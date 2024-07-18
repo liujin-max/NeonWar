@@ -48,6 +48,7 @@ public class Field : MonoBehaviour
 
         InitPlayer();
         InitEnemy();
+        InitEnemy();
 
         GameFacade.Instance.UIManager.LoadWindow("GameWindow", UIManager.BOTTOM).GetComponent<GameWindow>();
 
@@ -101,7 +102,20 @@ public class Field : MonoBehaviour
 
     void InitEnemy()
     {
-        GameFacade.Instance.UIManager.LoadPrefab("Prefab/Element/Enemy", Vector2.zero, Land.ENTITY_ROOT);
+        var enemy = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Element/Enemy", Vector2.zero, Land.ENTITY_ROOT).GetComponent<Enemy>();
+        enemy.Push(160);
+    }
+
+    //子弹击中敌人
+    public void Hit()
+    {
+
+    }
+
+    //敌人碰撞玩家
+    public void Crash(Enemy enemy, Player player)
+    {
+        player.ATT.HP -= enemy.ATT.ATK;
     }
 
     #endregion
