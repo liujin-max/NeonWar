@@ -80,7 +80,7 @@ public static class ToolUtility
         return result;
     }
 
-    public static Vector2 FindPointOnCircle(Vector3 center, float radius, float angle)
+    public static Vector2 FindPointOnCircle(Vector2 center, float radius, float angle)
     {
         // 将角度转换为弧度
         float radians = angle * Mathf.Deg2Rad;

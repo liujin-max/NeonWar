@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-//负责监听方块的滑动
+//可以进行局外系统的操作
 public class State_Idle<T> : State<Field>
 {
     public State_Idle(_C.FSMSTATE id) : base(id){}

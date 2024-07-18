@@ -16,11 +16,14 @@ public class Field : MonoBehaviour
     private Land Land;
 
 
+    private Player m_Player;
+    public Player Player{ get { return m_Player;}}
 
 
     void Awake()
     {
         m_Instance = this;
+
     }
 
     void OnDestroy()
@@ -32,20 +35,23 @@ public class Field : MonoBehaviour
     {
         m_FSM = new FSM<Field>(this,  new State<Field>[] {
             new State_Idle<Field>(_C.FSMSTATE.IDLE),
-
+            new State_Play<Field>(_C.FSMSTATE.PLAY),
+            new State_Result<Field>(_C.FSMSTATE.RESULT),
         });
-
-    
     }
 
-    public void Enter(int stage)
+    public void Enter()
     {
         STATE   = _C.GAME_STATE.PLAY;
 
         Land    = new Land();
 
+        InitPlayer();
 
-        m_FSM.Transist(_C.FSMSTATE.IDLE);
+
+        GameFacade.Instance.UIManager.LoadWindow("GameWindow", UIManager.BOTTOM).GetComponent<GameWindow>();
+
+        m_FSM.Transist(_C.FSMSTATE.PLAY);
     }
 
     public void Pause()
@@ -86,5 +92,12 @@ public class Field : MonoBehaviour
     }
 
 
+    #region 逻辑处理
+    void InitPlayer()
+    {
+        m_Player = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Element/Player", Vector2.zero, Land.ENTITY_ROOT).GetComponent<Player>();
+        m_Player.Move(-90);
+    }
 
+    #endregion
 }
