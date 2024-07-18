@@ -12,10 +12,10 @@ TagManager:
   - Scene
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Enemy
+  - InnerCircle
+  - OuterCircle
   - 
   - 
   - 

@@ -133,6 +133,8 @@
      <Compile Include="Assets\Joystick Pack\Examples\JoystickPlayerExample.cs" />
      <Compile Include="Assets\Joystick Pack\Examples\JoystickSetterExample.cs" />
      <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\FixedJoystick.cs" />
+     <Compile Include="Assets\Scripts\Logic\Element\Enemy.cs" />
+     <Compile Include="Assets\Scripts\Logic\Element\HollowCircle.cs" />
      <None Include="Assets\Resources\Shader\SpriteGray.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />

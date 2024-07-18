@@ -47,7 +47,7 @@ public class Field : MonoBehaviour
         Land    = new Land();
 
         InitPlayer();
-
+        InitEnemy();
 
         GameFacade.Instance.UIManager.LoadWindow("GameWindow", UIManager.BOTTOM).GetComponent<GameWindow>();
 
@@ -96,7 +96,12 @@ public class Field : MonoBehaviour
     void InitPlayer()
     {
         m_Player = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Element/Player", Vector2.zero, Land.ENTITY_ROOT).GetComponent<Player>();
-        m_Player.Move(-90);
+        m_Player.Init(270);
+    }
+
+    void InitEnemy()
+    {
+        GameFacade.Instance.UIManager.LoadPrefab("Prefab/Element/Enemy", Vector2.zero, Land.ENTITY_ROOT);
     }
 
     #endregion

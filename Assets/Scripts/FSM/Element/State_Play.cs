@@ -31,6 +31,9 @@ public class State_Play<T> : State<Field>
 
         float angle = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg;
 
+        // 将角度限制在0-360之间
+        angle = (angle + 360) % 360;
+        
         Field.Instance.Player.Move(angle);
     }
 }
