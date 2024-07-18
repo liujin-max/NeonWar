@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!28 &2800000
+Texture2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Scape_popup_reward_title.png
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 3
+  m_Width: 32
+  m_Height: 12
+  m_CompleteImageSize: 384
+  m_MipsStripped: 0
+  m_TextureFormat: 12
+  m_MipCount: 1
+  m_IsReadable: 1
+  m_IsPreProcessed: 0
+  m_IgnoreMasterTextureLimit: 0
+  m_StreamingMipmaps: 0
+  m_StreamingMipmapsPriority: 0
+  m_VTOnly: 0
+  m_AlphaIsTransparency: 1
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_LightmapFormat: 6
+  m_ColorSpace: 1
+  m_PlatformBlob: 
+  image data: 384
+  _typelessdata: ff01c97f6e219002cc93c35957ad090dff0049323e000b00b0aca359355fffa2e300499224fd0d013cef0462025555fff500499224b60d0036d60462005555aaf500499224b60d0036d60462005555aae300499224fe0b083cef0462805555ffff00499273250000b0aca3595cf5ff8aff017fb2f1000334cc93c359d57a6070f700a19018c997247df7c459f5d7dc70ff110000001310b3f0b4e45900000afdff5400000000f078f0bc666a000000b5fffd00000000100030e610bd55555503ffff49922449922430e610bd55555580ff5d00000000a0e6f0bc666a0000005eff1100000080563aafb4c4590000807ff7001003277b92247df7c4595fd7370d0000499224499224ffff58d6600000000000499224499224bef7676a56000000920049905c499224bef78251d7d87080ff0000504ec999e457ffc359aabfd578ff000080b1fbe32436ffa359aafe572dc60078b227499224bef7c359d73725020000499224499224bef7676a950000000000499224499224ffff58d609000000
+  m_StreamData:
+    serializedVersion: 2
+    offset: 0
+    size: 0
+    path: 
+  m_OriginalWidth: 0
+  m_OriginalHeight: 0
+  m_OriginalAssetGuid: 00000000000000000000000000000000

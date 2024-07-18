@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!28 &2800000
+Texture2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: fire2.png
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 3
+  m_Width: 32
+  m_Height: 32
+  m_CompleteImageSize: 512
+  m_MipsStripped: 0
+  m_TextureFormat: 10
+  m_MipCount: 1
+  m_IsReadable: 1
+  m_IsPreProcessed: 0
+  m_IgnoreMasterTextureLimit: 0
+  m_StreamingMipmaps: 0
+  m_StreamingMipmapsPriority: 0
+  m_VTOnly: 0
+  m_AlphaIsTransparency: 1
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 0
+    m_WrapV: 0
+    m_WrapW: 0
+  m_LightmapFormat: 6
+  m_ColorSpace: 1
+  m_PlatformBlob: 
+  image data: 512
+  _typelessdata: 04e36048d6dfae80a5fb80582f37afadc5fbe2c1dc7a728aa3daa15068ff5ff883d281400dada52f06fcc1782f050d0f08fd83e20d8dab7d04f38299d76a70a885eb40380a27b5b724f3e178b7a8000064f3218982e0787844f30181cbede58dc5f3629915bd0b8fe4ea82a1c7edfede44ebc2b9b5adc0ed43d201712cf66e8d43d2e1607e5efaf804ebc1680b2dfd6b04f3a150a8002a9524f3e1708220a05ee4f28050aeaa0bad43cae160dfdea0fce2b121793c94fec344eb6291d5d50b02e4e282995c72beec04eb8050627abebfe4e26048bd0208f863daa14858d8dcbf04ebc160f5f52f2ac7fc21a1556be2e0a3e26291e3ef4a88c5f30199a2dffb0263d2a14800a2daf244eb80602a00f07a43c28148587c7edf04e381503d3d3d2fa4dae1682eec687804ebe178a0ab8b8544f301810ae0726ba5f3c180828beb7bc4f20171ebea6ae823ca8138fade3f2f23c26030bfaade7844eb81500b02ef7524ebc168d8a803e9a3dac1600f0bc062c4e2e1788b0f0b89c4e28150e2e20f3783dae168800f252f83e221813ea0f87e83e2803868c0aad7c2a960307f5bf8e0a5f3a1607da90b8bc4ea60487bfaa82e24eba1588d0d0a0043c24020de5c5c5c04eb4189aaaa2dd6a4da81487078e80282890010feffb72863d26038ab8dcde0e4e28150e3e389ad65ebe170353dbd2ba5f3e2c1fe5ea80804eb218156f85a97
+  m_StreamData:
+    serializedVersion: 2
+    offset: 0
+    size: 0
+    path: 
+  m_OriginalWidth: 0
+  m_OriginalHeight: 0
+  m_OriginalAssetGuid: 00000000000000000000000000000000

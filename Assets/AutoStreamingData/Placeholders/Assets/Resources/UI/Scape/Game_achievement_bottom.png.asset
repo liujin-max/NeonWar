@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!28 &2800000
+Texture2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Game_achievement_bottom.png
+  m_ImageContentsHash:
+    serializedVersion: 2
+    Hash: 00000000000000000000000000000000
+  m_ForcedFallbackFormat: 4
+  m_DownscaleFallback: 0
+  m_IsAlphaChannelOptional: 0
+  serializedVersion: 3
+  m_Width: 32
+  m_Height: 12
+  m_CompleteImageSize: 384
+  m_MipsStripped: 0
+  m_TextureFormat: 12
+  m_MipCount: 1
+  m_IsReadable: 1
+  m_IsPreProcessed: 0
+  m_IgnoreMasterTextureLimit: 0
+  m_StreamingMipmaps: 0
+  m_StreamingMipmapsPriority: 0
+  m_VTOnly: 0
+  m_AlphaIsTransparency: 1
+  m_ImageCount: 1
+  m_TextureDimension: 2
+  m_TextureSettings:
+    serializedVersion: 2
+    m_FilterMode: 1
+    m_Aniso: 1
+    m_MipBias: 0
+    m_WrapU: 1
+    m_WrapV: 1
+    m_WrapW: 1
+  m_LightmapFormat: 6
+  m_ColorSpace: 1
+  m_PlatformBlob: 
+  image data: 384
+  _typelessdata: fc00499ea479970aeea4000058dcb72fff2a49b26d0000002b63410855a8fcf6ff3149b249000000684a42085500ffffff37492249000000674a831055005755ff48492e49000000a95ae41855005555ff5fc92f01000000ea5a0519fd005555ff78c90f4000000091944621752a15d5fd007ea2d6100c310ef7a118757baa2aff0029900bc9905899ad07842ab7f5fdffff499224499224d7b5c418575f00aaffff499224499224149dc418555557c2ffff4992244992247263a4105555552efffe0000000080040f84e51855557d88ffff4992244992248c4a0621555555a0ffff499224499224ea312721155555a0ff00d803390003c837c68110bc5a7363e300775108e79b2451f70000adab0800ff020000009c90dc33ef2f63d5deaa00ff00000069fcf32452f728216bff0200ff0000c049f99d2451f78a29b5de0000ff07580b35927e3b91f72773af2d3f20c000939024499224b4fff1c5570000feef0012f0df49922473f712a5570000aafc00006af749922452f76d6b6b20002a
+  m_StreamData:
+    serializedVersion: 2
+    offset: 0
+    size: 0
+    path: 
+  m_OriginalWidth: 0
+  m_OriginalHeight: 0
+  m_OriginalAssetGuid: 00000000000000000000000000000000
