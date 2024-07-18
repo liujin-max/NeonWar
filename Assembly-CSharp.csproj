@@ -80,6 +80,7 @@
      <Compile Include="Assets\Scripts\Utility\CameraUtility.cs" />
      <Compile Include="Assets\Scripts\Display\Land.cs" />
      <Compile Include="Assets\AllIn1SpriteShader\Demo\Scripts\DemoRandomColorSwap.cs" />
+     <Compile Include="Assets\Scripts\UI\Window\GameWindow.cs" />
      <Compile Include="Assets\Scripts\CONST.cs" />
      <Compile Include="Assets\Scripts\Utility\NumberTransition.cs" />
      <Compile Include="Assets\Scripts\UI\Window\SettingWindow.cs" />
@@ -120,11 +121,11 @@
      <Compile Include="Assets\Scripts\Effect\Shine.cs" />
      <Compile Include="Assets\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
      <Compile Include="Assets\Scripts\UI\Window\TipWindow.cs" />
-     <Compile Include="Assets\Scripts\UI\Window\GameWindow.cs" />
+     <Compile Include="Assets\Scripts\Logic\Field.cs" />
+     <Compile Include="Assets\Scripts\FSM\Element\State_Idle.cs" />
      <None Include="Assets\Resources\Shader\SpriteGray.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
-     <None Include="Assets\GrabSquaresEffect\Shaders\GrabSquares.shader" />
      <None Include="Assets\DOTween\readme.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
      <None Include="Assets\Resources\Shader\UVScroll.shader" />
@@ -147,7 +148,6 @@
      <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
      <None Include="Assets\AllIn1SpriteShader\Resources\AllIn1SpriteShaderLight.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
-     <None Include="Assets\codeandweb.com\Readme.txt" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
      <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
@@ -235,9 +235,6 @@
     <Reference Include="UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule">
         <HintPath>C:\Program Files\Unity 2021.2.5f1c303\Editor\Data\Managed\UnityEngine\UnityEngine.RuntimeInitializeOnLoadManagerInitializerModule.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.ScreenCaptureModule">
-        <HintPath>C:\Program Files\Unity 2021.2.5f1c303\Editor\Data\Managed\UnityEngine\UnityEngine.ScreenCaptureModule.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEngine.SharedInternalsModule">
         <HintPath>C:\Program Files\Unity 2021.2.5f1c303\Editor\Data\Managed\UnityEngine\UnityEngine.SharedInternalsModule.dll</HintPath>
     </Reference>
@@ -255,12 +252,6 @@
     </Reference>
     <Reference Include="UnityEngine.TLSModule">
         <HintPath>C:\Program Files\Unity 2021.2.5f1c303\Editor\Data\Managed\UnityEngine\UnityEngine.TLSModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.TerrainModule">
-        <HintPath>C:\Program Files\Unity 2021.2.5f1c303\Editor\Data\Managed\UnityEngine\UnityEngine.TerrainModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.TerrainPhysicsModule">
-        <HintPath>C:\Program Files\Unity 2021.2.5f1c303\Editor\Data\Managed\UnityEngine\UnityEngine.TerrainPhysicsModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TextCoreFontEngineModule">
         <HintPath>C:\Program Files\Unity 2021.2.5f1c303\Editor\Data\Managed\UnityEngine\UnityEngine.TextCoreFontEngineModule.dll</HintPath>
@@ -321,9 +312,6 @@
     </Reference>
     <Reference Include="UnityEngine.VehiclesModule">
         <HintPath>C:\Program Files\Unity 2021.2.5f1c303\Editor\Data\Managed\UnityEngine\UnityEngine.VehiclesModule.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.VideoModule">
-        <HintPath>C:\Program Files\Unity 2021.2.5f1c303\Editor\Data\Managed\UnityEngine\UnityEngine.VideoModule.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.WebGLModule">
         <HintPath>C:\Program Files\Unity 2021.2.5f1c303\Editor\Data\PlaybackEngines\WebGLSupport\Managed\UnityEngine.WebGLModule.dll</HintPath>
@@ -808,9 +796,6 @@
     <Reference Include="Unity.VisualStudio.Editor">
         <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Timeline">
-        <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.VisualScripting.Core.Editor">
         <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.VisualScripting.Core.Editor.dll</HintPath>
     </Reference>
@@ -882,9 +867,6 @@
     </Reference>
     <Reference Include="Unity.2D.PixelPerfect.Editor">
         <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.2D.PixelPerfect.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Timeline.Editor">
-        <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Mathematics.Editor">
         <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>

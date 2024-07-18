@@ -162,7 +162,7 @@ public class WXPlatform : Platform
         //云开发：加载积分数据
         WX.cloud.CallFunction(new CallFunctionParam()
         {
-            name = rank_type == _C.RANK.LEVEL ? "GetLevelRank" : "GetRank", //"GetRank",
+            name = "GetRank", //"GetRank",
             data = JsonUtility.ToJson(""),
             success = (res) =>
             {

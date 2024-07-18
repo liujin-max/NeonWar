@@ -51,23 +51,23 @@ public class Rank
     //刷新本地排行榜
     public void SyncRank(_C.RANK rank_type, RankData[] rankDatas)
     {
-        if (rank_type == _C.RANK.ENDLESS)
-        {
-            m_SyncFlag = true;
-            m_RankList.Clear();
-            for (int i = 0; i < rankDatas.Length; i++) {
-                var rankData    = rankDatas[i];
-                rankData.Order  = i + 1;
-                m_RankList.Add(rankData);
-            }
-        }
-        else if (rank_type == _C.RANK.LEVEL)
-        {
-            for (int i = 0; i < rankDatas.Length; i++) {
-                var rankData    = rankDatas[i];
-                rankData.Order  = i + 1;
-            }
-        }
+        // if (rank_type == _C.RANK.ENDLESS)
+        // {
+        //     m_SyncFlag = true;
+        //     m_RankList.Clear();
+        //     for (int i = 0; i < rankDatas.Length; i++) {
+        //         var rankData    = rankDatas[i];
+        //         rankData.Order  = i + 1;
+        //         m_RankList.Add(rankData);
+        //     }
+        // }
+        // else if (rank_type == _C.RANK.LEVEL)
+        // {
+        //     for (int i = 0; i < rankDatas.Length; i++) {
+        //         var rankData    = rankDatas[i];
+        //         rankData.Order  = i + 1;
+        //     }
+        // }
     }
 
     public bool IsSyncFinished()
@@ -75,29 +75,6 @@ public class Rank
         return m_SyncFlag;
     }
 
-    public void GenerateGoalRank()
-    {
-        //重置
-        m_GoalRank  = null;
-
-        if (m_RankList.Count == 0) return;
-
-        int my_order    = this.GetMyRankOrder();
-
-        //计算目标排名
-        if (my_order == _C.DEFAULT_RANK)
-        {
-            m_GoalRank  = m_RankList.Last();
-        }
-        else if (my_order == 1)
-        {
-            m_GoalRank  = m_RankList.First();
-        }
-        else
-        {
-            m_GoalRank  = m_RankList[my_order - 2];
-        }
-    }
 
     public bool NextGoalRank()
     {
@@ -116,14 +93,14 @@ public class Rank
     //获取我的排名
     public int GetMyRankOrder()
     {
-        if (m_RankList.Count == 0 && GameFacade.Instance.DataCenter.User.Score > 0) return 1;
+        // if (m_RankList.Count == 0 && GameFacade.Instance.DataCenter.User.Score > 0) return 1;
 
-        for (int i = 0; i < m_RankList.Count; i++) {
-            var rankData = m_RankList[i];
-            if (GameFacade.Instance.DataCenter.User.Score >= rankData.Value) {
-                return rankData.Order;
-            }
-        }
+        // for (int i = 0; i < m_RankList.Count; i++) {
+        //     var rankData = m_RankList[i];
+        //     if (GameFacade.Instance.DataCenter.User.Score >= rankData.Value) {
+        //         return rankData.Order;
+        //     }
+        // }
 
         return _C.DEFAULT_RANK;
     }

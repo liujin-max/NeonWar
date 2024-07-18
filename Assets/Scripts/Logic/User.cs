@@ -39,18 +39,13 @@ public class GameUserData
     public string HeadUrl;
     public int Level;       //通关记录
     public int Coin;        //金币
-    public int Food = _C.DEFAULT_FOOD;  //体力
+
     public long RecoveryTimestamp;    //上次体力的恢复时间
-    public int Score;       //无尽分数
     public int RegisterDay;     //注册时间(一年中的第几天)
     public int LastLoginDay;    //上次登录的天数
     public int LoginDay;        //登录天数
     public int SignInStatus;  //签到状态
 
-
-    // public List<int> Tasks = new List<int>();   //废弃
-    public List<TaskMsg> TaskRecords = new List<TaskMsg>();
-    public List<PropMsg> Props = new List<PropMsg>();
 }
 
 
@@ -77,17 +72,12 @@ public class User
     public string HeadURL { get{ return m_Data.HeadUrl;}}
     public int Level { get{ return m_Data.Level;}}
     public int Coin { get{ return m_Data.Coin;}}
-    public int Food { get{ return m_Data.Food;}}
-    public int Score { get{ return m_Data.Score;}}
-    // public List<int> Tasks { get{ return m_Data.Tasks;}}
+
 
     private bool m_userUpdate = false;  //账号数据变动标记
     public bool IsDirty {get { return m_userUpdate;}}
 
     
-    //体力恢复计时器
-    private CDTimer m_FoodTimer = new CDTimer(_C.FOOD_RECOVERYTIME);
-    private float m_FoodTimeStep= 0;
 
     public bool IsSyncFinished = false;
     
@@ -186,26 +176,6 @@ public class User
         m_userUpdate = true;
     }
 
-    public void SetFood(int value)
-    {
-        m_Data.Food = value;
-
-        m_userUpdate = true;
-    }
-
-    public bool IsFoodFull()
-    {
-        return m_Data.Food >= _C.DEFAULT_FOOD;
-    }
-
-    public void UpdateFood(int value)
-    {
-        if (value == 0) return;
-
-        m_Data.Food  = Mathf.Clamp(m_Data.Food + value, 0, _C.DEFAULT_FOOD);
-        
-        m_userUpdate = true;
-    }
 
     public void SetRecoveryTimestamp(long value)
     {
@@ -214,31 +184,6 @@ public class User
         m_userUpdate = true;
     }
 
-    public void SetScore(int value)
-    {
-        if (value <= m_Data.Score ) return;
-
-        m_Data.Score = value;
-
-        m_userUpdate = true;
-    }
-
-    public int GetFoodTimer()
-    {
-        return Mathf.CeilToInt(m_FoodTimer.Duration - m_FoodTimer.Current);
-    }
-
-
-    public bool IsTaskContains(int task_id)
-    {
-        foreach (var item in m_Data.TaskRecords) {
-            if (item.ID == task_id && item.Day == DateTime.Now.DayOfYear) {
-                return true;
-            }
-        }
-
-        return false;
-    }
 
     //七日签到
     public void RecordsSignIn(int day)
@@ -251,21 +196,6 @@ public class User
 
     public void Update(float dt)
     {   
-        float realtime  = Time.realtimeSinceStartup;
-        float offset    = realtime - m_FoodTimeStep;
-        m_FoodTimeStep  = realtime;
-
-        //体力恢复线程
-        m_FoodTimer.Update(offset);
-        if (m_FoodTimer.IsFinished()) {
-            m_FoodTimer.Reset();
-
-            this.UpdateFood(1);
-            this.SetRecoveryTimestamp(ToolUtility.GetUnixTimestamp());
-            Debug.Log("恢复体力：" + ToolUtility.GetUnixTimestamp());
-
-            EventManager.SendEvent(new GameEvent(EVENT.UI_UPDATEFOOD));
-        }
 
         if (m_userUpdate) {
              Upload();

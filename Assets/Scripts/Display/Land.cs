@@ -7,10 +7,9 @@ using UnityEngine;
 
 
 //负责游戏场景的表现逻辑
-public class Land
+public class Land : MonoBehaviour
 {
     public Transform ENTITY;
-    public Transform GRID_ROOT;
     public Transform ENTITY_ROOT;
     public Transform ELEMENT_ROOT;
 
@@ -20,7 +19,6 @@ public class Land
     public Land()
     {
         ENTITY      = GameObject.Find("Field").transform;
-        GRID_ROOT   = GameObject.Find("Field/Grids").transform;
         ENTITY_ROOT = GameObject.Find("Field/Entitys").transform;
         ELEMENT_ROOT= GameObject.Find("Field/Elements").transform;
 

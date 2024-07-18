@@ -24,7 +24,7 @@ public static class NavigationController
     public static void GotoGame()
     {
         GameFacade.Instance.ScenePool.LoadSceneAsync("Game", () => {
-
+            GameFacade.Instance.UIManager.LoadWindow("GameWindow", UIManager.BOTTOM).GetComponent<GameWindow>();
         });
 
 
