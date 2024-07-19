@@ -131,7 +131,7 @@ public class GameFacade : MonoBehaviour
     {
         _instance = this;
 
-        Input.multiTouchEnabled = false;
+        Input.multiTouchEnabled = true;
         
 
         DontDestroyOnLoad(gameObject);

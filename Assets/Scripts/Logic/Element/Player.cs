@@ -5,7 +5,7 @@ using UnityEngine;
 //基础属性
 public class PlayerATT
 {
-    public int HP = 1;
+    public int HP = 1111;
     public int ATK = 1;
     public CDTimer ASP   = new CDTimer(1f);    //攻速 
 }
@@ -19,7 +19,6 @@ public class Player : MonoBehaviour
 
 
     private float m_Angle;      //角度
-    private float m_TAgl;       //目标角度
 
     // Start is called before the first frame update
     void Start()
@@ -32,16 +31,28 @@ public class Player : MonoBehaviour
     public void Init(float angle)
     {
         m_Angle = angle;
-        m_TAgl  = angle;
 
         this.SetPosition(ToolUtility.FindPointOnCircle(Vector2.zero, _C.DEFAULT_RADIUS, angle));
     }
 
 
     //angle : 0 -> 360
-    public void Move(float angle)
+    public void Move(float direction)
     {
-        m_TAgl = angle;
+        float speed = 2;
+
+        float t = Mathf.Clamp01(Time.deltaTime / 0.01f);
+        m_Angle = Mathf.LerpAngle(m_Angle, m_Angle + direction * speed, t);
+
+        this.SetPosition(ToolUtility.FindPointOnCircle(Vector2.zero, _C.DEFAULT_RADIUS, m_Angle));
+    }
+
+    //对角线闪现
+    public void Blink()
+    {
+        m_Angle += 180;
+
+        this.SetPosition(ToolUtility.FindPointOnCircle(Vector2.zero, _C.DEFAULT_RADIUS, m_Angle));
     }
 
     public void SetPosition(Vector2 pos)
@@ -61,19 +72,6 @@ public class Player : MonoBehaviour
         if (Field.Instance.STATE == _C.GAME_STATE.PAUSE) return;
 
         ATT.ASP.Update(Time.deltaTime);
-
-        if (m_Angle != m_TAgl)
-        {
-            float t = Mathf.Clamp01(Time.deltaTime / 0.06f);
-            m_Angle = Mathf.LerpAngle(m_Angle, m_TAgl, t);
-
-            // 如果已经达到目标角度，重置时间
-            if (Mathf.Abs(Mathf.DeltaAngle(m_Angle, m_TAgl)) <= 0.1f) {
-                m_Angle = m_TAgl;
-            }
-
-            this.SetPosition(ToolUtility.FindPointOnCircle(Vector2.zero, _C.DEFAULT_RADIUS, m_Angle));
-        }
     }
 
     void LateUpdate()
@@ -102,7 +100,7 @@ public class Player : MonoBehaviour
 
     void Shoot()
     {
-        var bullet = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Element/Bullet", transform.localPosition, Field.Instance.Land.ELEMENT_ROOT).GetComponent<Bullet>();
+        var bullet = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Element/Bullet", transform.localPosition, Field.Instance.Land.ENTITY_ROOT).GetComponent<Bullet>();
         bullet.transform.position = m_ShootPivot.position;
         bullet.Shoot(this, ToolUtility.FindPointOnCircle(Vector2.zero, 1000, m_Angle + 180));
     }

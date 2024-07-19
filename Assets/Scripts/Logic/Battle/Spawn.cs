@@ -17,7 +17,7 @@ public class Spawn
     void InitEnemy()
     {
         Vector2 point = new Vector2(RandomUtility.Random(-100, 101) / 100.0f, RandomUtility.Random(-100, 101) / 100.0f);
-        var enemy = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Element/Enemy", point, Field.Instance.Land.ENTITY_ROOT).GetComponent<Enemy>();
+        var enemy = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Element/Enemy", point, Field.Instance.Land.ENEMY_ROOT).GetComponent<Enemy>();
         enemy.Push(160);
 
         m_Enemys.Add(enemy);

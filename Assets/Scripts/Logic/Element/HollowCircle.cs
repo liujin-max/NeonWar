@@ -8,6 +8,7 @@ public class HollowCircle : MonoBehaviour
     public int OuterSegments = 64;
     public int InnerSegments = 64;
 
+
     void Start()
     {
         GenerateHollowCircle();

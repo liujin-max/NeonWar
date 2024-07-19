@@ -7,13 +7,15 @@ using UnityEngine;
 
 public class Field : MonoBehaviour
 {
+    public HollowCircle HollowCircle;
+
     private static Field m_Instance;
     public static Field Instance{ get { return m_Instance;}}
 
     private FSM<Field> m_FSM;
     public _C.GAME_STATE STATE = _C.GAME_STATE.PAUSE;
 
-    public Land Land;
+    [HideInInspector] public Land Land;
     public Spawn Spawn; //怪物工厂
 
     private Player m_Player;
@@ -53,7 +55,7 @@ public class Field : MonoBehaviour
 
         Field.Instance.Pause();
 
-        m_FSM.Transist(_C.FSMSTATE.IDLE);
+        m_FSM.Transist(_C.FSMSTATE.PLAY);
     }
 
     public void Pause()

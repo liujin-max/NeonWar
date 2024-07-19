@@ -11,7 +11,7 @@ public class Land : MonoBehaviour
 {
     public Transform ENTITY;
     public Transform ENTITY_ROOT;
-    public Transform ELEMENT_ROOT;
+    public Transform ENEMY_ROOT;
 
     public CameraUtility SCENE_CAMERA;
     
@@ -20,7 +20,7 @@ public class Land : MonoBehaviour
     {
         ENTITY      = GameObject.Find("Field").transform;
         ENTITY_ROOT = GameObject.Find("Field/Entitys").transform;
-        ELEMENT_ROOT= GameObject.Find("Field/Elements").transform;
+        ENEMY_ROOT  = GameObject.Find("Field/Enemys").transform;
 
 
         SCENE_CAMERA= GameObject.FindWithTag("SceneCamera").GetComponent<CameraUtility>();

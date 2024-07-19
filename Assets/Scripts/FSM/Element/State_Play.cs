@@ -14,7 +14,7 @@ public class State_Play<T> : State<Field>
         Debug.Log("进入 游玩阶段");
 
         EventManager.AddHandler(EVENT.ONJOYSTICK_PRESS,     OnJoyStickPress);
-        EventManager.AddHandler(EVENT.ONJOYSTICK_DRAG,      OnJoyStickDrag);
+        EventManager.AddHandler(EVENT.ONJOYSTICK_DOUBLE,    OnJoyStickDouble);
 
         var game_window = GameFacade.Instance.UIManager.GetWindow("GameWindow").GetComponent<GameWindow>();
         game_window.ShowJoyStick(true);
@@ -41,29 +41,23 @@ public class State_Play<T> : State<Field>
         Field.Instance.Spawn.Dispose();
 
         EventManager.DelHandler(EVENT.ONJOYSTICK_PRESS,     OnJoyStickPress);
-        EventManager.DelHandler(EVENT.ONJOYSTICK_DRAG,      OnJoyStickDrag);
+        EventManager.DelHandler(EVENT.ONJOYSTICK_DOUBLE,    OnJoyStickDouble);
     }
 
 
+    #region 监听事件
     //按下、抬起摇杆
     private void OnJoyStickPress(GameEvent @event)
     {
-        bool flag = (bool)@event.GetParam(0);
+        float direction = (float)@event.GetParam(0);
 
-        if (flag) Field.Instance.Resume();
-        else Field.Instance.Pause();
+        Field.Instance.Player.Move(direction);
+
     }
 
-    //拖拽摇杆
-    private void OnJoyStickDrag(GameEvent @event)
+    private void OnJoyStickDouble(GameEvent @event)
     {
-        Vector2 input = (Vector2)@event.GetParam(0);
-
-        float angle = Mathf.Atan2(input.y, input.x) * Mathf.Rad2Deg;
-
-        // 将角度限制在0-360之间
-        angle = (angle + 360) % 360;
-        
-        Field.Instance.Player.Move(angle);
+        Field.Instance.Player.Blink();
     }
+    #endregion
 }
