@@ -28,6 +28,9 @@ public class Field : MonoBehaviour
     public bool LeftBtnPressFlag    = false;
     public bool RightBtnPressFlag   = false;
 
+    //闪现冷却
+    public CDTimer BlinkTimer = new CDTimer(0);
+
     void Awake()
     {
         m_Instance = this;
@@ -55,24 +58,39 @@ public class Field : MonoBehaviour
         Land    = new Land();
         Spawn   = new Spawn();
 
-        GameFacade.Instance.UIManager.LoadWindow("GameWindow", UIManager.BOTTOM).GetComponent<GameWindow>();
+        GameFacade.Instance.UIManager.LoadWindow("GameWindow", UIManager.BOTTOM).GetComponent<GameWindow>().Init();
 
 
         m_FSM.Transist(_C.FSMSTATE.IDLE);
     }
 
-    public void Dispose()
+    //开始游玩
+    public void Play()
+    {
+        STATE   = _C.GAME_STATE.PLAY;
+
+        BlinkTimer.Reset(_C.DEFAULT_BLINKCD);
+        BlinkTimer.Full();
+
+        EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_SHOW, true));
+    }
+
+    //结束游玩
+    public void End()
     {
         STATE   = _C.GAME_STATE.PAUSE;
 
         m_Glass = 0;
 
+        BlinkTimer.Full();
+
         Land.Dispose();
         Spawn.Dispose();
 
-
+        EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_SHOW, false));
         EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS, m_Glass));
     }
+
 
     public void Pause()
     {
@@ -107,6 +125,7 @@ public class Field : MonoBehaviour
         if (m_FSM != null) m_FSM.Update();
 
         Spawn.Update(deltaTime);
+        BlinkTimer.Update(deltaTime);
     }
 
     public _C.RESULT CheckResult()

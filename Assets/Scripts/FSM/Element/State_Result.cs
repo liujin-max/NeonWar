@@ -16,7 +16,6 @@ public class State_Result<T> : State<Field>
         //结算奖励
         GameFacade.Instance.DataCenter.User.UpdateGlass(Field.Instance.Glass);
 
-        Field.Instance.Dispose();
 
         GameFacade.Instance.UIManager.LoadWindow("ResultWindow", UIManager.BOARD).GetComponent<ResultWindow>();
     }

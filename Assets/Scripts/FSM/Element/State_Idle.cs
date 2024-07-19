@@ -14,8 +14,7 @@ public class State_Idle<T> : State<Field>
         Debug.Log("进入 待机阶段");
         EventManager.AddHandler(EVENT.ONJOYSTICK_PRESS,     OnJoyStickPress);
 
-        var game_window = GameFacade.Instance.UIManager.GetWindow("GameWindow").GetComponent<GameWindow>();
-        game_window.ShowJoyStick(true);
+        EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_SHOW, true));
 
 
         Field.Instance.InitPlayer();

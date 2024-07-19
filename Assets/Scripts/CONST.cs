@@ -9,6 +9,7 @@ public static class _C
     public static string CLOUD_ENV = "fingerblock-3gqj06sx5ebc6035";    //云开发环境ID
 
     public static float DEFAULT_RADIUS = 5.4f;  //圆弧半径
+    public static float DEFAULT_BLINKCD= 1.5f;  //闪现冷却
 
     public static int DEFAULT_RANK = 999;       //默认排名
 

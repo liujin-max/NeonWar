@@ -15,11 +15,8 @@ public class State_Play<T> : State<Field>
 
         EventManager.AddHandler(EVENT.ONJOYSTICK_PRESS,     OnJoyStickPress);
         EventManager.AddHandler(EVENT.ONJOYSTICK_DOUBLE,    OnJoyStickDouble);
-
-        var game_window = GameFacade.Instance.UIManager.GetWindow("GameWindow").GetComponent<GameWindow>();
-        game_window.ShowJoyStick(true);
-
-        Field.Instance.Resume();
+        
+        Field.Instance.Play();
     }
 
     public override void Update()
@@ -34,13 +31,7 @@ public class State_Play<T> : State<Field>
 
     public override void Exit()
     {
-        Debug.Log("离开 游玩阶段");
-
-        var game_window = GameFacade.Instance.UIManager.GetWindow("GameWindow").GetComponent<GameWindow>();
-        game_window.ShowJoyStick(false);
-
-        Field.Instance.Pause();
-        Field.Instance.Spawn.Dispose();
+        Field.Instance.End();
 
         EventManager.DelHandler(EVENT.ONJOYSTICK_PRESS,     OnJoyStickPress);
         EventManager.DelHandler(EVENT.ONJOYSTICK_DOUBLE,    OnJoyStickDouble);
@@ -58,6 +49,12 @@ public class State_Play<T> : State<Field>
 
     private void OnJoyStickDouble(GameEvent @event)
     {
+        if (!Field.Instance.BlinkTimer.IsFinished()) {
+            EventManager.SendEvent(new GameEvent(EVENT.UI_BLINKSHAKE));
+            return;
+        }
+
+        Field.Instance.BlinkTimer.ForceReset();
         Field.Instance.Player.Blink();
     }
     #endregion
