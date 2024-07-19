@@ -11,7 +11,7 @@ public class State_Result<T> : State<Field>
 
     public override void Enter(params object[] values)
     {
-
+        Debug.Log("进入 结算阶段");
     }
 
     public override void Update()
@@ -21,6 +21,6 @@ public class State_Result<T> : State<Field>
 
     public override void Exit()
     {
-
+        
     }
 }

@@ -7,11 +7,13 @@ public class PlayerATT
 {
     public int HP = 1;
     public int ATK = 1;
-    public CDTimer ASP   = new CDTimer(0.8f);    //攻速 
+    public CDTimer ASP   = new CDTimer(1f);    //攻速 
 }
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] private Transform m_ShootPivot;
+
     public PlayerATT ATT = new PlayerATT();
 
 
@@ -47,9 +49,19 @@ public class Player : MonoBehaviour
         transform.localPosition = pos;
     }
 
+    public bool IsDead()
+    {
+        return ATT.HP <= 0;
+    }
+
     // Update is called once per frame
     void Update()
     {
+        if (IsDead()) return;
+        if (Field.Instance.STATE == _C.GAME_STATE.PAUSE) return;
+
+        ATT.ASP.Update(Time.deltaTime);
+
         if (m_Angle != m_TAgl)
         {
             float t = Mathf.Clamp01(Time.deltaTime / 0.06f);
@@ -66,10 +78,35 @@ public class Player : MonoBehaviour
 
     void LateUpdate()
     {
+        if (IsDead()) return;
+        if (Field.Instance.STATE == _C.GAME_STATE.PAUSE) return;
+
         //始终朝向圆心
         transform.localEulerAngles = new Vector3(0, 0, m_Angle + 90);
+
+        //攻击间隔
+        if (ATT.ASP.IsFinished() == true) {
+            ATT.ASP.Reset();
+
+            Shoot();
+        }
     }
 
+    
+
+    #region 逻辑处理
+    public void UpdateHP(int value)
+    {
+        ATT.HP += value;
+    }
+
+    void Shoot()
+    {
+        var bullet = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Element/Bullet", transform.localPosition, Field.Instance.Land.ELEMENT_ROOT).GetComponent<Bullet>();
+        bullet.transform.position = m_ShootPivot.position;
+        bullet.Shoot(this, ToolUtility.FindPointOnCircle(Vector2.zero, 1000, m_Angle + 180));
+    }
+    #endregion
 
     #region 碰撞检测
     void OnCollisionEnter2D(Collision2D collision)

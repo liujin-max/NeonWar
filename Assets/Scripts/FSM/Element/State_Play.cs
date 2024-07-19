@@ -11,21 +11,51 @@ public class State_Play<T> : State<Field>
 
     public override void Enter(params object[] values)
     {
-        EventManager.AddHandler(EVENT.ONJOYSTICK,   OnJoyStick);
+        Debug.Log("进入 游玩阶段");
+
+        EventManager.AddHandler(EVENT.ONJOYSTICK_PRESS,     OnJoyStickPress);
+        EventManager.AddHandler(EVENT.ONJOYSTICK_DRAG,      OnJoyStickDrag);
+
+        var game_window = GameFacade.Instance.UIManager.GetWindow("GameWindow").GetComponent<GameWindow>();
+        game_window.ShowJoyStick(true);
+
+        Field.Instance.Resume();
     }
 
     public override void Update()
     {
-
+        var result = Field.Instance.CheckResult();
+        if (result != _C.RESULT.NONE) {
+            m_FSM.Transist(_C.FSMSTATE.RESULT, result);
+        }
     }
 
     public override void Exit()
     {
-        EventManager.DelHandler(EVENT.ONJOYSTICK,   OnJoyStick);
+        Debug.Log("离开 游玩阶段");
+
+        var game_window = GameFacade.Instance.UIManager.GetWindow("GameWindow").GetComponent<GameWindow>();
+        game_window.ShowJoyStick(false);
+
+        Field.Instance.Pause();
+        Field.Instance.Spawn.Dispose();
+
+        EventManager.DelHandler(EVENT.ONJOYSTICK_PRESS,     OnJoyStickPress);
+        EventManager.DelHandler(EVENT.ONJOYSTICK_DRAG,      OnJoyStickDrag);
+    }
+
+
+    //按下、抬起摇杆
+    private void OnJoyStickPress(GameEvent @event)
+    {
+        bool flag = (bool)@event.GetParam(0);
+
+        if (flag) Field.Instance.Resume();
+        else Field.Instance.Pause();
     }
 
     //拖拽摇杆
-    private void OnJoyStick(GameEvent @event)
+    private void OnJoyStickDrag(GameEvent @event)
     {
         Vector2 input = (Vector2)@event.GetParam(0);
 

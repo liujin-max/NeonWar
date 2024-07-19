@@ -13,8 +13,8 @@ public class Field : MonoBehaviour
     private FSM<Field> m_FSM;
     public _C.GAME_STATE STATE = _C.GAME_STATE.PAUSE;
 
-    private Land Land;
-
+    public Land Land;
+    public Spawn Spawn; //怪物工厂
 
     private Player m_Player;
     public Player Player{ get { return m_Player;}}
@@ -45,24 +45,29 @@ public class Field : MonoBehaviour
         STATE   = _C.GAME_STATE.PLAY;
 
         Land    = new Land();
+        Spawn   = new Spawn();
 
         InitPlayer();
-        InitEnemy();
-        InitEnemy();
 
         GameFacade.Instance.UIManager.LoadWindow("GameWindow", UIManager.BOTTOM).GetComponent<GameWindow>();
 
-        m_FSM.Transist(_C.FSMSTATE.PLAY);
+        Field.Instance.Pause();
+
+        m_FSM.Transist(_C.FSMSTATE.IDLE);
     }
 
     public void Pause()
     {
         STATE   = _C.GAME_STATE.PAUSE;
+
+        Spawn.Pause();
     }
 
     public void Resume()
     {
         STATE   = _C.GAME_STATE.PLAY;
+
+        Spawn.Resume();
     }
 
     public void Transist(_C.FSMSTATE state, params object[] values)
@@ -79,16 +84,18 @@ public class Field : MonoBehaviour
     {
         if (this.STATE != _C.GAME_STATE.PLAY) return;
 
-        if (m_FSM != null) m_FSM.Update();
-    }
+        float deltaTime = Time.deltaTime;
 
-    void FixedUpdate()
-    {
-        
+        if (m_FSM != null) m_FSM.Update();
+
+        Spawn.Update(deltaTime);
     }
 
     public _C.RESULT CheckResult()
     {
+        if (m_Player.IsDead() == true) return _C.RESULT.LOSE;
+
+        
         return _C.RESULT.NONE;
     }
 
@@ -100,22 +107,19 @@ public class Field : MonoBehaviour
         m_Player.Init(270);
     }
 
-    void InitEnemy()
-    {
-        var enemy = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Element/Enemy", Vector2.zero, Land.ENTITY_ROOT).GetComponent<Enemy>();
-        enemy.Push(160);
-    }
 
     //子弹击中敌人
-    public void Hit()
+    public void Hit(Bullet bullet, Enemy enemy)
     {
+        if (bullet.Caster.IsDead()) return;
 
+        enemy.UpdateHP(-bullet.Caster.ATT.ATK);
     }
 
     //敌人碰撞玩家
     public void Crash(Enemy enemy, Player player)
     {
-        player.ATT.HP -= enemy.ATT.ATK;
+        player.UpdateHP(-enemy.ATT.ATK);
     }
 
     #endregion

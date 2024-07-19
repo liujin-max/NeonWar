@@ -30,38 +30,26 @@ public class UIManager : MonoBehaviour
     {
         path    = "Prefab/UI/Window/" + path;
 
-        return Instantiate<GameObject>(Resources.Load<GameObject>(path), parent);
+        GameObject obj = Instantiate<GameObject>(Resources.Load<GameObject>(path), parent);
+        WindowCaches[obj.name.Replace("(Clone)", "")] = obj;
+
+        return obj;
     }
 
     public void UnloadWindow(GameObject window)
     {
+        WindowCaches[window.name] = null;
+
         Destroy(window);
     }
 
-    //显示界面
-    public GameObject ShowWindow(string name)
+    public GameObject GetWindow(string name)
     {
-        GameObject cache;
-        if (WindowCaches.TryGetValue(name, out cache)) {
-            // cache.SetActive(true);
-            cache.transform.localPosition = Vector3.zero;
-            WindowCaches.Remove(name);
-            return cache;
+        GameObject window;
+        if (WindowCaches.TryGetValue(name, out window)) {
+            return window;
         }
         return null;
-    }
-
-    //隐藏界面(不销毁)
-    public void HideWindow(string name, GameObject obj)
-    {
-        GameObject cache;
-        if (WindowCaches.TryGetValue(name, out cache)) {
-            cache.SetActive(false);
-            return;
-        }
-
-        obj.transform.localPosition = new Vector3(9999, 9999, 0);
-        WindowCaches.Add(name, obj);
     }
 
     public GameObject LoadItem(string path, Transform parent)

@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - SceneCamera
+  - Enemy
+  - Bullet
   layers:
   - Default
   - TransparentFX
@@ -14,8 +16,8 @@ TagManager:
   - UI
   - Player
   - Enemy
-  - InnerCircle
-  - OuterCircle
+  - Bullet
+  - 
   - 
   - 
   - 

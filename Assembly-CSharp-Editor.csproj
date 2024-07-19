@@ -37,19 +37,19 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\Editor\ExtractTexture.cs" />
+     <Compile Include="Assets\Joystick Pack\Scripts\Editor\VariableJoystickEditor.cs" />
      <Compile Include="Assets\AllIn1SpriteShader\Editor\AllIn1SpriteShaderLight.cs" />
      <Compile Include="Assets\Editor\BitmapFontExporter.cs" />
      <Compile Include="Assets\Editor\CustomFont.cs" />
      <Compile Include="Assets\Editor\Unity-Resource-Checker-master\ResourceChecker.cs" />
+     <Compile Include="Assets\Joystick Pack\Scripts\Editor\DynamicJoystickEditor.cs" />
+     <Compile Include="Assets\Joystick Pack\Scripts\Editor\FloatingJoystickEditor.cs" />
      <Compile Include="Assets\Editor\Tool\FindReferences.cs" />
      <Compile Include="Assets\AllIn1SpriteShader\Editor\AllIn1SpriteShaderStencil.cs" />
      <Compile Include="Assets\Editor\AudioPostProcessor.cs" />
+     <Compile Include="Assets\Joystick Pack\Scripts\Editor\JoystickEditor.cs" />
      <Compile Include="Assets\AllIn1SpriteShader\Editor\AllIn1ShaderScriptEditor.cs" />
      <Compile Include="Assets\AllIn1SpriteShader\Editor\AllIn1SpriteShader.cs" />
-     <Compile Include="Assets\Joystick Pack\Scripts\Editor\FloatingJoystickEditor.cs" />
-     <Compile Include="Assets\Joystick Pack\Scripts\Editor\JoystickEditor.cs" />
-     <Compile Include="Assets\Joystick Pack\Scripts\Editor\DynamicJoystickEditor.cs" />
-     <Compile Include="Assets\Joystick Pack\Scripts\Editor\VariableJoystickEditor.cs" />
     <Reference Include="UnityEngine">
         <HintPath>C:\Program Files\Unity 2021.2.5f1c303\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
@@ -815,6 +815,9 @@
     <Reference Include="Unity.PlasticSCM.Editor">
         <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.2D.Tilemap.Extras.Editor">
+        <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.2D.Tilemap.Extras.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Rider.Editor">
         <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
     </Reference>
@@ -823,9 +826,6 @@
     </Reference>
     <Reference Include="UnityEngine.UI">
         <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Tilemap.Extras.Editor">
-        <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.2D.Tilemap.Extras.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.InternalAPIEditorBridge.001">
         <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.InternalAPIEditorBridge.001.dll</HintPath>
