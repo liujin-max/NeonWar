@@ -52,7 +52,6 @@ public class State_Play<T> : State<Field>
         float direction = (float)@event.GetParam(0);
 
         Field.Instance.Player.Move(direction);
-
     }
 
     private void OnJoyStickDouble(GameEvent @event)
