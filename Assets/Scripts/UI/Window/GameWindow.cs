@@ -11,9 +11,6 @@ public class GameWindow : MonoBehaviour
     [SerializeField] LongPressButton m_BtnRight;
 
 
-    private bool IsLeftPress    = false;
-    private bool IsRightPress   = false;
-
     private float LeftPressTime = 0;
     private float RightPressTime= 0;
 
@@ -33,7 +30,8 @@ public class GameWindow : MonoBehaviour
     {
         m_BtnLeft.SetCallback(
         ()=>{
-            LeftPressTime = Time.time;
+            Field.Instance.LeftBtnPressFlag = true;
+            LeftPressTime   = Time.time;
 
             if (CheckBlink()) {
                 LeftPressTime = 0;
@@ -42,13 +40,14 @@ public class GameWindow : MonoBehaviour
             }
             else EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS, -1f));
         }, 
-        ()=>{}, 
+        ()=>{Field.Instance.LeftBtnPressFlag = false;}, 
         ()=>{
             EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS, -1f));
         });
 
         m_BtnRight.SetCallback(
         ()=>{
+            Field.Instance.RightBtnPressFlag = true;
             RightPressTime = Time.time;
 
             if (CheckBlink()) {
@@ -58,7 +57,7 @@ public class GameWindow : MonoBehaviour
             }
             else EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS,  1f));
         }, 
-        ()=>{}, 
+        ()=>{Field.Instance.RightBtnPressFlag = false;}, 
         ()=>{
             EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS,  1f));
         });
@@ -68,8 +67,19 @@ public class GameWindow : MonoBehaviour
     {
         //监听电脑端的输入
         // 检测方向键输入
-        if (Input.GetKeyDown(KeyCode.LeftArrow))    LeftPressTime = Time.time;
-        if (Input.GetKeyDown(KeyCode.RightArrow))   RightPressTime = Time.time;
+        if (Input.GetKeyDown(KeyCode.LeftArrow)) {
+            Field.Instance.LeftBtnPressFlag = true;
+            LeftPressTime = Time.time;
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftArrow)) { Field.Instance.LeftBtnPressFlag = false;}
+
+        if (Input.GetKeyDown(KeyCode.RightArrow)) {
+            Field.Instance.RightBtnPressFlag = true;
+            RightPressTime = Time.time;
+        }
+
+        if (Input.GetKeyUp(KeyCode.RightArrow)) { Field.Instance.RightBtnPressFlag = false;}
 
         if (Input.GetKey(KeyCode.LeftArrow))
         {

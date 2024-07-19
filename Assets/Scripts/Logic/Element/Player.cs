@@ -107,22 +107,25 @@ public class Player : MonoBehaviour
     #endregion
 
     #region 碰撞检测
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnTriggerEnter2D(Collider2D collider)
     {
         // 当碰撞开始时调用
-        // Debug.Log("Player Collision Enter : " + collision.gameObject.name);
+        // Debug.Log("Player collider Enter : " + collider.gameObject.name);
+
+        if (collider.gameObject.tag == "Enemy")
+        {
+            Field.Instance.Crash(collider.gameObject.GetComponent<Enemy>(), this);
+        }
     }
 
-    void OnCollisionStay2D(Collision2D collision)
+    void OnTriggerStay2D(Collider2D collider)
     {
-        // 当碰撞持续时调用
-        // Debug.Log("Player Collision Stay : " + collision.gameObject.name);
+
     }
 
-    void OnCollisionExit2D(Collision2D collision)
+    void OnTriggerExit2D(Collider2D collider)
     {
-        // 当碰撞结束时调用
-        // Debug.Log("Player Collision Exit : " + collision.gameObject.name);
+
     }
     #endregion
 }

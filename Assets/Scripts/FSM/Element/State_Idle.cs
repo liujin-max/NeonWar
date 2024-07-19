@@ -17,6 +17,8 @@ public class State_Idle<T> : State<Field>
 
         var game_window = GameFacade.Instance.UIManager.GetWindow("GameWindow").GetComponent<GameWindow>();
         game_window.ShowJoyStick(true);
+
+        Field.Instance.Pause();
     }
 
     public override void Update()
@@ -31,7 +33,7 @@ public class State_Idle<T> : State<Field>
         EventManager.DelHandler(EVENT.ONJOYSTICK_PRESS,     OnJoyStickPress);
     }
 
-    //拖拽摇杆
+    //按下按钮
     private void OnJoyStickPress(GameEvent @event)
     {
         m_FSM.Transist(_C.FSMSTATE.PLAY);

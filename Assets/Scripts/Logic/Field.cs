@@ -20,7 +20,10 @@ public class Field : MonoBehaviour
 
     private Player m_Player;
     public Player Player{ get { return m_Player;}}
+    
 
+    public bool LeftBtnPressFlag    = false;
+    public bool RightBtnPressFlag   = false;
 
     void Awake()
     {
@@ -55,7 +58,7 @@ public class Field : MonoBehaviour
 
         Field.Instance.Pause();
 
-        m_FSM.Transist(_C.FSMSTATE.PLAY);
+        m_FSM.Transist(_C.FSMSTATE.IDLE);
     }
 
     public void Pause()
@@ -99,6 +102,11 @@ public class Field : MonoBehaviour
 
         
         return _C.RESULT.NONE;
+    }
+
+    public bool IsPressing()
+    {
+        return LeftBtnPressFlag || RightBtnPressFlag;
     }
 
 
