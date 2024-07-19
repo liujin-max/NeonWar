@@ -11,8 +11,6 @@ public class State_Result<T> : State<Field>
 
     public override void Enter(params object[] values)
     {
-        Debug.Log("进入 结算阶段");
-
         //结算奖励
         GameFacade.Instance.DataCenter.User.UpdateGlass(Field.Instance.Glass);
 

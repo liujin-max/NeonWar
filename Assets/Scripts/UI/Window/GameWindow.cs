@@ -174,12 +174,14 @@ public class GameWindow : MonoBehaviour
 
     private void OnBlinkShake(GameEvent @event)
     {
+        Platform.Instance.VIBRATE(_C.VIBRATELEVEL.MEDIUM);
+        SoundManager.Instance.Load(SOUND.TIP);
+
         if (m_BlinkTweener != null) {
             m_BlinkTweener.Kill();
             m_BlinkPivot.transform.localPosition = new Vector3(0, -615, 0);
         }
 
-        //缺少音效
         m_BlinkTweener = m_BlinkPivot.transform.DOShakePosition(0.25f, new Vector3(10, 0, 0), 40, 50);
     }
     #endregion

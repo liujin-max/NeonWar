@@ -11,8 +11,6 @@ public class State_Play<T> : State<Field>
 
     public override void Enter(params object[] values)
     {
-        Debug.Log("进入 游玩阶段");
-
         EventManager.AddHandler(EVENT.ONJOYSTICK_PRESS,     OnJoyStickPress);
         EventManager.AddHandler(EVENT.ONJOYSTICK_DOUBLE,    OnJoyStickDouble);
         

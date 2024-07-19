@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7648711988609833028}
   - component: {fileID: 1385727364263510942}
-  - component: {fileID: 226448906922943594}
+  - component: {fileID: 2771878909110086244}
   m_Layer: 0
   m_Name: Sound_tip
   m_TagString: Untagged
@@ -129,7 +129,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &226448906922943594
+--- !u!114 &2771878909110086244
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,4 +141,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45d3534610030564eb00e88b69fbcb96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsPlayLimit: 1
   AutoDestroy: 1

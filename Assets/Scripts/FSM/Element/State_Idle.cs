@@ -11,7 +11,6 @@ public class State_Idle<T> : State<Field>
 
     public override void Enter(params object[] values)
     {
-        Debug.Log("进入 待机阶段");
         EventManager.AddHandler(EVENT.ONJOYSTICK_PRESS,     OnJoyStickPress);
 
         EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_SHOW, true));
@@ -27,8 +26,6 @@ public class State_Idle<T> : State<Field>
 
     public override void Exit()
     {
-        Debug.Log("离开 待机阶段");
-
         EventManager.DelHandler(EVENT.ONJOYSTICK_PRESS,     OnJoyStickPress);
     }
 
