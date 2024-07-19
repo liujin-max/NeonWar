@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,13 +12,22 @@ public class GameWindow : MonoBehaviour
     [SerializeField] LongPressButton m_BtnRight;
 
 
+    [SerializeField] TextMeshProUGUI m_Glass;
+
+
     private float LeftPressTime = 0;
     private float RightPressTime= 0;
 
     void Awake()
     {
-
+        EventManager.AddHandler(EVENT.ONUPDATEGLASS,    OnUpdateGlass);
     }
+
+    void OnDestroy()
+    {
+        EventManager.DelHandler(EVENT.ONUPDATEGLASS,    OnUpdateGlass);
+    }
+
 
     //同时按下的时间间隔小于0.05秒
     bool CheckBlink()
@@ -104,4 +114,16 @@ public class GameWindow : MonoBehaviour
     {
         m_Joystick.gameObject.SetActive(flag);
     }
+
+
+
+
+    #region 监听事件
+    private void OnUpdateGlass(GameEvent @event)
+    {
+        int offset  = (int)@event.GetParam(0);
+
+        m_Glass.text = (GameFacade.Instance.DataCenter.User.Glass + offset).ToString();
+    }
+    #endregion
 }

@@ -42,9 +42,7 @@
      <Compile Include="Assets\Scripts\EFFECT.cs" />
      <Compile Include="Assets\Scripts\Effect\BezierCurveAnimation.cs" />
      <Compile Include="Assets\Scripts\Utility\UrlImageUtility.cs" />
-     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\FixedJoystick.cs" />
      <Compile Include="Assets\Scripts\UI\Window\MaskWindow.cs" />
-     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\VariableJoystick.cs" />
      <Compile Include="Assets\Scripts\Utility\BarTransition.cs" />
      <Compile Include="Assets\Scripts\Effect\Floating.cs" />
      <Compile Include="Assets\Scripts\Manager\SoundManager.cs" />
@@ -66,7 +64,6 @@
      <Compile Include="Assets\Scripts\EVENT.cs" />
      <Compile Include="Assets\Scripts\Utility\UIMaskUtility.cs" />
      <Compile Include="Assets\Scripts\Manager\SceneManager.cs" />
-     <Compile Include="Assets\Joystick Pack\Examples\JoystickPlayerExample.cs" />
      <Compile Include="Assets\DOTween\Modules\DOTweenModuleUtils.cs" />
      <Compile Include="Assets\Scripts\Utility\CSVUtility.cs" />
      <Compile Include="Assets\AllIn1SpriteShader\Demo\Scripts\DemoItem.cs" />
@@ -75,13 +72,11 @@
      <Compile Include="Assets\DOTween\Modules\DOTweenModulePhysics.cs" />
      <Compile Include="Assets\AllIn1SpriteShader\Demo\Scripts\DemoCamera.cs" />
      <Compile Include="Assets\Scripts\Effect\RateNumber.cs" />
-     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\DynamicJoystick.cs" />
      <Compile Include="Assets\Scripts\SOUND.cs" />
      <Compile Include="Assets\Scripts\Effect\ButtonScale.cs" />
      <Compile Include="Assets\Scripts\Utility\ImageGray.cs" />
      <Compile Include="Assets\AllIn1SpriteShader\Demo\Scripts\Demo2AutoScroll.cs" />
      <Compile Include="Assets\Scripts\Utility\ToolUtility.cs" />
-     <Compile Include="Assets\Joystick Pack\Scripts\Base\Joystick.cs" />
      <Compile Include="Assets\Scripts\Logic\User.cs" />
      <Compile Include="Assets\Scripts\Manager\SystemManager.cs" />
      <Compile Include="Assets\Scripts\Utility\CameraUtility.cs" />
@@ -103,7 +98,6 @@
      <Compile Include="Assets\Scripts\Utility\MouseClickHandler.cs" />
      <Compile Include="Assets\Scripts\FSM\Element\State_Play.cs" />
      <Compile Include="Assets\Scripts\Utility\BoxColliderUtility.cs" />
-     <Compile Include="Assets\Joystick Pack\Examples\JoystickSetterExample.cs" />
      <Compile Include="Assets\Scripts\Manager\CsvManager.cs" />
      <Compile Include="Assets\Scripts\Utility\TextureImporterSettings.cs" />
      <Compile Include="Assets\Scripts\Display\DisplayEngine.cs" />
@@ -119,7 +113,6 @@
      <Compile Include="Assets\DOTween\Modules\DOTweenModuleUI.cs" />
      <Compile Include="Assets\Scripts\Effect\BrokenEffect.cs" />
      <Compile Include="Assets\AllIn1SpriteShader\Scripts\AllIn1ShaderWindow.cs" />
-     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\FloatingJoystick.cs" />
      <Compile Include="Assets\Scripts\Utility\BGM.cs" />
      <Compile Include="Assets\DOTween\Modules\DOTweenModuleEPOOutline.cs" />
      <Compile Include="Assets\Scripts\Logic\Rank.cs" />
@@ -138,6 +131,7 @@
      <Compile Include="Assets\Scripts\UI\Window\TipWindow.cs" />
      <Compile Include="Assets\Scripts\Logic\Battle\Spawn.cs" />
      <Compile Include="Assets\Scripts\Utility\LongPressButton.cs" />
+     <Compile Include="Assets\Scripts\UI\Window\ResultWindow.cs" />
      <None Include="Assets\Resources\Shader\SpriteGray.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />

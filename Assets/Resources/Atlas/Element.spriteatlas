@@ -39,8 +39,10 @@ SpriteAtlas:
     isAtlasV2: 0
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
-  m_PackedSprites: []
-  m_PackedSpriteNamesToIndex: []
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 6576f8b87ac876e4da015975d6342ebe, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - battery
   m_RenderDataMap: {}
   m_Tag: Element
   m_IsVariant: 0

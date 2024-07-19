@@ -2,11 +2,12 @@
 
 public static class EVENT
 {
-
     public static string UI_SHOWGUIDE       = "UI_SHOWGUIDE";
     public static string UI_POPUPMASK       = "UI_POPUPMASK";
     public static string UI_POPUPTIP        = "UI_POPUPTIP";
 
+
+    public static string ONUPDATEGLASS      = "ONUPDATEGLASS";
 
 
     public static string ONJOYSTICK_PRESS   = "ONJOYSTICK_PRESS";

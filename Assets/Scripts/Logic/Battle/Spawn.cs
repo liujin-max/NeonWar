@@ -47,7 +47,11 @@ public class Spawn
         //销毁死亡的敌人
         List<Enemy> _Removes = new List<Enemy>();
         m_Enemys.ForEach(e => {
-            if (e.IsDead() == true) _Removes.Add(e);
+            if (e.IsDead() == true) {
+                Field.Instance.UpdateGlass(e.ATT.Glass);
+
+                _Removes.Add(e);
+            }
         });
 
         _Removes.ForEach(e => {

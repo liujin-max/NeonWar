@@ -21,6 +21,9 @@ public class Field : MonoBehaviour
     private Player m_Player;
     public Player Player{ get { return m_Player;}}
     
+    //累计获得的碎片
+    private int m_Glass;
+    public int Glass{get {return m_Glass;}}
 
     public bool LeftBtnPressFlag    = false;
     public bool RightBtnPressFlag   = false;
@@ -47,18 +50,28 @@ public class Field : MonoBehaviour
 
     public void Enter()
     {
-        STATE   = _C.GAME_STATE.PLAY;
+        STATE   = _C.GAME_STATE.PAUSE;
 
         Land    = new Land();
         Spawn   = new Spawn();
 
-        InitPlayer();
-
         GameFacade.Instance.UIManager.LoadWindow("GameWindow", UIManager.BOTTOM).GetComponent<GameWindow>();
 
-        Field.Instance.Pause();
 
         m_FSM.Transist(_C.FSMSTATE.IDLE);
+    }
+
+    public void Dispose()
+    {
+        STATE   = _C.GAME_STATE.PAUSE;
+
+        m_Glass = 0;
+
+        Land.Dispose();
+        Spawn.Dispose();
+
+
+        EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS, m_Glass));
     }
 
     public void Pause()
@@ -111,10 +124,25 @@ public class Field : MonoBehaviour
 
 
     #region 逻辑处理
-    void InitPlayer()
+    public void UpdateGlass(int value)
     {
+        m_Glass += value;
+
+        EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS, m_Glass));
+    }
+
+    public void InitPlayer()
+    {
+        if (m_Player != null) return;
+
         m_Player = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Element/Player", Vector2.zero, Land.ENTITY_ROOT).GetComponent<Player>();
         m_Player.Init(270);
+    }
+
+    public void RemovePlayer()
+    {
+        m_Player.Dispose();
+        m_Player = null;
     }
 
 

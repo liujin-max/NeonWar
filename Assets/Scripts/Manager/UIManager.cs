@@ -43,6 +43,14 @@ public class UIManager : MonoBehaviour
         Destroy(window);
     }
 
+    public void UnloadWindow(string name)
+    {
+        var window = GetWindow(name);
+        if (window != null) {
+            UnloadWindow(window);
+        }
+    }
+
     public GameObject GetWindow(string name)
     {
         GameObject window;

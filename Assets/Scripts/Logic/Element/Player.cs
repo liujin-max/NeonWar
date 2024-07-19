@@ -5,7 +5,7 @@ using UnityEngine;
 //基础属性
 public class PlayerATT
 {
-    public int HP = 1111;
+    public int HP = 1;
     public int ATK = 1;
     public CDTimer ASP   = new CDTimer(1f);    //攻速 
 }
@@ -17,16 +17,9 @@ public class Player : MonoBehaviour
     public PlayerATT ATT = new PlayerATT();
 
 
-
     private float m_Angle;      //角度
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    
 
     public void Init(float angle)
     {
@@ -90,6 +83,11 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void Dispose()
+    {
+        Destroy(gameObject);
+    }
+
     
 
     #region 逻辑处理
@@ -105,6 +103,7 @@ public class Player : MonoBehaviour
         bullet.Shoot(this, ToolUtility.FindPointOnCircle(Vector2.zero, 1000, m_Angle + 180));
     }
     #endregion
+
 
     #region 碰撞检测
     void OnTriggerEnter2D(Collider2D collider)

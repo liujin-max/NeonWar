@@ -8,6 +8,7 @@ public class EnemyATT
     public int HP = 1;
     public int ATK = 1;
 
+    public int Glass = 1;
 }
 
 public class Enemy : MonoBehaviour

@@ -39,6 +39,7 @@ public class GameUserData
     public string HeadUrl;
     public int Level;       //通关记录
     public int Coin;        //金币
+    public int Glass;       //碎片
 
     public long RecoveryTimestamp;    //上次体力的恢复时间
     public int RegisterDay;     //注册时间(一年中的第几天)
@@ -72,7 +73,7 @@ public class User
     public string HeadURL { get{ return m_Data.HeadUrl;}}
     public int Level { get{ return m_Data.Level;}}
     public int Coin { get{ return m_Data.Coin;}}
-
+    public int Glass { get{ return m_Data.Glass;}}
 
     private bool m_userUpdate = false;  //账号数据变动标记
     public bool IsDirty {get { return m_userUpdate;}}
@@ -172,6 +173,13 @@ public class User
     public void UpdateCoin(int value)
     {
         m_Data.Coin  = Mathf.Max(0, m_Data.Coin + value);
+
+        m_userUpdate = true;
+    }
+
+    public void UpdateGlass(int value)
+    {
+        m_Data.Glass = Mathf.Max(0, m_Data.Glass + value);
 
         m_userUpdate = true;
     }

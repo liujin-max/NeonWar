@@ -28,7 +28,7 @@ public class Land : MonoBehaviour
 
     public void Dispose()
     {
-        SCENE_CAMERA.Reset();
+
     }
 
 
