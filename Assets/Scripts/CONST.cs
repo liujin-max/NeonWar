@@ -11,6 +11,17 @@ public static class _C
     public static float DEFAULT_RADIUS = 5.4f;  //圆弧半径
     public static float DEFAULT_BLINKCD= 1.5f;  //闪现冷却
 
+
+    public static int UPGRADE_ATK       = 1;        //每级提高的攻击力
+    public static float UPGRADE_ASP     = 0.05f;    //每级提高的攻速百分比
+
+
+
+
+
+
+
+
     public static int DEFAULT_RANK = 999;       //默认排名
 
 

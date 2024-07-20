@@ -9,16 +9,25 @@ public class Spawn
 {
     private List<Enemy> m_Enemys = new List<Enemy>();
 
+    private Pair m_Pool = new Pair(0, 0);
+
     //现在生产怪物看的是时间间隔
     private CDTimer m_Timer = new CDTimer(1.5f);
 
 
+    public void Init(int enemy_count)
+    {
+
+    }
 
     void InitEnemy()
     {
-        Vector2 point = new Vector2(RandomUtility.Random(-100, 101) / 100.0f, RandomUtility.Random(-100, 101) / 100.0f);
+        int hp = Field.Instance.FML_EnemyHP(Field.Instance.Level.ID);
+
+        Vector2 point = new Vector2(RandomUtility.Random(-200, 201) / 100.0f, RandomUtility.Random(-200, 201) / 100.0f);
         var enemy = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Element/Enemy", point, Field.Instance.Land.ENEMY_ROOT).GetComponent<Enemy>();
         enemy.Push(160);
+        enemy.Init(hp);
 
         m_Enemys.Add(enemy);
     }

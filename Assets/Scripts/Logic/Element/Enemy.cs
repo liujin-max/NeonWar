@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 //基础属性
@@ -14,6 +15,7 @@ public class EnemyATT
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D m_Rigidbody;
+    [SerializeField] private TextMeshPro m_HPText;
 
 
     public EnemyATT ATT = new EnemyATT();
@@ -27,6 +29,14 @@ public class Enemy : MonoBehaviour
         m_Rigidbody.gravityScale = 0;
     }
 
+    public void Init(int hp)
+    {
+        ATT.HP      = hp;
+        ATT.Glass   = Mathf.Max(Field.Instance.FML_HP2Glass(hp), 1);
+
+        FlushHP();
+    }
+
     public void Dispose()
     {
         Destroy(gameObject);
@@ -37,11 +47,23 @@ public class Enemy : MonoBehaviour
         return ATT.HP <= 0;
     }
 
+    void FlushHP()
+    {
+       m_HPText.text = ATT.HP.ToString(); 
+    }
+
+    void LateUpdate()
+    {
+        m_HPText.transform.eulerAngles = Vector3.zero;
+    }
+
 
     #region 逻辑处理
     public void UpdateHP(int value)
     {
         ATT.HP += value;
+
+        FlushHP();
     }
 
     //strength :力的强度，意味着移动速度

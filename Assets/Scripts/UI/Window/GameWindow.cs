@@ -16,6 +16,14 @@ public class GameWindow : MonoBehaviour
 
     [SerializeField] TextMeshProUGUI m_Glass;
 
+    
+    [Header("按钮")]
+    [SerializeField] Button m_BtnATK;
+    [SerializeField] Button m_BtnASP;
+
+
+    [SerializeField] private List<CanvasGroup> m_Groups = new List<CanvasGroup>();
+
 
     private float LeftPressTime = 0;
     private float RightPressTime= 0;
@@ -25,6 +33,8 @@ public class GameWindow : MonoBehaviour
 
     void Awake()
     {
+        EventManager.AddHandler(EVENT.ONBATTLESTART,    OnBattleStart);
+        EventManager.AddHandler(EVENT.ONBATTLEEND,      OnBattleEnd);
         EventManager.AddHandler(EVENT.ONJOYSTICK_SHOW,  OnJoyStickShow);
         EventManager.AddHandler(EVENT.ONUPDATEGLASS,    OnUpdateGlass);
 
@@ -34,6 +44,8 @@ public class GameWindow : MonoBehaviour
 
     void OnDestroy()
     {
+        EventManager.DelHandler(EVENT.ONBATTLESTART,    OnBattleStart);
+        EventManager.DelHandler(EVENT.ONBATTLEEND,      OnBattleEnd);
         EventManager.DelHandler(EVENT.ONJOYSTICK_SHOW,  OnJoyStickShow);
         EventManager.DelHandler(EVENT.ONUPDATEGLASS,    OnUpdateGlass);
 
@@ -52,6 +64,7 @@ public class GameWindow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //往左
         m_BtnLeft.SetCallback(()=>{
             Field.Instance.LeftBtnPressFlag = true;
             LeftPressTime   = Time.time;
@@ -68,6 +81,7 @@ public class GameWindow : MonoBehaviour
             EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS, -1f));
         });
 
+        //往右
         m_BtnRight.SetCallback(()=>{
             Field.Instance.RightBtnPressFlag = true;
             RightPressTime = Time.time;
@@ -83,7 +97,44 @@ public class GameWindow : MonoBehaviour
         ()=>{
             EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS,  1f));
         });
-    }
+
+
+
+        //升级攻击力
+        m_BtnATK.onClick.AddListener(()=>{
+            int cost = GameFacade.Instance.DataCenter.User.GetATKCost();
+
+            if (GameFacade.Instance.DataCenter.User.Glass < cost) {
+                EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "不足"));
+                return;
+            }
+
+            GameFacade.Instance.DataCenter.User.UpdateATK(1);
+            GameFacade.Instance.DataCenter.User.UpdateGlass(-cost);
+
+            FlushUpgradePivot();
+
+            EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS, 0));
+        });
+
+
+        //升级攻速
+        m_BtnASP.onClick.AddListener(()=>{
+            int cost = GameFacade.Instance.DataCenter.User.GetASPCost();
+
+            if (GameFacade.Instance.DataCenter.User.Glass < cost) {
+                EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "不足"));
+                return;
+            }
+
+            GameFacade.Instance.DataCenter.User.UpdateASP(1);
+            GameFacade.Instance.DataCenter.User.UpdateGlass(-cost);
+
+            FlushUpgradePivot();
+
+            EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS, 0));
+        });
+    }   
 
     public void Init()
     {
@@ -92,7 +143,20 @@ public class GameWindow : MonoBehaviour
 
     void FlushUI()
     {
+        FlushUpgradePivot();
+
+
         UpdateBlink();
+    }
+
+    void FlushUpgradePivot()
+    {
+        m_BtnATK.transform.Find("Level").GetComponent<TextMeshProUGUI>().text   = GameFacade.Instance.DataCenter.User.ATK.ToString();
+        m_BtnATK.transform.Find("Cost").GetComponent<TextMeshProUGUI>().text    = "消耗：" + GameFacade.Instance.DataCenter.User.GetATKCost();
+
+
+        m_BtnASP.transform.Find("Level").GetComponent<TextMeshProUGUI>().text   = GameFacade.Instance.DataCenter.User.ASP.ToString();
+        m_BtnASP.transform.Find("Cost").GetComponent<TextMeshProUGUI>().text    = "消耗：" + GameFacade.Instance.DataCenter.User.GetASPCost();
     }
 
     void Update()
@@ -156,6 +220,31 @@ public class GameWindow : MonoBehaviour
 
 
     #region 监听事件
+    //战斗开始
+    private void OnBattleStart(GameEvent @event)
+    {
+        m_Joystick.gameObject.SetActive(true);
+
+        m_Groups.ForEach(group => {
+            group.DOFade(0, 0.2f).OnComplete(()=>{
+                group.gameObject.SetActive(false);
+            });
+        });
+    }
+
+    //战斗结束
+    private void OnBattleEnd(GameEvent @event)
+    {
+        m_Joystick.gameObject.SetActive(false);
+
+        m_Glass.text = GameFacade.Instance.DataCenter.User.Glass.ToString();
+
+        m_Groups.ForEach(group => {
+            group.gameObject.SetActive(true);
+            group.DOFade(1, 0.1f);
+        });
+    }
+
     private void OnJoyStickShow(GameEvent @event)
     {
         bool flag = (bool)@event.GetParam(0);
@@ -179,7 +268,7 @@ public class GameWindow : MonoBehaviour
 
         if (m_BlinkTweener != null) {
             m_BlinkTweener.Kill();
-            m_BlinkPivot.transform.localPosition = new Vector3(0, -615, 0);
+            m_BlinkPivot.transform.localPosition = new Vector3(0, -740, 0);
         }
 
         m_BlinkTweener = m_BlinkPivot.transform.DOShakePosition(0.25f, new Vector3(10, 0, 0), 40, 50);

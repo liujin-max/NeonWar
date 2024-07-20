@@ -14,11 +14,15 @@ public class DataCenter
     //账号信息
     public User User;
 
+    public Levels Levels;
+
 
     public void Init()
     {
         //账号数据
-        User = new User();
+        User    = new User();
+
+        Levels  = new Levels();
     }
 }
 

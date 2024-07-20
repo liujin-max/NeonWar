@@ -40,6 +40,8 @@ public class GameUserData
     public int Level;       //通关记录
     public int Coin;        //金币
     public int Glass;       //碎片
+    public int ATK = 1;     //默认1J
+    public int ASP = 1;
 
     public long RecoveryTimestamp;    //上次体力的恢复时间
     public int RegisterDay;     //注册时间(一年中的第几天)
@@ -74,6 +76,8 @@ public class User
     public int Level { get{ return m_Data.Level;}}
     public int Coin { get{ return m_Data.Coin;}}
     public int Glass { get{ return m_Data.Glass;}}
+    public int ATK { get{ return m_Data.ATK;}}
+    public int ASP { get{ return m_Data.ASP;}}
 
     private bool m_userUpdate = false;  //账号数据变动标记
     public bool IsDirty {get { return m_userUpdate;}}
@@ -184,6 +188,29 @@ public class User
         m_userUpdate = true;
     }
 
+    public void UpdateATK(int value)
+    {
+        m_Data.ATK += value;
+
+        m_userUpdate = true;
+    }
+
+    public void UpdateASP(int value)
+    {
+        m_Data.ASP += value;
+
+        m_userUpdate = true;
+    }
+
+    public int GetATKCost()
+    {
+        return Field.Instance.FML_ATKCost(m_Data.ATK);
+    }
+
+    public int GetASPCost()
+    {
+        return Field.Instance.FML_ATKCost(m_Data.ASP);
+    }
 
     public void SetRecoveryTimestamp(long value)
     {

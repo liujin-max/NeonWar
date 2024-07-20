@@ -10,17 +10,16 @@ public static class EVENT
     public static string UI_BLINKSHAKE      = "UI_BLINKSHAKE";
 
 
+
+
+    public static string ONBATTLESTART      = "ONBATTLESTART";
+    public static string ONBATTLEEND        = "ONBATTLEEND";
+    
     public static string ONUPDATEGLASS      = "ONUPDATEGLASS";
-
-
 
     public static string ONJOYSTICK_SHOW    = "ONJOYSTICK_SHOW";
     public static string ONJOYSTICK_PRESS   = "ONJOYSTICK_PRESS";
     public static string ONJOYSTICK_DOUBLE  = "ONJOYSTICK_DOUBLE";
     
-    // public static string ONENTERSTAGE       = "ONENTERSTAGE";
-    // public static string ONBROKENCARD       = "ONBROKENCARD";
-    // public static string ONCARDMOVED        = "ONCARDMOVED";    //移动完成
-    // public static string ONSHOWGRID         = "ONSHOWGRID";
 
 }

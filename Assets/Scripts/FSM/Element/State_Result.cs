@@ -11,11 +11,22 @@ public class State_Result<T> : State<Field>
 
     public override void Enter(params object[] values)
     {
-        //结算奖励
-        GameFacade.Instance.DataCenter.User.UpdateGlass(Field.Instance.Glass);
+        _C.RESULT result = (_C.RESULT) values[0];
 
+        //胜利
+        if (result == _C.RESULT.VICTORY)
+        {   
+            //记录通关
+            GameFacade.Instance.DataCenter.User.SetLevel(Field.Instance.Level.ID);
+        }
 
         GameFacade.Instance.UIManager.LoadWindow("ResultWindow", UIManager.BOARD).GetComponent<ResultWindow>();
+
+        //结算奖励
+        GameFacade.Instance.DataCenter.User.UpdateGlass(Field.Instance.Glass);
+        
+        
+        Field.Instance.End();
     }
 
     public override void Update()

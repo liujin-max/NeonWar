@@ -29,7 +29,7 @@ public class State_Play<T> : State<Field>
 
     public override void Exit()
     {
-        Field.Instance.End();
+    
 
         EventManager.DelHandler(EVENT.ONJOYSTICK_PRESS,     OnJoyStickPress);
         EventManager.DelHandler(EVENT.ONJOYSTICK_DOUBLE,    OnJoyStickDouble);

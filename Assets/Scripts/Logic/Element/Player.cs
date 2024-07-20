@@ -5,8 +5,8 @@ using UnityEngine;
 //基础属性
 public class PlayerATT
 {
-    public int HP = 1;
-    public int ATK = 1;
+    public int HP   = 3;
+    public int ATK  = 1;
     public CDTimer ASP   = new CDTimer(1f);    //攻速 
 }
 
@@ -91,6 +91,15 @@ public class Player : MonoBehaviour
     
 
     #region 逻辑处理
+    //同步最新的加成等级
+    public void Sync()
+    {
+        ATT.ATK = GameFacade.Instance.DataCenter.User.ATK * _C.UPGRADE_ATK;
+
+        //每级提高攻速百分比
+        ATT.ASP.Reset(1 / (1 + _C.UPGRADE_ASP * (GameFacade.Instance.DataCenter.User.ASP - 1)));
+    }
+
     public void UpdateHP(int value)
     {
         ATT.HP += value;
@@ -108,9 +117,6 @@ public class Player : MonoBehaviour
     #region 碰撞检测
     void OnTriggerEnter2D(Collider2D collider)
     {
-        // 当碰撞开始时调用
-        // Debug.Log("Player collider Enter : " + collider.gameObject.name);
-
         if (collider.gameObject.tag == "Enemy")
         {
             Field.Instance.Crash(collider.gameObject.GetComponent<Enemy>(), this);
