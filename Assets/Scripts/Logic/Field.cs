@@ -16,7 +16,7 @@ public class Field : MonoBehaviour
     public _C.GAME_STATE STATE = _C.GAME_STATE.PAUSE;
 
     [HideInInspector] public Land Land;
-    public Spawn Spawn; //怪物工厂
+    private Spawn m_Spawn; //怪物工厂
 
     private Player m_Player;
     public Player Player{ get { return m_Player;}}
@@ -59,7 +59,7 @@ public class Field : MonoBehaviour
         STATE   = _C.GAME_STATE.PAUSE;
 
         Land    = new Land();
-        Spawn   = new Spawn();
+        m_Spawn = new Spawn();
 
         GameFacade.Instance.UIManager.LoadWindow("GameWindow", UIManager.BOTTOM).GetComponent<GameWindow>().Init();
 
@@ -76,7 +76,7 @@ public class Field : MonoBehaviour
         BlinkTimer.Full();
 
         m_Level = GameFacade.Instance.DataCenter.Levels.GetLevel(GameFacade.Instance.DataCenter.User.Level + 1);
-        Spawn.Init(Field.Instance.FML_EnemyCount(m_Level.ID));
+        m_Spawn.Init(NumericalManager.FML_EnemyCount(m_Level.ID));
 
         Debug.Log("========  开始关卡：" + m_Level.ID + "  ========");
 
@@ -96,7 +96,7 @@ public class Field : MonoBehaviour
         BlinkTimer.Full();
 
         Land.Dispose();
-        Spawn.Dispose();
+        m_Spawn.Dispose();
 
 
         EventManager.SendEvent(new GameEvent(EVENT.ONBATTLEEND));
@@ -107,14 +107,14 @@ public class Field : MonoBehaviour
     {
         STATE   = _C.GAME_STATE.PAUSE;
 
-        Spawn.Pause();
+        m_Spawn.Pause();
     }
 
     public void Resume()
     {
         STATE   = _C.GAME_STATE.PLAY;
 
-        Spawn.Resume();
+        m_Spawn.Resume();
     }
 
     public void Transist(_C.FSMSTATE state, params object[] values)
@@ -135,15 +135,15 @@ public class Field : MonoBehaviour
 
         if (m_FSM != null) m_FSM.Update();
 
-        Spawn.Update(deltaTime);
+        m_Spawn.Update(deltaTime);
         BlinkTimer.Update(deltaTime);
     }
 
     public _C.RESULT CheckResult()
     {
+        if (m_Spawn.IsClear() == true) return _C.RESULT.VICTORY;
         if (m_Player.IsDead() == true) return _C.RESULT.LOSE;
 
-        
         return _C.RESULT.NONE;
     }
 
@@ -151,77 +151,6 @@ public class Field : MonoBehaviour
     {
         return LeftBtnPressFlag || RightBtnPressFlag;
     }
-
-
-    #region 数值公式
-    //敌人数量和关卡的公式
-    public int FML_EnemyCount(int stage_level)
-    {
-        //第一关敌人的数量
-        int e1  = 5; 
-        //线性增长系数
-        float m = 2f;
-        //后期增长系数
-        float a = 0.01f;
-        //增长指数
-        float b = 2f;
-
-        return Mathf.FloorToInt(e1 + m * (stage_level - 1) + a * Mathf.Pow(stage_level - 1, b));
-    }
-
-    
-
-    //敌人血量和关卡的关系公式
-    public int FML_EnemyHP(int stage_level)
-    {
-        //第一关敌人的基础血量
-        int hp_base = 2;  
-        //血量增长率，设定为0.1（每关增加10%） 
-        float pr    = 0.1f;
-
-        int hp_now  = Mathf.FloorToInt(hp_base * Mathf.Pow(1 + pr, stage_level - 1));
-
-        //上下浮动
-        int hp_min  = Mathf.FloorToInt(hp_now * 0.8f);
-        int hp_max  = Mathf.CeilToInt(hp_now * 1.2f);
-
-        return RandomUtility.Random(hp_min, hp_max);
-    }
-
-    //敌人死亡时掉落的碎片和敌人血量的公式
-    public int FML_HP2Glass(int hp)
-    {
-        // k 是比例系数(0.5， 表示每2滴血掉落1颗碎片)
-        float k = 0.5f;
-
-        return Mathf.FloorToInt(k * hp);
-    }
-
-    //升级攻击力消耗的碎片数量和等级的公式
-    public int FML_ATKCost(int atk_level)
-    {
-        //第一次升级消耗的数量
-        int cost_base = 5;
-
-        //增长指数
-        float cost_pa = 1.5f;
-
-        return Mathf.FloorToInt(cost_base * Mathf.Pow(atk_level, cost_pa));
-    }
-
-    //升级攻速消耗的碎片数量和等级的公式
-    public int FML_ASPCost(int asp_level)
-    {
-        //第一次升级消耗的数量
-        int cost_base = 5;
-
-        //增长指数
-        float cost_pa = 1.2f;
-
-        return Mathf.FloorToInt(cost_base * Mathf.Pow(asp_level, cost_pa));
-    }
-
-    #endregion
 
 
     #region 逻辑处理
@@ -259,6 +188,8 @@ public class Field : MonoBehaviour
     //敌人碰撞玩家
     public void Crash(Enemy enemy, Player player)
     {
+        GameFacade.Instance.EffectManager.Load(EFFECT.CRASH, Vector3.zero, Field.Instance.Land.ELEMENT_ROOT.gameObject);
+
         player.UpdateHP(-enemy.ATT.ATK);
     }
 

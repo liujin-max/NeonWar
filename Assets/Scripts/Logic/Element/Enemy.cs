@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour
     public void Init(int hp)
     {
         ATT.HP      = hp;
-        ATT.Glass   = Mathf.Max(Field.Instance.FML_HP2Glass(hp), 1);
+        ATT.Glass   = Mathf.Max(NumericalManager.FML_HP2Glass(hp), 1);
 
         FlushHP();
     }

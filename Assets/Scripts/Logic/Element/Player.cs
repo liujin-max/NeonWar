@@ -7,7 +7,7 @@ public class PlayerATT
 {
     public int HP   = 3;
     public int ATK  = 1;
-    public CDTimer ASP   = new CDTimer(1f);    //攻速 
+    public CDTimer ASP   = new CDTimer(0.6f);    //攻速 
 }
 
 public class Player : MonoBehaviour

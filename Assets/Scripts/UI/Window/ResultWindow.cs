@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class ResultWindow : MonoBehaviour
 {
-
+    [SerializeField] TextMeshProUGUI m_Result;
     [SerializeField] Button m_BtnContinue;
 
 
@@ -17,9 +18,8 @@ public class ResultWindow : MonoBehaviour
         });
     }
 
-    // Update is called once per frame
-    void Update()
+    public void Init(_C.RESULT result)
     {
-        
+        m_Result.text = result == _C.RESULT.VICTORY ? "胜利" : "失败";
     }
 }

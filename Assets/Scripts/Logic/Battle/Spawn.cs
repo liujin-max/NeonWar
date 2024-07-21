@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 
@@ -12,24 +13,44 @@ public class Spawn
     private Pair m_Pool = new Pair(0, 0);
 
     //现在生产怪物看的是时间间隔
-    private CDTimer m_Timer = new CDTimer(1.5f);
+    private CDTimer m_Timer = new CDTimer(6f);
 
 
     public void Init(int enemy_count)
     {
-
+        Debug.Log("怪物数量：" + enemy_count);
+        m_Pool.Reset(0, enemy_count);
     }
 
-    void InitEnemy()
+    void PutEnemy()
     {
-        int hp = Field.Instance.FML_EnemyHP(Field.Instance.Level.ID);
+        int hp = NumericalManager.FML_EnemyHP(Field.Instance.Level.ID);
 
         Vector2 point = new Vector2(RandomUtility.Random(-200, 201) / 100.0f, RandomUtility.Random(-200, 201) / 100.0f);
-        var enemy = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Element/Enemy", point, Field.Instance.Land.ENEMY_ROOT).GetComponent<Enemy>();
-        enemy.Push(160);
-        enemy.Init(hp);
 
+        var enemy = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Element/Enemy", point, Field.Instance.Land.ENEMY_ROOT).GetComponent<Enemy>();
+        enemy.Init(hp);
+        enemy.gameObject.SetActive(false);
         m_Enemys.Add(enemy);
+
+
+        // var hole = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Effect/BlackHole", point, Field.Instance.Land.ELEMENT_ROOT).transform;
+        var hole = GameFacade.Instance.EffectManager.Load(EFFECT.BLACKHOLE, point, Field.Instance.Land.ELEMENT_ROOT.gameObject).transform;
+
+        hole.localScale = Vector3.zero;
+        Sequence seq = DOTween.Sequence();
+        seq.Append(hole.DOScale(Vector3.one, 0.5f));
+        seq.AppendInterval(0.4f);
+        
+        seq.AppendCallback(()=>{
+            enemy.gameObject.SetActive(true);
+            enemy.Push(160);
+        });
+
+        seq.AppendInterval(0.2f);
+        seq.Append(hole.DOScale(1.3f, 0.15f));
+        seq.Append(hole.DOScale(0, 0.4f));
+        seq.Play();
     }
 
     public void Pause()
@@ -42,16 +63,30 @@ public class Spawn
         m_Enemys.ForEach(e => e.Resume());
     }
 
+    public bool IsClear()
+    {
+        return m_Pool.IsFull() && m_Enemys.Count == 0;
+    }
+
     public void Update(float deltaTime)
     {
-        //按时间间隔产出敌人
-        m_Timer.Update(deltaTime);
-        if (m_Timer.IsFinished() == true)
+        if (!m_Pool.IsFull())
         {
-            m_Timer.Reset();
+            if (m_Enemys.Count == 0) m_Timer.Full();
 
-            InitEnemy();
+            //按时间间隔产出敌人
+            m_Timer.Update(deltaTime);
+            if (m_Timer.IsFinished() == true)
+            {
+                m_Timer.Reset();
+                m_Timer.SetCurrent(RandomUtility.Random(0, Mathf.FloorToInt(m_Timer.Duration * 100)) / 100.0f);
+
+                m_Pool.UpdateCurrent(1);
+
+                PutEnemy();
+            }
         }
+        
 
         //销毁死亡的敌人
         List<Enemy> _Removes = new List<Enemy>();
@@ -72,6 +107,8 @@ public class Spawn
 
     public void Dispose()
     {
+        m_Pool.Reset(0, 0);
+        
         m_Enemys.ForEach(e => {
             e.Dispose();
         });

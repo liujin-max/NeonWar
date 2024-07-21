@@ -96,6 +96,7 @@
      <Compile Include="Assets\AllIn1SpriteShader\Scripts\SetAtlasUvs.cs" />
      <Compile Include="Assets\Scripts\FSM\Element\State_Idle.cs" />
      <Compile Include="Assets\Scripts\FSM\FSM.cs" />
+     <Compile Include="Assets\Scripts\Logic\Data\Level.cs" />
      <Compile Include="Assets\Scripts\Effect\FlyCoin.cs" />
      <Compile Include="Assets\Scripts\Utility\MouseClickHandler.cs" />
      <Compile Include="Assets\Scripts\FSM\Element\State_Play.cs" />
@@ -116,6 +117,7 @@
      <Compile Include="Assets\DOTween\Modules\DOTweenModuleUI.cs" />
      <Compile Include="Assets\Scripts\Effect\BrokenEffect.cs" />
      <Compile Include="Assets\AllIn1SpriteShader\Scripts\AllIn1ShaderWindow.cs" />
+     <Compile Include="Assets\Scripts\Logic\Data\Levels.cs" />
      <Compile Include="Assets\Scripts\Utility\BGM.cs" />
      <Compile Include="Assets\DOTween\Modules\DOTweenModuleEPOOutline.cs" />
      <Compile Include="Assets\Scripts\Logic\Rank.cs" />
@@ -132,8 +134,7 @@
      <Compile Include="Assets\Scripts\Effect\Shine.cs" />
      <Compile Include="Assets\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
      <Compile Include="Assets\Scripts\UI\Window\TipWindow.cs" />
-     <Compile Include="Assets\Scripts\Logic\Data\Levels.cs" />
-     <Compile Include="Assets\Scripts\Logic\Data\Level.cs" />
+     <Compile Include="Assets\Scripts\Logic\Data\NumericalManager.cs" />
      <None Include="Assets\Resources\Shader\SpriteGray.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />

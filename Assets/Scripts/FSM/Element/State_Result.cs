@@ -20,7 +20,8 @@ public class State_Result<T> : State<Field>
             GameFacade.Instance.DataCenter.User.SetLevel(Field.Instance.Level.ID);
         }
 
-        GameFacade.Instance.UIManager.LoadWindow("ResultWindow", UIManager.BOARD).GetComponent<ResultWindow>();
+        var window = GameFacade.Instance.UIManager.LoadWindow("ResultWindow", UIManager.BOARD).GetComponent<ResultWindow>();
+        window.Init(result);
 
         //结算奖励
         GameFacade.Instance.DataCenter.User.UpdateGlass(Field.Instance.Glass);

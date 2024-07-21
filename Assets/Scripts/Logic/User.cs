@@ -204,12 +204,12 @@ public class User
 
     public int GetATKCost()
     {
-        return Field.Instance.FML_ATKCost(m_Data.ATK);
+        return NumericalManager.FML_ATKCost(m_Data.ATK);
     }
 
     public int GetASPCost()
     {
-        return Field.Instance.FML_ATKCost(m_Data.ASP);
+        return NumericalManager.FML_ASPCost(m_Data.ASP);
     }
 
     public void SetRecoveryTimestamp(long value)
