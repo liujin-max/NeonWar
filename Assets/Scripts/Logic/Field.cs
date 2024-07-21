@@ -187,23 +187,25 @@ public class Field : MonoBehaviour
 
         if (enemy.IsDead() == true)
         {
-            // float angle = Vector3.Angle(enemy.transform.localPosition, bullet.transform.localPosition);
-
-            float angle = Mathf.Atan2(bullet.Velocity.y, bullet.Velocity.x) * Mathf.Rad2Deg;
+            Land.DoSmallShake();
 
             var e = GameFacade.Instance.EffectManager.Load(EFFECT.BROKEN, enemy.transform.localPosition, Land.ELEMENT_ROOT.gameObject);
-            e.transform.localEulerAngles = new Vector3(0, 0, angle);
-
-            Debug.Log("角度：" + angle);
+            e.transform.localEulerAngles = new Vector3(0, 0, Mathf.Atan2(bullet.Velocity.y, bullet.Velocity.x) * Mathf.Rad2Deg);
         }
     }
 
     //敌人碰撞玩家
     public void Crash(Enemy enemy, Player player)
     {
-        GameFacade.Instance.EffectManager.Load(EFFECT.CRASH, Vector3.zero, Field.Instance.Land.ELEMENT_ROOT.gameObject);
+        //无敌了
+        if (player.IsInvincible() == true) return;
 
         player.UpdateHP(-enemy.ATT.ATK);
+        player.ATT.InvincibleTimer.ForceReset();
+
+        //特效处理
+        if (player.IsDead() == true) {}
+        else GameFacade.Instance.EffectManager.Load(EFFECT.CRASH, Vector3.zero, Field.Instance.Land.ELEMENT_ROOT.gameObject);
     }
 
     #endregion

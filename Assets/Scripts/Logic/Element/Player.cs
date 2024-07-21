@@ -7,7 +7,9 @@ public class PlayerATT
 {
     public int HP   = 3;
     public int ATK  = 1;
-    public CDTimer ASP   = new CDTimer(0.6f);    //攻速 
+    public CDTimer ASP   = new CDTimer(_C.DEFAULT_ASP);    //攻速 
+
+    public CDTimer InvincibleTimer = new CDTimer(1f);   //无敌时间
 }
 
 public class Player : MonoBehaviour
@@ -24,6 +26,8 @@ public class Player : MonoBehaviour
     public void Init(float angle)
     {
         m_Angle = angle;
+
+        ATT.InvincibleTimer.Full();
 
         this.SetPosition(ToolUtility.FindPointOnCircle(Vector2.zero, _C.DEFAULT_RADIUS, angle));
     }
@@ -58,13 +62,29 @@ public class Player : MonoBehaviour
         return ATT.HP <= 0;
     }
 
+    //无敌
+    public bool IsInvincible()
+    {
+        return !ATT.InvincibleTimer.IsFinished();
+    }
+
     // Update is called once per frame
     void Update()
     {
         if (IsDead()) return;
         if (Field.Instance.STATE == _C.GAME_STATE.PAUSE) return;
 
-        ATT.ASP.Update(Time.deltaTime);
+        float deltaTime = Time.deltaTime;
+
+        ATT.InvincibleTimer.Update(deltaTime);
+
+        //攻击间隔
+        ATT.ASP.Update(deltaTime);
+        if (ATT.ASP.IsFinished() == true) {
+            ATT.ASP.Reset();
+
+            Shoot();
+        }
     }
 
     void LateUpdate()
@@ -74,13 +94,6 @@ public class Player : MonoBehaviour
 
         //始终朝向圆心
         transform.localEulerAngles = new Vector3(0, 0, m_Angle + 90);
-
-        //攻击间隔
-        if (ATT.ASP.IsFinished() == true) {
-            ATT.ASP.Reset();
-
-            Shoot();
-        }
     }
 
     public void Dispose()
@@ -97,7 +110,7 @@ public class Player : MonoBehaviour
         ATT.ATK = GameFacade.Instance.DataCenter.User.ATK * _C.UPGRADE_ATK;
 
         //每级提高攻速百分比
-        ATT.ASP.Reset(1 / (1 + _C.UPGRADE_ASP * (GameFacade.Instance.DataCenter.User.ASP - 1)));
+        ATT.ASP.Reset(_C.DEFAULT_ASP / (1 + _C.UPGRADE_ASP * (GameFacade.Instance.DataCenter.User.ASP - 1)));
     }
 
     public void UpdateHP(int value)

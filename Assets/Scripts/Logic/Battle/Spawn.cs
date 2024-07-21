@@ -34,10 +34,10 @@ public class Spawn
         m_Enemys.Add(enemy);
 
 
-        // var hole = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Effect/BlackHole", point, Field.Instance.Land.ELEMENT_ROOT).transform;
-        var hole = GameFacade.Instance.EffectManager.Load(EFFECT.BLACKHOLE, point, Field.Instance.Land.ELEMENT_ROOT.gameObject).transform;
 
+        var hole = GameFacade.Instance.EffectManager.Load(EFFECT.BLACKHOLE, point, Field.Instance.Land.ELEMENT_ROOT.gameObject).transform;
         hole.localScale = Vector3.zero;
+        
         Sequence seq = DOTween.Sequence();
         seq.Append(hole.DOScale(Vector3.one, 0.5f));
         seq.AppendInterval(0.4f);

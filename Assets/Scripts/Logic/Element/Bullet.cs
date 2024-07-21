@@ -31,9 +31,6 @@ public class Bullet : MonoBehaviour
     #region 碰撞检测
     void OnTriggerEnter2D(Collider2D collider)
     {
-        // 当碰撞开始时调用
-        // Debug.Log("Bullet collider Enter : " + collider.gameObject.name);
-
         if (collider.gameObject.tag == "Enemy")
         {
             Field.Instance.Hit(this, collider.gameObject.GetComponent<Enemy>());

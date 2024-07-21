@@ -14,7 +14,7 @@ public static class _C
 
     public static int UPGRADE_ATK       = 1;        //每级提高的攻击力
     public static float UPGRADE_ASP     = 0.05f;    //每级提高的攻速百分比
-
+    public static float DEFAULT_ASP     = 0.6f;     //默认攻速
 
 
 
