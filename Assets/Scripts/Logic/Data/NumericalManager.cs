@@ -10,7 +10,7 @@ public static class NumericalManager
     public static int FML_EnemyCount(int stage_level)
     {
         //第一关敌人的数量
-        int e1  = 10; 
+        int e1  = 8; 
         //线性增长系数
         float m = 2f;
         //后期增长系数
@@ -26,7 +26,7 @@ public static class NumericalManager
     public static int FML_EnemyHP(int stage_level)
     {
         //第一关敌人的基础血量
-        int hp_base = 2;  
+        int hp_base = 5;  
         //血量增长率，设定为0.1（每关增加10%） 
         float pr    = 0.3f;
 
@@ -44,7 +44,7 @@ public static class NumericalManager
     public static int FML_HP2Glass(int hp)
     {
         // k 是比例系数(0.5， 表示每2滴血掉落1颗碎片)
-        float k = 1f;
+        float k = 0.5f;
 
         return Mathf.FloorToInt(k * hp);
     }

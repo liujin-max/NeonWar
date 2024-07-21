@@ -28,8 +28,10 @@ public class Spawn
 
         Vector2 point = new Vector2(RandomUtility.Random(-200, 201) / 100.0f, RandomUtility.Random(-200, 201) / 100.0f);
 
-        var enemy = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Element/Enemy", point, Field.Instance.Land.ENEMY_ROOT).GetComponent<Enemy>();
-        enemy.Init(hp);
+        int enemy_id    = RandomUtility.Random(101, 105);
+
+        var enemy = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Enemy/" + enemy_id, point, Field.Instance.Land.ENEMY_ROOT).GetComponent<Enemy>();
+        enemy.Init(enemy_id, hp);
         enemy.gameObject.SetActive(false);
         m_Enemys.Add(enemy);
 
@@ -44,7 +46,7 @@ public class Spawn
         
         seq.AppendCallback(()=>{
             enemy.gameObject.SetActive(true);
-            enemy.Push(160);
+            enemy.Push();
         });
 
         seq.AppendInterval(0.2f);
@@ -92,7 +94,7 @@ public class Spawn
         List<Enemy> _Removes = new List<Enemy>();
         m_Enemys.ForEach(e => {
             if (e.IsDead() == true) {
-                Field.Instance.UpdateGlass(e.ATT.Glass);
+                Field.Instance.UpdateGlass(e.Glass);
 
                 _Removes.Add(e);
             }

@@ -6,7 +6,15 @@ using UnityEngine;
 //关卡管理器
 public class Levels
 {
+    //关卡数据
     private Dictionary<int, Level> m_Levels = new Dictionary<int, Level>();
+
+    //怪物数据
+
+    public void Init()
+    {
+
+    }
 
 
     //获取关卡

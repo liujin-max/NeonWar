@@ -165,7 +165,7 @@ public class Field : MonoBehaviour
     {
         if (m_Player != null) return;
 
-        m_Player = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Element/Player", Vector2.zero, Land.ENTITY_ROOT).GetComponent<Player>();
+        m_Player = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Player/Player", Vector2.zero, Land.ENTITY_ROOT).GetComponent<Player>();
         m_Player.Init(270);
         m_Player.Sync();
     }

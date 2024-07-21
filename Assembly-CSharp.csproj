@@ -60,6 +60,7 @@
      <Compile Include="Assets\AllIn1SpriteShader\Scripts\AllIn1Shader.cs" />
      <Compile Include="Assets\Scripts\Struct\CDTimer.cs" />
      <Compile Include="Assets\Scripts\Manager\EditorPlatform.cs" />
+     <Compile Include="Assets\Scripts\Logic\Data\NumericalManager.cs" />
      <Compile Include="Assets\Scripts\Manager\OBJManager.cs" />
      <Compile Include="Assets\Scripts\EVENT.cs" />
      <Compile Include="Assets\Scripts\Utility\UIMaskUtility.cs" />
@@ -95,6 +96,7 @@
      <Compile Include="Assets\Scripts\Logic\Element\Player.cs" />
      <Compile Include="Assets\AllIn1SpriteShader\Scripts\SetAtlasUvs.cs" />
      <Compile Include="Assets\Scripts\FSM\Element\State_Idle.cs" />
+     <Compile Include="Assets\Scripts\Logic\Element\Unit.cs" />
      <Compile Include="Assets\Scripts\FSM\FSM.cs" />
      <Compile Include="Assets\Scripts\Logic\Data\Level.cs" />
      <Compile Include="Assets\Scripts\Effect\FlyCoin.cs" />
@@ -130,13 +132,11 @@
      <Compile Include="Assets\Scripts\Logic\DataCenter.cs" />
      <Compile Include="Assets\Scripts\Utility\SuperScrollView.cs" />
      <Compile Include="Assets\Scripts\Manager\Effect.cs" />
+     <Compile Include="Assets\Scripts\Logic\Element\Parts.cs" />
      <Compile Include="Assets\AllIn1SpriteShader\Demo\Scripts\DemoCircleExpositor.cs" />
      <Compile Include="Assets\Scripts\Effect\Shine.cs" />
      <Compile Include="Assets\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
      <Compile Include="Assets\Scripts\UI\Window\TipWindow.cs" />
-     <Compile Include="Assets\Scripts\Logic\Data\NumericalManager.cs" />
-     <Compile Include="Assets\Scripts\Logic\Element\Parts.cs" />
-     <Compile Include="Assets\Scripts\Logic\Element\Unit.cs" />
      <None Include="Assets\Resources\Shader\SpriteGray.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />

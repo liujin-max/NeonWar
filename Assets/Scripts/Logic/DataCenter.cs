@@ -23,6 +23,7 @@ public class DataCenter
         User    = new User();
 
         Levels  = new Levels();
+        Levels.Init();
     }
 }
 

@@ -14,21 +14,14 @@ public class Parts : Unit
         m_Caster = player;
     }
 
-    // Update is called once per frame
-    void Update()
+    public override bool IsDead()
     {
-        if (m_Caster.IsDead()) return;
-        if (Field.Instance.STATE == _C.GAME_STATE.PAUSE) return;
+        return m_Caster.IsDead();
+    }
 
-        float deltaTime = Time.deltaTime;
-
-        //攻击间隔
-        ATT.ASP.Update(deltaTime);
-        if (ATT.ASP.IsFinished() == true) {
-            ATT.ASP.Reset();
-
-            Shoot();
-        }
+    public override float GetAngle()
+    {
+        return m_Caster.GetAngle();
     }
 
 
@@ -39,14 +32,9 @@ public class Parts : Unit
         ATT.ATK = GameFacade.Instance.DataCenter.User.ATK * _C.UPGRADE_ATK;
 
         //每级提高攻速百分比
-        ATT.ASP.Reset(_C.DEFAULT_ASP / (1 + _C.UPGRADE_ASP * (GameFacade.Instance.DataCenter.User.ASP - 1)));
+        ASP.Reset((ATT.ASP / 1000.0f) / (1 + _C.UPGRADE_ASP * (GameFacade.Instance.DataCenter.User.ASP - 1)));
     }
 
-    void Shoot()
-    {
-        var bullet = GameFacade.Instance.PoolManager.AllocateBullet(m_BulletTemplate, Vector3.zero);
-        bullet.transform.position = m_ShootPivot.position;
-        bullet.Shoot(this, ToolUtility.FindPointOnCircle(Vector2.zero, 1000, m_Caster.Angle + 180));
-    }
+
     #endregion
 }

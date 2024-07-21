@@ -13,9 +13,6 @@ public class Player : Unit
 
     private List<Parts> m_Parts = new List<Parts>();
 
-    private float m_Angle;      //角度
-    public float Angle {get { return m_Angle; }}
-
 
 
     public void Init(float angle)
@@ -32,15 +29,15 @@ public class Player : Unit
     //加载配件
     void InitParts()
     {
-        var p1 = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Element/Parts_Battery", new Vector2(-0.7f, 0.6f), m_PartsPivot.transform).GetComponent<Parts>();
+        var p1 = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Parts/Parts_Battery", new Vector2(-0.7f, 0.6f), m_PartsPivot.transform).GetComponent<Parts>();
         p1.Init(this);
-        // parts.Sync();
+        p1.Sync();
         m_Parts.Add(p1);
 
 
-        var p2 = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Element/Parts_Battery", new Vector2( 0.7f, 0.6f), m_PartsPivot.transform).GetComponent<Parts>();
+        var p2 = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Parts/Parts_Battery", new Vector2( 0.7f, 0.6f), m_PartsPivot.transform).GetComponent<Parts>();
         p2.Init(this);
-        // parts.Sync();
+        p2.Sync();
         m_Parts.Add(p2);
     }
 
@@ -75,7 +72,7 @@ public class Player : Unit
     }
 
     // Update is called once per frame
-    void Update()
+    protected override void Update()
     {
         if (IsDead()) return;
         if (Field.Instance.STATE == _C.GAME_STATE.PAUSE) return;
@@ -84,14 +81,9 @@ public class Player : Unit
 
         InvincibleTimer.Update(deltaTime);
 
-        //攻击间隔
-        ATT.ASP.Update(deltaTime);
-        if (ATT.ASP.IsFinished() == true) {
-            ATT.ASP.Reset();
-
-            Shoot();
-        }
+        base.Update();
     }
+
 
     void LateUpdate()
     {
@@ -113,12 +105,6 @@ public class Player : Unit
         ATT.HP += value;
     }
 
-    void Shoot()
-    {
-        var bullet = GameFacade.Instance.PoolManager.AllocateBullet(m_BulletTemplate, Vector3.zero);
-        bullet.transform.position = m_ShootPivot.position;
-        bullet.Shoot(this, ToolUtility.FindPointOnCircle(Vector2.zero, 1000, m_Angle + 180));
-    }
     #endregion
 
 

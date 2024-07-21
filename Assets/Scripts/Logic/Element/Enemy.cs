@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
-//基础属性
-public class EnemyATT
-{
-    public int HP = 1;
-    public int ATK = 1;
 
-    public int Glass = 1;
+//基础属性
+[System.Serializable]
+public class EnemyATT : ATT
+{
+    public int Speed;    //攻速 
 }
 
 public class Enemy : MonoBehaviour
@@ -18,7 +17,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] private TextMeshPro m_HPText;
 
 
+    public int ID;
     public EnemyATT ATT = new EnemyATT();
+
+    [HideInInspector] public int Glass;
 
     private Vector2 m_LastVelocity;
     private float m_LastAngularVelocity;
@@ -29,10 +31,11 @@ public class Enemy : MonoBehaviour
         m_Rigidbody.gravityScale = 0;
     }
 
-    public void Init(int hp)
+    public void Init(int id, int hp)
     {
-        ATT.HP      = hp;
-        ATT.Glass   = Mathf.Max(NumericalManager.FML_HP2Glass(hp), 1);
+        ID      = id;
+        ATT.HP  = hp;
+        Glass   = Mathf.Max(NumericalManager.FML_HP2Glass(hp), 1);
 
         FlushHP();
     }
@@ -67,9 +70,9 @@ public class Enemy : MonoBehaviour
     }
 
     //strength :力的强度，意味着移动速度
-    public void Push(float strength)
+    public void Push()
     {
-        Vector2 force = ToolUtility.FindPointOnCircle(Vector2.zero, strength, RandomUtility.Random(0, 360));
+        Vector2 force = ToolUtility.FindPointOnCircle(Vector2.zero, ATT.Speed, RandomUtility.Random(0, 360));
         m_Rigidbody.AddForce(force);
     }
 
@@ -101,8 +104,6 @@ public class Enemy : MonoBehaviour
     #region 碰撞检测
     void OnCollisionEnter2D(Collision2D collision)
     {
-        // Debug.Log("Enemy OnCollisionEnter2D : " + collision.gameObject.name);
-
         if (collision.gameObject.tag == "Player")
         {
             Field.Instance.Crash(this, collision.gameObject.GetComponent<Player>());

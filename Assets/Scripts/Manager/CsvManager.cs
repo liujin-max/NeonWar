@@ -9,9 +9,8 @@ using UnityEngine;
 public class CsvManager: MonoBehaviour
 {
     //表名
-    public const string TableKey_Card   = "Card";
-    public const string TableKey_Task   = "Task";
-    public const string TableKey_Prop   = "Prop";
+    public const string TableKey_Monster   = "Monster";
+
 
 
     //表名与表结构
@@ -22,9 +21,7 @@ public class CsvManager: MonoBehaviour
 
     public void ReadCsvs()
     {
-        // this.ReadCsv(CsvManager.TableKey_Card,          "CSV/Card");
-        // this.ReadCsv(CsvManager.TableKey_Task,          "CSV/Task");
-        // this.ReadCsv(CsvManager.TableKey_Prop,          "CSV/Prop");
+        this.ReadCsv(CsvManager.TableKey_Monster,          "CSV/Monster");
     }
 
     public string[] GetStringArray(string excel_name, int id)

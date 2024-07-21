@@ -165,6 +165,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ShootPivot: {fileID: 6984079534802894655}
   m_BulletTemplate: {fileID: 5480662803317571861, guid: c15afc1203c625642a10d26c3e6cff88, type: 3}
+  ATT:
+    HP: 3
+    ATK: 1
+    ASP: 300
   m_PartsPivot: {fileID: 7161159462277823728}
 --- !u!61 &887894130549375324
 BoxCollider2D:
