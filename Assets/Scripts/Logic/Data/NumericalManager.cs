@@ -57,7 +57,7 @@ public static class NumericalManager
         int cost_base = 2;
 
         //增长指数
-        float cost_pa = 2f;
+        float cost_pa = 2.6f;
 
         return Mathf.FloorToInt(cost_base * Mathf.Pow(atk_level, cost_pa));
     }
@@ -69,7 +69,7 @@ public static class NumericalManager
         int cost_base = 2;
 
         //增长指数
-        float cost_pa = 1.5f;
+        float cost_pa = 1.8f;
 
         return Mathf.FloorToInt(cost_base * Mathf.Pow(asp_level, cost_pa));
     }
