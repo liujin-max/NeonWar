@@ -17,7 +17,7 @@ public class EffectManager : MonoBehaviour
     //加载特效
     public GameObject Load(string path, Vector3 pos, GameObject parent = null)
     {
-        var e = GameFacade.Instance.PoolManager.AllocateEffect(path, pos); //Instantiate(Resources.Load<GameObject>(path), pos, Quaternion.identity);
+        var e = GameFacade.Instance.PoolManager.AllocateEffect(path, pos);
 
         if (parent != null) {
             e.transform.SetParent(parent.transform);
@@ -26,4 +26,6 @@ public class EffectManager : MonoBehaviour
 
         return e;
     }
+
+
 }

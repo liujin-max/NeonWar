@@ -132,6 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShootPivot: {fileID: 6984079534802894655}
+  m_BulletTemplate: {fileID: 5480662803317571861, guid: c15afc1203c625642a10d26c3e6cff88, type: 3}
 --- !u!61 &887894130549375324
 BoxCollider2D:
   m_ObjectHideFlags: 0

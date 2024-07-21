@@ -15,6 +15,7 @@ public class PlayerATT
 public class Player : MonoBehaviour
 {
     [SerializeField] private Transform m_ShootPivot;
+    [SerializeField] private GameObject m_BulletTemplate;
 
     public PlayerATT ATT = new PlayerATT();
 
@@ -120,7 +121,9 @@ public class Player : MonoBehaviour
 
     void Shoot()
     {
-        var bullet = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Element/Bullet", transform.localPosition, Field.Instance.Land.ENTITY_ROOT).GetComponent<Bullet>();
+        // var bullet = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Element/Bullet", transform.localPosition, Field.Instance.Land.ENTITY_ROOT).GetComponent<Bullet>();
+
+        var bullet = GameFacade.Instance.PoolManager.AllocateBullet(m_BulletTemplate, Vector3.zero);
         bullet.transform.position = m_ShootPivot.position;
         bullet.Shoot(this, ToolUtility.FindPointOnCircle(Vector2.zero, 1000, m_Angle + 180));
     }

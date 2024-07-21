@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D m_Rigidbody;
 
+    public string Name;
     public Player Caster;
 
     public Vector2 Velocity {get { return m_Rigidbody.velocity;}}
@@ -25,7 +26,8 @@ public class Bullet : MonoBehaviour
 
     void Dispose()
     {
-        Destroy(gameObject);
+        // Destroy(gameObject);
+        GameFacade.Instance.PoolManager.RecycleBullet(this);
     }
 
     #region 碰撞检测

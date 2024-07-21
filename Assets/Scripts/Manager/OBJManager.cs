@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,7 +8,7 @@ public class OBJManager: MonoBehaviour
 {
     private Transform PoolLayer;
 
-    private Dictionary<int, List<GameObject>> m_ObstaclePool = new Dictionary<int, List<GameObject>>();
+    private Dictionary<string, List<Bullet>> m_BulletPool = new Dictionary<string, List<Bullet>>();
 
     //特效池
     private Dictionary<string, List<GameObject>> m_EffectPool = new Dictionary<string, List<GameObject>>();
@@ -21,7 +22,48 @@ public class OBJManager: MonoBehaviour
 
 
 
+    //加载子弹
+    public Bullet AllocateBullet(GameObject bullet_template, Vector3 pos)
+    {
+        string name     = bullet_template.name;
+        Bullet bullet   = null;
 
+        if (m_BulletPool.ContainsKey(name)) {
+            List<Bullet> bullets = m_BulletPool[name];
+
+            if (bullets.Count > 0) {
+                bullet  = bullets.First();
+            }
+        }
+
+        if (bullet == null)
+        {
+            bullet      = Instantiate(bullet_template, pos, Quaternion.identity).GetComponent<Bullet>();
+            bullet.Name = name;
+        }
+
+        bullet.gameObject.SetActive(true);
+        bullet.transform.SetParent(Field.Instance.Land.ELEMENT_ROOT);
+        bullet.transform.localPosition = pos;
+        bullet.transform.localEulerAngles = Vector3.zero;
+
+        return bullet;
+    }
+
+    //回收子弹
+    public void RecycleBullet(Bullet bullet)
+    {
+        string name = bullet.Name;
+
+        if (!m_BulletPool.ContainsKey(name)) {
+            m_BulletPool[name] = new List<Bullet>();
+        }
+
+        m_BulletPool[name].Add(bullet);
+
+        bullet.transform.SetParent(PoolLayer);
+        bullet.gameObject.SetActive(false);
+    }
 
 
     public GameObject AllocateEffect(string effect_path, Vector3 pos)
