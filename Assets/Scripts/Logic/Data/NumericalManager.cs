@@ -54,10 +54,10 @@ public static class NumericalManager
     public static int FML_ATKCost(int atk_level)
     {
         //第一次升级消耗的数量
-        int cost_base = 2;
+        int cost_base = 3;
 
         //增长指数
-        float cost_pa = 2.6f;
+        float cost_pa = 2f;
 
         return Mathf.FloorToInt(cost_base * Mathf.Pow(atk_level, cost_pa));
     }
@@ -69,7 +69,7 @@ public static class NumericalManager
         int cost_base = 2;
 
         //增长指数
-        float cost_pa = 1.8f;
+        float cost_pa = 1.6f;
 
         return Mathf.FloorToInt(cost_base * Mathf.Pow(asp_level, cost_pa));
     }
