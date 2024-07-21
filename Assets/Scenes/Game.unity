@@ -493,7 +493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dafcb548fe966d45ac13f050d4c2bb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OuterRadius: 3
+  OuterRadius: 4
   InnerRadius: 2.5
   OuterSegments: 12
   InnerSegments: 64

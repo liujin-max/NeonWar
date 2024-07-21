@@ -92,8 +92,8 @@ Material:
     - _FlickerPercent: 0.453
     - _GhostColorBoost: 1.46
     - _GhostTransparency: 0
-    - _GlitchAmount: 20
-    - _GlitchSize: 0.5
+    - _GlitchAmount: 1.36
+    - _GlitchSize: 1.2
     - _Glow: 0
     - _GlowTexUsed: 0
     - _GradBlend: 0.291
@@ -105,8 +105,8 @@ Material:
     - _GreyscaleOutline: 0
     - _HandDrawnAmount: 10
     - _HandDrawnSpeed: 3
-    - _HitEffectBlend: 0.708
-    - _HitEffectGlow: 14.6
+    - _HitEffectBlend: 0.183
+    - _HitEffectGlow: 1
     - _HologramMaxAlpha: 1
     - _HologramMinAlpha: 0.271
     - _HologramStripesAmount: 0.227
@@ -126,7 +126,7 @@ Material:
     - _MotionBlurDist: 1.25
     - _MyDstMode: 10
     - _MySrcMode: 5
-    - _NegativeAmount: 1
+    - _NegativeAmount: 0.826
     - _OffsetUvX: 0
     - _OffsetUvY: 0
     - _OnlyInnerOutline: 0
@@ -146,13 +146,13 @@ Material:
     - _OutlineTexYSpeed: 0
     - _OutlineWidth: 0
     - _PinchUvAmount: 0
-    - _PixelateSize: 512
+    - _PixelateSize: 76
     - _PosterizeGamma: 0.75
     - _PosterizeNumColors: 53.4
     - _PosterizeOutline: 0
     - _RandomSeed: 0
     - _RectSize: 1
-    - _RotateUvAmount: 0
+    - _RotateUvAmount: 5.39
     - _RoundWaveSpeed: 2
     - _RoundWaveStrength: 0.7
     - _ShadowAlpha: 0.5
@@ -176,7 +176,7 @@ Material:
     - _WaveX: 0.5
     - _WaveY: 0.6
     - _ZWrite: 0
-    - _ZoomUvAmount: 0.5
+    - _ZoomUvAmount: 1.1
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _ColorChangeNewCol: {r: 1, g: 1, b: 0, a: 1}
@@ -192,7 +192,7 @@ Material:
     - _GradTopRightCol: {r: 1, g: 0, b: 0, a: 1}
     - _GreyscaleTintColor: {r: 1, g: 1, b: 1, a: 1}
     - _HitEffectColor: {r: 1, g: 1, b: 1, a: 1}
-    - _InnerOutlineColor: {r: 0.3507228, g: 0, b: 1, a: 1}
+    - _InnerOutlineColor: {r: 1, g: 0.03272705, b: 0, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _ShineColor: {r: 1, g: 1, b: 1, a: 1}

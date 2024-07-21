@@ -33,6 +33,7 @@ public class OBJManager: MonoBehaviour
 
             if (bullets.Count > 0) {
                 bullet  = bullets.First();
+                bullets.Remove(bullet);
             }
         }
 

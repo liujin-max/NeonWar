@@ -6,8 +6,8 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D m_Rigidbody;
 
-    public string Name;
-    public Player Caster;
+    [HideInInspector] public string Name;
+    [HideInInspector] public Unit Caster;
 
     public Vector2 Velocity {get { return m_Rigidbody.velocity;}}
 
@@ -17,7 +17,7 @@ public class Bullet : MonoBehaviour
         m_Rigidbody.gravityScale = 0;
     }
     
-    public void Shoot(Player caster, Vector2 force)
+    public void Shoot(Unit caster, Vector2 force)
     {
         Caster = caster;
 

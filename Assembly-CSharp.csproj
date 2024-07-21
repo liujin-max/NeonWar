@@ -125,7 +125,7 @@
      <Compile Include="Assets\Scripts\Utility\Sound.cs" />
      <Compile Include="Assets\Scripts\Utility\RandomUtility.cs" />
      <Compile Include="Assets\AllIn1SpriteShader\Scripts\RandomSeed.cs" />
-     <Compile Include="Assets\Scripts\Logic\Element\HollowCircle.cs" />
+     <Compile Include="Assets\Scripts\Logic\Battle\HollowCircle.cs" />
      <Compile Include="Assets\Scripts\FSM\State.cs" />
      <Compile Include="Assets\Scripts\Logic\DataCenter.cs" />
      <Compile Include="Assets\Scripts\Utility\SuperScrollView.cs" />
@@ -135,6 +135,8 @@
      <Compile Include="Assets\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
      <Compile Include="Assets\Scripts\UI\Window\TipWindow.cs" />
      <Compile Include="Assets\Scripts\Logic\Data\NumericalManager.cs" />
+     <Compile Include="Assets\Scripts\Logic\Element\Parts.cs" />
+     <Compile Include="Assets\Scripts\Logic\Element\Unit.cs" />
      <None Include="Assets\Resources\Shader\SpriteGray.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />

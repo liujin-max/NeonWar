@@ -201,8 +201,9 @@ public class Field : MonoBehaviour
         if (player.IsInvincible() == true) return;
 
         player.UpdateHP(-enemy.ATT.ATK);
-        player.ATT.InvincibleTimer.ForceReset();
+        player.InvincibleTimer.ForceReset();
 
+        Land.DoShake();
         //特效处理
         if (player.IsDead() == true) {}
         else GameFacade.Instance.EffectManager.Load(EFFECT.CRASH, Vector3.zero, Field.Instance.Land.ELEMENT_ROOT.gameObject);
