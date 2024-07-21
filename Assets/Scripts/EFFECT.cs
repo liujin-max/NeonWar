@@ -8,5 +8,6 @@ public static class EFFECT
 
     public const string BLACKHOLE   = "Prefab/Effect/BlackHole";
     public const string CRASH       = "Prefab/Effect/Crash";
+    public const string BROKEN      = "Prefab/Effect/fx_broken";
 
 }

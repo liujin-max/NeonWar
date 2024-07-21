@@ -183,6 +183,19 @@ public class Field : MonoBehaviour
         if (bullet.Caster.IsDead()) return;
 
         enemy.UpdateHP(-bullet.Caster.ATT.ATK);
+
+
+        if (enemy.IsDead() == true)
+        {
+            // float angle = Vector3.Angle(enemy.transform.localPosition, bullet.transform.localPosition);
+
+            float angle = Mathf.Atan2(bullet.Velocity.y, bullet.Velocity.x) * Mathf.Rad2Deg;
+
+            var e = GameFacade.Instance.EffectManager.Load(EFFECT.BROKEN, enemy.transform.localPosition, Land.ELEMENT_ROOT.gameObject);
+            e.transform.localEulerAngles = new Vector3(0, 0, angle);
+
+            Debug.Log("角度：" + angle);
+        }
     }
 
     //敌人碰撞玩家

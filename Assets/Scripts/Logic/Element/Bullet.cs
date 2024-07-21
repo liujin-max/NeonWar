@@ -8,6 +8,7 @@ public class Bullet : MonoBehaviour
 
     public Player Caster;
 
+    public Vector2 Velocity {get { return m_Rigidbody.velocity;}}
 
     void Start()
     {
