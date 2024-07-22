@@ -8,22 +8,30 @@ using UnityEngine;
 [System.Serializable]
 public class EnemyATT : ATT
 {
-    public int Speed;    //攻速 
+    public int CrashATK = 1;    //撞击伤害
+    public int Speed;    //移动速度 
 }
 
-public class Enemy : MonoBehaviour
+public class Enemy : Unit
 {
-    [SerializeField] private Rigidbody2D m_Rigidbody;
-    [SerializeField] private TextMeshPro m_HPText;
+    private Rigidbody2D m_Rigidbody;
+    private TextMeshPro m_HPText;
 
 
-    public int ID;
-    public EnemyATT ATT = new EnemyATT();
+    public int CrashATK = 1;    //撞击伤害
+    public int Speed;    //移动速度 
 
     [HideInInspector] public int Glass;
 
     private Vector2 m_LastVelocity;
     private float m_LastAngularVelocity;
+
+
+    void Awake()
+    {
+        m_Rigidbody = GetComponent<Rigidbody2D>();
+        m_HPText    = transform.Find("HP").GetComponent<TextMeshPro>();
+    }
 
     void Start()
     {
@@ -33,6 +41,7 @@ public class Enemy : MonoBehaviour
 
     public void Init(int id, int hp)
     {
+        Side    = _C.SIDE.ENEMY;
         ID      = id;
         ATT.HP  = hp;
         Glass   = Mathf.Max(NumericalManager.FML_HP2Glass(hp), 1);
@@ -43,11 +52,6 @@ public class Enemy : MonoBehaviour
     public void Dispose()
     {
         Destroy(gameObject);
-    }
-
-    public bool IsDead()
-    {
-        return ATT.HP <= 0;
     }
 
     void FlushHP()
@@ -62,9 +66,9 @@ public class Enemy : MonoBehaviour
 
 
     #region 逻辑处理
-    public void UpdateHP(int value)
+    public override void UpdateHP(int value)
     {
-        ATT.HP += value;
+        base.UpdateHP(value);
 
         FlushHP();
     }
@@ -72,7 +76,7 @@ public class Enemy : MonoBehaviour
     //strength :力的强度，意味着移动速度
     public void Push()
     {
-        Vector2 force = ToolUtility.FindPointOnCircle(Vector2.zero, ATT.Speed, RandomUtility.Random(0, 360));
+        Vector2 force = ToolUtility.FindPointOnCircle(Vector2.zero, Speed, RandomUtility.Random(0, 360));
         m_Rigidbody.AddForce(force);
     }
 

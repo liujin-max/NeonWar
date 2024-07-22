@@ -8,7 +8,7 @@ public class Player : Unit
 {
     [SerializeField] private Transform m_PartsPivot;
 
-    
+
     public CDTimer InvincibleTimer = new CDTimer(1f);   //无敌时间
 
     private List<Parts> m_Parts = new List<Parts>();
@@ -17,6 +17,7 @@ public class Player : Unit
 
     public void Init(float angle)
     {
+        Side    = _C.SIDE.PLAYER;
         m_Angle = angle;
 
         InvincibleTimer.Full();
@@ -99,11 +100,7 @@ public class Player : Unit
     
 
     #region 逻辑处理
-    //同步最新的加成等级
-    public void UpdateHP(int value)
-    {
-        ATT.HP += value;
-    }
+
 
     #endregion
 

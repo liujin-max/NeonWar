@@ -42,6 +42,13 @@ public static class _C
         PAUSE
     }
 
+    //
+    public enum SIDE
+    {
+        PLAYER,
+        ENEMY
+    }
+
 
     public enum RESULT
     {

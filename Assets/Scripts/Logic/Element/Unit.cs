@@ -6,7 +6,7 @@ using UnityEngine;
 [System.Serializable]
 public class ATT
 {
-    public int HP   = 3;
+    [HideInInspector] public int HP   = 3;
     public int ATK  = 1;
     [Header("攻速/ms")]public int ASP;    //攻速 
 }
@@ -17,9 +17,10 @@ public class Unit : MonoBehaviour
     [SerializeField] protected Transform m_ShootPivot;
     [SerializeField] protected GameObject m_BulletTemplate;
 
-
+    [HideInInspector] public int ID;
+    [HideInInspector] public _C.SIDE Side = _C.SIDE.PLAYER;
     public ATT ATT = new ATT();
-    public CDTimer ASP = new CDTimer(0);
+    public CDTimer ASP = new CDTimer(0f);
 
     protected float m_Angle;      //角度
 
@@ -41,15 +42,23 @@ public class Unit : MonoBehaviour
         float deltaTime = Time.deltaTime;
 
         //攻击间隔
-        ASP.Update(deltaTime);
-        if (ASP.IsFinished() == true) {
-            ASP.Reset();
+        if (ASP.Duration > 0)
+        {
+            ASP.Update(deltaTime);
+            if (ASP.IsFinished() == true) {
+                ASP.Reset();
 
-            Shoot();
+                Shoot();
+            }
         }
     }
 
     #region 逻辑处理
+    public virtual void UpdateHP(int value)
+    {
+        ATT.HP += value;
+    }
+
     //同步最新的加成等级
     public virtual void Sync()
     {

@@ -178,19 +178,37 @@ public class Field : MonoBehaviour
 
 
     //子弹击中敌人
-    public void Hit(Bullet bullet, Enemy enemy)
+    public void Hit(Bullet bullet, Unit unit)
     {
         if (bullet.Caster.IsDead()) return;
 
-        enemy.UpdateHP(-bullet.Caster.ATT.ATK);
+        unit.UpdateHP(-bullet.Caster.ATT.ATK);
 
 
-        if (enemy.IsDead() == true)
+
+        if (unit.IsDead() == true)
         {
-            Land.DoSmallShake();
+            if (unit.Side == _C.SIDE.PLAYER) 
+            {
+                Land.DoShake();
+            }
 
-            var e = GameFacade.Instance.EffectManager.Load(EFFECT.BROKEN, enemy.transform.localPosition, Land.ELEMENT_ROOT.gameObject);
-            e.transform.localEulerAngles = new Vector3(0, 0, Mathf.Atan2(bullet.Velocity.y, bullet.Velocity.x) * Mathf.Rad2Deg);
+            //怪物死亡
+            if (unit.Side == _C.SIDE.ENEMY)
+            {
+                Land.DoSmallShake();
+
+                var e = GameFacade.Instance.EffectManager.Load(EFFECT.BROKEN, unit.transform.localPosition, Land.ELEMENT_ROOT.gameObject);
+                e.transform.localEulerAngles = new Vector3(0, 0, Mathf.Atan2(bullet.Velocity.y, bullet.Velocity.x) * Mathf.Rad2Deg);
+            }
+        }
+        else
+        {
+            if (unit.Side == _C.SIDE.PLAYER) 
+            {
+                Land.DoShake();
+                GameFacade.Instance.EffectManager.Load(EFFECT.CRASH, Vector3.zero, Field.Instance.Land.ELEMENT_ROOT.gameObject);
+            }
         }
     }
 

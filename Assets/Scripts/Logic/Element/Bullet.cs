@@ -26,7 +26,6 @@ public class Bullet : MonoBehaviour
 
     void Dispose()
     {
-        // Destroy(gameObject);
         GameFacade.Instance.PoolManager.RecycleBullet(this);
     }
 
