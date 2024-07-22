@@ -68,17 +68,17 @@ public class Field : MonoBehaviour
     }
 
     //开始游玩
-    public void Play()
+    public void Play(int level_id)
     {
         STATE   = _C.GAME_STATE.PLAY;
 
         BlinkTimer.Reset(_C.DEFAULT_BLINKCD);
         BlinkTimer.Full();
 
-        m_Level = GameFacade.Instance.DataCenter.Levels.GetLevel(GameFacade.Instance.DataCenter.User.Level + 1);
-        m_Spawn.Init(m_Level.ID);
+        m_Level = GameFacade.Instance.DataCenter.Levels.GetLevel(level_id);
+        m_Spawn.Init(level_id);
 
-        Debug.Log("========  开始关卡：" + m_Level.ID + "  ========");
+        Debug.Log("========  开始关卡：" + level_id + "  ========");
 
         //将最新的加成等级应用到Player身上
         m_Player.Sync();
@@ -165,7 +165,7 @@ public class Field : MonoBehaviour
     {
         if (m_Player != null) return;
 
-        m_Player = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Player/Player", Vector2.zero, Land.ENTITY_ROOT).GetComponent<Player>();
+        m_Player = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Player/Player_10000", Vector2.zero, Land.ENTITY_ROOT).GetComponent<Player>();
         m_Player.Init(270);
         m_Player.Sync();
     }

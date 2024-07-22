@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 6844395886254004022}
   - component: {fileID: 8806232948033803205}
   m_Layer: 6
-  m_Name: Parts_Battery
+  m_Name: Parts_1000
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -109,7 +109,7 @@
      <Compile Include="Assets\Scripts\Display\DisplayEngine.cs" />
      <Compile Include="Assets\Scripts\Manager\EffectManager.cs" />
      <Compile Include="Assets\Scripts\Struct\AttributeValue.cs" />
-     <Compile Include="Assets\Scripts\Logic\Element\Enemy.cs" />
+     <Compile Include="Assets\Scripts\Logic\Enemy\Enemy.cs" />
      <Compile Include="Assets\Scripts\Display\DisplayEvent.cs" />
      <Compile Include="Assets\Scripts\Manager\TimeManager.cs" />
      <Compile Include="Assets\Scripts\GameFacade.cs" />
@@ -137,6 +137,7 @@
      <Compile Include="Assets\Scripts\Effect\Shine.cs" />
      <Compile Include="Assets\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
      <Compile Include="Assets\Scripts\UI\Window\TipWindow.cs" />
+     <Compile Include="Assets\Scripts\Logic\Enemy\Enemy_102.cs" />
      <None Include="Assets\Resources\Shader\SpriteGray.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />

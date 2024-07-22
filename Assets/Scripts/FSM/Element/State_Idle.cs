@@ -32,12 +32,19 @@ public class State_Idle<T> : State<Field>
     //按下按钮
     private void OnJoyStickPress(GameEvent @event)
     {
+        int level_id = GameFacade.Instance.DataCenter.User.Level + 1;
+
+        if (GameFacade.Instance.TestMode == true)
+        {
+            level_id    = GameFacade.Instance.TestStage;
+        }
+
         //判断是不是通关了
-        if (GameFacade.Instance.DataCenter.Levels.LoadLevelJSON(GameFacade.Instance.DataCenter.User.Level + 1) == null) {
+        if (GameFacade.Instance.DataCenter.Levels.LoadLevelJSON(level_id) == null) {
             EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "未完待续..."));
             return;
         }
 
-        m_FSM.Transist(_C.FSMSTATE.PLAY);
+        m_FSM.Transist(_C.FSMSTATE.PLAY, level_id);
     }
 }

@@ -17,9 +17,9 @@ public class Enemy : Unit
     private Rigidbody2D m_Rigidbody;
     private TextMeshPro m_HPText;
 
-
+    public float HPRate = 1;    //血量倍率
     public int CrashATK = 1;    //撞击伤害
-    public int Speed;    //移动速度 
+    public int Speed;           //移动速度 
 
     [HideInInspector] public int Glass;
 
@@ -39,12 +39,14 @@ public class Enemy : Unit
         m_Rigidbody.gravityScale = 0;
     }
 
-    public void Init(int id, int hp)
+    public virtual void Init(int id, int hp)
     {
         Side    = _C.SIDE.ENEMY;
         ID      = id;
-        ATT.HP  = hp;
-        Glass   = Mathf.Max(NumericalManager.FML_HP2Glass(hp), 1);
+        ATT.HP  = Mathf.CeilToInt(hp * HPRate);
+        Glass   = Mathf.Max(NumericalManager.FML_HP2Glass(ATT.HP), 1);
+
+        ASP.Reset(ATT.ASP / 1000.0f);
 
         FlushHP();
     }
@@ -112,16 +114,6 @@ public class Enemy : Unit
         {
             Field.Instance.Crash(this, collision.gameObject.GetComponent<Player>());
         }
-    }
-
-    void OnCollisionStay2D(Collision2D collision)
-    {
-        // Debug.Log("Enemy OnCollisionStay2D : " + collision.gameObject.name);
-    }
-
-    void OnCollisionExit2D(Collision2D collision)
-    {
-        // Debug.Log("Enemy OnCollisionExit2D : " + collision.gameObject.name);
     }
     #endregion
 }

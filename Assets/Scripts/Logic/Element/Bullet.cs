@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D m_Rigidbody;
+    private Rigidbody2D m_Rigidbody;
 
     [HideInInspector] public string Name;
     [HideInInspector] public Unit Caster;
 
     public Vector2 Velocity {get { return m_Rigidbody.velocity;}}
+
+    void Awake()
+    {
+        m_Rigidbody = GetComponent<Rigidbody2D>();
+    }
 
     void Start()
     {
@@ -32,11 +37,21 @@ public class Bullet : MonoBehaviour
     #region 碰撞检测
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.tag == "Enemy")
+        //子弹撞墙 则销毁
+        if (collider.gameObject.tag == "Wall")
         {
-            Field.Instance.Hit(this, collider.gameObject.GetComponent<Enemy>());
+            Dispose();
+            return;
         }
 
+
+        var unit = collider.GetComponent<Unit>();
+        if (unit == null) return;
+
+        if (unit.Side == Caster.Side) return;
+
+
+        Field.Instance.Hit(this, unit);
 
         Dispose();
     }

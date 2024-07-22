@@ -50,16 +50,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ShootPivot: {fileID: 0}
   m_BulletTemplate: {fileID: 0}
+  ID: 103
   Side: 1
   ATT:
     HP: 3
     ATK: 1
     ASP: 0
-  m_Rigidbody: {fileID: 5767221125352602383}
-  m_HPText: {fileID: 2276059473645410998}
-  ID: 103
   CrashATK: 1
-  Speed: 200
+  Speed: 220
   Glass: 0
 --- !u!50 &5767221125352602383
 Rigidbody2D:

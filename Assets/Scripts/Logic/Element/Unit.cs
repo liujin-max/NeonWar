@@ -24,6 +24,7 @@ public class Unit : MonoBehaviour
 
     protected float m_Angle;      //角度
 
+
     public virtual bool IsDead()
     {
         return ATT.HP <= 0;
@@ -68,7 +69,7 @@ public class Unit : MonoBehaviour
         ASP.Reset((ATT.ASP / 1000.0f) / (1 + _C.UPGRADE_ASP * (GameFacade.Instance.DataCenter.User.ASP - 1)));
     }
 
-    void Shoot()
+    protected virtual void Shoot()
     {
         var bullet = GameFacade.Instance.PoolManager.AllocateBullet(m_BulletTemplate, Vector3.zero);
         bullet.transform.position = m_ShootPivot.position;
