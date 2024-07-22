@@ -32,6 +32,12 @@ public class State_Idle<T> : State<Field>
     //按下按钮
     private void OnJoyStickPress(GameEvent @event)
     {
+        //判断是不是通关了
+        if (GameFacade.Instance.DataCenter.Levels.LoadLevelJSON(GameFacade.Instance.DataCenter.User.Level + 1) == null) {
+            EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "未完待续..."));
+            return;
+        }
+
         m_FSM.Transist(_C.FSMSTATE.PLAY);
     }
 }

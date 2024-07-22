@@ -38,6 +38,7 @@ public class TipWindow : MonoBehaviour
 
         if (m_Sequence != null) {
             m_Sequence.Kill();
+            m_TipPivot.transform.localPosition = new Vector3(0, 350, 0);
         }
         var group   = m_TipPivot.GetComponent<CanvasGroup>();
         group.alpha = 1;

@@ -76,7 +76,7 @@ public class Field : MonoBehaviour
         BlinkTimer.Full();
 
         m_Level = GameFacade.Instance.DataCenter.Levels.GetLevel(GameFacade.Instance.DataCenter.User.Level + 1);
-        m_Spawn.Init(NumericalManager.FML_EnemyCount(m_Level.ID));
+        m_Spawn.Init(m_Level.ID);
 
         Debug.Log("========  开始关卡：" + m_Level.ID + "  ========");
 

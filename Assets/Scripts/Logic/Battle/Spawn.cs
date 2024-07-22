@@ -6,32 +6,30 @@ using UnityEngine;
 
 //怪物工厂
 //负责敌人的生产逻辑
+//关卡数据由表格配置，包括出场怪物ID、出场时间，当前血量等
+//通过计时器的方式有序出场
+//当场上没有怪物时，使序列中的下一个怪物立即出场
 public class Spawn
 {
+    private LevelJSON m_LevelJSON;
     private List<Enemy> m_Enemys = new List<Enemy>();
 
-    private Pair m_Pool = new Pair(0, 0);
-
-    //现在生产怪物看的是时间间隔
-    private CDTimer m_Timer = new CDTimer(6f);
-
-
-    public void Init(int enemy_count)
+    public void Init(int level_id)
     {
-        Debug.Log("怪物数量：" + enemy_count);
-        m_Pool.Reset(0, enemy_count);
+        m_LevelJSON = GameFacade.Instance.DataCenter.Levels.LoadLevelJSON(level_id);
+
+        Debug.Log("怪物数量：" + m_LevelJSON.Monsters.Count);
     }
 
-    void PutEnemy()
+    void PutEnemy(MonsterJSON monsterJSON)
     {
-        int hp = NumericalManager.FML_EnemyHP(Field.Instance.Level.ID);
+        Vector2 point   = new Vector2(RandomUtility.Random(-200, 201) / 100.0f, RandomUtility.Random(-200, 201) / 100.0f);
 
-        Vector2 point = new Vector2(RandomUtility.Random(-200, 201) / 100.0f, RandomUtility.Random(-200, 201) / 100.0f);
-
-        int enemy_id    = RandomUtility.Random(100, 104);
+        int enemy_id    = monsterJSON.ID;
+        int enemy_hp    = monsterJSON.HP;
 
         var enemy = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Enemy/" + enemy_id, point, Field.Instance.Land.ENEMY_ROOT).GetComponent<Enemy>();
-        enemy.Init(enemy_id, hp);
+        enemy.Init(enemy_id, enemy_hp);
         enemy.gameObject.SetActive(false);
         m_Enemys.Add(enemy);
 
@@ -67,25 +65,30 @@ public class Spawn
 
     public bool IsClear()
     {
-        return m_Pool.IsFull() && m_Enemys.Count == 0;
+        return m_LevelJSON.Monsters.Count == 0 && m_Enemys.Count == 0;
     }
 
     public void Update(float deltaTime)
     {
-        if (!m_Pool.IsFull())
+        if (m_LevelJSON.Monsters.Count > 0)
         {
-            if (m_Enemys.Count == 0) m_Timer.Full();
+            if (m_Enemys.Count == 0) m_LevelJSON.Monsters[0].Time = 0;
 
-            //按时间间隔产出敌人
-            m_Timer.Update(deltaTime);
-            if (m_Timer.IsFinished() == true)
+            m_LevelJSON.Monsters.ForEach(monster_json => {
+                monster_json.Time -= deltaTime * 1000f;
+            });
+
+            for (int i = m_LevelJSON.Monsters.Count - 1; i >= 0; i--)
             {
-                m_Timer.Reset();
-                m_Timer.SetCurrent(RandomUtility.Random(0, Mathf.FloorToInt(m_Timer.Duration * 100)) / 100.0f);
+                var monster_json    = m_LevelJSON.Monsters[i];
+                monster_json.Time   -= deltaTime * 1000f;
 
-                m_Pool.UpdateCurrent(1);
+                if (monster_json.Time <= 0)
+                {
+                    PutEnemy(monster_json);
 
-                PutEnemy();
+                    m_LevelJSON.Monsters.Remove(monster_json);
+                }
             }
         }
         
@@ -109,8 +112,6 @@ public class Spawn
 
     public void Dispose()
     {
-        m_Pool.Reset(0, 0);
-        
         m_Enemys.ForEach(e => {
             e.Dispose();
         });

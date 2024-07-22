@@ -3,6 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+//关卡Json数据
+[System.Serializable]
+public class LevelJSON
+{
+    public List<MonsterJSON> Monsters;
+}
+
+//怪物Json数据
+[System.Serializable]
+public class MonsterJSON
+{
+    public float Time;
+    public int ID;
+    public int HP;
+}
+
+
+
 //关卡管理器
 public class Levels
 {
@@ -28,5 +46,19 @@ public class Levels
         level = new Level(n);
         m_Levels[n] = level;
         return level;
+    }
+
+    public LevelJSON LoadLevelJSON(int id)
+    {
+        var path = "Json/" + id;
+
+        TextAsset jsonAsset = Resources.Load<TextAsset>(path);
+        if (jsonAsset != null) 
+        {
+            return JsonUtility.FromJson<LevelJSON>(jsonAsset.text);
+        }
+        
+        Debug.LogError("未读取到配置：" + path);
+        return null;
     }
 }
