@@ -15,7 +15,7 @@ public class State_Idle<T> : State<Field>
 
         EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_SHOW, true));
 
-
+        Field.Instance.RemovePlayer();
         Field.Instance.InitPlayer();
     }
 

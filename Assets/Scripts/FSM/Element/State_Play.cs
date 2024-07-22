@@ -21,7 +21,7 @@ public class State_Play<T> : State<Field>
     {
         var result = Field.Instance.CheckResult();
         if (result != _C.RESULT.NONE) {
-            Field.Instance.RemovePlayer();
+            // Field.Instance.RemovePlayer();
 
             m_FSM.Transist(_C.FSMSTATE.RESULT, result);
         }

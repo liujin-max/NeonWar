@@ -172,8 +172,10 @@ public class Field : MonoBehaviour
 
     public void RemovePlayer()
     {
-        m_Player.Dispose();
-        m_Player = null;
+        if (m_Player != null) {
+            m_Player.Dispose();
+            m_Player = null;
+        }
     }
 
 
