@@ -19,7 +19,7 @@ public class Enemy : Unit
 
     public float HPRate = 1;    //血量倍率
     public int CrashATK = 1;    //撞击伤害
-    public int Speed;           //移动速度 
+    public int Speed = 160;     //移动速度 
 
     [HideInInspector] public int Glass;
 
@@ -43,7 +43,10 @@ public class Enemy : Unit
     {
         Side    = _C.SIDE.ENEMY;
         ID      = id;
-        ATT.HP  = Mathf.CeilToInt(hp * HPRate);
+
+        ATT.HPMAX  = Mathf.CeilToInt(hp * HPRate);
+        ATT.HP  = ATT.HPMAX;
+
         Glass   = Mathf.Max(NumericalManager.FML_HP2Glass(ATT.HP), 1);
 
         ASP.Reset(ATT.ASP / 1000.0f);
@@ -64,6 +67,9 @@ public class Enemy : Unit
     void LateUpdate()
     {
         m_HPText.transform.eulerAngles = Vector3.zero;
+
+        //始终朝向前行的方向
+        transform.localEulerAngles = new Vector3(0, 0, Mathf.Atan2(m_Rigidbody.velocity.y, m_Rigidbody.velocity.x) * Mathf.Rad2Deg);
     }
 
 

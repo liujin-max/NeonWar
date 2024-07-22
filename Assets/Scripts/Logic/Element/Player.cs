@@ -30,16 +30,16 @@ public class Player : Unit
     //加载配件
     void InitParts()
     {
-        var p1 = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Parts/Parts_1000", new Vector2(-0.7f, 0.6f), m_PartsPivot.transform).GetComponent<Parts>();
-        p1.Init(this);
-        p1.Sync();
-        m_Parts.Add(p1);
+        // var p1 = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Parts/Parts_1000", new Vector2(-0.7f, 0.6f), m_PartsPivot.transform).GetComponent<Parts>();
+        // p1.Init(this);
+        // p1.Sync();
+        // m_Parts.Add(p1);
 
 
-        var p2 = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Parts/Parts_1000", new Vector2( 0.7f, 0.6f), m_PartsPivot.transform).GetComponent<Parts>();
-        p2.Init(this);
-        p2.Sync();
-        m_Parts.Add(p2);
+        // var p2 = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Parts/Parts_1000", new Vector2( 0.7f, 0.6f), m_PartsPivot.transform).GetComponent<Parts>();
+        // p2.Init(this);
+        // p2.Sync();
+        // m_Parts.Add(p2);
     }
 
     //angle : 0 -> 360

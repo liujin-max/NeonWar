@@ -6,7 +6,8 @@ using UnityEngine;
 [System.Serializable]
 public class ATT
 {
-    [HideInInspector] public int HP   = 3;
+    [HideInInspector] public int HPMAX   = 3;
+    [HideInInspector] public int HP = 3;
     public int ATK  = 1;
     [Header("攻速/ms")]public int ASP;    //攻速 
 }

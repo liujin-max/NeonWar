@@ -50,14 +50,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_ShootPivot: {fileID: 0}
   m_BulletTemplate: {fileID: 0}
+  ID: 100
   Side: 1
   ATT:
+    HPMAX: 3
     HP: 1
     ATK: 1
     ASP: 0
-  m_Rigidbody: {fileID: 5767221125352602383}
-  m_HPText: {fileID: 2276059473645410998}
-  ID: 100
+  HPRate: 1
   CrashATK: 1
   Speed: 160
   Glass: 0
@@ -94,10 +94,10 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
-  m_Interpolate: 1
+  m_Interpolate: 2
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!1 &7813202397386786216
 GameObject:
   m_ObjectHideFlags: 0

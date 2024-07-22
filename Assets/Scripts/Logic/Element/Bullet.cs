@@ -27,6 +27,9 @@ public class Bullet : MonoBehaviour
         Caster = caster;
 
         m_Rigidbody.AddForce(force);
+
+        float angle = Mathf.Atan2(force.y, force.x) * Mathf.Rad2Deg;
+        transform.localEulerAngles = new Vector3(0, 0, angle);
     }
 
     void Dispose()

@@ -17,6 +17,7 @@ public class Field : MonoBehaviour
 
     [HideInInspector] public Land Land;
     private Spawn m_Spawn; //怪物工厂
+    public Spawn Spawn {get {return m_Spawn;}}
 
     private Player m_Player;
     public Player Player{ get { return m_Player;}}

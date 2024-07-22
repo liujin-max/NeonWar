@@ -13,6 +13,7 @@ public class Spawn
 {
     private LevelJSON m_LevelJSON;
     private List<Enemy> m_Enemys = new List<Enemy>();
+    public List<Enemy> Enemys {get {return m_Enemys;}}
 
     public void Init(int level_id)
     {
