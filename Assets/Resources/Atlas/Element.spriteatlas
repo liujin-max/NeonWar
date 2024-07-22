@@ -54,15 +54,15 @@ SpriteAtlas:
   m_PackedSpriteNamesToIndex:
   - bow
   - 105
-  - polygon3
-  - polygon4
-  - polygon1
+  - 102
+  - 101
+  - 100
   - battery
   - arrow
   - 104
   - ball
   - Paotai
-  - polygon5
+  - 103
   m_RenderDataMap: {}
   m_Tag: Element
   m_IsVariant: 0
