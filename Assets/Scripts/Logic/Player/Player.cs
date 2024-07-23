@@ -6,12 +6,9 @@ using UnityEngine;
 
 public class Player : Unit
 {
-    [SerializeField] private Transform m_PartsPivot;
-
-
     public CDTimer InvincibleTimer = new CDTimer(1f);   //无敌时间
 
-    private List<Parts> m_Parts = new List<Parts>();
+    private List<Skill> m_Skills = new List<Skill>();
 
 
 
@@ -23,24 +20,8 @@ public class Player : Unit
         InvincibleTimer.Full();
 
         this.SetPosition(ToolUtility.FindPointOnCircle(Vector2.zero, _C.DEFAULT_RADIUS, angle));
-
-        InitParts();
     }
 
-    //加载配件
-    void InitParts()
-    {
-        // var p1 = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Parts/Parts_1000", new Vector2(-0.7f, 0.6f), m_PartsPivot.transform).GetComponent<Parts>();
-        // p1.Init(this);
-        // p1.Sync();
-        // m_Parts.Add(p1);
-
-
-        // var p2 = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Parts/Parts_1000", new Vector2( 0.7f, 0.6f), m_PartsPivot.transform).GetComponent<Parts>();
-        // p2.Init(this);
-        // p2.Sync();
-        // m_Parts.Add(p2);
-    }
 
     //angle : 0 -> 360
     public void Move(float direction)
@@ -100,7 +81,22 @@ public class Player : Unit
     
 
     #region 逻辑处理
+    //同步最新的加成等级
+    public void Sync()
+    {
+        ATT.ATK = GameFacade.Instance.DataCenter.User.CurrentPlayer.ATK * _C.UPGRADE_ATK;
 
+        //每级提高攻速百分比
+        ASP.Reset((ATT.ASP / 1000.0f) / (1 + _C.UPGRADE_ASP * (GameFacade.Instance.DataCenter.User.CurrentPlayer.ASP - 1)));
+
+        //同步技能
+        m_Skills.Clear();
+        GameFacade.Instance.DataCenter.User.CurrentPlayer.Skills.ForEach(skill_msg => {
+            Skill sk = new Skill(GameFacade.Instance.DataCenter.League.GetSkillData(skill_msg.ID), this, skill_msg.Level);
+            sk.Init();
+            m_Skills.Add(sk);
+        });
+    }
 
     #endregion
 

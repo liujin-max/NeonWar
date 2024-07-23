@@ -80,6 +80,7 @@ public static class ToolUtility
         return result;
     }
 
+    //根据圆心、半径和角度，计算出坐标点
     public static Vector2 FindPointOnCircle(Vector2 center, float radius, float angle)
     {
         // 将角度转换为弧度
@@ -91,6 +92,20 @@ public static class ToolUtility
             center.y + radius * Mathf.Sin(radians));
 
         return point;
+    }
+
+    // 将角度转换为单位向量
+    public static Vector2 AngleToVector(float angleInDegrees)
+    {
+        // 将角度转换为弧度
+        float angleInRadians = angleInDegrees * Mathf.Deg2Rad;
+        
+        // 计算单位向量的 x 和 y 分量
+        float x = Mathf.Cos(angleInRadians);
+        float y = Mathf.Sin(angleInRadians);
+        
+        // 返回单位向量
+        return new Vector2(x, y);
     }
 
     public static long GetUnixTimestamp()

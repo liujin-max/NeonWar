@@ -53,7 +53,6 @@ public class Bullet : MonoBehaviour
 
         if (unit.Side == Caster.Side) return;
 
-
         Field.Instance.Hit(this, unit);
 
         Dispose();

@@ -27,13 +27,13 @@ public class Parts : Unit
 
     #region 逻辑处理
     //同步最新的加成等级
-    public override void Sync()
-    {
-        ATT.ATK = GameFacade.Instance.DataCenter.User.ATK * _C.UPGRADE_ATK;
+    // public override void Sync()
+    // {
+    //     ATT.ATK = GameFacade.Instance.DataCenter.User.CurrentPlayer.ATK * _C.UPGRADE_ATK;
 
-        //每级提高攻速百分比
-        ASP.Reset((ATT.ASP / 1000.0f) / (1 + _C.UPGRADE_ASP * (GameFacade.Instance.DataCenter.User.ASP - 1)));
-    }
+    //     //每级提高攻速百分比
+    //     ASP.Reset((ATT.ASP / 1000.0f) / (1 + _C.UPGRADE_ASP * (GameFacade.Instance.DataCenter.User.CurrentPlayer.ASP - 1)));
+    // }
 
 
     #endregion

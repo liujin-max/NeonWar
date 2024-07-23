@@ -1,5 +1,6 @@
 
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 public static class _C
@@ -48,6 +49,34 @@ public static class _C
         PLAYER,
         ENEMY
     }
+
+    public enum PLAYER
+    {
+        BOW = 10000,    //弓
+    }
+
+    //攻击3级解锁攻击槽1
+    //攻击15级解锁攻击槽2
+    //攻速8级解锁攻速槽1
+    //攻速25级解锁攻速槽2
+    public enum SKILLTYPE
+    {
+        ATK_1   = 1,
+        ATK_2   = 2,
+
+        ASP_1   = 3,
+        ASP_2   = 4,
+    }
+
+    public static Dictionary<_C.SKILLTYPE, int> SKILLUNLOCKLEVELS = new Dictionary<_C.SKILLTYPE, int>()
+    {
+        [_C.SKILLTYPE.ATK_1] = 3,
+        [_C.SKILLTYPE.ATK_1] = 15,
+
+        [_C.SKILLTYPE.ASP_1] = 8,
+        [_C.SKILLTYPE.ASP_2] = 25
+    };
+
 
 
     public enum RESULT

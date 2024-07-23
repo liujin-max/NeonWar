@@ -13,7 +13,7 @@ public class DataCenter
 {
     //账号信息
     public User User;
-
+    public League League;
     public Levels Levels;
 
 
@@ -22,8 +22,13 @@ public class DataCenter
         //账号数据
         User    = new User();
 
+        League  = new League();
+        League.Init();
+
         Levels  = new Levels();
         Levels.Init();
     }
+
+
 }
 

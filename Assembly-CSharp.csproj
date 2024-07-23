@@ -95,7 +95,7 @@
      <Compile Include="Assets\Scripts\Utility\BalatroFloating.cs" />
      <Compile Include="Assets\Scripts\Effect\Fly.cs" />
      <Compile Include="Assets\Scripts\Logic\NavigationController.cs" />
-     <Compile Include="Assets\Scripts\Logic\Element\Player.cs" />
+     <Compile Include="Assets\Scripts\Logic\Player\Player.cs" />
      <Compile Include="Assets\AllIn1SpriteShader\Scripts\SetAtlasUvs.cs" />
      <Compile Include="Assets\Scripts\FSM\Element\State_Idle.cs" />
      <Compile Include="Assets\Scripts\Logic\Element\Unit.cs" />
@@ -140,6 +140,9 @@
      <Compile Include="Assets\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
      <Compile Include="Assets\Scripts\Logic\Enemy\Enemy_104.cs" />
      <Compile Include="Assets\Scripts\UI\Window\TipWindow.cs" />
+     <Compile Include="Assets\Scripts\Logic\Data\Skill.cs" />
+     <Compile Include="Assets\Scripts\Logic\Data\League.cs" />
+     <Compile Include="Assets\Scripts\Logic\Player\Player_10000.cs" />
      <None Include="Assets\Resources\Shader\SpriteGray.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />

@@ -9,7 +9,7 @@ using UnityEngine;
 public class CsvManager: MonoBehaviour
 {
     //表名
-    public const string TableKey_Monster   = "Monster";
+    public const string TableKey_Skill   = "Skill";
 
 
 
@@ -21,7 +21,7 @@ public class CsvManager: MonoBehaviour
 
     public void ReadCsvs()
     {
-        this.ReadCsv(CsvManager.TableKey_Monster,          "CSV/Monster");
+        this.ReadCsv(CsvManager.TableKey_Skill,          "CSV/Skill");
     }
 
     public string[] GetStringArray(string excel_name, int id)

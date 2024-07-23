@@ -30,6 +30,25 @@ public class TaskMsg
     public int Day; //上次领取的日期
 }
 
+//技能记录数据
+[System.Serializable]
+public class SkillMsg
+{
+    public int ID;
+    public int Level;
+}
+
+//武器数据
+[System.Serializable]
+public class PlayerMsg
+{
+    public int ID;
+    public bool InUse;  //使用中
+    public int ATK = 1;
+    public int ASP = 1;
+    public List<SkillMsg> Skills = new List<SkillMsg>();
+}
+
 
 //账号数据
 [System.Serializable]
@@ -40,8 +59,9 @@ public class GameUserData
     public int Level;       //通关记录
     public int Coin;        //金币
     public int Glass;       //碎片
-    public int ATK = 1;     //默认1J
-    public int ASP = 1;
+
+
+    public List<PlayerMsg> Players = new List<PlayerMsg>();
 
     public long RecoveryTimestamp;    //上次体力的恢复时间
     public int RegisterDay;     //注册时间(一年中的第几天)
@@ -76,8 +96,29 @@ public class User
     public int Level { get{ return m_Data.Level;}}
     public int Coin { get{ return m_Data.Coin;}}
     public int Glass { get{ return m_Data.Glass;}}
-    public int ATK { get{ return m_Data.ATK;}}
-    public int ASP { get{ return m_Data.ASP;}}
+
+    //获取当前正在使用的武器
+    public PlayerMsg CurrentPlayer {
+        get { 
+            if (m_Data.Players.Count > 0) {
+                foreach (var player_msg in m_Data.Players) {
+                    if (player_msg.InUse == true) return player_msg;
+                }
+
+                m_Data.Players[0].InUse = true;
+                return m_Data.Players[0];
+            }
+
+            PlayerMsg player = new PlayerMsg()
+            {
+                ID      = (int)_C.PLAYER.BOW,
+                InUse   = true
+            };
+
+            m_Data.Players.Add(player);
+            return player;
+        }
+    }
 
     private bool m_userUpdate = false;  //账号数据变动标记
     public bool IsDirty {get { return m_userUpdate;}}
@@ -190,26 +231,26 @@ public class User
 
     public void UpdateATK(int value)
     {
-        m_Data.ATK += value;
+        CurrentPlayer.ATK += value;
 
         m_userUpdate = true;
     }
 
     public void UpdateASP(int value)
     {
-        m_Data.ASP += value;
+        CurrentPlayer.ASP += value;
 
         m_userUpdate = true;
     }
 
     public int GetATKCost()
     {
-        return NumericalManager.FML_ATKCost(m_Data.ATK);
+        return NumericalManager.FML_ATKCost(CurrentPlayer.ATK);
     }
 
     public int GetASPCost()
     {
-        return NumericalManager.FML_ASPCost(m_Data.ASP);
+        return NumericalManager.FML_ASPCost(CurrentPlayer.ASP);
     }
 
     public void SetRecoveryTimestamp(long value)

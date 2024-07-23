@@ -19,7 +19,11 @@ public class GameWindow : MonoBehaviour
     
     [Header("按钮")]
     [SerializeField] Button m_BtnATK;
+    [SerializeField] Button m_BtnATK1;
+    [SerializeField] Button m_BtnATK2;
     [SerializeField] Button m_BtnASP;
+    [SerializeField] Button m_BtnASP1;
+    [SerializeField] Button m_BtnASP2;
 
 
     [SerializeField] private List<CanvasGroup> m_Groups = new List<CanvasGroup>();
@@ -151,11 +155,30 @@ public class GameWindow : MonoBehaviour
 
     void FlushUpgradePivot()
     {
-        m_BtnATK.transform.Find("Level").GetComponent<TextMeshProUGUI>().text   = GameFacade.Instance.DataCenter.User.ATK.ToString();
+        int atk_level   = GameFacade.Instance.DataCenter.User.CurrentPlayer.ATK;
+        int asp_level   = GameFacade.Instance.DataCenter.User.CurrentPlayer.ASP;
+
+        m_BtnATK.transform.Find("Level").GetComponent<TextMeshProUGUI>().text   = atk_level.ToString();
         m_BtnATK.transform.Find("Cost").GetComponent<TextMeshProUGUI>().text    = "消耗：" + GameFacade.Instance.DataCenter.User.GetATKCost();
 
 
-        m_BtnASP.transform.Find("Level").GetComponent<TextMeshProUGUI>().text   = GameFacade.Instance.DataCenter.User.ASP.ToString();
+        //攻击槽1
+        {
+            int level_need  = _C.SKILLUNLOCKLEVELS[_C.SKILLTYPE.ATK_1];
+            if (atk_level >= level_need)
+            {
+                
+            }
+            else
+            {
+                m_BtnATK1.transform.Find("Name").GetComponent<TextMeshProUGUI>().text   = string.Format("攻击{0}级解锁", level_need);
+                m_BtnATK1.transform.Find("Level").GetComponent<TextMeshProUGUI>().text  = "";
+                m_BtnATK1.transform.Find("Cost").GetComponent<TextMeshProUGUI>().text   = "";
+            }
+        }
+
+
+        m_BtnASP.transform.Find("Level").GetComponent<TextMeshProUGUI>().text   = asp_level.ToString();
         m_BtnASP.transform.Find("Cost").GetComponent<TextMeshProUGUI>().text    = "消耗：" + GameFacade.Instance.DataCenter.User.GetASPCost();
     }
 
