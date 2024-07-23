@@ -39,6 +39,7 @@
      <Compile Include="Assets\DOTween\Modules\DOTweenModuleSprite.cs" />
      <Compile Include="Assets\Scripts\Manager\EventManager.cs" />
      <Compile Include="Assets\Scripts\Utility\SlideScrollView.cs" />
+     <Compile Include="Assets\Scripts\Logic\Enemy\Enemy_105.cs" />
      <Compile Include="Assets\Scripts\EFFECT.cs" />
      <Compile Include="Assets\Scripts\Effect\BezierCurveAnimation.cs" />
      <Compile Include="Assets\Scripts\Utility\UrlImageUtility.cs" />
@@ -52,6 +53,7 @@
      <Compile Include="Assets\DOTween\Modules\DOTweenModulePhysics2D.cs" />
      <Compile Include="Assets\Scripts\Manager\UIManager.cs" />
      <Compile Include="Assets\Scripts\Utility\TextSpacing.cs" />
+     <Compile Include="Assets\Scripts\Logic\Enemy\Enemy_102.cs" />
      <Compile Include="Assets\Scripts\Utility\SpriteSwitch.cs" />
      <Compile Include="Assets\Scripts\Utility\Crypt.cs" />
      <Compile Include="Assets\Scripts\Manager\WXPlatform.cs" />
@@ -136,10 +138,8 @@
      <Compile Include="Assets\AllIn1SpriteShader\Demo\Scripts\DemoCircleExpositor.cs" />
      <Compile Include="Assets\Scripts\Effect\Shine.cs" />
      <Compile Include="Assets\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
-     <Compile Include="Assets\Scripts\UI\Window\TipWindow.cs" />
-     <Compile Include="Assets\Scripts\Logic\Enemy\Enemy_102.cs" />
      <Compile Include="Assets\Scripts\Logic\Enemy\Enemy_104.cs" />
-     <Compile Include="Assets\Scripts\Logic\Enemy\Enemy_105.cs" />
+     <Compile Include="Assets\Scripts\UI\Window\TipWindow.cs" />
      <None Include="Assets\Resources\Shader\SpriteGray.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
