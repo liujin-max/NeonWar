@@ -6,7 +6,7 @@ using UnityEngine;
 public class Player_10000 : Player
 {
     //发射子弹
-    protected override void Shoot()
+    protected override void Attack()
     {
         //判断技能是否控制发射
         foreach (var sk in m_Skills) {

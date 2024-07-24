@@ -28,5 +28,6 @@ public static class EVENT
     public static string ONBULLETCREATE     = "ONBULLETCREATE";
     //子弹击中目标
     public static string ONBULLETHIT        = "ONBULLETHIT";
-    
+    //发射子弹
+    public static string ONBULLETSHOOT      = "ONBULLETSHOOT";
 }

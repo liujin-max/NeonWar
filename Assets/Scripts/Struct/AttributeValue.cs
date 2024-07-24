@@ -3,9 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class AttributeValue
 {
-    private float m_Base;
+    [SerializeField] private float m_Base;
     private bool m_IsInt = false;
 
     Dictionary<object, float> ADDDic = new Dictionary<object, float>();

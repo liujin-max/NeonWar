@@ -50,7 +50,7 @@ public class Unit : MonoBehaviour
             if (ASP.IsFinished() == true) {
                 ASP.Reset();
 
-                Shoot();
+                Attack();
             }
         }
     }
@@ -77,15 +77,13 @@ public class Unit : MonoBehaviour
         bullet.Caster = this;
 
         EventManager.SendEvent(new GameEvent(EVENT.ONBULLETCREATE, bullet));
-        
+
         return bullet;
     }
 
-    protected virtual void Shoot()
+    protected virtual void Attack()
     {
-        // var bullet = GameFacade.Instance.PoolManager.AllocateBullet(BulletTemplate, Vector3.zero);
-        // bullet.transform.position = ShootPivot.position;
-        // bullet.Shoot(this, ToolUtility.FindPointOnCircle(Vector2.zero, 1000, this.GetAngle() + 180));
+
     }
 
     #endregion

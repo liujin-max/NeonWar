@@ -213,15 +213,118 @@ public class Skill_10060 : Skill
 #endregion
 
 
+#region 弓：反弹
+//箭矢可反弹#次
+public class Skill_10070 : Skill
+{
+    public Skill_10070()
+    {
+        EventManager.AddHandler(EVENT.ONBULLETCREATE,   OnBulletCreate);
+    }
+
+    public override void Dispose()
+    {
+        EventManager.DelHandler(EVENT.ONBULLETCREATE,   OnBulletCreate);
+    }
+
+    //创建子弹
+    private void OnBulletCreate(GameEvent @event)
+    {
+        Bullet b = @event.GetParam(0) as Bullet;
+        if (b.Caster != Caster) return;
+
+
+        b.ReboundTimes = Value;
+    }
+}
+#endregion
+
+
+
+#region 弓：快速射击
+//有#%的概率连续发射箭矢
+public class Skill_10110 : Skill
+{
+    public Skill_10110()
+    {
+        EventManager.AddHandler(EVENT.ONBULLETSHOOT,    OnBulletShoot);
+    }
+
+    public override void Dispose()
+    {
+        EventManager.DelHandler(EVENT.ONBULLETSHOOT,    OnBulletShoot);
+    }
+
+    //发射子弹
+    private void OnBulletShoot(GameEvent @event)
+    {
+        Bullet b = @event.GetParam(0) as Bullet;
+        if (b.Caster != Caster) return;
+
+        int rate = Value;
+        if (RandomUtility.IsHit(rate))
+        {
+            //缺少特效
+            Caster.ASP.SetCurrent(Caster.ASP.Duration * 0.8f);
+        }
+    }
+}
+#endregion
+
+
+#region 弓：急速箭矢
+//箭矢移动速度提高#%
+public class Skill_10130 : Skill
+{
+    public Skill_10130()
+    {
+        EventManager.AddHandler(EVENT.ONBULLETCREATE,    OnBulletCreate);
+    }
+
+    public override void Dispose()
+    {
+        EventManager.DelHandler(EVENT.ONBULLETCREATE,    OnBulletCreate);
+    }
+
+    //创建子弹
+    void OnBulletCreate(GameEvent @event)
+    {
+        Bullet b = @event.GetParam(0) as Bullet;
+        if (b.Caster != Caster) return;
+
+        b.Speed.PutAUL(this, this.Value / 100.0f);
+    }
+}
+#endregion
 
 
 
 
+#region 弓：必杀
+//被击中的敌人有#%的概率直接死亡(精英、Boss除外)
+public class Skill_10160 : Skill
+{
+    public Skill_10160()
+    {
+        EventManager.AddHandler(EVENT.ONBULLETCREATE,    OnBulletCreate);
+    }
 
+    public override void Dispose()
+    {
+        EventManager.DelHandler(EVENT.ONBULLETCREATE,    OnBulletCreate);
+    }
 
+    //创建子弹
+    void OnBulletCreate(GameEvent @event)
+    {
+        Bullet b = @event.GetParam(0) as Bullet;
+        if (b.Caster != Caster) return;
 
+        b.KillRate = this.Value;
+    }
+}
 
-
+#endregion
 
 
 
@@ -254,11 +357,20 @@ public class Skill
     public Unit Caster;
 
     private static Dictionary<int, Func<Skill>> m_classDictionary = new Dictionary<int, Func<Skill>> {
+        //弓 攻击
         {10010, () => new Skill_10010()},
         {10020, () => new Skill_10020()},
         {10030, () => new Skill_10030()},
 
-        {10060, () => new Skill_10060()}
+        {10060, () => new Skill_10060()},
+        {10070, () => new Skill_10070()},
+
+        //弓 攻速
+        {10110, () => new Skill_10110()},
+
+        {10130, () => new Skill_10130()},
+
+        {10160, () => new Skill_10160()},
     };
 
     //参数
@@ -297,13 +409,6 @@ public class Skill
     public bool IsLevelMax()
     {
         return Level >= Data.LevelMax;
-    }
-
-    
-
-    public virtual void Init()
-    {
-
     }
 
     public virtual bool OnShoot()

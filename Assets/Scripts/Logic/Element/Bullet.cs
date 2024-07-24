@@ -10,13 +10,14 @@ public class Bullet : MonoBehaviour
     [HideInInspector] public Unit Caster;
 
     public Vector2 Velocity {get { return m_Rigidbody.velocity;}}
-    public float Speed = 500;
-    private float SpeedRate = 1.0f;
+    public AttributeValue Speed = new AttributeValue(500);
 
 
     [HideInInspector] public HashSet<Unit> SpliteIgnoreUnits = new HashSet<Unit>();
     [HideInInspector] public bool IsSplit = false;      //是否是分裂出的
     [HideInInspector] public int PassTimes = 0;         //可穿透次数
+    [HideInInspector] public int ReboundTimes = 0;      //可反弹次数
+    [HideInInspector] public int KillRate = 0;          //必杀概率
 
     void Awake()
     {
@@ -28,21 +29,40 @@ public class Bullet : MonoBehaviour
         // 确保物体不受重力影响
         m_Rigidbody.gravityScale = 0;
     }
-    
-    public void Shoot(float angle, float speed_rate = 1.0f)
-    {
-        SpeedRate = speed_rate;
 
-        Vector2 force = ToolUtility.FindPointOnCircle(Vector2.zero, this.Speed * speed_rate, angle);
+    
+    public void Shoot(float angle , bool is_shoot = true)
+    {
+        m_Rigidbody.velocity = Vector2.zero;
+
+        Vector2 force = ToolUtility.FindPointOnCircle(Vector2.zero, Speed.ToNumber(), angle);
         m_Rigidbody.AddForce(force);
 
+        //朝向前进的方向
         transform.localEulerAngles = new Vector3(0, 0, Mathf.Atan2(force.y, force.x) * Mathf.Rad2Deg);
+
+        EventManager.SendEvent(new GameEvent(EVENT.ONBULLETSHOOT, this));
+    }
+
+    void Rebound()
+    {
+        ReboundTimes--;
+
+        // 计算反弹方向
+        float angle = Mathf.Atan2(m_Rigidbody.velocity.y, m_Rigidbody.velocity.x) * Mathf.Rad2Deg;
+        //给一个随机的偏移
+        angle += 180 + RandomUtility.Random(-45, 45);
+
+        Shoot(angle, false);
     }
 
     void Dispose()
     {
         SpliteIgnoreUnits.Clear();
-        IsSplit = false;
+        IsSplit         = false;
+        PassTimes       = 0;
+        ReboundTimes    = 0;
+        KillRate        = 0;
 
         GameFacade.Instance.PoolManager.RecycleBullet(this);
     }
@@ -55,7 +75,9 @@ public class Bullet : MonoBehaviour
         {
             SpliteIgnoreUnits.Clear();
 
-            Dispose();
+            if (ReboundTimes >= 0) Rebound();
+            if (ReboundTimes < 0) Dispose();
+
             return;
         }
 
@@ -63,14 +85,12 @@ public class Bullet : MonoBehaviour
         var unit = collider.GetComponent<Unit>();
         if (unit == null) return;
 
-        if (unit.Side == Caster.Side) return;
-        if (SpliteIgnoreUnits.Contains(unit)) return;
+        if (Field.Instance.Hit(this, unit) == true)
+        {
+            PassTimes--;
 
-        Field.Instance.Hit(this, unit);
-
-        PassTimes--;
-
-        if (PassTimes < 0) Dispose();
+            if (PassTimes < 0) Dispose();
+        }
     }
 
     void OnTriggerStay2D(Collider2D collider)

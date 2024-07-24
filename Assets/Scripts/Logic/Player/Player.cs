@@ -97,14 +97,11 @@ public class Player : Unit
         m_Skills.Clear();
         GameFacade.Instance.DataCenter.User.CurrentPlayer.Skills.ForEach(skill_msg => {
             Skill sk = Skill.Create(GameFacade.Instance.DataCenter.League.GetSkillData(skill_msg.ID), this, skill_msg.Level);
-            sk.Init();
             m_Skills.Add(sk);
         });
 
         //测试技能
-        Skill sk = Skill.Create(GameFacade.Instance.DataCenter.League.GetSkillData(10060), this, 2);
-        sk.Init();
-        m_Skills.Add(sk);
+        m_Skills.Add(Skill.Create(GameFacade.Instance.DataCenter.League.GetSkillData(10160), this, 3));
     }
 
     #endregion

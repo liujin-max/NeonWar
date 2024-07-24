@@ -180,11 +180,23 @@ public class Field : MonoBehaviour
 
 
     //子弹击中敌人
-    public void Hit(Bullet bullet, Unit unit)
+    public bool Hit(Bullet bullet, Unit unit)
     {
-        if (bullet.Caster.IsDead()) return;
+        if (unit.IsDead()) return false;
+        if (bullet.Caster.IsDead()) return false;
+        if (unit.Side == bullet.Caster.Side) return false;
+        if (bullet.SpliteIgnoreUnits.Contains(unit)) return false;
 
-        unit.UpdateHP(-bullet.Caster.ATT.ATK);
+
+        if (RandomUtility.IsHit(bullet.KillRate) == true)   //一击必杀
+        {
+            unit.UpdateHP(-unit.ATT.HP);
+        }
+        else
+        {
+           unit.UpdateHP(-bullet.Caster.ATT.ATK); 
+        }
+
 
 
         EventManager.SendEvent(new GameEvent(EVENT.ONBULLETHIT, bullet, unit));
@@ -213,6 +225,8 @@ public class Field : MonoBehaviour
                 GameFacade.Instance.EffectManager.Load(EFFECT.CRASH, Vector3.zero, Field.Instance.Land.ELEMENT_ROOT.gameObject);
             }
         }
+
+        return true;
     }
 
     //敌人碰撞玩家
