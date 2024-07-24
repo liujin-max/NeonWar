@@ -166,7 +166,6 @@ MonoBehaviour:
     HP: 3
     ATK: 1
     ASP: 300
-  BulletCount: 1
 --- !u!1 &8387908895274495325
 GameObject:
   m_ObjectHideFlags: 0

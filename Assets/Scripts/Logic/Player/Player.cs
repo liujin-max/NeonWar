@@ -16,6 +16,7 @@ public class Player : Unit
     {
         Side    = _C.SIDE.PLAYER;
         m_Angle = angle;
+        ATT.HP  = ATT.HPMAX;
 
         InvincibleTimer.Full();
 
