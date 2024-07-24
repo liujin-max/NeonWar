@@ -11,9 +11,8 @@ public class Enemy_105 : Enemy
         {
             float angle = 60.0f * i;
 
-            var bullet = GameFacade.Instance.PoolManager.AllocateBullet(BulletTemplate, Vector3.zero);
-            bullet.transform.position = ShootPivot.position;
-            bullet.Shoot(this, ToolUtility.FindPointOnCircle(Vector2.zero, 200, angle));
+            var bullet = CreateBullet();
+            bullet.Shoot(angle);
         }
     }
 }

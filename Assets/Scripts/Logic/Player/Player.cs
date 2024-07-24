@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,8 +9,7 @@ public class Player : Unit
 {
     public CDTimer InvincibleTimer = new CDTimer(1f);   //无敌时间
 
-    private List<Skill> m_Skills = new List<Skill>();
-
+    protected List<Skill> m_Skills = new List<Skill>();
 
 
     public void Init(float angle)
@@ -75,6 +75,9 @@ public class Player : Unit
 
     public void Dispose()
     {
+        m_Skills.ForEach(skill => skill.Dispose());
+        m_Skills.Clear();
+
         Destroy(gameObject);
     }
 
@@ -90,12 +93,18 @@ public class Player : Unit
         ASP.Reset((ATT.ASP / 1000.0f) / (1 + _C.UPGRADE_ASP * (GameFacade.Instance.DataCenter.User.CurrentPlayer.ASP - 1)));
 
         //同步技能
+        m_Skills.ForEach(skill => skill.Dispose());
         m_Skills.Clear();
         GameFacade.Instance.DataCenter.User.CurrentPlayer.Skills.ForEach(skill_msg => {
-            Skill sk = new Skill(GameFacade.Instance.DataCenter.League.GetSkillData(skill_msg.ID), this, skill_msg.Level);
+            Skill sk = Skill.Create(GameFacade.Instance.DataCenter.League.GetSkillData(skill_msg.ID), this, skill_msg.Level);
             sk.Init();
             m_Skills.Add(sk);
         });
+
+        //测试技能
+        Skill sk = Skill.Create(GameFacade.Instance.DataCenter.League.GetSkillData(10060), this, 2);
+        sk.Init();
+        m_Skills.Add(sk);
     }
 
     #endregion

@@ -26,6 +26,8 @@ public class Enemy : Unit
     private Vector2 m_LastVelocity;
     private float m_LastAngularVelocity;
 
+    private bool m_ValidFlag = true;
+    public bool IsValid {get {return m_ValidFlag;} }
 
     void Awake()
     {
@@ -74,6 +76,11 @@ public class Enemy : Unit
 
 
     #region 逻辑处理
+    public void SetValid(bool flag)
+    {
+        m_ValidFlag = flag;
+    }
+
     public override void UpdateHP(int value)
     {
         base.UpdateHP(value);

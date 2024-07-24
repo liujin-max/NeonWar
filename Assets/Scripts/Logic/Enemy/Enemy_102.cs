@@ -12,9 +12,7 @@ public class Enemy_102 : Enemy
         Vector2 dir = Field.Instance.Player.transform.localPosition - transform.localPosition;
         float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
-
-        var bullet = GameFacade.Instance.PoolManager.AllocateBullet(BulletTemplate, Vector3.zero);
-        bullet.transform.position = ShootPivot.position;
-        bullet.Shoot(this, ToolUtility.FindPointOnCircle(Vector2.zero, 200, angle));
+        var bullet = CreateBullet();
+        bullet.Shoot(angle);
     }
 }

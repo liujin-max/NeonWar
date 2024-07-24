@@ -22,4 +22,11 @@ public static class EVENT
     public static string ONJOYSTICK_DOUBLE  = "ONJOYSTICK_DOUBLE";
     
 
+
+
+    //创建子弹
+    public static string ONBULLETCREATE     = "ONBULLETCREATE";
+    //子弹击中目标
+    public static string ONBULLETHIT        = "ONBULLETHIT";
+    
 }

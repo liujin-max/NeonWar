@@ -31,8 +31,9 @@ public class Spawn
 
         var enemy = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Enemy/" + enemy_id, point, Field.Instance.Land.ENEMY_ROOT).GetComponent<Enemy>();
         enemy.Init(enemy_id, enemy_hp);
-        enemy.gameObject.SetActive(false);
         m_Enemys.Add(enemy);
+        enemy.gameObject.SetActive(false);
+        enemy.SetValid(false);
 
 
 
@@ -45,6 +46,7 @@ public class Spawn
         
         seq.AppendCallback(()=>{
             enemy.gameObject.SetActive(true);
+            enemy.SetValid(true);
             enemy.Push();
         });
 

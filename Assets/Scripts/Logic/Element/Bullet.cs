@@ -10,6 +10,13 @@ public class Bullet : MonoBehaviour
     [HideInInspector] public Unit Caster;
 
     public Vector2 Velocity {get { return m_Rigidbody.velocity;}}
+    public float Speed = 500;
+    private float SpeedRate = 1.0f;
+
+
+    [HideInInspector] public HashSet<Unit> SpliteIgnoreUnits = new HashSet<Unit>();
+    [HideInInspector] public bool IsSplit = false;      //是否是分裂出的
+    [HideInInspector] public int PassTimes = 0;         //可穿透次数
 
     void Awake()
     {
@@ -22,18 +29,21 @@ public class Bullet : MonoBehaviour
         m_Rigidbody.gravityScale = 0;
     }
     
-    public void Shoot(Unit caster, Vector2 force)
+    public void Shoot(float angle, float speed_rate = 1.0f)
     {
-        Caster = caster;
+        SpeedRate = speed_rate;
 
+        Vector2 force = ToolUtility.FindPointOnCircle(Vector2.zero, this.Speed * speed_rate, angle);
         m_Rigidbody.AddForce(force);
 
-        float angle = Mathf.Atan2(force.y, force.x) * Mathf.Rad2Deg;
-        transform.localEulerAngles = new Vector3(0, 0, angle);
+        transform.localEulerAngles = new Vector3(0, 0, Mathf.Atan2(force.y, force.x) * Mathf.Rad2Deg);
     }
 
     void Dispose()
     {
+        SpliteIgnoreUnits.Clear();
+        IsSplit = false;
+
         GameFacade.Instance.PoolManager.RecycleBullet(this);
     }
 
@@ -43,6 +53,8 @@ public class Bullet : MonoBehaviour
         //子弹撞墙 则销毁
         if (collider.gameObject.tag == "Wall")
         {
+            SpliteIgnoreUnits.Clear();
+
             Dispose();
             return;
         }
@@ -52,10 +64,13 @@ public class Bullet : MonoBehaviour
         if (unit == null) return;
 
         if (unit.Side == Caster.Side) return;
+        if (SpliteIgnoreUnits.Contains(unit)) return;
 
         Field.Instance.Hit(this, unit);
 
-        Dispose();
+        PassTimes--;
+
+        if (PassTimes < 0) Dispose();
     }
 
     void OnTriggerStay2D(Collider2D collider)

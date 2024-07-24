@@ -49,6 +49,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   Caster: {fileID: 0}
+  Speed: 200
+  IsSplit: 0
 --- !u!50 &5024298108139937723
 Rigidbody2D:
   serializedVersion: 4

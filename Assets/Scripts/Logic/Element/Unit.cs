@@ -8,8 +8,8 @@ public class ATT
 {
     [HideInInspector] public int HPMAX   = 3;
     [HideInInspector] public int HP = 3;
-    public int ATK  = 1;
-    [Header("攻速/ms")]public int ASP;    //攻速 
+    [HideInInspector] public int ATK  = 1;
+    [Header("攻速/ms")] public int ASP;    //攻速 
 }
 
 //基础单位
@@ -69,6 +69,17 @@ public class Unit : MonoBehaviour
     //     //每级提高攻速百分比
     //     ASP.Reset((ATT.ASP / 1000.0f) / (1 + _C.UPGRADE_ASP * (GameFacade.Instance.DataCenter.User.CurrentPlayer.ASP - 1)));
     // }
+
+    public virtual Bullet CreateBullet()
+    {
+        var bullet = GameFacade.Instance.PoolManager.AllocateBullet(BulletTemplate, Vector3.zero);
+        bullet.transform.position = ShootPivot.position;
+        bullet.Caster = this;
+
+        EventManager.SendEvent(new GameEvent(EVENT.ONBULLETCREATE, bullet));
+        
+        return bullet;
+    }
 
     protected virtual void Shoot()
     {

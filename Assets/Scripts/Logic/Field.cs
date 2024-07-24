@@ -168,7 +168,6 @@ public class Field : MonoBehaviour
 
         m_Player = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Player/Player_10000", Vector2.zero, Land.ENTITY_ROOT).GetComponent<Player>();
         m_Player.Init(270);
-        m_Player.Sync();
     }
 
     public void RemovePlayer()
@@ -188,6 +187,7 @@ public class Field : MonoBehaviour
         unit.UpdateHP(-bullet.Caster.ATT.ATK);
 
 
+        EventManager.SendEvent(new GameEvent(EVENT.ONBULLETHIT, bullet, unit));
 
         if (unit.IsDead() == true)
         {

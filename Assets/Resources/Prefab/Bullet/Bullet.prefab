@@ -49,6 +49,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   Caster: {fileID: 0}
+  Speed: 500
+  IsSplit: 0
 --- !u!58 &2171232781514582220
 CircleCollider2D:
   m_ObjectHideFlags: 0
