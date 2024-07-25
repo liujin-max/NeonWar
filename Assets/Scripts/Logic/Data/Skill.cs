@@ -272,6 +272,39 @@ public class Skill_10110 : Skill
 #endregion
 
 
+#region 弓：晕眩射击
+//被击中的敌人有#%的概率晕眩0.5秒
+public class Skill_10120 : Skill
+{
+    public Skill_10120()
+    {
+        EventManager.AddHandler(EVENT.ONBULLETHIT,  OnBulletHit);
+    }
+
+    public override void Dispose()
+    {
+        EventManager.DelHandler(EVENT.ONBULLETHIT,  OnBulletHit);
+    }
+
+    //子弹击中目标
+    private void OnBulletHit(GameEvent @event)
+    {
+        Bullet b = @event.GetParam(0) as Bullet;
+        if (b.Caster != Caster) return;
+
+        Unit unit = @event.GetParam(1) as Unit;
+
+        if (RandomUtility.IsHit(this.Value))
+        {
+            unit.AddBuff((int)_C.BUFF.STUN, 1);
+        }
+        
+    }
+}
+#endregion
+
+
+
 #region 弓：急速箭矢
 //箭矢移动速度提高#%
 public class Skill_10130 : Skill
@@ -326,7 +359,33 @@ public class Skill_10160 : Skill
 
 #endregion
 
+#region 弓：标记
+//被击中的敌人在5秒内受到的伤害提高#%
+public class Skill_10170 : Skill
+{
+    public Skill_10170()
+    {
+        EventManager.AddHandler(EVENT.ONBULLETHIT,  OnBulletHit);
+    }
 
+    public override void Dispose()
+    {
+        EventManager.DelHandler(EVENT.ONBULLETHIT,  OnBulletHit);
+    }
+
+    //子弹击中目标
+    private void OnBulletHit(GameEvent @event)
+    {
+        Bullet b = @event.GetParam(0) as Bullet;
+        if (b.Caster != Caster) return;
+
+        Unit unit = @event.GetParam(1) as Unit;
+
+        unit.AddBuff((int)_C.BUFF.YISHANG, this.Value);
+    }
+}
+
+#endregion
 
 
 
@@ -367,10 +426,11 @@ public class Skill
 
         //弓 攻速
         {10110, () => new Skill_10110()},
-
+        {10120, () => new Skill_10120()},
         {10130, () => new Skill_10130()},
 
         {10160, () => new Skill_10160()},
+        {10170, () => new Skill_10170()},
     };
 
     //参数

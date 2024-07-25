@@ -78,6 +78,13 @@ public static class _C
     };
 
 
+    public enum BUFF
+    {
+        STUN    = 50000,
+        YISHANG,
+    }
+
+
 
     public enum RESULT
     {

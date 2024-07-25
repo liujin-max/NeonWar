@@ -10,6 +10,9 @@ public class ATT
     [HideInInspector] public int HP = 3;
     [HideInInspector] public int ATK  = 1;
     [Header("攻速/ms")] public int ASP;    //攻速 
+
+    //易伤倍率
+    [HideInInspector] public AttributeValue VUN_INC   = new AttributeValue(1f, false);
 }
 
 //基础单位
@@ -22,6 +25,10 @@ public class Unit : MonoBehaviour
     [HideInInspector] public _C.SIDE Side = _C.SIDE.PLAYER;
     public ATT ATT = new ATT();
     public CDTimer ASP = new CDTimer(0f);
+
+
+    //Buff
+    private Dictionary<int, Buff> m_BuffDic = new Dictionary<int, Buff>();
 
     protected float m_Angle;      //角度
 
@@ -53,22 +60,38 @@ public class Unit : MonoBehaviour
                 Attack();
             }
         }
+
+
+        List<Buff> remove_buffs = new List<Buff>();
+        //刷新Buff
+        foreach (var item in m_BuffDic)
+        {
+            Buff buff = item.Value;
+            buff.Update(deltaTime);
+
+            if (buff.IsEnd()) remove_buffs.Add(buff);
+        }
+
+        remove_buffs.ForEach(buff => this.RemoveBuff(buff));
     }
 
     #region 逻辑处理
+    //无法移动
+    public virtual void Stop()
+    {
+
+    }
+
+    //恢复运动
+    public virtual void Resume()
+    {
+
+    }
+
     public virtual void UpdateHP(int value)
     {
         ATT.HP += value;
     }
-
-    // //同步最新的加成等级
-    // public virtual void Sync()
-    // {
-    //     ATT.ATK = GameFacade.Instance.DataCenter.User.CurrentPlayer.ATK * _C.UPGRADE_ATK;
-
-    //     //每级提高攻速百分比
-    //     ASP.Reset((ATT.ASP / 1000.0f) / (1 + _C.UPGRADE_ASP * (GameFacade.Instance.DataCenter.User.CurrentPlayer.ASP - 1)));
-    // }
 
     public virtual Bullet CreateBullet()
     {
@@ -84,6 +107,37 @@ public class Unit : MonoBehaviour
     protected virtual void Attack()
     {
 
+    }
+
+    public Buff AddBuff(int buff_id, int value)
+    {
+        Buff b;
+
+        //已经有对应Buff了
+        if (m_BuffDic.ContainsKey(buff_id)) 
+        {
+            b = m_BuffDic[buff_id];
+            b.Value = value;
+            b.Flush();  //刷新CD
+        }
+        else
+        {
+            b = Buff.Create(buff_id, value, this);
+            b.Init();
+
+            m_BuffDic[buff_id] = b;
+        }
+
+        return b;
+    }
+
+    public void RemoveBuff(Buff buff)
+    {
+        buff.Dispose();
+        
+        if (m_BuffDic.ContainsKey(buff.ID)) {
+            m_BuffDic.Remove(buff.ID);
+        }
     }
 
     #endregion

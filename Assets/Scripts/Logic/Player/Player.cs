@@ -102,7 +102,7 @@ public class Player : Unit
         });
 
         //测试技能
-        m_Skills.Add(Skill.Create(GameFacade.Instance.DataCenter.League.GetSkillData(10160), this, 3));
+        m_Skills.Add(Skill.Create(GameFacade.Instance.DataCenter.League.GetSkillData(10170), this, 3));
     }
 
     #endregion

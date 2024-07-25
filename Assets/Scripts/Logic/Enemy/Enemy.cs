@@ -71,7 +71,7 @@ public class Enemy : Unit
         m_HPText.transform.eulerAngles = Vector3.zero;
 
         //始终朝向前行的方向
-        transform.localEulerAngles = new Vector3(0, 0, Mathf.Atan2(m_Rigidbody.velocity.y, m_Rigidbody.velocity.x) * Mathf.Rad2Deg);
+        if (!m_Rigidbody.isKinematic) transform.localEulerAngles = new Vector3(0, 0, Mathf.Atan2(m_Rigidbody.velocity.y, m_Rigidbody.velocity.x) * Mathf.Rad2Deg);
     }
 
 
@@ -96,7 +96,7 @@ public class Enemy : Unit
     }
 
     //暂停运动
-    public void Pause()
+    public override void Stop()
     {
         if (m_Rigidbody.isKinematic == true) return;
 
@@ -109,7 +109,7 @@ public class Enemy : Unit
     }
 
     //恢复运动
-    public void Resume()
+    public override void Resume()
     {
         if (!m_Rigidbody.isKinematic) return;
 

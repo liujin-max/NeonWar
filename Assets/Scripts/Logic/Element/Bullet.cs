@@ -75,9 +75,8 @@ public class Bullet : MonoBehaviour
         {
             SpliteIgnoreUnits.Clear();
 
-            if (ReboundTimes >= 0) Rebound();
-            if (ReboundTimes < 0) Dispose();
-
+            if (ReboundTimes > 0) Rebound();
+            if (ReboundTimes <= 0) Dispose();
             return;
         }
 
@@ -85,24 +84,10 @@ public class Bullet : MonoBehaviour
         var unit = collider.GetComponent<Unit>();
         if (unit == null) return;
 
-        if (Field.Instance.Hit(this, unit) == true)
-        {
+        if (Field.Instance.Hit(this, unit) == true) {
             PassTimes--;
-
             if (PassTimes < 0) Dispose();
         }
-    }
-
-    void OnTriggerStay2D(Collider2D collider)
-    {
-        // 当碰撞持续时调用
-        // Debug.Log("Player Collision Stay : " + collision.gameObject.name);
-    }
-
-    void OnTriggerExit2D(Collider2D collider)
-    {
-        // 当碰撞结束时调用
-        // Debug.Log("Player Collision Exit : " + collision.gameObject.name);
     }
     #endregion
 }

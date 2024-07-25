@@ -57,6 +57,7 @@
      <Compile Include="Assets\Scripts\Utility\SpriteSwitch.cs" />
      <Compile Include="Assets\Scripts\Utility\Crypt.cs" />
      <Compile Include="Assets\Scripts\Manager\WXPlatform.cs" />
+     <Compile Include="Assets\Scripts\Logic\Data\League.cs" />
      <Compile Include="Assets\AllIn1SpriteShader\Demo\Scripts\All1ShaderDemoController.cs" />
      <Compile Include="Assets\Scripts\Effect\Rotate.cs" />
      <Compile Include="Assets\AllIn1SpriteShader\Scripts\AllIn1Shader.cs" />
@@ -67,6 +68,7 @@
      <Compile Include="Assets\Scripts\EVENT.cs" />
      <Compile Include="Assets\Scripts\Utility\UIMaskUtility.cs" />
      <Compile Include="Assets\Scripts\Manager\SceneManager.cs" />
+     <Compile Include="Assets\Scripts\Logic\Data\Skill.cs" />
      <Compile Include="Assets\Scripts\Logic\Battle\Spawn.cs" />
      <Compile Include="Assets\DOTween\Modules\DOTweenModuleUtils.cs" />
      <Compile Include="Assets\Scripts\Utility\CSVUtility.cs" />
@@ -91,6 +93,7 @@
      <Compile Include="Assets\Scripts\CONST.cs" />
      <Compile Include="Assets\Scripts\UI\Window\ResultWindow.cs" />
      <Compile Include="Assets\Scripts\Utility\NumberTransition.cs" />
+     <Compile Include="Assets\Scripts\Logic\Player\Player_10000.cs" />
      <Compile Include="Assets\Scripts\UI\Window\SettingWindow.cs" />
      <Compile Include="Assets\Scripts\Utility\BalatroFloating.cs" />
      <Compile Include="Assets\Scripts\Effect\Fly.cs" />
@@ -130,6 +133,7 @@
      <Compile Include="Assets\Scripts\Utility\RandomUtility.cs" />
      <Compile Include="Assets\AllIn1SpriteShader\Scripts\RandomSeed.cs" />
      <Compile Include="Assets\Scripts\Logic\Battle\HollowCircle.cs" />
+     <Compile Include="Assets\Scripts\Logic\Battle\Buff.cs" />
      <Compile Include="Assets\Scripts\FSM\State.cs" />
      <Compile Include="Assets\Scripts\Logic\DataCenter.cs" />
      <Compile Include="Assets\Scripts\Utility\SuperScrollView.cs" />
@@ -140,9 +144,6 @@
      <Compile Include="Assets\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
      <Compile Include="Assets\Scripts\Logic\Enemy\Enemy_104.cs" />
      <Compile Include="Assets\Scripts\UI\Window\TipWindow.cs" />
-     <Compile Include="Assets\Scripts\Logic\Data\Skill.cs" />
-     <Compile Include="Assets\Scripts\Logic\Data\League.cs" />
-     <Compile Include="Assets\Scripts\Logic\Player\Player_10000.cs" />
      <None Include="Assets\Resources\Shader\SpriteGray.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />

@@ -194,7 +194,9 @@ public class Field : MonoBehaviour
         }
         else
         {
-           unit.UpdateHP(-bullet.Caster.ATT.ATK); 
+            int demage  = Mathf.RoundToInt(bullet.Caster.ATT.ATK * unit.ATT.VUN_INC.ToNumber());
+
+            unit.UpdateHP(-demage); 
         }
 
 

@@ -58,7 +58,7 @@ public class Spawn
 
     public void Pause()
     {
-        m_Enemys.ForEach(e => e.Pause());
+        m_Enemys.ForEach(e => e.Stop());
     }
 
     public void Resume()
