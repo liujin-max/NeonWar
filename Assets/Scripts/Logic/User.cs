@@ -35,7 +35,7 @@ public class TaskMsg
 public class SkillMsg
 {
     public int ID;
-    public int Level;
+    public int Level = 1;
 }
 
 //武器数据
@@ -43,10 +43,20 @@ public class SkillMsg
 public class PlayerMsg
 {
     public int ID;
+    public bool UnlockFlag = false;
     public bool InUse;  //使用中
     public int ATK = 1;
     public int ASP = 1;
-    public List<SkillMsg> Skills = new List<SkillMsg>();
+
+    //默认5个技能 都是空着的
+    public List<SkillMsg> Skills = new List<SkillMsg>()
+    {
+        new SkillMsg() {ID = -1},
+        new SkillMsg() {ID = -1},
+        new SkillMsg() {ID = -1},
+        new SkillMsg() {ID = -1},
+        new SkillMsg() {ID = -1}
+    };
 }
 
 
@@ -58,10 +68,13 @@ public class GameUserData
     public string HeadUrl;
     public int Level;       //通关记录
     public int Coin;        //金币
-    public int Glass;       //碎片
+    public int Glass = 1000;       //碎片
 
-
-    public List<PlayerMsg> Players = new List<PlayerMsg>();
+    //当前只开放了1个角色
+    public List<PlayerMsg> Players = new List<PlayerMsg>()
+    {
+        new PlayerMsg() {ID = (int)_C.PLAYER.BOW, UnlockFlag = true, InUse = true}
+    };
 
     public long RecoveryTimestamp;    //上次体力的恢复时间
     public int RegisterDay;     //注册时间(一年中的第几天)
@@ -100,23 +113,13 @@ public class User
     //获取当前正在使用的武器
     public PlayerMsg CurrentPlayer {
         get { 
-            if (m_Data.Players.Count > 0) {
-                foreach (var player_msg in m_Data.Players) {
-                    if (player_msg.InUse == true) return player_msg;
-                }
-
-                m_Data.Players[0].InUse = true;
-                return m_Data.Players[0];
+            foreach (var player_msg in m_Data.Players) {
+                if (player_msg.InUse == true) 
+                    return player_msg;
             }
 
-            PlayerMsg player = new PlayerMsg()
-            {
-                ID      = (int)_C.PLAYER.BOW,
-                InUse   = true
-            };
-
-            m_Data.Players.Add(player);
-            return player;
+            m_Data.Players[0].InUse = true;
+            return m_Data.Players[0];
         }
     }
 
@@ -130,14 +133,7 @@ public class User
     //从存档里同步数据
     public void Sync()
     {
-        // //同步账号基础数据(头像、名字)
-        // Platform.Instance.LOGIN(()=>{
-        //     //同步账号游玩数据(记录、成就等)
-        //     Platform.Instance.SYNC();
-        // });
-
         Platform.Instance.SYNC();
-        // Platform.Instance.PULLRANK(_C.RANK.ENDLESS, null);
     }
 
     public void SyncFinish()
@@ -251,6 +247,15 @@ public class User
     public int GetASPCost()
     {
         return NumericalManager.FML_ASPCost(CurrentPlayer.ASP);
+    }
+
+    public void UpgradeSkill(int order, int skill_id, int skill_level)
+    {
+        SkillMsg skillMsg   = CurrentPlayer.Skills[order];
+        skillMsg.ID         = skill_id;
+        skillMsg.Level      = skill_level;
+
+
     }
 
     public void SetRecoveryTimestamp(long value)

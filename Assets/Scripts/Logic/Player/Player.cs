@@ -97,8 +97,10 @@ public class Player : Unit
         m_Skills.ForEach(skill => skill.Dispose());
         m_Skills.Clear();
         GameFacade.Instance.DataCenter.User.CurrentPlayer.Skills.ForEach(skill_msg => {
-            Skill sk = Skill.Create(GameFacade.Instance.DataCenter.League.GetSkillData(skill_msg.ID), this, skill_msg.Level);
-            m_Skills.Add(sk);
+            if (skill_msg.ID > 0) {
+                Skill sk = Skill.Create(GameFacade.Instance.DataCenter.League.GetSkillData(skill_msg.ID), this, skill_msg.Level);
+                m_Skills.Add(sk);
+            }
         });
 
         //测试技能

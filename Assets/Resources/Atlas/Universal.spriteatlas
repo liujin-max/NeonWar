@@ -41,8 +41,14 @@ SpriteAtlas:
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: 6d926c23a743f124196ad06a696dfead, type: 3}
+  - {fileID: 21300000, guid: c8f30c444f708634b964f813f0ee69a3, type: 3}
+  - {fileID: 21300000, guid: 293695154776f51498d95cfb4bcf9d0d, type: 3}
+  - {fileID: 21300000, guid: 593f33fa08974a84187540486df712c9, type: 3}
   m_PackedSpriteNamesToIndex:
   - Universal_black_frame
+  - Universal_btn_green
+  - Universal_btn_green 1
+  - Universal_skill_frame
   m_RenderDataMap: {}
   m_Tag: Universal
   m_IsVariant: 0

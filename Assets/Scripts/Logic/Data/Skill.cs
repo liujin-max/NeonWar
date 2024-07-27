@@ -12,7 +12,7 @@ public class Skill_10010 : Skill
 {
     public override bool OnShoot()
     {
-        int BulletCount = Value + 1;
+        int BulletCount = Skill.ToValue(Data, Level) + 1;
 
         switch (BulletCount)
         {
@@ -125,14 +125,14 @@ public class Skill_10020 : Skill
     {
         Bullet b = @event.GetParam(0) as Bullet;
         if (b.Caster != Caster) return;
-        if (b.IsSplit == true) return;
+        // if (b.IsSplit == true) return;   //分裂出的箭矢也能继续分裂？
 
         Unit unit = @event.GetParam(1) as Unit;
 
-        for (int i = 0; i < this.Value; i++)
+        for (int i = 0; i < Skill.ToValue(Data, Level); i++)
         {
             var bullet = Caster.CreateBullet();
-            bullet.transform.position = unit.transform.position;
+            bullet.transform.position = b.transform.position;
             bullet.IsSplit = true;
             bullet.SpliteIgnoreUnits.Add(unit);
             bullet.Shoot(RandomUtility.Random(0, 360));
@@ -164,7 +164,7 @@ public class Skill_10030 : Skill
             .ToArray();
 
             
-        for (int i = 0; i < this.Value; i++)
+        for (int i = 0; i < Skill.ToValue(Data, Level); i++)
         {
             if (i >= sortedObjects.Length) break;
 
@@ -207,7 +207,7 @@ public class Skill_10060 : Skill
         if (b.Caster != Caster) return;
 
 
-        b.PassTimes = Value;
+        b.PassTimes = Skill.ToValue(Data, Level);
     }
 }
 #endregion
@@ -234,7 +234,7 @@ public class Skill_10070 : Skill
         if (b.Caster != Caster) return;
 
 
-        b.ReboundTimes = Value;
+        b.ReboundTimes = Skill.ToValue(Data, Level);
     }
 }
 #endregion
@@ -261,7 +261,7 @@ public class Skill_10110 : Skill
         Bullet b = @event.GetParam(0) as Bullet;
         if (b.Caster != Caster) return;
 
-        int rate = Value;
+        int rate = Skill.ToValue(Data, Level);
         if (RandomUtility.IsHit(rate))
         {
             //缺少特效
@@ -294,7 +294,7 @@ public class Skill_10120 : Skill
 
         Unit unit = @event.GetParam(1) as Unit;
 
-        if (RandomUtility.IsHit(this.Value))
+        if (RandomUtility.IsHit(Skill.ToValue(Data, Level)))
         {
             unit.AddBuff((int)_C.BUFF.STUN, 1);
         }
@@ -325,7 +325,7 @@ public class Skill_10130 : Skill
         Bullet b = @event.GetParam(0) as Bullet;
         if (b.Caster != Caster) return;
 
-        b.Speed.PutAUL(this, this.Value / 100.0f);
+        b.Speed.PutAUL(this, Skill.ToValue(Data, Level) / 100.0f);
     }
 }
 #endregion
@@ -353,7 +353,7 @@ public class Skill_10160 : Skill
         Bullet b = @event.GetParam(0) as Bullet;
         if (b.Caster != Caster) return;
 
-        b.KillRate = this.Value;
+        b.KillRate = Skill.ToValue(Data, Level);
     }
 }
 
@@ -381,7 +381,7 @@ public class Skill_10170 : Skill
 
         Unit unit = @event.GetParam(1) as Unit;
 
-        unit.AddBuff((int)_C.BUFF.YISHANG, this.Value);
+        unit.AddBuff((int)_C.BUFF.YISHANG, Skill.ToValue(Data, Level));
     }
 }
 
@@ -433,9 +433,6 @@ public class Skill
         {10170, () => new Skill_10170()},
     };
 
-    //参数
-    public int Value {get {return Data.Values[Level - 1];}}
-    public string Description {get {return Data.Description.Replace("#", Value.ToString());}}
 
     public static Skill Create(SkillData data, Unit caster, int level)
     {
@@ -446,6 +443,24 @@ public class Skill
         skill.Init(data, caster, level);
 
         return skill;
+    }
+
+    //参数
+    public static int ToValue(SkillData skillData, int level)
+    {
+        return skillData.Values[level - 1];
+    }
+
+    public static string GetDescription(SkillData skillData, int level)
+    {
+        int value = Skill.ToValue(skillData, level);
+
+        return skillData.Description.Replace("#", value.ToString());
+    }
+
+    public static int GetCost(SkillData skillData, int level)
+    {
+        return skillData.Glass[level - 1];
     }
 
     public Skill()

@@ -12,9 +12,8 @@ public class GameWindow : MonoBehaviour
     [SerializeField] LongPressButton m_BtnLeft;
     [SerializeField] LongPressButton m_BtnRight;
     [SerializeField] GameObject m_BlinkPivot;
-
-
     [SerializeField] TextMeshProUGUI m_Glass;
+    [SerializeField] Transform m_SkillPivot;
 
     
     [Header("按钮")]
@@ -23,12 +22,30 @@ public class GameWindow : MonoBehaviour
 
 
     [SerializeField] private List<CanvasGroup> m_Groups = new List<CanvasGroup>();
+    private List<SkillSeatItem> m_SkillSeatItems = new List<SkillSeatItem>();
 
 
     private float LeftPressTime = 0;
     private float RightPressTime= 0;
     private Tweener m_BlinkTweener;
 
+
+    SkillSeatItem new_seat_item(int order)
+    {
+        SkillSeatItem skill_item = null;
+        if (m_SkillSeatItems.Count > order)
+        {
+            skill_item = m_SkillSeatItems[order];
+        }
+        else
+        {
+            skill_item = GameFacade.Instance.UIManager.LoadItem("SkillSeatItem", m_SkillPivot.Find(order.ToString())).GetComponent<SkillSeatItem>();
+            m_SkillSeatItems.Add(skill_item);
+        }
+        skill_item.gameObject.SetActive(true);
+
+        return skill_item;
+    }
 
 
     void Awake()
@@ -37,9 +54,10 @@ public class GameWindow : MonoBehaviour
         EventManager.AddHandler(EVENT.ONBATTLEEND,      OnBattleEnd);
         EventManager.AddHandler(EVENT.ONJOYSTICK_SHOW,  OnJoyStickShow);
         EventManager.AddHandler(EVENT.ONUPDATEGLASS,    OnUpdateGlass);
-
+        
 
         EventManager.AddHandler(EVENT.UI_BLINKSHAKE,    OnBlinkShake);
+        EventManager.AddHandler(EVENT.UI_SKILLUPGRADE,  OnSkillUpgrade);
     }
 
     void OnDestroy()
@@ -51,6 +69,7 @@ public class GameWindow : MonoBehaviour
 
 
         EventManager.DelHandler(EVENT.UI_BLINKSHAKE,    OnBlinkShake);
+        EventManager.DelHandler(EVENT.UI_SKILLUPGRADE,  OnSkillUpgrade);
     }
 
 
@@ -112,7 +131,8 @@ public class GameWindow : MonoBehaviour
             GameFacade.Instance.DataCenter.User.UpdateATK(1);
             GameFacade.Instance.DataCenter.User.UpdateGlass(-cost);
 
-            FlushUpgradePivot();
+            FlushUI();
+            
 
             EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS, 0));
         });
@@ -130,7 +150,7 @@ public class GameWindow : MonoBehaviour
             GameFacade.Instance.DataCenter.User.UpdateASP(1);
             GameFacade.Instance.DataCenter.User.UpdateGlass(-cost);
 
-            FlushUpgradePivot();
+            FlushUI();
 
             EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS, 0));
         });
@@ -139,17 +159,16 @@ public class GameWindow : MonoBehaviour
     public void Init()
     {
         FlushUI();
+        UpdateBlink();
     }
 
     void FlushUI()
     {
-        FlushUpgradePivot();
-
-
-        UpdateBlink();
+        InitUpgradePivot();
+        InitSkills();
     }
 
-    void FlushUpgradePivot()
+    void InitUpgradePivot()
     {
         int atk_level   = GameFacade.Instance.DataCenter.User.CurrentPlayer.ATK;
         int asp_level   = GameFacade.Instance.DataCenter.User.CurrentPlayer.ASP;
@@ -161,9 +180,29 @@ public class GameWindow : MonoBehaviour
         m_BtnASP.transform.Find("Cost").GetComponent<TextMeshProUGUI>().text    = "消耗：" + GameFacade.Instance.DataCenter.User.GetASPCost();
     }
 
+    //生成技能
     void InitSkills()
     {
+        m_SkillSeatItems.ForEach(item => {item.gameObject.SetActive(false); });
 
+        SkillSeat[] seats = new SkillSeat[]
+        {
+            new SkillSeat(){Order = 0, ATK = 3},
+            new SkillSeat(){Order = 1, ASP = 8},
+            new SkillSeat(){Order = 2, ATK = 15},
+            new SkillSeat(){Order = 3, ASP = 25},
+            new SkillSeat(){Order = 4, ATK = 30, ASP = 30}
+        };
+
+
+        for (int i = 0; i < seats.Length; i++)
+        {
+            SkillMsg skill_msg = GameFacade.Instance.DataCenter.User.CurrentPlayer.Skills[i];
+            SkillData skill_data = GameFacade.Instance.DataCenter.League.GetSkillData(skill_msg.ID);
+
+            var item = new_seat_item(i);
+            item.Init(seats[i], skill_data, skill_msg.Level);
+        }
     }
 
     void Update()
@@ -268,7 +307,7 @@ public class GameWindow : MonoBehaviour
 
 
 
-    private void OnBlinkShake(GameEvent @event)
+    void OnBlinkShake(GameEvent @event)
     {
         Platform.Instance.VIBRATE(_C.VIBRATELEVEL.MEDIUM);
         SoundManager.Instance.Load(SOUND.TIP);
@@ -280,5 +319,11 @@ public class GameWindow : MonoBehaviour
 
         m_BlinkTweener = m_BlinkPivot.transform.DOShakePosition(0.25f, new Vector3(10, 0, 0), 40, 50);
     }
+
+    void OnSkillUpgrade(GameEvent @event)
+    {
+        FlushUI();
+    }
+    
     #endregion
 }

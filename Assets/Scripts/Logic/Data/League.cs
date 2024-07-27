@@ -14,8 +14,7 @@ public class SkillData
     public int LevelMax;
     public int[] Values;
     public int[] Glass;
-    public int ATK;
-    public int ASP;
+    public int Order;
     public string Description;
 }
 
@@ -44,9 +43,8 @@ public class League
                 LevelMax    = Convert.ToInt32(data[3]),
                 Values      = data[4].Split('|').Select(int.Parse).ToArray(),
                 Glass       = data[5].Split('|').Select(int.Parse).ToArray(),
-                ATK         = Convert.ToInt32(data[6]),
-                ASP         = Convert.ToInt32(data[7]),
-                Description = data[8]
+                Order       = Convert.ToInt32(data[6]),
+                Description = data[7]
             };
 
             m_SkillDic[skill.ID]  = skill;
@@ -67,5 +65,15 @@ public class League
             return data;
         }
         return null;
+    }
+
+    public List<SkillData> GetPlayerSkills(int player_id)
+    {
+        List<SkillData> skills = new List<SkillData>();
+        if (m_PlayerSkills.TryGetValue(player_id, out skills)) {
+            return skills;
+        }
+
+        return skills;
     }
 }

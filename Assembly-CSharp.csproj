@@ -83,7 +83,7 @@
      <Compile Include="Assets\Scripts\Utility\ImageGray.cs" />
      <Compile Include="Assets\AllIn1SpriteShader\Demo\Scripts\Demo2AutoScroll.cs" />
      <Compile Include="Assets\Scripts\Utility\ToolUtility.cs" />
-     <Compile Include="Assets\Scripts\UI\Item\SkillItem.cs" />
+     <Compile Include="Assets\Scripts\UI\Item\SkillSeatItem.cs" />
      <Compile Include="Assets\Scripts\Logic\User.cs" />
      <Compile Include="Assets\Scripts\Manager\SystemManager.cs" />
      <Compile Include="Assets\Scripts\Utility\CameraUtility.cs" />
@@ -145,6 +145,8 @@
      <Compile Include="Assets\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
      <Compile Include="Assets\Scripts\Logic\Enemy\Enemy_104.cs" />
      <Compile Include="Assets\Scripts\UI\Window\TipWindow.cs" />
+     <Compile Include="Assets\Scripts\UI\Window\SkillWindow.cs" />
+     <Compile Include="Assets\Scripts\UI\Item\SkillItem.cs" />
      <None Include="Assets\Resources\Shader\SpriteGray.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />

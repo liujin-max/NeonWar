@@ -25,7 +25,8 @@ public static class _C
 
 
 
-    public static string COLOR_RED = "<#FF0000>";
+    public static string COLOR_RED      = "<#FF0000>";
+    public static string COLOR_GREEN    = "<#33FF07>";
 
  
     //状态机的状态列表
