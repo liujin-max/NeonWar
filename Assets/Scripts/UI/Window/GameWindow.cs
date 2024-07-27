@@ -158,8 +158,9 @@ public class GameWindow : MonoBehaviour
 
     public void Init()
     {
+        FlushGlass();
         FlushUI();
-        UpdateBlink();
+        FlushBlink();
     }
 
     void FlushUI()
@@ -243,10 +244,10 @@ public class GameWindow : MonoBehaviour
 
     void LateUpdate()
     {
-        UpdateBlink();
+        FlushBlink();
     }
 
-    void UpdateBlink()
+    void FlushBlink()
     {
         if (Field.Instance.BlinkTimer.IsFinished() == true)
         {
@@ -263,6 +264,11 @@ public class GameWindow : MonoBehaviour
         }
     }
 
+    void FlushGlass()
+    {
+        m_Glass.text = GameFacade.Instance.DataCenter.User.Glass.ToString();
+    }
+    
 
 
     #region 监听事件
@@ -283,7 +289,7 @@ public class GameWindow : MonoBehaviour
     {
         m_Joystick.gameObject.SetActive(false);
 
-        m_Glass.text = GameFacade.Instance.DataCenter.User.Glass.ToString();
+        FlushGlass();
 
         m_Groups.ForEach(group => {
             group.gameObject.SetActive(true);

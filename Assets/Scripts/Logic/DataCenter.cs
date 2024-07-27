@@ -30,5 +30,9 @@ public class DataCenter
     }
 
 
+    public void Update(float dt)
+    {
+        User.Update(dt);
+    }
 }
 

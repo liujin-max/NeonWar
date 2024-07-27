@@ -31,7 +31,7 @@ public class EditorPlatform : Platform
             return;
         }
         
-        // Debug.Log("加载：" + json);
+        // Debug.Log("加载存档：" + json);
 
         GameFacade.Instance.DataCenter.User.Data = JsonUtility.FromJson<GameUserData>(json);
 

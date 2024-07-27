@@ -182,6 +182,8 @@ public class GameFacade : MonoBehaviour
 
     void Update()
     {
+        float dt = Time.deltaTime;
 
+        m_DataCenter.Update(dt);
     }
 }
