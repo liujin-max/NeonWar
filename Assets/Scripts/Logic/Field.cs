@@ -221,6 +221,8 @@ public class Field : MonoBehaviour
         }
         else
         {
+            unit.HitAnim();
+            
             if (unit.Side == _C.SIDE.PLAYER) 
             {
                 Land.DoShake();

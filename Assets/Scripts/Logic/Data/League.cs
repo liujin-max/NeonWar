@@ -11,11 +11,11 @@ public class SkillData
     public int ID;
     public string Name;
     public int Belong;
-    public int Type;
     public int LevelMax;
     public int[] Values;
     public int[] Glass;
-
+    public int ATK;
+    public int ASP;
     public string Description;
 }
 
@@ -41,11 +41,12 @@ public class League
                 ID          = Convert.ToInt32(data[0]),
                 Name        = data[1],
                 Belong      = Convert.ToInt32(data[2]),
-                Type        = Convert.ToInt32(data[3]),
-                LevelMax    = Convert.ToInt32(data[4]),
-                Values      = data[5].Split('|').Select(int.Parse).ToArray(),
-                Glass       = data[6].Split('|').Select(int.Parse).ToArray(),
-                Description = data[7]
+                LevelMax    = Convert.ToInt32(data[3]),
+                Values      = data[4].Split('|').Select(int.Parse).ToArray(),
+                Glass       = data[5].Split('|').Select(int.Parse).ToArray(),
+                ATK         = Convert.ToInt32(data[6]),
+                ASP         = Convert.ToInt32(data[7]),
+                Description = data[8]
             };
 
             m_SkillDic[skill.ID]  = skill;

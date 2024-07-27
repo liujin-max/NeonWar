@@ -47,7 +47,7 @@ public class Spawn
         seq.AppendCallback(()=>{
             enemy.gameObject.SetActive(true);
             enemy.SetValid(true);
-            enemy.Push();
+            enemy.Push(RandomUtility.Random(0, 360));
         });
 
         seq.AppendInterval(0.2f);

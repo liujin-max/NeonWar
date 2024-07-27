@@ -75,6 +75,14 @@ public class Unit : MonoBehaviour
         remove_buffs.ForEach(buff => this.RemoveBuff(buff));
     }
 
+    #region 表现处理
+    public virtual void HitAnim()
+    {
+
+    }
+    #endregion
+
+
     #region 逻辑处理
     //无法移动
     public virtual void Stop()

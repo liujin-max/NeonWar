@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
@@ -15,6 +16,7 @@ public class EnemyATT : ATT
 public class Enemy : Unit
 {
     private Rigidbody2D m_Rigidbody;
+    private SpriteRenderer m_Sprite;
     private TextMeshPro m_HPText;
 
     public float HPRate = 1;    //血量倍率
@@ -29,9 +31,14 @@ public class Enemy : Unit
     private bool m_ValidFlag = true;
     public bool IsValid {get {return m_ValidFlag;} }
 
+
+    private bool m_InHitAnim = false;
+
     void Awake()
     {
         m_Rigidbody = GetComponent<Rigidbody2D>();
+
+        m_Sprite    = transform.Find("Sprite").GetComponent<SpriteRenderer>();
         m_HPText    = transform.Find("HP").GetComponent<TextMeshPro>();
     }
 
@@ -74,6 +81,15 @@ public class Enemy : Unit
         if (!m_Rigidbody.isKinematic) transform.localEulerAngles = new Vector3(0, 0, Mathf.Atan2(m_Rigidbody.velocity.y, m_Rigidbody.velocity.x) * Mathf.Rad2Deg);
     }
 
+    #region 表现处理
+    public override void HitAnim()
+    {
+        if (m_InHitAnim) return;
+
+        m_InHitAnim = true;
+        m_Sprite.transform.DOPunchScale(new Vector3(0.15f, 0.15f, 0.15f), 0.15f).OnComplete(()=>{m_InHitAnim = false;});
+    }
+    #endregion
 
     #region 逻辑处理
     public void SetValid(bool flag)
@@ -89,9 +105,11 @@ public class Enemy : Unit
     }
 
     //strength :力的强度，意味着移动速度
-    public void Push()
+    public void Push(float angle)
     {
-        Vector2 force = ToolUtility.FindPointOnCircle(Vector2.zero, Speed, RandomUtility.Random(0, 360));
+        m_Rigidbody.velocity = Vector3.zero;
+
+        Vector2 force = ToolUtility.FindPointOnCircle(Vector2.zero, Speed, angle);
         m_Rigidbody.AddForce(force);
     }
 
