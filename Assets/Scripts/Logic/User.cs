@@ -68,7 +68,7 @@ public class GameUserData
     public string HeadUrl;
     public int Level;       //通关记录
     public int Coin;        //金币
-    public int Glass = 1000;       //碎片
+    public int Glass;       //碎片
 
     //当前只开放了1个角色
     public List<PlayerMsg> Players = new List<PlayerMsg>()
