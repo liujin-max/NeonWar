@@ -165,7 +165,9 @@ MonoBehaviour:
     HPMAX: 3
     HP: 3
     ATK: 1
-    ASP: 300
+    ASP: 450
+    VUN_INC:
+      m_Base: 1
 --- !u!1 &8387908895274495325
 GameObject:
   m_ObjectHideFlags: 0

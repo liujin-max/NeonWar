@@ -17,6 +17,10 @@ public class MonsterJSON
     public float Time;
     public int ID;
     public int HP;
+    //掉落的碎片数量
+    public int Glass;
+    //出现时的运行角度
+    public int Angle;
 }
 
 

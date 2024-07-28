@@ -88,10 +88,12 @@ public class Player : Unit
     //同步最新的加成等级
     public void Sync()
     {
-        ATT.ATK = GameFacade.Instance.DataCenter.User.CurrentPlayer.ATK * _C.UPGRADE_ATK;
+        int atk_level = GameFacade.Instance.DataCenter.User.CurrentPlayer.ATK;
+        int asp_level = GameFacade.Instance.DataCenter.User.CurrentPlayer.ASP;
 
-        //每级提高攻速百分比
-        ASP.Reset((ATT.ASP / 1000.0f) / (1 + _C.UPGRADE_ASP * (GameFacade.Instance.DataCenter.User.CurrentPlayer.ASP - 1)));
+        ATT.ATK = NumericalManager.FML_ATK(atk_level);
+        ASP.Reset(NumericalManager.FML_ASP(ATT.ASP, asp_level) / 1000.0f);
+
 
         //同步技能
         m_Skills.ForEach(skill => skill.Dispose());

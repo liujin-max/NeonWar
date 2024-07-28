@@ -30,7 +30,7 @@ public class Spawn
         int enemy_hp    = monsterJSON.HP;
 
         var enemy = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Enemy/" + enemy_id, point, Field.Instance.Land.ENEMY_ROOT).GetComponent<Enemy>();
-        enemy.Init(enemy_id, enemy_hp);
+        enemy.Init(monsterJSON);
         m_Enemys.Add(enemy);
         enemy.gameObject.SetActive(false);
         enemy.SetValid(false);
@@ -47,7 +47,7 @@ public class Spawn
         seq.AppendCallback(()=>{
             enemy.gameObject.SetActive(true);
             enemy.SetValid(true);
-            enemy.Push(RandomUtility.Random(0, 360));
+            enemy.Push();
         });
 
         seq.AppendInterval(0.2f);

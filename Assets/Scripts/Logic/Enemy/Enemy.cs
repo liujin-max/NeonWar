@@ -23,7 +23,8 @@ public class Enemy : Unit
     public int CrashATK = 1;    //撞击伤害
     public int Speed = 160;     //移动速度 
 
-    [HideInInspector] public int Glass;
+    private MonsterJSON m_Data;
+    public int Glass { get {return m_Data.Glass;}}
 
     private Vector2 m_LastVelocity;
     private float m_LastAngularVelocity;
@@ -48,15 +49,14 @@ public class Enemy : Unit
         m_Rigidbody.gravityScale = 0;
     }
 
-    public virtual void Init(int id, int hp)
+    public virtual void Init(MonsterJSON monster_data)
     {
+        m_Data  = monster_data;
         Side    = _C.SIDE.ENEMY;
-        ID      = id;
+        ID      = monster_data.ID;
 
-        ATT.HPMAX  = Mathf.CeilToInt(hp * HPRate);
+        ATT.HPMAX  = Mathf.CeilToInt(monster_data.HP * HPRate);
         ATT.HP  = ATT.HPMAX;
-
-        Glass   = Mathf.Max(NumericalManager.FML_HP2Glass(ATT.HP), 1);
 
         ASP.Reset(ATT.ASP / 1000.0f);
 
@@ -105,11 +105,13 @@ public class Enemy : Unit
     }
 
     //strength :力的强度，意味着移动速度
-    public void Push(float angle)
+    public void Push()
     {
         m_Rigidbody.velocity = Vector3.zero;
 
-        Vector2 force = ToolUtility.FindPointOnCircle(Vector2.zero, Speed, angle);
+        float angle     = m_Data.Angle == -1 ? RandomUtility.Random(0, 360) : m_Data.Angle;
+        Vector2 force   = ToolUtility.FindPointOnCircle(Vector2.zero, Speed, angle);
+        
         m_Rigidbody.AddForce(force);
     }
 
