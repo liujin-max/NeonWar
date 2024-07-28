@@ -59,6 +59,7 @@ public class Enemy : Unit
         ATT.HP  = ATT.HPMAX;
 
         ASP.Reset(ATT.ASP / 1000.0f);
+        ASP.Full();
 
         FlushHP();
     }
@@ -81,6 +82,7 @@ public class Enemy : Unit
         if (!m_Rigidbody.isKinematic) transform.localEulerAngles = new Vector3(0, 0, Mathf.Atan2(m_Rigidbody.velocity.y, m_Rigidbody.velocity.x) * Mathf.Rad2Deg);
     }
 
+
     #region 表现处理
     public override void HitAnim()
     {
@@ -90,6 +92,7 @@ public class Enemy : Unit
         m_Sprite.transform.DOPunchScale(new Vector3(0.15f, 0.15f, 0.15f), 0.15f).OnComplete(()=>{m_InHitAnim = false;});
     }
     #endregion
+
 
     #region 逻辑处理
     public void SetValid(bool flag)

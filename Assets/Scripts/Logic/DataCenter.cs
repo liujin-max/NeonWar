@@ -26,7 +26,6 @@ public class DataCenter
         League.Init();
 
         Levels  = new Levels();
-        Levels.Init();
     }
 
 

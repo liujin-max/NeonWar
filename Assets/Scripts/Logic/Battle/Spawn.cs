@@ -11,20 +11,42 @@ using UnityEngine;
 //当场上没有怪物时，使序列中的下一个怪物立即出场
 public class Spawn
 {
-    private LevelJSON m_LevelJSON;
+    private List<MonsterJSON> m_EnemyPool = new List<MonsterJSON>();
     private List<Enemy> m_Enemys = new List<Enemy>();
     public List<Enemy> Enemys {get {return m_Enemys;}}
 
-    public void Init(int level_id)
-    {
-        m_LevelJSON = GameFacade.Instance.DataCenter.Levels.LoadLevelJSON(level_id);
+    //击杀进度
+    private Pair m_KillProgress;
+    public float KillProgress {get {return m_KillProgress.Progress;}}
+    
 
-        Debug.Log("怪物数量：" + m_LevelJSON.Monsters.Count);
+    public void Init(LevelJSON level_json)
+    {
+        m_EnemyPool.AddRange(level_json.Monsters);
+        m_KillProgress  = new Pair(0, m_EnemyPool.Count);
+    }
+
+    public void Pause()
+    {
+        m_Enemys.ForEach(e => e.Stop());
+    }
+
+    public void Resume()
+    {
+        m_Enemys.ForEach(e => e.Resume());
+    }
+
+    public bool IsClear()
+    {
+        return m_EnemyPool.Count == 0 && m_Enemys.Count == 0;
     }
 
     void PutEnemy(MonsterJSON monsterJSON)
     {
-        Vector2 point   = new Vector2(RandomUtility.Random(-200, 201) / 100.0f, RandomUtility.Random(-200, 201) / 100.0f);
+        Vector2 point   = monsterJSON.Origin;
+
+        if (monsterJSON.Origin.x == -1000 && monsterJSON.Origin.y == -1000) 
+            point = new Vector2(RandomUtility.Random(-200, 201) / 100.0f, RandomUtility.Random(-200, 201) / 100.0f);
 
         int enemy_id    = monsterJSON.ID;
         int enemy_hp    = monsterJSON.HP;
@@ -56,41 +78,22 @@ public class Spawn
         seq.Play();
     }
 
-    public void Pause()
-    {
-        m_Enemys.ForEach(e => e.Stop());
-    }
-
-    public void Resume()
-    {
-        m_Enemys.ForEach(e => e.Resume());
-    }
-
-    public bool IsClear()
-    {
-        return m_LevelJSON.Monsters.Count == 0 && m_Enemys.Count == 0;
-    }
-
     public void Update(float deltaTime)
     {
-        if (m_LevelJSON.Monsters.Count > 0)
+        if (m_EnemyPool.Count > 0)
         {
-            if (m_Enemys.Count == 0) m_LevelJSON.Monsters[0].Time = 0;
+            if (m_Enemys.Count == 0) m_EnemyPool[0].Time = 0;
 
-            m_LevelJSON.Monsters.ForEach(monster_json => {
-                monster_json.Time -= deltaTime * 1000f;
-            });
-
-            for (int i = m_LevelJSON.Monsters.Count - 1; i >= 0; i--)
+            for (int i = m_EnemyPool.Count - 1; i >= 0; i--)
             {
-                var monster_json    = m_LevelJSON.Monsters[i];
+                var monster_json    = m_EnemyPool[i];
                 monster_json.Time   -= deltaTime * 1000f;
 
                 if (monster_json.Time <= 0)
                 {
                     PutEnemy(monster_json);
 
-                    m_LevelJSON.Monsters.Remove(monster_json);
+                    m_EnemyPool.Remove(monster_json);
                 }
             }
         }
@@ -100,6 +103,7 @@ public class Spawn
         List<Enemy> _Removes = new List<Enemy>();
         m_Enemys.ForEach(e => {
             if (e.IsDead() == true) {
+                m_KillProgress.UpdateCurrent(1);
                 Field.Instance.UpdateGlass(e.Glass);
 
                 _Removes.Add(e);

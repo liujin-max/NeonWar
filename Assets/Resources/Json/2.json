@@ -1,19 +1,20 @@
 {
+    "Glass" : 18,
     "Monsters": 
     [
-        {"Time":    0, "ID": 101, "HP": 3, "Glass": 2, "Angle": -1},
-        {"Time": 2500, "ID": 100, "HP": 3, "Glass": 1, "Angle": -1},
-        {"Time": 5000, "ID": 100, "HP": 3, "Glass": 1, "Angle": -1},
+        {"Time":    0, "ID": 100, "HP": 3},
+        {"Time": 2000, "ID": 100, "HP": 3},
+        {"Time": 3000, "ID": 101, "HP": 3},
         
-        {"Time":12000, "ID": 100, "HP": 4, "Glass": 1, "Angle": -1},
-        {"Time":15000, "ID": 101, "HP": 3, "Glass": 2, "Angle": -1},
-        {"Time":15000, "ID": 101, "HP": 3, "Glass": 2, "Angle": -1},
+        {"Time": 6000, "ID": 100, "HP": 4},
+        {"Time": 8000, "ID": 101, "HP": 3},
+        {"Time": 8000, "ID": 100, "HP": 3},
         
-        {"Time":20000, "ID": 100, "HP": 4, "Glass": 1, "Angle": -1},
-        {"Time":20500, "ID": 100, "HP": 4, "Glass": 1, "Angle": -1},
-        {"Time":21000, "ID": 101, "HP": 4, "Glass": 2, "Angle": -1},
-        {"Time":21500, "ID": 101, "HP": 4, "Glass": 2, "Angle": -1},
-        {"Time":22000, "ID": 101, "HP": 4, "Glass": 2, "Angle": -1}
+        {"Time":10000, "ID": 101, "HP": 3},
+        {"Time":11000, "ID": 100, "HP": 3},
+        {"Time":12000, "ID": 100, "HP": 3},
+        {"Time":13000, "ID": 100, "HP": 3},
+        {"Time":14000, "ID": 101, "HP": 4}
     ]
 }
   

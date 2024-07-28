@@ -23,7 +23,8 @@ public class Field : MonoBehaviour
     public Player Player{ get { return m_Player;}}
 
     private Level m_Level;
-    public Level Level{ get { return m_Level;}}
+    public Level Level {get {return m_Level;}}
+
     
     //累计获得的碎片
     private int m_Glass;
@@ -76,8 +77,9 @@ public class Field : MonoBehaviour
         BlinkTimer.Reset(_C.DEFAULT_BLINKCD);
         BlinkTimer.Full();
 
+
         m_Level = GameFacade.Instance.DataCenter.Levels.GetLevel(level_id);
-        m_Spawn.Init(level_id);
+        m_Spawn.Init(m_Level.LevelJSON);
 
         Debug.Log("========  开始关卡：" + level_id + "  ========");
 
@@ -160,6 +162,18 @@ public class Field : MonoBehaviour
         m_Glass += value;
 
         EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS, m_Glass));
+    }
+
+    
+    //根据当前的击杀进度计算出可以获得多少碎片奖励
+    public void ReceiveRewards()
+    {
+        float kill_rate = m_Spawn.KillProgress;
+
+        int glass = Mathf.FloorToInt(m_Level.LevelJSON.Glass * kill_rate);
+
+        GameFacade.Instance.DataCenter.User.UpdateGlass(glass);
+    
     }
 
     public void InitPlayer()

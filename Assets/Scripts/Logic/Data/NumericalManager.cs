@@ -6,44 +6,6 @@ using UnityEngine;
 //数值公式系统
 public static class NumericalManager
 {
-    //敌人数量和关卡的公式
-    public static int FML_EnemyCount(int stage_level)
-    {
-        //第一关敌人的数量
-        int e1  = 6; 
-        //线性增长系数
-        float m = 2f;
-        //后期增长系数
-        float a = 0.01f;
-        //增长指数
-        float b = 2f;
-
-        return Mathf.FloorToInt(e1 + m * (stage_level - 1) + a * Mathf.Pow(stage_level - 1, b));
-    }
-
-    
-    //敌人血量和关卡的关系公式
-    public static int FML_EnemyHP(int stage_level)
-    {
-        //第一关敌人的基础血量
-        int hp_base = 2;  
-        //血量增长率，设定为0.1（每关增加10%） 
-        float pr    = 0.5f;
-
-        int hp_now  = Mathf.FloorToInt(hp_base * Mathf.Pow(1 + pr, stage_level - 1));
-
-        return hp_now;
-    }
-
-
-    //掉落碎片和敌人血量的公式
-    public static int FML_HP2Glass(int hp)
-    {
-        // k 是比例系数(0.5， 表示每2滴血掉落1颗碎片)
-        float k = 1f;
-
-        return Mathf.FloorToInt(k * hp);
-    }
 
     #region 攻击力成长系数
     public static int FML_ATK_GC(int level)

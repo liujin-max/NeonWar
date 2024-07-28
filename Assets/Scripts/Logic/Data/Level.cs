@@ -7,9 +7,11 @@ using UnityEngine;
 public class Level
 {
     public int ID;
+    public LevelJSON LevelJSON;
 
-    public Level(int level)
+    public Level(int id, LevelJSON level_json)
     {
-        ID = level;
+        ID = id;
+        LevelJSON   = level_json;
     }
 }

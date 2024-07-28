@@ -4,10 +4,12 @@
 public class Pair 
 {
     private int m_Curret;
-    public int Current{ get {return m_Curret ;}}
+    public int Current{get {return m_Curret;}}
 
     private int m_Total;
-    public int Total{ get {return m_Total ;}}
+    public int Total{get {return m_Total;}}
+
+    public float Progress {get {return m_Curret / (float)m_Total;}}
 
     public Pair(int current, int total)
     {

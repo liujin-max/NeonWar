@@ -171,20 +171,6 @@ public class GameFacade : MonoBehaviour
         }
 
 
-        //测试代码
-        // for (int i = 1; i <= 30; i++)
-        // {
-        //     int enemy_count = NumericalManager.FML_EnemyCount(i);
-        //     int enemy_hp    = NumericalManager.FML_EnemyHP(i);
-        //     Debug.Log("关卡：" + i + ", 怪物数量：" + enemy_count + ", 血量：" + enemy_hp);
-        //     Debug.Log("可获得碎片：" + NumericalManager.FML_HP2Glass(enemy_count * enemy_hp));
-
-        //     Debug.Log("攻击消耗 等级：" + i + ", 消耗：" + NumericalManager.FML_ATKCost(i));
-        //     Debug.Log("攻速消耗 等级：" + i + ", 消耗：" + NumericalManager.FML_ASPCost(i));
-        // }
-        //
-
-
         //进入游戏
         NavigationController.GotoGame();
         

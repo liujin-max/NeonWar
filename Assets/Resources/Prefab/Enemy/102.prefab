@@ -131,8 +131,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 722234f5126fe9640ac0bd90c9053aa4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ShootPivot: {fileID: 9042973003601015850}
-  m_BulletTemplate: {fileID: 5480662803317571861, guid: 6656a8db8a48abd42be02ad9e7c1e4e0, type: 3}
+  ShootPivot: {fileID: 9042973003601015850}
+  BulletTemplate: {fileID: 5480662803317571861, guid: 6656a8db8a48abd42be02ad9e7c1e4e0, type: 3}
   ID: 0
   Side: 0
   ATT:
@@ -140,10 +140,11 @@ MonoBehaviour:
     HP: 3
     ATK: 1
     ASP: 2000
+    VUN_INC:
+      m_Base: 1
   HPRate: 0.5
   CrashATK: 1
   Speed: 160
-  Glass: 0
 --- !u!1 &7813202397386786216
 GameObject:
   m_ObjectHideFlags: 0

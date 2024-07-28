@@ -39,7 +39,7 @@ public class State_Result<T> : State<Field>
             window.Init(m_Result);
 
             //结算奖励
-            GameFacade.Instance.DataCenter.User.UpdateGlass(Field.Instance.Glass);
+            Field.Instance.ReceiveRewards();
             
             
             Field.Instance.End();

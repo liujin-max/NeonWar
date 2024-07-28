@@ -7,6 +7,7 @@ using UnityEngine;
 [System.Serializable]
 public class LevelJSON
 {
+    public int Glass;
     public List<MonsterJSON> Monsters;
 }
 
@@ -20,7 +21,9 @@ public class MonsterJSON
     //掉落的碎片数量
     public int Glass;
     //出现时的运行角度
-    public int Angle;
+    public int Angle = -1;
+    //起点
+    public Vector2 Origin = new Vector2(-1000, -1000);
 }
 
 
@@ -31,15 +34,8 @@ public class Levels
     //关卡数据
     private Dictionary<int, Level> m_Levels = new Dictionary<int, Level>();
 
-    //怪物数据
 
-    public void Init()
-    {
-
-    }
-
-
-    //获取关卡
+    //获取关卡(用到的时候再生成)
     public Level GetLevel(int n)
     {
         Level level;
@@ -47,7 +43,7 @@ public class Levels
             return level;
         }
 
-        level = new Level(n);
+        level = new Level(n, this.LoadLevelJSON(n));
         m_Levels[n] = level;
         return level;
     }
