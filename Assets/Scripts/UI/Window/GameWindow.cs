@@ -12,7 +12,7 @@ public class GameWindow : MonoBehaviour
     [SerializeField] LongPressButton m_BtnLeft;
     [SerializeField] LongPressButton m_BtnRight;
     [SerializeField] GameObject m_BlinkPivot;
-    [SerializeField] TextMeshProUGUI m_Glass;
+    [SerializeField] NumberTransition m_Glass;
     [SerializeField] Transform m_SkillPivot;
 
     
@@ -158,7 +158,8 @@ public class GameWindow : MonoBehaviour
 
     public void Init()
     {
-        FlushGlass();
+        m_Glass.ForceValue(GameFacade.Instance.DataCenter.User.Glass);
+
         FlushUI();
         FlushBlink();
     }
@@ -266,7 +267,7 @@ public class GameWindow : MonoBehaviour
 
     void FlushGlass()
     {
-        m_Glass.text = GameFacade.Instance.DataCenter.User.Glass.ToString();
+        m_Glass.SetValue(GameFacade.Instance.DataCenter.User.Glass);
     }
     
 
@@ -308,7 +309,7 @@ public class GameWindow : MonoBehaviour
     {
         int offset  = (int)@event.GetParam(0);
 
-        m_Glass.text = (GameFacade.Instance.DataCenter.User.Glass + offset).ToString();
+        m_Glass.SetValue(GameFacade.Instance.DataCenter.User.Glass + offset);
     }
 
 

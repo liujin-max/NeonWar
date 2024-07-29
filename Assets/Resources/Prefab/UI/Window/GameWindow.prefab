@@ -124,6 +124,7 @@ GameObject:
   - component: {fileID: 6041593675145732434}
   - component: {fileID: 1076724100406989398}
   - component: {fileID: 5115075498474163180}
+  - component: {fileID: 4551848800263374708}
   m_Layer: 5
   m_Name: Glass
   m_TagString: Untagged
@@ -248,6 +249,19 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &4551848800263374708
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1495719038784614314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b81c16ddde6ae64aad42dd4f677fc33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SpeedMin: 1
 --- !u!1 &1546834190785833449
 GameObject:
   m_ObjectHideFlags: 0
@@ -1801,7 +1815,7 @@ MonoBehaviour:
   m_BtnLeft: {fileID: 4311378433792047239}
   m_BtnRight: {fileID: 8133254276531120528}
   m_BlinkPivot: {fileID: 2164646112005014323}
-  m_Glass: {fileID: 5115075498474163180}
+  m_Glass: {fileID: 4551848800263374708}
   m_SkillPivot: {fileID: 1864150395814612518}
   m_BtnATK: {fileID: 2060851597223059472}
   m_BtnASP: {fileID: 1128094209443490864}
