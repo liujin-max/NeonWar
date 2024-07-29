@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class SkillWindow : MonoBehaviour
 {
     [SerializeField] Transform m_SkillPivot;
+    [SerializeField] Button m_BtnReset;
     [SerializeField] Button m_BtnClose;
 
 
@@ -58,10 +59,18 @@ public class SkillWindow : MonoBehaviour
 
         var item = new_skill_item(0);
         item.Init(skill_data, level + 1);
+
+        //重置技能
+        m_BtnReset.gameObject.SetActive(true);
+        m_BtnReset.onClick.AddListener(()=>{
+            GameFacade.Instance.DataCenter.League.ResetSkill(skill_data.ID);
+        });
     }
 
     public void InitSkills()
     {
+        m_BtnReset.gameObject.SetActive(false);
+
         m_SkillItems.ForEach(item => {item.gameObject.SetActive(false); });
 
         List<SkillData> player_skills = GameFacade.Instance.DataCenter.League.GetPlayerSkills(GameFacade.Instance.DataCenter.User.CurrentPlayer.ID);

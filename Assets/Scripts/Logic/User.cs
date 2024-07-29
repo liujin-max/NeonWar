@@ -249,13 +249,34 @@ public class User
         return NumericalManager.FML_ASPCost(CurrentPlayer.ASP);
     }
 
+    //升级技能
     public void UpgradeSkill(int order, int skill_id, int skill_level)
     {
         SkillMsg skillMsg   = CurrentPlayer.Skills[order];
         skillMsg.ID         = skill_id;
         skillMsg.Level      = skill_level;
 
+        m_userUpdate = true;
+    }
 
+    //重置技能
+    public void ResetSkill(int order)
+    {
+        CurrentPlayer.Skills[order].ID      = -1;
+        CurrentPlayer.Skills[order].Level   = 0;
+
+        m_userUpdate = true;
+    }
+
+    public SkillMsg GetSkillMsg(int skill_id)
+    {
+        for (int i = 0; i < CurrentPlayer.Skills.Count; i++) {
+            SkillMsg skillMsg = CurrentPlayer.Skills[i];
+            if (skillMsg.ID == skill_id)
+                return skillMsg;
+        }
+
+        return null;
     }
 
     public void SetRecoveryTimestamp(long value)

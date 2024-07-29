@@ -76,4 +76,30 @@ public class League
 
         return skills;
     }
+
+    //重置技能
+    public void ResetSkill(int skill_id)
+    {
+        SkillMsg skillMsg = GameFacade.Instance.DataCenter.User.GetSkillMsg(skill_id);
+
+        if (skillMsg == null) return;
+
+        SkillData skillData = GameFacade.Instance.DataCenter.League.GetSkillData(skill_id);
+
+        int cost_total = 0;
+
+        for (int i = 1; i <= skillMsg.Level; i++)
+        {
+            cost_total += Skill.GetCost(skillData, i);
+        }
+
+        //重置技能
+        GameFacade.Instance.DataCenter.User.ResetSkill(skillData.Order);
+
+        //返还资源
+        GameFacade.Instance.DataCenter.User.UpdateGlass(cost_total);
+
+        EventManager.SendEvent(new GameEvent(EVENT.UI_SKILLUPGRADE));
+        EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS, 0));
+    }
 }
