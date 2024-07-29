@@ -8,7 +8,7 @@ public class Effect : MonoBehaviour
     public float m_Time = 0;
     private float m_TimeMax = 0;
     public bool m_IsLoop = false;
-    public bool m_IsRecycle = true;
+    public bool IsRecycle = true;
     [HideInInspector]public string ResPath;
 
     private Action m_Callback;
@@ -41,11 +41,7 @@ public class Effect : MonoBehaviour
                 m_Callback.Invoke();
             }
 
-            if (string.IsNullOrEmpty(ResPath) || !m_IsRecycle) {
-                Destroy(gameObject);
-            } else {
-                GameFacade.Instance.PoolManager.RecycleEffect(this);
-            }
+            GameFacade.Instance.EffectManager.RemoveEffect(this);
         }
     }
 }

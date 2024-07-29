@@ -26,9 +26,11 @@ public class Unit : MonoBehaviour
     public ATT ATT = new ATT();
     public CDTimer ASP = new CDTimer(0f);
 
-
     //Buff
     private Dictionary<int, Buff> m_BuffDic = new Dictionary<int, Buff>();
+
+    //各种状态
+    
 
     protected float m_Angle;      //角度
 
@@ -146,6 +148,15 @@ public class Unit : MonoBehaviour
         if (m_BuffDic.ContainsKey(buff.ID)) {
             m_BuffDic.Remove(buff.ID);
         }
+    }
+
+    public Buff GetBuff(int buff_id)
+    {
+        Buff buff = null;
+        if (m_BuffDic.TryGetValue(buff_id, out buff)) {
+            return buff;
+        }
+        return null;
     }
 
     #endregion

@@ -28,7 +28,6 @@ public class Field : MonoBehaviour
     
     //累计获得的碎片
     private int m_Glass;
-    public int Glass{get {return m_Glass;}}
 
     public bool LeftBtnPressFlag    = false;
     public bool RightBtnPressFlag   = false;
@@ -202,21 +201,21 @@ public class Field : MonoBehaviour
         if (bullet.PassTimes < 0) return false;
 
 
+        int demage = Mathf.RoundToInt(bullet.Caster.ATT.ATK * unit.ATT.VUN_INC.ToNumber());
+
         if (RandomUtility.IsHit(bullet.KillRate) == true && (unit.Side == _C.SIDE.ENEMY && unit.GetComponent<Enemy>().TYPE != _C.ENEMY_TYPE.BOSS))   //一击必杀
         {
-            unit.UpdateHP(-unit.ATT.HP);
-        }
-        else
-        {
-            int demage  = Mathf.RoundToInt(bullet.Caster.ATT.ATK * unit.ATT.VUN_INC.ToNumber());
-
-            unit.UpdateHP(-demage); 
+            demage = unit.ATT.HP;
         }
 
+        //护盾
+        if (unit.GetBuff((int)_C.BUFF.SHIELD) != null) demage = 0;
 
+        unit.UpdateHP(-demage); 
 
         EventManager.SendEvent(new GameEvent(EVENT.ONBULLETHIT, bullet, unit));
 
+        //受击表现
         if (unit.IsDead() == true)
         {
             if (unit.Side == _C.SIDE.PLAYER) 
@@ -235,12 +234,15 @@ public class Field : MonoBehaviour
         }
         else
         {
-            unit.HitAnim();
-            
-            if (unit.Side == _C.SIDE.PLAYER) 
+            if (demage > 0)
             {
-                Land.DoShake();
-                GameFacade.Instance.EffectManager.Load(EFFECT.CRASH, Vector3.zero, Field.Instance.Land.ELEMENT_ROOT.gameObject);
+                unit.HitAnim();
+            
+                if (unit.Side == _C.SIDE.PLAYER) 
+                {
+                    Land.DoShake();
+                    GameFacade.Instance.EffectManager.Load(EFFECT.CRASH, Vector3.zero, Field.Instance.Land.ELEMENT_ROOT.gameObject);
+                }
             }
         }
 

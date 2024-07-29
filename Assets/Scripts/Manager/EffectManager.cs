@@ -5,7 +5,7 @@ using UnityEngine;
 public class EffectManager : MonoBehaviour
 {
     //加载UI特效
-    public GameObject LoadUIEffect(string path, Vector3 world_pos)
+    public Effect LoadUIEffect(string path, Vector3 world_pos)
     {
         var e = GameFacade.Instance.EffectManager.Load(path, world_pos, UIManager.EFFECT.gameObject);
         e.transform.position = world_pos;
@@ -15,7 +15,7 @@ public class EffectManager : MonoBehaviour
 
 
     //加载特效
-    public GameObject Load(string path, Vector3 pos, GameObject parent = null)
+    public Effect Load(string path, Vector3 pos, GameObject parent = null)
     {
         var e = GameFacade.Instance.PoolManager.AllocateEffect(path, pos);
 
@@ -24,8 +24,17 @@ public class EffectManager : MonoBehaviour
             e.transform.localPosition = pos;
         }
 
-        return e;
+        return e.GetComponent<Effect>();
     }
 
-
+    //销毁特效
+    public void RemoveEffect(Effect e)
+    {
+        if (string.IsNullOrEmpty(e.ResPath) || !e.IsRecycle) {
+            Destroy(e.gameObject);
+            return;
+        } 
+        
+        GameFacade.Instance.PoolManager.RecycleEffect(e);
+    }
 }

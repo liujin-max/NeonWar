@@ -463,11 +463,6 @@ public class Skill
         return skillData.Glass[level - 1];
     }
 
-    public Skill()
-    {
-
-    }
-
     public virtual void Dispose()
     {
 
