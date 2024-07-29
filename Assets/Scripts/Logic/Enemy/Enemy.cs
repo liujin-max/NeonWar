@@ -19,18 +19,24 @@ public class Enemy : Unit
     private SpriteRenderer m_Sprite;
     private TextMeshPro m_HPText;
 
-    public float HPRate = 1;    //血量倍率
     public int CrashATK = 1;    //撞击伤害
     public int Speed = 160;     //移动速度 
 
     private MonsterJSON m_Data;
+    public _C.ENEMY_TYPE TYPE {get {return m_Data.Type;}}
     public int Glass { get {return m_Data.Glass;}}
 
     private Vector2 m_LastVelocity;
     private float m_LastAngularVelocity;
 
     private bool m_ValidFlag = true;
-    public bool IsValid {get {return m_ValidFlag;} }
+    public bool IsValid {
+        get {
+            if (IsDead()) return false;
+
+            return m_ValidFlag;
+        } 
+    }
 
 
     private bool m_InHitAnim = false;
@@ -55,11 +61,10 @@ public class Enemy : Unit
         Side    = _C.SIDE.ENEMY;
         ID      = monster_data.ID;
 
-        ATT.HPMAX  = Mathf.CeilToInt(monster_data.HP * HPRate);
+        ATT.HPMAX  = monster_data.HP;
         ATT.HP  = ATT.HPMAX;
 
         ASP.Reset(ATT.ASP / 1000.0f);
-        ASP.Full();
 
         FlushHP();
     }
@@ -79,7 +84,7 @@ public class Enemy : Unit
         m_HPText.transform.eulerAngles = Vector3.zero;
 
         //始终朝向前行的方向
-        if (!m_Rigidbody.isKinematic) transform.localEulerAngles = new Vector3(0, 0, Mathf.Atan2(m_Rigidbody.velocity.y, m_Rigidbody.velocity.x) * Mathf.Rad2Deg);
+        // if (!m_Rigidbody.isKinematic) transform.localEulerAngles = new Vector3(0, 0, Mathf.Atan2(m_Rigidbody.velocity.y, m_Rigidbody.velocity.x) * Mathf.Rad2Deg);
     }
 
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -119,6 +120,9 @@ public class Spawn
 
     public void Dispose()
     {
+        m_EnemyPool.Clear();
+        m_KillProgress.Clear();
+
         m_Enemys.ForEach(e => {
             e.Dispose();
         });

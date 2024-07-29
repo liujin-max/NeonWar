@@ -17,6 +17,7 @@ public class MonsterJSON
 {
     public float Time;
     public int ID;
+    public _C.ENEMY_TYPE Type = _C.ENEMY_TYPE.NORMAL;
     public int HP;
     //掉落的碎片数量
     public int Glass;
@@ -43,7 +44,7 @@ public class Levels
             return level;
         }
 
-        level = new Level(n, this.LoadLevelJSON(n));
+        level = new Level(n);
         m_Levels[n] = level;
         return level;
     }

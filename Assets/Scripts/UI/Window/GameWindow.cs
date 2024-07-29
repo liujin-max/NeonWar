@@ -134,7 +134,7 @@ public class GameWindow : MonoBehaviour
             FlushUI();
             
 
-            EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS, 0));
+            EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS));
         });
 
 
@@ -152,7 +152,7 @@ public class GameWindow : MonoBehaviour
 
             FlushUI();
 
-            EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS, 0));
+            EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS));
         });
     }   
 
@@ -307,9 +307,7 @@ public class GameWindow : MonoBehaviour
 
     private void OnUpdateGlass(GameEvent @event)
     {
-        int offset  = (int)@event.GetParam(0);
-
-        m_Glass.SetValue(GameFacade.Instance.DataCenter.User.Glass + offset);
+        m_Glass.SetValue(GameFacade.Instance.DataCenter.User.Glass);
     }
 
 

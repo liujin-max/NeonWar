@@ -48,8 +48,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6baad2d78c60f8a46b872272ec8c0666, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_ShootPivot: {fileID: 0}
-  m_BulletTemplate: {fileID: 0}
+  ShootPivot: {fileID: 0}
+  BulletTemplate: {fileID: 0}
   ID: 100
   Side: 1
   ATT:
@@ -57,10 +57,11 @@ MonoBehaviour:
     HP: 1
     ATK: 1
     ASP: 0
+    VUN_INC:
+      m_Base: 1
   HPRate: 1
   CrashATK: 1
-  Speed: 160
-  Glass: 0
+  Speed: 150
 --- !u!58 &3382774460602914520
 CircleCollider2D:
   m_ObjectHideFlags: 0

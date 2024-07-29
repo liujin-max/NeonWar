@@ -79,6 +79,7 @@ public class Field : MonoBehaviour
 
 
         m_Level = GameFacade.Instance.DataCenter.Levels.GetLevel(level_id);
+        m_Level.Init();
         m_Spawn.Init(m_Level.LevelJSON);
 
         Debug.Log("========  开始关卡：" + level_id + "  ========");
@@ -160,8 +161,6 @@ public class Field : MonoBehaviour
     public void UpdateGlass(int value)
     {
         m_Glass += value;
-
-        EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS, m_Glass));
     }
 
     
@@ -172,7 +171,7 @@ public class Field : MonoBehaviour
 
         int glass = Mathf.FloorToInt(m_Level.LevelJSON.Glass * kill_rate);
 
-        GameFacade.Instance.DataCenter.User.UpdateGlass(glass);
+        GameFacade.Instance.DataCenter.User.UpdateGlass(glass + m_Glass);
     
     }
 
@@ -200,9 +199,10 @@ public class Field : MonoBehaviour
         if (bullet.Caster.IsDead()) return false;
         if (unit.Side == bullet.Caster.Side) return false;
         if (bullet.SpliteIgnoreUnits.Contains(unit)) return false;
+        if (bullet.PassTimes < 0) return false;
 
 
-        if (RandomUtility.IsHit(bullet.KillRate) == true)   //一击必杀
+        if (RandomUtility.IsHit(bullet.KillRate) == true && (unit.Side == _C.SIDE.ENEMY && unit.GetComponent<Enemy>().TYPE != _C.ENEMY_TYPE.BOSS))   //一击必杀
         {
             unit.UpdateHP(-unit.ATT.HP);
         }

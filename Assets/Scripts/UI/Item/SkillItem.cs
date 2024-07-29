@@ -32,7 +32,7 @@ public class SkillItem : MonoBehaviour
             GameFacade.Instance.DataCenter.User.UpgradeSkill(m_SkillData.Order, m_SkillData.ID, m_Level);
 
             EventManager.SendEvent(new GameEvent(EVENT.UI_SKILLUPGRADE));
-            EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS, 0));
+            EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS));
         });
     }
 

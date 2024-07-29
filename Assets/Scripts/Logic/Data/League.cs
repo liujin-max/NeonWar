@@ -100,6 +100,6 @@ public class League
         GameFacade.Instance.DataCenter.User.UpdateGlass(cost_total);
 
         EventManager.SendEvent(new GameEvent(EVENT.UI_SKILLUPGRADE));
-        EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS, 0));
+        EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS));
     }
 }

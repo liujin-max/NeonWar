@@ -50,6 +50,12 @@ public static class _C
         BOW = 10000,    //弓
     }
 
+    //怪物类型(普通、精英、Boss)
+    public enum ENEMY_TYPE
+    {
+        NORMAL = 1,
+        BOSS
+    }
 
     public enum BUFF
     {

@@ -98,7 +98,7 @@ public class Unit : MonoBehaviour
 
     public virtual void UpdateHP(int value)
     {
-        ATT.HP += value;
+        ATT.HP = Mathf.Clamp(ATT.HP + value, 0, ATT.HPMAX);
     }
 
     public virtual Bullet CreateBullet()

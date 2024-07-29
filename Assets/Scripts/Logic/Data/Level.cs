@@ -9,9 +9,13 @@ public class Level
     public int ID;
     public LevelJSON LevelJSON;
 
-    public Level(int id, LevelJSON level_json)
+    public Level(int id)
     {
         ID = id;
-        LevelJSON   = level_json;
+    }
+
+    public void Init()
+    {
+        LevelJSON = GameFacade.Instance.DataCenter.Levels.LoadLevelJSON(ID);
     }
 }
