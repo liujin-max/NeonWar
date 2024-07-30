@@ -39,7 +39,7 @@ public class Bullet : MonoBehaviour
         m_Rigidbody.AddForce(force);
 
         //朝向前进的方向
-        transform.localEulerAngles = new Vector3(0, 0, Mathf.Atan2(force.y, force.x) * Mathf.Rad2Deg);
+        transform.right = force;
 
         EventManager.SendEvent(new GameEvent(EVENT.ONBULLETSHOOT, this));
     }
@@ -49,7 +49,7 @@ public class Bullet : MonoBehaviour
         ReboundTimes--;
 
         // 计算反弹方向
-        float angle = Mathf.Atan2(m_Rigidbody.velocity.y, m_Rigidbody.velocity.x) * Mathf.Rad2Deg;
+        float angle = ToolUtility.VectorToAngle(m_Rigidbody.velocity);
         //给一个随机的偏移
         angle += 180 + RandomUtility.Random(-45, 45);
 

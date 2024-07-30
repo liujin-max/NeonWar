@@ -108,6 +108,12 @@ public static class ToolUtility
         return new Vector2(x, y);
     }
 
+    // 将向量转换成角度
+    public static float VectorToAngle(Vector3 dir)
+    {
+        return Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+    }
+
     public static long GetUnixTimestamp()
     {
         long unixTimestamp = (long)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds;

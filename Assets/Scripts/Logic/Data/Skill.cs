@@ -150,10 +150,7 @@ public class Skill_10020 : Skill
                 enemy_pool.Remove(e);
 
                 //分裂箭射向其他目标
-                Vector2 dir = e.transform.localPosition - bullet.transform.localPosition;
-                float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-
-                bullet.Shoot(angle);
+                bullet.Shoot(ToolUtility.VectorToAngle(e.transform.localPosition - bullet.transform.localPosition));
             }
             else
             {
@@ -194,11 +191,8 @@ public class Skill_10030 : Skill
             Enemy e = sortedObjects[i].GetComponent<Enemy>();
 
             //向目标发射子弹
-            Vector2 dir = e.transform.localPosition - Caster.transform.localPosition;
-            float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-
             var bullet = Caster.CreateBullet();
-            bullet.Shoot(angle);
+            bullet.Shoot(ToolUtility.VectorToAngle(e.transform.localPosition - Caster.transform.localPosition));
         }
 
 

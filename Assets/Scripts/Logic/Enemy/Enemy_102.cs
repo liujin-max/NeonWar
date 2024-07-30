@@ -9,10 +9,7 @@ public class Enemy_102 : Enemy
     protected override void Attack()
     {
         //向玩家发射子弹
-        Vector2 dir = Field.Instance.Player.transform.localPosition - transform.localPosition;
-        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-
         var bullet = CreateBullet();
-        bullet.Shoot(angle);
+        bullet.Shoot(ToolUtility.VectorToAngle(Field.Instance.Player.transform.localPosition - transform.localPosition));
     }
 }

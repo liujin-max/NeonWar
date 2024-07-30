@@ -82,9 +82,6 @@ public class Enemy : Unit
     void LateUpdate()
     {
         m_HPText.transform.eulerAngles = Vector3.zero;
-
-        //始终朝向前行的方向
-        // if (!m_Rigidbody.isKinematic) transform.localEulerAngles = new Vector3(0, 0, Mathf.Atan2(m_Rigidbody.velocity.y, m_Rigidbody.velocity.x) * Mathf.Rad2Deg);
     }
 
 

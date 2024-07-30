@@ -231,7 +231,7 @@ public class Field : MonoBehaviour
                 Land.DoSmallShake();
 
                 var e = GameFacade.Instance.EffectManager.Load(EFFECT.BROKEN, unit.transform.localPosition, Land.ELEMENT_ROOT.gameObject);
-                e.transform.localEulerAngles = new Vector3(0, 0, Mathf.Atan2(bullet.Velocity.y, bullet.Velocity.x) * Mathf.Rad2Deg);
+                e.transform.localEulerAngles = new Vector3(0, 0, ToolUtility.VectorToAngle(bullet.Velocity));
             }
         }
         else
