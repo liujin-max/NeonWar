@@ -125,9 +125,17 @@ public class Skill_10020 : Skill
     {
         Bullet b = @event.GetParam(0) as Bullet;
         if (b.Caster != Caster) return;
-        // if (b.IsSplit == true) return;   //分裂出的箭矢也能继续分裂？
+        if (b.IsSplit == true) return;   //分裂出的箭矢也能继续分裂？
 
         Unit unit = @event.GetParam(1) as Unit;
+
+        List<object> enemy_pool = new List<object>();
+        Field.Instance.Spawn.Enemys.ForEach(enemy => {
+            if (enemy.gameObject != unit.gameObject) {
+                enemy_pool.Add(enemy);
+            }
+        });
+        
 
         for (int i = 0; i < Skill.ToValue(Data, Level); i++)
         {
@@ -135,7 +143,22 @@ public class Skill_10020 : Skill
             bullet.transform.position = b.transform.position;
             bullet.IsSplit = true;
             bullet.SpliteIgnoreUnits.Add(unit);
-            bullet.Shoot(RandomUtility.Random(0, 360));
+
+            if (enemy_pool.Count > 0)
+            {
+                Enemy e = RandomUtility.Pick(1, enemy_pool)[0] as Enemy;
+                enemy_pool.Remove(e);
+
+                //分裂箭射向其他目标
+                Vector2 dir = e.transform.localPosition - bullet.transform.localPosition;
+                float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+
+                bullet.Shoot(angle);
+            }
+            else
+            {
+                bullet.Shoot(RandomUtility.Random(0, 360));
+            }
         }
         
     }

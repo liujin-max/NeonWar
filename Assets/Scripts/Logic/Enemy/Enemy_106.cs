@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy_106 : Enemy
 {
-    private int m_BuffValue = 2;
+    private int m_BuffValue = 3;
 
     private CDTimer m_Timer = new CDTimer(3f);
 

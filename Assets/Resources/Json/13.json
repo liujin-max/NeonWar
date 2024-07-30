@@ -1,5 +1,5 @@
 {
-    "Glass" : 340,
+    "Glass" : 400,
     "Monsters": 
     [
         {"Time":    0, "ID": 103, "HP": 120},
