@@ -45,12 +45,9 @@ public class Unit : MonoBehaviour
         return m_Angle;
     }
     
-    protected virtual void Update()
+    public virtual bool CustomUpdate(float deltaTime)
     {
-        if (IsDead()) return;
-        if (Field.Instance.STATE == _C.GAME_STATE.PAUSE) return;
-
-        float deltaTime = Time.deltaTime;
+        if (IsDead()) return false;
 
         //攻击间隔
         if (ASP.Duration > 0)
@@ -75,6 +72,8 @@ public class Unit : MonoBehaviour
         }
 
         remove_buffs.ForEach(buff => this.RemoveBuff(buff));
+
+        return true;
     }
 
     #region 表现处理

@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Test
   m_Shader: {fileID: 4800000, guid: a36b7719ff0465b42ab1407d67672c5f, type: 3}
-  m_ShaderKeywords: 
+  m_ShaderKeywords: FISHEYE_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -86,7 +86,7 @@ Material:
     - _FadeBurnGlow: 4.4
     - _FadeBurnTransition: 0.084
     - _FadeBurnWidth: 0.208
-    - _FishEyeUvAmount: 0
+    - _FishEyeUvAmount: 0.002
     - _FlickerAlpha: 0.764
     - _FlickerFreq: 2.25
     - _FlickerPercent: 0.449

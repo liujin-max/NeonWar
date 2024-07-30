@@ -79,7 +79,7 @@ public class Spawn
         seq.Play();
     }
 
-    public void Update(float deltaTime)
+    public void CustomUpdate(float deltaTime)
     {
         if (m_EnemyPool.Count > 0)
         {
@@ -103,6 +103,8 @@ public class Spawn
         //销毁死亡的敌人
         List<Enemy> _Removes = new List<Enemy>();
         m_Enemys.ForEach(e => {
+            e.CustomUpdate(deltaTime);
+
             if (e.IsDead() == true) {
                 m_KillProgress.UpdateCurrent(1);
                 Field.Instance.UpdateGlass(e.Glass);

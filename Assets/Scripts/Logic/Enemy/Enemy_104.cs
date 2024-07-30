@@ -15,12 +15,11 @@ public class Enemy_104 : Enemy
         m_Timer.Full();
     }
 
-    protected override void Update()
+    public override bool CustomUpdate(float deltaTime)
     {
-        if (IsDead()) return;
-        if (Field.Instance.STATE == _C.GAME_STATE.PAUSE) return;
-
-        m_Timer.Update(Time.deltaTime);
+        if (!base.CustomUpdate(deltaTime)) return false;
+        
+        m_Timer.Update(deltaTime);
         if (m_Timer.IsFinished() == true) {
             m_Timer.Reset();
 
@@ -35,5 +34,7 @@ public class Enemy_104 : Enemy
                 GameFacade.Instance.EffectManager.Load(EFFECT.HEAL, Vector3.zero, e.gameObject);
             }
         }
+
+        return true;
     }
 }

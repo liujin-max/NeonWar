@@ -74,12 +74,13 @@ public class Buff_Shield : Buff
     private void OnBulletHit(GameEvent @event)
     {
         Value--;
-
+        
+        SoundManager.Instance.Load(SOUND.HIT_SHIELD);
+        
         if (m_Tweener != null) {
             m_Tweener.Kill();
             m_Tweener = null;
         }
-        
         // 创建抖动和缩放效果
         m_Tweener = m_Effect.transform.DOShakeRotation(0.2f, 25f, vibrato: 15, randomness: 50);
 

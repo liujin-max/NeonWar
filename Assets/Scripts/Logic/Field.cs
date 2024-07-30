@@ -138,7 +138,9 @@ public class Field : MonoBehaviour
 
         if (m_FSM != null) m_FSM.Update();
 
-        m_Spawn.Update(deltaTime);
+        m_Player.CustomUpdate(deltaTime);
+        m_Spawn.CustomUpdate(deltaTime);
+        
         BlinkTimer.Update(deltaTime);
     }
 

@@ -172,7 +172,7 @@ Material:
     - _TwistUvRadius: 0.75
     - _WaveAmount: 7
     - _WaveSpeed: 10
-    - _WaveStrength: 3
+    - _WaveStrength: 8
     - _WaveX: 0.5
     - _WaveY: 0.5
     - _ZWrite: 0

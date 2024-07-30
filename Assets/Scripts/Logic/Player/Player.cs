@@ -55,23 +55,20 @@ public class Player : Unit
     }
 
     // Update is called once per frame
-    protected override void Update()
+    public override bool CustomUpdate(float deltaTime)
     {
-        if (IsDead()) return;
-        if (Field.Instance.STATE == _C.GAME_STATE.PAUSE) return;
-
-        float deltaTime = Time.deltaTime;
+        if (!base.CustomUpdate(deltaTime)) return false;
 
         InvincibleTimer.Update(deltaTime);
 
-        base.Update();
+        return true;
     }
 
 
     void LateUpdate()
     {
         //始终朝向圆心
-        transform.localEulerAngles = new Vector3(0, 0, m_Angle + 90);
+        transform.right = Vector3.zero - transform.localPosition;
     }
 
     public void Dispose()
