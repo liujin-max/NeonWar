@@ -33,6 +33,14 @@ public class Unit : MonoBehaviour
     
 
     protected float m_Angle;      //角度
+    protected bool m_ValidFlag = true;
+    public bool IsValid {
+        get {
+            if (IsDead()) return false;
+
+            return m_ValidFlag;
+        } 
+    }
 
 
     public virtual bool IsDead()
@@ -47,7 +55,7 @@ public class Unit : MonoBehaviour
     
     public virtual bool CustomUpdate(float deltaTime)
     {
-        if (IsDead()) return false;
+        if (!IsValid) return false;
 
         //攻击间隔
         if (ASP.Duration > 0)

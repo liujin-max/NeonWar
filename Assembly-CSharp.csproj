@@ -158,6 +158,7 @@
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
      <None Include="Assets\Resources\Shader\UVScroll.shader" />
      <None Include="Assets\UIShaders\Shaders\Utils\Rotation2D.cginc" />
+     <None Include="Assets\UIShaders\Shaders\NoiseRing.shader" />
      <None Include="Assets\AllIn1SpriteShader\Resources\AllIn1SpriteShader.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />

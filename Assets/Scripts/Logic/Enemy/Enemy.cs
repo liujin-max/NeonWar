@@ -29,14 +29,6 @@ public class Enemy : Unit
     private Vector2 m_LastVelocity;
     private float m_LastAngularVelocity;
 
-    private bool m_ValidFlag = true;
-    public bool IsValid {
-        get {
-            if (IsDead()) return false;
-
-            return m_ValidFlag;
-        } 
-    }
 
 
     private bool m_InHitAnim = false;
