@@ -17,7 +17,6 @@ public class Enemy : Unit
 {
     private Rigidbody2D m_Rigidbody;
     private SpriteRenderer m_Sprite;
-    private NumberTransition m_HPText;
     private CircleHP m_HPBar;
 
     public int CrashATK = 1;    //撞击伤害
@@ -47,7 +46,6 @@ public class Enemy : Unit
         m_Rigidbody = GetComponent<Rigidbody2D>();
 
         m_Sprite    = transform.Find("Sprite").GetComponent<SpriteRenderer>();
-        m_HPText    = transform.Find("HP").GetComponent<NumberTransition>();
     }
 
     void Start()
@@ -79,22 +77,14 @@ public class Enemy : Unit
     void InitHPBar()
     {
         m_HPBar = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Enemy/CircleHP", Vector2.zero, transform).GetComponent<CircleHP>();
-        m_HPBar.transform.localScale = new Vector3(2f, 2f, 2f);
+        m_HPBar.transform.localScale = new Vector3(1.6f, 1.6f, 1.6f);
         m_HPBar.Init(this);
-        
 
-        m_HPText.ForceValue(ATT.HP); 
-    }
-
-    void FlushHP()
-    {
-        m_HPText.SetValue(ATT.HP); 
-        m_HPBar.FlushHP();
     }
 
     void LateUpdate()
     {
-        m_HPText.transform.eulerAngles = Vector3.zero;
+
     }
 
 
@@ -119,7 +109,7 @@ public class Enemy : Unit
     {
         base.UpdateHP(value);
 
-        FlushHP();
+        m_HPBar.FlushHP();
     }
 
     //strength :力的强度，意味着移动速度

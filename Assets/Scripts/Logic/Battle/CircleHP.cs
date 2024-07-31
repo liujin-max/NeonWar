@@ -6,11 +6,12 @@ public class CircleHP : MonoBehaviour
 {
     [SerializeField] private SpriteRenderer m_Yellow;
     [SerializeField] private SpriteRenderer m_Red;
-
+    [SerializeField] private NumberTransition m_HPText;
     [SerializeField] private float m_Height;
 
+
     private Enemy m_Enemy;
-    private ValueTransition m_YellowValue = new ValueTransition(0.3f, 0.5f);
+    private ValueTransition m_YellowValue = new ValueTransition(0.3f, 0.4f);
     private ValueTransition m_RedValue = new ValueTransition(1f, 0.15f);
 
 
@@ -18,14 +19,19 @@ public class CircleHP : MonoBehaviour
     {
         m_Enemy = enemy;
 
-        m_YellowValue.ForceValue(m_Enemy.ATT.HP);
-        m_RedValue.ForceValue(m_Enemy.ATT.HP);
+        int hp  = m_Enemy.ATT.HP;
+        m_HPText.ForceValue(hp);
+        m_YellowValue.ForceValue(hp);
+        m_RedValue.ForceValue(hp);
     }
 
     public void FlushHP()
     {
-        m_YellowValue.SetValue(m_Enemy.ATT.HP);
-        m_RedValue.SetValue(m_Enemy.ATT.HP);
+        int hp  = m_Enemy.ATT.HP;
+        
+        m_HPText.SetValue(hp);
+        m_YellowValue.SetValue(hp);
+        m_RedValue.SetValue(hp);
     }
 
     void Update()
