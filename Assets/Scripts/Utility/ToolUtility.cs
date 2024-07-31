@@ -7,69 +7,13 @@ using UnityEngine;
 
 public static class ToolUtility
 {
-    public static void ApplicationQuit()
+    public static long GetUnixTimestamp()
     {
-        #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-        #else
-            // Application.Quit();
-        #endif
+        long unixTimestamp = (long)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds;
+
+        return unixTimestamp;
     }
 
-    public static bool Approximately(Vector3 v1, Vector3 v2) {
-        return Vector3.SqrMagnitude(v1 - v2) < float.Epsilon;
-    }
-
-    public static Vector2[] GenerateRandomPoints(Vector2 topLeft, Vector2 bottomRight, int N, float minDistance)
-    {
-        List<Vector2> points = new List<Vector2>();
-        HashSet<Vector2> usedPoints = new HashSet<Vector2>();
-
-        int count = 0;  //防卡死机制
-        while (points.Count < N)
-        {
-            Vector2 randomPoint = new Vector2(RandomUtility.Random((int)(topLeft.x * 100), (int)(bottomRight.x * 100)) / 100.0f, RandomUtility.Random((int)(bottomRight.y * 100), (int)(topLeft.y * 100)) / 100.0f);
-
-            bool isValid = true;
-            foreach (Vector2 existingPoint in usedPoints)
-            {
-                if (Vector2.Distance(randomPoint, existingPoint) < minDistance)
-                {
-                    isValid = false;
-                    break;
-                }
-            }
-
-            if (isValid)
-            {
-                count = 0;
-                points.Add(randomPoint);
-                usedPoints.Add(randomPoint);
-            }
-            else
-            {
-                count++;
-            }
-
-            //单次随机次数超出1000次，直接跳出，免得死循环了
-            if (count >= 1000) {
-                Debug.LogError("测试输出 order ： " + points.Count);
-                break;
-            }
-        }
-
-        return points.ToArray();
-    }
-
-    public static double TimeStamp()
-    {
-        DateTime currentTime = DateTime.UtcNow;
-
-        DateTime unixEpoch  = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
-        TimeSpan timeSpan   = currentTime - unixEpoch;
-        double timestamp    = timeSpan.TotalSeconds;
-        return timestamp;
-    }
 
     public static string Second2Minute(int seconds)
     {
@@ -114,12 +58,24 @@ public static class ToolUtility
         return Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
     }
 
-    public static long GetUnixTimestamp()
+    //数字转换成单位
+    public static string FormatNumber(double num)
     {
-        long unixTimestamp = (long)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds;
-
-        return unixTimestamp;
+        if (num >= 1000000000)
+        {
+            return (num / 1000000000D).ToString("0.#") + "B";
+        }
+        else if (num >= 1000000)
+        {
+            return (num / 1000000D).ToString("0.#") + "M";
+        }
+        else if (num >= 1000)
+        {
+            return (num / 1000D).ToString("0.#") + "K";
+        }
+        else
+        {
+            return num.ToString();
+        }
     }
-
-    
 }

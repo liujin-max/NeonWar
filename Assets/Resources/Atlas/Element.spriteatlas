@@ -49,6 +49,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: ab69ac5a88732bb44806bd74cc0dec6d, type: 3}
   - {fileID: 21300000, guid: 9e46957eadca10246b09b1791b73b7dc, type: 3}
   - {fileID: 21300000, guid: bd27d6cf46e9fb8498ad80adea9f8f73, type: 3}
+  - {fileID: 21300000, guid: 8831f3ff3f35cf94bbd0ca4535782ef6, type: 3}
   m_PackedSpriteNamesToIndex:
   - bow
   - 105
@@ -59,6 +60,7 @@ SpriteAtlas:
   - arrow
   - 104
   - 103
+  - 107
   m_RenderDataMap: {}
   m_Tag: Element
   m_IsVariant: 0

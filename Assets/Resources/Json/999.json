@@ -1,11 +1,7 @@
 {
     "Monsters": 
     [
-        {"Time":0, "ID": 102, "HP": 8, "Origin": {"x":0,"y":0}},
-        {"Time":0, "ID": 102, "HP": 8, "Origin": {"x":-1,"y":1}},
-        {"Time":0, "ID": 102, "HP": 8, "Origin": {"x":1,"y":1}},
-        {"Time":0, "ID": 102, "HP": 8, "Origin": {"x":-1,"y":-1}},
-        {"Time":0, "ID": 102, "HP": 8, "Origin": {"x":1,"y":-1}}
+
     ]
 }
   

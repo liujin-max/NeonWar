@@ -59,7 +59,6 @@ MonoBehaviour:
     ASP: 0
     VUN_INC:
       m_Base: 1
-  HPRate: 1
   CrashATK: 1
   Speed: 150
 --- !u!58 &3382774460602914520
@@ -110,6 +109,7 @@ GameObject:
   - component: {fileID: 5789655574617207310}
   - component: {fileID: 7208213883259057274}
   - component: {fileID: 2276059473645410998}
+  - component: {fileID: 4154955907414472}
   m_Layer: 7
   m_Name: HP
   m_TagString: Untagged
@@ -271,6 +271,20 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 7208213883259057274}
   m_maskType: 0
+--- !u!114 &4154955907414472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7813202397386786216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b81c16ddde6ae64aad42dd4f677fc33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SpeedMin: 1
+  m_IsFormat: 1
 --- !u!1 &7913849833340424108
 GameObject:
   m_ObjectHideFlags: 0

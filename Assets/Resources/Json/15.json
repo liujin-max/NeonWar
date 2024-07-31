@@ -1,0 +1,9 @@
+{
+    "Glass" : 0,
+    "HP" : 230,
+    "Monsters": 
+    [
+        {"Time":    0, "ID": 107, "HP": 2500, "Radius" : 0, "Angle" : 0}
+    ]
+}
+  

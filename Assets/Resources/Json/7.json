@@ -2,10 +2,10 @@
     "Glass" : 115,
     "Monsters": 
     [
-        {"Time":    0, "ID": 103, "HP": 20, "Origin": {"x": -2, "y": 2}},
-        {"Time": 1000, "ID": 103, "HP": 18, "Origin": {"x":  2, "y": 2}},
-        {"Time": 2000, "ID": 103, "HP": 20, "Origin": {"x": -2, "y":-2}},
-        {"Time": 3000, "ID": 103, "HP": 18, "Origin": {"x":  2, "y":-2}},
+        {"Time":    0, "ID": 103, "HP": 20, "Radius": 2, "Angle":45},
+        {"Time": 1000, "ID": 103, "HP": 18, "Radius": 2, "Angle":135},
+        {"Time": 2000, "ID": 103, "HP": 20, "Radius": 2, "Angle":-135},
+        {"Time": 3000, "ID": 103, "HP": 18, "Radius": 2, "Angle":-45},
 
         {"Time": 5000, "ID": 101, "HP": 24},
         

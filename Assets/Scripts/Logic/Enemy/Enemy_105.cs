@@ -6,7 +6,6 @@ public class Enemy_105 : Enemy
 {
     protected override void Attack()
     {
-
         for (int i = 0; i < 6; i++)
         {
             float angle = 60.0f * i;

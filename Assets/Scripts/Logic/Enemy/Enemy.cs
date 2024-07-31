@@ -17,7 +17,8 @@ public class Enemy : Unit
 {
     private Rigidbody2D m_Rigidbody;
     private SpriteRenderer m_Sprite;
-    private TextMeshPro m_HPText;
+    private NumberTransition m_HPText;
+    private CircleHP m_HPBar;
 
     public int CrashATK = 1;    //撞击伤害
     public int Speed = 160;     //移动速度 
@@ -46,7 +47,7 @@ public class Enemy : Unit
         m_Rigidbody = GetComponent<Rigidbody2D>();
 
         m_Sprite    = transform.Find("Sprite").GetComponent<SpriteRenderer>();
-        m_HPText    = transform.Find("HP").GetComponent<TextMeshPro>();
+        m_HPText    = transform.Find("HP").GetComponent<NumberTransition>();
     }
 
     void Start()
@@ -66,7 +67,8 @@ public class Enemy : Unit
 
         ASP.Reset(ATT.ASP / 1000.0f);
 
-        FlushHP();
+
+        InitHPBar();
     }
 
     public void Dispose()
@@ -74,9 +76,20 @@ public class Enemy : Unit
         Destroy(gameObject);
     }
 
+    void InitHPBar()
+    {
+        m_HPBar = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Enemy/CircleHP", Vector2.zero, transform).GetComponent<CircleHP>();
+        m_HPBar.transform.localScale = new Vector3(2f, 2f, 2f);
+        m_HPBar.Init(this);
+        
+
+        m_HPText.ForceValue(ATT.HP); 
+    }
+
     void FlushHP()
     {
-       m_HPText.text = ATT.HP.ToString(); 
+        m_HPText.SetValue(ATT.HP); 
+        m_HPBar.FlushHP();
     }
 
     void LateUpdate()
@@ -114,7 +127,7 @@ public class Enemy : Unit
     {
         m_Rigidbody.velocity = Vector3.zero;
 
-        float angle     = m_Data.Angle == -1 ? RandomUtility.Random(0, 360) : m_Data.Angle;
+        float angle     = RandomUtility.Random(0, 360);
         Vector2 force   = ToolUtility.FindPointOnCircle(Vector2.zero, Speed, angle);
         
         m_Rigidbody.AddForce(force);

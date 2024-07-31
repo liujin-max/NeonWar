@@ -21,10 +21,9 @@ public class MonsterJSON
     public int HP;
     //掉落的碎片数量
     public int Glass;
-    //出现时的运行角度
+    //和圆点的角度
     public int Angle = -1;
-    //起点
-    public Vector2 Origin = new Vector2(-1000, -1000);
+    public int Radius;
 }
 
 

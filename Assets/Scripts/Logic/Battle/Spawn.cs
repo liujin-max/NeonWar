@@ -44,10 +44,12 @@ public class Spawn
 
     void PutEnemy(MonsterJSON monsterJSON)
     {
-        Vector2 point   = monsterJSON.Origin;
+        Vector2 point = new Vector2(RandomUtility.Random(-200, 201) / 100.0f, RandomUtility.Random(-200, 201) / 100.0f);
 
-        if (monsterJSON.Origin.x == -1000 && monsterJSON.Origin.y == -1000) 
-            point = new Vector2(RandomUtility.Random(-200, 201) / 100.0f, RandomUtility.Random(-200, 201) / 100.0f);
+        if (monsterJSON.Angle != -1) 
+        {
+            point = ToolUtility.FindPointOnCircle(Vector3.zero, monsterJSON.Radius, monsterJSON.Angle);
+        }
 
         int enemy_id    = monsterJSON.ID;
         int enemy_hp    = monsterJSON.HP;
@@ -83,7 +85,14 @@ public class Spawn
     {
         if (m_EnemyPool.Count > 0)
         {
-            if (m_Enemys.Count == 0) m_EnemyPool[0].Time = 0;
+            //场上没有怪物了，则集体速减CD
+            if (m_Enemys.Count == 0) {
+                float time = m_EnemyPool[0].Time;
+
+                m_EnemyPool.ForEach(monster_json => {
+                    monster_json.Time -= time;
+                });
+            }
 
             for (int i = m_EnemyPool.Count - 1; i >= 0; i--)
             {
