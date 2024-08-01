@@ -3,7 +3,7 @@
     "HP" : 280,
     "Monsters": 
     [
-
+        {"Time": 4000, "ID": 107, "HP":260080, "Type" : 2, "Glass" : 75, "Radius": 0, "Angle":0}
     ]
 }
   

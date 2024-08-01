@@ -54,6 +54,7 @@ MonoBehaviour:
   IsSplit: 0
   PassTimes: 0
   ReboundTimes: 0
+  KillRate: 0
 --- !u!50 &5024298108139937723
 Rigidbody2D:
   serializedVersion: 4
@@ -116,7 +117,7 @@ SpriteRenderer:
   m_SortingLayerID: -1515743181
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 89a3bc33efff1754fbb1a3351a2f011d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2e8eb37160eac3a47aa00ba3ef36e93f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -142,4 +143,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.2
+  m_Radius: 0.18

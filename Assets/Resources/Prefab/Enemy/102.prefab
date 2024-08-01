@@ -139,10 +139,13 @@ MonoBehaviour:
     HP: 3
     ATK: 1
     ASP: 2000
+    CP:
+      m_Base: 0
+    CT:
+      m_Base: 1500
+    SPEED: 150
     VUN_INC:
       m_Base: 1
-  CrashATK: 1
-  Speed: 160
 --- !u!1 &7913849833340424108
 GameObject:
   m_ObjectHideFlags: 0

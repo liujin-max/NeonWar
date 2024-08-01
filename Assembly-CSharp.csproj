@@ -70,6 +70,7 @@
      <Compile Include="Assets\Scripts\Utility\UIMaskUtility.cs" />
      <Compile Include="Assets\Scripts\Manager\SceneManager.cs" />
      <Compile Include="Assets\Scripts\Logic\Data\Skill.cs" />
+     <Compile Include="Assets\Scripts\Logic\Enemy\Enemy_107.cs" />
      <Compile Include="Assets\Scripts\Logic\Battle\Spawn.cs" />
      <Compile Include="Assets\DOTween\Modules\DOTweenModuleUtils.cs" />
      <Compile Include="Assets\Scripts\Utility\CSVUtility.cs" />
@@ -78,7 +79,8 @@
      <Compile Include="Assets\Scripts\Logic\Element\Bullet.cs" />
      <Compile Include="Assets\DOTween\Modules\DOTweenModulePhysics.cs" />
      <Compile Include="Assets\AllIn1SpriteShader\Demo\Scripts\DemoCamera.cs" />
-     <Compile Include="Assets\Scripts\Effect\RateNumber.cs" />
+     <Compile Include="Assets\Scripts\Effect\Crit.cs" />
+     <Compile Include="Assets\Scripts\Logic\Battle\CircleHP.cs" />
      <Compile Include="Assets\Scripts\SOUND.cs" />
      <Compile Include="Assets\Scripts\Effect\ButtonScale.cs" />
      <Compile Include="Assets\Scripts\Utility\ImageGray.cs" />
@@ -139,6 +141,7 @@
      <Compile Include="Assets\Scripts\Logic\Battle\HollowCircle.cs" />
      <Compile Include="Assets\Scripts\Logic\Battle\Buff.cs" />
      <Compile Include="Assets\Scripts\FSM\State.cs" />
+     <Compile Include="Assets\Scripts\Utility\ValueTransition.cs" />
      <Compile Include="Assets\Scripts\Logic\DataCenter.cs" />
      <Compile Include="Assets\Scripts\Utility\SuperScrollView.cs" />
      <Compile Include="Assets\Scripts\Manager\Effect.cs" />
@@ -148,9 +151,6 @@
      <Compile Include="Assets\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
      <Compile Include="Assets\Scripts\Logic\Enemy\Enemy_104.cs" />
      <Compile Include="Assets\Scripts\UI\Window\TipWindow.cs" />
-     <Compile Include="Assets\Scripts\Logic\Enemy\Enemy_107.cs" />
-     <Compile Include="Assets\Scripts\Logic\Battle\CircleHP.cs" />
-     <Compile Include="Assets\Scripts\Utility\ValueTransition.cs" />
      <None Include="Assets\Resources\Shader\SpriteGray.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />

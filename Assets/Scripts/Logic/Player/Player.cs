@@ -27,7 +27,7 @@ public class Player : Unit
     //angle : 0 -> 360
     public void Move(float direction)
     {
-        float speed = 2;
+        float speed = ATT.SPEED / 100.0f;
 
         float t = Mathf.Clamp01(Time.deltaTime / 0.01f);
         m_Angle = Mathf.LerpAngle(m_Angle, m_Angle + direction * speed, t);

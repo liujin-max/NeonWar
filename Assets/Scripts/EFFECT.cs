@@ -9,6 +9,7 @@ public static class EFFECT
     public const string HEAL        = "Prefab/Effect/fx_healOnce";
     public const string SHIELD      = "Prefab/Effect/fx_shield";
     public const string SHIELD_BROKEN   = "Prefab/Effect/fx_shield_boom";
+    public const string CRIT        = "Prefab/Effect/fx_crit";
     
 
 

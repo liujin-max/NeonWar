@@ -57,6 +57,10 @@ public class SkillItem : MonoBehaviour
 
         if (GameFacade.Instance.DataCenter.User.Glass >= cost) m_Cost.text = cost.ToString();
         else m_Cost.text = _C.COLOR_RED + cost.ToString();
-        
+    }
+
+    public void ShowBtnUpgrade(bool flag)
+    {
+        m_BtnUpgrade.gameObject.SetActive(flag);
     }
 }

@@ -58,7 +58,8 @@ public class SkillWindow : MonoBehaviour
         m_SkillItems.ForEach(item => {item.gameObject.SetActive(false);});
 
         var item = new_skill_item(0);
-        item.Init(skill_data, level + 1);
+        item.Init(skill_data, Mathf.Min(skill_data.LevelMax, level + 1));
+        item.ShowBtnUpgrade(level < skill_data.LevelMax);
 
         //重置技能
         m_BtnReset.gameObject.SetActive(true);

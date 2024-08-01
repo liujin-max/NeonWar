@@ -11,6 +11,8 @@ public class Bullet : MonoBehaviour
 
     public Vector2 Velocity {get { return m_Rigidbody.velocity;}}
     public AttributeValue Speed = new AttributeValue(500);
+    public AttributeValue CP = new AttributeValue(0);
+    public AttributeValue CT = new AttributeValue(0);
 
 
     [HideInInspector] public HashSet<Unit> SpliteIgnoreUnits = new HashSet<Unit>();
@@ -30,6 +32,13 @@ public class Bullet : MonoBehaviour
         m_Rigidbody.gravityScale = 0;
     }
 
+    public void Init(Unit caster)
+    {
+        Caster = caster;
+
+        CP.SetBase(caster.ATT.CP.ToNumber());
+        CT.SetBase(caster.ATT.CP.ToNumber());
+    }
     
     public void Shoot(float angle , bool is_shoot = true)
     {
@@ -58,6 +67,10 @@ public class Bullet : MonoBehaviour
 
     void Dispose()
     {
+        Speed.Clear();
+        CP.Clear();
+        CT.Clear();
+
         SpliteIgnoreUnits.Clear();
         IsSplit         = false;
         PassTimes       = 0;

@@ -19,10 +19,11 @@ public static class RandomUtility
         return _Random.Next(min, max);
     }
 
-    public static bool IsHit(int value, int rate = 1)
+    public static bool IsHit(int value, int percent = 100)
     {
-        return _Random.Next(1, 100 * rate) <= value;
+        return _Random.Next(1, percent) <= value;
     }
+
 
     public static void Shuffle<T>(List<T> list)
     {

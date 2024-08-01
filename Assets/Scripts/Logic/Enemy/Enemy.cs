@@ -9,8 +9,7 @@ using UnityEngine;
 [System.Serializable]
 public class EnemyATT : ATT
 {
-    public int CrashATK = 1;    //撞击伤害
-    public int Speed;    //移动速度 
+    
 }
 
 public class Enemy : Unit
@@ -19,8 +18,6 @@ public class Enemy : Unit
     private SpriteRenderer m_Sprite;
     private CircleHP m_HPBar;
 
-    public int CrashATK = 1;    //撞击伤害
-    public int Speed = 160;     //移动速度 
 
     private MonsterJSON m_Data;
     public _C.ENEMY_TYPE TYPE {get {return m_Data.Type;}}
@@ -110,7 +107,7 @@ public class Enemy : Unit
         m_Rigidbody.velocity = Vector3.zero;
 
         float angle     = RandomUtility.Random(0, 360);
-        Vector2 force   = ToolUtility.FindPointOnCircle(Vector2.zero, Speed, angle);
+        Vector2 force   = ToolUtility.FindPointOnCircle(Vector2.zero, ATT.SPEED, angle);
         
         m_Rigidbody.AddForce(force);
     }

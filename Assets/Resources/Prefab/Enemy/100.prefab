@@ -56,10 +56,13 @@ MonoBehaviour:
     HP: 1
     ATK: 1
     ASP: 0
+    CP:
+      m_Base: 0
+    CT:
+      m_Base: 1500
+    SPEED: 150
     VUN_INC:
       m_Base: 1
-  CrashATK: 1
-  Speed: 150
 --- !u!58 &3382774460602914520
 CircleCollider2D:
   m_ObjectHideFlags: 0

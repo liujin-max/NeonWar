@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5581647061099615948}
   - component: {fileID: 5024298108139937723}
   - component: {fileID: 6940764923761439305}
-  - component: {fileID: 7962723872122156163}
+  - component: {fileID: 6683928179677100747}
   m_Layer: 8
   m_Name: Bullet_102
   m_TagString: Bullet
@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 5480662803317571861}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -51,9 +51,14 @@ MonoBehaviour:
   Caster: {fileID: 0}
   Speed:
     m_Base: 250
+  CP:
+    m_Base: 0
+  CT:
+    m_Base: 0
   IsSplit: 0
   PassTimes: 0
   ReboundTimes: 0
+  KillRate: 0
 --- !u!50 &5024298108139937723
 Rigidbody2D:
   serializedVersion: 4
@@ -116,7 +121,7 @@ SpriteRenderer:
   m_SortingLayerID: -1515743181
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: cdb54804151a57d4abb0511fbbda1a03, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a5d96e2173c70004592e9b69f9bedc96, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -127,8 +132,8 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!60 &7962723872122156163
-PolygonCollider2D:
+--- !u!58 &6683928179677100747
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -141,17 +146,5 @@ PolygonCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.72, y: 1}
-    newSize: {x: 5.12, y: 5.12}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Points:
-    m_Paths:
-    - - {x: 0.7239919, y: -0.58695495}
-      - {x: 0.009094, y: 0.6748976}
-      - {x: -0.6618116, y: -0.5899317}
+  serializedVersion: 2
+  m_Radius: 0.16

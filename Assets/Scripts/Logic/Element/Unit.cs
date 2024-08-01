@@ -9,8 +9,12 @@ public class ATT
     public int HPMAX   = 3;
     [HideInInspector] public int HP = 3;
     [HideInInspector] public int ATK  = 1;
-    [Header("攻速/ms")] public int ASP;    //攻速 
+    [Header("攻速(毫秒)")] public int ASP;    //攻速 
+    [Header("暴击率(千分制)")] public AttributeValue CP = new AttributeValue(0);
+    [Header("暴击伤害(千分制)")] public AttributeValue CT = new AttributeValue(1500);
 
+    [Header("移动速度")] public float SPEED;    //移动速度 
+    
     //易伤倍率
     [HideInInspector] public AttributeValue VUN_INC   = new AttributeValue(1f, false);
 }
@@ -114,7 +118,7 @@ public class Unit : MonoBehaviour
     {
         var bullet = GameFacade.Instance.PoolManager.AllocateBullet(BulletTemplate, Vector3.zero);
         bullet.transform.position = ShootPivot.position;
-        bullet.Caster = this;
+        bullet.Init(this);
 
         EventManager.SendEvent(new GameEvent(EVENT.ONBULLETCREATE, bullet));
 

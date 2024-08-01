@@ -205,13 +205,29 @@ public class Field : MonoBehaviour
 
         int demage = Mathf.RoundToInt(bullet.Caster.ATT.ATK * unit.ATT.VUN_INC.ToNumber());
 
-        if (RandomUtility.IsHit(bullet.KillRate) == true && (unit.Side == _C.SIDE.ENEMY && unit.GetComponent<Enemy>().TYPE != _C.ENEMY_TYPE.BOSS))   //一击必杀
-        {
-            demage = unit.ATT.HP;
-        }
-
         //护盾
-        if (unit.GetBuff((int)_C.BUFF.SHIELD) != null) demage = 0;
+        if (unit.GetBuff((int)_C.BUFF.SHIELD) != null)
+        {
+            demage = 0;
+        }
+        else
+        {
+            if (RandomUtility.IsHit(bullet.KillRate) == true && (unit.Side == _C.SIDE.ENEMY && unit.GetComponent<Enemy>().TYPE != _C.ENEMY_TYPE.BOSS))   //一击必杀
+            {
+                demage = unit.ATT.HP;
+            }
+            else
+            {
+                //是否暴击
+                if (RandomUtility.IsHit((int)bullet.CP.ToNumber(), 1000) == true)
+                {
+                    demage  = Mathf.FloorToInt(demage * bullet.CT.ToNumber() / 1000.0f);
+
+                    //暴击特效
+                    GameFacade.Instance.EffectManager.Load(EFFECT.CRIT, bullet.transform.localPosition, Land.ELEMENT_ROOT.gameObject);
+                }
+            }
+        }
 
         unit.UpdateHP(-demage); 
 
@@ -257,10 +273,13 @@ public class Field : MonoBehaviour
         //无敌了
         if (player.IsInvincible() == true) return;
 
-        player.UpdateHP(-enemy.ATT.ATK);
+        //撞击伤害
+        int demage = enemy.TYPE == _C.ENEMY_TYPE.BOSS ? 3 : 1;
+        player.UpdateHP(-demage);
         player.InvincibleTimer.ForceReset();
 
         Land.DoShake();
+
         //特效处理
         if (player.IsDead() == true) {}
         else GameFacade.Instance.EffectManager.Load(EFFECT.CRASH, Vector3.zero, Field.Instance.Land.ELEMENT_ROOT.gameObject);

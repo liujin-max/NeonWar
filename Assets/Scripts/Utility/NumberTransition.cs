@@ -45,6 +45,15 @@ public class NumberTransition : MonoBehaviour
         }
     }
 
+    public string GetText()
+    {
+        if (m_TextUGUI != null) return m_TextUGUI.text;
+        if (m_TextMesh != null) return m_TextMesh.text;
+        if (m_Text != null) return m_Text.text;
+
+        return "";
+    }
+
     public void SetValue(int value)
     {
         m_TargetNumber  = value;
