@@ -1,9 +1,13 @@
 {
-    "Glass" : 0,
+    "Glass" : 535,
     "HP" : 280,
     "Monsters": 
     [
-        {"Time": 4000, "ID": 107, "HP":260080, "Type" : 2, "Glass" : 75, "Radius": 0, "Angle":0}
+        {"Time":    0, "ID": 103, "HP": 215, "Radius": 2.5, "Angle":162, "Buffs": [60000, 60002, 60006, 60007]},
+
+
+        {"Time": 4000, "ID": 100, "HP":2680, "Type" : 2, "Glass" : 75, "Radius": 0, "Angle":0}
+
     ]
 }
   

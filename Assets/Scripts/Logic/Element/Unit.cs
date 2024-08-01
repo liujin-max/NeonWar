@@ -8,12 +8,12 @@ public class ATT
 {
     public int HPMAX   = 3;
     [HideInInspector] public int HP = 3;
-    [HideInInspector] public int ATK  = 1;
-    [Header("攻速(毫秒)")] public int ASP;    //攻速 
+    [HideInInspector] public AttributeValue ATK  = new AttributeValue(1);
+    [Header("攻速(毫秒)")] public AttributeValue ASP = new AttributeValue(1000);    //攻速 
     [Header("暴击率(千分制)")] public AttributeValue CP = new AttributeValue(0);
     [Header("暴击伤害(千分制)")] public AttributeValue CT = new AttributeValue(1500);
-
-    [Header("移动速度")] public float SPEED;    //移动速度 
+    [Header("闪避率(千分制)")] public AttributeValue DODGE = new AttributeValue(0);
+    [Header("移动速度")] public AttributeValue SPEED = new AttributeValue(0);
     
     //易伤倍率
     [HideInInspector] public AttributeValue VUN_INC   = new AttributeValue(1f, false);
@@ -90,6 +90,11 @@ public class Unit : MonoBehaviour
 
     #region 表现处理
     public virtual void HitAnim()
+    {
+
+    }
+
+    public virtual void Dead(Bullet bullet)
     {
 
     }

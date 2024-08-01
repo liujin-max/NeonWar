@@ -62,6 +62,18 @@ public static class _C
         STUN    = 50000,
         YISHANG,
         SHIELD,
+
+
+        ATK_UP      = 60000,    //攻击力提高
+        ATK_DOWN    = 60001,    //攻击力降低
+        ASP_UP      = 60002,    //攻速提升
+        ASP_DOWN    = 60003,    //攻速降低
+        SPEED_UP    = 60004,    //移动速度提高
+        SPEED_DOWN  = 60005,    //移动速度降低
+        CP          = 60006,    //暴击率提高
+        DODGE_UP    = 60007,    //闪避率提高
+
+        END
     }
 
 

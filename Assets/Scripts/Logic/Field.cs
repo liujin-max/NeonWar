@@ -25,6 +25,7 @@ public class Field : MonoBehaviour
     private Level m_Level;
     public Level Level {get {return m_Level;}}
 
+    private List<BuffBubble> m_BuffBubbles = new List<BuffBubble>();
     
     //累计获得的碎片
     private int m_Glass;
@@ -100,6 +101,9 @@ public class Field : MonoBehaviour
 
         Land.Dispose();
         m_Spawn.Dispose();
+
+        m_BuffBubbles.ForEach(b => b.Dispose());
+        m_BuffBubbles.Clear();
 
 
         EventManager.SendEvent(new GameEvent(EVENT.ONBATTLEEND));
@@ -192,6 +196,24 @@ public class Field : MonoBehaviour
         }
     }
 
+    //在场地上生成可拾取的Buff
+    public void PushBuffBubble(int id, int value)
+    {
+        var point = ToolUtility.FindPointOnCircle(Vector2.zero, _C.DEFAULT_RADIUS, RandomUtility.Random(0, 360));
+
+        var bubble = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Element/BuffBubble", point, Land.ELEMENT_ROOT).GetComponent<BuffBubble>();
+        bubble.Init(id, value);
+
+        m_BuffBubbles.Add(bubble);
+    }
+
+    public void RemoveBuffBubble(BuffBubble b)
+    {
+        b.Dispose();
+
+        m_BuffBubbles.Remove(b);
+    }
+
 
     //子弹击中敌人
     public bool Hit(Bullet bullet, Unit unit)
@@ -203,11 +225,17 @@ public class Field : MonoBehaviour
         if (bullet.PassTimes < 0) return false;
 
 
-        int demage = Mathf.RoundToInt(bullet.Caster.ATT.ATK * unit.ATT.VUN_INC.ToNumber());
+        int demage = Mathf.RoundToInt(bullet.Caster.ATT.ATK.ToNumber() * unit.ATT.VUN_INC.ToNumber());
+
 
         //护盾
         if (unit.GetBuff((int)_C.BUFF.SHIELD) != null)
         {
+            demage = 0;
+        }
+        else if (RandomUtility.IsHit((int)unit.ATT.DODGE.ToNumber(), 1000) == true) //闪避了
+        {
+            //闪避特效
             demage = 0;
         }
         else
@@ -236,31 +264,12 @@ public class Field : MonoBehaviour
         //受击表现
         if (unit.IsDead() == true)
         {
-            if (unit.Side == _C.SIDE.PLAYER) 
-            {
-                Land.DoShake();
-            }
-
-            //怪物死亡
-            if (unit.Side == _C.SIDE.ENEMY)
-            {
-                Land.DoSmallShake();
-
-                var e = GameFacade.Instance.EffectManager.Load(EFFECT.BROKEN, unit.transform.localPosition, Land.ELEMENT_ROOT.gameObject);
-                e.transform.localEulerAngles = new Vector3(0, 0, ToolUtility.VectorToAngle(bullet.Velocity));
-            }
+            unit.Dead(bullet);
         }
         else
         {
-            if (demage > 0)
-            {
+            if (demage > 0) {
                 unit.HitAnim();
-            
-                if (unit.Side == _C.SIDE.PLAYER) 
-                {
-                    Land.DoShake();
-                    GameFacade.Instance.EffectManager.Load(EFFECT.CRASH, Vector3.zero, Field.Instance.Land.ELEMENT_ROOT.gameObject);
-                }
             }
         }
 
@@ -272,6 +281,13 @@ public class Field : MonoBehaviour
     {
         //无敌了
         if (player.IsInvincible() == true) return;
+
+        //闪避了
+        if (RandomUtility.IsHit((int)player.ATT.DODGE.ToNumber(), 1000) == true) {
+            //闪避特效
+            return;
+        }
+
 
         //撞击伤害
         int demage = enemy.TYPE == _C.ENEMY_TYPE.BOSS ? 3 : 1;

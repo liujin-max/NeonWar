@@ -12,6 +12,9 @@ public class EnemyATT : ATT
     
 }
 
+
+
+
 public class Enemy : Unit
 {
     private Rigidbody2D m_Rigidbody;
@@ -25,10 +28,10 @@ public class Enemy : Unit
 
     private Vector2 m_LastVelocity;
     private float m_LastAngularVelocity;
-
-
-
     private bool m_InHitAnim = false;
+
+
+
 
     void Awake()
     {
@@ -52,7 +55,7 @@ public class Enemy : Unit
         ATT.HPMAX  = monster_data.HP;
         ATT.HP  = ATT.HPMAX;
 
-        ASP.Reset(ATT.ASP / 1000.0f);
+        ASP.Reset(ATT.ASP.ToNumber() / 1000.0f);
 
 
         InitHPBar();
@@ -83,7 +86,24 @@ public class Enemy : Unit
         if (m_InHitAnim) return;
 
         m_InHitAnim = true;
-        m_Sprite.transform.DOPunchScale(new Vector3(0.15f, 0.2f, 0.15f), 0.15f).OnComplete(()=>{m_InHitAnim = false;});
+        m_Sprite.transform.DOPunchScale(new Vector3(0.15f, 0.2f, 0.15f), 0.15f).OnComplete(()=>{ m_InHitAnim = false;});
+    }
+
+    public override void Dead(Bullet bullet)
+    {
+        //掉落Buff逻辑
+        if (m_Data.Buffs.Length > 0)
+        {
+            int rand    = RandomUtility.Random(0, m_Data.Buffs.Length);
+            int buff_id = m_Data.Buffs[rand];
+            Field.Instance.PushBuffBubble(buff_id, 1);
+        }
+
+
+        Field.Instance.Land.DoSmallShake();
+
+        GameFacade.Instance.EffectManager.Load(EFFECT.BROKEN, transform.localPosition, Field.Instance.Land.ELEMENT_ROOT.gameObject).transform.right = bullet.Velocity;
+
     }
     #endregion
 
@@ -107,7 +127,7 @@ public class Enemy : Unit
         m_Rigidbody.velocity = Vector3.zero;
 
         float angle     = RandomUtility.Random(0, 360);
-        Vector2 force   = ToolUtility.FindPointOnCircle(Vector2.zero, ATT.SPEED, angle);
+        Vector2 force   = ToolUtility.FindPointOnCircle(Vector2.zero, ATT.SPEED.ToNumber(), angle);
         
         m_Rigidbody.AddForce(force);
     }

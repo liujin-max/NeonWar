@@ -18,6 +18,9 @@ public class CDTimer
         }
     }
 
+
+    public float Progress {get{return m_current / m_duration;}}
+
     //倒计时
     private bool m_IsCountDown = false;
 

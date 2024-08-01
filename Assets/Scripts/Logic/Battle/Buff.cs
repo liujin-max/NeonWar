@@ -96,6 +96,178 @@ public class Buff_Shield : Buff
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#region 场上Buff
+
+
+#region 攻击百分比提高
+public class Buff_ATKUP : Buff
+{
+    public override void Init()
+    {
+        Duration = new CDTimer(5f);
+
+        Caster.ATT.ATK.PutAUL(this, 0.5f);
+    }
+
+    public override void Dispose()
+    {
+        Caster.ATT.ATK.Pop(this);
+    }
+}
+#endregion
+
+
+#region 攻击百分比下降
+public class Buff_ATKDOWN : Buff
+{
+    public override void Init()
+    {
+        Duration = new CDTimer(5f);
+
+        Caster.ATT.ATK.PutAUL(this, -0.5f);
+    }
+
+    public override void Dispose()
+    {
+        Caster.ATT.ATK.Pop(this);
+    }
+}
+#endregion
+
+
+#region 攻速提高
+public class Buff_ASPUP : Buff
+{
+    public override void Init()
+    {
+        Duration = new CDTimer(5f);
+
+        Caster.ATT.ASP.PutMUL(this, 0.5f);
+        Caster.ASP.SetDuration(Caster.ATT.ASP.ToNumber() / 1000.0f);
+    }
+
+    public override void Dispose()
+    {
+        Caster.ATT.ASP.Pop(this);
+        Caster.ASP.SetDuration(Caster.ATT.ASP.ToNumber() / 1000.0f);
+    }
+}
+#endregion
+
+
+#region 攻速降低
+public class Buff_ASPDOWN : Buff
+{
+    public override void Init()
+    {
+        Duration = new CDTimer(5f);
+
+        Caster.ATT.ASP.PutMUL(this, 1.5f);
+        Caster.ASP.SetDuration(Caster.ATT.ASP.ToNumber() / 1000.0f);
+    }
+
+    public override void Dispose()
+    {
+        Caster.ATT.ASP.Pop(this);
+        Caster.ASP.SetDuration(Caster.ATT.ASP.ToNumber() / 1000.0f);
+    }
+}
+#endregion
+
+
+#region 移动速度提高
+public class Buff_SPEEDUP : Buff
+{
+    public override void Init()
+    {
+        Duration = new CDTimer(5f);
+
+        Caster.ATT.SPEED.PutAUL(this, 0.3f);
+    }
+
+    public override void Dispose()
+    {
+        Caster.ATT.SPEED.Pop(this);
+    }
+}
+#endregion
+
+
+#region 移动速度降低
+public class Buff_SPEEDDOWN : Buff
+{
+    public override void Init()
+    {
+        Duration = new CDTimer(5f);
+
+        Caster.ATT.SPEED.PutAUL(this, -0.3f);
+    }
+
+    public override void Dispose()
+    {
+        Caster.ATT.SPEED.Pop(this);
+    }
+}
+#endregion
+
+
+#region 暴击率提高
+public class Buff_CP : Buff
+{
+    public override void Init()
+    {
+        Duration = new CDTimer(5f);
+
+        Caster.ATT.CP.PutADD(this, 500);
+    }
+
+    public override void Dispose()
+    {
+        Caster.ATT.CP.Pop(this);
+    }
+}
+#endregion
+
+
+#region 闪避率提高
+public class Buff_DODGEUP : Buff
+{
+    public override void Init()
+    {
+        Duration = new CDTimer(5f);
+
+        Caster.ATT.DODGE.PutADD(this, 800);
+    }
+
+    public override void Dispose()
+    {
+        Caster.ATT.DODGE.Pop(this);
+    }
+}
+#endregion
+
+
+#endregion
+
+
+
 public class Buff
 {
     public Unit Caster;
@@ -112,6 +284,17 @@ public class Buff
         {(int)_C.BUFF.STUN,     () => new Buff_Stun()},
         {(int)_C.BUFF.YISHANG,  () => new Buff_YiShang()},
         {(int)_C.BUFF.SHIELD,   () => new Buff_Shield()},
+
+
+        //场上Buff
+        {(int)_C.BUFF.ATK_UP,   () => new Buff_ATKUP()},
+        {(int)_C.BUFF.ATK_DOWN, () => new Buff_ATKDOWN()},
+        {(int)_C.BUFF.ASP_UP,   () => new Buff_ASPUP()},
+        {(int)_C.BUFF.ASP_DOWN, () => new Buff_ASPDOWN()},
+        {(int)_C.BUFF.SPEED_UP, () => new Buff_SPEEDUP()},
+        {(int)_C.BUFF.SPEED_DOWN,   () => new Buff_SPEEDDOWN()},
+        {(int)_C.BUFF.CP,       () => new Buff_CP()},
+        {(int)_C.BUFF.DODGE_UP, () => new Buff_DODGEUP()},
     };
 
 

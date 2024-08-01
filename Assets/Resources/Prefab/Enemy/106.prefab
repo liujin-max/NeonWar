@@ -175,12 +175,17 @@ MonoBehaviour:
   ATT:
     HPMAX: 3
     HP: 3
-    ATK: 1
-    ASP: 0
+    ATK:
+      m_Base: 1
+    ASP:
+      m_Base: 0
     CP:
       m_Base: 0
     CT:
       m_Base: 1500
-    SPEED: 150
+    DODGE:
+      m_Base: 0
+    SPEED:
+      m_Base: 150
     VUN_INC:
       m_Base: 1

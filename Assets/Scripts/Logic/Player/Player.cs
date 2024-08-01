@@ -18,29 +18,11 @@ public class Player : Unit
         m_Angle = angle;
         ATT.HP  = ATT.HPMAX;
 
+
+
         InvincibleTimer.Full();
 
         this.SetPosition(ToolUtility.FindPointOnCircle(Vector2.zero, _C.DEFAULT_RADIUS, angle));
-    }
-
-
-    //angle : 0 -> 360
-    public void Move(float direction)
-    {
-        float speed = ATT.SPEED / 100.0f;
-
-        float t = Mathf.Clamp01(Time.deltaTime / 0.01f);
-        m_Angle = Mathf.LerpAngle(m_Angle, m_Angle + direction * speed, t);
-
-        this.SetPosition(ToolUtility.FindPointOnCircle(Vector2.zero, _C.DEFAULT_RADIUS, m_Angle));
-    }
-
-    //对角线闪现
-    public void Blink()
-    {
-        m_Angle += 180;
-
-        this.SetPosition(ToolUtility.FindPointOnCircle(Vector2.zero, _C.DEFAULT_RADIUS, m_Angle));
     }
 
     public void SetPosition(Vector2 pos)
@@ -73,23 +55,58 @@ public class Player : Unit
 
     public void Dispose()
     {
-        m_Skills.ForEach(skill => skill.Dispose());
+        m_Skills.ForEach(s => s.Dispose());
         m_Skills.Clear();
 
         Destroy(gameObject);
     }
 
+
+    #region 表现处理
+    public override void HitAnim()
+    {
+        Field.Instance.Land.DoShake();
+        GameFacade.Instance.EffectManager.Load(EFFECT.CRASH, Vector3.zero, Field.Instance.Land.ELEMENT_ROOT.gameObject);
+    }
+
+    public override void Dead(Bullet bullet)
+    {
+        Field.Instance.Land.DoShake();
+    }
+    
+    #endregion
     
 
     #region 逻辑处理
+    //angle : 0 -> 360
+    public void Move(float direction)
+    {
+        float speed = ATT.SPEED.ToNumber() / 100.0f;
+
+        float t = Mathf.Clamp01(Time.deltaTime / 0.01f);
+        m_Angle = Mathf.LerpAngle(m_Angle, m_Angle + direction * speed, t);
+
+        this.SetPosition(ToolUtility.FindPointOnCircle(Vector2.zero, _C.DEFAULT_RADIUS, m_Angle));
+    }
+
+    //对角线闪现
+    public void Blink()
+    {
+        m_Angle += 180;
+
+        this.SetPosition(ToolUtility.FindPointOnCircle(Vector2.zero, _C.DEFAULT_RADIUS, m_Angle));
+    }
+
     //同步最新的加成等级
     public void Sync()
     {
         int atk_level = GameFacade.Instance.DataCenter.User.CurrentPlayer.ATK;
         int asp_level = GameFacade.Instance.DataCenter.User.CurrentPlayer.ASP;
 
-        ATT.ATK = NumericalManager.FML_ATK(atk_level);
-        ASP.Reset(NumericalManager.FML_ASP(ATT.ASP, asp_level) / 1000.0f);
+
+        ATT.ATK.SetBase(NumericalManager.FML_ATK(atk_level));
+        ATT.ASP.SetBase(NumericalManager.FML_ASP(ATT.ASP.GetBase(), asp_level));
+        ASP.Reset(ATT.ASP.ToNumber() / 1000.0f);
 
 
         //同步技能

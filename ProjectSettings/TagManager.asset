@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Bullet
   - Wall
+  - BuffBubble
   layers:
   - Default
   - TransparentFX
@@ -18,7 +19,7 @@ TagManager:
   - Player
   - Enemy
   - Bullet
-  - 
+  - Buff
   - 
   - 
   - 
