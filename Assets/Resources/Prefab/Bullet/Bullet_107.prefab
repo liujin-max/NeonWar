@@ -50,7 +50,11 @@ MonoBehaviour:
   Name: 
   Caster: {fileID: 0}
   Speed:
-    m_Base: 250
+    m_Base: 180
+  CP:
+    m_Base: 0
+  CT:
+    m_Base: 0
   IsSplit: 0
   PassTimes: 0
   ReboundTimes: 0

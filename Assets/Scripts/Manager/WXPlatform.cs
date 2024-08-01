@@ -23,9 +23,9 @@ public class WXPlatform : Platform
             WX.SetPreferredFramesPerSecond(_C.DEFAULT_FRAME);
 
             //初始化云开发
-            CallFunctionInitParam param = new CallFunctionInitParam();
-            param.env = _C.CLOUD_ENV;
-            WX.cloud.Init(param);
+            // CallFunctionInitParam param = new CallFunctionInitParam();
+            // param.env = _C.CLOUD_ENV;
+            // WX.cloud.Init(param);
 
             //上报启动
             WX.ReportGameStart();
@@ -86,71 +86,82 @@ public class WXPlatform : Platform
     //启动同步账号数据
     public override void SYNC()
     {
-        Debug.Log("====开始获取账号数据====");
-        EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPMASK, true));
-        //云开发：加载积分数据
-        WX.cloud.CallFunction(new CallFunctionParam()
-        {
-            name = "GetUserData",
-            data = JsonUtility.ToJson(""),
-            success = (res) =>
-            {
-                Debug.Log("====获取账号数据成功==== : " + res.result);
-                //云数据保存到本地
-                var data = JsonMapper.ToObject(res.result);
-                if (data.ContainsKey("data"))
-                {
-                    //将Json转换成临时的GameUserData
-                    GameFacade.Instance.DataCenter.User.Data    = JsonUtility.FromJson<GameUserData>(JsonMapper.ToJson(data["data"]));
+        string json = PlayerPrefs.GetString(SystemManager.KEY_USER);
 
-                    //基础数据
-                    GameFacade.Instance.DataCenter.User.Base    = JsonUtility.FromJson<BaseData>(JsonMapper.ToJson(data["data"]["userInfo"]));
-                }
-            },
-            fail = (res) =>
-            {
-                Debug.LogError("====获取账号数据失败====" + res.errMsg);
-            },
-            complete = (res) =>
-            {
-                Debug.Log("====获取账号数据结束====");
-                GameFacade.Instance.DataCenter.User.SyncRecords();
+        if (string.IsNullOrEmpty(json)) {
+            GameFacade.Instance.DataCenter.User.SyncRecords();
+            GameFacade.Instance.DataCenter.User.SyncFinish();
+            return;
+        }
+        
+        // Debug.Log("加载存档：" + json);
 
-                // if (GameFacade.Instance.DataCenter.User.Level >= _C.ENDLESS_UNLOCK_LEVEL)
-                // {
-                //     Platform.Instance.PULLRANK(_C.RANK.ENDLESS, (data)=>{
-                //         GameFacade.Instance.DataCenter.User.SyncFinish();
-                //     });
-                // }
-                // else
-                // {
-                    GameFacade.Instance.DataCenter.User.SyncFinish();
-                // }
+        GameFacade.Instance.DataCenter.User.Data = JsonUtility.FromJson<GameUserData>(json);
+
+        GameFacade.Instance.DataCenter.User.SyncRecords();
+        GameFacade.Instance.DataCenter.User.SyncFinish();
+
+        // Debug.Log("====开始获取账号数据====");
+        // EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPMASK, true));
+        // //云开发：加载积分数据
+        // WX.cloud.CallFunction(new CallFunctionParam()
+        // {
+        //     name = "GetUserData",
+        //     data = JsonUtility.ToJson(""),
+        //     success = (res) =>
+        //     {
+        //         Debug.Log("====获取账号数据成功==== : " + res.result);
+        //         //云数据保存到本地
+        //         var data = JsonMapper.ToObject(res.result);
+        //         if (data.ContainsKey("data"))
+        //         {
+        //             //将Json转换成临时的GameUserData
+        //             GameFacade.Instance.DataCenter.User.Data    = JsonUtility.FromJson<GameUserData>(JsonMapper.ToJson(data["data"]));
+
+        //             //基础数据
+        //             GameFacade.Instance.DataCenter.User.Base    = JsonUtility.FromJson<BaseData>(JsonMapper.ToJson(data["data"]["userInfo"]));
+        //         }
+        //     },
+        //     fail = (res) =>
+        //     {
+        //         Debug.LogError("====获取账号数据失败====" + res.errMsg);
+        //     },
+        //     complete = (res) =>
+        //     {
+        //         Debug.Log("====获取账号数据结束====");
+        //         GameFacade.Instance.DataCenter.User.SyncRecords();
+
+
+        //         GameFacade.Instance.DataCenter.User.SyncFinish();
                 
-                EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPMASK, false));
-            }
-        });
+        //         EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPMASK, false));
+        //     }
+        // });
         
 
     }
 
     public override void UPLOAD(GameUserData userData)
     {
+        string json = JsonUtility.ToJson(userData);
+        PlayerPrefs.SetString(SystemManager.KEY_USER, json);
+        PlayerPrefs.Save();
+
         //上传账号数据
-        Debug.Log("====开始上传账号数据====");
-        WX.cloud.CallFunction(new CallFunctionParam()
-        {
-            name = "SetUserData",
-            data = JsonUtility.ToJson(userData),
-            success = (res) =>
-            {
-                Debug.Log("====上传账号数据成功====");
-            },
-            fail = (res) =>
-            {
-                Debug.LogError("====上传账号数据失败====" + res.errMsg);
-            }
-        });
+        // Debug.Log("====开始上传账号数据====");
+        // WX.cloud.CallFunction(new CallFunctionParam()
+        // {
+        //     name = "SetUserData",
+        //     data = JsonUtility.ToJson(userData),
+        //     success = (res) =>
+        //     {
+        //         Debug.Log("====上传账号数据成功====");
+        //     },
+        //     fail = (res) =>
+        //     {
+        //         Debug.LogError("====上传账号数据失败====" + res.errMsg);
+        //     }
+        // });
     }
 
     //拉取排行榜

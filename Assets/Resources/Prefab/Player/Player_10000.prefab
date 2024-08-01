@@ -162,7 +162,7 @@ MonoBehaviour:
   ID: 0
   Side: 0
   ATT:
-    HPMAX: 2
+    HPMAX: 3
     HP: 3
     ATK: 1
     ASP: 450
@@ -170,7 +170,7 @@ MonoBehaviour:
       m_Base: 50
     CT:
       m_Base: 1500
-    SPEED: 250
+    SPEED: 180
     VUN_INC:
       m_Base: 1
 --- !u!1 &8387908895274495325

@@ -41,7 +41,7 @@ public class ValueTransition
 
     public void Update(float deltaTime)
     {
-        if (m_TargetNumber == (int)m_CurrentNumber) return;
+        if (m_TargetNumber == m_CurrentNumber) return;
 
         
         var speed   = m_Offset * deltaTime / m_Time;

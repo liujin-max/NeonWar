@@ -50,7 +50,7 @@ MonoBehaviour:
   Name: 
   Caster: {fileID: 0}
   Speed:
-    m_Base: 250
+    m_Base: 200
   CP:
     m_Base: 0
   CT:

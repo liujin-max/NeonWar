@@ -37,7 +37,7 @@ public class Bullet : MonoBehaviour
         Caster = caster;
 
         CP.SetBase(caster.ATT.CP.ToNumber());
-        CT.SetBase(caster.ATT.CP.ToNumber());
+        CT.SetBase(caster.ATT.CT.ToNumber());
     }
     
     public void Shoot(float angle , bool is_shoot = true)
