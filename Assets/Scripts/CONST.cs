@@ -72,7 +72,7 @@ public static class _C
         SPEED_DOWN  = 60005,    //移动速度降低
         CP          = 60006,    //暴击率提高
         DODGE_UP    = 60007,    //闪避率提高
-        SPD_MUL     = 60008,    //减速全程敌人
+        SPD_MUL     = 60008,    //减速全场敌人
 
         END
     }

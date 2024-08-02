@@ -1,18 +1,19 @@
 %YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
+%TAG !u! tag:yousandi.cn,2023:
 --- !u!1 &5480662803317571861
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
+  serializedVersion: 7
   m_Component:
   - component: {fileID: 5439145291208257697}
   - component: {fileID: 5581647061099615948}
   - component: {fileID: 2171232781514582220}
   - component: {fileID: 5024298108139937723}
   m_Layer: 8
+  m_HasEditorInfo: 1
   m_Name: Bullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -49,8 +50,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   Caster: {fileID: 0}
-  Speed: 500
+  Speed:
+    m_Base: 1250
+  CP:
+    m_Base: 0
+  CT:
+    m_Base: 0
   IsSplit: 0
+  PassTimes: 0
+  ReboundTimes: 0
+  KillRate: 0
 --- !u!58 &2171232781514582220
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -61,6 +70,25 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -84,6 +112,12 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
   m_Interpolate: 2
   m_SleepingMode: 1
   m_CollisionDetection: 1
@@ -94,11 +128,12 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
+  serializedVersion: 7
   m_Component:
   - component: {fileID: 5611778980231053346}
   - component: {fileID: 3806200536078765297}
   m_Layer: 8
+  m_HasEditorInfo: 1
   m_Name: '-'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -137,6 +172,8 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 0
   m_RayTraceProcedural: 0
+  m_virtualGeometry: 0
+  m_virtualGeometryShadow: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:

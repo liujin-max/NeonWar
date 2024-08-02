@@ -42,13 +42,7 @@ public class Bullet : MonoBehaviour
     
     public void Shoot(float angle , bool is_shoot = true)
     {
-        m_Rigidbody.velocity = Vector2.zero;
-
-        Vector2 force = ToolUtility.FindPointOnCircle(Vector2.zero, Speed.ToNumber(), angle);
-        m_Rigidbody.AddForce(force);
-
-        //朝向前进的方向
-        transform.right = force;
+        m_Rigidbody.velocity = ToolUtility.FindPointOnCircle(Vector2.zero, Speed.ToNumber() / 100.0f, angle);
 
         EventManager.SendEvent(new GameEvent(EVENT.ONBULLETSHOOT, this));
     }
@@ -78,6 +72,12 @@ public class Bullet : MonoBehaviour
         KillRate        = 0;
 
         GameFacade.Instance.PoolManager.RecycleBullet(this);
+    }
+
+    void LateUpdate()
+    {
+        //朝向前进的方向
+        transform.right = m_Rigidbody.velocity;
     }
 
     #region 碰撞检测

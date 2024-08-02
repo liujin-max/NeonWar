@@ -199,7 +199,6 @@ public class Field : MonoBehaviour
     //在场地上生成可拾取的Buff
     public void PushBuffBubble(int id, int value)
     {
-        id = 60008;
         var point = ToolUtility.FindPointOnCircle(Vector2.zero, _C.DEFAULT_RADIUS, RandomUtility.Random(0, 360));
 
         var bubble = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Element/BuffBubble", point, Land.ELEMENT_ROOT).GetComponent<BuffBubble>();

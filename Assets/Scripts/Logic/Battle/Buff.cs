@@ -264,7 +264,7 @@ public class Buff_DODGEUP : Buff
 #endregion
 
 
-#region 减速全场敌人
+#region 减速敌人
 public class Buff_SPDMUL : Buff
 {
     public override void Init()
