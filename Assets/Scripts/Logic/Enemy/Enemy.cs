@@ -66,6 +66,14 @@ public class Enemy : Unit
         Destroy(gameObject);
     }
 
+    void LateUpdate()
+    {
+        m_Rigidbody.velocity = m_Rigidbody.velocity.normalized * ATT.SPEED.ToNumber() / 100.0f;
+    }
+
+
+    #region 表现处理
+
     void InitHPBar()
     {
         m_HPBar = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Enemy/CircleHP", Vector2.zero, transform).GetComponent<CircleHP>();
@@ -75,8 +83,6 @@ public class Enemy : Unit
     }
 
 
-
-    #region 表现处理
     public override void HitAnim()
     {
         if (m_InHitAnim) return;
@@ -102,7 +108,6 @@ public class Enemy : Unit
     }
     #endregion
 
-
     #region 逻辑处理
     public void SetValid(bool flag)
     {
@@ -119,12 +124,9 @@ public class Enemy : Unit
     //strength :力的强度，意味着移动速度
     public void Push()
     {
-        m_Rigidbody.velocity = Vector3.zero;
+        float angle = RandomUtility.Random(0, 360);
 
-        float angle     = RandomUtility.Random(0, 360);
-        Vector2 force   = ToolUtility.FindPointOnCircle(Vector2.zero, ATT.SPEED.ToNumber(), angle);
-        
-        m_Rigidbody.AddForce(force);
+        m_Rigidbody.velocity = ToolUtility.FindPointOnCircle(Vector2.zero, ATT.SPEED.ToNumber() / 100.0f, angle);
     }
 
     //暂停运动

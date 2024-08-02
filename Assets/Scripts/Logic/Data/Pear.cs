@@ -50,4 +50,9 @@ public class Pear
     {
 
     }
+
+    public virtual void Dispose()
+    {
+
+    }
 }

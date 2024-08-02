@@ -251,7 +251,7 @@ public class Buff_DODGEUP : Buff
 {
     public override void Init()
     {
-        Duration = new CDTimer(5f);
+        Duration = new CDTimer(8f);
 
         Caster.ATT.DODGE.PutADD(this, 800);
     }
@@ -263,6 +263,32 @@ public class Buff_DODGEUP : Buff
 }
 #endregion
 
+
+#region 减速全场敌人
+public class Buff_SPDMUL : Buff
+{
+    public override void Init()
+    {
+        Duration = new CDTimer(3.5f);
+    }
+
+    public override void Update(float deltaTime)
+    {
+        base.Update(deltaTime);
+
+        Field.Instance.Spawn.Enemys.ForEach(e => {
+            e.ATT.SPEED.PutMUL(this, 0.4f);
+        });
+    }
+
+    public override void Dispose()
+    {
+        Field.Instance.Spawn.Enemys.ForEach(e => {
+            e.ATT.SPEED.Pop(this);
+        });
+    }
+}
+#endregion
 
 #endregion
 
@@ -295,14 +321,20 @@ public class Buff
         {(int)_C.BUFF.SPEED_DOWN,   () => new Buff_SPEEDDOWN()},
         {(int)_C.BUFF.CP,       () => new Buff_CP()},
         {(int)_C.BUFF.DODGE_UP, () => new Buff_DODGEUP()},
+        {(int)_C.BUFF.SPD_MUL,  () => new Buff_SPDMUL()},
     };
 
 
     public static Buff Create(int buff_id, int value, Unit caster)
     {
         Buff buff;
-        if (m_classDictionary.ContainsKey(buff_id)) buff = m_classDictionary[buff_id]();
-        else buff = new Buff();
+        if (m_classDictionary.ContainsKey(buff_id)) {
+            buff = m_classDictionary[buff_id]();
+        }
+        else {
+            buff = new Buff();
+            Debug.LogError("未实现的Buff：" + buff_id);
+        }
 
         buff.ID     = buff_id;
         buff.Caster = caster;

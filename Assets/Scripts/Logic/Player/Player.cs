@@ -10,6 +10,7 @@ public class Player : Unit
     public CDTimer InvincibleTimer = new CDTimer(1f);   //无敌时间
 
     protected List<Skill> m_Skills = new List<Skill>();
+    protected List<Pear> m_Pears = new List<Pear>();
 
 
     public void Init(float angle)
@@ -57,6 +58,9 @@ public class Player : Unit
     {
         m_Skills.ForEach(s => s.Dispose());
         m_Skills.Clear();
+
+        m_Pears.ForEach(p => p.Dispose());
+        m_Pears.Clear();
 
         Destroy(gameObject);
     }
@@ -121,6 +125,17 @@ public class Player : Unit
 
         //测试技能
         // m_Skills.Add(Skill.Create(GameFacade.Instance.DataCenter.League.GetSkillData(10160), this, 3));
+
+        //同步宝珠
+        m_Pears.ForEach(pear => pear.Dispose());
+        m_Pears.Clear();
+        GameFacade.Instance.DataCenter.User.CurrentPlayer.PearSlots.ForEach(pear_msg => {
+            if (pear_msg.ID > 0)
+            {
+                // Pear pear = Pear.Create(pear_msg.ID);
+            }
+        });
+        
     }
 
     #endregion
