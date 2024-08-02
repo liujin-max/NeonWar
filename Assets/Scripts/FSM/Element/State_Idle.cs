@@ -13,7 +13,6 @@ public class State_Idle<T> : State<Field>
     {
         EventManager.AddHandler(EVENT.ONJOYSTICK_PRESS,     OnJoyStickPress);
 
-        EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_SHOW, true));
 
         Field.Instance.RemovePlayer();
         Field.Instance.InitPlayer();

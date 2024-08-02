@@ -8,11 +8,15 @@ using UnityEngine.UI;
 
 public class GameWindow : MonoBehaviour
 {
-    [SerializeField] GameObject m_Joystick;
+    [SerializeField] Text m_Level;
+    [SerializeField] Text m_SubLevel;
+    [SerializeField] NumberTransition m_Coin;
+    [SerializeField] NumberTransition m_Glass;
+
+
     [SerializeField] LongPressButton m_BtnLeft;
     [SerializeField] LongPressButton m_BtnRight;
     [SerializeField] GameObject m_BlinkPivot;
-    [SerializeField] NumberTransition m_Glass;
     [SerializeField] Transform m_SkillPivot;
 
     
@@ -52,7 +56,6 @@ public class GameWindow : MonoBehaviour
     {
         EventManager.AddHandler(EVENT.ONBATTLESTART,    OnBattleStart);
         EventManager.AddHandler(EVENT.ONBATTLEEND,      OnBattleEnd);
-        EventManager.AddHandler(EVENT.ONJOYSTICK_SHOW,  OnJoyStickShow);
         EventManager.AddHandler(EVENT.ONUPDATEGLASS,    OnUpdateGlass);
         
 
@@ -64,7 +67,6 @@ public class GameWindow : MonoBehaviour
     {
         EventManager.DelHandler(EVENT.ONBATTLESTART,    OnBattleStart);
         EventManager.DelHandler(EVENT.ONBATTLEEND,      OnBattleEnd);
-        EventManager.DelHandler(EVENT.ONJOYSTICK_SHOW,  OnJoyStickShow);
         EventManager.DelHandler(EVENT.ONUPDATEGLASS,    OnUpdateGlass);
 
 
@@ -166,8 +168,19 @@ public class GameWindow : MonoBehaviour
 
     void FlushUI()
     {
+        FlushElements();
+
         InitUpgradePivot();
         InitSkills();
+    }
+
+    void FlushElements()
+    {
+        m_Level.text    = (GameFacade.Instance.DataCenter.User.Level + 1).ToString();
+        m_SubLevel.text = (GameFacade.Instance.DataCenter.User.Level + 1).ToString();
+
+        m_Coin.SetValue(GameFacade.Instance.DataCenter.User.Coin);
+        m_Glass.SetValue(GameFacade.Instance.DataCenter.User.Glass);
     }
 
     void InitUpgradePivot()
@@ -265,19 +278,13 @@ public class GameWindow : MonoBehaviour
         }
     }
 
-    void FlushGlass()
-    {
-        m_Glass.SetValue(GameFacade.Instance.DataCenter.User.Glass);
-    }
-    
+
 
 
     #region 监听事件
     //战斗开始
     private void OnBattleStart(GameEvent @event)
     {
-        m_Joystick.gameObject.SetActive(true);
-
         m_Groups.ForEach(group => {
             group.DOFade(0, 0.2f).OnComplete(()=>{
                 group.gameObject.SetActive(false);
@@ -288,9 +295,7 @@ public class GameWindow : MonoBehaviour
     //战斗结束
     private void OnBattleEnd(GameEvent @event)
     {
-        m_Joystick.gameObject.SetActive(false);
-
-        FlushGlass();
+        FlushElements();
 
         m_Groups.ForEach(group => {
             group.gameObject.SetActive(true);
@@ -298,12 +303,6 @@ public class GameWindow : MonoBehaviour
         });
     }
 
-    private void OnJoyStickShow(GameEvent @event)
-    {
-        bool flag = (bool)@event.GetParam(0);
-
-        m_Joystick.gameObject.SetActive(flag);
-    }
 
     private void OnUpdateGlass(GameEvent @event)
     {

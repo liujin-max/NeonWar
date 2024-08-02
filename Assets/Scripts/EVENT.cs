@@ -17,7 +17,7 @@ public static class EVENT
     
     public static string ONUPDATEGLASS      = "ONUPDATEGLASS";
 
-    public static string ONJOYSTICK_SHOW    = "ONJOYSTICK_SHOW";
+
     public static string ONJOYSTICK_PRESS   = "ONJOYSTICK_PRESS";
     public static string ONJOYSTICK_DOUBLE  = "ONJOYSTICK_DOUBLE";
     
