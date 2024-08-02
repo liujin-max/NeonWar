@@ -109,6 +109,7 @@
      <Compile Include="Assets\Scripts\FSM\FSM.cs" />
      <Compile Include="Assets\Scripts\Logic\Data\Level.cs" />
      <Compile Include="Assets\Scripts\Effect\FlyCoin.cs" />
+     <Compile Include="Assets\Scripts\Logic\Element\BuffBubble.cs" />
      <Compile Include="Assets\Scripts\Utility\MouseClickHandler.cs" />
      <Compile Include="Assets\Scripts\FSM\Element\State_Play.cs" />
      <Compile Include="Assets\Scripts\Utility\BoxColliderUtility.cs" />
@@ -150,7 +151,6 @@
      <Compile Include="Assets\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
      <Compile Include="Assets\Scripts\Logic\Enemy\Enemy_104.cs" />
      <Compile Include="Assets\Scripts\UI\Window\TipWindow.cs" />
-     <Compile Include="Assets\Scripts\Logic\Element\BuffBubble.cs" />
      <None Include="Assets\Resources\Shader\SpriteGray.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />

@@ -2017,6 +2017,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1542212889066094677, guid: 9faec18c71d52de4a8e186b5c5d33ee3, type: 3}
+      propertyPath: m_Constraints
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 3051838613015140977, guid: 9faec18c71d52de4a8e186b5c5d33ee3, type: 3}
       propertyPath: m_Name
       value: BuffBubble
