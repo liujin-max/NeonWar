@@ -278,6 +278,7 @@ public class Buff_SPDMUL : Buff
 
         Field.Instance.Spawn.Enemys.ForEach(e => {
             e.ATT.SPEED.PutMUL(this, 0.4f);
+            e.SyncSpeed();
         });
     }
 
@@ -285,6 +286,7 @@ public class Buff_SPDMUL : Buff
     {
         Field.Instance.Spawn.Enemys.ForEach(e => {
             e.ATT.SPEED.Pop(this);
+            e.SyncSpeed();
         });
     }
 }

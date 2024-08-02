@@ -184,7 +184,7 @@ public class Field : MonoBehaviour
     {
         if (m_Player != null) return;
 
-        m_Player = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Player/Player_10000", Vector2.zero, Land.ENTITY_ROOT).GetComponent<Player>();
+        m_Player = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Player/Player_" + GameFacade.Instance.DataCenter.User.CurrentPlayer.ID, Vector2.zero, Land.ENTITY_ROOT).GetComponent<Player>();
         m_Player.Init(270);
     }
 
@@ -199,9 +199,8 @@ public class Field : MonoBehaviour
     //在场地上生成可拾取的Buff
     public void PushBuffBubble(int id, int value)
     {
-        var point = ToolUtility.FindPointOnCircle(Vector2.zero, _C.DEFAULT_RADIUS, RandomUtility.Random(0, 360));
-
-        var bubble = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Element/BuffBubble", point, Land.ELEMENT_ROOT).GetComponent<BuffBubble>();
+        var point   = ToolUtility.FindPointOnCircle(Vector2.zero, _C.DEFAULT_RADIUS, RandomUtility.Random(0, 360));
+        var bubble  = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Element/BuffBubble", point, Land.ELEMENT_ROOT).GetComponent<BuffBubble>();
         bubble.Init(id, value);
 
         m_BuffBubbles.Add(bubble);

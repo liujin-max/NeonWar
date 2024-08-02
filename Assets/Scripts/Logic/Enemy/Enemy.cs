@@ -66,11 +66,6 @@ public class Enemy : Unit
         Destroy(gameObject);
     }
 
-    void LateUpdate()
-    {
-        m_Rigidbody.velocity = m_Rigidbody.velocity.normalized * ATT.SPEED.ToNumber() / 100.0f;
-    }
-
 
     #region 表现处理
 
@@ -127,6 +122,11 @@ public class Enemy : Unit
         float angle = RandomUtility.Random(0, 360);
 
         m_Rigidbody.velocity = ToolUtility.FindPointOnCircle(Vector2.zero, ATT.SPEED.ToNumber() / 100.0f, angle);
+    }
+
+    public void SyncSpeed()
+    {
+        m_Rigidbody.velocity = m_Rigidbody.velocity.normalized * ATT.SPEED.ToNumber() / 100.0f;
     }
 
     //暂停运动
