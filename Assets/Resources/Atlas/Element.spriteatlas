@@ -1,5 +1,5 @@
 %YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
+%TAG !u! tag:yousandi.cn,2023:
 --- !u!687078895 &4343727234628468602
 SpriteAtlas:
   m_ObjectHideFlags: 0
@@ -11,7 +11,7 @@ SpriteAtlas:
   m_EditorData:
     serializedVersion: 2
     textureSettings:
-      serializedVersion: 2
+      serializedVersion: 3
       anisoLevel: 1
       compressionQuality: 50
       maxTextureSize: 2048
@@ -20,6 +20,7 @@ SpriteAtlas:
       generateMipMaps: 0
       readable: 0
       crunchedCompression: 0
+      webStreaming: 0
       sRGB: 1
     platformSettings: []
     packingSettings:
@@ -31,13 +32,23 @@ SpriteAtlas:
       enableTightPacking: 1
       enableAlphaDilation: 1
     secondaryTextureSettings: {}
-    transparentPlaceholder: 0
     variantMultiplier: 1
     packables:
     - {fileID: 102900000, guid: 91521a6df8c0af640ba8bb004689c3ad, type: 3}
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
+    packedSpriteRenderDataKeys:
+    - 26b9cb139d4c04b448b5a407444c3c44: 21300000
+    - 89a3bc33efff1754fbb1a3351a2f011d: 21300000
+    - 93e79493be3281149849e7995542149a: 21300000
+    - cdb54804151a57d4abb0511fbbda1a03: 21300000
+    - 6d963214dc0a5344c9d23d4cd20d6b4b: 21300000
+    - 61e472c536a969a489144036581c5ec5: 21300000
+    - ab69ac5a88732bb44806bd74cc0dec6d: 21300000
+    - 9e46957eadca10246b09b1791b73b7dc: 21300000
+    - bd27d6cf46e9fb8498ad80adea9f8f73: 21300000
+    - 8831f3ff3f35cf94bbd0ca4535782ef6: 21300000
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: 26b9cb139d4c04b448b5a407444c3c44, type: 3}
