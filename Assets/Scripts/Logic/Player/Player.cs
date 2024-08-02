@@ -112,7 +112,7 @@ public class Player : Unit
         //同步技能
         m_Skills.ForEach(skill => skill.Dispose());
         m_Skills.Clear();
-        GameFacade.Instance.DataCenter.User.CurrentPlayer.Skills.ForEach(skill_msg => {
+        GameFacade.Instance.DataCenter.User.CurrentPlayer.SkillSlots.ForEach(skill_msg => {
             if (skill_msg.ID > 0) {
                 Skill sk = Skill.Create(GameFacade.Instance.DataCenter.League.GetSkillData(skill_msg.ID), this, skill_msg.Level);
                 m_Skills.Add(sk);

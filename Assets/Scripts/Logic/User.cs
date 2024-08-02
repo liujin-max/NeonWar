@@ -30,9 +30,16 @@ public class TaskMsg
     public int Day; //上次领取的日期
 }
 
-//技能记录数据
+//宝珠槽数据
 [System.Serializable]
-public class SkillMsg
+public class PearSlotMsg
+{
+    public int ID;
+}
+
+//技能槽数据
+[System.Serializable]
+public class SkillSlotMsg
 {
     public int ID;
     public int Level = 1;
@@ -48,15 +55,18 @@ public class PlayerMsg
     public int ATK = 1;
     public int ASP = 1;
 
-    //默认5个技能 都是空着的
-    public List<SkillMsg> Skills = new List<SkillMsg>()
+    //5个技能槽
+    public List<SkillSlotMsg> SkillSlots = new List<SkillSlotMsg>()
     {
-        new SkillMsg() {ID = -1},
-        new SkillMsg() {ID = -1},
-        new SkillMsg() {ID = -1},
-        new SkillMsg() {ID = -1},
-        new SkillMsg() {ID = -1}
+        new SkillSlotMsg() {ID = -1},
+        new SkillSlotMsg() {ID = -1},
+        new SkillSlotMsg() {ID = -1},
+        new SkillSlotMsg() {ID = -1},
+        new SkillSlotMsg() {ID = -1}
     };
+
+    //N个宝珠槽(每种武器拥有的宝珠槽数量不同)
+    public List<PearSlotMsg> PearSlots;
 }
 
 
@@ -73,7 +83,18 @@ public class GameUserData
     //当前只开放了1个角色
     public List<PlayerMsg> Players = new List<PlayerMsg>()
     {
-        new PlayerMsg() {ID = (int)_C.PLAYER.BOW, UnlockFlag = true, InUse = true}
+        //弓
+        new PlayerMsg() 
+        {
+            ID = (int)_C.PLAYER.BOW, 
+            UnlockFlag  = true, 
+            InUse       = true, 
+            PearSlots   = new List<PearSlotMsg>()   //2个宝珠槽
+            {
+                new PearSlotMsg() {ID = -1},
+                new PearSlotMsg() {ID = -1},
+            }
+        }
     };
 
     public long RecoveryTimestamp;    //上次体力的恢复时间
@@ -252,9 +273,9 @@ public class User
     //升级技能
     public void UpgradeSkill(int order, int skill_id, int skill_level)
     {
-        SkillMsg skillMsg   = CurrentPlayer.Skills[order];
-        skillMsg.ID         = skill_id;
-        skillMsg.Level      = skill_level;
+        SkillSlotMsg slot   = CurrentPlayer.SkillSlots[order];
+        slot.ID     = skill_id;
+        slot.Level  = skill_level;
 
         m_userUpdate = true;
     }
@@ -262,21 +283,15 @@ public class User
     //重置技能
     public void ResetSkill(int order)
     {
-        CurrentPlayer.Skills[order].ID      = -1;
-        CurrentPlayer.Skills[order].Level   = 0;
+        CurrentPlayer.SkillSlots[order].ID      = -1;
+        CurrentPlayer.SkillSlots[order].Level   = 0;
 
         m_userUpdate = true;
     }
 
-    public SkillMsg GetSkillMsg(int skill_id)
+    public SkillSlotMsg GetSkillSlotMsg(int order)
     {
-        for (int i = 0; i < CurrentPlayer.Skills.Count; i++) {
-            SkillMsg skillMsg = CurrentPlayer.Skills[i];
-            if (skillMsg.ID == skill_id)
-                return skillMsg;
-        }
-
-        return null;
+        return CurrentPlayer.SkillSlots[order];
     }
 
     public void SetRecoveryTimestamp(long value)

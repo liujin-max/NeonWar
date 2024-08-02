@@ -212,7 +212,7 @@ public class GameWindow : MonoBehaviour
 
         for (int i = 0; i < seats.Length; i++)
         {
-            SkillMsg skill_msg = GameFacade.Instance.DataCenter.User.CurrentPlayer.Skills[i];
+            SkillSlotMsg skill_msg = GameFacade.Instance.DataCenter.User.CurrentPlayer.SkillSlots[i];
             SkillData skill_data = GameFacade.Instance.DataCenter.League.GetSkillData(skill_msg.ID);
 
             var item = new_seat_item(i);

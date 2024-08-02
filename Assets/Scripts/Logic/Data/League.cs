@@ -78,17 +78,17 @@ public class League
     }
 
     //重置技能
-    public void ResetSkill(int skill_id)
+    public void ResetSkill(int order)
     {
-        SkillMsg skillMsg = GameFacade.Instance.DataCenter.User.GetSkillMsg(skill_id);
+        SkillSlotMsg slot = GameFacade.Instance.DataCenter.User.GetSkillSlotMsg(order);
 
-        if (skillMsg == null) return;
+        if (slot.ID == -1) return;
 
-        SkillData skillData = GameFacade.Instance.DataCenter.League.GetSkillData(skill_id);
+        SkillData skillData = GameFacade.Instance.DataCenter.League.GetSkillData(slot.ID);
 
         int cost_total = 0;
 
-        for (int i = 1; i <= skillMsg.Level; i++)
+        for (int i = 1; i <= slot.Level; i++)
         {
             cost_total += Skill.GetCost(skillData, i);
         }

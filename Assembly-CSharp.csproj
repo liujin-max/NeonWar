@@ -74,7 +74,6 @@
      <Compile Include="Assets\Scripts\Utility\SuperScrollView.cs" />
      <Compile Include="Assets\Scripts\Logic\Enemy\Enemy_107.cs" />
      <Compile Include="Assets\Scripts\Manager\SceneManager.cs" />
-     <Compile Include="Assets\Scripts\Logic\Data\NumericalManager.cs" />
      <Compile Include="Assets\Scripts\Manager\TimeManager.cs" />
      <Compile Include="Assets\Scripts\Logic\Data\League.cs" />
      <Compile Include="Assets\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
@@ -120,6 +119,7 @@
      <Compile Include="Assets\Scripts\Manager\CsvManager.cs" />
      <Compile Include="Assets\Scripts\Utility\DIYScrollView.cs" />
      <Compile Include="Assets\Scripts\Utility\ImageGray.cs" />
+     <Compile Include="Assets\Scripts\Logic\NumericalManager.cs" />
      <Compile Include="Assets\Scripts\Logic\Element\BuffBubble.cs" />
      <Compile Include="Assets\DOTween\Modules\DOTweenModuleUI.cs" />
      <Compile Include="Assets\Scripts\Utility\BGM.cs" />
@@ -151,6 +151,7 @@
      <Compile Include="Assets\Scripts\EVENT.cs" />
      <Compile Include="Assets\Scripts\Logic\User.cs" />
      <Compile Include="Assets\DOTween\Modules\DOTweenModuleUtils.cs" />
+     <Compile Include="Assets\Scripts\Logic\Data\Pear.cs" />
      <Compile Include="Assets\Scripts\Logic\Data\Level.cs" />
      <Compile Include="Assets\Scripts\Effect\ButtonScale.cs" />
      <Compile Include="Assets\Scripts\Effect\FlyCoin.cs" />

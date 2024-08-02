@@ -64,7 +64,7 @@ public class SkillWindow : MonoBehaviour
         //重置技能
         m_BtnReset.gameObject.SetActive(true);
         m_BtnReset.onClick.AddListener(()=>{
-            GameFacade.Instance.DataCenter.League.ResetSkill(skill_data.ID);
+            GameFacade.Instance.DataCenter.League.ResetSkill(skill_data.Order);
         });
     }
 
