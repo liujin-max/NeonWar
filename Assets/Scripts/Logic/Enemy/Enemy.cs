@@ -99,7 +99,6 @@ public class Enemy : Unit
             Field.Instance.PushBuffBubble(buff_id, 1);
         }
 
-
         Field.Instance.Land.DoSmallShake();
 
         GameFacade.Instance.EffectManager.Load(EFFECT.BROKEN, transform.localPosition, Field.Instance.Land.ELEMENT_ROOT.gameObject).transform.right = bullet.Velocity;

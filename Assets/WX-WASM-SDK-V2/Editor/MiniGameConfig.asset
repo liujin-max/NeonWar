@@ -13,13 +13,13 @@ MonoBehaviour:
   m_Name: MiniGameConfig
   m_EditorClassIdentifier: 
   ProjectConf:
-    projectName: 
-    Appid: 
+    projectName: "\u5706\u5F27\u4E4B\u6218"
+    Appid: wx4084a464d1d00b1d
     CDN: 
-    assetLoadType: 0
+    assetLoadType: 1
     compressDataPackage: 0
     VideoUrl: 
-    DST: 
+    DST: D:/Work/NeonWar/OutPut
     StreamCDN: 
     bundleHashLength: 32
     bundlePathIdentifier: StreamingAssets;
@@ -57,11 +57,12 @@ MonoBehaviour:
     ProfilingMemory: 0
     CleanBuild: 0
     CustomNodePath: 
-    showMonitorSuggestModal: 1
+    showMonitorSuggestModal: 0
     enableProfileStats: 0
     enableRenderAnalysis: 0
     iOSAutoGCInterval: 10000
     enableIOSPerformancePlus: 0
+    brotliMT: 1
   CompressTexture:
     halfSize: 0
     useDXT5: 0
@@ -72,3 +73,23 @@ MonoBehaviour:
     debugMode: 0
     force: 0
   PlayerPrefsKeys: []
+  FontOptions:
+    CJK_Unified_Ideographs: 1
+    C0_Controls_and_Basic_Latin: 1
+    CJK_Symbols_and_Punctuation: 1
+    General_Punctuation: 1
+    Enclosed_CJK_Letters_and_Months: 1
+    Vertical_Forms: 1
+    CJK_Compatibility_Forms: 1
+    Miscellaneous_Symbols: 1
+    CJK_Compatibility: 1
+    Halfwidth_and_Fullwidth_Forms: 1
+    Dingbats: 1
+    Letterlike_Symbols: 1
+    Enclosed_Alphanumerics: 1
+    Number_Forms: 1
+    Currency_Symbols: 1
+    Arrows: 1
+    Geometric_Shapes: 1
+    Mathematical_Operators: 1
+    CustomUnicode: 
