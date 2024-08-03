@@ -14,31 +14,39 @@ public class Pear_Crit : Pear
 //宝珠
 public class Pear
 {
-    public int ID;
-    public int Level;
+    private PearData m_Data;
+    public PearData Data { get => m_Data; set => m_Data = value; }
+
+    public int ID { get => m_Data.ID;}
     public int Count;
     public Unit Caster;
 
     private static Dictionary<int, Func<Pear>> m_classDictionary = new Dictionary<int, Func<Pear>> {
-        {20001, () => new Pear_Crit()}
+        {20000, () => new Pear_Crit()}
     };
 
-    public static Pear Create(int id, int level = 1, int count = 1)
+    
+
+    public static Pear Create(PearData pearData, int count = 1)
     {
         Pear pear;
-        if (m_classDictionary.ContainsKey(id)) pear = m_classDictionary[id]();
+        if (m_classDictionary.ContainsKey(pearData.ID)) pear = m_classDictionary[pearData.ID]();
         else pear = new Pear();
 
-        pear.Init(id, level, count);
+        pear.Init(pearData, count);
 
         return pear;
     }
 
-    public void Init(int id, int level, int count)
+    public void Init(PearData pearData, int count)
     {
-        ID      = id;
-        Level   = level;
+        m_Data  = pearData;
         Count   = count;
+    }
+
+    public bool IsLevelMax()
+    {
+        return m_Data.Level >= 5;
     }
 
     public void Equip(Unit player)

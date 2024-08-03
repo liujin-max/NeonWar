@@ -69,6 +69,14 @@ public class PlayerMsg
     public List<PearSlotMsg> PearSlots;
 }
 
+//宝珠数据
+[System.Serializable]
+public class PearMsg
+{
+    public int ID;
+    public int Count;
+}
+
 
 //账号数据
 [System.Serializable]
@@ -96,6 +104,9 @@ public class GameUserData
             }
         }
     };
+
+    //宝珠数据
+    public List<PearMsg> Pears = new List<PearMsg>();
 
     public long RecoveryTimestamp;    //上次体力的恢复时间
     public int RegisterDay;     //注册时间(一年中的第几天)
@@ -165,6 +176,10 @@ public class User
     public void SyncRecords()
     {
         int day_of_year = DateTime.Now.DayOfYear;
+
+        //同步宝珠数据
+        GameFacade.Instance.DataCenter.Backpack.SyncPears(m_Data.Pears);
+
 
 
         //同步任务信息

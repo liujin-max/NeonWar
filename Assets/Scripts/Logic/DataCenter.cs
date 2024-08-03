@@ -15,6 +15,7 @@ public class DataCenter
     public User User;
     public League League;
     public Levels Levels;
+    public Backpack Backpack;
 
 
     public void Init()
@@ -26,6 +27,9 @@ public class DataCenter
         League.Init();
 
         Levels  = new Levels();
+
+        Backpack= new Backpack();
+        Backpack.Init();
     }
 
 
