@@ -41,7 +41,6 @@ public class Unit : MonoBehaviour
     public bool IsValid {
         get {
             if (IsDead()) return false;
-
             return m_ValidFlag;
         } 
     }
@@ -178,4 +177,12 @@ public class Unit : MonoBehaviour
     #endregion
 
 
+    public virtual void Dispose()
+    {
+        //清空Buff
+        foreach (var item in m_BuffDic) {
+            item.Value.Dispose();
+        }
+        m_BuffDic.Clear();
+    }
 }

@@ -61,8 +61,10 @@ public class Enemy : Unit
         InitHPBar();
     }
 
-    public void Dispose()
+    public override void Dispose()
     {
+        base.Dispose();
+        
         Destroy(gameObject);
     }
 

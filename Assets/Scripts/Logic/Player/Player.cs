@@ -56,6 +56,8 @@ public class Player : Unit
 
     public void Dispose()
     {
+        base.Dispose();
+        
         m_Skills.ForEach(s => s.Dispose());
         m_Skills.Clear();
 

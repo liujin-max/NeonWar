@@ -365,6 +365,9 @@ public class Buff
 
     public virtual void Dispose() 
     {
-        if (m_Effect != null) GameFacade.Instance.EffectManager.RemoveEffect(m_Effect);
+        if (m_Effect != null) {
+            GameFacade.Instance.EffectManager.RemoveEffect(m_Effect);
+            m_Effect = null;
+        }
     }
 }

@@ -168,7 +168,7 @@ MonoBehaviour:
     ATK:
       m_Base: 1
     ASP:
-      m_Base: 2000
+      m_Base: 2500
     CP:
       m_Base: 0
     CT:
