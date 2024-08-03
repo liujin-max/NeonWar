@@ -42,6 +42,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\UI\Window\ResultWindow.cs" />
      <Compile Include="Assets\Scripts\Logic\Enemy\Enemy_104.cs" />
+     <Compile Include="Assets\Scripts\Logic\Battle\Hit.cs" />
      <Compile Include="Assets\Scripts\Utility\BalatroFloating.cs" />
      <Compile Include="Assets\AllIn1SpriteShader\Demo\Scripts\DemoRandomColorSwap.cs" />
      <Compile Include="Assets\Scripts\Manager\WXPlatform.cs" />

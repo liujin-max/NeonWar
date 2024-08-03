@@ -77,6 +77,11 @@ public static class _C
         END
     }
 
+    public enum BUFF_TYPE
+    {
+        GAIN,
+        DE
+    }
 
 
     public enum RESULT

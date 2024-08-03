@@ -80,7 +80,7 @@ public class Enemy : Unit
     }
 
 
-    public override void HitAnim()
+    public override void Affected(Hit hit)
     {
         if (m_InHitAnim) return;
 
@@ -88,7 +88,7 @@ public class Enemy : Unit
         m_Sprite.transform.DOPunchScale(new Vector3(0.15f, 0.2f, 0.15f), 0.15f).OnComplete(()=>{ m_InHitAnim = false;});
     }
 
-    public override void Dead(Bullet bullet)
+    public override void Dead(Hit hit)
     {
         //掉落Buff逻辑
         if (m_Data.Buffs.Length > 0)
@@ -100,7 +100,7 @@ public class Enemy : Unit
 
         Field.Instance.Land.DoSmallShake();
 
-        GameFacade.Instance.EffectManager.Load(EFFECT.BROKEN, transform.localPosition, Field.Instance.Land.ELEMENT_ROOT.gameObject).transform.right = bullet.Velocity;
+        GameFacade.Instance.EffectManager.Load(EFFECT.BROKEN, transform.localPosition, Field.Instance.Land.ELEMENT_ROOT.gameObject).transform.right = hit.Velocity;
 
     }
     #endregion

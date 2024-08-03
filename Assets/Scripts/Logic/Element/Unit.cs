@@ -16,7 +16,9 @@ public class ATT
     [Header("移动速度")] public AttributeValue SPEED = new AttributeValue(0);
     
     //易伤倍率
-    [HideInInspector] public AttributeValue VUN_INC   = new AttributeValue(1f, false);
+    [HideInInspector] public AttributeValue VUN_INC     = new AttributeValue(1f, false);
+    //对头目伤害加成
+    [HideInInspector] public AttributeValue BOSS_INC    = new AttributeValue(1f, false);
 }
 
 //基础单位
@@ -56,6 +58,12 @@ public class Unit : MonoBehaviour
         return m_Angle;
     }
     
+    //无敌
+    public virtual bool IsInvincible()
+    {
+        return false;
+    }
+
     public virtual bool CustomUpdate(float deltaTime)
     {
         if (!IsValid) return false;
@@ -88,12 +96,13 @@ public class Unit : MonoBehaviour
     }
 
     #region 表现处理
-    public virtual void HitAnim()
+    //受击
+    public virtual void Affected(Hit hit)
     {
 
     }
 
-    public virtual void Dead(Bullet bullet)
+    public virtual void Dead(Hit hit)
     {
 
     }
@@ -151,6 +160,8 @@ public class Unit : MonoBehaviour
             b.Init();
 
             m_BuffDic[buff_id] = b;
+
+            EventManager.SendEvent(new GameEvent(EVENT.ONADDBUFF, b));
         }
 
         return b;

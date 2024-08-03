@@ -214,18 +214,16 @@ public class Field : MonoBehaviour
     }
 
 
-    //子弹击中敌人
-    public bool Hit(Bullet bullet, Unit unit)
+    //击中目标
+    public bool SettleHit(Hit hit, Unit unit)
     {
+        //无敌了
+        if (unit.IsInvincible() == true) return false;
         if (unit.IsDead()) return false;
-        if (bullet.Caster.IsDead()) return false;
-        if (unit.Side == bullet.Caster.Side) return false;
-        if (bullet.SpliteIgnoreUnits.Contains(unit)) return false;
-        if (bullet.PassTimes < 0) return false;
+        if (hit.IgnoreUnits.Contains(unit)) return false;
+        
 
-
-        int demage = Mathf.RoundToInt(bullet.Caster.ATT.ATK.ToNumber() * unit.ATT.VUN_INC.ToNumber());
-
+        float demage = Mathf.RoundToInt(hit.ATK.ToNumber() * unit.ATT.VUN_INC.ToNumber());
 
         //护盾
         if (unit.GetBuff((int)_C.BUFF.SHIELD) != null)
@@ -239,36 +237,46 @@ public class Field : MonoBehaviour
         }
         else
         {
-            if (RandomUtility.IsHit(bullet.KillRate) == true && (unit.Side == _C.SIDE.ENEMY && unit.GetComponent<Enemy>().TYPE != _C.ENEMY_TYPE.BOSS))   //一击必杀
+            if (RandomUtility.IsHit(hit.KillRate) == true && (unit.Side == _C.SIDE.ENEMY && unit.GetComponent<Enemy>().TYPE != _C.ENEMY_TYPE.BOSS))   //一击必杀
             {
-                demage = unit.ATT.HP;
+                demage = unit.ATT.HPMAX;
             }
             else
             {
-                //是否暴击
-                if (RandomUtility.IsHit((int)bullet.CP.ToNumber(), 1000) == true)
+                if (unit.Side == _C.SIDE.ENEMY)
                 {
-                    demage  = Mathf.FloorToInt(demage * bullet.CT.ToNumber() / 1000.0f);
+                    if (unit.GetComponent<Enemy>().TYPE == _C.ENEMY_TYPE.BOSS)
+                    {
+                        demage *= hit.BOSS_INC.ToNumber();
+                    }
+                }
+
+                //是否暴击
+                if (RandomUtility.IsHit((int)hit.CP.ToNumber(), 1000) == true)
+                {
+                    demage  = demage * hit.CT.ToNumber() / 1000.0f;
 
                     //暴击特效
-                    GameFacade.Instance.EffectManager.Load(EFFECT.CRIT, bullet.transform.localPosition, Land.ELEMENT_ROOT.gameObject);
+                    GameFacade.Instance.EffectManager.Load(EFFECT.CRIT, hit.Position, Land.ELEMENT_ROOT.gameObject);
                 }
             }
         }
 
-        unit.UpdateHP(-demage); 
+        demage  = Mathf.FloorToInt(demage);
 
-        EventManager.SendEvent(new GameEvent(EVENT.ONBULLETHIT, bullet, unit));
+        unit.UpdateHP(-(int)demage); 
+
+        // EventManager.SendEvent(new GameEvent(EVENT.ONBULLETHIT, bullet, unit));
 
         //受击表现
         if (unit.IsDead() == true)
         {
-            unit.Dead(bullet);
+            unit.Dead(hit);
         }
         else
         {
             if (demage > 0) {
-                unit.HitAnim();
+                unit.Affected(hit);
             }
         }
 
@@ -291,13 +299,17 @@ public class Field : MonoBehaviour
         //撞击伤害
         int demage = enemy.TYPE == _C.ENEMY_TYPE.BOSS ? 3 : 1;
         player.UpdateHP(-demage);
-        player.InvincibleTimer.ForceReset();
 
-        Land.DoShake();
 
-        //特效处理
-        if (player.IsDead() == true) {}
-        else GameFacade.Instance.EffectManager.Load(EFFECT.CRASH, Vector3.zero, Field.Instance.Land.ELEMENT_ROOT.gameObject);
+        //受击表现
+        if (player.IsDead() == true)
+        {
+            player.Dead(null);
+        }
+        else
+        {
+            player.Affected(null);
+        }
     }
 
     #endregion

@@ -30,4 +30,6 @@ public static class EVENT
     public static string ONBULLETHIT        = "ONBULLETHIT";
     //发射子弹
     public static string ONBULLETSHOOT      = "ONBULLETSHOOT";
+    //获得Buff后
+    public static string ONADDBUFF          = "ONADDBUFF";
 }

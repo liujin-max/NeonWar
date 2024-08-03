@@ -11,7 +11,8 @@ public class Buff_Stun : Buff
 {
     public override void Init()
     {
-        Duration = new CDTimer(0.5f);
+        TYPE    = _C.BUFF_TYPE.DE;
+        Duration= new CDTimer(0.5f);
 
         Caster.Stop();
     }
@@ -32,7 +33,8 @@ public class Buff_YiShang : Buff
 {
     public override void Init()
     {
-        Duration = new CDTimer(5f);
+        TYPE    = _C.BUFF_TYPE.DE;
+        Duration= new CDTimer(5f);
 
         Caster.ATT.VUN_INC.PutADD(this, Value / 100.0f);
     }
@@ -139,7 +141,8 @@ public class Buff_ATKDOWN : Buff
 {
     public override void Init()
     {
-        Duration = new CDTimer(5f);
+        TYPE    = _C.BUFF_TYPE.DE;
+        Duration= new CDTimer(5f);
 
         Caster.ATT.ATK.PutAUL(this, -0.5f);
     }
@@ -177,7 +180,8 @@ public class Buff_ASPDOWN : Buff
 {
     public override void Init()
     {
-        Duration = new CDTimer(5f);
+        TYPE    = _C.BUFF_TYPE.DE;
+        Duration= new CDTimer(5f);
 
         Caster.ATT.ASP.PutMUL(this, 1.5f);
         Caster.ASP.SetDuration(Caster.ATT.ASP.ToNumber() / 1000.0f);
@@ -215,7 +219,8 @@ public class Buff_SPEEDDOWN : Buff
 {
     public override void Init()
     {
-        Duration = new CDTimer(5f);
+        TYPE    = _C.BUFF_TYPE.DE;
+        Duration= new CDTimer(5f);
 
         Caster.ATT.SPEED.PutAUL(this, -0.3f);
     }
@@ -302,6 +307,7 @@ public class Buff
 
     public int ID;
     public int Value = 0;   //参数
+    public _C.BUFF_TYPE TYPE = _C.BUFF_TYPE.GAIN;
     public CDTimer Duration = new CDTimer(999999);  //持续时间
     
 

@@ -32,7 +32,7 @@ public class Player : Unit
     }
 
     //无敌
-    public bool IsInvincible()
+    public override bool IsInvincible()
     {
         return !InvincibleTimer.IsFinished();
     }
@@ -69,13 +69,17 @@ public class Player : Unit
 
 
     #region 表现处理
-    public override void HitAnim()
+
+    //碰撞造成伤害时， hit为空 
+    public override void Affected(Hit hit)
     {
+        InvincibleTimer.ForceReset();
+
         Field.Instance.Land.DoShake();
         GameFacade.Instance.EffectManager.Load(EFFECT.CRASH, Vector3.zero, Field.Instance.Land.ELEMENT_ROOT.gameObject);
     }
 
-    public override void Dead(Bullet bullet)
+    public override void Dead(Hit hit)
     {
         Field.Instance.Land.DoShake();
     }
@@ -144,9 +148,9 @@ public class Player : Unit
             });
 
             //测试宝珠
-            // Pear pear = Pear.Create(GameFacade.Instance.DataCenter.Backpack.GetPearData(20004));
-            // pear.Equip(this);
-            // m_Pears.Add(pear);
+            Pear pear = Pear.Create(GameFacade.Instance.DataCenter.Backpack.GetPearData(20042));
+            pear.Equip(this);
+            m_Pears.Add(pear);
         }
         
     }

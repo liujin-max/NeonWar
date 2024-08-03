@@ -11,15 +11,14 @@ public class Bullet : MonoBehaviour
 
     public Vector2 Velocity {get { return m_Rigidbody.velocity;}}
     public AttributeValue Speed = new AttributeValue(500);
-    public AttributeValue CP = new AttributeValue(0);
-    public AttributeValue CT = new AttributeValue(0);
+    public Hit Hit = null;
 
 
-    [HideInInspector] public HashSet<Unit> SpliteIgnoreUnits = new HashSet<Unit>();
+
     [HideInInspector] public bool IsSplit = false;      //是否是分裂出的
     [HideInInspector] public int PassTimes = 0;         //可穿透次数
     [HideInInspector] public int ReboundTimes = 0;      //可反弹次数
-    [HideInInspector] public int KillRate = 0;          //必杀概率
+    
 
     void Awake()
     {
@@ -34,10 +33,8 @@ public class Bullet : MonoBehaviour
 
     public void Init(Unit caster)
     {
-        Caster = caster;
-
-        CP.SetBase(caster.ATT.CP.ToNumber());
-        CT.SetBase(caster.ATT.CT.ToNumber());
+        Caster  = caster;
+        Hit     = new Hit(caster);
     }
     
     public void Shoot(float angle , bool is_shoot = true)
@@ -62,14 +59,11 @@ public class Bullet : MonoBehaviour
     void Dispose()
     {
         Speed.Clear();
-        CP.Clear();
-        CT.Clear();
 
-        SpliteIgnoreUnits.Clear();
         IsSplit         = false;
         PassTimes       = 0;
         ReboundTimes    = 0;
-        KillRate        = 0;
+
 
         GameFacade.Instance.PoolManager.RecycleBullet(this);
     }
@@ -86,7 +80,7 @@ public class Bullet : MonoBehaviour
         //子弹撞墙 则销毁
         if (collider.gameObject.tag == "Wall")
         {
-            SpliteIgnoreUnits.Clear();
+            Hit.IgnoreUnits.Clear();
 
             if (ReboundTimes > 0) Rebound();
             if (ReboundTimes <= 0) Dispose();
@@ -96,8 +90,15 @@ public class Bullet : MonoBehaviour
 
         var unit = collider.GetComponent<Unit>();
         if (unit == null) return;
+        if (unit.Side == Caster.Side) return;
+        if (PassTimes < 0) return;
 
-        if (Field.Instance.Hit(this, unit) == true) {
+        Hit.Position = transform.localPosition;
+        Hit.Velocity = this.Velocity;
+
+        if (Field.Instance.SettleHit(Hit, unit) == true) {
+            EventManager.SendEvent(new GameEvent(EVENT.ONBULLETHIT, this, unit));
+
             PassTimes--;
             if (PassTimes < 0) Dispose();
         }

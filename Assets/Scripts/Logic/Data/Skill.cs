@@ -142,7 +142,7 @@ public class Skill_10020 : Skill
             var bullet = Caster.CreateBullet();
             bullet.transform.position = b.transform.position;
             bullet.IsSplit = true;
-            bullet.SpliteIgnoreUnits.Add(unit);
+            bullet.Hit.IgnoreUnits.Add(unit);
 
             if (enemy_pool.Count > 0)
             {
@@ -370,7 +370,7 @@ public class Skill_10160 : Skill
         Bullet b = @event.GetParam(0) as Bullet;
         if (b.Caster != Caster) return;
 
-        b.KillRate = Skill.ToValue(Data, Level);
+        b.Hit.KillRate = Skill.ToValue(Data, Level);
     }
 }
 
@@ -455,7 +455,11 @@ public class Skill
     {
         Skill skill;
         if (m_classDictionary.ContainsKey(data.ID)) skill = m_classDictionary[data.ID]();
-        else skill = new Skill();
+        else {
+            skill = new Skill();
+
+            Debug.LogError("未实现的技能：" + data.ID);
+        }
 
         skill.Init(data, caster, level);
 
