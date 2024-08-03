@@ -4,20 +4,34 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-
+#region 暴击率
 public class Pear_Crit : Pear
 {
+    public override void Equip(Unit player)
+    {
+        base.Equip(player);
 
+        player.ATT.CP.PutADD(this, m_Data.Value * 10);
+    }
+
+    public override void UnEquip()
+    {
+        base.UnEquip();
+
+        Caster.ATT.CP.Pop(this);
+    }
 }
-
+#endregion
 
 //宝珠
 public class Pear
 {
-    private PearData m_Data;
+    protected PearData m_Data;
     public PearData Data { get => m_Data; set => m_Data = value; }
 
     public int ID { get => m_Data.ID;}
+    public int Level { get => m_Data.Level;}
+    public int Class { get => m_Data.Class;}
     public int Count;
     public Unit Caster;
 
@@ -30,7 +44,7 @@ public class Pear
     public static Pear Create(PearData pearData, int count = 1)
     {
         Pear pear;
-        if (m_classDictionary.ContainsKey(pearData.ID)) pear = m_classDictionary[pearData.ID]();
+        if (m_classDictionary.ContainsKey(pearData.Class)) pear = m_classDictionary[pearData.Class]();
         else pear = new Pear();
 
         pear.Init(pearData, count);
@@ -44,23 +58,25 @@ public class Pear
         Count   = count;
     }
 
+    public void UpdateCount(int value)
+    {
+        Count += value;
+    }
+
     public bool IsLevelMax()
     {
         return m_Data.Level >= 5;
     }
 
-    public void Equip(Unit player)
+    public virtual void Equip(Unit player)
     {
         Caster = player;
     }
 
-    public void UnEquip()
+    public virtual void UnEquip()
     {
-
+        Caster = null;
     }
 
-    public virtual void Dispose()
-    {
 
-    }
 }

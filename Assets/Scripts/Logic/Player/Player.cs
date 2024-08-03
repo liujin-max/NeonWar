@@ -54,14 +54,14 @@ public class Player : Unit
         transform.right = Vector3.zero - transform.localPosition;
     }
 
-    public void Dispose()
+    public override void Dispose()
     {
         base.Dispose();
         
         m_Skills.ForEach(s => s.Dispose());
         m_Skills.Clear();
 
-        m_Pears.ForEach(p => p.Dispose());
+        m_Pears.ForEach(p => p.UnEquip());
         m_Pears.Clear();
 
         Destroy(gameObject);
@@ -116,27 +116,38 @@ public class Player : Unit
 
 
         //同步技能
-        m_Skills.ForEach(skill => skill.Dispose());
-        m_Skills.Clear();
-        GameFacade.Instance.DataCenter.User.CurrentPlayer.SkillSlots.ForEach(skill_msg => {
-            if (skill_msg.ID > 0) {
-                Skill sk = Skill.Create(GameFacade.Instance.DataCenter.League.GetSkillData(skill_msg.ID), this, skill_msg.Level);
-                m_Skills.Add(sk);
-            }
-        });
+        {
+            m_Skills.ForEach(skill => skill.Dispose());
+            m_Skills.Clear();
+            GameFacade.Instance.DataCenter.User.CurrentPlayer.SkillSlots.ForEach(skill_msg => {
+                if (skill_msg.ID > 0) {
+                    Skill sk = Skill.Create(GameFacade.Instance.DataCenter.League.GetSkillData(skill_msg.ID), this, skill_msg.Level);
+                    m_Skills.Add(sk);
+                }
+            });
 
-        //测试技能
-        // m_Skills.Add(Skill.Create(GameFacade.Instance.DataCenter.League.GetSkillData(10160), this, 3));
+            //测试技能
+            // m_Skills.Add(Skill.Create(GameFacade.Instance.DataCenter.League.GetSkillData(10160), this, 3));
+        }
 
         //同步宝珠
-        m_Pears.ForEach(pear => pear.Dispose());
-        m_Pears.Clear();
-        GameFacade.Instance.DataCenter.User.CurrentPlayer.PearSlots.ForEach(pear_msg => {
-            if (pear_msg.ID > 0)
-            {
-                // Pear pear = Pear.Create(pear_msg.ID);
-            }
-        });
+        {
+            m_Pears.ForEach(pear => pear.UnEquip());
+            m_Pears.Clear();
+            GameFacade.Instance.DataCenter.User.CurrentPlayer.PearSlots.ForEach(pear_msg => {
+                if (pear_msg.ID > 0)
+                {
+                    Pear pear = Pear.Create(GameFacade.Instance.DataCenter.Backpack.GetPearData(pear_msg.ID));
+                    pear.Equip(this);
+                    m_Pears.Add(pear);
+                }
+            });
+
+            //测试宝珠
+            // Pear pear = Pear.Create(GameFacade.Instance.DataCenter.Backpack.GetPearData(20004));
+            // pear.Equip(this);
+            // m_Pears.Add(pear);
+        }
         
     }
 
