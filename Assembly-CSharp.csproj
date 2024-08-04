@@ -45,7 +45,9 @@
      <Compile Include="Assets\Scripts\Logic\Battle\Hit.cs" />
      <Compile Include="Assets\Scripts\Utility\BalatroFloating.cs" />
      <Compile Include="Assets\AllIn1SpriteShader\Demo\Scripts\DemoRandomColorSwap.cs" />
+     <Compile Include="Assets\Scripts\UI\Window\BackpackWindow.cs" />
      <Compile Include="Assets\Scripts\Manager\WXPlatform.cs" />
+     <Compile Include="Assets\Scripts\UI\Item\PearDetailItem.cs" />
      <Compile Include="Assets\Scripts\Display\DisplayEvent.cs" />
      <Compile Include="Assets\Scripts\Manager\Effect.cs" />
      <Compile Include="Assets\Scripts\Logic\Battle\CircleHP.cs" />
@@ -115,6 +117,7 @@
      <Compile Include="Assets\Scripts\UI\Item\SkillItem.cs" />
      <Compile Include="Assets\DOTween\Modules\DOTweenModulePhysics2D.cs" />
      <Compile Include="Assets\Scripts\Struct\Pair.cs" />
+     <Compile Include="Assets\Scripts\UI\Item\PearSeatItem.cs" />
      <Compile Include="Assets\Scripts\Utility\Crypt.cs" />
      <Compile Include="Assets\Scripts\Utility\UIMaskUtility.cs" />
      <Compile Include="Assets\Scripts\Display\DisplayEngine.cs" />
@@ -158,6 +161,7 @@
      <Compile Include="Assets\Scripts\Effect\ButtonScale.cs" />
      <Compile Include="Assets\Scripts\Effect\FlyCoin.cs" />
      <Compile Include="Assets\Scripts\Logic\Enemy\Enemy_105.cs" />
+     <Compile Include="Assets\Scripts\UI\Item\PearItem.cs" />
      <None Include="Assets\Resources\Shader\SpriteGray.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />

@@ -31,7 +31,7 @@ public class EditorPlatform : Platform
             return;
         }
         
-        // Debug.Log("加载存档：" + json);
+        Debug.Log("加载：" + json);
 
         GameFacade.Instance.DataCenter.User.Data = JsonUtility.FromJson<GameUserData>(json);
 
@@ -45,7 +45,7 @@ public class EditorPlatform : Platform
         PlayerPrefs.SetString(SystemManager.KEY_USER, json);
         PlayerPrefs.Save();
 
-        // Debug.Log("存储：" + json);
+        Debug.Log("存储：" + json);
     }
 
     public override void PULLRANK(_C.RANK rank_type, Action<RankDataInfo> callback)

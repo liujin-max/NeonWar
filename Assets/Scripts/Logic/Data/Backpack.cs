@@ -19,6 +19,7 @@ public class PearData
 public class Backpack
 {
     private List<Pear> m_Pears = new List<Pear>();
+    public List<Pear> Pears {get => m_Pears;}
     private Dictionary<int, Pear> m_PearsDic = new Dictionary<int, Pear>();
 
 
@@ -77,6 +78,15 @@ public class Backpack
         return pear;
     }
 
+    public Pear GetPear(int id)
+    {
+        Pear data;
+        if (m_PearsDic.TryGetValue(id, out data)) {
+            return data;
+        }
+        return null;
+    }
+
     public void SyncPears(List<PearMsg> pear_msgs)
     {
         m_Pears.Clear();
@@ -84,6 +94,9 @@ public class Backpack
         pear_msgs.ForEach(pear_msg => {
             AddPear(pear_msg.ID, pear_msg.Count);
         });
+
+        //测试代码
+        AddPear(20052, 1);
     }
 
     public Pear PushPear(int id)

@@ -1,17 +1,18 @@
 %YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
+%TAG !u! tag:yousandi.cn,2023:
 --- !u!1 &1504916332429515990
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
+  serializedVersion: 7
   m_Component:
   - component: {fileID: 5523607923328437590}
   - component: {fileID: 8041978540765753659}
   - component: {fileID: 4570593527906768814}
   m_Layer: 5
+  m_HasEditorInfo: 1
   m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -82,12 +83,13 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
+  serializedVersion: 7
   m_Component:
   - component: {fileID: 1141294445863416668}
   - component: {fileID: 1832839019905317577}
   - component: {fileID: 8996759610693244506}
   m_Layer: 5
+  m_HasEditorInfo: 1
   m_Name: IconPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,7 +161,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
+  serializedVersion: 7
   m_Component:
   - component: {fileID: 3626869093230229903}
   - component: {fileID: 8497498715043244767}
@@ -167,6 +169,7 @@ GameObject:
   - component: {fileID: 842981916200253293}
   - component: {fileID: 8701986815524755527}
   m_Layer: 5
+  m_HasEditorInfo: 1
   m_Name: BtnUpgrade
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -291,12 +294,13 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
+  serializedVersion: 7
   m_Component:
   - component: {fileID: 2188322188091390868}
   - component: {fileID: 2834424077686353001}
   - component: {fileID: 6631655835552506909}
   m_Layer: 5
+  m_HasEditorInfo: 1
   m_Name: Touch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -371,12 +375,13 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
+  serializedVersion: 7
   m_Component:
   - component: {fileID: 3760396601257252927}
   - component: {fileID: 6205147329207418502}
   - component: {fileID: 7556538319790394644}
   m_Layer: 5
+  m_HasEditorInfo: 1
   m_Name: Description
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -433,8 +438,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u51FB\u4E2D\u76EE\u6807\u65F6\u9644\u52A0#\u5C42\u4E2D\u6BD2\u6548\u679C"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 9da4907aecabeaf4b8aa62a09c26a128, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 38fe36e16c4d3e04cbd367bc98254900, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8d56633f6aa035949848b6f4f14a6ebd, type: 2}
+  m_sharedMaterial: {fileID: 2136087169309321419, guid: 8d56633f6aa035949848b6f4f14a6ebd, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -506,12 +511,13 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
+  serializedVersion: 7
   m_Component:
   - component: {fileID: 2058896316108702017}
   - component: {fileID: 3500909407856535083}
   - component: {fileID: 5178449462850589418}
   m_Layer: 5
+  m_HasEditorInfo: 1
   m_Name: Cost
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -568,8 +574,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: 1000
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 9da4907aecabeaf4b8aa62a09c26a128, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 38fe36e16c4d3e04cbd367bc98254900, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8d56633f6aa035949848b6f4f14a6ebd, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 156a3c5e3ed29d94389ed3dc7f72be7c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -641,11 +647,12 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
+  serializedVersion: 7
   m_Component:
   - component: {fileID: 3956288724007292595}
   - component: {fileID: 5137231441271166477}
   m_Layer: 5
+  m_HasEditorInfo: 1
   m_Name: SkillItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -666,7 +673,7 @@ RectTransform:
   m_Children:
   - {fileID: 2188322188091390868}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -696,12 +703,13 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
+  serializedVersion: 7
   m_Component:
   - component: {fileID: 7525713387758829920}
   - component: {fileID: 3809532831384742575}
   - component: {fileID: 656344887036522300}
   m_Layer: 5
+  m_HasEditorInfo: 1
   m_Name: Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -758,8 +766,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: "\u6BD2\u6DB2\u7BAD\u77E2"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 9da4907aecabeaf4b8aa62a09c26a128, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 38fe36e16c4d3e04cbd367bc98254900, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 8d56633f6aa035949848b6f4f14a6ebd, type: 2}
+  m_sharedMaterial: {fileID: 2136087169309321419, guid: 8d56633f6aa035949848b6f4f14a6ebd, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

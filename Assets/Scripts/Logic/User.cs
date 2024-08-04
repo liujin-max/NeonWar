@@ -225,6 +225,8 @@ public class User
     {
         if (!m_userUpdate) return;
 
+        ExportPears();
+
         Platform.Instance.UPLOAD(m_Data);
 
         //重置标记
@@ -309,6 +311,35 @@ public class User
         return CurrentPlayer.SkillSlots[order];
     }
 
+    //穿脱宝珠
+    public void SetPearSeat(int order, int pear_id)
+    {
+        CurrentPlayer.PearSlots[order].ID = pear_id;
+
+        m_userUpdate = true;
+    }
+
+    public bool IsPearEquiped(int pear_id)
+    {
+        foreach (var slot_msg in CurrentPlayer.PearSlots) {
+            if (slot_msg.ID == pear_id) return true;
+        }
+        return false;
+    }
+
+    //同步宝珠背包数据
+    public void ExportPears()
+    {
+        m_Data.Pears.Clear();
+
+        GameFacade.Instance.DataCenter.Backpack.Pears.ForEach(pear =>{
+            m_Data.Pears.Add(new PearMsg() {
+                ID      = pear.ID,
+                Count   = pear.Count
+            });
+        });
+    }
+
     public void SetRecoveryTimestamp(long value)
     {
         m_Data.RecoveryTimestamp = value;
@@ -330,7 +361,7 @@ public class User
     {   
 
         if (m_userUpdate) {
-             Upload();
+            Upload();
         }
     }
 }

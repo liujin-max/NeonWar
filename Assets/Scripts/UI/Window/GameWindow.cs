@@ -18,6 +18,7 @@ public class GameWindow : MonoBehaviour
     [SerializeField] LongPressButton m_BtnRight;
     [SerializeField] GameObject m_BlinkPivot;
     [SerializeField] Transform m_SkillPivot;
+    [SerializeField] Transform m_PearPivot;
 
     
     [Header("按钮")]
@@ -27,6 +28,7 @@ public class GameWindow : MonoBehaviour
 
     [SerializeField] private List<CanvasGroup> m_Groups = new List<CanvasGroup>();
     private List<SkillSeatItem> m_SkillSeatItems = new List<SkillSeatItem>();
+    private List<PearSeatItem> m_PearSeatItems = new List<PearSeatItem>();
 
 
     private float LeftPressTime = 0;
@@ -34,23 +36,39 @@ public class GameWindow : MonoBehaviour
     private Tweener m_BlinkTweener;
 
 
-    SkillSeatItem new_seat_item(int order)
+    SkillSeatItem new_skill_seat_item(int order)
     {
-        SkillSeatItem skill_item = null;
+        SkillSeatItem item = null;
         if (m_SkillSeatItems.Count > order)
         {
-            skill_item = m_SkillSeatItems[order];
+            item = m_SkillSeatItems[order];
         }
         else
         {
-            skill_item = GameFacade.Instance.UIManager.LoadItem("SkillSeatItem", m_SkillPivot.Find(order.ToString())).GetComponent<SkillSeatItem>();
-            m_SkillSeatItems.Add(skill_item);
+            item = GameFacade.Instance.UIManager.LoadItem("SkillSeatItem", m_SkillPivot.Find(order.ToString())).GetComponent<SkillSeatItem>();
+            m_SkillSeatItems.Add(item);
         }
-        skill_item.gameObject.SetActive(true);
+        item.gameObject.SetActive(true);
 
-        return skill_item;
+        return item;
     }
 
+    PearSeatItem new_pear_seat_item(int order)
+    {
+        PearSeatItem item = null;
+        if (m_PearSeatItems.Count > order)
+        {
+            item = m_PearSeatItems[order];
+        }
+        else
+        {
+            item = GameFacade.Instance.UIManager.LoadItem("PearSeatItem", m_PearPivot).GetComponent<PearSeatItem>();
+            m_PearSeatItems.Add(item);
+        }
+        item.gameObject.SetActive(true);
+
+        return item;
+    }
 
     void Awake()
     {
@@ -61,6 +79,7 @@ public class GameWindow : MonoBehaviour
 
         EventManager.AddHandler(EVENT.UI_BLINKSHAKE,    OnBlinkShake);
         EventManager.AddHandler(EVENT.UI_SKILLUPGRADE,  OnSkillUpgrade);
+        EventManager.AddHandler(EVENT.UI_PEAREQUIP,     OnPearEquip);
     }
 
     void OnDestroy()
@@ -72,7 +91,10 @@ public class GameWindow : MonoBehaviour
 
         EventManager.DelHandler(EVENT.UI_BLINKSHAKE,    OnBlinkShake);
         EventManager.DelHandler(EVENT.UI_SKILLUPGRADE,  OnSkillUpgrade);
+        EventManager.DelHandler(EVENT.UI_PEAREQUIP,     OnPearEquip);
     }
+
+
 
 
 
@@ -163,6 +185,7 @@ public class GameWindow : MonoBehaviour
         m_Glass.ForceValue(GameFacade.Instance.DataCenter.User.Glass);
 
         FlushUI();
+        InitPears();
         FlushBlink();
     }
 
@@ -198,7 +221,7 @@ public class GameWindow : MonoBehaviour
     //生成技能
     void InitSkills()
     {
-        m_SkillSeatItems.ForEach(item => {item.gameObject.SetActive(false); });
+        m_SkillSeatItems.ForEach(item => {item.gameObject.SetActive(false);});
 
         SkillSeat[] seats = new SkillSeat[]
         {
@@ -215,8 +238,23 @@ public class GameWindow : MonoBehaviour
             SkillSlotMsg skill_msg = GameFacade.Instance.DataCenter.User.CurrentPlayer.SkillSlots[i];
             SkillData skill_data = GameFacade.Instance.DataCenter.League.GetSkillData(skill_msg.ID);
 
-            var item = new_seat_item(i);
+            var item = new_skill_seat_item(i);
             item.Init(seats[i], skill_data, skill_msg.Level);
+        }
+    }
+
+    //生成宝珠
+    void InitPears()
+    {
+        m_PearSeatItems.ForEach(item => {item.gameObject.SetActive(false);});
+
+        for (int i = 0; i < GameFacade.Instance.DataCenter.User.CurrentPlayer.PearSlots.Count; i++)
+        {
+            PearSlotMsg slotMsg = GameFacade.Instance.DataCenter.User.CurrentPlayer.PearSlots[i];
+            Pear pear = GameFacade.Instance.DataCenter.Backpack.GetPear(slotMsg.ID);
+
+            var item = new_pear_seat_item(i);
+            item.Init(pear);
         }
     }
 
@@ -329,5 +367,10 @@ public class GameWindow : MonoBehaviour
         FlushUI();
     }
     
+    private void OnPearEquip(GameEvent @event)
+    {
+        InitPears();
+    }
+
     #endregion
 }
