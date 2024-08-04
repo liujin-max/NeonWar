@@ -12,8 +12,10 @@ public class Hit
     public AttributeValue CP    = new AttributeValue(0);
     public AttributeValue CT    = new AttributeValue(0);
 
+    //伤害倍率
+    public AttributeValue ATK_INC   = new AttributeValue(1, false);
     //对Boss额外伤害倍率
-    public AttributeValue BOSS_INC = new AttributeValue(1);
+    public AttributeValue BOSS_INC  = new AttributeValue(1, false);
 
 
 

@@ -7,7 +7,7 @@ using UnityEngine;
 #region 暴击率
 public class Pear_Crit : Pear
 {
-    public override void Equip(Unit player)
+    public override void Equip(Player player)
     {
         base.Equip(player);
 
@@ -27,7 +27,7 @@ public class Pear_Crit : Pear
 #region 暴击伤害
 public class Pear_CritDemage : Pear
 {
-    public override void Equip(Unit player)
+    public override void Equip(Player player)
     {
         base.Equip(player);
 
@@ -47,7 +47,7 @@ public class Pear_CritDemage : Pear
 #region 移动速度
 public class Pear_Speed : Pear
 {
-    public override void Equip(Unit player)
+    public override void Equip(Player player)
     {
         base.Equip(player);
 
@@ -67,7 +67,7 @@ public class Pear_Speed : Pear
 #region 体力
 public class Pear_HP : Pear
 {
-    public override void Equip(Unit player)
+    public override void Equip(Player player)
     {
         base.Equip(player);
 
@@ -89,7 +89,7 @@ public class Pear_HP : Pear
 #region 增益时间提升
 public class Pear_Buff : Pear
 {
-    public override void Equip(Unit player)
+    public override void Equip(Player player)
     {
         base.Equip(player);
 
@@ -116,20 +116,41 @@ public class Pear_Buff : Pear
 #endregion
 
 
-#region 头目伤害加成
-// 对头目造成的伤害提高#%
-public class Pear_Boss : Pear
+#region 碎片加成
+// 关卡获得的碎片数量提高#%
+public class Pear_Glass : Pear
 {
-    public override void Equip(Unit player)
+    public override void Equip(Player player)
     {
         base.Equip(player);
-        
-        
+
+        Caster.GlassRate.PutAUL(this, m_Data.Value / 100.0f);
     }
 
     public override void UnEquip()
     {
+        Caster.GlassRate.Pop(this);
+
+        base.UnEquip();
+    }
+}
+#endregion
+
+
+#region 头目伤害加成
+// 对头目造成的伤害提高#%
+public class Pear_Boss : Pear
+{
+    public override void Equip(Player player)
+    {
+        base.Equip(player);
         
+        Caster.ATT.BOSS_INC.PutAUL(this, m_Data.Value / 100.0f);
+    }
+
+    public override void UnEquip()
+    {
+        Caster.ATT.BOSS_INC.Pop(this);
         
         base.UnEquip();
     }
@@ -138,30 +159,62 @@ public class Pear_Boss : Pear
 
 
 
+#region 箭矢伤害加成
+public class Pear_Arrow : Pear
+{
+    public override void Equip(Player player)
+    {
+        base.Equip(player);
+        
+        EventManager.AddHandler(EVENT.ONBULLETCREATE,   OnBulletCreate);
+    }
 
+    public override void UnEquip()
+    {
+        EventManager.DelHandler(EVENT.ONBULLETCREATE,   OnBulletCreate);
+        
+        base.UnEquip();
+    }
+
+    private void OnBulletCreate(GameEvent @event)
+    {
+        Bullet bullet = @event.GetParam(0) as Bullet;
+
+        if (bullet.Caster.ID == (int)_C.PLAYER.BOW)
+        {
+            bullet.Hit.ATK_INC.PutAUL(this, m_Data.Value / 100.0f);
+        }
+    }
+}
+#endregion
 
 
 //宝珠
 public class Pear
 {
     protected PearData m_Data;
-    public PearData Data { get => m_Data; set => m_Data = value; }
+    public PearData Data { get => m_Data;}
 
     public int ID { get => m_Data.ID;}
     public int Level { get => m_Data.Level;}
     public int Class { get => m_Data.Class;}
     public int Count;
-    public Unit Caster;
+    public Player Caster;
 
+
+
+    #region 逻辑配置
     private static Dictionary<int, Func<Pear>> m_classDictionary = new Dictionary<int, Func<Pear>> {
         {20000, () => new Pear_Crit()},
         {20010, () => new Pear_CritDemage()},
         {20020, () => new Pear_Speed()},
         {20030, () => new Pear_HP()},
-        {20040, () => new Pear_Buff()}
+        {20040, () => new Pear_Buff()},
+        {20050, () => new Pear_Glass()},
+        {20060, () => new Pear_Boss()},
+        {20070, () => new Pear_Arrow()}
     };
-
-    
+    #endregion
 
     public static Pear Create(PearData pearData, int count = 1)
     {
@@ -194,7 +247,7 @@ public class Pear
         return m_Data.Level >= 5;
     }
 
-    public virtual void Equip(Unit player)
+    public virtual void Equip(Player player)
     {
         Caster = player;
     }

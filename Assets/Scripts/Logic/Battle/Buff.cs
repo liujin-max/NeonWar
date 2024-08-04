@@ -12,7 +12,7 @@ public class Buff_Stun : Buff
     public override void Init()
     {
         TYPE    = _C.BUFF_TYPE.DE;
-        Duration= new CDTimer(0.5f);
+        Duration= new CDTimer(0.8f);
 
         Caster.Stop();
     }

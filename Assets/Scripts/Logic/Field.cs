@@ -174,18 +174,21 @@ public class Field : MonoBehaviour
     {
         float kill_rate = m_Spawn.KillProgress;
 
-        int glass = Mathf.FloorToInt(m_Level.LevelJSON.Glass * kill_rate);
+        int glass = Mathf.FloorToInt(m_Level.LevelJSON.Glass * kill_rate) + m_Glass;
 
-        GameFacade.Instance.DataCenter.User.UpdateGlass(glass + m_Glass);
-    
+        //额外倍率
+        glass   = Mathf.CeilToInt(glass * m_Player.GlassRate.ToNumber());
+
+        GameFacade.Instance.DataCenter.User.UpdateGlass(glass);
     }
 
     public void InitPlayer()
     {
         if (m_Player != null) return;
 
-        m_Player = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Player/Player_" + GameFacade.Instance.DataCenter.User.CurrentPlayer.ID, Vector2.zero, Land.ENTITY_ROOT).GetComponent<Player>();
-        m_Player.Init(270);
+        int id      = GameFacade.Instance.DataCenter.User.CurrentPlayer.ID;
+        m_Player    = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Player/Player_" + id, Vector2.zero, Land.ENTITY_ROOT).GetComponent<Player>();
+        m_Player.Init(id, 270);
     }
 
     public void RemovePlayer()
@@ -223,7 +226,7 @@ public class Field : MonoBehaviour
         if (hit.IgnoreUnits.Contains(unit)) return false;
         
 
-        float demage = Mathf.RoundToInt(hit.ATK.ToNumber() * unit.ATT.VUN_INC.ToNumber());
+        float demage = Mathf.RoundToInt(hit.ATK.ToNumber() * hit.ATK_INC.ToNumber() * unit.ATT.VUN_INC.ToNumber());
 
         //护盾
         if (unit.GetBuff((int)_C.BUFF.SHIELD) != null)

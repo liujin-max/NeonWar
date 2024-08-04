@@ -94,7 +94,7 @@ public class GameUserData
         //弓
         new PlayerMsg() 
         {
-            ID = (int)_C.PLAYER.BOW, 
+            ID          = (int)_C.PLAYER.BOW, 
             UnlockFlag  = true, 
             InUse       = true, 
             PearSlots   = new List<PearSlotMsg>()   //2个宝珠槽

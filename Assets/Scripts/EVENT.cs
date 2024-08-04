@@ -12,18 +12,16 @@ public static class EVENT
 
 
 
-    public static string ONBATTLESTART      = "ONBATTLESTART";
-    public static string ONBATTLEEND        = "ONBATTLEEND";
+
     
     public static string ONUPDATEGLASS      = "ONUPDATEGLASS";
-
-
     public static string ONJOYSTICK_PRESS   = "ONJOYSTICK_PRESS";
     public static string ONJOYSTICK_DOUBLE  = "ONJOYSTICK_DOUBLE";
     
 
 
-
+    public static string ONBATTLESTART      = "ONBATTLESTART";
+    public static string ONBATTLEEND        = "ONBATTLEEND";
     //创建子弹
     public static string ONBULLETCREATE     = "ONBULLETCREATE";
     //子弹击中目标

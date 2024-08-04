@@ -13,8 +13,13 @@ public class Player : Unit
     protected List<Pear> m_Pears = new List<Pear>();
 
 
-    public void Init(float angle)
+    //碎片奖励
+    [HideInInspector] public AttributeValue GlassRate = new AttributeValue(1, false);
+
+
+    public void Init(int id, float angle)
     {
+        ID      = id;
         Side    = _C.SIDE.PLAYER;
         m_Angle = angle;
         ATT.HP  = ATT.HPMAX;
@@ -148,9 +153,9 @@ public class Player : Unit
             });
 
             //测试宝珠
-            Pear pear = Pear.Create(GameFacade.Instance.DataCenter.Backpack.GetPearData(20042));
-            pear.Equip(this);
-            m_Pears.Add(pear);
+            // Pear pear = Pear.Create(GameFacade.Instance.DataCenter.Backpack.GetPearData(20052));
+            // pear.Equip(this);
+            // m_Pears.Add(pear);
         }
         
     }
