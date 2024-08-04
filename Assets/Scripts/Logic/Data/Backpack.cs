@@ -96,7 +96,7 @@ public class Backpack
         });
 
         //测试代码
-        AddPear(20052, 1);
+        // AddPear(20012, 3);
     }
 
     public Pear PushPear(int id)

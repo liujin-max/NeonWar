@@ -311,12 +311,45 @@ public class User
         return CurrentPlayer.SkillSlots[order];
     }
 
-    //穿脱宝珠
-    public void SetPearSeat(int order, int pear_id)
+    //宝珠槽是不是满了
+    public bool IsPearSeatsFull()
     {
-        CurrentPlayer.PearSlots[order].ID = pear_id;
+        for (int i = 0; i < CurrentPlayer.PearSlots.Count; i++)
+        {
+            var slot = CurrentPlayer.PearSlots[i];
+            if (slot.ID == -1) {
+                return false;
+            }
+        }
 
-        m_userUpdate = true;
+        return true;
+    }
+
+    //穿脱宝珠
+    public void EquipPear(int pear_id)
+    {
+        for (int i = 0; i < CurrentPlayer.PearSlots.Count; i++)
+        {
+            var slot = CurrentPlayer.PearSlots[i];
+            if (slot.ID == -1) {
+                m_userUpdate = true;
+                CurrentPlayer.PearSlots[i].ID = pear_id;
+                break;
+            }
+        } 
+    }
+
+    public void UnloadPear(int pear_id)
+    {
+        for (int i = 0; i < CurrentPlayer.PearSlots.Count; i++)
+        {
+            var slot = CurrentPlayer.PearSlots[i];
+            if (slot.ID == pear_id) {
+                m_userUpdate = true;
+                CurrentPlayer.PearSlots[i].ID = -1;
+                break;
+            }
+        }
     }
 
     public bool IsPearEquiped(int pear_id)

@@ -196,8 +196,11 @@ public class Pear
     public PearData Data { get => m_Data;}
 
     public int ID { get => m_Data.ID;}
+    public string Name { get => m_Data.Name;}
     public int Level { get => m_Data.Level;}
     public int Class { get => m_Data.Class;}
+   
+
     public int Count;
     public Player Caster;
 
@@ -257,5 +260,12 @@ public class Pear
         Caster = null;
     }
 
+    public string GetDescription()
+    {
+        var data = GameFacade.Instance.DataCenter.Backpack.GetPearData(m_Data.Class);
+        string text = data.Description.Replace("#", _C.COLOR_GREEN + m_Data.Value.ToString() + "</color>");
 
+
+        return text;
+    }
 }

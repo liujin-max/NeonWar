@@ -10,6 +10,7 @@ public class PearSeatItem : MonoBehaviour
     [SerializeField] private Button m_Touch;
 
 
+
     private Pear m_Pear;
 
 
@@ -17,10 +18,6 @@ public class PearSeatItem : MonoBehaviour
     {
         m_Touch.onClick.AddListener(()=>{
             GameFacade.Instance.UIManager.LoadWindow("BackpackWindow", UIManager.MAJOR).GetComponent<BackpackWindow>().Init();
-
-            // GameFacade.Instance.DataCenter.User.SetPearSeat(0, 20052);
-
-            // EventManager.SendEvent(new GameEvent(EVENT.UI_PEAREQUIP));
         });
     }
 

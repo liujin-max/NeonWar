@@ -79,7 +79,7 @@ public class GameWindow : MonoBehaviour
 
         EventManager.AddHandler(EVENT.UI_BLINKSHAKE,    OnBlinkShake);
         EventManager.AddHandler(EVENT.UI_SKILLUPGRADE,  OnSkillUpgrade);
-        EventManager.AddHandler(EVENT.UI_PEAREQUIP,     OnPearEquip);
+        EventManager.AddHandler(EVENT.UI_PEARCHANGE,    OnPearChange);
     }
 
     void OnDestroy()
@@ -91,7 +91,7 @@ public class GameWindow : MonoBehaviour
 
         EventManager.DelHandler(EVENT.UI_BLINKSHAKE,    OnBlinkShake);
         EventManager.DelHandler(EVENT.UI_SKILLUPGRADE,  OnSkillUpgrade);
-        EventManager.DelHandler(EVENT.UI_PEAREQUIP,     OnPearEquip);
+        EventManager.DelHandler(EVENT.UI_PEARCHANGE,    OnPearChange);
     }
 
 
@@ -367,7 +367,7 @@ public class GameWindow : MonoBehaviour
         FlushUI();
     }
     
-    private void OnPearEquip(GameEvent @event)
+    private void OnPearChange(GameEvent @event)
     {
         InitPears();
     }

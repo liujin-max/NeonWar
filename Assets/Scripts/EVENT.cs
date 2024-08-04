@@ -9,7 +9,7 @@ public static class EVENT
 
     public static string UI_BLINKSHAKE      = "UI_BLINKSHAKE";
     public static string UI_SKILLUPGRADE    = "UI_SKILLUPGRADE";
-    public static string UI_PEAREQUIP       = "UI_PEAREQUIP";
+    public static string UI_PEARCHANGE      = "UI_PEARCHANGE";
 
 
 

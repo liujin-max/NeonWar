@@ -6,12 +6,24 @@ using UnityEngine.UI;
 
 public class PearItem : MonoBehaviour
 {
+    public Button Touch;
+
     [SerializeField] private Image m_Icon;
     [SerializeField] private TextMeshProUGUI m_Count;
     [SerializeField] private GameObject m_TagEquiped;
 
 
     private Pear m_Pear;
+
+    void Awake()
+    {
+        EventManager.AddHandler(EVENT.UI_PEARCHANGE,    OnPearChange);
+    }
+
+    void OnDestroy()
+    {
+        EventManager.DelHandler(EVENT.UI_PEARCHANGE,    OnPearChange);
+    }
 
     public void Init(Pear pear)
     {
@@ -26,6 +38,8 @@ public class PearItem : MonoBehaviour
     void FlushUI()
     {
         m_Count.text = m_Pear.Count > 1 ? m_Pear.Count.ToString() : "";
+
+        ShowTagEquip(GameFacade.Instance.DataCenter.User.IsPearEquiped(m_Pear.ID));
     }
 
     public void ShowTagEquip(bool flag)
@@ -33,4 +47,13 @@ public class PearItem : MonoBehaviour
         m_TagEquiped.SetActive(flag);
         m_Count.gameObject.SetActive(!flag);
     }
+
+
+
+    #region 监听事件
+    private void OnPearChange(GameEvent @event)
+    {
+        FlushUI();
+    }
+    #endregion
 }
