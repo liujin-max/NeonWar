@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PearSeatItem : MonoBehaviour
 {
-    [SerializeField] private Image m_Frame;
-    [SerializeField] private Image m_Icon;
-    [SerializeField] private Button m_Touch;
+    [SerializeField] Button m_Touch;
+    [SerializeField] Image m_Frame;
+    [SerializeField] Image m_Icon;
+    [SerializeField] TextMeshProUGUI m_Text;
+    
 
 
 
@@ -17,7 +20,7 @@ public class PearSeatItem : MonoBehaviour
     void Start()
     {
         m_Touch.onClick.AddListener(()=>{
-            GameFacade.Instance.UIManager.LoadWindow("BackpackWindow", UIManager.MAJOR).GetComponent<BackpackWindow>().Init();
+            NavigationController.GotoBackpack(m_Pear);
         });
     }
 
@@ -36,16 +39,29 @@ public class PearSeatItem : MonoBehaviour
             // m_Frame.SetNativeSize();
 
             m_Icon.gameObject.SetActive(true);
-
             m_Icon.sprite = Resources.Load<Sprite>("UI/Pear/" + m_Pear.Class);
             m_Icon.SetNativeSize();
+
+            m_Text.text = _C.LEVELCOLOR_PAIRS[m_Pear.Level] + m_Pear.Name;
         }
         else
         {
-            // m_Frame.sprite = Resources.Load<Sprite>("");
-            // m_Frame.SetNativeSize();
+            m_Frame.sprite = Resources.Load<Sprite>("UI/Game/Game_pear_frame");
+            m_Frame.SetNativeSize();
 
-            m_Icon.gameObject.SetActive(false);
+            m_Text.text = "";
+
+            if (GameFacade.Instance.DataCenter.IsPearUnlock() == true)
+            {
+                m_Icon.gameObject.SetActive(false);
+            }
+            else
+            {
+                m_Icon.gameObject.SetActive(true);
+
+                m_Icon.sprite = Resources.Load<Sprite>("UI/Universal/Universal_lock");
+                m_Icon.SetNativeSize();
+            }
         }
         
     }

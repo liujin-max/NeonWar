@@ -10,7 +10,7 @@ public class BackpackWindow : MonoBehaviour
     [SerializeField] private Transform m_DetailPivot;
 
 
-
+    private PearItem m_PearItem;
     private PearDetailItem m_DetailItem;
 
     void Start()
@@ -40,12 +40,17 @@ public class BackpackWindow : MonoBehaviour
 
             item.Touch.onClick.RemoveAllListeners();
             item.Touch.onClick.AddListener(()=>{
+                if (m_PearItem != null) m_PearItem.Select(false);
+
+                m_PearItem = item;
+                m_PearItem.Select(true);
+
                 ShowDetail(pear);
             });
         });
     }
 
-    void ShowDetail(Pear pear)
+    public void ShowDetail(Pear pear)
     {
         if (m_DetailItem == null) {
             m_DetailItem = GameFacade.Instance.UIManager.LoadItem("PearDetailItem", m_DetailPivot).GetComponent<PearDetailItem>();

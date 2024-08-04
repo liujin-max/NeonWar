@@ -95,8 +95,6 @@ public class Backpack
             AddPear(pear_msg.ID, pear_msg.Count);
         });
 
-        //测试代码
-        // AddPear(20012, 3);
     }
 
     public Pear PushPear(int id)

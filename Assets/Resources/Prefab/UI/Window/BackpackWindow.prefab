@@ -512,6 +512,6 @@ MonoBehaviour:
   maxItemCount: 24
   datasNum: 0
   rowCount: 8
-  beginOffset: 0
+  beginOffset: 20
   initIndex: 0
   isUpperStart: 1

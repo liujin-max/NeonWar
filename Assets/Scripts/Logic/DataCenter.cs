@@ -32,10 +32,14 @@ public class DataCenter
         Backpack.Init();
     }
 
-
     public void Update(float dt)
     {
         User.Update(dt);
+    }
+
+    public bool IsPearUnlock()
+    {
+        return User.Level > _C.PEAR_UNLOCK_LEVEL;
     }
 }
 

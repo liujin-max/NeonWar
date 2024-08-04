@@ -90,20 +90,6 @@ public class Rank
         return true;
     }
 
-    //获取我的排名
-    public int GetMyRankOrder()
-    {
-        // if (m_RankList.Count == 0 && GameFacade.Instance.DataCenter.User.Score > 0) return 1;
-
-        // for (int i = 0; i < m_RankList.Count; i++) {
-        //     var rankData = m_RankList[i];
-        //     if (GameFacade.Instance.DataCenter.User.Score >= rankData.Value) {
-        //         return rankData.Order;
-        //     }
-        // }
-
-        return _C.DEFAULT_RANK;
-    }
 
 
 }

@@ -263,7 +263,7 @@ public class Pear
     public string GetDescription()
     {
         var data = GameFacade.Instance.DataCenter.Backpack.GetPearData(m_Data.Class);
-        string text = data.Description.Replace("#", _C.COLOR_GREEN + m_Data.Value.ToString() + "</color>");
+        string text = data.Description.Replace("#", _C.COLOR_GREEN2 + m_Data.Value.ToString() + "</color>");
 
 
         return text;

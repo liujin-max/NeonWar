@@ -8,6 +8,7 @@ public class PearItem : MonoBehaviour
 {
     public Button Touch;
 
+    [SerializeField] private GameObject m_Light;
     [SerializeField] private Image m_Icon;
     [SerializeField] private TextMeshProUGUI m_Count;
     [SerializeField] private GameObject m_TagEquiped;
@@ -30,7 +31,9 @@ public class PearItem : MonoBehaviour
         m_Pear = pear;
 
         m_Icon.sprite = Resources.Load<Sprite>("UI/Pear/" + m_Pear.Class);
-        m_Icon.SetNativeSize();
+        // m_Icon.SetNativeSize();
+
+        Select(false);
 
         FlushUI();
     }
@@ -48,6 +51,10 @@ public class PearItem : MonoBehaviour
         m_Count.gameObject.SetActive(!flag);
     }
 
+    public void Select(bool flag)
+    {
+        m_Light.SetActive(flag);
+    }
 
 
     #region 监听事件

@@ -9,18 +9,34 @@ public static class _C
 
     public static string CLOUD_ENV = "fingerblock-3gqj06sx5ebc6035";    //云开发环境ID
 
+
+
+
+
+    public static int PEAR_UNLOCK_LEVEL= 15;    //通过15关后开放宝珠系统
     public static float DEFAULT_RADIUS = 5.4f;  //圆弧半径
     public static float DEFAULT_BLINKCD= 1.5f;  //闪现冷却
 
 
 
     
-    public static int DEFAULT_RANK = 999;       //默认排名
+
 
 
 
     public static string COLOR_RED      = "<#FF0000>";
     public static string COLOR_GREEN    = "<#33FF07>";
+    public static string COLOR_GREEN2   = "<#1D9F00>";
+
+    //品质对应的名字颜色
+    public static Dictionary<int, string> LEVELCOLOR_PAIRS = new Dictionary<int, string>()
+    {
+        [1] = "<#FFFFFF>",
+        [2] = "<#39B317>",
+        [3] = "<#1790B2>",
+        [4] = "<#9717B2>",
+        [5] = "<#B21F17>",
+    };
 
  
     //状态机的状态列表
