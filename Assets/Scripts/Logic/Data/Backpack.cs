@@ -12,6 +12,7 @@ public class PearData
     public int Class;
     public int Level;
     public int Value;
+    public int Weight;
     public string Description;
 }
 
@@ -46,7 +47,8 @@ public class Backpack
                 Class       = Convert.ToInt32(data[2]),
                 Level       = Convert.ToInt32(data[3]),
                 Value       = Convert.ToInt32(data[4]),
-                Description = data[5]
+                Weight      = Convert.ToInt32(data[5]),
+                Description = data[6]
             };
 
             m_PearDataDic[pear.ID]  = pear;
