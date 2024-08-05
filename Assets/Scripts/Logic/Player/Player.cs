@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class Player : Unit
 {
+    private Animator m_Animator;
+
     public CDTimer InvincibleTimer = new CDTimer(1f);   //无敌时间
 
     protected List<Skill> m_Skills = new List<Skill>();
@@ -16,6 +18,11 @@ public class Player : Unit
     //碎片奖励
     [HideInInspector] public AttributeValue GlassRate = new AttributeValue(1, false);
 
+
+    void Awake()
+    {
+        m_Animator = transform.Find("Entity").GetComponent<Animator>();
+    }
 
     public void Init(int id, float angle)
     {
@@ -160,6 +167,14 @@ public class Player : Unit
         
     }
 
+    //攻击
+    protected override void Attack()
+    {
+        m_Animator.speed  = 1 / (ASP.Duration / (ATT.ASP.GetOrigin() / 1000.0f));
+        m_Animator.Play("Attack", 0, 0);
+
+        Debug.Log("速度：" + m_Animator.speed);
+    }
     #endregion
 
 

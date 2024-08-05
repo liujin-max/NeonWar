@@ -7,6 +7,7 @@ using UnityEngine;
 public class AttributeValue
 {
     [SerializeField] private float m_Base;
+    [SerializeField] private float m_Origin;
     private bool m_IsInt = false;
 
     Dictionary<object, float> ADDDic = new Dictionary<object, float>();
@@ -15,6 +16,7 @@ public class AttributeValue
     public AttributeValue(float value, bool int_flag = true)
     {
         m_Base  = value;
+        m_Origin= value;
         m_IsInt = int_flag;
     }
 
@@ -26,6 +28,11 @@ public class AttributeValue
     public float GetBase()
     {
         return m_Base;
+    }
+
+    public float GetOrigin()
+    {
+        return m_Origin;
     }
 
     public void PutADD(object obj, float value)
