@@ -6,10 +6,8 @@ using UnityEngine;
 public class Player_10000 : Player
 {
     //发射子弹
-    protected override void Attack()
+    public override void DoAttack()
     {
-        base.Attack();
-        Debug.Log("SHoot");
         //判断技能是否控制发射
         foreach (var sk in m_Skills) {
             if (sk.OnShoot() == true) return;

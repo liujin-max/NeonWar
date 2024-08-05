@@ -103,7 +103,17 @@ public class Enemy : Unit
         GameFacade.Instance.EffectManager.Load(EFFECT.BROKEN, transform.localPosition, Field.Instance.Land.ELEMENT_ROOT.gameObject).transform.right = hit.Velocity;
 
     }
+
+    //怪物通常没有攻击动画，所以直接执行DoAttack
+    //有攻击动画的怪物需要重写此方法
+    protected override void Attack()
+    {
+        DoAttack();
+    }
     #endregion
+
+
+
 
     #region 逻辑处理
     public void SetValid(bool flag)
@@ -130,6 +140,7 @@ public class Enemy : Unit
     {
         m_Rigidbody.velocity = m_Rigidbody.velocity.normalized * ATT.SPEED.ToNumber() / 100.0f;
     }
+
 
     //暂停运动
     public override void Stop()

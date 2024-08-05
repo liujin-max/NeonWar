@@ -106,6 +106,12 @@ public class Unit : MonoBehaviour
     {
 
     }
+
+    //播放攻击动画，真正的攻击逻辑在动画的某一帧执行
+    protected virtual void Attack()
+    {
+
+    }
     #endregion
 
 
@@ -138,7 +144,8 @@ public class Unit : MonoBehaviour
         return bullet;
     }
 
-    protected virtual void Attack()
+    //真正的攻击逻辑
+    public virtual void DoAttack()
     {
 
     }

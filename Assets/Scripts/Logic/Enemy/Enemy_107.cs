@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Enemy_107 : Enemy
 {
-    protected override void Attack()
+    public override void DoAttack()
     {
         float base_angle = ToolUtility.VectorToAngle(Field.Instance.Player.transform.localPosition - transform.localPosition);
 

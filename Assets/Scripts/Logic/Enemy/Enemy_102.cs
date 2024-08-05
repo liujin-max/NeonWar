@@ -6,7 +6,7 @@ using UnityEngine;
 //血量较低，且会发射子弹
 public class Enemy_102 : Enemy
 {
-    protected override void Attack()
+    public override void DoAttack()
     {
         //向玩家发射子弹
         var bullet = CreateBullet();

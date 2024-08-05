@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class Player : Unit
 {
-    private Animator m_Animator;
+    protected Animator m_Animator;
 
     public CDTimer InvincibleTimer = new CDTimer(1f);   //无敌时间
 
@@ -96,6 +96,13 @@ public class Player : Unit
         Field.Instance.Land.DoShake();
     }
     
+    //攻击动画，在Animation clip中插入帧事件来执行真正的攻击逻辑
+    protected override void Attack()
+    {
+        //播放速度随攻速的变化而变化
+        m_Animator.speed  = 1 / Mathf.Min(1, (ASP.Duration / (ATT.ASP.GetOrigin() / 1000.0f)));
+        m_Animator.Play("Attack", 0, 0);
+    }
     #endregion
     
 
@@ -167,14 +174,6 @@ public class Player : Unit
         
     }
 
-    //攻击
-    protected override void Attack()
-    {
-        m_Animator.speed  = 1 / (ASP.Duration / (ATT.ASP.GetOrigin() / 1000.0f));
-        m_Animator.Play("Attack", 0, 0);
-
-        Debug.Log("速度：" + m_Animator.speed);
-    }
     #endregion
 
 
