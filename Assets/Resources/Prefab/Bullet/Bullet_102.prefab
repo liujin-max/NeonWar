@@ -34,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5581647061099615948
 MonoBehaviour:
@@ -52,14 +52,10 @@ MonoBehaviour:
   Caster: {fileID: 0}
   Speed:
     m_Base: 420
-  CP:
-    m_Base: 0
-  CT:
-    m_Base: 0
+    m_Origin: 0
   IsSplit: 0
   PassTimes: 0
   ReboundTimes: 0
-  KillRate: 0
 --- !u!50 &5024298108139937723
 Rigidbody2D:
   serializedVersion: 4
@@ -130,12 +126,12 @@ SpriteRenderer:
   m_SortingLayerID: -1515743181
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a5d96e2173c70004592e9b69f9bedc96, type: 3}
+  m_Sprite: {fileID: 21300000, guid: c98447c30dffdf44593178d3852a8188, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 5.12, y: 5.12}
+  m_Size: {x: 0.32, y: 0.32}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

@@ -6,7 +6,7 @@ public class Enemy_106 : Enemy
 {
     private int m_BuffValue = 3;
 
-    private CDTimer m_Timer = new CDTimer(3f);
+    private CDTimer m_Timer = new CDTimer(4f);
 
     public override void Init(MonsterJSON monster_data)
     {

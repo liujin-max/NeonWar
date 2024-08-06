@@ -34,7 +34,7 @@ Transform:
   m_Children:
   - {fileID: 4245187752296427639}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &1924509244257183491
 Rigidbody2D:
@@ -84,18 +84,28 @@ MonoBehaviour:
     HP: 3
     ATK:
       m_Base: 1
+      m_Origin: 0
     ASP:
       m_Base: 0
+      m_Origin: 0
     CP:
       m_Base: 0
+      m_Origin: 0
     CT:
       m_Base: 1500
+      m_Origin: 0
     DODGE:
       m_Base: 0
+      m_Origin: 0
     SPEED:
       m_Base: 400
+      m_Origin: 0
     VUN_INC:
       m_Base: 1
+      m_Origin: 0
+    BOSS_INC:
+      m_Base: 1
+      m_Origin: 0
 --- !u!58 &4186952632196083614
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -158,7 +168,7 @@ Transform:
   m_GameObject: {fileID: 2841726863660340128}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.6, y: 1.6, z: 1.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1613257971997458555}

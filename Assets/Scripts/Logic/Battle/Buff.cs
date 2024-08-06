@@ -84,7 +84,7 @@ public class Buff_Shield : Buff
             m_Tweener = null;
         }
         // 创建抖动和缩放效果
-        m_Tweener = m_Effect.transform.DOShakeRotation(0.2f, 25f, vibrato: 15, randomness: 50);
+        m_Tweener = m_Effect.transform.DOShakeScale(0.2f, 0.25f, vibrato: 15, randomness: 50);
 
         if (Value <= 0) Caster.RemoveBuff(this);
     }

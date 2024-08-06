@@ -77,13 +77,19 @@ public class Bullet : MonoBehaviour
     #region 碰撞检测
     void OnTriggerEnter2D(Collider2D collider)
     {
-        //子弹撞墙 则销毁
+        //子弹撞到边界 则销毁
+        if (collider.gameObject.tag == "Board")
+        {
+            Dispose();
+            return;
+        }
+
+        //子弹撞墙 判断是否反弹
         if (collider.gameObject.tag == "Wall")
         {
             Hit.IgnoreUnits.Clear();
 
             if (ReboundTimes > 0) Rebound();
-            if (ReboundTimes <= 0) Dispose();
             return;
         }
 

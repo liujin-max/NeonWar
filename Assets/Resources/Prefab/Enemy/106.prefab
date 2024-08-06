@@ -121,7 +121,7 @@ Transform:
   m_Children:
   - {fileID: 2237775171984065861}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &4562983818337489457
 Rigidbody2D:
@@ -182,9 +182,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.08, y: 0}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.55
+  m_Radius: 0.5
 --- !u!114 &7279178389058679603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -206,15 +206,25 @@ MonoBehaviour:
     HP: 3
     ATK:
       m_Base: 1
+      m_Origin: 0
     ASP:
       m_Base: 0
+      m_Origin: 0
     CP:
       m_Base: 0
+      m_Origin: 0
     CT:
       m_Base: 1500
+      m_Origin: 0
     DODGE:
       m_Base: 0
+      m_Origin: 0
     SPEED:
       m_Base: 400
+      m_Origin: 0
     VUN_INC:
       m_Base: 1
+      m_Origin: 0
+    BOSS_INC:
+      m_Base: 1
+      m_Origin: 0
