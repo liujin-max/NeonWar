@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 182418787278251666}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3712288799380927817}
@@ -76,12 +76,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 89a3bc33efff1754fbb1a3351a2f011d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cdb54804151a57d4abb0511fbbda1a03, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 5.12, y: 5.12}
+  m_Size: {x: 1.44, y: 1.44}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -123,7 +123,7 @@ Transform:
   - {fileID: 5289464577677390390}
   - {fileID: 6876995078200789080}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &4562983818337489457
 Rigidbody2D:
@@ -200,7 +200,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ShootPivot: {fileID: 5289464577677390390}
-  BulletTemplate: {fileID: 5480662803317571861, guid: a7aee017515b6d24caef15973615edb8, type: 3}
+  BulletTemplate: {fileID: 5480662803317571861, guid: 6656a8db8a48abd42be02ad9e7c1e4e0, type: 3}
   ID: 0
   Side: 0
   ATT:
@@ -211,7 +211,7 @@ MonoBehaviour:
       m_Origin: 1
     ASP:
       m_Base: 2500
-      m_Origin: 1000
+      m_Origin: 2500
     CP:
       m_Base: 0
       m_Origin: 0
@@ -222,8 +222,8 @@ MonoBehaviour:
       m_Base: 0
       m_Origin: 0
     SPEED:
-      m_Base: 330
-      m_Origin: 0
+      m_Base: 320
+      m_Origin: 320
     VUN_INC:
       m_Base: 1
       m_Origin: 1

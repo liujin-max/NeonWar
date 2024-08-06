@@ -51,15 +51,11 @@ MonoBehaviour:
   Name: 
   Caster: {fileID: 0}
   Speed:
-    m_Base: 420
-  CP:
-    m_Base: 0
-  CT:
-    m_Base: 0
+    m_Base: 410
+    m_Origin: 410
   IsSplit: 0
   PassTimes: 0
   ReboundTimes: 0
-  KillRate: 0
 --- !u!50 &5024298108139937723
 Rigidbody2D:
   serializedVersion: 4

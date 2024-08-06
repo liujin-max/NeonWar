@@ -100,7 +100,7 @@ MonoBehaviour:
       m_Base: 0
       m_Origin: 0
     SPEED:
-      m_Base: 400
+      m_Base: 390
       m_Origin: 0
     VUN_INC:
       m_Base: 1

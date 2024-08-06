@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5581647061099615948}
   - component: {fileID: 5024298108139937723}
   - component: {fileID: 6940764923761439305}
-  - component: {fileID: 6683928179677100747}
+  - component: {fileID: 9132919704319249470}
   m_Layer: 8
   m_HasEditorInfo: 1
   m_Name: Bullet_102
@@ -34,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5581647061099615948
 MonoBehaviour:
@@ -51,8 +51,8 @@ MonoBehaviour:
   Name: 
   Caster: {fileID: 0}
   Speed:
-    m_Base: 420
-    m_Origin: 0
+    m_Base: 410
+    m_Origin: 410
   IsSplit: 0
   PassTimes: 0
   ReboundTimes: 0
@@ -82,7 +82,7 @@ Rigidbody2D:
   m_Interpolate: 2
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!212 &6940764923761439305
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -126,18 +126,18 @@ SpriteRenderer:
   m_SortingLayerID: -1515743181
   m_SortingLayer: 2
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c98447c30dffdf44593178d3852a8188, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2e8eb37160eac3a47aa00ba3ef36e93f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.32, y: 0.32}
+  m_Size: {x: 5.12, y: 5.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &6683928179677100747
+--- !u!58 &9132919704319249470
 CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -171,4 +171,4 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.16
+  m_Radius: 0.18

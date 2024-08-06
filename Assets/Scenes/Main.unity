@@ -1052,7 +1052,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Version: 1.0.0
   OpenAdvert: 1
-  TestMode: 1
+  TestMode: 0
   TestStage: 0
 --- !u!224 &1549498438 stripped
 RectTransform:
@@ -1446,6 +1446,14 @@ PrefabInstance:
     - target: {fileID: 4225492563364461987, guid: 0ed09c9fa3d0c5748886d2c024bd5a83, type: 3}
       propertyPath: m_RootOrder
       value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4225492563364461987, guid: 0ed09c9fa3d0c5748886d2c024bd5a83, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4225492563364461987, guid: 0ed09c9fa3d0c5748886d2c024bd5a83, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4225492563364461987, guid: 0ed09c9fa3d0c5748886d2c024bd5a83, type: 3}
       propertyPath: m_LocalPosition.x
