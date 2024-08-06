@@ -49,11 +49,9 @@ public class Buff_YiShang : Buff
 #endregion
 
 
-#region 护盾
+#region 蛛网护盾
 public class Buff_Shield : Buff
 {
-    private Tweener m_Tweener;
-
     public Buff_Shield()
     {
         EventManager.AddHandler(EVENT.ONBULLETHIT,  OnBulletHit);
@@ -62,29 +60,25 @@ public class Buff_Shield : Buff
     public override void Init()
     {
         m_Effect = GameFacade.Instance.EffectManager.Load(EFFECT.SHIELD, Vector3.zero, Caster.gameObject);
+        m_Effect.transform.GetComponent<Animation>().Play("Shield_Show");
     }
 
     public override void Dispose()
     {
-        base.Dispose();
+        // SoundManager.Instance.Load(SOUND.HIT_SHIELD);
+
+        m_Effect.transform.GetComponent<Animation>().Play("Shield_Broken");
         
         EventManager.DelHandler(EVENT.ONBULLETHIT,  OnBulletHit);
-
-        GameFacade.Instance.EffectManager.Load(EFFECT.SHIELD_BROKEN, Vector3.zero, Caster.gameObject);
     }
 
     private void OnBulletHit(GameEvent @event)
     {
         Value--;
         
-        SoundManager.Instance.Load(SOUND.HIT_SHIELD);
+        // SoundManager.Instance.Load(SOUND.HIT_SHIELD);
         
-        if (m_Tweener != null) {
-            m_Tweener.Kill();
-            m_Tweener = null;
-        }
-        // 创建抖动和缩放效果
-        m_Tweener = m_Effect.transform.DOShakeScale(0.2f, 0.25f, vibrato: 15, randomness: 50);
+        m_Effect.transform.GetComponent<Animation>().Play("Shield_Hit");
 
         if (Value <= 0) Caster.RemoveBuff(this);
     }

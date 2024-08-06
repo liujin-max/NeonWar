@@ -19,6 +19,7 @@ public class Enemy : Unit
 {
     private Rigidbody2D m_Rigidbody;
     private SpriteRenderer m_Sprite;
+    private Transform m_HPPivot;
     private CircleHP m_HPBar;
 
 
@@ -38,6 +39,7 @@ public class Enemy : Unit
         m_Rigidbody = GetComponent<Rigidbody2D>();
 
         m_Sprite    = transform.Find("Sprite").GetComponent<SpriteRenderer>();
+        m_HPPivot   = transform.Find("HPPivot");
     }
 
     void Start()
@@ -73,7 +75,7 @@ public class Enemy : Unit
 
     void InitHPBar()
     {
-        m_HPBar = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Enemy/CircleHP", Vector2.zero, transform).GetComponent<CircleHP>();
+        m_HPBar = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Enemy/CircleHP", Vector2.zero, m_HPPivot).GetComponent<CircleHP>();
         m_HPBar.Init(this);
     }
 

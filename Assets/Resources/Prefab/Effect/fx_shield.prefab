@@ -26,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1479846845368177795}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.1, z: 0}
-  m_LocalScale: {x: 1.1, y: 1.1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1639283594952267686}
@@ -97,6 +97,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1639283594952267686}
   - component: {fileID: 4509596076240414482}
+  - component: {fileID: 8172459996644378242}
   m_Layer: 0
   m_HasEditorInfo: 1
   m_Name: fx_shield
@@ -135,5 +136,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Time: 0
   m_IsLoop: 1
-  IsRecycle: 1
+  IsRecycle: 0
   ResPath: 
+--- !u!111 &8172459996644378242
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1639283594952267687}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 5e4b49792416f7a4a9b9ef012b080a1a, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 5e4b49792416f7a4a9b9ef012b080a1a, type: 2}
+  - {fileID: 7400000, guid: e7c60c8c08a2eaf4e9cad922d922baf2, type: 2}
+  - {fileID: 7400000, guid: 9bc595eabd1fa7a429cb8de45513990a, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 0
+  m_AnimatePhysics: 0
+  m_CullingType: 0

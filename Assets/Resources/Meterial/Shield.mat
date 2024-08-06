@@ -1,21 +1,26 @@
 %YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
+%TAG !u! tag:yousandi.cn,2023:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Shield
   m_Shader: {fileID: 4800000, guid: a36b7719ff0465b42ab1407d67672c5f, type: 3}
-  m_ShaderKeywords: WAVEUV_ON
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - FISHEYE_ON
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -86,13 +91,13 @@ Material:
     - _FadeBurnGlow: 2
     - _FadeBurnTransition: 0.075
     - _FadeBurnWidth: 0.025
-    - _FishEyeUvAmount: 0.35
+    - _FishEyeUvAmount: 0
     - _FlickerAlpha: 0
     - _FlickerFreq: 0.2
-    - _FlickerPercent: 0.05
-    - _GhostColorBoost: 1
+    - _FlickerPercent: 0.205
+    - _GhostColorBoost: 1.62
     - _GhostTransparency: 0
-    - _GlitchAmount: 3
+    - _GlitchAmount: 0
     - _GlitchSize: 1
     - _Glow: 10
     - _GlowTexUsed: 0
@@ -101,20 +106,20 @@ Material:
     - _GrassManualToggle: 0
     - _GrassSpeed: 2
     - _GrassWind: 20
-    - _GreyscaleLuminosity: 0
+    - _GreyscaleLuminosity: 0.058
     - _GreyscaleOutline: 0
     - _HandDrawnAmount: 6
     - _HandDrawnSpeed: 3
-    - _HitEffectBlend: 1
-    - _HitEffectGlow: 5
+    - _HitEffectBlend: 0
+    - _HitEffectGlow: 49.8
     - _HologramMaxAlpha: 1
     - _HologramMinAlpha: 0
     - _HologramStripesAmount: 0.2
     - _HologramStripesSpeed: 5
     - _HologramUnmodAmount: 0.4
     - _HsvBright: 1
-    - _HsvSaturation: 1
-    - _HsvShift: 180
+    - _HsvSaturation: 0.776
+    - _HsvShift: 234
     - _InnerOutlineAlpha: 1
     - _InnerOutlineGlow: 1
     - _InnerOutlineThickness: 1
@@ -145,10 +150,10 @@ Material:
     - _OutlineTexXSpeed: 10
     - _OutlineTexYSpeed: 0
     - _OutlineWidth: 0.004
-    - _PinchUvAmount: 0.35
-    - _PixelateSize: 43
+    - _PinchUvAmount: 0
+    - _PixelateSize: 417
     - _PosterizeGamma: 0.75
-    - _PosterizeNumColors: 8
+    - _PosterizeNumColors: 15
     - _PosterizeOutline: 0
     - _RandomSeed: 0
     - _RectSize: 1
@@ -176,7 +181,7 @@ Material:
     - _WaveX: 0.5
     - _WaveY: 0.5
     - _ZWrite: 0
-    - _ZoomUvAmount: 0.5
+    - _ZoomUvAmount: 1.41
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _ColorChangeNewCol: {r: 1, g: 1, b: 0, a: 1}
@@ -191,7 +196,7 @@ Material:
     - _GradTopLeftCol: {r: 1, g: 0, b: 0, a: 1}
     - _GradTopRightCol: {r: 1, g: 0, b: 0, a: 1}
     - _GreyscaleTintColor: {r: 1, g: 1, b: 1, a: 1}
-    - _HitEffectColor: {r: 1, g: 1, b: 1, a: 1}
+    - _HitEffectColor: {r: 1, g: 0, b: 0, a: 1}
     - _InnerOutlineColor: {r: 1, g: 0, b: 0, a: 1}
     - _OutlineColor: {r: 1, g: 1, b: 1, a: 1}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}

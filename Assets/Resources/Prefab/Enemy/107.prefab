@@ -153,6 +153,7 @@ Transform:
   m_Children:
   - {fileID: 2237775171984065861}
   - {fileID: 3028144208133233005}
+  - {fileID: 2457054629613802698}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -239,15 +240,57 @@ MonoBehaviour:
     HP: 3
     ATK:
       m_Base: 1
+      m_Origin: 1
     ASP:
       m_Base: 1800
+      m_Origin: 1000
     CP:
       m_Base: 0
+      m_Origin: 0
     CT:
       m_Base: 1500
+      m_Origin: 1500
     DODGE:
       m_Base: 0
+      m_Origin: 0
     SPEED:
       m_Base: 0
+      m_Origin: 0
     VUN_INC:
       m_Base: 1
+      m_Origin: 1
+    BOSS_INC:
+      m_Base: 1
+      m_Origin: 1
+--- !u!1 &4427109836883213748
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 7
+  m_Component:
+  - component: {fileID: 2457054629613802698}
+  m_Layer: 6
+  m_HasEditorInfo: 1
+  m_Name: HPPivot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2457054629613802698
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4427109836883213748}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3712288799380927817}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
