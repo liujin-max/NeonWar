@@ -17,6 +17,11 @@ public class CircleHP : MonoBehaviour
     private ValueTransition m_YellowValue = new ValueTransition(0.3f, 0.4f);
     private ValueTransition m_RedValue = new ValueTransition(1f, 0.15f);
 
+    private Color GREEN     = new Color(83/255f, 202/255f, 0/255f, 1);
+    private Color YELLOW    = new Color(255/255f, 151/255f, 4/255f, 1);
+    private Color RED       = new Color(247/255f, 66/255f, 11/255f, 1);
+
+
     private Tweener m_HPTweener;
     private List<Tweener> m_ShakeTweeners = new List<Tweener>();
 
@@ -28,6 +33,8 @@ public class CircleHP : MonoBehaviour
         m_HPText.ForceValue(hp);
         m_YellowValue.ForceValue(hp);
         m_RedValue.ForceValue(hp);
+
+        m_Red.color = GREEN;
 
         for (int i = 0; i < m_ShakePivot.childCount; i++)
         {
@@ -78,8 +85,22 @@ public class CircleHP : MonoBehaviour
 
     void LateUpdate()
     {
+        float hp_rate   = m_RedValue.Value / (float)m_Enemy.ATT.HPMAX;
         m_Yellow.size   = new Vector2(m_Yellow.size.x, m_Height * m_YellowValue.Value / (float)m_Enemy.ATT.HPMAX);
-        m_Red.size      = new Vector2(m_Red.size.x, m_Height * m_RedValue.Value / (float)m_Enemy.ATT.HPMAX);
+        m_Red.size      = new Vector2(m_Red.size.x, m_Height * hp_rate);
+
+        if (hp_rate >= 0.8f)
+        {
+            m_Red.color = GREEN;
+        }
+        else if (hp_rate >=0.3f)
+        {
+            m_Red.color = YELLOW;
+        }
+        else
+        {
+            m_Red.color = RED;
+        }
 
         for (int i = 0; i < m_ShakePivot.childCount; i++) {
             m_ShakePivot.GetChild(i).GetComponent<TextMeshPro>().text= m_HPText.GetText();

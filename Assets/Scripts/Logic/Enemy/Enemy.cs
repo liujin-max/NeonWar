@@ -74,9 +74,7 @@ public class Enemy : Unit
     void InitHPBar()
     {
         m_HPBar = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Enemy/CircleHP", Vector2.zero, transform).GetComponent<CircleHP>();
-        m_HPBar.transform.localScale = new Vector3(1.6f, 1.6f, 1.6f);
         m_HPBar.Init(this);
-
     }
 
 
