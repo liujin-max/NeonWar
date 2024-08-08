@@ -19,6 +19,7 @@ public class GameWindow : MonoBehaviour
     [SerializeField] GameObject m_BlinkPivot;
     [SerializeField] Transform m_SkillPivot;
     [SerializeField] Transform m_PearPivot;
+    [SerializeField] Transform m_HPPivot;
 
     
     [Header("按钮")]
@@ -29,6 +30,8 @@ public class GameWindow : MonoBehaviour
     [SerializeField] private List<CanvasGroup> m_Groups = new List<CanvasGroup>();
     private List<SkillSeatItem> m_SkillSeatItems = new List<SkillSeatItem>();
     private List<PearSeatItem> m_PearSeatItems = new List<PearSeatItem>();
+
+    private PlayerHPItem m_HPITEM = null;
 
 
     private float LeftPressTime = 0;
@@ -75,6 +78,7 @@ public class GameWindow : MonoBehaviour
         EventManager.AddHandler(EVENT.ONBATTLESTART,    OnBattleStart);
         EventManager.AddHandler(EVENT.ONBATTLEEND,      OnBattleEnd);
         EventManager.AddHandler(EVENT.ONUPDATEGLASS,    OnUpdateGlass);
+        EventManager.AddHandler(EVENT.ONHPUPDATE,       OnUpdateHP);
         
 
         EventManager.AddHandler(EVENT.UI_BLINKSHAKE,    OnBlinkShake);
@@ -87,6 +91,7 @@ public class GameWindow : MonoBehaviour
         EventManager.DelHandler(EVENT.ONBATTLESTART,    OnBattleStart);
         EventManager.DelHandler(EVENT.ONBATTLEEND,      OnBattleEnd);
         EventManager.DelHandler(EVENT.ONUPDATEGLASS,    OnUpdateGlass);
+        EventManager.DelHandler(EVENT.ONHPUPDATE,       OnUpdateHP);
 
 
         EventManager.DelHandler(EVENT.UI_BLINKSHAKE,    OnBlinkShake);
@@ -258,6 +263,21 @@ public class GameWindow : MonoBehaviour
         }
     }
 
+    //玩家血条
+    void InitPlayerHP()
+    {
+        if (m_HPITEM == null)
+        {
+            m_HPITEM = GameFacade.Instance.UIManager.LoadItem("PlayerHPItem", m_HPPivot).GetComponent<PlayerHPItem>();
+        }
+
+        m_HPITEM.transform.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
+        m_HPITEM.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+        m_HPITEM.Show(true);
+
+        m_HPITEM.Init(Field.Instance.Player);
+    }
+
     void Update()
     {
         //监听电脑端的输入
@@ -323,6 +343,8 @@ public class GameWindow : MonoBehaviour
     //战斗开始
     private void OnBattleStart(GameEvent @event)
     {
+        InitPlayerHP();
+
         m_Groups.ForEach(group => {
             group.DOFade(0, 0.2f).OnComplete(()=>{
                 group.gameObject.SetActive(false);
@@ -339,6 +361,10 @@ public class GameWindow : MonoBehaviour
             group.gameObject.SetActive(true);
             group.DOFade(1, 0.1f);
         });
+
+        if (m_HPITEM != null) {
+            m_HPITEM.Show(false);
+        }
     }
 
 
@@ -347,6 +373,12 @@ public class GameWindow : MonoBehaviour
         m_Glass.SetValue(GameFacade.Instance.DataCenter.User.Glass);
     }
 
+    private void OnUpdateHP(GameEvent @event)
+    {
+        if (m_HPITEM == null) return;
+
+        m_HPITEM.FlushHP();
+    }
 
 
     void OnBlinkShake(GameEvent @event)

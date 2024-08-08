@@ -10,6 +10,7 @@ public static class EVENT
     public static string UI_BLINKSHAKE      = "UI_BLINKSHAKE";
     public static string UI_SKILLUPGRADE    = "UI_SKILLUPGRADE";
     public static string UI_PEARCHANGE      = "UI_PEARCHANGE";
+    
 
 
 
@@ -22,6 +23,8 @@ public static class EVENT
 
     public static string ONBATTLESTART      = "ONBATTLESTART";
     public static string ONBATTLEEND        = "ONBATTLEEND";
+    //玩家血量变化
+    public static string ONHPUPDATE         = "ONHPUPDATE";
     //创建子弹
     public static string ONBULLETCREATE     = "ONBULLETCREATE";
     //子弹击中目标

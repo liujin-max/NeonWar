@@ -269,7 +269,7 @@ public class Field : MonoBehaviour
 
         unit.UpdateHP(-(int)demage); 
 
-        // EventManager.SendEvent(new GameEvent(EVENT.ONBULLETHIT, bullet, unit));
+        EventManager.SendEvent(new GameEvent(EVENT.ONHPUPDATE));
 
         //受击表现
         if (unit.IsDead() == true)
@@ -303,6 +303,7 @@ public class Field : MonoBehaviour
         int demage = enemy.TYPE == _C.ENEMY_TYPE.BOSS ? 3 : 1;
         player.UpdateHP(-demage);
 
+        EventManager.SendEvent(new GameEvent(EVENT.ONHPUPDATE));
 
         //受击表现
         if (player.IsDead() == true)
