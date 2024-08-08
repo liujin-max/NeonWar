@@ -85,7 +85,11 @@ public class Enemy : Unit
         if (m_InHitAnim) return;
 
         m_InHitAnim = true;
-        m_Sprite.transform.DOPunchScale(new Vector3(0.15f, 0.2f, 0.15f), 0.15f).OnComplete(()=>{ m_InHitAnim = false;});
+        m_Sprite.transform.DOPunchPosition(new Vector3(0.04f, 0.04f, 0f), 0.15f, 50).OnComplete(()=>{ m_InHitAnim = false;});
+
+        m_Sprite.DOColor(Color.red, 0.1f).OnComplete(()=>{
+            m_Sprite.DOColor(Color.white, 0.05f);
+        });
     }
 
     public override void Dead(Hit hit)
