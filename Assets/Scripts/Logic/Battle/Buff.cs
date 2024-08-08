@@ -74,6 +74,9 @@ public class Buff_Shield : Buff
 
     private void OnBulletHit(GameEvent @event)
     {
+        var target = @event.GetParam(1) as Unit;
+        if (target != Caster) return;
+
         Value--;
         
         // SoundManager.Instance.Load(SOUND.HIT_SHIELD);
