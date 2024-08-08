@@ -76,6 +76,7 @@
      <Compile Include="Assets\Scripts\SOUND.cs" />
      <Compile Include="Assets\Scripts\Logic\Data\Backpack.cs" />
      <Compile Include="Assets\Scripts\Utility\SlideScrollView.cs" />
+     <Compile Include="Assets\Scripts\Logic\Enemy\Enemy_109.cs" />
      <Compile Include="Assets\Scripts\Utility\SuperScrollView.cs" />
      <Compile Include="Assets\Scripts\Logic\Enemy\Enemy_107.cs" />
      <Compile Include="Assets\Scripts\UI\Item\PlayerHPItem.cs" />

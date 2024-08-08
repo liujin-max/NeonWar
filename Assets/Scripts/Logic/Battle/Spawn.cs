@@ -81,6 +81,16 @@ public class Spawn
         seq.Play();
     }
 
+    //分裂
+    public void SplitEnemy(MonsterJSON monsterJSON, Vector2 point)
+    {
+        var enemy = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Enemy/" + monsterJSON.ID, point, Field.Instance.Land.ENEMY_ROOT).GetComponent<Enemy>();
+        enemy.Init(monsterJSON);
+        enemy.Push();
+        
+        m_Enemys.Add(enemy);
+    }
+
     public void CustomUpdate(float deltaTime)
     {
         if (m_EnemyPool.Count > 0)
