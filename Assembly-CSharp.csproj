@@ -107,6 +107,7 @@
      <Compile Include="Assets\AllIn1SpriteShader\Scripts\SetAtlasUvs.cs" />
      <Compile Include="Assets\Scripts\Display\Land.cs" />
      <Compile Include="Assets\AllIn1SpriteShader\Demo\Scripts\DemoCamera.cs" />
+     <Compile Include="Assets\Scripts\Effect\PixelBroken.cs" />
      <Compile Include="Assets\Scripts\CONST.cs" />
      <Compile Include="Assets\Scripts\Logic\Enemy\Enemy.cs" />
      <Compile Include="Assets\Scripts\Logic\NavigationController.cs" />

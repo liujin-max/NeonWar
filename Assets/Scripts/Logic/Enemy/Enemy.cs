@@ -22,6 +22,8 @@ public class Enemy : Unit
     private Transform m_HPPivot;
     private CircleHP m_HPBar;
 
+    [SerializeField] private ParticleSystem.MinMaxGradient m_Color;
+
 
     private MonsterJSON m_Data;
     public _C.ENEMY_TYPE TYPE {get {return m_Data.Type;}}
@@ -104,7 +106,9 @@ public class Enemy : Unit
 
         Field.Instance.Land.DoSmallShake();
 
-        GameFacade.Instance.EffectManager.Load(EFFECT.BROKEN, transform.localPosition, Field.Instance.Land.ELEMENT_ROOT.gameObject).transform.right = hit.Velocity;
+        var e = GameFacade.Instance.EffectManager.Load(EFFECT.BROKEN, transform.localPosition, Field.Instance.Land.ELEMENT_ROOT.gameObject).GetComponent<PixelBroken>();
+        e.transform.right = hit.Velocity;
+        e.Init(m_Color);
 
     }
 
