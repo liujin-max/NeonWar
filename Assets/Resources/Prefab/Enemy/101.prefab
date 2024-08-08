@@ -207,7 +207,7 @@ MonoBehaviour:
       m_ColorSpace: -1
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-    m_ColorMin: {r: 0, g: 0, b: 0, a: 1}
+    m_ColorMin: {r: 0.5882353, g: 0, b: 0, a: 1}
     m_ColorMax: {r: 0.5411765, g: 0.7686275, b: 0.91372555, a: 1}
 --- !u!50 &5767221125352602383
 Rigidbody2D:

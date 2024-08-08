@@ -293,7 +293,7 @@ MonoBehaviour:
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     m_ColorMin: {r: 0, g: 0, b: 0, a: 1}
-    m_ColorMax: {r: 0.6431373, g: 0.24313727, b: 0.21568629, a: 1}
+    m_ColorMax: {r: 0.6415094, g: 0.15729582, b: 0.12406549, a: 1}
 --- !u!1 &7289432653103146828
 GameObject:
   m_ObjectHideFlags: 0
