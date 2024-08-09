@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//为周围的同伴恢复生命
+//狼王：召唤数个小狼
 public class Enemy_104 : Enemy
 {
     private CDTimer m_Timer = new CDTimer(3f);
@@ -23,15 +23,16 @@ public class Enemy_104 : Enemy
         if (m_Timer.IsFinished() == true) {
             m_Timer.Reset();
 
-            foreach (var e in Field.Instance.Spawn.Enemys)
+            //召唤
+            for (int i = 0; i < 3; i++)
             {
-                if (e.IsDead()) continue;
-                if (e == this) continue;
+                MonsterJSON monsterJSON = new MonsterJSON()
+                {
+                    ID  = 150,
+                    HP  = Mathf.CeilToInt(ATT.HPMAX / 4f)
+                };
 
-
-                e.UpdateHP(Mathf.CeilToInt(e.ATT.HPMAX * 0.1f));
-                //特效：治疗
-                GameFacade.Instance.EffectManager.Load(EFFECT.HEAL, Vector3.zero, e.gameObject);
+                Field.Instance.Spawn.Summon(monsterJSON, transform.localPosition);
             }
         }
 

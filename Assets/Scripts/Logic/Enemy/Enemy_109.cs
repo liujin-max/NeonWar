@@ -18,7 +18,7 @@ public class Enemy_109 : Enemy
                 HP  = Mathf.CeilToInt(ATT.HPMAX / 3f)
             };
 
-            Field.Instance.Spawn.SplitEnemy(monsterJSON, transform.localPosition);
+            Field.Instance.Spawn.Summon(monsterJSON, transform.localPosition);
         }
     }
 }

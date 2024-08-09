@@ -82,7 +82,7 @@ public class Spawn
     }
 
     //分裂
-    public void SplitEnemy(MonsterJSON monsterJSON, Vector2 point)
+    public void Summon(MonsterJSON monsterJSON, Vector2 point)
     {
         var enemy = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Enemy/" + monsterJSON.ID, point, Field.Instance.Land.ENEMY_ROOT).GetComponent<Enemy>();
         enemy.Init(monsterJSON);
@@ -120,8 +120,11 @@ public class Spawn
         
 
         //销毁死亡的敌人
-        List<Enemy> _Removes = new List<Enemy>();
-        m_Enemys.ForEach(e => {
+        List<Enemy> _Removes    = new List<Enemy>();
+        List<Enemy> _Enemys     = new List<Enemy>();
+        _Enemys.AddRange(m_Enemys);
+        
+        _Enemys.ForEach(e => {
             e.CustomUpdate(deltaTime);
 
             if (e.IsDead() == true) {
