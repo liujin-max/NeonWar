@@ -230,7 +230,7 @@ MonoBehaviour:
       m_Base: 450
       m_Origin: 450
     CP:
-      m_Base: 800
+      m_Base: 50
       m_Origin: 50
     CT:
       m_Base: 1500

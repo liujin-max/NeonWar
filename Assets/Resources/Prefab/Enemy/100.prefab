@@ -36,7 +36,7 @@ Transform:
   - {fileID: 3126055938984245170}
   - {fileID: 6308434208241512206}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7293579574577141740
 MonoBehaviour:
@@ -144,7 +144,7 @@ MonoBehaviour:
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     m_ColorMin: {r: 0.5882353, g: 0, b: 0, a: 1}
-    m_ColorMax: {r: 0.5803922, g: 0.6666667, b: 0.6784314, a: 1}
+    m_ColorMax: {r: 0.9803922, g: 0.9803922, b: 0.9803922, a: 1}
 --- !u!58 &3382774460602914520
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -297,7 +297,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7913849833340424108}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
