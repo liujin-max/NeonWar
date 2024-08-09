@@ -237,6 +237,8 @@ public class Field : MonoBehaviour
         {
             //闪避特效
             demage = 0;
+
+            EventManager.SendEvent(new GameEvent(EVENT.ONDODGE, hit, unit));
         }
         else
         {

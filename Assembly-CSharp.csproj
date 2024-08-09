@@ -98,7 +98,6 @@
      <Compile Include="Assets\Scripts\Struct\AttributeValue.cs" />
      <Compile Include="Assets\AllIn1SpriteShader\Demo\Scripts\DemoItem.cs" />
      <Compile Include="Assets\Scripts\Logic\Player\Player_10000.cs" />
-     <Compile Include="Assets\Scripts\Logic\Enemy\Enemy_110.cs" />
      <Compile Include="Assets\AllIn1SpriteShader\Scripts\AllIn1ShaderWindow.cs" />
      <Compile Include="Assets\Scripts\EFFECT.cs" />
      <Compile Include="Assets\Scripts\FSM\State.cs" />
