@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 182418787278251666}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3712288799380927817}
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: cdb54804151a57d4abb0511fbbda1a03, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 00ec4fd08e2d533438b1a989b4c110d7, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -98,10 +98,10 @@ GameObject:
   - component: {fileID: 3712288799380927817}
   - component: {fileID: 4562983818337489457}
   - component: {fileID: 1827891889010042124}
-  - component: {fileID: 7307754850795509221}
+  - component: {fileID: 2016808253629311600}
   m_Layer: 7
   m_HasEditorInfo: 1
-  m_Name: 105
+  m_Name: 106
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -187,7 +187,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &7307754850795509221
+--- !u!114 &2016808253629311600
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -196,7 +196,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3814604846322337021}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9460129c9dcfc6b4781588a4cce40667, type: 3}
+  m_Script: {fileID: 11500000, guid: 9d13c1197564555459072841c4e8e7f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ShootPivot: {fileID: 5289464577677390390}
@@ -222,8 +222,8 @@ MonoBehaviour:
       m_Base: 0
       m_Origin: 0
     SPEED:
-      m_Base: 350
-      m_Origin: 350
+      m_Base: 280
+      m_Origin: 280
     VUN_INC:
       m_Base: 1
       m_Origin: 1
@@ -292,8 +292,8 @@ MonoBehaviour:
       m_ColorSpace: -1
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
-    m_ColorMin: {r: 0.13207549, g: 0.13207549, b: 0.13207549, a: 1}
-    m_ColorMax: {r: 0.7254902, g: 0.53333336, b: 0.29803923, a: 1}
+    m_ColorMin: {r: 0, g: 0, b: 0, a: 1}
+    m_ColorMax: {r: 0.62352943, g: 0.627451, b: 0.63529414, a: 1}
 --- !u!1 &7289432653103146828
 GameObject:
   m_ObjectHideFlags: 0
