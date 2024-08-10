@@ -13,4 +13,5 @@ public class PixelBroken : MonoBehaviour
         // 将颜色设置为两者之间的随机颜色
         main.startColor = color;
     }
+
 }
