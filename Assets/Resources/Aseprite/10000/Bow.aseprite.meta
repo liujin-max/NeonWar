@@ -108,7 +108,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638584849017041133
+  platformSettingsDirtyTick: 638589168230311749
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -134,7 +134,7 @@ ScriptedImporter:
   animatedSpriteImportData:
   - name: Bow_Frame_0
     originalName: 
-    pivot: {x: 0.5138889, y: 0}
+    pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -154,7 +154,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 142}
   - name: Bow_Frame_1
     originalName: 
-    pivot: {x: 0.5138889, y: 0}
+    pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -174,7 +174,7 @@ ScriptedImporter:
     uvTransform: {x: 55, y: 4}
   - name: Bow_Frame_2
     originalName: 
-    pivot: {x: 0.55128205, y: -0.015873017}
+    pivot: {x: 0.53846157, y: -0.015873017}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -194,7 +194,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 71}
   - name: Bow_Frame_3
     originalName: 
-    pivot: {x: 0.59302324, y: -0.05084746}
+    pivot: {x: 0.5813953, y: -0.05084746}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -214,7 +214,7 @@ ScriptedImporter:
     uvTransform: {x: 4, y: 4}
   - name: Bow_Frame_4
     originalName: 
-    pivot: {x: 0.5138889, y: 0}
+    pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -244,7 +244,7 @@ ScriptedImporter:
     - name: Bow_Frame_0
       frameIndex: 0
       cellRect:
-        x: 14
+        x: 10
         y: 0
         width: 36
         height: 65
@@ -252,7 +252,7 @@ ScriptedImporter:
     - name: Bow_Frame_1
       frameIndex: 1
       cellRect:
-        x: 14
+        x: 10
         y: 0
         width: 36
         height: 65
@@ -260,7 +260,7 @@ ScriptedImporter:
     - name: Bow_Frame_2
       frameIndex: 2
       cellRect:
-        x: 11
+        x: 7
         y: 1
         width: 39
         height: 63
@@ -268,7 +268,7 @@ ScriptedImporter:
     - name: Bow_Frame_3
       frameIndex: 3
       cellRect:
-        x: 7
+        x: 3
         y: 3
         width: 43
         height: 59
@@ -276,7 +276,7 @@ ScriptedImporter:
     - name: Bow_Frame_4
       frameIndex: 4
       cellRect:
-        x: 14
+        x: 10
         y: 0
         width: 36
         height: 65
@@ -338,4 +338,4 @@ ScriptedImporter:
     androidETC2FallbackOverride: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 65, y: 65}
+  canvasSize: {x: 56, y: 65}
