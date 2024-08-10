@@ -78,6 +78,7 @@ public static class _C
         STUN    = 50000,
         YISHANG,
         SHIELD,
+        CHAOS,
 
 
         ATK_UP      = 60000,    //攻击力提高

@@ -9,11 +9,14 @@ using UnityEngine;
 //晕眩0.5秒，无法移动
 public class Buff_Stun : Buff
 {
-    public override void Init()
+    public Buff_Stun()
     {
         TYPE    = _C.BUFF_TYPE.DE;
         Duration= new CDTimer(0.8f);
+    }
 
+    public override void Init()
+    {
         Caster.Stop();
     }
 
@@ -31,11 +34,14 @@ public class Buff_Stun : Buff
 //5秒内受到的伤害提高#%
 public class Buff_YiShang : Buff
 {
-    public override void Init()
+    public Buff_YiShang()
     {
         TYPE    = _C.BUFF_TYPE.DE;
         Duration= new CDTimer(5f);
+    }
 
+    public override void Init()
+    {
         Caster.ATT.VUN_INC.PutADD(this, Value / 100.0f);
     }
 
@@ -89,6 +95,35 @@ public class Buff_Shield : Buff
 #endregion
 
 
+#region 混乱
+//针对玩家，使左右键的方向相反
+public class Buff_Chaos : Buff
+{
+    public Buff_Chaos()
+    {
+        TYPE    = _C.BUFF_TYPE.DE;
+        Duration= new CDTimer(5);
+    }
+
+    public override void Init()
+    {
+        var player = Caster.GetComponent<Player>();
+        if (player == null) return;
+
+        player.MoveDirection = -1;
+    }
+
+    public override void Dispose()
+    {
+        base.Dispose();
+
+        var player = Caster.GetComponent<Player>();
+        if (player == null) return;
+
+        player.MoveDirection = 1;
+    }
+}
+#endregion
 
 
 
@@ -112,16 +147,25 @@ public class Buff_Shield : Buff
 
 
 
-#region 场上Buff
+#region 可拾取BUFF
+
+
+
+
+
+
 
 
 #region 攻击百分比提高
 public class Buff_ATKUP : Buff
 {
+    public Buff_ATKUP()
+    {
+        Duration= new CDTimer(5f);
+    }
+
     public override void Init()
     {
-        Duration = new CDTimer(5f);
-
         Caster.ATT.ATK.PutAUL(this, 0.5f);
     }
 
@@ -136,11 +180,14 @@ public class Buff_ATKUP : Buff
 #region 攻击百分比下降
 public class Buff_ATKDOWN : Buff
 {
-    public override void Init()
+    public Buff_ATKDOWN()
     {
         TYPE    = _C.BUFF_TYPE.DE;
         Duration= new CDTimer(5f);
+    }
 
+    public override void Init()
+    {
         Caster.ATT.ATK.PutAUL(this, -0.5f);
     }
 
@@ -155,10 +202,13 @@ public class Buff_ATKDOWN : Buff
 #region 攻速提高
 public class Buff_ASPUP : Buff
 {
+    public Buff_ASPUP()
+    {
+        Duration= new CDTimer(5f);
+    }
+
     public override void Init()
     {
-        Duration = new CDTimer(5f);
-
         Caster.ATT.ASP.PutMUL(this, 0.5f);
         Caster.ASP.SetDuration(Caster.ATT.ASP.ToNumber() / 1000.0f);
     }
@@ -175,11 +225,14 @@ public class Buff_ASPUP : Buff
 #region 攻速降低
 public class Buff_ASPDOWN : Buff
 {
-    public override void Init()
+    public Buff_ASPDOWN()
     {
         TYPE    = _C.BUFF_TYPE.DE;
         Duration= new CDTimer(5f);
+    }
 
+    public override void Init()
+    {
         Caster.ATT.ASP.PutMUL(this, 1.5f);
         Caster.ASP.SetDuration(Caster.ATT.ASP.ToNumber() / 1000.0f);
     }
@@ -196,10 +249,13 @@ public class Buff_ASPDOWN : Buff
 #region 移动速度提高
 public class Buff_SPEEDUP : Buff
 {
+    public Buff_SPEEDUP()
+    {
+        Duration= new CDTimer(5f);
+    }
+
     public override void Init()
     {
-        Duration = new CDTimer(5f);
-
         Caster.ATT.SPEED.PutAUL(this, 0.3f);
     }
 
@@ -214,11 +270,14 @@ public class Buff_SPEEDUP : Buff
 #region 移动速度降低
 public class Buff_SPEEDDOWN : Buff
 {
-    public override void Init()
+    public Buff_SPEEDDOWN()
     {
         TYPE    = _C.BUFF_TYPE.DE;
         Duration= new CDTimer(5f);
+    }
 
+    public override void Init()
+    {
         Caster.ATT.SPEED.PutAUL(this, -0.3f);
     }
 
@@ -233,10 +292,13 @@ public class Buff_SPEEDDOWN : Buff
 #region 暴击率提高
 public class Buff_CP : Buff
 {
+    public Buff_CP()
+    {
+        Duration= new CDTimer(5f);
+    }
+
     public override void Init()
     {
-        Duration = new CDTimer(5f);
-
         Caster.ATT.CP.PutADD(this, 500);
     }
 
@@ -251,10 +313,13 @@ public class Buff_CP : Buff
 #region 闪避率提高
 public class Buff_DODGEUP : Buff
 {
+    public Buff_DODGEUP()
+    {
+        Duration= new CDTimer(8f);
+    }
+
     public override void Init()
     {
-        Duration = new CDTimer(8f);
-
         Caster.ATT.DODGE.PutADD(this, 800);
     }
 
@@ -269,9 +334,14 @@ public class Buff_DODGEUP : Buff
 #region 减速敌人
 public class Buff_SPDMUL : Buff
 {
+    public Buff_SPDMUL()
+    {
+        Duration= new CDTimer(3.5f);
+    }
+
     public override void Init()
     {
-        Duration = new CDTimer(3.5f);
+
     }
 
     public override void Update(float deltaTime)
@@ -315,6 +385,7 @@ public class Buff
         {(int)_C.BUFF.STUN,     () => new Buff_Stun()},
         {(int)_C.BUFF.YISHANG,  () => new Buff_YiShang()},
         {(int)_C.BUFF.SHIELD,   () => new Buff_Shield()},
+        {(int)_C.BUFF.CHAOS,    () => new Buff_Chaos()},
 
 
         //场上Buff
@@ -330,7 +401,7 @@ public class Buff
     };
 
 
-    public static Buff Create(int buff_id, int value, Unit caster)
+    public static Buff Create(int buff_id, int value, Unit caster, float time = 0)
     {
         Buff buff;
         if (m_classDictionary.ContainsKey(buff_id)) {
@@ -345,6 +416,8 @@ public class Buff
         buff.Caster = caster;
         buff.Value  = value;
 
+        if (time > 0) buff.Duration = new CDTimer(time);  //持续时间
+
         return buff;
     }
 
@@ -356,9 +429,10 @@ public class Buff
         Duration.Update(deltaTime);
     }
 
-    public virtual void Flush()
+    public virtual void Flush(float time)
     {
-        Duration.ForceReset();
+        if (time != 0) Duration.Reset(time);
+        else Duration.ForceReset();
     }
 
     public bool IsEnd()

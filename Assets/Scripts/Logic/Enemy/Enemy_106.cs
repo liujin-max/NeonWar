@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//石头人：高血量且可发射子弹
+
 public class Enemy_106 : Enemy
 {
     public override void DoAttack()

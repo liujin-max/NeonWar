@@ -10,6 +10,7 @@ public class Player : Unit
     protected Animator m_Animator;
 
     public CDTimer InvincibleTimer = new CDTimer(1f);   //无敌时间
+    public int MoveDirection = 1;
 
     protected List<Skill> m_Skills = new List<Skill>();
     protected List<Pear> m_Pears = new List<Pear>();
@@ -113,7 +114,7 @@ public class Player : Unit
         float speed = ATT.SPEED.ToNumber() / 100.0f;
 
         float t = Mathf.Clamp01(Time.deltaTime / 0.01f);
-        m_Angle = Mathf.LerpAngle(m_Angle, m_Angle + direction * speed, t);
+        m_Angle = Mathf.LerpAngle(m_Angle, m_Angle + (direction * MoveDirection) * speed, t);
 
         this.SetPosition(ToolUtility.FindPointOnCircle(Vector2.zero, _C.DEFAULT_RADIUS, m_Angle));
     }

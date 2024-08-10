@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class Enemy_107 : Enemy
 {
-    public override void DoAttack()
-    {
-        float base_angle = ToolUtility.VectorToAngle(Field.Instance.Player.transform.localPosition - transform.localPosition);
+    private CDTimer m_Timer = new CDTimer(3f);
 
-        CreateBullet().Shoot(base_angle);
-        CreateBullet().Shoot(base_angle - 45);
-        CreateBullet().Shoot(base_angle + 45);
+    public override bool CustomUpdate(float deltaTime)
+    {
+        if (!base.CustomUpdate(deltaTime)) return false;
+        
+        m_Timer.Update(deltaTime);
+        if (m_Timer.IsFinished() == true) {
+            m_Timer.Reset(8f);
+
+            Field.Instance.Player.AddBuff((int)_C.BUFF.CHAOS, 1, 3f);
+        }
+
+        return true;
     }
 }
