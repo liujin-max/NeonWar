@@ -10,6 +10,8 @@ public static class EFFECT
     public const string SHIELD      = "Prefab/Effect/fx_shield";
     public const string SHIELD_BROKEN   = "Prefab/Effect/fx_shield_boom";
     public const string CRIT        = "Prefab/Effect/fx_crit";
+    public const string MISS        = "Prefab/Effect/fx_miss";
+    
     
 
 

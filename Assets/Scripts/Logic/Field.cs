@@ -236,6 +236,8 @@ public class Field : MonoBehaviour
         else if (RandomUtility.IsHit((int)unit.ATT.DODGE.ToNumber(), 1000) == true) //闪避了
         {
             //闪避特效
+            GameFacade.Instance.EffectManager.Load(EFFECT.MISS, hit.Position, Land.ELEMENT_ROOT.gameObject);
+
             demage = 0;
 
             EventManager.SendEvent(new GameEvent(EVENT.ONDODGE, hit, unit));

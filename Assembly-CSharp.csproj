@@ -105,8 +105,8 @@
      <Compile Include="Assets\Scripts\Manager\OBJManager.cs" />
      <Compile Include="Assets\AllIn1SpriteShader\Scripts\AllIn1Shader.cs" />
      <Compile Include="Assets\AllIn1SpriteShader\Demo\Scripts\All1ShaderDemoController.cs" />
-     <Compile Include="Assets\Scripts\Logic\Field.cs" />
      <Compile Include="Assets\Scripts\Logic\Enemy\Enemy_205.cs" />
+     <Compile Include="Assets\Scripts\Logic\Field.cs" />
      <Compile Include="Assets\Scripts\Logic\Enemy\Enemy_402.cs" />
      <Compile Include="Assets\Scripts\Manager\SoundManager.cs" />
      <Compile Include="Assets\Scripts\Utility\ScaleUtility.cs" />
@@ -141,6 +141,7 @@
      <Compile Include="Assets\DOTween\Modules\DOTweenModuleSprite.cs" />
      <Compile Include="Assets\Scripts\Logic\DataCenter.cs" />
      <Compile Include="Assets\Scripts\Logic\Element\Unit.cs" />
+     <Compile Include="Assets\Scripts\Effect\Miss.cs" />
      <Compile Include="Assets\Scripts\Utility\SpriteSwitch.cs" />
      <Compile Include="Assets\Scripts\Logic\Battle\Buff.cs" />
      <Compile Include="Assets\Scripts\FSM\Element\State_Result.cs" />
