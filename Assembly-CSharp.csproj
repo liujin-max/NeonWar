@@ -93,6 +93,7 @@
      <Compile Include="Assets\Scripts\Logic\Enemy\Enemy_404.cs" />
      <Compile Include="Assets\Scripts\Utility\MouseClickHandler.cs" />
      <Compile Include="Assets\Scripts\Manager\Platform.cs" />
+     <Compile Include="Assets\Scripts\Effect\Affected.cs" />
      <Compile Include="Assets\Scripts\Logic\Battle\Spawn.cs" />
      <Compile Include="Assets\Scripts\Utility\TextureImporterSettings.cs" />
      <Compile Include="Assets\Scripts\Struct\AttributeValue.cs" />

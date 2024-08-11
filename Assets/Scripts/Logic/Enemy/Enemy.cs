@@ -31,7 +31,6 @@ public class Enemy : Unit
 
     private Vector2 m_LastVelocity;
     private float m_LastAngularVelocity;
-    private bool m_InHitAnim = false;
 
 
 
@@ -76,7 +75,7 @@ public class Enemy : Unit
 
     void InitHPBar()
     {
-        GameFacade.Instance.PrefabManager.AsyncLoad("Prefab/Enemy/CircleHP", Vector2.zero, m_HPPivot, (obj)=>{
+        GameFacade.Instance.PrefabManager.AsyncLoad("Prefab/Element/CircleHP", Vector2.zero, m_HPPivot, (obj)=>{
             m_HPBar = obj.GetComponent<CircleHP>();
             m_HPBar.Init(this);
         });
@@ -85,14 +84,7 @@ public class Enemy : Unit
 
     public override void Affected(Hit hit)
     {
-        if (m_InHitAnim) return;
-
-        m_InHitAnim = true;
-        m_Sprite.transform.DOPunchPosition(new Vector3(0.04f, 0.04f, 0f), 0.15f, 50).OnComplete(()=>{ m_InHitAnim = false;});
-
-        m_Sprite.DOColor(Color.red, 0.1f).OnComplete(()=>{
-            m_Sprite.DOColor(Color.white, 0.05f);
-        });
+        m_Sprite.GetComponent<Affected>().DoAnimation();
     }
 
     public override void Dead(Hit hit)

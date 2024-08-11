@@ -9,11 +9,10 @@ public class ValueTransition
 {
     public float m_SpeedMin = 0.03f;
     public float m_Time = 0.2f;
+    private float m_TimeCount = 0;
     
     private float m_TargetNumber = 0;
     private float m_CurrentNumber = 0;
-    private float m_OriginNumber = 0;
-    private float m_Offset = 0;
 
 
     [HideInInspector] public float Value {get { return m_CurrentNumber;}}
@@ -21,47 +20,30 @@ public class ValueTransition
 
     public ValueTransition(float speed, float time)
     {
-        m_SpeedMin = speed;
-        m_Time = time;
+        m_SpeedMin  = speed;
+        m_Time      = time;
+        m_TimeCount = 0;
     }
 
     public void SetValue(float value)
     {
         m_TargetNumber  = value;
-        m_Offset        = m_TargetNumber - m_CurrentNumber;
-        m_OriginNumber  = m_CurrentNumber;
+        m_TimeCount     = 0;
     }
 
     public void ForceValue(int value)
     {
         m_TargetNumber  = value;
         m_CurrentNumber = value;
-        m_OriginNumber  = value;
     }
 
     public void Update(float deltaTime)
     {
         if (m_TargetNumber == m_CurrentNumber) return;
 
-        
-        var speed   = m_Offset * deltaTime / m_Time;
-        if (speed > 0) {
-            speed   = Math.Max(m_SpeedMin, speed);
-        } else {
-            speed   = Math.Min(-m_SpeedMin, speed);
-        }
+        m_TimeCount += deltaTime;
 
-        m_CurrentNumber += speed;
 
-        var offset  = m_TargetNumber - m_OriginNumber;
-        if (offset > 0) {
-            if (m_CurrentNumber >= m_TargetNumber) {
-                m_CurrentNumber = m_TargetNumber;
-            }
-        } else {
-            if (m_CurrentNumber <= m_TargetNumber) {
-                m_CurrentNumber = m_TargetNumber;
-            }
-        }
+        m_CurrentNumber = Mathf.Lerp(m_CurrentNumber, m_TargetNumber, m_TimeCount / m_Time);
     }
 }

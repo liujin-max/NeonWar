@@ -90,6 +90,8 @@ public class Bullet : MonoBehaviour
             Hit.IgnoreUnits.Clear();
 
             if (ReboundTimes > 0) Rebound();
+            else if (ReboundTimes <= 0) Dispose();
+            
             return;
         }
 
