@@ -61,7 +61,6 @@ public class Enemy : Unit
 
         ASP.Reset(ATT.ASP.ToNumber() / 1000.0f);
 
-
         InitHPBar();
     }
 
@@ -77,8 +76,10 @@ public class Enemy : Unit
 
     void InitHPBar()
     {
-        m_HPBar = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Enemy/CircleHP", Vector2.zero, m_HPPivot).GetComponent<CircleHP>();
-        m_HPBar.Init(this);
+        GameFacade.Instance.PrefabManager.AsyncLoad("Prefab/Enemy/CircleHP", Vector2.zero, m_HPPivot, (obj)=>{
+            m_HPBar = obj.GetComponent<CircleHP>();
+            m_HPBar.Init(this);
+        });
     }
 
 

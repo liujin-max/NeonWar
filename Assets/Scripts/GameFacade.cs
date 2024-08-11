@@ -67,6 +67,17 @@ public class GameFacade : MonoBehaviour
         }
     }
 
+    private PrefabManager m_PrefabManager = null;
+    public PrefabManager PrefabManager
+    {
+        get {
+            if (m_PrefabManager == null) {
+                m_PrefabManager = transform.AddComponent<PrefabManager>();
+            }
+            return m_PrefabManager;
+        }
+    }
+
     private CsvManager m_CsvManager = null;
     public CsvManager CsvManager
     {

@@ -51,44 +51,44 @@ public class Spawn
             point = ToolUtility.FindPointOnCircle(Vector3.zero, monsterJSON.Radius, monsterJSON.Angle);
         }
 
-        int enemy_id    = monsterJSON.ID;
-        int enemy_hp    = monsterJSON.HP;
 
-        var enemy = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Enemy/" + enemy_id, point, Field.Instance.Land.ENEMY_ROOT).GetComponent<Enemy>();
-        enemy.Init(monsterJSON);
-        m_Enemys.Add(enemy);
-        enemy.gameObject.SetActive(false);
-        enemy.SetValid(false);
+        GameFacade.Instance.PrefabManager.AsyncLoad("Prefab/Enemy/" + monsterJSON.ID, point, Field.Instance.Land.ENEMY_ROOT, (obj)=>{
+            var enemy = obj.GetComponent<Enemy>();
+            m_Enemys.Add(enemy);
+            enemy.gameObject.SetActive(false);
+            enemy.SetValid(false);
 
+            var hole = GameFacade.Instance.EffectManager.Load(EFFECT.BLACKHOLE, point, Field.Instance.Land.ELEMENT_ROOT.gameObject).transform;
+            hole.localScale = Vector3.zero;
+            
+            Sequence seq = DOTween.Sequence();
+            seq.Append(hole.DOScale(Vector3.one, 0.5f));
+            seq.AppendInterval(0.4f);
+            
+            seq.AppendCallback(()=>{
+                enemy.gameObject.SetActive(true);
+                enemy.SetValid(true);
+                enemy.Init(monsterJSON);
+                enemy.Push();
+            });
 
-
-        var hole = GameFacade.Instance.EffectManager.Load(EFFECT.BLACKHOLE, point, Field.Instance.Land.ELEMENT_ROOT.gameObject).transform;
-        hole.localScale = Vector3.zero;
-        
-        Sequence seq = DOTween.Sequence();
-        seq.Append(hole.DOScale(Vector3.one, 0.5f));
-        seq.AppendInterval(0.4f);
-        
-        seq.AppendCallback(()=>{
-            enemy.gameObject.SetActive(true);
-            enemy.SetValid(true);
-            enemy.Push();
+            seq.AppendInterval(0.2f);
+            seq.Append(hole.DOScale(1.3f, 0.15f));
+            seq.Append(hole.DOScale(0, 0.4f));
+            seq.Play();
         });
-
-        seq.AppendInterval(0.2f);
-        seq.Append(hole.DOScale(1.3f, 0.15f));
-        seq.Append(hole.DOScale(0, 0.4f));
-        seq.Play();
     }
 
     //分裂
     public void Summon(MonsterJSON monsterJSON, Vector2 point)
     {
-        var enemy = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Enemy/" + monsterJSON.ID, point, Field.Instance.Land.ENEMY_ROOT).GetComponent<Enemy>();
-        enemy.Init(monsterJSON);
-        enemy.Push();
-        
-        m_Enemys.Add(enemy);
+        GameFacade.Instance.PrefabManager.AsyncLoad("Prefab/Enemy/" + monsterJSON.ID, point, Field.Instance.Land.ENEMY_ROOT, (obj)=>{
+            var enemy = obj.GetComponent<Enemy>();
+            enemy.Init(monsterJSON);
+            enemy.Push();
+            
+            m_Enemys.Add(enemy);
+        });
     }
 
     public void CustomUpdate(float deltaTime)

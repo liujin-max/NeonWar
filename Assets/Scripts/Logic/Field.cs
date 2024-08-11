@@ -186,8 +186,8 @@ public class Field : MonoBehaviour
     {
         if (m_Player != null) return;
 
-        int id      = GameFacade.Instance.DataCenter.User.CurrentPlayer.ID;
-        m_Player    = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Player/Player_" + id, Vector2.zero, Land.ENTITY_ROOT).GetComponent<Player>();
+        int id  = GameFacade.Instance.DataCenter.User.CurrentPlayer.ID;
+        m_Player= GameFacade.Instance.PrefabManager.Load("Prefab/Player/Player_" + id, Vector2.zero, Land.ENTITY_ROOT).GetComponent<Player>();
         m_Player.Init(id, 270);
     }
 
@@ -203,10 +203,13 @@ public class Field : MonoBehaviour
     public void PushBuffBubble(int id, int value)
     {
         var point   = ToolUtility.FindPointOnCircle(Vector2.zero, _C.DEFAULT_RADIUS, RandomUtility.Random(0, 360));
-        var bubble  = GameFacade.Instance.UIManager.LoadPrefab("Prefab/Element/BuffBubble", point, Land.ELEMENT_ROOT).GetComponent<BuffBubble>();
-        bubble.Init(id, value);
 
-        m_BuffBubbles.Add(bubble);
+        GameFacade.Instance.PrefabManager.AsyncLoad("Prefab/Element/BuffBubble", point, Land.ELEMENT_ROOT, (obj)=>{
+            var bubble = obj.GetComponent<BuffBubble>();
+            bubble.Init(id, value);
+
+            m_BuffBubbles.Add(bubble);
+        });
     }
 
     public void RemoveBuffBubble(BuffBubble b)

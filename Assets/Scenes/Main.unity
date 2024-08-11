@@ -2036,14 +2036,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1542212889066094677, guid: 9faec18c71d52de4a8e186b5c5d33ee3, type: 3}
-      propertyPath: m_Constraints
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2381464107777129407, guid: 9faec18c71d52de4a8e186b5c5d33ee3, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3051838613015140977, guid: 9faec18c71d52de4a8e186b5c5d33ee3, type: 3}
       propertyPath: m_Name
       value: BuffBubble
@@ -2326,19 +2318,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 584455480009275333, guid: 0ed09c9fa3d0c5748886d2c024bd5a83, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 2825475932677297463, guid: 0ed09c9fa3d0c5748886d2c024bd5a83, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 8478235468251347303, guid: 0ed09c9fa3d0c5748886d2c024bd5a83, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
-    - targetCorrespondingSourceObject: {fileID: 4553495376013313108, guid: 0ed09c9fa3d0c5748886d2c024bd5a83, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 0}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0ed09c9fa3d0c5748886d2c024bd5a83, type: 3}
 --- !u!1001 &7309202967191861230
 PrefabInstance:
