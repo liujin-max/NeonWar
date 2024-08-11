@@ -64,7 +64,7 @@ public class CircleHP : MonoBehaviour
             hp_text.transform.localPosition  = Vector3.zero;
             hp_text.text= m_HPText.GetText();
 
-            var tweener = hp_text.transform.DOShakePosition(0.4f, new Vector3(0.03f, 0.03f, 0), 50);
+            var tweener = hp_text.transform.DOShakePosition(0.4f, new Vector3(0.1f, 0.1f, 0), 50);
 
             if (m_ShakeTweeners.Count > i) 
             {
