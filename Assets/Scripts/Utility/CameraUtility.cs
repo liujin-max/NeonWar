@@ -85,6 +85,6 @@ public class CameraUtility : MonoBehaviour
             m_Tweener.Kill();
         }
 
-        m_Tweener = transform.DOShakePosition(0.1f, 0.15f, 35, 60);
+        m_Tweener = transform.DOShakePosition(0.1f, 0.1f, 35, 60);
     }
 }

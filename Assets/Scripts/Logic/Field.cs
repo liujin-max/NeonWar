@@ -257,6 +257,7 @@ public class Field : MonoBehaviour
     //击中目标
     public bool SettleHit(Hit hit, Unit unit)
     {
+        if (this.STATE != _C.GAME_STATE.PLAY) return false;
         //无敌了
         if (unit.IsInvincible() == true) return false;
         if (unit.IsDead()) return false;
