@@ -63,11 +63,6 @@ public class BuffBubble : MonoBehaviour
         Field.Instance.RemoveBuffBubble(this);
     }
 
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        Debug.Log("OnCollisionEnter2D 1");
-
-    }
     #endregion
 
 }

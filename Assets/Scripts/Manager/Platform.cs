@@ -25,8 +25,7 @@ public abstract class Platform
     public abstract void AUTH(Action callback);
     public abstract void SYNC();
     public abstract void UPLOAD(GameUserData userData);
-    //拉取排行榜
-    public abstract void PULLRANK(_C.RANK rank_type, Action<RankDataInfo> callback);
+
     //分享
     public abstract void SHARE(string text, bool show_image);
     //激励广告

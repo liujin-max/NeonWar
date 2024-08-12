@@ -100,6 +100,10 @@ public static class _C
         DE
     }
 
+    public enum TRACE
+    {
+        PARABOLA,       //抛物线
+    }
 
     public enum RESULT
     {

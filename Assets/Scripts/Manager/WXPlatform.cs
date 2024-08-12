@@ -164,41 +164,6 @@ public class WXPlatform : Platform
         // });
     }
 
-    //拉取排行榜
-    public override void PULLRANK(_C.RANK rank_type, Action<RankDataInfo> callback)
-    {
-        Debug.Log("====开始清空排行数据====");
-        EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPMASK, true));
-
-        //云开发：加载积分数据
-        WX.cloud.CallFunction(new CallFunctionParam()
-        {
-            name = "GetRank", //"GetRank",
-            data = JsonUtility.ToJson(""),
-            success = (res) =>
-            {
-                Debug.Log("====获取排行数据成功==== : " + res.result);
-                var data = JsonMapper.ToObject(res.result);
-                if (data.ContainsKey("data")) {
-                    RankDataInfo data_info = JsonUtility.FromJson<RankDataInfo>(res.result);
-
-                    //记录在本地
-                    Rank.Instance.SyncRank(rank_type, data_info.data);
-
-                    if (callback != null) callback(data_info);
-                }
-            },
-            fail = (res) =>
-            {
-                EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "获取排行榜失败"));
-            },
-            complete = (res) =>
-            {
-                EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPMASK, false));
-            }
-        });
-    }
-
     //分享
     public override void SHARE(string text, bool show_image)
     {

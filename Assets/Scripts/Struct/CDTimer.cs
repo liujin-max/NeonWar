@@ -1,5 +1,7 @@
 //计时器
 
+using UnityEngine;
+
 public class CDTimer
 {
     private float m_duration;
@@ -40,7 +42,7 @@ public class CDTimer
 
     public void Reset()
     {
-        m_current -= m_duration;
+        m_current = Mathf.Max(0, m_current - m_duration);
     }
 
     public void ForceReset()

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -142,6 +143,16 @@ public class Unit : MonoBehaviour
         EventManager.SendEvent(new GameEvent(EVENT.ONBULLETCREATE, bullet));
 
         return bullet;
+    }
+
+    public virtual Projectile CreateProjectile(string projectile ,_C.TRACE trace_type, Vector2 to_pos, Action callback)
+    {
+        var project = GameFacade.Instance.PrefabManager.Load(projectile, Vector3.zero, Field.Instance.Land.ELEMENT_ROOT).GetComponent<Projectile>();
+        project.transform.position = ShootPivot.position;
+        project.Init(trace_type, this, callback);
+        project.GO(to_pos);
+
+        return project;
     }
 
     //真正的攻击逻辑

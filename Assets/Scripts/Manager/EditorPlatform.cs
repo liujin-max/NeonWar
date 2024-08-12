@@ -48,16 +48,6 @@ public class EditorPlatform : Platform
         Debug.Log("存储：" + json);
     }
 
-    public override void PULLRANK(_C.RANK rank_type, Action<RankDataInfo> callback)
-    {
-        //记录在本地
-        var data_info = new RankDataInfo();
-        data_info.data = new RankData[0];
-        Rank.Instance.SyncRank(rank_type, data_info.data);
-
-        if (callback != null) callback(data_info);
-    }
-
     public override void SHARE(string text, bool show_image)
     {
         //任务：每日分享

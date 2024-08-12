@@ -26,6 +26,7 @@ public class Field : MonoBehaviour
     public Level Level {get {return m_Level;}}
 
     private List<BuffBubble> m_BuffBubbles = new List<BuffBubble>();
+    private List<Area> m_Areas = new List<Area>();
     
     //累计获得的碎片
     private int m_Glass;
@@ -105,6 +106,9 @@ public class Field : MonoBehaviour
         m_BuffBubbles.ForEach(b => b.Dispose());
         m_BuffBubbles.Clear();
 
+        m_Areas.ForEach(a => a.Dispose());
+        m_Areas.Clear();
+
 
         EventManager.SendEvent(new GameEvent(EVENT.ONBATTLEEND));
     }
@@ -141,11 +145,24 @@ public class Field : MonoBehaviour
         float deltaTime = Time.deltaTime;
 
         if (m_FSM != null) m_FSM.Update();
+        BlinkTimer.Update(deltaTime);
 
         m_Player.CustomUpdate(deltaTime);
         m_Spawn.CustomUpdate(deltaTime);
         
-        BlinkTimer.Update(deltaTime);
+
+        //区域
+        List<Area> _Removes = new List<Area>();
+        m_Areas.ForEach(a => {
+            a.CustomUpdate(deltaTime);
+
+            if (a.IsFinished()) _Removes.Add(a);
+        });
+
+        _Removes.ForEach(a => {
+            Field.Instance.RemoveArea(a);
+        });
+
     }
 
     public _C.RESULT CheckResult()
@@ -217,6 +234,23 @@ public class Field : MonoBehaviour
         b.Dispose();
 
         m_BuffBubbles.Remove(b);
+    }
+
+    //在场地上生成区域
+    public void PushArea(Unit caster, string area_path, Vector2 point, float time)
+    {
+        GameFacade.Instance.PrefabManager.AsyncLoad(area_path, point, Land.ELEMENT_ROOT, (obj)=>{
+            var area = obj.GetComponent<Area>();
+            area.Init(caster, time);
+
+            m_Areas.Add(area);
+        });
+    }
+
+    public void RemoveArea(Area area)
+    {
+        area.Dispose();
+        m_Areas.Remove(area);
     }
 
 

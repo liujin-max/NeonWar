@@ -44,6 +44,7 @@
      <Compile Include="Assets\Scripts\Logic\Enemy\Enemy_104.cs" />
      <Compile Include="Assets\Scripts\Logic\Battle\Hit.cs" />
      <Compile Include="Assets\Scripts\Utility\BalatroFloating.cs" />
+     <Compile Include="Assets\Scripts\Logic\AREA.cs" />
      <Compile Include="Assets\AllIn1SpriteShader\Demo\Scripts\DemoRandomColorSwap.cs" />
      <Compile Include="Assets\Scripts\UI\Window\BackpackWindow.cs" />
      <Compile Include="Assets\Scripts\Manager\WXPlatform.cs" />
@@ -54,7 +55,6 @@
      <Compile Include="Assets\Scripts\Utility\CameraUtility.cs" />
      <Compile Include="Assets\Scripts\Utility\ToolUtility.cs" />
      <Compile Include="Assets\AllIn1SpriteShader\Scripts\RandomSeed.cs" />
-     <Compile Include="Assets\Scripts\Logic\Rank.cs" />
      <Compile Include="Assets\Scripts\GameFacade.cs" />
      <Compile Include="Assets\DOTween\Modules\DOTweenModuleAudio.cs" />
      <Compile Include="Assets\Scripts\Logic\AnimationEvent\AttackEvent.cs" />
@@ -67,6 +67,7 @@
      <Compile Include="Assets\Scripts\Manager\UIManager.cs" />
      <Compile Include="Assets\Scripts\FSM\Element\State_Play.cs" />
      <Compile Include="Assets\Scripts\Effect\BezierCurveAnimation.cs" />
+     <Compile Include="Assets\Scripts\Logic\Area\Area_Thorns.cs" />
      <Compile Include="Assets\Scripts\UI\Window\SkillWindow.cs" />
      <Compile Include="Assets\Scripts\Manager\EventManager.cs" />
      <Compile Include="Assets\Scripts\Effect\BrokenEffect.cs" />
@@ -82,6 +83,7 @@
      <Compile Include="Assets\Scripts\Logic\Enemy\Enemy_107.cs" />
      <Compile Include="Assets\Scripts\UI\Item\PlayerHPItem.cs" />
      <Compile Include="Assets\Scripts\Manager\SceneManager.cs" />
+     <Compile Include="Assets\Scripts\Logic\PROJECTILE.cs" />
      <Compile Include="Assets\Scripts\Logic\Enemy\Enemy_403.cs" />
      <Compile Include="Assets\Scripts\Manager\TimeManager.cs" />
      <Compile Include="Assets\Scripts\Logic\Data\League.cs" />
@@ -108,6 +110,7 @@
      <Compile Include="Assets\AllIn1SpriteShader\Demo\Scripts\All1ShaderDemoController.cs" />
      <Compile Include="Assets\Scripts\Logic\Enemy\Enemy_205.cs" />
      <Compile Include="Assets\Scripts\Logic\Field.cs" />
+     <Compile Include="Assets\Scripts\Logic\Element\Trace.cs" />
      <Compile Include="Assets\Scripts\Manager\SoundManager.cs" />
      <Compile Include="Assets\Scripts\Utility\ScaleUtility.cs" />
      <Compile Include="Assets\AllIn1SpriteShader\Scripts\SetAtlasUvs.cs" />
@@ -151,6 +154,7 @@
      <Compile Include="Assets\Scripts\Effect\Shine.cs" />
      <Compile Include="Assets\Scripts\Utility\UrlImageUtility.cs" />
      <Compile Include="Assets\Scripts\Utility\Sound.cs" />
+     <Compile Include="Assets\Scripts\Logic\Area\Area.cs" />
      <Compile Include="Assets\Scripts\Manager\EffectManager.cs" />
      <Compile Include="Assets\Scripts\Struct\CDTimer.cs" />
      <Compile Include="Assets\Scripts\Utility\UIFitter.cs" />
@@ -160,6 +164,7 @@
      <Compile Include="Assets\Scripts\Effect\Fly.cs" />
      <Compile Include="Assets\Scripts\UI\Item\SkillSeatItem.cs" />
      <Compile Include="Assets\Scripts\Manager\SystemManager.cs" />
+     <Compile Include="Assets\Scripts\Logic\Element\Projectile.cs" />
      <Compile Include="Assets\DOTween\Modules\DOTweenModuleEPOOutline.cs" />
      <Compile Include="Assets\Scripts\UI\Window\MaskWindow.cs" />
      <Compile Include="Assets\Scripts\UI\Window\GameWindow.cs" />
