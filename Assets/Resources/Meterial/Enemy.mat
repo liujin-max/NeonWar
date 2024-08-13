@@ -72,7 +72,7 @@ Material:
     - _BlurHD: 0
     - _BlurIntensity: 0
     - _ChromAberrAlpha: 0.5
-    - _ChromAberrAmount: 0
+    - _ChromAberrAmount: 0.8
     - _ClipUvDown: 0
     - _ClipUvLeft: 0
     - _ClipUvRight: 0

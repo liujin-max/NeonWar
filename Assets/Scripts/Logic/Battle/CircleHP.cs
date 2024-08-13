@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class CircleHP : MonoBehaviour
 {
-    [SerializeField] private SpriteRenderer m_Yellow;
+    [SerializeField] private SpriteRenderer m_White;
     [SerializeField] private SpriteRenderer m_Red;
     [SerializeField] private NumberTransition m_HPText;
     [SerializeField] private Transform m_ShakePivot;
@@ -14,7 +14,7 @@ public class CircleHP : MonoBehaviour
 
 
     private Enemy m_Enemy;
-    private ValueTransition m_YellowValue = new ValueTransition(0.3f, 0.4f);
+    private ValueTransition m_WhiteValue = new ValueTransition(0.3f, 0.5f);
     private ValueTransition m_RedValue = new ValueTransition(1f, 0.15f);
 
     private Color GREEN     = new Color(83/255f, 202/255f, 0/255f, 1);
@@ -31,7 +31,7 @@ public class CircleHP : MonoBehaviour
 
         int hp  = m_Enemy.ATT.HP;
         m_HPText.ForceValue(hp);
-        m_YellowValue.ForceValue(hp);
+        m_WhiteValue.ForceValue(hp);
         m_RedValue.ForceValue(hp);
 
         m_Red.color = GREEN;
@@ -47,7 +47,7 @@ public class CircleHP : MonoBehaviour
     {
         int hp  = m_Enemy.ATT.HP;
         m_HPText.SetValue(hp);
-        m_YellowValue.SetValue(hp);
+        m_WhiteValue.SetValue(hp);
         m_RedValue.SetValue(hp);
 
         if (m_HPTweener != null) {
@@ -79,14 +79,14 @@ public class CircleHP : MonoBehaviour
     {
         float deltaTime = Time.deltaTime;
 
-        m_YellowValue.Update(deltaTime);
+        m_WhiteValue.Update(deltaTime);
         m_RedValue.Update(deltaTime);
     }
 
     void LateUpdate()
     {
         float hp_rate   = m_RedValue.Value / (float)m_Enemy.ATT.HPMAX;
-        m_Yellow.size   = new Vector2(m_Yellow.size.x, m_Height * m_YellowValue.Value / (float)m_Enemy.ATT.HPMAX);
+        m_White.size   = new Vector2(m_White.size.x, m_Height * m_WhiteValue.Value / (float)m_Enemy.ATT.HPMAX);
         m_Red.size      = new Vector2(m_Red.size.x, m_Height * hp_rate);
 
         if (hp_rate >= 0.8f)

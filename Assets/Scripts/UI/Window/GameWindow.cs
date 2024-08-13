@@ -114,7 +114,6 @@ public class GameWindow : MonoBehaviour
     {
         //往左
         m_BtnLeft.SetCallback(()=>{
-            Field.Instance.LeftBtnPressFlag = true;
             LeftPressTime   = Time.time;
 
             if (CheckBlink()) {
@@ -124,14 +123,13 @@ public class GameWindow : MonoBehaviour
             }
             else EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS, -1f));
         }, 
-        ()=>{Field.Instance.LeftBtnPressFlag = false;}, 
+        ()=>{}, 
         ()=>{
             EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS, -1f));
         });
 
         //往右
         m_BtnRight.SetCallback(()=>{
-            Field.Instance.RightBtnPressFlag = true;
             RightPressTime = Time.time;
 
             if (CheckBlink()) {
@@ -141,7 +139,7 @@ public class GameWindow : MonoBehaviour
             }
             else EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS,  1f));
         }, 
-        ()=>{Field.Instance.RightBtnPressFlag = false;}, 
+        ()=>{}, 
         ()=>{
             EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS,  1f));
         });
@@ -283,18 +281,16 @@ public class GameWindow : MonoBehaviour
         //监听电脑端的输入
         // 检测方向键输入
         if (Input.GetKeyDown(KeyCode.LeftArrow)) {
-            Field.Instance.LeftBtnPressFlag = true;
             LeftPressTime = Time.time;
         }
 
-        if (Input.GetKeyUp(KeyCode.LeftArrow)) { Field.Instance.LeftBtnPressFlag = false;}
+        if (Input.GetKeyUp(KeyCode.LeftArrow)) {}
 
         if (Input.GetKeyDown(KeyCode.RightArrow)) {
-            Field.Instance.RightBtnPressFlag = true;
             RightPressTime = Time.time;
         }
 
-        if (Input.GetKeyUp(KeyCode.RightArrow)) { Field.Instance.RightBtnPressFlag = false;}
+        if (Input.GetKeyUp(KeyCode.RightArrow)) {}
 
         if (Input.GetKey(KeyCode.LeftArrow))
         {

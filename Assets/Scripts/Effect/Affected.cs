@@ -19,14 +19,21 @@ public class Affected : MonoBehaviour
 
     public void DoAnimation()
     {
-        // if (m_IsDoing) return;
+        if (m_IsDoing) return;
 
-        if (m_Mat == null) {
-            m_Mat   = Resources.Load<Material>("Meterial/Enemy");
-            m_Sprite.material   = m_Mat;
-        }
+        m_IsDoing = true;
 
-        StartCoroutine(InterpolateValue());
+        m_Sprite.transform.DOPunchScale(new Vector3(0.15f, 0.15f, 0f), 0.2f, 50).OnComplete(()=>{m_IsDoing = false;});
+        m_Sprite.DOColor(Color.red, 0.12f).OnComplete(()=>{
+            m_Sprite.DOColor(Color.white, 0.08f);
+        });
+
+        // if (m_Mat == null) {
+        //     m_Mat   = Resources.Load<Material>("Meterial/Enemy");
+        //     m_Sprite.material   = m_Mat;
+        // }
+
+        // StartCoroutine(InterpolateValue());
     }
 
     // Coroutine 来处理插值过程
@@ -43,7 +50,7 @@ public class Affected : MonoBehaviour
         while (m_Value < 1f)
         {
             t1 += Time.deltaTime;
-            m_Value = Mathf.Lerp(0f, 1f, t1 / time1);
+            m_Value = Mathf.Lerp(0f, 0.8f, t1 / time1);
 
             yield return null;
         }
@@ -56,7 +63,7 @@ public class Affected : MonoBehaviour
         while (m_Value > 0f)
         {
             t2 += Time.deltaTime;
-            m_Value = Mathf.Lerp(1f, 0f, t2 / time2);
+            m_Value = Mathf.Lerp(0.8f, 0f, t2 / time2);
 
             yield return null;
         }
@@ -69,6 +76,6 @@ public class Affected : MonoBehaviour
     {
         if (!m_IsDoing) return;
 
-        m_Mat.SetFloat("_ChromAberrAmount", m_Value);
+        // m_Mat.SetFloat("_ChromAberrAmount", m_Value);
     }
 }

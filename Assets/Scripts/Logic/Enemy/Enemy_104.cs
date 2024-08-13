@@ -29,7 +29,7 @@ public class Enemy_104 : Enemy
                 MonsterJSON monsterJSON = new MonsterJSON()
                 {
                     ID  = 150,
-                    HP  = Mathf.CeilToInt(ATT.HPMAX / 4f)
+                    HP  = Mathf.CeilToInt(ATT.HPMAX / 5f)
                 };
 
                 Field.Instance.Spawn.Summon(monsterJSON, transform.localPosition);

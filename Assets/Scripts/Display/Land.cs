@@ -23,7 +23,9 @@ public class Land : MonoBehaviour
         ELEMENT_ROOT    = GameObject.Find("Field/Elements").transform;
 
 
-        SCENE_CAMERA= GameObject.FindWithTag("SceneCamera").GetComponent<CameraUtility>();
+        SCENE_CAMERA    = GameObject.FindWithTag("SceneCamera").GetComponent<CameraUtility>();
+
+        // GameObject.FindWithTag("SceneCamera").GetComponent<Camera>().AddCommandBuffer();
     }
 
     public void Dispose()

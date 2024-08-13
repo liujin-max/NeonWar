@@ -126,7 +126,7 @@ public class Enemy : Unit
     {
         base.UpdateHP(value);
 
-        m_HPBar.FlushHP();
+        if (m_HPBar != null) m_HPBar.FlushHP();
     }
 
     //strength :力的强度，意味着移动速度

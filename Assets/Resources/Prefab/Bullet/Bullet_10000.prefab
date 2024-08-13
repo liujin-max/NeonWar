@@ -34,7 +34,7 @@ Transform:
   m_Children:
   - {fileID: 5611778980231053346}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5581647061099615948
 MonoBehaviour:
@@ -52,6 +52,7 @@ MonoBehaviour:
   Caster: {fileID: 0}
   Speed:
     m_Base: 1250
+    m_Origin: 500
   IsSplit: 0
   PassTimes: 0
   ReboundTimes: 0
@@ -116,7 +117,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0.3, y: 0}
   serializedVersion: 2
-  m_Radius: 0.3
+  m_Radius: 0.25
 --- !u!1 &5656264745782442856
 GameObject:
   m_ObjectHideFlags: 0

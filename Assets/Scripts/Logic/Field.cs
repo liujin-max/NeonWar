@@ -31,16 +31,15 @@ public class Field : MonoBehaviour
     //累计获得的碎片
     private int m_Glass;
 
-    public bool LeftBtnPressFlag    = false;
-    public bool RightBtnPressFlag   = false;
-
     //闪现冷却
     public CDTimer BlinkTimer = new CDTimer(0);
+
+
+
 
     void Awake()
     {
         m_Instance = this;
-
     }
 
     void OnDestroy()
@@ -172,12 +171,6 @@ public class Field : MonoBehaviour
 
         return _C.RESULT.NONE;
     }
-
-    public bool IsPressing()
-    {
-        return LeftBtnPressFlag || RightBtnPressFlag;
-    }
-
 
     #region 逻辑处理
     public void UpdateGlass(int value)

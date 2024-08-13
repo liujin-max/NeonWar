@@ -70,6 +70,8 @@ public class Spawn
                 enemy.SetValid(true);
                 enemy.Init(monsterJSON);
                 enemy.Push();
+
+                if (monsterJSON.Type == _C.ENEMY_TYPE.BOSS) enemy.transform.localScale = new Vector3(1.25f, 1.25f, 1.25f);
             });
 
             seq.AppendInterval(0.2f);
