@@ -153,7 +153,7 @@ MonoBehaviour:
       m_Origin: 1
     ASP:
       m_Base: 2500
-      m_Origin: 1000
+      m_Origin: 2500
     CP:
       m_Base: 0
       m_Origin: 0

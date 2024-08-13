@@ -1920,6 +1920,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: AreaThorns
       objectReference: {fileID: 0}
+    - target: {fileID: 1691479139711232836, guid: 31c36e43883b89b4181f106015b44de5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3039165371280491811, guid: 31c36e43883b89b4181f106015b44de5, type: 3}
       propertyPath: m_RootOrder
       value: 8

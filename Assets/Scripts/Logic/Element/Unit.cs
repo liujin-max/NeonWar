@@ -117,7 +117,7 @@ public class Unit : MonoBehaviour
 
 
     #region 逻辑处理
-    //无法移动
+    //停止运动
     public virtual void Stop()
     {
 
