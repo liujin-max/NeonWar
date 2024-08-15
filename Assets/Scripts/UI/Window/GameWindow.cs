@@ -8,8 +8,8 @@ using UnityEngine.UI;
 
 public class GameWindow : MonoBehaviour
 {
-    [SerializeField] Text m_Level;
-    [SerializeField] Text m_SubLevel;
+    [SerializeField] TextMeshProUGUI m_Level;
+    [SerializeField] TextMeshProUGUI m_SubLevel;
     [SerializeField] NumberTransition m_Coin;
     [SerializeField] NumberTransition m_Glass;
 
@@ -127,8 +127,9 @@ public class GameWindow : MonoBehaviour
 
     void FlushUI()
     {
-        m_Level.text    = (GameFacade.Instance.DataCenter.User.Level + 1).ToString();
-        m_SubLevel.text = (GameFacade.Instance.DataCenter.User.Level + 1).ToString();
+        var str         = GameFacade.Instance.DataCenter.GetLevelString();
+        m_Level.text    = str;
+        m_SubLevel.text = str;
 
         m_Coin.SetValue(GameFacade.Instance.DataCenter.User.Coin);
         m_Glass.SetValue(GameFacade.Instance.DataCenter.User.Glass);

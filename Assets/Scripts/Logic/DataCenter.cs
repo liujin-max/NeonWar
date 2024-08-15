@@ -41,5 +41,15 @@ public class DataCenter
     {
         return User.Level > _C.PEAR_UNLOCK_LEVEL;
     }
+
+    public string GetLevelString()
+    {
+        int level   = User.Level;
+
+        int chapter = level / 20 + 1;
+        int stage   = level % 20 + 1;
+
+        return string.Format("{0}-{1}", chapter, stage);
+    }
 }
 

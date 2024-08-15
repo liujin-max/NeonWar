@@ -35,8 +35,8 @@ public class PearSeatItem : MonoBehaviour
     {
         if (m_Pear != null)
         {
-            // m_Frame.sprite = Resources.Load<Sprite>("");
-            // m_Frame.SetNativeSize();
+            m_Frame.sprite = Resources.Load<Sprite>("UI/Quality/Quality_" + m_Pear.Level);
+            m_Frame.SetNativeSize();
 
             m_Icon.gameObject.SetActive(true);
             m_Icon.sprite = Resources.Load<Sprite>("UI/Pear/" + m_Pear.Class);
@@ -46,7 +46,7 @@ public class PearSeatItem : MonoBehaviour
         }
         else
         {
-            m_Frame.sprite = Resources.Load<Sprite>("UI/Game/Game_pear_frame");
+            m_Frame.sprite = Resources.Load<Sprite>("UI/Quality/Quality_1");
             m_Frame.SetNativeSize();
 
             m_Text.text = "";
