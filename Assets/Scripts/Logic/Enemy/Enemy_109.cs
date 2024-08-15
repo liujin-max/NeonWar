@@ -32,7 +32,7 @@ public class Enemy_109 : Enemy
             m_Timer.Reset();
 
             GameFacade.Instance.EffectManager.Load(EFFECT.HEAL, Vector3.zero, gameObject);
-            this.UpdateHP(Mathf.CeilToInt(ATT.HPMAX * 0.15f)); 
+            this.UpdateHP(Mathf.CeilToInt(ATT.HPMAX * 0.05f)); 
         }
 
         return true;

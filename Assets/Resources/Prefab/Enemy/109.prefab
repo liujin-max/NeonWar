@@ -232,8 +232,8 @@ MonoBehaviour:
       m_Base: 1500
       m_Origin: 1500
     DODGE:
-      m_Base: 350
-      m_Origin: 350
+      m_Base: 200
+      m_Origin: 200
     SPEED:
       m_Base: 360
       m_Origin: 360

@@ -17,7 +17,7 @@ public class Enemy_107 : Enemy
 
             GameFacade.Instance.EffectManager.Load(EFFECT.WAVE, transform.localPosition, Field.Instance.Land.ELEMENT_ROOT.gameObject);
 
-            if (Vector2.Distance(transform.localPosition, Field.Instance.Player.transform.localPosition) <= 5)
+            if (Vector2.Distance(transform.localPosition, Field.Instance.Player.transform.localPosition) <= 5.5f)
             {
                 Field.Instance.Player.AddBuff((int)_C.BUFF.CHAOS, 1, 3f);
             }
