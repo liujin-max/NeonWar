@@ -12,10 +12,6 @@ public class State_Idle<T> : State<Field>
     public override void Enter(params object[] values)
     {
         EventManager.AddHandler(EVENT.ONJOYSTICK_PRESS,     OnJoyStickPress);
-
-
-        Field.Instance.RemovePlayer();
-        Field.Instance.InitPlayer();
     }
 
     public override void Update()

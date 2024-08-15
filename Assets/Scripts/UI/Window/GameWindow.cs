@@ -17,21 +17,14 @@ public class GameWindow : MonoBehaviour
     [SerializeField] LongPressButton m_BtnLeft;
     [SerializeField] LongPressButton m_BtnRight;
     [SerializeField] GameObject m_BlinkPivot;
-    [SerializeField] Transform m_SkillPivot;
-    [SerializeField] Transform m_PearPivot;
+    [SerializeField] Transform m_WeaponPivot;
     [SerializeField] Transform m_HPPivot;
-
-    
-    [Header("按钮")]
-    [SerializeField] Button m_BtnATK;
-    [SerializeField] Button m_BtnASP;
 
 
     [SerializeField] private List<CanvasGroup> m_Groups = new List<CanvasGroup>();
-    private List<SkillSeatItem> m_SkillSeatItems = new List<SkillSeatItem>();
-    private List<PearSeatItem> m_PearSeatItems = new List<PearSeatItem>();
 
     private PlayerHPItem m_HPITEM = null;
+    private WeaponItem m_WEAPONITEM = null;
 
 
     private float LeftPressTime = 0;
@@ -39,39 +32,7 @@ public class GameWindow : MonoBehaviour
     private Tweener m_BlinkTweener;
 
 
-    SkillSeatItem new_skill_seat_item(int order)
-    {
-        SkillSeatItem item = null;
-        if (m_SkillSeatItems.Count > order)
-        {
-            item = m_SkillSeatItems[order];
-        }
-        else
-        {
-            item = GameFacade.Instance.UIManager.LoadItem("SkillSeatItem", m_SkillPivot.Find(order.ToString())).GetComponent<SkillSeatItem>();
-            m_SkillSeatItems.Add(item);
-        }
-        item.gameObject.SetActive(true);
 
-        return item;
-    }
-
-    PearSeatItem new_pear_seat_item(int order)
-    {
-        PearSeatItem item = null;
-        if (m_PearSeatItems.Count > order)
-        {
-            item = m_PearSeatItems[order];
-        }
-        else
-        {
-            item = GameFacade.Instance.UIManager.LoadItem("PearSeatItem", m_PearPivot).GetComponent<PearSeatItem>();
-            m_PearSeatItems.Add(item);
-        }
-        item.gameObject.SetActive(true);
-
-        return item;
-    }
 
     void Awake()
     {
@@ -144,43 +105,6 @@ public class GameWindow : MonoBehaviour
             EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS,  1f));
         });
 
-
-
-        //升级攻击力
-        m_BtnATK.onClick.AddListener(()=>{
-            int cost = GameFacade.Instance.DataCenter.User.GetATKCost();
-
-            if (GameFacade.Instance.DataCenter.User.Glass < cost) {
-                EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "不足"));
-                return;
-            }
-
-            GameFacade.Instance.DataCenter.User.UpdateATK(1);
-            GameFacade.Instance.DataCenter.User.UpdateGlass(-cost);
-
-            FlushUI();
-            
-
-            EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS));
-        });
-
-
-        //升级攻速
-        m_BtnASP.onClick.AddListener(()=>{
-            int cost = GameFacade.Instance.DataCenter.User.GetASPCost();
-
-            if (GameFacade.Instance.DataCenter.User.Glass < cost) {
-                EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "不足"));
-                return;
-            }
-
-            GameFacade.Instance.DataCenter.User.UpdateASP(1);
-            GameFacade.Instance.DataCenter.User.UpdateGlass(-cost);
-
-            FlushUI();
-
-            EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS));
-        });
     }   
 
     public void Init()
@@ -188,84 +112,35 @@ public class GameWindow : MonoBehaviour
         m_Glass.ForceValue(GameFacade.Instance.DataCenter.User.Glass);
 
         FlushUI();
-        InitPears();
+
+        InitWeapon();
         FlushBlink();
     }
 
-    void FlushUI()
+    void InitWeapon()
     {
-        FlushElements();
+        if (m_WEAPONITEM != null) Destroy(m_WEAPONITEM.gameObject);
 
-        InitUpgradePivot();
-        InitSkills();
-    }
+        m_WEAPONITEM    = GameFacade.Instance.UIManager.LoadItem(GameFacade.Instance.DataCenter.User.CurrentPlayer.UI, m_WeaponPivot).GetComponent<WeaponItem>();
+        m_WEAPONITEM.Init();
+    } 
 
-    void FlushElements()
+    void FlushUI()
     {
         m_Level.text    = (GameFacade.Instance.DataCenter.User.Level + 1).ToString();
         m_SubLevel.text = (GameFacade.Instance.DataCenter.User.Level + 1).ToString();
 
         m_Coin.SetValue(GameFacade.Instance.DataCenter.User.Coin);
         m_Glass.SetValue(GameFacade.Instance.DataCenter.User.Glass);
+
+        if (m_WEAPONITEM != null) m_WEAPONITEM.FlushUI();
     }
 
-    void InitUpgradePivot()
-    {
-        int atk_level   = GameFacade.Instance.DataCenter.User.CurrentPlayer.ATK;
-        int asp_level   = GameFacade.Instance.DataCenter.User.CurrentPlayer.ASP;
-
-        m_BtnATK.transform.Find("Level").GetComponent<TextMeshProUGUI>().text   = atk_level.ToString();
-        m_BtnATK.transform.Find("Cost").GetComponent<TextMeshProUGUI>().text    = "消耗：" + GameFacade.Instance.DataCenter.User.GetATKCost();
-
-        m_BtnASP.transform.Find("Level").GetComponent<TextMeshProUGUI>().text   = asp_level.ToString();
-        m_BtnASP.transform.Find("Cost").GetComponent<TextMeshProUGUI>().text    = "消耗：" + GameFacade.Instance.DataCenter.User.GetASPCost();
-    }
-
-    //生成技能
-    void InitSkills()
-    {
-        m_SkillSeatItems.ForEach(item => {item.gameObject.SetActive(false);});
-
-        SkillSeat[] seats = new SkillSeat[]
-        {
-            new SkillSeat(){Order = 0, ATK = 3},
-            new SkillSeat(){Order = 1, ASP = 8},
-            new SkillSeat(){Order = 2, ATK = 15},
-            new SkillSeat(){Order = 3, ASP = 25},
-            new SkillSeat(){Order = 4, ATK = 30, ASP = 30}
-        };
-
-
-        for (int i = 0; i < seats.Length; i++)
-        {
-            SkillSlotMsg skill_msg = GameFacade.Instance.DataCenter.User.CurrentPlayer.SkillSlots[i];
-            SkillData skill_data = GameFacade.Instance.DataCenter.League.GetSkillData(skill_msg.ID);
-
-            var item = new_skill_seat_item(i);
-            item.Init(seats[i], skill_data, skill_msg.Level);
-        }
-    }
-
-    //生成宝珠
-    void InitPears()
-    {
-        m_PearSeatItems.ForEach(item => {item.gameObject.SetActive(false);});
-
-        for (int i = 0; i < GameFacade.Instance.DataCenter.User.CurrentPlayer.PearSlots.Count; i++)
-        {
-            PearSlotMsg slotMsg = GameFacade.Instance.DataCenter.User.CurrentPlayer.PearSlots[i];
-            Pear pear = GameFacade.Instance.DataCenter.Backpack.GetPear(slotMsg.ID);
-
-            var item = new_pear_seat_item(i);
-            item.Init(pear);
-        }
-    }
 
     //玩家血条
     void InitPlayerHP()
     {
-        if (m_HPITEM == null)
-        {
+        if (m_HPITEM == null) {
             m_HPITEM = GameFacade.Instance.UIManager.LoadItem("PlayerHPItem", m_HPPivot).GetComponent<PlayerHPItem>();
         }
 
@@ -351,7 +226,7 @@ public class GameWindow : MonoBehaviour
     //战斗结束
     private void OnBattleEnd(GameEvent @event)
     {
-        FlushElements();
+        FlushUI();
 
         m_Groups.ForEach(group => {
             group.gameObject.SetActive(true);
@@ -397,7 +272,9 @@ public class GameWindow : MonoBehaviour
     
     private void OnPearChange(GameEvent @event)
     {
-        InitPears();
+        if (m_WEAPONITEM == null) return;
+
+        m_WEAPONITEM.InitPears();
     }
 
     #endregion

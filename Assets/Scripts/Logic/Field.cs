@@ -85,7 +85,8 @@ public class Field : MonoBehaviour
         Debug.Log("========  开始关卡：" + level_id + "  ========");
 
         //将最新的加成等级应用到Player身上
-        m_Player.Sync();
+        InitPlayer();
+        // m_Player.Sync();
 
         EventManager.SendEvent(new GameEvent(EVENT.ONBATTLESTART));
     }
@@ -199,6 +200,7 @@ public class Field : MonoBehaviour
         int id  = GameFacade.Instance.DataCenter.User.CurrentPlayer.ID;
         m_Player= GameFacade.Instance.PrefabManager.Load("Prefab/Player/Player_" + id, Vector2.zero, Land.ENTITY_ROOT).GetComponent<Player>();
         m_Player.Init(id, 270);
+        m_Player.Sync();
     }
 
     public void RemovePlayer()

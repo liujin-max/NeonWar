@@ -48,6 +48,7 @@
      <Compile Include="Assets\AllIn1SpriteShader\Demo\Scripts\DemoRandomColorSwap.cs" />
      <Compile Include="Assets\Scripts\UI\Window\BackpackWindow.cs" />
      <Compile Include="Assets\Scripts\Manager\WXPlatform.cs" />
+     <Compile Include="Assets\Scripts\UI\Item\WeaponItem.cs" />
      <Compile Include="Assets\Scripts\UI\Item\PearDetailItem.cs" />
      <Compile Include="Assets\Scripts\Display\DisplayEvent.cs" />
      <Compile Include="Assets\Scripts\Manager\Effect.cs" />
@@ -157,6 +158,7 @@
      <Compile Include="Assets\Scripts\Logic\Area\Area.cs" />
      <Compile Include="Assets\Scripts\Manager\EffectManager.cs" />
      <Compile Include="Assets\Scripts\Struct\CDTimer.cs" />
+     <Compile Include="Assets\Scripts\UI\Item\BowItem.cs" />
      <Compile Include="Assets\Scripts\Utility\UIFitter.cs" />
      <Compile Include="Assets\Scripts\UI\Item\PlayerHPPointItem.cs" />
      <Compile Include="Assets\Scripts\UI\Window\TipWindow.cs" />

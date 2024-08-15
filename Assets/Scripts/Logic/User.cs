@@ -50,6 +50,7 @@ public class SkillSlotMsg
 public class PlayerMsg
 {
     public int ID;
+    public string UI;
     public bool UnlockFlag = false;
     public bool InUse;  //使用中
     public int ATK = 1;
@@ -95,6 +96,7 @@ public class GameUserData
         new PlayerMsg() 
         {
             ID          = (int)_C.PLAYER.BOW, 
+            UI          = "BowItem",
             UnlockFlag  = true, 
             InUse       = true, 
             PearSlots   = new List<PearSlotMsg>()   //2个宝珠槽
