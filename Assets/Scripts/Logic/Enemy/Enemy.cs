@@ -29,6 +29,8 @@ public class Enemy : Unit
     public _C.ENEMY_TYPE TYPE {get {return m_Data.Type;}}
     public int Glass { get {return m_Data.Glass;}}
 
+    public bool IsSummon = false;
+
     private Vector2 m_LastVelocity;
     private float m_LastAngularVelocity;
 

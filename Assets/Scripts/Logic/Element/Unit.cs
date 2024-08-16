@@ -37,7 +37,7 @@ public class Unit : MonoBehaviour
     private Dictionary<int, Buff> m_BuffDic = new Dictionary<int, Buff>();
 
     //各种状态
-    
+    public int StunFlag = 0;    //晕眩
 
     protected float m_Angle;      //角度
     protected bool m_ValidFlag = true;
@@ -69,18 +69,6 @@ public class Unit : MonoBehaviour
     {
         if (!IsValid) return false;
 
-        //攻击间隔
-        if (ASP.Duration > 0)
-        {
-            ASP.Update(deltaTime);
-            if (ASP.IsFinished() == true) {
-                ASP.Reset();
-
-                Attack();
-            }
-        }
-
-
         List<Buff> remove_buffs = new List<Buff>();
         //刷新Buff
         foreach (var item in m_BuffDic)
@@ -92,6 +80,21 @@ public class Unit : MonoBehaviour
         }
 
         remove_buffs.ForEach(buff => this.RemoveBuff(buff));
+
+        //晕眩不会影响Buff计时
+        if (StunFlag > 0) return false;
+
+        //攻击间隔
+        if (ASP.Duration > 0)
+        {
+            ASP.Update(deltaTime);
+            if (ASP.IsFinished() == true) {
+                ASP.Reset();
+
+                Attack();
+            }
+        }
+        
 
         return true;
     }

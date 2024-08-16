@@ -1,0 +1,77 @@
+%YAML 1.1
+%TAG !u! tag:yousandi.cn,2023:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Bullet
+  serializedVersion: 2
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 3
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      webStreaming: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: WeixinMiniGame
+      m_MaxTextureSize: 2048
+      m_MaxPlaceholderSize: 32
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 48
+      m_TextureCompression: 1
+      m_CompressionQuality: 100
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 1
+      m_IgnorePlatformSupport: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 1
+      enableAlphaDilation: 1
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 3e55953468e51e04e92cc548210a5ca6, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+    packedSpriteRenderDataKeys:
+    - 0b5fddd05d4a35741a59ec1a7cfd64f6: 21300000
+    - c98447c30dffdf44593178d3852a8188: 21300000
+    - 5ca4eab5f82c6d24ea5fdf7507c563d4: 21300000
+    - ecc4b51b910aab747b4bc772035c0145: 21300000
+    - cc0689fb9c013bb4390271b0dd9b8a2d: 21300000
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 0b5fddd05d4a35741a59ec1a7cfd64f6, type: 3}
+  - {fileID: 21300000, guid: c98447c30dffdf44593178d3852a8188, type: 3}
+  - {fileID: 21300000, guid: 5ca4eab5f82c6d24ea5fdf7507c563d4, type: 3}
+  - {fileID: 21300000, guid: ecc4b51b910aab747b4bc772035c0145, type: 3}
+  - {fileID: 21300000, guid: cc0689fb9c013bb4390271b0dd9b8a2d, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - 10000
+  - 108
+  - 102
+  - 109
+  - 106
+  m_RenderDataMap: {}
+  m_Tag: Bullet
+  m_IsVariant: 0
+  m_IsPlaceholder: 0

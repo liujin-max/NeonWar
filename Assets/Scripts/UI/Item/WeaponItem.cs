@@ -150,5 +150,6 @@ public class WeaponItem : MonoBehaviour
     {
         InitUpgradePivot();
         InitSkills();
+        InitPears();
     }
 }

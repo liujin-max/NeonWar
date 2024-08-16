@@ -41,8 +41,9 @@ public class State_Result<T> : State<Field>
             //结算奖励
             Field.Instance.ReceiveRewards();
             
-            Field.Instance.RemovePlayer();
             Field.Instance.End();
+
+            Field.Instance.RemovePlayer();
         }
     }
 

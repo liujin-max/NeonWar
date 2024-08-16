@@ -87,6 +87,7 @@ public class Spawn
         GameFacade.Instance.PrefabManager.AsyncLoad("Prefab/Enemy/" + monsterJSON.ID, point, Field.Instance.Land.ENEMY_ROOT, (obj)=>{
             var enemy = obj.GetComponent<Enemy>();
             enemy.Init(monsterJSON);
+            enemy.IsSummon = true;
             enemy.Push();
             
             m_Enemys.Add(enemy);
@@ -130,8 +131,10 @@ public class Spawn
             e.CustomUpdate(deltaTime);
 
             if (e.IsDead() == true) {
-                m_KillProgress.UpdateCurrent(1);
-                Field.Instance.UpdateGlass(e.Glass);
+                if (!e.IsSummon) {
+                    m_KillProgress.UpdateCurrent(1);
+                    Field.Instance.UpdateGlass(e.Glass);
+                }
 
                 _Removes.Add(e);
             }

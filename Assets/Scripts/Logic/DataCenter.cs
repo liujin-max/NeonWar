@@ -39,7 +39,7 @@ public class DataCenter
 
     public bool IsPearUnlock()
     {
-        return User.Level > _C.PEAR_UNLOCK_LEVEL;
+        return User.Level >= _C.PEAR_UNLOCK_LEVEL;
     }
 
     public string GetLevelString()

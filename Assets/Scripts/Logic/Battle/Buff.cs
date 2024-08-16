@@ -17,6 +17,7 @@ public class Buff_Stun : Buff
 
     public override void Init()
     {
+        Caster.StunFlag++;
         Caster.Stop();
     }
 
@@ -24,6 +25,7 @@ public class Buff_Stun : Buff
     {
         base.Dispose();
 
+        Caster.StunFlag--;
         Caster.Resume();
     }
 }

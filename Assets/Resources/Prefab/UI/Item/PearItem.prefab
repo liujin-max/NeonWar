@@ -37,7 +37,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 98, y: 98}
+  m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1868061377103909261
 CanvasRenderer:
@@ -350,7 +350,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Touch: {fileID: 2676818428195381816}
   m_Light: {fileID: 8512268330783084525}
-  m_Frame: {fileID: 0}
+  m_Frame: {fileID: 2947993683562365265}
   m_Icon: {fileID: 3071338636706540028}
   m_Count: {fileID: 1414381364875799697}
   m_TagEquiped: {fileID: 7207079640230066609}

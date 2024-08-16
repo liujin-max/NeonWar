@@ -97,19 +97,23 @@ public class Backpack
             AddPear(pear_msg.ID, pear_msg.Count);
         });
 
+
+        //测试代码
+        // PushPear(20000);
+        //
     }
 
-    public Pear PushPear(int id)
+    public Pear PushPear(int id, int count = 1)
     {
         if (m_PearsDic.ContainsKey(id) == true)
         {
             Pear pear = m_PearsDic[id];
-            pear.UpdateCount(1);
+            pear.UpdateCount(count);
 
             return pear;
         }
         
-        return AddPear(id, 1);
+        return AddPear(id, count);
     }
 
     public void RemovePear(int id, int count)

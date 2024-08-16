@@ -144,7 +144,6 @@ public class Field : MonoBehaviour
 
         float deltaTime = Time.deltaTime;
 
-        if (m_FSM != null) m_FSM.Update();
         BlinkTimer.Update(deltaTime);
 
         m_Player.CustomUpdate(deltaTime);
@@ -163,6 +162,7 @@ public class Field : MonoBehaviour
             Field.Instance.RemoveArea(a);
         });
 
+        if (m_FSM != null) m_FSM.Update();
     }
 
     public _C.RESULT CheckResult()
