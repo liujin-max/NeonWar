@@ -86,33 +86,8 @@ MonoBehaviour:
   BulletTemplate: {fileID: 0}
   ID: 103
   Side: 1
-  ATT:
-    HPMAX: 3
-    HP: 3
-    ATK:
-      m_Base: 1
-      m_Origin: 0
-    ASP:
-      m_Base: 0
-      m_Origin: 0
-    CP:
-      m_Base: 0
-      m_Origin: 0
-    CT:
-      m_Base: 1500
-      m_Origin: 0
-    DODGE:
-      m_Base: 0
-      m_Origin: 0
-    SPEED:
-      m_Base: 500
-      m_Origin: 0
-    VUN_INC:
-      m_Base: 1
-      m_Origin: 0
-    BOSS_INC:
-      m_Base: 1
-      m_Origin: 0
+  ATT: {fileID: 11400000, guid: 52f0d6b6517951f4d924bf7521b3c989, type: 2}
+  StunFlag: 0
   m_Color:
     m_Mode: 2
     m_GradientMin:
@@ -177,6 +152,7 @@ MonoBehaviour:
       m_NumAlphaKeys: 2
     m_ColorMin: {r: 0.5882353, g: 0, b: 0, a: 1}
     m_ColorMax: {r: 0.5882353, g: 0.30588236, b: 0.59607846, a: 1}
+  IsSummon: 0
 --- !u!50 &5767221125352602383
 Rigidbody2D:
   serializedVersion: 4

@@ -49,6 +49,7 @@
      <Compile Include="Assets\Scripts\UI\Window\BackpackWindow.cs" />
      <Compile Include="Assets\Scripts\Manager\WXPlatform.cs" />
      <Compile Include="Assets\Scripts\UI\Item\WeaponItem.cs" />
+     <Compile Include="Assets\Scripts\Configs\ATTConfig.cs" />
      <Compile Include="Assets\Scripts\UI\Item\PearDetailItem.cs" />
      <Compile Include="Assets\Scripts\Display\DisplayEvent.cs" />
      <Compile Include="Assets\Scripts\Manager\Effect.cs" />

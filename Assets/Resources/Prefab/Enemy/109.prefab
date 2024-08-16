@@ -216,33 +216,8 @@ MonoBehaviour:
   BulletTemplate: {fileID: 5480662803317571861, guid: b2f200c53e30a8444a9e8f2b09e03a88, type: 3}
   ID: 0
   Side: 0
-  ATT:
-    HPMAX: 3
-    HP: 3
-    ATK:
-      m_Base: 1
-      m_Origin: 1
-    ASP:
-      m_Base: 0
-      m_Origin: 0
-    CP:
-      m_Base: 0
-      m_Origin: 0
-    CT:
-      m_Base: 1500
-      m_Origin: 1500
-    DODGE:
-      m_Base: 200
-      m_Origin: 200
-    SPEED:
-      m_Base: 360
-      m_Origin: 360
-    VUN_INC:
-      m_Base: 1
-      m_Origin: 1
-    BOSS_INC:
-      m_Base: 1
-      m_Origin: 1
+  ATT: {fileID: 11400000, guid: 6ce599e8b4909264d83b74a3fe133af0, type: 2}
+  StunFlag: 0
   m_Color:
     m_Mode: 2
     m_GradientMin:
@@ -307,6 +282,7 @@ MonoBehaviour:
       m_NumAlphaKeys: 2
     m_ColorMin: {r: 0.20392159, g: 0.21960786, b: 0.21960786, a: 1}
     m_ColorMax: {r: 0.8745099, g: 0.9294118, b: 0.97647065, a: 1}
+  IsSummon: 0
 --- !u!1 &7289432653103146828
 GameObject:
   m_ObjectHideFlags: 0

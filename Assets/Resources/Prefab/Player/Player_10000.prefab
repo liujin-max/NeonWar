@@ -220,33 +220,8 @@ MonoBehaviour:
   BulletTemplate: {fileID: 5480662803317571861, guid: c15afc1203c625642a10d26c3e6cff88, type: 3}
   ID: 0
   Side: 0
-  ATT:
-    HPMAX: 3
-    HP: 3
-    ATK:
-      m_Base: 1
-      m_Origin: 0
-    ASP:
-      m_Base: 450
-      m_Origin: 450
-    CP:
-      m_Base: 50
-      m_Origin: 50
-    CT:
-      m_Base: 1500
-      m_Origin: 1500
-    DODGE:
-      m_Base: 0
-      m_Origin: 0
-    SPEED:
-      m_Base: 180
-      m_Origin: 180
-    VUN_INC:
-      m_Base: 1
-      m_Origin: 0
-    BOSS_INC:
-      m_Base: 1
-      m_Origin: 0
+  ATT: {fileID: 11400000, guid: bea9157e7a133be41a8ad88c5659b7ed, type: 2}
+  StunFlag: 0
   MoveDirection: 1
   GlassRate:
     m_Base: 1

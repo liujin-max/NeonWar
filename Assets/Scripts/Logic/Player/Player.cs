@@ -30,8 +30,10 @@ public class Player : Unit
         ID      = id;
         Side    = _C.SIDE.PLAYER;
         m_Angle = angle;
-        ATT.HP  = ATT.HPMAX;
 
+        //修改到源文件
+        ATT     = Instantiate(ATT);
+        ATT.HP  = ATT.HPMAX;
 
 
         InvincibleTimer.Full();

@@ -54,33 +54,8 @@ MonoBehaviour:
   BulletTemplate: {fileID: 0}
   ID: 100
   Side: 1
-  ATT:
-    HPMAX: 3
-    HP: 1
-    ATK:
-      m_Base: 1
-      m_Origin: 1
-    ASP:
-      m_Base: 0
-      m_Origin: 0
-    CP:
-      m_Base: 0
-      m_Origin: 0
-    CT:
-      m_Base: 1500
-      m_Origin: 1500
-    DODGE:
-      m_Base: 0
-      m_Origin: 0
-    SPEED:
-      m_Base: 350
-      m_Origin: 350
-    VUN_INC:
-      m_Base: 1
-      m_Origin: 1
-    BOSS_INC:
-      m_Base: 1
-      m_Origin: 1
+  ATT: {fileID: 11400000, guid: e780756007967e24096d4765bb515ed5, type: 2}
+  StunFlag: 0
   m_Color:
     m_Mode: 2
     m_GradientMin:
@@ -145,6 +120,7 @@ MonoBehaviour:
       m_NumAlphaKeys: 2
     m_ColorMin: {r: 0.5882353, g: 0, b: 0, a: 1}
     m_ColorMax: {r: 0.9803922, g: 0.9803922, b: 0.9803922, a: 1}
+  IsSummon: 0
 --- !u!58 &3382774460602914520
 CircleCollider2D:
   m_ObjectHideFlags: 0
