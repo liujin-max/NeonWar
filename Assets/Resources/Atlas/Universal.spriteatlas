@@ -16,7 +16,7 @@ SpriteAtlas:
       compressionQuality: 50
       maxTextureSize: 2048
       textureCompression: 0
-      filterMode: 1
+      filterMode: 0
       generateMipMaps: 0
       readable: 0
       crunchedCompression: 0
@@ -41,6 +41,7 @@ SpriteAtlas:
     packedSpriteRenderDataKeys:
     - ad420080693c6b24d92f2fcc00429662: 21300000
     - d986788269edbb04f87ad5da1b223885: 21300000
+    - 20d45ab292f96384f8a35bfb10b7f7b6: 21300000
     - 6d926c23a743f124196ad06a696dfead: 21300000
     - c8f30c444f708634b964f813f0ee69a3: 21300000
     - 293695154776f51498d95cfb4bcf9d0d: 21300000
@@ -48,6 +49,7 @@ SpriteAtlas:
     - 9ecb5e586c0e72246a1e3c65328b5eaa: 21300000
     - 35167688f7d892b41964cb37ed41b011: 21300000
     - 593f33fa08974a84187540486df712c9: 21300000
+    - b2eccbac93d81324097697223a846f23: 21300000
     - 2d29866ec5b21ae449fa1ee8f45a1833: 21300000
     - f3f7696e610878e44bf063e4fc9b109b: 21300000
     - 58d826aef2166434abbd52256620fe13: 21300000
@@ -56,6 +58,7 @@ SpriteAtlas:
   m_PackedSprites:
   - {fileID: 21300000, guid: ad420080693c6b24d92f2fcc00429662, type: 3}
   - {fileID: 21300000, guid: d986788269edbb04f87ad5da1b223885, type: 3}
+  - {fileID: 21300000, guid: 20d45ab292f96384f8a35bfb10b7f7b6, type: 3}
   - {fileID: 21300000, guid: 6d926c23a743f124196ad06a696dfead, type: 3}
   - {fileID: 21300000, guid: c8f30c444f708634b964f813f0ee69a3, type: 3}
   - {fileID: 21300000, guid: 293695154776f51498d95cfb4bcf9d0d, type: 3}
@@ -63,6 +66,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 9ecb5e586c0e72246a1e3c65328b5eaa, type: 3}
   - {fileID: 21300000, guid: 35167688f7d892b41964cb37ed41b011, type: 3}
   - {fileID: 21300000, guid: 593f33fa08974a84187540486df712c9, type: 3}
+  - {fileID: 21300000, guid: b2eccbac93d81324097697223a846f23, type: 3}
   - {fileID: 21300000, guid: 2d29866ec5b21ae449fa1ee8f45a1833, type: 3}
   - {fileID: 21300000, guid: f3f7696e610878e44bf063e4fc9b109b, type: 3}
   - {fileID: 21300000, guid: 58d826aef2166434abbd52256620fe13, type: 3}
@@ -70,6 +74,7 @@ SpriteAtlas:
   m_PackedSpriteNamesToIndex:
   - Universal_guide_frame
   - Universal_btn_normal
+  - Universal_glass
   - Universal_black_frame
   - Universal_btn_green
   - Universal_btn_green 1
@@ -77,6 +82,7 @@ SpriteAtlas:
   - Universal_HP_bar
   - Universal_lock
   - Universal_skill_frame
+  - Universal_coin
   - Universal_pear_item_light
   - Universal_circle_white
   - Universal_count_frame
