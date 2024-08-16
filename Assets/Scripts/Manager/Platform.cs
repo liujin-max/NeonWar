@@ -41,6 +41,9 @@ public abstract class Platform
     public abstract void VIBRATE(string level);
     //适配UI
     public abstract void ADAPTATION(RectTransform rectTransform, float offset);
+    //
+    public abstract void UPDATETARGETFRAME(int frame);
+
     //打开其他小游戏
     public abstract void OPENMINIGAME(string appid);
     //游戏圈

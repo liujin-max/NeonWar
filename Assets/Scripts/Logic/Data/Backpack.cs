@@ -5,7 +5,7 @@ using UnityEngine;
 
 
 [System.Serializable]
-public class PearData
+public struct PearData
 {
     public int ID;
     public string Name;
@@ -68,7 +68,7 @@ public class Backpack
         if (m_PearDataDic.TryGetValue(id, out data)) {
             return data;
         }
-        return null;
+        return data;
     }
 
     Pear AddPear(int id, int count)

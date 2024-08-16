@@ -366,6 +366,12 @@ public class WXPlatform : Platform
         rectTransform.offsetMax = Vector2.zero;
     }
 
+    public override void UPDATETARGETFRAME(int frame)
+    {
+        //设置帧率
+        WX.SetPreferredFramesPerSecond(frame);
+    }
+
     //打开其他小游戏
     public override void OPENMINIGAME(string appid)
     {

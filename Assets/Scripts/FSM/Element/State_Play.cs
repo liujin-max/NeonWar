@@ -13,6 +13,8 @@ public class State_Play<T> : State<Field>
     {
         EventManager.AddHandler(EVENT.ONJOYSTICK_PRESS,     OnJoyStickPress);
         EventManager.AddHandler(EVENT.ONJOYSTICK_DOUBLE,    OnJoyStickDouble);
+
+        Platform.Instance.UPDATETARGETFRAME(60);
         
         int level_id = (int)values[0];
         Field.Instance.Play(level_id);

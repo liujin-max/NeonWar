@@ -9,14 +9,14 @@ using UnityEngine;
 
 //基础数据
 [System.Serializable]
-public class BaseData
+public struct BaseData
 {
     public string openId;
 }
 
 //道具数据
 [System.Serializable]
-public class PropMsg
+public struct PropMsg
 {
     public int ID;
     public int Count;
@@ -43,6 +43,8 @@ public class SkillSlotMsg
 {
     public int ID;
     public int Level = 1;
+
+    
 }
 
 //武器数据

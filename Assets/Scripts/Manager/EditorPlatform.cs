@@ -78,6 +78,11 @@ public class EditorPlatform : Platform
 
     }
 
+    public override void UPDATETARGETFRAME(int frame)
+    {
+        Application.targetFrameRate = frame;
+    }
+
     public override void OPENMINIGAME(string appid)
     {
 
