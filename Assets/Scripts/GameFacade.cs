@@ -181,10 +181,7 @@ public class GameFacade : MonoBehaviour
             yield return null; 
         }
 
-        AssetsManager.LoadPrefab("Font", "JingNanJunJunTi-JinNanJunJunTi-Bold-2 SDF");
-        AssetsManager.LoadPrefab("Font", "JingNanJunJunTi-JinNanJunJunTi-Bold-2 SDF HP");
-        AssetsManager.LoadPrefab("Font", "JingNanJunJunTi-JinNanJunJunTi-Bold-2 SDF OutLine");
-        AssetsManager.LoadPrefab("Font", "JingNanJunJunTi-JinNanJunJunTi-Bold-2 SDF Projection");
+
         //进入游戏
         NavigationController.GotoGame();
         

@@ -1,10 +1,8 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using LitJson;
 using UnityEngine;
 
-#if WEIXINMINIGAME  //&& !UNITY_EDITOR
+#if WEIXINMINIGAME  && !UNITY_EDITOR
 using WeChatWASM;
 
 

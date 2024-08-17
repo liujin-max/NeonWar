@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 2099942852
+CRC: 1927568642
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: a7b365dcce606ca406253b3ac582dcee
+    Hash: 07f7bb306998a3a00542913d6a9da059
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 81d2163b02c69748026fde4184781cca
+    Hash: 178fd09190f854b8cc93b026b071eef0
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -48,6 +48,8 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: d11b1e481f288934380911bc2f2b0339, type: 3}
 - Class: 115
+  Script: {instanceID: 0}
+- Class: 128
   Script: {instanceID: 0}
 - Class: 198
   Script: {instanceID: 0}
@@ -99,5 +101,4 @@ Assets:
 - Assets/Prefab/Effect/fx_coin.prefab
 - Assets/Prefab/Effect/fx_BlackHole.prefab
 Dependencies:
-- D:/Work/NeonWar/Assets/StreamingAssets/AssetBundles/font
 - D:/Work/NeonWar/Assets/StreamingAssets/AssetBundles/universal

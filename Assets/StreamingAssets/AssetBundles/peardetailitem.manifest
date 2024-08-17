@@ -1,17 +1,21 @@
 ManifestFileVersion: 0
-CRC: 2219365981
+CRC: 903632323
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 58fda9491a9e3f828f0e4ed98e59ed60
+    Hash: eb3290c0280bbf5e12c2825a509ffb91
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 1a2a87e644ad13aefa3a606046442f75
+    Hash: f91312c038bf915c463986e474a4afbf
 HashAppended: 0
 ClassTypes:
 - Class: 1
   Script: {instanceID: 0}
 - Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
   Script: {instanceID: 0}
 - Class: 114
   Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -28,6 +32,8 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: 59f8146938fff824cb5fd77236b75775, type: 3}
 - Class: 115
+  Script: {instanceID: 0}
+- Class: 128
   Script: {instanceID: 0}
 - Class: 213
   Script: {instanceID: 0}
@@ -77,6 +83,5 @@ SerializeReferenceClassIdentifiers:
 Assets:
 - Assets/Prefab/UI/Item/PearDetailItem.prefab
 Dependencies:
-- D:/Work/NeonWar/Assets/StreamingAssets/AssetBundles/font
 - D:/Work/NeonWar/Assets/StreamingAssets/AssetBundles/pear
 - D:/Work/NeonWar/Assets/StreamingAssets/AssetBundles/universal

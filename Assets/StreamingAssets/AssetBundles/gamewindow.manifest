@@ -1,17 +1,21 @@
 ManifestFileVersion: 0
-CRC: 3349542842
+CRC: 2830285129
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 44755ce671eba53fd84cc8d1c800c068
+    Hash: cd7343b09eae94e2bc7d3199445f503d
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 11a48409f83fc5be5afde0b24b234439
+    Hash: 2e877a9fcb7effe21001cdd667fcc334
 HashAppended: 0
 ClassTypes:
 - Class: 1
   Script: {instanceID: 0}
 - Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
   Script: {instanceID: 0}
 - Class: 114
   Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -30,6 +34,8 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: a962190fe0b88c8479fd13830142e8e7, type: 3}
 - Class: 115
+  Script: {instanceID: 0}
+- Class: 128
   Script: {instanceID: 0}
 - Class: 213
   Script: {instanceID: 0}
@@ -79,6 +85,5 @@ SerializeReferenceClassIdentifiers:
 Assets:
 - Assets/Prefab/UI/Window/GameWindow.prefab
 Dependencies:
-- D:/Work/NeonWar/Assets/StreamingAssets/AssetBundles/font
 - D:/Work/NeonWar/Assets/StreamingAssets/AssetBundles/game
 - D:/Work/NeonWar/Assets/StreamingAssets/AssetBundles/universal

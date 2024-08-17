@@ -1,17 +1,21 @@
 ManifestFileVersion: 0
-CRC: 889683172
+CRC: 538561310
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 67e3607f758190e3136911154442ea53
+    Hash: eaa795f02a146ca7d9b4b8911db1e63f
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 10edb523b87d545360f0bca639e7c8f5
+    Hash: 2b4262d8433e7ad5da511d7cb3c7d3fa
 HashAppended: 0
 ClassTypes:
 - Class: 1
   Script: {instanceID: 0}
 - Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
   Script: {instanceID: 0}
 - Class: 114
   Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -24,6 +28,8 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
 - Class: 115
+  Script: {instanceID: 0}
+- Class: 128
   Script: {instanceID: 0}
 - Class: 213
   Script: {instanceID: 0}
@@ -71,6 +77,5 @@ SerializeReferenceClassIdentifiers:
 Assets:
 - Assets/Prefab/UI/Item/SkillSeatItem.prefab
 Dependencies:
-- D:/Work/NeonWar/Assets/StreamingAssets/AssetBundles/font
 - D:/Work/NeonWar/Assets/StreamingAssets/AssetBundles/skill
 - D:/Work/NeonWar/Assets/StreamingAssets/AssetBundles/universal

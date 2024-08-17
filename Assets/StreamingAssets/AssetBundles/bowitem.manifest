@@ -1,17 +1,21 @@
 ManifestFileVersion: 0
-CRC: 4025834447
+CRC: 2026092304
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: b811c518deab0db825238b1b5c5a1b00
+    Hash: 7b6c61800f7d8b0f741a311b4b543e53
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 58b8d66d811b6584b59098c01019cad1
+    Hash: ae84c80b799586db8af76b1eb872107f
 HashAppended: 0
 ClassTypes:
 - Class: 1
   Script: {instanceID: 0}
 - Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
   Script: {instanceID: 0}
 - Class: 114
   Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -26,6 +30,8 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
 - Class: 115
+  Script: {instanceID: 0}
+- Class: 128
   Script: {instanceID: 0}
 - Class: 213
   Script: {instanceID: 0}
@@ -75,5 +81,4 @@ SerializeReferenceClassIdentifiers:
 Assets:
 - Assets/Prefab/UI/Item/BowItem.prefab
 Dependencies:
-- D:/Work/NeonWar/Assets/StreamingAssets/AssetBundles/font
 - D:/Work/NeonWar/Assets/StreamingAssets/AssetBundles/playericon

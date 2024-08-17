@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 117502328
+CRC: 3731814943
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: a34bc55f91ad602172d0a1e20c46235e
+    Hash: 824ef236a91388f1964b835f5847dc05
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 46ef67b7aeb5fa511fb92aff22148820
+    Hash: 4ed13322758e62b926cc964c414fc2c6
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -16,6 +16,8 @@ ClassTypes:
 - Class: 21
   Script: {instanceID: 0}
 - Class: 23
+  Script: {instanceID: 0}
+- Class: 28
   Script: {instanceID: 0}
 - Class: 48
   Script: {instanceID: 0}
@@ -38,6 +40,8 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: a9c84f8ba767d1c40834ba9c9e6d32d6, type: 3}
 - Class: 115
+  Script: {instanceID: 0}
+- Class: 128
   Script: {instanceID: 0}
 - Class: 210
   Script: {instanceID: 0}
@@ -79,5 +83,4 @@ Assets:
 - Assets/Prefab/Element/CircleHP.prefab
 Dependencies:
 - D:/Work/NeonWar/Assets/StreamingAssets/AssetBundles/buff
-- D:/Work/NeonWar/Assets/StreamingAssets/AssetBundles/font
 - D:/Work/NeonWar/Assets/StreamingAssets/AssetBundles/universal

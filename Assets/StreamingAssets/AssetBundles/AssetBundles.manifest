@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 3437428318
+CRC: 567207522
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -27,13 +27,11 @@ AssetBundleManifest:
       Name: effect
       Dependencies:
         Dependency_0: universal
-        Dependency_1: font
     Info_8:
       Name: element
       Dependencies:
         Dependency_0: universal
-        Dependency_1: font
-        Dependency_2: buff
+        Dependency_1: buff
     Info_9:
       Name: enemy
       Dependencies:
@@ -52,14 +50,12 @@ AssetBundleManifest:
     Info_13:
       Name: bowitem
       Dependencies:
-        Dependency_0: font
-        Dependency_1: playericon
+        Dependency_0: playericon
     Info_14:
       Name: peardetailitem
       Dependencies:
         Dependency_0: universal
         Dependency_1: pear
-        Dependency_2: font
     Info_15:
       Name: pearitem
       Dependencies:
@@ -67,13 +63,11 @@ AssetBundleManifest:
         Dependency_1: universal
         Dependency_2: pear
         Dependency_3: quality
-        Dependency_4: font
     Info_16:
       Name: pearseatitem
       Dependencies:
         Dependency_0: universal
         Dependency_1: quality
-        Dependency_2: font
     Info_17:
       Name: playerhpitem
       Dependencies: {}
@@ -87,13 +81,11 @@ AssetBundleManifest:
         Dependency_0: game
         Dependency_1: universal
         Dependency_2: skill
-        Dependency_3: font
     Info_20:
       Name: skillseatitem
       Dependencies:
         Dependency_0: universal
         Dependency_1: skill
-        Dependency_2: font
     Info_21:
       Name: weaponitem
       Dependencies: {}
@@ -106,7 +98,6 @@ AssetBundleManifest:
       Dependencies:
         Dependency_0: game
         Dependency_1: universal
-        Dependency_2: font
     Info_24:
       Name: maskwindow
       Dependencies: {}
@@ -120,23 +111,19 @@ AssetBundleManifest:
       Name: skillwindow
       Dependencies:
         Dependency_0: universal
-        Dependency_1: font
     Info_28:
       Name: tipwindow
       Dependencies:
         Dependency_0: universal
     Info_29:
-      Name: font
-      Dependencies: {}
-    Info_30:
       Name: battle
       Dependencies: {}
-    Info_31:
+    Info_30:
       Name: buff
       Dependencies: {}
-    Info_32:
+    Info_31:
       Name: playericon
       Dependencies: {}
-    Info_33:
+    Info_32:
       Name: grass
       Dependencies: {}

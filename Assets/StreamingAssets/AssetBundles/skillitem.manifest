@@ -1,12 +1,12 @@
 ManifestFileVersion: 0
-CRC: 956352156
+CRC: 2748861638
 Hashes:
   AssetFileHash:
     serializedVersion: 2
-    Hash: 457155566c293a5c7dbebff6f7257b02
+    Hash: b52ac822f75baf9d4f2cb785a1abe6da
   TypeTreeHash:
     serializedVersion: 2
-    Hash: 9715798d4448daa33f7d98ee9ce90519
+    Hash: d815b3ba2fff338e9607c413c3683e5b
 HashAppended: 0
 ClassTypes:
 - Class: 1
@@ -32,6 +32,8 @@ ClassTypes:
 - Class: 114
   Script: {fileID: 11500000, guid: e8ca1374b554f544da806d0208dfc178, type: 3}
 - Class: 115
+  Script: {instanceID: 0}
+- Class: 128
   Script: {instanceID: 0}
 - Class: 213
   Script: {instanceID: 0}
@@ -79,7 +81,6 @@ SerializeReferenceClassIdentifiers:
 Assets:
 - Assets/Prefab/UI/Item/SkillItem.prefab
 Dependencies:
-- D:/Work/NeonWar/Assets/StreamingAssets/AssetBundles/font
 - D:/Work/NeonWar/Assets/StreamingAssets/AssetBundles/game
 - D:/Work/NeonWar/Assets/StreamingAssets/AssetBundles/skill
 - D:/Work/NeonWar/Assets/StreamingAssets/AssetBundles/universal
