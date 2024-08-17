@@ -27,6 +27,7 @@ public class Field : MonoBehaviour
 
     private List<BuffBubble> m_BuffBubbles = new List<BuffBubble>();
     private List<Area> m_Areas = new List<Area>();
+    private List<Area> m_AreaRemoves = new List<Area>();
     
     //累计获得的碎片
     private int m_Glass;
@@ -151,16 +152,19 @@ public class Field : MonoBehaviour
         
 
         //区域
-        List<Area> _Removes = new List<Area>();
         m_Areas.ForEach(a => {
             a.CustomUpdate(deltaTime);
 
-            if (a.IsFinished()) _Removes.Add(a);
+            if (a.IsFinished()) m_AreaRemoves.Add(a);
         });
 
-        _Removes.ForEach(a => {
-            Field.Instance.RemoveArea(a);
-        });
+        if (m_AreaRemoves.Count > 0) {
+            m_AreaRemoves.ForEach(a => {
+                Field.Instance.RemoveArea(a);
+            });
+            m_AreaRemoves.Clear();
+        }
+        
 
         if (m_FSM != null) m_FSM.Update();
     }

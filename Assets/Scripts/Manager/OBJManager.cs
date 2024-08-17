@@ -60,6 +60,8 @@ public class OBJManager: MonoBehaviour
             m_BulletPool[name] = new List<Bullet>();
         }
 
+        if (m_BulletPool[name].Contains(bullet)) return;
+
         m_BulletPool[name].Add(bullet);
 
         bullet.transform.SetParent(PoolLayer);

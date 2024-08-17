@@ -224,7 +224,7 @@ public class Skill_10060 : Skill
         if (b.Caster != Caster) return;
 
 
-        b.PassTimes = Skill.ToValue(Data, Level);
+        b.HitRemaining = 1 + Skill.ToValue(Data, Level);
     }
 }
 #endregion

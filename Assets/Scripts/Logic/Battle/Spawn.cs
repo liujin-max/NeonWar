@@ -16,6 +16,11 @@ public class Spawn
     private List<Enemy> m_Enemys = new List<Enemy>();
     public List<Enemy> Enemys {get {return m_Enemys;}}
 
+    private List<Enemy> m_EnemyRemoves  = new List<Enemy>();
+    private List<Enemy> m_EnemyTemps    = new List<Enemy>();
+
+    private int m_AsyncCount    = 0;
+
     //击杀进度
     private Pair m_KillProgress;
     public float KillProgress {get {return m_KillProgress.Progress;}}
@@ -39,7 +44,7 @@ public class Spawn
 
     public bool IsClear()
     {
-        return m_EnemyPool.Count == 0 && m_Enemys.Count == 0;
+        return m_EnemyPool.Count == 0 && m_Enemys.Count == 0 && m_AsyncCount == 0;
     }
 
     void PutEnemy(MonsterJSON monsterJSON)
@@ -51,7 +56,7 @@ public class Spawn
             point = ToolUtility.FindPointOnCircle(Vector3.zero, monsterJSON.Radius, monsterJSON.Angle);
         }
 
-
+        m_AsyncCount++;
         GameFacade.Instance.PrefabManager.AsyncLoad("Prefab/Enemy/" + monsterJSON.ID, point, Field.Instance.Land.ENEMY_ROOT, (obj)=>{
             var enemy = obj.GetComponent<Enemy>();
             m_Enemys.Add(enemy);
@@ -78,6 +83,8 @@ public class Spawn
             seq.Append(hole.DOScale(1.3f, 0.15f));
             seq.Append(hole.DOScale(0, 0.4f));
             seq.Play();
+
+            m_AsyncCount--;
         });
     }
 
@@ -123,11 +130,10 @@ public class Spawn
         
 
         //销毁死亡的敌人
-        List<Enemy> _Removes    = new List<Enemy>();
-        List<Enemy> _Enemys     = new List<Enemy>();
-        _Enemys.AddRange(m_Enemys);
+        m_EnemyTemps.Clear();
+        m_EnemyTemps.AddRange(m_Enemys);
         
-        _Enemys.ForEach(e => {
+        m_EnemyTemps.ForEach(e => {
             e.CustomUpdate(deltaTime);
 
             if (e.IsDead() == true) {
@@ -136,19 +142,25 @@ public class Spawn
                     Field.Instance.UpdateGlass(e.Glass);
                 }
 
-                _Removes.Add(e);
+                m_EnemyRemoves.Add(e);
             }
         });
 
-        _Removes.ForEach(e => {
-            m_Enemys.Remove(e);
+        if (m_EnemyRemoves.Count > 0) {
+            m_EnemyRemoves.ForEach(e => {
+                m_Enemys.Remove(e);
 
-            e.Dispose();
-        });
+                e.Dispose();
+            });
+
+            m_EnemyRemoves.Clear();
+        }
     }
 
     public void Dispose()
     {
+        m_AsyncCount = 0;
+
         m_EnemyPool.Clear();
         m_KillProgress.Clear();
 

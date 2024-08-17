@@ -16,7 +16,7 @@ public class Bullet : MonoBehaviour
 
 
     [HideInInspector] public bool IsSplit = false;      //是否是分裂出的
-    [HideInInspector] public int PassTimes = 0;         //可穿透次数
+    [HideInInspector] public int HitRemaining = 1;       //剩余可击中敌人次数(穿透逻辑)
     [HideInInspector] public int ReboundTimes = 0;      //可反弹次数
     
 
@@ -31,10 +31,21 @@ public class Bullet : MonoBehaviour
         m_Rigidbody.gravityScale = 0;
     }
 
+    public void InitStatus()
+    {
+        Speed.Clear();
+
+        IsSplit         = false;
+        HitRemaining    = 1;
+        ReboundTimes    = 0;
+    }
+
     public void Init(Unit caster)
     {
         Caster  = caster;
         Hit     = new Hit(caster);
+
+        InitStatus();
     }
     
     public void Shoot(float angle , bool is_shoot = true)
@@ -58,13 +69,6 @@ public class Bullet : MonoBehaviour
 
     void Dispose()
     {
-        Speed.Clear();
-
-        IsSplit         = false;
-        PassTimes       = 0;
-        ReboundTimes    = 0;
-
-
         GameFacade.Instance.PoolManager.RecycleBullet(this);
     }
 
@@ -95,11 +99,11 @@ public class Bullet : MonoBehaviour
             return;
         }
 
-
         var unit = collider.GetComponent<Unit>();
         if (unit == null) return;
         if (unit.Side == Caster.Side) return;
-        if (PassTimes < 0) return;
+        if (HitRemaining <= 0) return;
+
 
         Hit.Position = transform.localPosition;
         Hit.Velocity = this.Velocity;
@@ -107,8 +111,9 @@ public class Bullet : MonoBehaviour
         if (Field.Instance.SettleHit(Hit, unit) == true) {
             EventManager.SendEvent(new GameEvent(EVENT.ONBULLETHIT, this, unit));
 
-            PassTimes--;
-            if (PassTimes < 0) Dispose();
+            HitRemaining--;
+
+            if (HitRemaining <= 0) Dispose();
         }
     }
     #endregion

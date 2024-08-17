@@ -16,6 +16,6 @@ public class Level
 
     public void Init()
     {
-        LevelJSON = GameFacade.Instance.DataCenter.Levels.LoadLevelJSON(ID);
+        LevelJSON = (LevelJSON)GameFacade.Instance.DataCenter.Levels.LoadLevelJSON(ID);
     }
 }

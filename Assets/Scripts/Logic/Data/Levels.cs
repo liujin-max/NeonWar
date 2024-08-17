@@ -5,7 +5,7 @@ using UnityEngine;
 
 //关卡Json数据
 [System.Serializable]
-public class LevelJSON
+public struct LevelJSON
 {
     public int Glass;
     public List<MonsterJSON> Monsters;
@@ -49,7 +49,7 @@ public class Levels
         return level;
     }
 
-    public LevelJSON LoadLevelJSON(int id)
+    public LevelJSON? LoadLevelJSON(int id)
     {
         var path = "Json/" + id;
 

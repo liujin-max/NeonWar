@@ -227,7 +227,7 @@ Transform:
   - {fileID: 2491569824425229344}
   - {fileID: 2463376180982676323}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1585666696243292549
 MonoBehaviour:
@@ -358,8 +358,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278191359
-  m_fontColor: {r: 1, g: 0.015686275, b: 0, a: 1}
+    rgba: 4278231295
+  m_fontColor: {r: 1, g: 0.62911344, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
