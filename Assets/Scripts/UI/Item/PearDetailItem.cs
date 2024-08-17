@@ -27,6 +27,8 @@ public class PearDetailItem : MonoBehaviour
 
     void OnDestroy()
     {
+        AssetsManager.Unload(m_Icon.gameObject);
+
         EventManager.DelHandler(EVENT.UI_PEARCHANGE,    OnPearChange);
     }
 
@@ -59,10 +61,10 @@ public class PearDetailItem : MonoBehaviour
     {
         m_Pear = pear;
 
-        m_Title.text        = _C.LEVELCOLOR_PAIRS[pear.Level] + pear.Name;
+        m_Title.text = _C.LEVELCOLOR_PAIRS[pear.Level] + pear.Name;
         m_Description.text  = pear.GetDescription();
 
-        m_Icon.sprite = Resources.Load<Sprite>("UI/Pear/" + m_Pear.Class);
+        m_Icon.sprite = AssetsManager.LoadSprite("Pear" , m_Pear.Class.ToString(), m_Icon.gameObject);
         m_Icon.SetNativeSize();
 
         FlushUI();

@@ -45,6 +45,11 @@ public class SkillSeatItem : MonoBehaviour
             else window.InitUpgradeSkill(m_SkillData, m_Level);
         });
     }
+
+    void OnDestroy()
+    {
+        AssetsManager.Unload(m_Icon.gameObject);
+    }
     
 
     public void Init(SkillSeat skill_seat, SkillData skill_data, int level)
@@ -63,13 +68,14 @@ public class SkillSeatItem : MonoBehaviour
             m_Text.text = m_SkillData.Name;
 
             m_Icon.gameObject.SetActive(true);
-            m_Icon.sprite = Resources.Load<Sprite>("UI/Skill/" + m_SkillData.ID);
+            m_Icon.sprite = AssetsManager.LoadSprite("Skill" , m_SkillData.ID.ToString(), m_Icon.gameObject);
             m_Icon.SetNativeSize();
         }
         else
         {
             m_Icon.gameObject.SetActive(false);
-
+            AssetsManager.Unload(m_Icon.gameObject);
+            
             if (!m_SkillSeat.IsUnlock())
             {
                 StringBuilder sb = new StringBuilder();

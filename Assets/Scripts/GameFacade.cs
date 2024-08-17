@@ -196,5 +196,7 @@ public class GameFacade : MonoBehaviour
         float dt = Time.deltaTime;
 
         m_DataCenter.Update(dt);
+
+        AssetsManager.CustomUpdate(dt);
     }
 }

@@ -1,0 +1,35 @@
+ManifestFileVersion: 0
+CRC: 1360975927
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 384202788ba12d9f21970a6127f89f8b
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: f35cd5eb20db3651781b475477f097e2
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 687078895
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/UI/Static/Universal/Universal_btn_normal.png
+- Assets/UI/Static/Universal/Universal_count_frame.png
+- Assets/UI/Static/Universal/Universal_btn_green.png
+- Assets/UI/Static/Universal/Universal_guide_frame.png
+- Assets/UI/Static/Universal/Universal_circle_white.png
+- Assets/UI/Static/Universal/Universal_coin.png
+- Assets/UI/Static/Universal/Universal_btn_green 1.png
+- Assets/UI/Static/Universal/Universal_black_frame.png
+- Assets/UI/Static/Universal/Universal_HP_bar.png
+- Assets/UI/Static/Universal/Universal_glass.png
+- Assets/UI/Static/Universal/Universal_pear_item_light.png
+- Assets/UI/Static/Universal/Universal_HP_frame.png
+- Assets/UI/Static/Universal/Universal_lock.png
+- Assets/UI/Static/Universal/Universal_skill_frame.png
+- Assets/UI/Static/Universal/Universal_mask_white.png
+Dependencies: []

@@ -1,5 +1,4 @@
 using UnityEngine;
-using WeChatWASM;
 
 
 //系统类

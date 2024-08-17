@@ -27,13 +27,6 @@ public class Affected : MonoBehaviour
         m_Sprite.DOColor(Color.red, 0.12f).OnComplete(()=>{
             m_Sprite.DOColor(Color.white, 0.08f);
         });
-
-        // if (m_Mat == null) {
-        //     m_Mat   = Resources.Load<Material>("Meterial/Enemy");
-        //     m_Sprite.material   = m_Mat;
-        // }
-
-        // StartCoroutine(InterpolateValue());
     }
 
     // Coroutine 来处理插值过程

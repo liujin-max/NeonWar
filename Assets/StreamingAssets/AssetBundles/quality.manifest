@@ -1,0 +1,25 @@
+ManifestFileVersion: 0
+CRC: 2414240671
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 1ed30dde48f2388a19043248a6a77e86
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: f35cd5eb20db3651781b475477f097e2
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 687078895
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/UI/Dynamic/Quality/Quality_3.png
+- Assets/UI/Dynamic/Quality/Quality_2.png
+- Assets/UI/Dynamic/Quality/Quality_5.png
+- Assets/UI/Dynamic/Quality/Quality_1.png
+- Assets/UI/Dynamic/Quality/Quality_4.png
+Dependencies: []

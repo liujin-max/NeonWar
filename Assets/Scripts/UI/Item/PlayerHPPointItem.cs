@@ -5,16 +5,22 @@ using UnityEngine.UI;
 
 public class PlayerHPPointItem : MonoBehaviour
 {
-    [SerializeField] Image m_Frame;
+    [SerializeField] GameObject m_FrameLeft;
+    [SerializeField] GameObject m_FrameCenter;
+    [SerializeField] GameObject m_FrameRight;
+
+
     [SerializeField] Image m_Point;
-
-
 
     public void Init(int order, int total_order)
     {
-        if (order == 1) m_Frame.sprite = Resources.Load<Sprite>("UI/Game/Game_PlayerHP_Left");
-        else if (order == total_order) m_Frame.sprite = Resources.Load<Sprite>("UI/Game/Game_PlayerHP_Right");
-        else m_Frame.sprite = Resources.Load<Sprite>("UI/Game/Game_PlayerHP");
+        m_FrameLeft.SetActive(false);
+        m_FrameCenter.SetActive(false);
+        m_FrameRight.SetActive(false);
+
+        if (order == 1) m_FrameLeft.SetActive(true);
+        else if (order == total_order) m_FrameRight.SetActive(true);
+        else m_FrameCenter.SetActive(true);
 
         ShowPoint(true);
         Green();

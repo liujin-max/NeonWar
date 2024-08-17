@@ -1,0 +1,19 @@
+ManifestFileVersion: 0
+CRC: 690578374
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: game
+      Dependencies: {}
+    Info_1:
+      Name: universal
+      Dependencies: {}
+    Info_2:
+      Name: pear
+      Dependencies: {}
+    Info_3:
+      Name: skill
+      Dependencies: {}
+    Info_4:
+      Name: quality
+      Dependencies: {}

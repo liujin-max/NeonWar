@@ -1,0 +1,26 @@
+ManifestFileVersion: 0
+CRC: 844221688
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 7f1813a9e3fc3941437b871d79978525
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 9c5c2bf181d9c166e27af67e2a391d17
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/UI/Dynamic/Pear/20020.png
+- Assets/UI/Dynamic/Pear/20040.png
+- Assets/UI/Dynamic/Pear/20060.png
+- Assets/UI/Dynamic/Pear/20070.png
+- Assets/UI/Dynamic/Pear/20000.png
+- Assets/UI/Dynamic/Pear/20010.png
+- Assets/UI/Dynamic/Pear/20050.png
+- Assets/UI/Dynamic/Pear/20030.png
+Dependencies: []

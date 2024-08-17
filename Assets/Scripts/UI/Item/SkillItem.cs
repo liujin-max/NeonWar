@@ -36,6 +36,11 @@ public class SkillItem : MonoBehaviour
         });
     }
 
+    void OnDestroy()
+    {
+        AssetsManager.Unload(m_Icon.gameObject);
+    }
+
     public void Init(SkillData skill_data, int level)
     {
         m_SkillData = skill_data;
@@ -48,7 +53,7 @@ public class SkillItem : MonoBehaviour
     {
         m_Text.text = m_SkillData.Name;
 
-        m_Icon.sprite = Resources.Load<Sprite>("UI/Skill/" + m_SkillData.ID);
+        m_Icon.sprite = AssetsManager.LoadSprite("Skill" , m_SkillData.ID.ToString(), m_Icon.gameObject);
         m_Icon.SetNativeSize();
 
         m_Description.text = Skill.GetDescription(m_SkillData, m_Level);

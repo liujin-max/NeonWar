@@ -1,0 +1,31 @@
+ManifestFileVersion: 0
+CRC: 694179453
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 795505b89b34df1664f98d13938e5684
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 9c5c2bf181d9c166e27af67e2a391d17
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/UI/Dynamic/Skill/10220.png
+- Assets/UI/Dynamic/Skill/10160.png
+- Assets/UI/Dynamic/Skill/10010.png
+- Assets/UI/Dynamic/Skill/10020.png
+- Assets/UI/Dynamic/Skill/10110.png
+- Assets/UI/Dynamic/Skill/10070.png
+- Assets/UI/Dynamic/Skill/10230.png
+- Assets/UI/Dynamic/Skill/10170.png
+- Assets/UI/Dynamic/Skill/10120.png
+- Assets/UI/Dynamic/Skill/10130.png
+- Assets/UI/Dynamic/Skill/10060.png
+- Assets/UI/Dynamic/Skill/10210.png
+- Assets/UI/Dynamic/Skill/10030.png
+Dependencies: []

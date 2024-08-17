@@ -1,0 +1,30 @@
+ManifestFileVersion: 0
+CRC: 2143846124
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 49777ebb89c1b00094cac3ec2e65c3c8
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 9c5c2bf181d9c166e27af67e2a391d17
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/UI/Static/Game/Game_PlayerHP_Left.png
+- Assets/UI/Static/Game/Game_blink_icon.png
+- Assets/UI/Static/Game/Game_PlayerHP.png
+- Assets/UI/Static/Game/Game_pear_frame.png
+- Assets/UI/Static/Game/Game_topbar.png
+- Assets/UI/Static/Game/Game_PlayerHP_point.png
+- Assets/UI/Static/Game/Game_tag_equiped.png
+- Assets/UI/Static/Game/Universal_btnSet.png
+- Assets/UI/Static/Game/Game_shop_item_frame.png
+- Assets/UI/Static/Game/Game_arrow.png
+- Assets/UI/Static/Game/Game_shop_item_frame_circle.png
+- Assets/UI/Static/Game/Game_PlayerHP_Right.png
+Dependencies: []

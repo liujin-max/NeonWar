@@ -24,6 +24,12 @@ public class PearSeatItem : MonoBehaviour
         });
     }
 
+    void OnDestroy()
+    {
+        AssetsManager.Unload(m_Frame.gameObject);
+        AssetsManager.Unload(m_Icon.gameObject);
+    }
+
     public void Init(Pear pear)
     {
         m_Pear = pear;
@@ -35,18 +41,18 @@ public class PearSeatItem : MonoBehaviour
     {
         if (m_Pear != null)
         {
-            m_Frame.sprite = Resources.Load<Sprite>("UI/Quality/Quality_" + m_Pear.Level);
+            m_Frame.sprite = AssetsManager.LoadSprite("Quality", "Quality_" + m_Pear.Level, m_Frame.gameObject);
             m_Frame.SetNativeSize();
 
             m_Icon.gameObject.SetActive(true);
-            m_Icon.sprite = Resources.Load<Sprite>("UI/Pear/" + m_Pear.Class);
+            m_Icon.sprite = AssetsManager.LoadSprite("Pear" , m_Pear.Class.ToString(), m_Icon.gameObject);
             m_Icon.SetNativeSize();
 
             m_Text.text = _C.LEVELCOLOR_PAIRS[m_Pear.Level] + m_Pear.Name;
         }
         else
         {
-            m_Frame.sprite = Resources.Load<Sprite>("UI/Quality/Quality_1");
+            m_Frame.sprite = AssetsManager.LoadSprite("Quality", "Quality_1", m_Frame.gameObject);
             m_Frame.SetNativeSize();
 
             m_Text.text = "";
@@ -54,12 +60,13 @@ public class PearSeatItem : MonoBehaviour
             if (GameFacade.Instance.DataCenter.IsPearUnlock() == true)
             {
                 m_Icon.gameObject.SetActive(false);
+                AssetsManager.Unload(m_Icon.gameObject);
             }
             else
             {
                 m_Icon.gameObject.SetActive(true);
 
-                m_Icon.sprite = Resources.Load<Sprite>("UI/Universal/Universal_lock");
+                m_Icon.sprite = AssetsManager.LoadSprite("Universal", "Universal_lock", m_Icon.gameObject);
                 m_Icon.SetNativeSize();
             }
         }
