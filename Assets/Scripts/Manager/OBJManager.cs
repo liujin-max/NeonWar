@@ -87,7 +87,7 @@ public class OBJManager: MonoBehaviour
             effect.transform.localPosition = pos;
             effect_list.RemoveAt(0);
         } else {
-            effect = Instantiate(Resources.Load<GameObject>(effect_path), pos, Quaternion.identity);
+            effect = Instantiate(AssetsManager.LoadPrefab("Effect", effect_path), pos, Quaternion.identity);
         }
 
 

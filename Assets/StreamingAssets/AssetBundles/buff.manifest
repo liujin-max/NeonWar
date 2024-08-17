@@ -1,0 +1,27 @@
+ManifestFileVersion: 0
+CRC: 1530152110
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 6522921252253dc019e082d68e512c62
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 9c5c2bf181d9c166e27af67e2a391d17
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/UI/Dynamic/Buff/60001.png
+- Assets/UI/Dynamic/Buff/60007.png
+- Assets/UI/Dynamic/Buff/60004.png
+- Assets/UI/Dynamic/Buff/60003.png
+- Assets/UI/Dynamic/Buff/60002.png
+- Assets/UI/Dynamic/Buff/60008.png
+- Assets/UI/Dynamic/Buff/60005.png
+- Assets/UI/Dynamic/Buff/60006.png
+- Assets/UI/Dynamic/Buff/60000.png
+Dependencies: []

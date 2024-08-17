@@ -1,0 +1,23 @@
+ManifestFileVersion: 0
+CRC: 4204808055
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 2405bf525d8248f38fd4ae9f45f41d84
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 6bd8330631add8c59439c1bcbc47920e
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: df6821acee6e55343a219420f4bc560a, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Prefab/UI/Item/WeaponItem.prefab
+Dependencies: []

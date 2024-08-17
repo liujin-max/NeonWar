@@ -19,7 +19,6 @@ public class Spawn
     private List<Enemy> m_EnemyRemoves  = new List<Enemy>();
     private List<Enemy> m_EnemyTemps    = new List<Enemy>();
 
-    private int m_AsyncCount    = 0;
 
     //击杀进度
     private Pair m_KillProgress;
@@ -44,7 +43,7 @@ public class Spawn
 
     public bool IsClear()
     {
-        return m_EnemyPool.Count == 0 && m_Enemys.Count == 0 && m_AsyncCount == 0;
+        return m_EnemyPool.Count == 0 && m_Enemys.Count == 0;
     }
 
     void PutEnemy(MonsterJSON monsterJSON)
@@ -56,49 +55,43 @@ public class Spawn
             point = ToolUtility.FindPointOnCircle(Vector3.zero, monsterJSON.Radius, monsterJSON.Angle);
         }
 
-        m_AsyncCount++;
-        GameFacade.Instance.PrefabManager.AsyncLoad("Prefab/Enemy/" + monsterJSON.ID, point, Field.Instance.Land.ENEMY_ROOT, (obj)=>{
-            var enemy = obj.GetComponent<Enemy>();
-            m_Enemys.Add(enemy);
-            enemy.gameObject.SetActive(false);
-            enemy.SetValid(false);
 
-            var hole = GameFacade.Instance.EffectManager.Load(EFFECT.BLACKHOLE, point, Field.Instance.Land.ELEMENT_ROOT.gameObject).transform;
-            hole.localScale = Vector3.zero;
-            
-            Sequence seq = DOTween.Sequence();
-            seq.Append(hole.DOScale(Vector3.one, 0.5f));
-            seq.AppendInterval(0.4f);
-            
-            seq.AppendCallback(()=>{
-                enemy.gameObject.SetActive(true);
-                enemy.SetValid(true);
-                enemy.Init(monsterJSON);
-                enemy.Push();
+        var enemy = GameFacade.Instance.PrefabManager.Load("Enemy" , monsterJSON.ID.ToString(), point, Field.Instance.Land.ENEMY_ROOT).GetComponent<Enemy>();
+        m_Enemys.Add(enemy);
+        enemy.gameObject.SetActive(false);
+        enemy.SetValid(false);
 
-                if (monsterJSON.Type == _C.ENEMY_TYPE.BOSS) enemy.transform.localScale = new Vector3(1.25f, 1.25f, 1.25f);
-            });
+        var hole = GameFacade.Instance.EffectManager.Load(EFFECT.BLACKHOLE, point, Field.Instance.Land.ELEMENT_ROOT.gameObject).transform;
+        hole.localScale = Vector3.zero;
+        
+        Sequence seq = DOTween.Sequence();
+        seq.Append(hole.DOScale(Vector3.one, 0.5f));
+        seq.AppendInterval(0.4f);
+        
+        seq.AppendCallback(()=>{
+            enemy.gameObject.SetActive(true);
+            enemy.SetValid(true);
+            enemy.Init(monsterJSON);
+            enemy.Push();
 
-            seq.AppendInterval(0.2f);
-            seq.Append(hole.DOScale(1.3f, 0.15f));
-            seq.Append(hole.DOScale(0, 0.4f));
-            seq.Play();
-
-            m_AsyncCount--;
+            if (monsterJSON.Type == _C.ENEMY_TYPE.BOSS) enemy.transform.localScale = new Vector3(1.25f, 1.25f, 1.25f);
         });
+
+        seq.AppendInterval(0.2f);
+        seq.Append(hole.DOScale(1.3f, 0.15f));
+        seq.Append(hole.DOScale(0, 0.4f));
+        seq.Play();
     }
 
     //分裂
     public void Summon(MonsterJSON monsterJSON, Vector2 point)
     {
-        GameFacade.Instance.PrefabManager.AsyncLoad("Prefab/Enemy/" + monsterJSON.ID, point, Field.Instance.Land.ENEMY_ROOT, (obj)=>{
-            var enemy = obj.GetComponent<Enemy>();
-            enemy.Init(monsterJSON);
-            enemy.IsSummon = true;
-            enemy.Push();
-            
-            m_Enemys.Add(enemy);
-        });
+        var enemy = GameFacade.Instance.PrefabManager.Load("Enemy" , monsterJSON.ID.ToString(), point, Field.Instance.Land.ENEMY_ROOT).GetComponent<Enemy>();
+        enemy.Init(monsterJSON);
+        enemy.IsSummon = true;
+        enemy.Push();
+        
+        m_Enemys.Add(enemy);
     }
 
     public void CustomUpdate(float deltaTime)
@@ -159,7 +152,6 @@ public class Spawn
 
     public void Dispose()
     {
-        m_AsyncCount = 0;
 
         m_EnemyPool.Clear();
         m_KillProgress.Clear();

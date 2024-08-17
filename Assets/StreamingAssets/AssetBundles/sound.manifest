@@ -1,0 +1,42 @@
+ManifestFileVersion: 0
+CRC: 1780059439
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 79390449b5845c2a61fbcd611793a51e
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 0da5b6ee3a7afed00f4d0bb944c64608
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 82
+  Script: {instanceID: 0}
+- Class: 83
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 45d3534610030564eb00e88b69fbcb96, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Prefab/Sound/Sound_snap.prefab
+- Assets/Prefab/Sound/Sound_hitshield.prefab
+- Assets/Prefab/Sound/Sound_getcoin.prefab
+- Assets/Prefab/Sound/Sound_click.prefab
+- Assets/Prefab/Sound/Sound_achievement.prefab
+- Assets/Prefab/Sound/Sound_rankup.prefab
+- Assets/Prefab/Sound/Sound_reward.prefab
+- Assets/Prefab/Sound/Sound_move.prefab
+- Assets/Prefab/Sound/Sound_Jump.prefab
+- Assets/Prefab/Sound/Sound_Broken.prefab
+- Assets/Prefab/Sound/Sound_shuffle.prefab
+- Assets/Prefab/Sound/Sound_chain.prefab
+- Assets/Prefab/Sound/Sound_tip.prefab
+- Assets/Prefab/Sound/Sound_hit.prefab
+- Assets/Prefab/Sound/Sound_coin.prefab
+- Assets/Prefab/Sound/Sound_exchange.prefab
+Dependencies: []

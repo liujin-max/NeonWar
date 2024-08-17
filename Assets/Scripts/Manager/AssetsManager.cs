@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,83 +9,151 @@ using UnityEngine.UI;
 public class ABInfo
 {
     public AssetBundle AssetBundle;
-    public List<GameObject>  ReferenceCounts;
+    public int  ReferenceCounts;
 
     public ABInfo(AssetBundle assetBundle)
     {
         AssetBundle     = assetBundle;
-        ReferenceCounts = new List<GameObject>();
     }
 }
 
 public static class AssetsManager
 {
+    private static string m_AssetBundlePath = Application.streamingAssetsPath + "/AssetBundles/";
+    private static AssetBundleManifest m_Manifest = null;
+
     private static Dictionary<string, ABInfo> m_AssetBundles = new Dictionary<string, ABInfo>();
 
-    //GameObject和AssetBundle的对应关系
-    private static Dictionary<GameObject, ABInfo> m_Obj2AssetBundles = new Dictionary<GameObject, ABInfo>();
+    //记录GameObject是否加载过Sprite
+    private static Dictionary<GameObject, ABInfo> m_SpriteRecords = new Dictionary<GameObject, ABInfo>();
 
+    
     //卸载队列
     private static Dictionary<ABInfo, CDTimer> m_ABInfoRemoves = new Dictionary<ABInfo, CDTimer>();
     private static List<ABInfo> m_Removes = new List<ABInfo>();
 
 
-
-    //获取AssetBundle
-    static ABInfo GetAssetBundleInfo(string dictionary)
+    static AssetBundleManifest GetManifest()
     {
-        StringBuilder path_sb   = new StringBuilder(Application.streamingAssetsPath);
-        path_sb.Append("/AssetBundles/");
-        path_sb.Append(dictionary.ToLower());
-
-        var res_path = path_sb.ToString();
-
-        if (!m_AssetBundles.ContainsKey(dictionary))
+        if (m_Manifest == null)
         {
-            m_AssetBundles[dictionary] = new ABInfo(AssetBundle.LoadFromFile(res_path));
+            // 假设你的AssetBundle目录是StreamingAssets/AssetBundles/
+            // 先加载主Manifest文件，它会包含所有的依赖信息
+            AssetBundle manifestBundle = AssetBundle.LoadFromFile(m_AssetBundlePath + "AssetBundles");
+            if (manifestBundle == null)
+            {
+                Debug.LogError("manifestBundle is null");
+                return null;
+            }
+
+            m_Manifest = manifestBundle.LoadAsset<AssetBundleManifest>("AssetBundleManifest");
         }
 
-        return m_AssetBundles[dictionary];
+        return m_Manifest;
+    }
+
+    //加载AssetBundle及依赖项
+    static ABInfo LoadAssetBundleWithDependencies(string bundleName)
+    {
+        if (m_AssetBundles.ContainsKey(bundleName))
+        {
+            Debug.Log(bundleName + " is already loaded.");
+            return m_AssetBundles[bundleName];
+        }
+
+
+        // 获取依赖项
+        string[] dependencies = GetManifest().GetAllDependencies(bundleName);
+        // 先加载所有依赖项
+        foreach (string dependency in dependencies)
+        {
+            if (!m_AssetBundles.ContainsKey(dependency))
+            {
+                string dependencyPath = m_AssetBundlePath + dependency;
+                AssetBundle dependencyBundle = AssetBundle.LoadFromFile(dependencyPath);
+                if (dependencyBundle != null) {
+                    m_AssetBundles[dependency] = new ABInfo(dependencyBundle);
+                    m_AssetBundles[dependency].ReferenceCounts++;
+                }
+            }
+        }
+
+        // 最后加载主AssetBundle
+        StringBuilder path_sb   = new StringBuilder(m_AssetBundlePath);
+        path_sb.Append(bundleName.ToLower());
+
+        m_AssetBundles[bundleName] = new ABInfo(AssetBundle.LoadFromFile(path_sb.ToString()));
+
+        return m_AssetBundles[bundleName];
     }
 
 
     /// <summary>
     /// 加载Sprite
     /// </summary>
-    /// <param name="dictionary">目录名称, 和AssetBundle的标签是一致的</param>
+    /// <param name="bundlename">目录名称, 和AssetBundle的标签是一致的</param>
     /// <param name="name">资源名称,不包含后缀</param>
     /// <param name="obj">使用Sprite的GameObject</param>
     /// <returns></returns>
-    public static Sprite LoadSprite(string dictionary, string name, GameObject obj)
+    public static Sprite LoadSprite(string bundlename, string name, GameObject obj)
     {
         //标签就是目录名称的小写
-        dictionary = dictionary.ToLower();
+        bundlename = bundlename.ToLower();
 
-        //如果当前obj正在使用其他的AB包中的资源，则先卸载计数
-        AssetsManager.Unload(obj);
+        //如果当前obj正在使用其他的AB包中的资源，则先卸载原AssetBundle的计数
+        if (m_SpriteRecords.ContainsKey(obj)) m_SpriteRecords[obj].ReferenceCounts--;
 
-        ABInfo ab_info  = GetAssetBundleInfo(dictionary);
+        ABInfo ab_info  = LoadAssetBundleWithDependencies(bundlename);
         Sprite sprite   = ab_info.AssetBundle.LoadAsset<Sprite>(name);
 
         //记录计数
-        m_Obj2AssetBundles.Add(obj, ab_info);
-        ab_info.ReferenceCounts.Add(obj);
+        ab_info.ReferenceCounts++;
+        m_SpriteRecords[obj] = ab_info;
 
         return sprite;
     }
 
-    //卸载引用计数
-    public static void Unload(GameObject obj)
+    //加载Prefab
+    public static GameObject LoadPrefab(string bundlename, string name)
     {
-        if (!m_Obj2AssetBundles.ContainsKey(obj)) return;
+        //标签就是目录名称的小写
+        bundlename = bundlename.ToLower();
 
-        var ab_info = m_Obj2AssetBundles[obj];
-        ab_info.ReferenceCounts.Remove(obj);
-        m_Obj2AssetBundles.Remove(obj);
+        ABInfo ab_info  = LoadAssetBundleWithDependencies(bundlename);
+        GameObject obj  = ab_info.AssetBundle.LoadAsset<GameObject>(name);
 
-        if (ab_info.ReferenceCounts.Count <= 0)
+        ab_info.ReferenceCounts++;
+
+        return obj;
+    }
+
+    //卸载引用计数
+    public static void Unload(string bundleName)
+    {
+        if (!m_AssetBundles.ContainsKey(bundleName)) return;
+
+        //先减少主AssetBundle的引用计数
+        var ab_info = m_AssetBundles[bundleName];
+        ab_info.ReferenceCounts--;
+
+
+        // 再处理依赖项
+        string[] dependencies = GetManifest().GetAllDependencies(bundleName);
+        foreach (string dependency in dependencies)
         {
-            m_ABInfoRemoves.Add(ab_info, new CDTimer(1.0f));
+            if (m_AssetBundles.ContainsKey(dependency)) m_AssetBundles[dependency].ReferenceCounts--;
+        }
+    }
+
+    //回收卸载未时候的AB
+    public static void Recyle()
+    {
+        foreach (var item in m_AssetBundles)
+        {
+            var ab_info = item.Value;
+
+            if (ab_info.ReferenceCounts <= 0 && !m_ABInfoRemoves.ContainsKey(ab_info))
+                m_ABInfoRemoves.Add(ab_info, new CDTimer(1.0f));
         }
     }
 

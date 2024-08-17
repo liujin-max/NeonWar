@@ -1,0 +1,50 @@
+ManifestFileVersion: 0
+CRC: 735974885
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: b1ca61a17617cb14d43dbd0fbd6612c1
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: d92df51f42281d4ecc0623d9c65afd19
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 50
+  Script: {instanceID: 0}
+- Class: 58
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3453f31f60d986a479c777206d5a449d, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 212
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 687078895
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: Assembly-CSharp
+  ClassName: AttributeValue
+Assets:
+- Assets/UI/Dynamic/Bullet/102.png
+- Assets/UI/Dynamic/Bullet/109.png
+- Assets/Prefab/Bullet/Bullet_106.prefab
+- Assets/UI/Dynamic/Bullet/106.png
+- Assets/UI/Dynamic/Bullet/10000.png
+- Assets/Prefab/Bullet/Bullet_102.prefab
+- Assets/Prefab/Bullet/Bullet_108.prefab
+- Assets/UI/Dynamic/Bullet/108.png
+- Assets/Prefab/Bullet/Bullet_109.prefab
+- Assets/Prefab/Bullet/Bullet_10000.prefab
+Dependencies: []

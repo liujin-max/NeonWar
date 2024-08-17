@@ -28,9 +28,9 @@ public class UIManager : MonoBehaviour
 
     public GameObject LoadWindow(string path, Transform parent)
     {
-        path    = "Prefab/UI/Window/" + path;
+        // path    = "Prefab/UI/Window/" + path;
 
-        GameObject obj = Instantiate<GameObject>(Resources.Load<GameObject>(path), parent);
+        GameObject obj = Instantiate<GameObject>(AssetsManager.LoadPrefab(path, path), parent);
         WindowCaches[obj.name.Replace("(Clone)", "")] = obj;
 
         return obj;
@@ -62,9 +62,9 @@ public class UIManager : MonoBehaviour
 
     public GameObject LoadItem(string path, Transform parent)
     {
-        path    = "Prefab/UI/Item/" + path;
+        // path    = "Prefab/UI/Item/" + path;
 
-        var obj = Instantiate<GameObject>(Resources.Load<GameObject>(path), parent);
+        var obj = Instantiate<GameObject>(AssetsManager.LoadPrefab(path, path), parent);
         obj.transform.localPosition = Vector3.zero;
 
         return obj;

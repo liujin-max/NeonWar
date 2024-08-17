@@ -1,0 +1,33 @@
+ManifestFileVersion: 0
+CRC: 2461653251
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 2d8473ec2e43b578bdb08f9b061ed878
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: a9a16f28cfcdfbecc3a38247f5c072d1
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 52b0c3340f587d9418690c33153cc5cc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 289e49ca3340c1545821675892da05d8, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.PersistentCallGroup
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
+Assets:
+- Assets/Prefab/UI/Window/MaskWindow.prefab
+Dependencies: []

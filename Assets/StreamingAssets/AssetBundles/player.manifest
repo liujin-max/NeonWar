@@ -1,0 +1,48 @@
+ManifestFileVersion: 0
+CRC: 185621972
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: d66b438d03c43e2a0ea57841e53d7c97
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: c32631cf22531e87da1fcd0724d8211f
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 61
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 91
+  Script: {instanceID: 0}
+- Class: 95
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 20a02e83a7434cb458da91f94aa3bf10, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 38000cc6c9b95324fb5de3beacb15d09, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 02fdfda7a1c09c64e8e71c96423e66d7, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 212
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: Assembly-CSharp
+  ClassName: AttributeValue
+Assets:
+- Assets/Prefab/Player/Player_10000.prefab
+Dependencies:
+- D:/Work/NeonWar/Assets/StreamingAssets/AssetBundles/bullet

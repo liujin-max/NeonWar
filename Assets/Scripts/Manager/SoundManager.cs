@@ -27,7 +27,7 @@ public  class SoundManager
         }
         
 
-        GameObject.Instantiate(Resources.Load<GameObject>(path), Vector3.zero, Quaternion.identity);
+        GameObject.Instantiate(AssetsManager.LoadPrefab("Sound",path), Vector3.zero, Quaternion.identity);
     }
 
     public bool IsPlayingSoundFull(string path)
@@ -66,7 +66,7 @@ public  class SoundManager
             GameObject.Destroy(m_BGM.gameObject);
         }
 
-        m_BGM = GameObject.Instantiate(Resources.Load<GameObject>(path), Vector3.zero, Quaternion.identity);
+        m_BGM = GameObject.Instantiate(AssetsManager.LoadPrefab("Music",path), Vector3.zero, Quaternion.identity);
 
         GameObject.DontDestroyOnLoad(m_BGM);
     }

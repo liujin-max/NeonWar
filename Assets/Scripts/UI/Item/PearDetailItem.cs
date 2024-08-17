@@ -27,7 +27,7 @@ public class PearDetailItem : MonoBehaviour
 
     void OnDestroy()
     {
-        AssetsManager.Unload(m_Icon.gameObject);
+        AssetsManager.Unload("Pear");
 
         EventManager.DelHandler(EVENT.UI_PEARCHANGE,    OnPearChange);
     }

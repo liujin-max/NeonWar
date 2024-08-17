@@ -1,0 +1,36 @@
+ManifestFileVersion: 0
+CRC: 1018156847
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 9ed5c4f090ee58fa1bc95ba1d008a644
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: f35cd5eb20db3651781b475477f097e2
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 687078895
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/UI/Dynamic/Battle/109.png
+- Assets/UI/Dynamic/Battle/100.png
+- Assets/UI/Dynamic/Battle/450.png
+- Assets/UI/Dynamic/Battle/403.png
+- Assets/UI/Dynamic/Battle/404.png
+- Assets/UI/Dynamic/Battle/108.png
+- Assets/UI/Dynamic/Battle/102.png
+- Assets/UI/Dynamic/Battle/101.png
+- Assets/UI/Dynamic/Battle/107.png
+- Assets/UI/Dynamic/Battle/104.png
+- Assets/UI/Dynamic/Battle/106.png
+- Assets/UI/Dynamic/Battle/401.png
+- Assets/UI/Dynamic/Battle/105.png
+- Assets/UI/Dynamic/Battle/103.png
+- Assets/UI/Dynamic/Battle/205.png
+- Assets/UI/Dynamic/Battle/150.png
+Dependencies: []

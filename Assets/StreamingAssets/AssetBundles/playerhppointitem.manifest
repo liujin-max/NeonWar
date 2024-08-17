@@ -1,0 +1,34 @@
+ManifestFileVersion: 0
+CRC: 332173989
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 35b041dcee5af93e69537ebd2ac16036
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: a69a95fde2f485256332a12b77cdf697
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: f56065e6f6ec0b94da0b93ea30f49d9b, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 222
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.PersistentCallGroup
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
+Assets:
+- Assets/Prefab/UI/Item/PlayerHPPointItem.prefab
+Dependencies:
+- D:/Work/NeonWar/Assets/StreamingAssets/AssetBundles/game

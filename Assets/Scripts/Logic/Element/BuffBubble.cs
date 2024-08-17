@@ -18,12 +18,17 @@ public class BuffBubble : MonoBehaviour
         m_Sprite = transform.Find("Sprite").GetComponent<SpriteRenderer>();
     }
 
+    void OnDestroy()
+    {
+        AssetsManager.Unload("Buff");
+    }
+
     public void Init(int id, int value)
     {
         m_BuffID    = id;
         m_BuffValue = value;
 
-        m_Sprite.sprite = Resources.Load<Sprite>("Buff/" + id);
+        m_Sprite.sprite = AssetsManager.LoadSprite("Buff" , id.ToString(), m_Sprite.gameObject);
     }
 
     void Shine()

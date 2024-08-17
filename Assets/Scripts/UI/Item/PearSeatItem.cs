@@ -26,8 +26,8 @@ public class PearSeatItem : MonoBehaviour
 
     void OnDestroy()
     {
-        AssetsManager.Unload(m_Frame.gameObject);
-        AssetsManager.Unload(m_Icon.gameObject);
+        AssetsManager.Unload("Quality");
+        AssetsManager.Unload("Pear");
     }
 
     public void Init(Pear pear)
@@ -60,7 +60,7 @@ public class PearSeatItem : MonoBehaviour
             if (GameFacade.Instance.DataCenter.IsPearUnlock() == true)
             {
                 m_Icon.gameObject.SetActive(false);
-                AssetsManager.Unload(m_Icon.gameObject);
+                AssetsManager.Unload("Pear");
             }
             else
             {

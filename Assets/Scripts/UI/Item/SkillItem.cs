@@ -38,7 +38,7 @@ public class SkillItem : MonoBehaviour
 
     void OnDestroy()
     {
-        AssetsManager.Unload(m_Icon.gameObject);
+        AssetsManager.Unload("Skill");
     }
 
     public void Init(SkillData skill_data, int level)

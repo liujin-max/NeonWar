@@ -1,0 +1,71 @@
+<linker>
+	<assembly fullname="Assembly-CSharp">
+		<type fullname="Area_Thorns" preserve="nothing"/>
+		<type fullname="Bullet" preserve="nothing"/>
+		<type fullname="Effect" preserve="nothing"/>
+		<type fullname="Crit" preserve="nothing"/>
+		<type fullname="Sound" preserve="nothing"/>
+		<type fullname="PixelBroken" preserve="nothing"/>
+		<type fullname="Miss" preserve="nothing"/>
+		<type fullname="BezierCurveAnimation" preserve="nothing"/>
+		<type fullname="CircleHP" preserve="nothing"/>
+		<type fullname="NumberTransition" preserve="nothing"/>
+		<type fullname="BuffBubble" preserve="nothing"/>
+		<type fullname="ATTConfig" preserve="nothing"/>
+		<type fullname="Enemy_106" preserve="nothing"/>
+		<type fullname="Affected" preserve="nothing"/>
+		<type fullname="Enemy_108" preserve="nothing"/>
+		<type fullname="Enemy_105" preserve="nothing"/>
+		<type fullname="Enemy_109" preserve="nothing"/>
+		<type fullname="Enemy_102" preserve="nothing"/>
+		<type fullname="Enemy_104" preserve="nothing"/>
+		<type fullname="Enemy_403" preserve="nothing"/>
+		<type fullname="Enemy" preserve="nothing"/>
+		<type fullname="Enemy_404" preserve="nothing"/>
+		<type fullname="Enemy_107" preserve="nothing"/>
+		<type fullname="Enemy_205" preserve="nothing"/>
+		<type fullname="Player_10000" preserve="nothing"/>
+		<type fullname="AttackEvent" preserve="nothing"/>
+		<type fullname="Projectile" preserve="nothing"/>
+		<type fullname="BowItem" preserve="nothing"/>
+		<type fullname="ButtonScale" preserve="nothing"/>
+		<type fullname="PearDetailItem" preserve="nothing"/>
+		<type fullname="PearItem" preserve="nothing"/>
+		<type fullname="PearSeatItem" preserve="nothing"/>
+		<type fullname="ImageGray" preserve="nothing"/>
+		<type fullname="PlayerHPItem" preserve="nothing"/>
+		<type fullname="PlayerHPPointItem" preserve="nothing"/>
+		<type fullname="SkillItem" preserve="nothing"/>
+		<type fullname="SkillSeatItem" preserve="nothing"/>
+		<type fullname="WeaponItem" preserve="nothing"/>
+		<type fullname="BackpackWindow" preserve="nothing"/>
+		<type fullname="SuperScrollView" preserve="nothing"/>
+		<type fullname="GameWindow" preserve="nothing"/>
+		<type fullname="UIFitter" preserve="nothing"/>
+		<type fullname="LongPressButton" preserve="nothing"/>
+		<type fullname="MaskWindow" preserve="nothing"/>
+		<type fullname="BoxColliderUtility" preserve="nothing"/>
+		<type fullname="ResultWindow" preserve="nothing"/>
+		<type fullname="SettingWindow" preserve="nothing"/>
+		<type fullname="SkillWindow" preserve="nothing"/>
+		<type fullname="TipWindow" preserve="nothing"/>
+	</assembly>
+	<assembly fullname="Unity.TextMeshPro">
+		<type fullname="TMPro.TMP_FontAsset" preserve="nothing"/>
+		<type fullname="TMPro.TextMeshPro" preserve="nothing"/>
+		<type fullname="TMPro.TextMeshProUGUI" preserve="nothing"/>
+	</assembly>
+	<assembly fullname="UnityEngine.UI">
+		<type fullname="UnityEngine.UI.Button" preserve="nothing"/>
+		<type fullname="UnityEngine.UI.Image" preserve="nothing"/>
+		<type fullname="UnityEngine.UI.VerticalLayoutGroup" preserve="nothing"/>
+		<type fullname="UnityEngine.UI.ContentSizeFitter" preserve="nothing"/>
+		<type fullname="UnityEngine.UI.HorizontalLayoutGroup" preserve="nothing"/>
+		<type fullname="UnityEngine.UI.RawImage" preserve="nothing"/>
+		<type fullname="UnityEngine.UI.ScrollRect" preserve="nothing"/>
+		<type fullname="UnityEngine.UI.Mask" preserve="nothing"/>
+		<type fullname="UnityEngine.UI.Slider" preserve="nothing"/>
+		<type fullname="UnityEngine.UI.Toggle" preserve="nothing"/>
+		<type fullname="UnityEngine.UI.Text" preserve="nothing"/>
+	</assembly>
+</linker>

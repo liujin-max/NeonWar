@@ -1,0 +1,19 @@
+ManifestFileVersion: 0
+CRC: 1396342961
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: fe587ca7aedd937dc99d402fbd3f4a6a
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 9c5c2bf181d9c166e27af67e2a391d17
+HashAppended: 0
+ClassTypes:
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/UI/Dynamic/PlayerIcon/10000.png
+Dependencies: []

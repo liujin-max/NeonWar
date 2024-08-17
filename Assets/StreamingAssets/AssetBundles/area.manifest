@@ -1,0 +1,39 @@
+ManifestFileVersion: 0
+CRC: 606829903
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 4760b3af6623a1c99c8e6a185a461a2c
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 5e09297f5eaf9b0187934bf160d96c9e
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 50
+  Script: {instanceID: 0}
+- Class: 58
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: fb72cd9c3d958a643af20d960e4c75a1, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 212
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 687078895
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers: []
+Assets:
+- Assets/Prefab/Area/AreaThorns.prefab
+Dependencies: []

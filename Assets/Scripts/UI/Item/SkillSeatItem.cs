@@ -48,7 +48,7 @@ public class SkillSeatItem : MonoBehaviour
 
     void OnDestroy()
     {
-        AssetsManager.Unload(m_Icon.gameObject);
+        AssetsManager.Unload("Skill");
     }
     
 
@@ -74,7 +74,7 @@ public class SkillSeatItem : MonoBehaviour
         else
         {
             m_Icon.gameObject.SetActive(false);
-            AssetsManager.Unload(m_Icon.gameObject);
+            AssetsManager.Unload("Skill");
             
             if (!m_SkillSeat.IsUnlock())
             {

@@ -71,10 +71,9 @@ public class Enemy : Unit
 
     void InitHPBar()
     {
-        GameFacade.Instance.PrefabManager.AsyncLoad("Prefab/Element/CircleHP", Vector2.zero, m_HPPivot, (obj)=>{
-            m_HPBar = obj.GetComponent<CircleHP>();
-            m_HPBar.Init(this);
-        });
+        m_HPBar = GameFacade.Instance.PrefabManager.Load("Element", "CircleHP", Vector2.zero, m_HPPivot).GetComponent<CircleHP>();
+
+        m_HPBar.Init(this);
     }
 
 

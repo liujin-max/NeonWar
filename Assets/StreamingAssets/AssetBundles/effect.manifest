@@ -1,0 +1,103 @@
+ManifestFileVersion: 0
+CRC: 2099942852
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: a7b365dcce606ca406253b3ac582dcee
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 81d2163b02c69748026fde4184781cca
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 74
+  Script: {instanceID: 0}
+- Class: 82
+  Script: {instanceID: 0}
+- Class: 83
+  Script: {instanceID: 0}
+- Class: 111
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 479a97c058510be43b3b26b23ce92fed, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 67ad096d43ca72d498d570fcdd219b23, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: f9335f8ac9382b54387ea5ea634d81a1, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9541d86e2fd84c1d9990edf0852d74ab, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: e30bfbfcb6baf0e4c9de3d81ae28e590, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 71c1514a6bd24e1e882cebbe1904ce04, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 45d3534610030564eb00e88b69fbcb96, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: d11b1e481f288934380911bc2f2b0339, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 198
+  Script: {instanceID: 0}
+- Class: 199
+  Script: {instanceID: 0}
+- Class: 212
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+- Class: 687078895
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.FaceInfo_Legacy
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.FontAssetCreationSettings
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.KerningTable
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.TMP_Character
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.TMP_FontFeatureTable
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.TMP_FontWeightPair
+- AssemblyName: Unity.TextMeshPro
+  ClassName: TMPro.VertexGradient
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.Events.PersistentCallGroup
+- AssemblyName: UnityEngine.TextCoreFontEngineModule
+  ClassName: UnityEngine.TextCore.FaceInfo
+- AssemblyName: UnityEngine.TextCoreFontEngineModule
+  ClassName: UnityEngine.TextCore.Glyph
+- AssemblyName: UnityEngine.TextCoreFontEngineModule
+  ClassName: UnityEngine.TextCore.GlyphMetrics
+- AssemblyName: UnityEngine.TextCoreFontEngineModule
+  ClassName: UnityEngine.TextCore.GlyphRect
+- AssemblyName: UnityEngine.UI
+  ClassName: UnityEngine.UI.MaskableGraphic/CullStateChangedEvent
+Assets:
+- Assets/Prefab/Effect/fx_healOnce.prefab
+- Assets/Prefab/Effect/fx_broken.prefab
+- Assets/Prefab/Effect/fx_shield.prefab
+- Assets/Prefab/Effect/fx_Crash.prefab
+- Assets/Prefab/Effect/fx_miss.prefab
+- Assets/Prefab/Effect/fx_crit.prefab
+- Assets/Prefab/Effect/fx_wave.prefab
+- Assets/Prefab/Effect/fx_coin.prefab
+- Assets/Prefab/Effect/fx_BlackHole.prefab
+Dependencies:
+- D:/Work/NeonWar/Assets/StreamingAssets/AssetBundles/font
+- D:/Work/NeonWar/Assets/StreamingAssets/AssetBundles/universal

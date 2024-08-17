@@ -14,6 +14,7 @@ public class State_Play<T> : State<Field>
         EventManager.AddHandler(EVENT.ONJOYSTICK_PRESS,     OnJoyStickPress);
         EventManager.AddHandler(EVENT.ONJOYSTICK_DOUBLE,    OnJoyStickDouble);
 
+        AssetsManager.Recyle(); //卸载无用的AB包
         Platform.Instance.UPDATETARGETFRAME(60);
         
         int level_id = (int)values[0];

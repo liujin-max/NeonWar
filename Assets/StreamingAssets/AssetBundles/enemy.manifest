@@ -1,0 +1,80 @@
+ManifestFileVersion: 0
+CRC: 4115325071
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: d64d26898574406996429c8c723084fd
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 6f28807ce353584d798e7bebc7ff73ab
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 50
+  Script: {instanceID: 0}
+- Class: 58
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: a99acc83d01a8494897cba3e8e424da2, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9460129c9dcfc6b4781588a4cce40667, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 20a02e83a7434cb458da91f94aa3bf10, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 55e43a5bc293ccb42a6eb3153bd06873, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 9d2b26dca78272f48a3660d2e068a70a, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 722234f5126fe9640ac0bd90c9053aa4, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 95ff59a0e1b95504da918e2437106dfe, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 830a74be4d745b940bf90abac566390f, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 7a08bb78ef07bcf438c8e7c51b6d0863, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 6baad2d78c60f8a46b872272ec8c0666, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: d3cc048f08297de43b9ef93f8745f205, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: d7ba97d44ac128d4c9ddf386d0e54af1, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 15911db5dedda004986b1fbe5768d667, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 212
+  Script: {instanceID: 0}
+- Class: 213
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: Assembly-CSharp
+  ClassName: AttributeValue
+- AssemblyName: UnityEngine.ParticleSystemModule
+  ClassName: UnityEngine.ParticleSystem/MinMaxGradient
+Assets:
+- Assets/Prefab/Enemy/104.prefab
+- Assets/Prefab/Enemy/108.prefab
+- Assets/Prefab/Enemy/403.prefab
+- Assets/Prefab/Enemy/101.prefab
+- Assets/Prefab/Enemy/401.prefab
+- Assets/Prefab/Enemy/106.prefab
+- Assets/Prefab/Enemy/450.prefab
+- Assets/Prefab/Enemy/105.prefab
+- Assets/Prefab/Enemy/107.prefab
+- Assets/Prefab/Enemy/404.prefab
+- Assets/Prefab/Enemy/150.prefab
+- Assets/Prefab/Enemy/205.prefab
+- Assets/Prefab/Enemy/109.prefab
+- Assets/Prefab/Enemy/103.prefab
+- Assets/Prefab/Enemy/102.prefab
+- Assets/Prefab/Enemy/100.prefab
+Dependencies:
+- D:/Work/NeonWar/Assets/StreamingAssets/AssetBundles/battle
+- D:/Work/NeonWar/Assets/StreamingAssets/AssetBundles/bullet

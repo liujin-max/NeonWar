@@ -1,5 +1,5 @@
 ManifestFileVersion: 0
-CRC: 690578374
+CRC: 3437428318
 AssetBundleManifest:
   AssetBundleInfos:
     Info_0:
@@ -16,4 +16,127 @@ AssetBundleManifest:
       Dependencies: {}
     Info_4:
       Name: quality
+      Dependencies: {}
+    Info_5:
+      Name: area
+      Dependencies: {}
+    Info_6:
+      Name: bullet
+      Dependencies: {}
+    Info_7:
+      Name: effect
+      Dependencies:
+        Dependency_0: universal
+        Dependency_1: font
+    Info_8:
+      Name: element
+      Dependencies:
+        Dependency_0: universal
+        Dependency_1: font
+        Dependency_2: buff
+    Info_9:
+      Name: enemy
+      Dependencies:
+        Dependency_0: bullet
+        Dependency_1: battle
+    Info_10:
+      Name: player
+      Dependencies:
+        Dependency_0: bullet
+    Info_11:
+      Name: projectile
+      Dependencies: {}
+    Info_12:
+      Name: sound
+      Dependencies: {}
+    Info_13:
+      Name: bowitem
+      Dependencies:
+        Dependency_0: font
+        Dependency_1: playericon
+    Info_14:
+      Name: peardetailitem
+      Dependencies:
+        Dependency_0: universal
+        Dependency_1: pear
+        Dependency_2: font
+    Info_15:
+      Name: pearitem
+      Dependencies:
+        Dependency_0: game
+        Dependency_1: universal
+        Dependency_2: pear
+        Dependency_3: quality
+        Dependency_4: font
+    Info_16:
+      Name: pearseatitem
+      Dependencies:
+        Dependency_0: universal
+        Dependency_1: quality
+        Dependency_2: font
+    Info_17:
+      Name: playerhpitem
+      Dependencies: {}
+    Info_18:
+      Name: playerhppointitem
+      Dependencies:
+        Dependency_0: game
+    Info_19:
+      Name: skillitem
+      Dependencies:
+        Dependency_0: game
+        Dependency_1: universal
+        Dependency_2: skill
+        Dependency_3: font
+    Info_20:
+      Name: skillseatitem
+      Dependencies:
+        Dependency_0: universal
+        Dependency_1: skill
+        Dependency_2: font
+    Info_21:
+      Name: weaponitem
+      Dependencies: {}
+    Info_22:
+      Name: backpackwindow
+      Dependencies:
+        Dependency_0: pearitem
+    Info_23:
+      Name: gamewindow
+      Dependencies:
+        Dependency_0: game
+        Dependency_1: universal
+        Dependency_2: font
+    Info_24:
+      Name: maskwindow
+      Dependencies: {}
+    Info_25:
+      Name: resultwindow
+      Dependencies: {}
+    Info_26:
+      Name: settingwindow
+      Dependencies: {}
+    Info_27:
+      Name: skillwindow
+      Dependencies:
+        Dependency_0: universal
+        Dependency_1: font
+    Info_28:
+      Name: tipwindow
+      Dependencies:
+        Dependency_0: universal
+    Info_29:
+      Name: font
+      Dependencies: {}
+    Info_30:
+      Name: battle
+      Dependencies: {}
+    Info_31:
+      Name: buff
+      Dependencies: {}
+    Info_32:
+      Name: playericon
+      Dependencies: {}
+    Info_33:
+      Name: grass
       Dependencies: {}

@@ -1,0 +1,29 @@
+ManifestFileVersion: 0
+CRC: 1227565328
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: de76164fc899d4e2c2c4e1e544d1d9c2
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 4972bbfe918c41d1a9fad5e4c4d0645c
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 30649d3a9faa99c48a7b1166b86bf2a0, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
+- Class: 114
+  Script: {fileID: 11500000, guid: f09a157090ef99e4f9036bd6e02a4cb3, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 224
+  Script: {instanceID: 0}
+SerializeReferenceClassIdentifiers:
+- AssemblyName: UnityEngine.CoreModule
+  ClassName: UnityEngine.RectOffset
+Assets:
+- Assets/Prefab/UI/Item/PlayerHPItem.prefab
+Dependencies: []
