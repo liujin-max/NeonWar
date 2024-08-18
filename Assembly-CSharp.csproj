@@ -171,6 +171,7 @@
      <Compile Include="Assets\DOTween\Modules\DOTweenModuleEPOOutline.cs" />
      <Compile Include="Assets\Scripts\UI\Window\MaskWindow.cs" />
      <Compile Include="Assets\Scripts\UI\Window\GameWindow.cs" />
+     <Compile Include="Assets\Scripts\Manager\OBJPool.cs" />
      <Compile Include="Assets\Scripts\Logic\Enemy\Enemy_106.cs" />
      <Compile Include="Assets\Scripts\Utility\CSVUtility.cs" />
      <Compile Include="Assets\Scripts\Logic\Data\Skill.cs" />
@@ -962,6 +963,9 @@
     <Reference Include="Unity.VisualScripting.State">
         <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.2D.SpriteShape.Editor">
+        <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.2D.SpriteShape.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.2D.Tilemap.Editor">
         <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.2D.Tilemap.Editor.dll</HintPath>
     </Reference>
@@ -970,9 +974,6 @@
     </Reference>
     <Reference Include="Unity.2D.IK.Editor">
         <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.2D.IK.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.SpriteShape.Editor">
-        <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.2D.SpriteShape.Editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

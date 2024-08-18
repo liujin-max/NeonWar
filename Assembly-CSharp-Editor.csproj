@@ -895,6 +895,9 @@
     <Reference Include="Unity.VisualScripting.State">
         <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.2D.SpriteShape.Editor">
+        <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.2D.SpriteShape.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.2D.Tilemap.Editor">
         <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.2D.Tilemap.Editor.dll</HintPath>
     </Reference>
@@ -903,9 +906,6 @@
     </Reference>
     <Reference Include="Unity.2D.IK.Editor">
         <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.2D.IK.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.SpriteShape.Editor">
-        <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.2D.SpriteShape.Editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -60,11 +60,7 @@ public class League
 
     public SkillData GetSkillData(int id)
     {
-        SkillData data;
-        if (m_SkillDic.TryGetValue(id, out data)) {
-            return data;
-        }
-        return data;
+        return m_SkillDic.TryGetValue(id, out var data) ? data : null;
     }
 
     public List<SkillData> GetPlayerSkills(int player_id)

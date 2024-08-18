@@ -16,9 +16,9 @@ public class Pear_Crit : Pear
 
     public override void UnEquip()
     {
-        base.UnEquip();
-
         Caster.ATT.CP.Pop(this);
+
+        base.UnEquip();
     }
 }
 #endregion

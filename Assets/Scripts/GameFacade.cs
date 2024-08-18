@@ -148,7 +148,6 @@ public class GameFacade : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         DontDestroyOnLoad(GameObject.Find("POOL"));
         DontDestroyOnLoad(GameObject.Find("Canvas"));
-        DontDestroyOnLoad(GameObject.Find("SceneCamera"));
         DontDestroyOnLoad(GameObject.Find("UICamera"));
         DontDestroyOnLoad(GameObject.Find("EventSystem"));
     }
@@ -184,8 +183,7 @@ public class GameFacade : MonoBehaviour
 
         //进入游戏
         NavigationController.GotoGame();
-        
-
+    
         
         yield return null; 
     }
@@ -195,6 +193,6 @@ public class GameFacade : MonoBehaviour
     {
         float dt = Time.deltaTime;
 
-        m_DataCenter.Update(dt);
+        // m_DataCenter.Update(dt);
     }
 }

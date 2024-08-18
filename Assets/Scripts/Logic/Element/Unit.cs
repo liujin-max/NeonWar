@@ -199,11 +199,7 @@ public class Unit : MonoBehaviour
 
     public Buff GetBuff(int buff_id)
     {
-        Buff buff = null;
-        if (m_BuffDic.TryGetValue(buff_id, out buff)) {
-            return buff;
-        }
-        return null;
+        return m_BuffDic.TryGetValue(buff_id, out var buff) ? buff : null;
     }
 
     #endregion

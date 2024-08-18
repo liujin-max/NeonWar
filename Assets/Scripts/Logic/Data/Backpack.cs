@@ -64,11 +64,7 @@ public class Backpack
 
     public PearData GetPearData(int id)
     {
-        PearData data;
-        if (m_PearDataDic.TryGetValue(id, out data)) {
-            return data;
-        }
-        return null;
+        return m_PearDataDic.TryGetValue(id, out PearData value) ? value : default;
     }
 
     Pear AddPear(int id, int count)
@@ -85,11 +81,7 @@ public class Backpack
 
     public Pear GetPear(int id)
     {
-        Pear data;
-        if (m_PearsDic.TryGetValue(id, out data)) {
-            return data;
-        }
-        return null;
+        return m_PearsDic.TryGetValue(id, out Pear value) ? value : default;
     }
 
     public void SyncPears(List<PearMsg> pear_msgs)
