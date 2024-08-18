@@ -40,11 +40,11 @@ public class OBJManager: MonoBehaviour
 {
     private Transform PoolLayer;
 
+    //子弹池
     private Dictionary<string, OBJPool<Bullet>> m_BulletPools = new Dictionary<string, OBJPool<Bullet>>();
-
     //特效池
-    private Dictionary<string, List<GameObject>> m_EffectPool = new Dictionary<string, List<GameObject>>();
-    private int m_EffectMax = 3;    //同种特效最多存3个
+    private Dictionary<string, OBJPool<Effect>> m_EffectPools = new Dictionary<string, OBJPool<Effect>>();
+    
 
 
     void Awake()
@@ -99,32 +99,19 @@ public class OBJManager: MonoBehaviour
     }
 
 
-    public GameObject AllocateEffect(string effect_path, Vector3 pos)
+    public Effect AllocateEffect(string effect_path, Vector3 pos)
     {
-        GameObject effect = null;
-
-        List<GameObject> effect_list;
-        if (m_EffectPool.TryGetValue(effect_path, out effect_list) != true)
-        {
-            effect_list = new List<GameObject>();
-            m_EffectPool.Add(effect_path, effect_list);
+        if (!m_EffectPools.ContainsKey(effect_path)) {
+            m_EffectPools.Add(effect_path, new OBJPool<Effect>(5));
         }
 
 
-        if (effect_list.Count > 0) {
-            effect = effect_list[0];
-            effect.transform.SetParent(SceneManager.GetActiveScene().GetRootGameObjects()[0].transform);
-            effect.transform.localPosition = pos;
-            effect_list.RemoveAt(0);
-        } else {
-            effect = Instantiate(Resources.Load<GameObject>(effect_path), pos, Quaternion.identity);
-        }
-
-
-        Effect effect_cs    = effect.GetComponent<Effect>();
-        effect_cs.ResPath   = effect_path;
-        effect_cs.Restart();
-        effect.SetActive(true);
+        Effect effect   = m_EffectPools[effect_path].Get(effect_path);
+        effect.transform.SetParent(Field.Instance.Land.ELEMENT_ROOT.transform);
+        effect.transform.localPosition = pos;
+        effect.ResPath   = effect_path;
+        effect.Restart();
+        effect.gameObject.SetActive(true);
 
 
         return effect;
@@ -132,15 +119,12 @@ public class OBJManager: MonoBehaviour
 
     public void RecycleEffect(Effect effect)
     {
-        List<GameObject> list = m_EffectPool[effect.ResPath];
-        if (list.Count >= m_EffectMax) {  //只存3个
-            Destroy(effect.gameObject);
-            return;
-        }
-        list.Add(effect.gameObject);
-
         effect.transform.SetParent(PoolLayer);
         effect.transform.localPosition = Vector3.zero;
         effect.gameObject.SetActive(false);
+
+        if (m_EffectPools[effect.ResPath].Has(effect)) return;
+
+        m_EffectPools[effect.ResPath].Recyle(effect);
     }
 }

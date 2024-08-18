@@ -5,9 +5,19 @@ using UnityEngine;
 
 public class OBJPool<T> where T : MonoBehaviour
 {
+    private int m_NumberMax = -1;    //最多存#个
+
+
     private readonly List<OBJEntity<T>> m_Caches = new List<OBJEntity<T>>();
     private readonly Dictionary<T, OBJEntity<T>> m_KeyPairs = new Dictionary<T, OBJEntity<T>>();
     private readonly List<OBJEntity<T>> m_Removes = new List<OBJEntity<T>>();
+
+    public OBJPool(int value = -1)
+    {
+        m_NumberMax = value;
+
+        Debug.Log("数量：" + m_NumberMax);
+    }
 
     public bool Has(T value)
     {
@@ -38,9 +48,34 @@ public class OBJPool<T> where T : MonoBehaviour
         }
     }
 
+    public T Get(string res_path)
+    {
+        if (m_Caches.Count > 0)
+        {
+            T obj = m_Caches[0].Entity;
+            m_Caches.RemoveAt(0); // 移除队列中的第一个对象
+            return obj;
+        }
+        else
+        {
+            // 如果缓存池没有对象，则创建一个新的对象
+            OBJEntity<T> e = new OBJEntity<T>(GameObject.Instantiate(Resources.Load<GameObject>(res_path)).GetComponent<T>());
+            m_KeyPairs[e.Entity] = e;
+            return e.Entity;
+        }
+    }
+
     public void Recyle(T value)
     {
         var obj_entity = m_KeyPairs[value];
+
+        if (m_NumberMax != -1 && m_Caches.Count >= m_NumberMax)
+        {
+            m_KeyPairs.Remove(value);
+            obj_entity.Dispose();
+            return;
+        }
+
         obj_entity.Reset();
 
         m_Caches.Add(obj_entity);
