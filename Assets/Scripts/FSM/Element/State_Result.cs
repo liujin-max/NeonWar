@@ -25,8 +25,6 @@ public class State_Result<T> : State<Field>
 
     public override void Update()
     {
-        if (m_DelayTimer == null) return;
-
         m_DelayTimer.Update(Time.deltaTime);
         if (m_DelayTimer.IsFinished() == true) {
             //胜利
