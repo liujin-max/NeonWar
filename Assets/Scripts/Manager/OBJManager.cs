@@ -4,11 +4,43 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+//负责管理单个对象的生命周期
+//如果长时间未被使用，则从池子里移除
+public class OBJEntity<T> where T : MonoBehaviour
+{
+    public T Entity;
+    public float m_Timer;
+
+
+    public OBJEntity(T e)
+    {
+        Entity = e;
+
+        Reset();
+    }
+
+    public void CustomUpdate(float dt)
+    {
+        m_Timer -= dt;
+    }
+
+    public void Reset() {m_Timer = 60;}
+    //长时间未使用
+    public bool IsUnUsed() { return m_Timer <= 0;}
+
+    public void Dispose()
+    {
+        if (Entity != null) GameObject.Destroy(Entity.gameObject);
+    }
+}
+
+
 public class OBJManager: MonoBehaviour
 {
     private Transform PoolLayer;
 
-    private Dictionary<string, List<Bullet>> m_BulletPool = new Dictionary<string, List<Bullet>>();
+    private Dictionary<string, OBJPool<Bullet>> m_BulletPools = new Dictionary<string, OBJPool<Bullet>>();
 
     //特效池
     private Dictionary<string, List<GameObject>> m_EffectPool = new Dictionary<string, List<GameObject>>();
@@ -20,29 +52,26 @@ public class OBJManager: MonoBehaviour
         PoolLayer = GameObject.Find("POOL").transform;
     }
 
-
+    //控制缓存池的生命周期、收缩策略
+    void Update()
+    {
+        float dt = Time.deltaTime;
+        foreach (var item in m_BulletPools) {
+            item.Value.CustomUpdate(dt);
+        }
+    }
 
     //加载子弹
     public Bullet AllocateBullet(GameObject bullet_template, Vector3 pos)
     {
         string name     = bullet_template.name;
-        Bullet bullet   = null;
 
-        if (m_BulletPool.ContainsKey(name)) {
-            List<Bullet> bullets = m_BulletPool[name];
-
-            if (bullets.Count > 0) {
-                bullet  = bullets.First();
-                bullets.Remove(bullet);
-            }
+        if (!m_BulletPools.ContainsKey(name)) {
+            m_BulletPools.Add(name, new OBJPool<Bullet>());
         }
 
-        if (bullet == null)
-        {
-            bullet      = Instantiate(bullet_template, pos, Quaternion.identity).GetComponent<Bullet>();
-            bullet.Name = name;
-        }
-
+        Bullet bullet = m_BulletPools[name].Get(bullet_template);
+        bullet.Name = name;
         bullet.gameObject.SetActive(true);
         bullet.transform.SetParent(Field.Instance.Land.ELEMENT_ROOT);
         bullet.transform.localPosition = pos;
@@ -56,16 +85,17 @@ public class OBJManager: MonoBehaviour
     {
         string name = bullet.Name;
 
-        if (!m_BulletPool.ContainsKey(name)) {
-            m_BulletPool[name] = new List<Bullet>();
-        }
-
-        if (m_BulletPool[name].Contains(bullet)) return;
-
-        m_BulletPool[name].Add(bullet);
-
         bullet.transform.SetParent(PoolLayer);
         bullet.gameObject.SetActive(false);
+
+        // 正常不会有这种情况
+        // if (!m_BulletPools.ContainsKey(name)) {
+        //     m_BulletPools.Add(name, new OBJPool<Bullet>());
+        // }
+
+        if (m_BulletPools[name].Has(bullet)) return;
+
+        m_BulletPools[name].Recyle(bullet);
     }
 
 
