@@ -146,7 +146,7 @@ public class GameWindow : MonoBehaviour
         }
 
         m_HPITEM.transform.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
-        m_HPITEM.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+        // m_HPITEM.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
         m_HPITEM.Show(true);
 
         m_HPITEM.Init(Field.Instance.Player);

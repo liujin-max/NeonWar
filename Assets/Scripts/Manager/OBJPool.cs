@@ -15,8 +15,6 @@ public class OBJPool<T> where T : MonoBehaviour
     public OBJPool(int value = -1)
     {
         m_NumberMax = value;
-
-        Debug.Log("数量：" + m_NumberMax);
     }
 
     public bool Has(T value)

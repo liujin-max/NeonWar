@@ -32,11 +32,11 @@ public class PlayerHPPointItem : MonoBehaviour
 
     public void Yellow()
     {
-        m_Point.color = new Color(1, 1, 1, 1);
+        m_Point.color = new Color(255/255f, 199/255f, 0/255f, 1);
     }
 
     public void Red()
     {
-        m_Point.color = new Color(148/255f, 72/255f, 103/255f, 1);
+        m_Point.color = new Color(236/255f, 15/255f, 60/255f, 1);
     }
 }
