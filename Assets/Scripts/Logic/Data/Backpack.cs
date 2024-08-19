@@ -94,7 +94,7 @@ public class Backpack
 
 
         //测试代码
-        // PushPear(20000);
+        // PushPear(20022);
         //
     }
 

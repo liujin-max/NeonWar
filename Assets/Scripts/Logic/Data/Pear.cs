@@ -199,7 +199,17 @@ public class Pear
     public string Name { get => m_Data.Name;}
     public int Level { get => m_Data.Level;}
     public int Class { get => m_Data.Class;}
-   
+    
+    //列表排序权重
+    public int SortOrder{
+        get {
+            int base_order = Level;
+
+            if (GameFacade.Instance.DataCenter.User.IsPearEquiped(this.ID)) base_order += 10;
+
+            return base_order;
+        }
+    }
 
     public int Count;
     public Player Caster;

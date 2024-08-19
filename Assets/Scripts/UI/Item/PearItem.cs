@@ -13,6 +13,7 @@ public class PearItem : MonoBehaviour
     [SerializeField] private Image m_Icon;
     [SerializeField] private TextMeshProUGUI m_Count;
     [SerializeField] private GameObject m_TagEquiped;
+    [SerializeField] TextMeshProUGUI m_Text;
 
 
     private Pear m_Pear;
@@ -36,6 +37,8 @@ public class PearItem : MonoBehaviour
 
         m_Icon.sprite   = Resources.Load<Sprite>("UI/Pear/" + pear.Class);
         m_Icon.SetNativeSize();
+
+        m_Text.text = _C.LEVELCOLOR_PAIRS[m_Pear.Level] + m_Pear.Name;
 
         Select(false);
 

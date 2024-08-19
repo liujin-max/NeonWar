@@ -48,9 +48,7 @@ public static class NavigationController
         }
 
         var window = GameFacade.Instance.UIManager.LoadWindow("BackpackWindow", UIManager.MAJOR).GetComponent<BackpackWindow>();
-        window.Init();
-
-        if (pear != null) window.ShowDetail(pear);
+        window.Init(pear);
     }
 }
 
