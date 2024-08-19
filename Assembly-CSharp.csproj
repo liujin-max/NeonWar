@@ -62,6 +62,7 @@
      <Compile Include="Assets\Scripts\Logic\AnimationEvent\AttackEvent.cs" />
      <Compile Include="Assets\Scripts\Effect\Rotate.cs" />
      <Compile Include="Assets\Scripts\Effect\Crit.cs" />
+     <Compile Include="Assets\Scripts\Utility\ImageFrameAnimation.cs" />
      <Compile Include="Assets\Scripts\Logic\Player\Player.cs" />
      <Compile Include="Assets\Scripts\Logic\Enemy\Enemy_102.cs" />
      <Compile Include="Assets\Scripts\Utility\ValueTransition.cs" />

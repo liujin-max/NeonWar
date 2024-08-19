@@ -18,6 +18,7 @@ public static class EFFECT
     public const string BLACKHOLE   = "Prefab/Element/BlackHole";
     public const string CRASH       = "Prefab/Element/Crash";
     
+    
 
 
 }

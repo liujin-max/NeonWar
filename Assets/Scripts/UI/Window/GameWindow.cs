@@ -19,6 +19,7 @@ public class GameWindow : MonoBehaviour
     [SerializeField] GameObject m_BlinkPivot;
     [SerializeField] Transform m_WeaponPivot;
     [SerializeField] Transform m_HPPivot;
+    [SerializeField] Transform m_FingerPivot;
 
 
     [SerializeField] private List<CanvasGroup> m_Groups = new List<CanvasGroup>();
@@ -115,6 +116,8 @@ public class GameWindow : MonoBehaviour
 
         InitWeapon();
         FlushBlink();
+
+        StartCoroutine(FingerAnim());
     }
 
     void InitWeapon()
@@ -209,6 +212,23 @@ public class GameWindow : MonoBehaviour
     }
 
 
+    #region 协程
+    IEnumerator FingerAnim()
+    {
+        var origin = m_FingerPivot.localPosition;
+        m_FingerPivot.localPosition = new Vector3(9999, 9999, 0);
+        
+        m_FingerPivot.Find("Left").gameObject.SetActive(true);
+        m_FingerPivot.Find("Right").gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(0.4f);
+
+        m_FingerPivot.Find("Right").gameObject.SetActive(true);
+        m_FingerPivot.localPosition = origin;
+
+        yield return null;
+    }
+    #endregion
 
 
     #region 监听事件
@@ -219,7 +239,8 @@ public class GameWindow : MonoBehaviour
 
         m_Groups.ForEach(group => {
             group.DOFade(0, 0.2f).OnComplete(()=>{
-                group.gameObject.SetActive(false);
+                // group.gameObject.SetActive(false);
+                group.blocksRaycasts = false;
             });
         });
     }
@@ -230,7 +251,8 @@ public class GameWindow : MonoBehaviour
         FlushUI();
 
         m_Groups.ForEach(group => {
-            group.gameObject.SetActive(true);
+            // group.gameObject.SetActive(true);
+            group.blocksRaycasts = true;
             group.DOFade(1, 0.1f);
         });
 

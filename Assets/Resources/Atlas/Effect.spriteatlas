@@ -55,22 +55,37 @@ SpriteAtlas:
     packedSpriteRenderDataKeys:
     - 443887c0448aa5a43b1f8b2ababb31ab: 21300000
     - 48ab82020b3e6894fa3a129b0a40c635: 21300000
+    - 4b2ad6a3ad6e17b499b6dad0401c1c9b: -207039474
+    - 4b2ad6a3ad6e17b499b6dad0401c1c9b: 1817806486
+    - 4b2ad6a3ad6e17b499b6dad0401c1c9b: 1293992038
+    - 4b2ad6a3ad6e17b499b6dad0401c1c9b: 39483535
     - 60ebcbac73fd6e9429544695c0d72105: 21300000
     - 89bc153d7f83db541be781100ec58719: 21300000
     - 0ec49a2efbe76b94c8942b569dfc2c97: 21300000
+    - d88e903fc1661354d9b631b8c48b7b52: 21300000
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
   - {fileID: 21300000, guid: 443887c0448aa5a43b1f8b2ababb31ab, type: 3}
   - {fileID: 21300000, guid: 48ab82020b3e6894fa3a129b0a40c635, type: 3}
+  - {fileID: -207039474, guid: 4b2ad6a3ad6e17b499b6dad0401c1c9b, type: 3}
+  - {fileID: 1817806486, guid: 4b2ad6a3ad6e17b499b6dad0401c1c9b, type: 3}
+  - {fileID: 1293992038, guid: 4b2ad6a3ad6e17b499b6dad0401c1c9b, type: 3}
+  - {fileID: 39483535, guid: 4b2ad6a3ad6e17b499b6dad0401c1c9b, type: 3}
   - {fileID: 21300000, guid: 60ebcbac73fd6e9429544695c0d72105, type: 3}
   - {fileID: 21300000, guid: 89bc153d7f83db541be781100ec58719, type: 3}
   - {fileID: 21300000, guid: 0ec49a2efbe76b94c8942b569dfc2c97, type: 3}
+  - {fileID: 21300000, guid: d88e903fc1661354d9b631b8c48b7b52, type: 3}
   m_PackedSpriteNamesToIndex:
   - wave
   - Element_net_shield
+  - finger_1
+  - finger_0
+  - finger_3
+  - finger_2
   - thorns
   - Element_crit_bottom
   - seed
+  - finger_wave
   m_RenderDataMap: {}
   m_Tag: Effect
   m_IsVariant: 0
