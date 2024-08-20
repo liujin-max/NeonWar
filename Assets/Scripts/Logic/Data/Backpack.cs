@@ -140,7 +140,7 @@ public class Backpack
         int cost_coin   = 50;
 
         if (GameFacade.Instance.DataCenter.User.Coin < cost_coin) {
-            EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "不足"));
+            EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "<sprite=0>不足"));
             return null;
         }
 

@@ -37,7 +37,7 @@ public class SkillTreeItem : MonoBehaviour
             int cost = GameFacade.Instance.DataCenter.User.GetATKCost();
 
             if (GameFacade.Instance.DataCenter.User.Glass < cost) {
-                EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "不足"));
+                EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "<sprite=1>不足"));
                 return;
             }
 
@@ -56,7 +56,7 @@ public class SkillTreeItem : MonoBehaviour
             int cost = GameFacade.Instance.DataCenter.User.GetASPCost();
 
             if (GameFacade.Instance.DataCenter.User.Glass < cost) {
-                EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "不足"));
+                EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "<sprite=1>不足"));
                 return;
             }
 
@@ -80,11 +80,17 @@ public class SkillTreeItem : MonoBehaviour
         int atk_level   = GameFacade.Instance.DataCenter.User.CurrentPlayer.ATK;
         int asp_level   = GameFacade.Instance.DataCenter.User.CurrentPlayer.ASP;
 
+        int atk_cost    = GameFacade.Instance.DataCenter.User.GetATKCost();
+        int asp_cost    = GameFacade.Instance.DataCenter.User.GetASPCost();
+
+        string atk_color= GameFacade.Instance.DataCenter.User.Glass >= atk_cost ? _C.COLOR_GREEN : _C.COLOR_RED;
+        string asp_color= GameFacade.Instance.DataCenter.User.Glass >= asp_cost ? _C.COLOR_GREEN : _C.COLOR_RED;
+
         m_BtnATK.transform.Find("Name").GetComponent<TextMeshProUGUI>().text   = string.Format("攻击 {0}级", atk_level);
-        m_BtnATK.transform.Find("Cost").GetComponent<TextMeshProUGUI>().text    = GameFacade.Instance.DataCenter.User.GetATKCost().ToString();
+        m_BtnATK.transform.Find("CostPivot/Cost").GetComponent<TextMeshProUGUI>().text    = string.Format("<sprite=1>{0}{1}", atk_color, atk_cost);
 
         m_BtnASP.transform.Find("Name").GetComponent<TextMeshProUGUI>().text   = string.Format("攻速 {0}级", asp_level);
-        m_BtnASP.transform.Find("Cost").GetComponent<TextMeshProUGUI>().text    = GameFacade.Instance.DataCenter.User.GetASPCost().ToString();
+        m_BtnASP.transform.Find("CostPivot/Cost").GetComponent<TextMeshProUGUI>().text    = string.Format("<sprite=1>{0}{1}", asp_color, asp_cost);
     }
 
     void InitSkills()

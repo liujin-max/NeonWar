@@ -25,7 +25,7 @@ public class SkillItem : MonoBehaviour
 
             if (GameFacade.Instance.DataCenter.User.Glass < cost)
             {
-                EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "不足"));
+                EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "<sprite=1>不足"));
                 return;
             }
             
