@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.U2D;
 using UnityEngine.UI;
 
 public class SkillItem : MonoBehaviour
@@ -48,9 +50,8 @@ public class SkillItem : MonoBehaviour
 
     void FlushUI()
     {
-        m_Text.text = m_SkillData.Name;
-
-        m_Icon.sprite = Resources.Load<Sprite>("UI/Skill/" + m_SkillData.ID);
+        m_Text.text     = m_SkillData.Name;
+        m_Icon.sprite   = AssetManager.LoadSprite("Skills/" + GameFacade.Instance.DataCenter.User.CurrentPlayer.ID, m_SkillData.ID.ToString()); 
         m_Icon.SetNativeSize();
 
         m_Description.text = Skill.GetDescription(m_SkillData, m_SkillSlot.Level);

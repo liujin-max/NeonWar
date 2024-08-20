@@ -32,10 +32,10 @@ public class PearItem : MonoBehaviour
     {
         m_Pear = pear;
 
-        m_Frame.sprite  = Resources.Load<Sprite>("UI/Quality/Quality_" + pear.Level);
+        m_Frame.sprite  = AssetManager.LoadSprite("Quality" , "Quality_" + pear.Level);
         m_Frame.SetNativeSize();
 
-        m_Icon.sprite   = Resources.Load<Sprite>("UI/Pear/" + pear.Class);
+        m_Icon.sprite   = AssetManager.LoadSprite("Pear" , pear.Class.ToString());
         m_Icon.SetNativeSize();
 
         m_Text.text = _C.LEVELCOLOR_PAIRS[m_Pear.Level] + m_Pear.Name;

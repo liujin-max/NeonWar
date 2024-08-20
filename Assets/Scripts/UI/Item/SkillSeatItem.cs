@@ -20,13 +20,6 @@ public class SkillSeatItem : MonoBehaviour
     private SkillSlotMsg m_SkillSlot;
     private SkillData m_SkillData;
 
-
-    void Awake()
-    {
-        m_Frame = GetComponent<Image>();
-    }
-
-
     void Start()
     {
         m_Touch.onClick.AddListener(()=>{
@@ -81,10 +74,11 @@ public class SkillSeatItem : MonoBehaviour
 
         if (m_SkillData != null)
         {
+            m_Frame.color   = Color.white;
             m_Text.text = m_SkillData.Name;
 
             m_Icon.gameObject.SetActive(true);
-            m_Icon.sprite = Resources.Load<Sprite>("UI/Skill/" + m_SkillData.ID);
+            m_Icon.sprite = AssetManager.LoadSprite("Skills/" + GameFacade.Instance.DataCenter.User.CurrentPlayer.ID, m_SkillData.ID.ToString());
             m_Icon.SetNativeSize();
         }
         else
@@ -95,13 +89,13 @@ public class SkillSeatItem : MonoBehaviour
             {
                 m_LockTag.SetActive(true);
 
-                m_Text.text     = "";
                 m_Frame.color   = Color.gray;
+                m_Text.text     = "";
             }
             else
             {
-                m_Text.text     = _C.COLOR_GREEN + "可使用";
                 m_Frame.color   = Color.green;
+                m_Text.text     = _C.COLOR_GREEN + "可使用";
             }
         }
     }
