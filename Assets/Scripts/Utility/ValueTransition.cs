@@ -13,6 +13,7 @@ public class ValueTransition
     
     private float m_TargetNumber = 0;
     private float m_CurrentNumber = 0;
+    public float Current {get { return m_CurrentNumber; } }
 
 
     [HideInInspector] public float Value {get { return m_CurrentNumber;}}
@@ -31,19 +32,21 @@ public class ValueTransition
         m_TimeCount     = 0;
     }
 
-    public void ForceValue(int value)
+    public void ForceValue(float value)
     {
         m_TargetNumber  = value;
         m_CurrentNumber = value;
     }
 
-    public void Update(float deltaTime)
+    public bool Update(float deltaTime)
     {
-        if (m_TargetNumber == m_CurrentNumber) return;
+        if (m_TargetNumber == m_CurrentNumber) return false;
 
         m_TimeCount += deltaTime;
 
 
         m_CurrentNumber = Mathf.Lerp(m_CurrentNumber, m_TargetNumber, m_TimeCount / m_Time);
+
+        return true;
     }
 }

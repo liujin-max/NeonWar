@@ -38,6 +38,12 @@ public static class _C
         [5] = "<#B21F17>",
     };
 
+
+    public enum PROPERTY
+    {
+        ATK,
+        ASP
+    }
  
     //状态机的状态列表
     public enum FSMSTATE

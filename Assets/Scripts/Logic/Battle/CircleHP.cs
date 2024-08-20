@@ -11,6 +11,7 @@ public class CircleHP : MonoBehaviour
     [SerializeField] private NumberTransition m_HPText;
     [SerializeField] private Transform m_BarPivot;
     [SerializeField] private Transform m_ShakePivot;
+    // [SerializeField] private Transform m_ShadowPivot;
     [SerializeField] private float m_Height;
 
 
@@ -82,7 +83,7 @@ public class CircleHP : MonoBehaviour
         if (m_HitShaking) return;
         m_HitShaking = true;
         m_BarPivot.transform.localScale = Vector3.one;
-        m_BarPivot.transform.DOShakeScale(0.3f, 0.4f, vibrato: 35, randomness: 50, fadeOut: true).OnComplete(()=>{
+        m_BarPivot.transform.DOShakeScale(0.3f, 0.3f, vibrato: 35, randomness: 50, fadeOut: true).OnComplete(()=>{
             m_HitShaking = false;
         });
     }
@@ -98,7 +99,7 @@ public class CircleHP : MonoBehaviour
     void LateUpdate()
     {
         float hp_rate   = m_RedValue.Value / (float)m_Enemy.ATT.HPMAX;
-        m_White.size   = new Vector2(m_White.size.x, m_Height * m_WhiteValue.Value / (float)m_Enemy.ATT.HPMAX);
+        m_White.size    = new Vector2(m_White.size.x, m_Height * m_WhiteValue.Value / (float)m_Enemy.ATT.HPMAX);
         m_Red.size      = new Vector2(m_Red.size.x, m_Height * hp_rate);
 
         if (hp_rate >= 0.8f)
@@ -117,5 +118,7 @@ public class CircleHP : MonoBehaviour
         for (int i = 0; i < m_ShakePivot.childCount; i++) {
             m_ShakePivot.GetChild(i).GetComponent<TextMeshPro>().text= m_HPText.GetText();
         }
+
+        // m_ShadowPivot.transform.localPosition = m_Enemy.transform.localPosition / 25f;
     }
 }

@@ -117,7 +117,7 @@ public class GameUserData
                 new SkillSlotMsg() {ASP =25, POS = "12", SkillPool = new int[] {10160, 10170}},
 
                 //大招
-                new SkillSlotMsg() {ATK =30, ASP =25, POS = "99", SkillPool = new int[] {10210, 10220, 10230}}
+                new SkillSlotMsg() {ATK =30, ASP =30, POS = "99", SkillPool = new int[] {10210, 10220, 10230}}
             },
             PearSlots   = new List<PearSlotMsg>()   //2个宝珠槽
             {
@@ -306,6 +306,17 @@ public class User
     public int GetASPCost()
     {
         return NumericalManager.FML_ASPCost(CurrentPlayer.ASP);
+    }
+
+    public int GetPropertyLevel(_C.PROPERTY property)
+    {
+        switch (property)
+        {
+            case _C.PROPERTY.ATK: return CurrentPlayer.ATK;
+            case _C.PROPERTY.ASP: return CurrentPlayer.ASP;
+        }
+
+        return 1;
     }
 
     //升级技能

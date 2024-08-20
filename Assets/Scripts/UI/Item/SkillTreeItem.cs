@@ -6,14 +6,21 @@ using UnityEngine.UI;
 
 public class SkillTreeItem : MonoBehaviour
 {
-    [SerializeField] protected Transform m_SkillPivot;
+    [SerializeField] Transform m_LinePivot;
+    [SerializeField] Transform m_SkillPivot;
 
     [Header("按钮")]
-    [SerializeField] protected Button m_BtnATK;
-    [SerializeField] protected Button m_BtnASP;
+    [SerializeField] Button m_BtnATK;
+    [SerializeField] Button m_BtnASP;
 
 
-    protected List<SkillSeatItem> m_SkillSeatItems = new List<SkillSeatItem>();
+    Dictionary<_C.PROPERTY, List<BarTransition>> m_Bars = new Dictionary<_C.PROPERTY, List<BarTransition>>()
+    {
+        [_C.PROPERTY.ATK] = new List<BarTransition>(),
+        [_C.PROPERTY.ASP] = new List<BarTransition>()
+    };
+
+    List<SkillSeatItem> m_SkillSeatItems = new List<SkillSeatItem>();
 
     SkillSeatItem new_skill_seat_item(int order, Transform pivot)
     {
@@ -45,7 +52,7 @@ public class SkillTreeItem : MonoBehaviour
             GameFacade.Instance.DataCenter.User.UpdateGlass(-cost);
 
             FlushUI();
-            
+            FlushBars(_C.PROPERTY.ATK);
 
             EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS));
         });
@@ -64,6 +71,7 @@ public class SkillTreeItem : MonoBehaviour
             GameFacade.Instance.DataCenter.User.UpdateGlass(-cost);
 
             FlushUI();
+            FlushBars(_C.PROPERTY.ASP);
 
             EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS));
         });
@@ -73,6 +81,7 @@ public class SkillTreeItem : MonoBehaviour
     public void Init()
     {
         FlushUI();
+        InitLines();
     }
 
     void InitUpgradePivot()
@@ -86,11 +95,13 @@ public class SkillTreeItem : MonoBehaviour
         string atk_color= GameFacade.Instance.DataCenter.User.Glass >= atk_cost ? _C.COLOR_GREEN : _C.COLOR_RED;
         string asp_color= GameFacade.Instance.DataCenter.User.Glass >= asp_cost ? _C.COLOR_GREEN : _C.COLOR_RED;
 
-        m_BtnATK.transform.Find("Name").GetComponent<TextMeshProUGUI>().text   = string.Format("攻击 {0}级", atk_level);
-        m_BtnATK.transform.Find("CostPivot/Cost").GetComponent<TextMeshProUGUI>().text    = string.Format("<sprite=1>{0}{1}", atk_color, atk_cost);
+        m_BtnATK.transform.Find("Name").GetComponent<TextMeshProUGUI>().text            = "攻击";
+        m_BtnATK.transform.Find("LevelPivot/Text").GetComponent<TextMeshProUGUI>().text = atk_level.ToString();
+        m_BtnATK.transform.Find("CostPivot/Cost").GetComponent<TextMeshProUGUI>().text  = string.Format("<sprite=1>{0}{1}", atk_color, ToolUtility.FormatNumber(atk_cost));
 
-        m_BtnASP.transform.Find("Name").GetComponent<TextMeshProUGUI>().text   = string.Format("攻速 {0}级", asp_level);
-        m_BtnASP.transform.Find("CostPivot/Cost").GetComponent<TextMeshProUGUI>().text    = string.Format("<sprite=1>{0}{1}", asp_color, asp_cost);
+        m_BtnASP.transform.Find("Name").GetComponent<TextMeshProUGUI>().text            = "攻速";
+        m_BtnASP.transform.Find("LevelPivot/Text").GetComponent<TextMeshProUGUI>().text = asp_level.ToString();
+        m_BtnASP.transform.Find("CostPivot/Cost").GetComponent<TextMeshProUGUI>().text  = string.Format("<sprite=1>{0}{1}", asp_color, ToolUtility.FormatNumber(asp_cost));
     }
 
     void InitSkills()
@@ -110,9 +121,48 @@ public class SkillTreeItem : MonoBehaviour
         }
     }
 
+
+    void InitLines()
+    {
+        PlayerMsg player =  GameFacade.Instance.DataCenter.User.CurrentPlayer;
+
+        //攻击
+        {
+            var bar1 = m_LinePivot.Find("ATK1/Bar").GetComponent<BarTransition>();
+            bar1.Init(player.ATK, player.SkillSlots[0].ATK);
+            m_Bars[_C.PROPERTY.ATK].Add(bar1);
+
+            var bar2 = m_LinePivot.Find("ATK2/Bar").GetComponent<BarTransition>();
+            bar2.Init(player.ATK, player.SkillSlots[1].ATK);
+            m_Bars[_C.PROPERTY.ATK].Add(bar2);
+        }
+
+        //攻速
+        {
+            var bar1 = m_LinePivot.Find("ASP1/Bar").GetComponent<BarTransition>();
+            bar1.Init(player.ATK, player.SkillSlots[2].ASP);
+            m_Bars[_C.PROPERTY.ASP].Add(bar1);
+
+            var bar2 = m_LinePivot.Find("ASP2/Bar").GetComponent<BarTransition>();
+            bar2.Init(player.ATK, player.SkillSlots[3].ASP);
+            m_Bars[_C.PROPERTY.ASP].Add(bar2);
+        }
+    }
+
     public void FlushUI()
     {
         InitUpgradePivot();
         InitSkills();
+    }
+
+    void FlushBars(_C.PROPERTY property)
+    {
+        if (m_Bars.ContainsKey(property))
+        {
+            int level = GameFacade.Instance.DataCenter.User.GetPropertyLevel(property);
+            m_Bars[property].ForEach(bar_trans => {
+                bar_trans.SetValue(level);
+            });
+        }
     }
 }
