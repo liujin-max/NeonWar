@@ -53,9 +53,7 @@ public class SkillSeatItem : MonoBehaviour
             }
 
             var window = GameFacade.Instance.UIManager.LoadWindow("SkillWindow", UIManager.BOARD).GetComponent<SkillWindow>();
-            window.Init(m_SkillSlot);
-            if (m_SkillData == null) window.InitSkills();
-            else window.InitUpgradeSkill(m_SkillData, m_SkillSlot.Level);
+            window.Init(m_SkillSlot, m_SkillData);
         });
     }
     

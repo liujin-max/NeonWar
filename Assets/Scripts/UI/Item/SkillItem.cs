@@ -58,12 +58,42 @@ public class SkillItem : MonoBehaviour
 
         int cost    = Skill.GetCost(m_SkillData, m_SkillSlot.Level);
 
-        if (GameFacade.Instance.DataCenter.User.Glass >= cost) m_Cost.text = cost.ToString();
-        else m_Cost.text = _C.COLOR_RED + cost.ToString();
+        if (GameFacade.Instance.DataCenter.User.Glass >= cost) m_Cost.text = "<sprite=1>" + cost.ToString();
+        else m_Cost.text = _C.COLOR_RED + "<sprite=1>" + cost.ToString();
     }
 
     public void ShowBtnUpgrade(bool flag)
     {
         m_BtnUpgrade.gameObject.SetActive(flag);
     }
+
+    public void Focus(bool flag)
+    {
+        m_Icon.GetComponent<ImageGray>().TurnGray(!flag);
+
+        if (flag == true)
+        {
+            m_Text.color        = new Color(255/255f, 220/255f, 64/255f, 1);
+            m_Description.color = Color.white;
+        }
+        else
+        {
+            m_Text.color        = Color.gray;
+            m_Description.color = Color.gray;
+        }
+    }
+
+
+    #region 按钮监听
+    public void BtnUpgradeDown()
+    {
+        SoundManager.Instance.Load(SOUND.CLICK);
+        m_Cost.transform.localPosition = new Vector3(0, 2, 0);
+    }
+
+    public void BtnUpgradeUp()
+    {
+        m_Cost.transform.localPosition = new Vector3(0, 11, 0);
+    }
+    #endregion
 }
