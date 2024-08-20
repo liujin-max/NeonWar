@@ -11,7 +11,7 @@ public class SkillWindow : MonoBehaviour
     [SerializeField] Button m_BtnClose;
 
 
-    private SkillSeat m_SkillSeat;
+    private SkillSlotMsg m_SkillSlot;
     private List<SkillItem> m_SkillItems = new List<SkillItem>();
 
     SkillItem new_skill_item(int order)
@@ -49,9 +49,9 @@ public class SkillWindow : MonoBehaviour
     }
 
 
-    public void Init(SkillSeat skill_seat)
+    public void Init(SkillSlotMsg skill_slot)
     {
-        m_SkillSeat = skill_seat;
+        m_SkillSlot = skill_slot;
     }
 
     public void InitUpgradeSkill(SkillData skill_data, int level)
@@ -59,13 +59,13 @@ public class SkillWindow : MonoBehaviour
         m_SkillItems.ForEach(item => {item.gameObject.SetActive(false);});
 
         var item = new_skill_item(0);
-        item.Init(skill_data, Mathf.Min(skill_data.LevelMax, level + 1));
+        item.Init(m_SkillSlot, skill_data);
         item.ShowBtnUpgrade(level < skill_data.LevelMax);
 
         //重置技能
         m_BtnReset.gameObject.SetActive(true);
         m_BtnReset.onClick.AddListener(()=>{
-            GameFacade.Instance.DataCenter.League.ResetSkill(skill_data.Order);
+            GameFacade.Instance.DataCenter.League.ResetSkill(m_SkillSlot);
         });
     }
 
@@ -75,18 +75,15 @@ public class SkillWindow : MonoBehaviour
 
         m_SkillItems.ForEach(item => {item.gameObject.SetActive(false); });
 
-        List<SkillData> player_skills = GameFacade.Instance.DataCenter.League.GetPlayerSkills(GameFacade.Instance.DataCenter.User.CurrentPlayer.ID);
+        int[] skill_ids = m_SkillSlot.SkillPool;
 
-        int order = 0;
-        player_skills.ForEach(skill_data => {
-            if (skill_data.Order == m_SkillSeat.Order)
-            {
-                var item = new_skill_item(order);
-                item.Init(skill_data, 1);
-
-                order++;
-            }
-        });
+        for (int i = 0; i < skill_ids.Length; i++)
+        {
+            int sk_id = skill_ids[i];
+            SkillData skill_data = GameFacade.Instance.DataCenter.League.GetSkillData(sk_id);
+            var item = new_skill_item(i);
+            item.Init(m_SkillSlot, skill_data);
+        }
     }
 
     

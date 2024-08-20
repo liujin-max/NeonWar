@@ -90,6 +90,7 @@
      <Compile Include="Assets\Scripts\Logic\Enemy\Enemy_403.cs" />
      <Compile Include="Assets\Scripts\Manager\TimeManager.cs" />
      <Compile Include="Assets\Scripts\Logic\Data\League.cs" />
+     <Compile Include="Assets\Scripts\UI\Item\SkillTreeItem.cs" />
      <Compile Include="Assets\DOTween\Modules\DOTweenModuleUnityVersion.cs" />
      <Compile Include="Assets\Scripts\Logic\Battle\HollowCircle.cs" />
      <Compile Include="Assets\AllIn1SpriteShader\Demo\Scripts\DemoCircleExpositor.cs" />

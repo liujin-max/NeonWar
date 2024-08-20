@@ -469,19 +469,19 @@ public class Skill
     //参数
     public static int ToValue(SkillData skillData, int level)
     {
-        return skillData.Values[level - 1];
+        return skillData.Values[Mathf.Min(skillData.LevelMax - 1, level)];
     }
 
     public static string GetDescription(SkillData skillData, int level)
     {
-        int value = Skill.ToValue(skillData, level);
+        int value = Skill.ToValue(skillData, Mathf.Min(skillData.LevelMax - 1, level));
 
         return skillData.Description.Replace("#", value.ToString());
     }
 
     public static int GetCost(SkillData skillData, int level)
     {
-        return skillData.Glass[level - 1];
+        return skillData.Glass[Mathf.Min(skillData.LevelMax - 1, level)];
     }
 
     public virtual void Dispose()

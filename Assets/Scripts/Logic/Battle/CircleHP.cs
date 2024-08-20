@@ -9,6 +9,7 @@ public class CircleHP : MonoBehaviour
     [SerializeField] private SpriteRenderer m_White;
     [SerializeField] private SpriteRenderer m_Red;
     [SerializeField] private NumberTransition m_HPText;
+    [SerializeField] private Transform m_BarPivot;
     [SerializeField] private Transform m_ShakePivot;
     [SerializeField] private float m_Height;
 
@@ -24,6 +25,7 @@ public class CircleHP : MonoBehaviour
 
     private Tweener m_HPTweener;
     private List<Tweener> m_ShakeTweeners = new List<Tweener>();
+    private bool m_HitShaking = false;
 
     public void Init(Enemy enemy)
     {
@@ -73,6 +75,16 @@ public class CircleHP : MonoBehaviour
             }
             else m_ShakeTweeners.Add(tweener);
         }
+    }
+
+    public void Affected()
+    {
+        if (m_HitShaking) return;
+        m_HitShaking = true;
+        m_BarPivot.transform.localScale = Vector3.one;
+        m_BarPivot.transform.DOShakeScale(0.3f, 0.4f, vibrato: 35, randomness: 50, fadeOut: true).OnComplete(()=>{
+            m_HitShaking = false;
+        });
     }
 
     void Update()

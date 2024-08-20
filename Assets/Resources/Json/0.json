@@ -2,8 +2,7 @@
     "Glass" : 0,
     "Monsters": 
     [
-        {"Time": 0, "ID": 106, "HP":1000, "Radius": 0.5, "Angle":0},
-        {"Time": 0, "ID": 106, "HP":1000, "Radius": 0.5, "Angle":180}
+        {"Time": 0, "ID": 106, "HP":10000, "Radius": 0.5, "Angle":0}
     ]
 }
   

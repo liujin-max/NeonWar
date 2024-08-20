@@ -12,14 +12,16 @@ public class SkillItem : MonoBehaviour
     [SerializeField] Button m_BtnUpgrade;
     [SerializeField] TextMeshProUGUI m_Cost;
 
+
+    private SkillSlotMsg m_SkillSlot;
     private SkillData m_SkillData;
-    private int m_Level;
+
 
 
     void Start()
     {
         m_BtnUpgrade.onClick.AddListener(()=>{
-            int cost = Skill.GetCost(m_SkillData, m_Level);
+            int cost = Skill.GetCost(m_SkillData, m_SkillSlot.Level);
 
             if (GameFacade.Instance.DataCenter.User.Glass < cost)
             {
@@ -29,17 +31,17 @@ public class SkillItem : MonoBehaviour
             
             GameFacade.Instance.DataCenter.User.UpdateGlass(-cost);
 
-            GameFacade.Instance.DataCenter.User.UpgradeSkill(m_SkillData.Order, m_SkillData.ID, m_Level);
+            GameFacade.Instance.DataCenter.User.UpgradeSkill(m_SkillSlot, m_SkillData.ID);
 
             EventManager.SendEvent(new GameEvent(EVENT.UI_SKILLUPGRADE));
             EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS));
         });
     }
 
-    public void Init(SkillData skill_data, int level)
+    public void Init(SkillSlotMsg skill_slot, SkillData skill_data)
     {
+        m_SkillSlot = skill_slot;
         m_SkillData = skill_data;
-        m_Level     = level;
 
         FlushUI();
     }
@@ -51,9 +53,9 @@ public class SkillItem : MonoBehaviour
         m_Icon.sprite = Resources.Load<Sprite>("UI/Skill/" + m_SkillData.ID);
         m_Icon.SetNativeSize();
 
-        m_Description.text = Skill.GetDescription(m_SkillData, m_Level);
+        m_Description.text = Skill.GetDescription(m_SkillData, m_SkillSlot.Level);
 
-        int cost    = Skill.GetCost(m_SkillData, m_Level);
+        int cost    = Skill.GetCost(m_SkillData, m_SkillSlot.Level);
 
         if (GameFacade.Instance.DataCenter.User.Glass >= cost) m_Cost.text = cost.ToString();
         else m_Cost.text = _C.COLOR_RED + cost.ToString();

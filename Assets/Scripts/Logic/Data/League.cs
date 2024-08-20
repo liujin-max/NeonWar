@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-
+//技能配置
 [System.Serializable]
 public class SkillData
 {
@@ -14,9 +14,9 @@ public class SkillData
     public int LevelMax;
     public int[] Values;
     public int[] Glass;
-    public int Order;
     public string Description;
 }
+
 
 //负责管理武器和技能的数据
 public class League
@@ -43,8 +43,7 @@ public class League
                 LevelMax    = Convert.ToInt32(data[3]),
                 Values      = data[4].Split('|').Select(int.Parse).ToArray(),
                 Glass       = data[5].Split('|').Select(int.Parse).ToArray(),
-                Order       = Convert.ToInt32(data[6]),
-                Description = data[7]
+                Description = data[6]
             };
 
             m_SkillDic[skill.ID]  = skill;
@@ -74,23 +73,21 @@ public class League
     }
 
     //重置技能
-    public void ResetSkill(int order)
+    public void ResetSkill(SkillSlotMsg slot)
     {
-        SkillSlotMsg slot = GameFacade.Instance.DataCenter.User.GetSkillSlotMsg(order);
-
         if (slot.ID == -1) return;
 
         SkillData skillData = GameFacade.Instance.DataCenter.League.GetSkillData(slot.ID);
 
         int cost_total = 0;
 
-        for (int i = 1; i <= slot.Level; i++)
+        for (int i = 0; i < slot.Level; i++)
         {
             cost_total += Skill.GetCost(skillData, i);
         }
 
         //重置技能
-        GameFacade.Instance.DataCenter.User.ResetSkill(skillData.Order);
+        GameFacade.Instance.DataCenter.User.ResetSkill(slot);
 
         //返还资源
         GameFacade.Instance.DataCenter.User.UpdateGlass(cost_total);

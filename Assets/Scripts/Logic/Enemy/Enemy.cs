@@ -81,6 +81,9 @@ public class Enemy : Unit
     public override void Affected(Hit hit)
     {
         m_Sprite.GetComponent<Affected>().DoAnimation();
+
+        if (m_HPBar != null) m_HPBar.Affected();
+
     }
 
     public override void Dead(Hit hit)

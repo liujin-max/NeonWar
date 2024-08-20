@@ -41,10 +41,22 @@ public class PearSlotMsg
 [System.Serializable]
 public class SkillSlotMsg
 {
-    public int ID;
-    public int Level = 1;
+    public int ID = -1;
+    public int Level;
+
+
+    //解锁条件及技能池
+    [NonSerialized] public int ATK;
+    [NonSerialized] public int ASP;
+    [NonSerialized] public string POS;  //对应SkillTreeItem的SkillPivot下的支点名称
+    [NonSerialized] public int[] SkillPool;
 
     
+    public bool IsUnlock()
+    {
+        PlayerMsg playerMsg = GameFacade.Instance.DataCenter.User.CurrentPlayer;
+        return playerMsg.ATK >= ATK && playerMsg.ASP >= ASP;
+    }
 }
 
 //武器数据
@@ -59,14 +71,7 @@ public class PlayerMsg
     public int ASP = 1;
 
     //5个技能槽
-    public List<SkillSlotMsg> SkillSlots = new List<SkillSlotMsg>()
-    {
-        new SkillSlotMsg() {ID = -1},
-        new SkillSlotMsg() {ID = -1},
-        new SkillSlotMsg() {ID = -1},
-        new SkillSlotMsg() {ID = -1},
-        new SkillSlotMsg() {ID = -1}
-    };
+    public List<SkillSlotMsg> SkillSlots;
 
     //N个宝珠槽(每种武器拥有的宝珠槽数量不同)
     public List<PearSlotMsg> PearSlots;
@@ -101,11 +106,24 @@ public class GameUserData
             UI          = "BowItem",
             UnlockFlag  = true, 
             InUse       = true, 
+            SkillSlots  = new List<SkillSlotMsg>()
+            {
+                //攻击分支
+                new SkillSlotMsg() {ATK = 3, POS = "1", SkillPool = new int[] {10010, 10020, 10030}},
+                new SkillSlotMsg() {ATK =15, POS = "2", SkillPool = new int[] {10060, 10070}},
+
+                //攻速分支
+                new SkillSlotMsg() {ASP = 8, POS = "11", SkillPool = new int[] {10110, 10120, 10130}},
+                new SkillSlotMsg() {ASP =25, POS = "12", SkillPool = new int[] {10160, 10170}},
+
+                //大招
+                new SkillSlotMsg() {ATK =30, ASP =25, POS = "99", SkillPool = new int[] {10210, 10220, 10230}}
+            },
             PearSlots   = new List<PearSlotMsg>()   //2个宝珠槽
             {
                 new PearSlotMsg() {ID = -1},
                 new PearSlotMsg() {ID = -1},
-            }
+            },
         }
     };
 
@@ -117,7 +135,6 @@ public class GameUserData
     public int LastLoginDay;    //上次登录的天数
     public int LoginDay;        //登录天数
     public int SignInStatus;  //签到状态
-
 }
 
 
@@ -292,20 +309,19 @@ public class User
     }
 
     //升级技能
-    public void UpgradeSkill(int order, int skill_id, int skill_level)
+    public void UpgradeSkill(SkillSlotMsg slotMsg, int skill_id)
     {
-        SkillSlotMsg slot   = CurrentPlayer.SkillSlots[order];
-        slot.ID     = skill_id;
-        slot.Level  = skill_level;
+        slotMsg.ID      = skill_id;
+        slotMsg.Level   += 1;
 
         m_userUpdate = true;
     }
 
     //重置技能
-    public void ResetSkill(int order)
+    public void ResetSkill(SkillSlotMsg skill_slot)
     {
-        CurrentPlayer.SkillSlots[order].ID      = -1;
-        CurrentPlayer.SkillSlots[order].Level   = 0;
+        skill_slot.ID       = -1;
+        skill_slot.Level    = 0;
 
         m_userUpdate = true;
     }

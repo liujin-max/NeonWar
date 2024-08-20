@@ -9,28 +9,12 @@ public class WeaponItem : MonoBehaviour
     [SerializeField] protected Transform m_SkillPivot;
     [SerializeField] protected Transform m_PearPivot;
 
-    [Header("按钮")]
-    [SerializeField] protected Button m_BtnATK;
-    [SerializeField] protected Button m_BtnASP;
-    
-    protected List<SkillSeatItem> m_SkillSeatItems = new List<SkillSeatItem>();
+
+    protected SkillTreeItem m_SkillTreeItem = null;
     protected List<PearSeatItem> m_PearSeatItems = new List<PearSeatItem>();
 
 
-    SkillSeatItem new_skill_seat_item(int order)
-    {
-        SkillSeatItem item = null;
-        if (m_SkillSeatItems.Count > order) {
-            item = m_SkillSeatItems[order];
-        }
-        else {
-            item = GameFacade.Instance.UIManager.LoadItem("SkillSeatItem", m_SkillPivot.Find(order.ToString())).GetComponent<SkillSeatItem>();
-            m_SkillSeatItems.Add(item);
-        }
-        item.gameObject.SetActive(true);
 
-        return item;
-    }
 
     PearSeatItem new_pear_seat_item(int order)
     {
@@ -48,87 +32,18 @@ public class WeaponItem : MonoBehaviour
     }
 
 
-    void Start()
-    {
-        //升级攻击力
-        m_BtnATK.onClick.AddListener(()=>{
-            int cost = GameFacade.Instance.DataCenter.User.GetATKCost();
-
-            if (GameFacade.Instance.DataCenter.User.Glass < cost) {
-                EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "不足"));
-                return;
-            }
-
-            GameFacade.Instance.DataCenter.User.UpdateATK(1);
-            GameFacade.Instance.DataCenter.User.UpdateGlass(-cost);
-
-            FlushUI();
-            
-
-            EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS));
-        });
-
-
-        //升级攻速
-        m_BtnASP.onClick.AddListener(()=>{
-            int cost = GameFacade.Instance.DataCenter.User.GetASPCost();
-
-            if (GameFacade.Instance.DataCenter.User.Glass < cost) {
-                EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "不足"));
-                return;
-            }
-
-            GameFacade.Instance.DataCenter.User.UpdateASP(1);
-            GameFacade.Instance.DataCenter.User.UpdateGlass(-cost);
-
-            FlushUI();
-
-            EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS));
-        });
-    }
-
     public void Init()
     {
-        InitUpgradePivot();
-        InitSkills();
+        InitSkillTree();
         InitPears();
     }
 
-    public void InitUpgradePivot()
+    void InitSkillTree()
     {
-        int atk_level   = GameFacade.Instance.DataCenter.User.CurrentPlayer.ATK;
-        int asp_level   = GameFacade.Instance.DataCenter.User.CurrentPlayer.ASP;
-
-        m_BtnATK.transform.Find("Level").GetComponent<TextMeshProUGUI>().text   = atk_level.ToString();
-        m_BtnATK.transform.Find("Cost").GetComponent<TextMeshProUGUI>().text    = "消耗：" + GameFacade.Instance.DataCenter.User.GetATKCost();
-
-        m_BtnASP.transform.Find("Level").GetComponent<TextMeshProUGUI>().text   = asp_level.ToString();
-        m_BtnASP.transform.Find("Cost").GetComponent<TextMeshProUGUI>().text    = "消耗：" + GameFacade.Instance.DataCenter.User.GetASPCost();
-    }
-
-    //生成技能
-    public void InitSkills()
-    {
-        m_SkillSeatItems.ForEach(item => {item.gameObject.SetActive(false);});
-
-        SkillSeat[] seats = new SkillSeat[]
-        {
-            new SkillSeat(){Order = 0, ATK = 3},
-            new SkillSeat(){Order = 1, ASP = 8},
-            new SkillSeat(){Order = 2, ATK = 15},
-            new SkillSeat(){Order = 3, ASP = 25},
-            new SkillSeat(){Order = 4, ATK = 30, ASP = 30}
-        };
-
-
-        for (int i = 0; i < seats.Length; i++)
-        {
-            SkillSlotMsg skill_msg = GameFacade.Instance.DataCenter.User.CurrentPlayer.SkillSlots[i];
-            SkillData skill_data = GameFacade.Instance.DataCenter.League.GetSkillData(skill_msg.ID);
-
-            var item = new_skill_seat_item(i);
-            item.Init(seats[i], skill_data, skill_msg.Level);
+        if (m_SkillTreeItem == null) {
+            m_SkillTreeItem = GameFacade.Instance.UIManager.LoadItem("SkillTreeItem", m_SkillPivot).GetComponent<SkillTreeItem>();
         }
+        m_SkillTreeItem.Init();
     }
 
     //生成宝珠
@@ -148,8 +63,7 @@ public class WeaponItem : MonoBehaviour
 
     public void FlushUI()
     {
-        InitUpgradePivot();
-        InitSkills();
+        if (m_SkillTreeItem != null) m_SkillTreeItem.FlushUI();
         InitPears();
     }
 }
