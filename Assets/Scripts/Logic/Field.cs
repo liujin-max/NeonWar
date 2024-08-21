@@ -136,8 +136,11 @@ public class Field : MonoBehaviour
 
     public _C.FSMSTATE GetCurrentFSMState()
     {
+        if (m_FSM == null || m_FSM.CurrentState == null) return _C.FSMSTATE.IDLE;
+
         return m_FSM.CurrentState.ID;
     }
+
 
     void Update()
     {
