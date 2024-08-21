@@ -205,7 +205,7 @@ public class Pear
         get {
             int base_order = Level;
 
-            if (GameFacade.Instance.DataCenter.User.IsPearEquiped(this.ID)) base_order += 10;
+            if (DataCenter.Instance.User.IsPearEquiped(this.ID)) base_order += 10;
 
             return base_order;
         }
@@ -272,7 +272,7 @@ public class Pear
 
     public string GetDescription()
     {
-        var data = GameFacade.Instance.DataCenter.Backpack.GetPearData(m_Data.Class);
+        var data = DataCenter.Instance.Backpack.GetPearData(m_Data.Class);
         string text = data.Description.Replace("#", _C.COLOR_GREEN2 + m_Data.Value.ToString() + "</color>");
 
 

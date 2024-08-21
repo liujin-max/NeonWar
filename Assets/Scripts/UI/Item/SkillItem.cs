@@ -25,15 +25,15 @@ public class SkillItem : MonoBehaviour
         m_BtnUpgrade.onClick.AddListener(()=>{
             int cost = Skill.GetCost(m_SkillData, m_SkillSlot.Level);
 
-            if (GameFacade.Instance.DataCenter.User.Glass < cost)
+            if (DataCenter.Instance.User.Glass < cost)
             {
                 EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "<sprite=1>不足"));
                 return;
             }
             
-            GameFacade.Instance.DataCenter.User.UpdateGlass(-cost);
+            DataCenter.Instance.User.UpdateGlass(-cost);
 
-            GameFacade.Instance.DataCenter.User.UpgradeSkill(m_SkillSlot, m_SkillData.ID);
+            DataCenter.Instance.User.UpgradeSkill(m_SkillSlot, m_SkillData.ID);
 
             EventManager.SendEvent(new GameEvent(EVENT.UI_SKILLUPGRADE));
             EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS));
@@ -51,14 +51,14 @@ public class SkillItem : MonoBehaviour
     void FlushUI()
     {
         m_Text.text     = m_SkillData.Name;
-        m_Icon.sprite   = AssetManager.LoadSprite("Skills/" + GameFacade.Instance.DataCenter.User.CurrentPlayer.ID, m_SkillData.ID.ToString()); 
+        m_Icon.sprite   = AssetManager.LoadSprite("Skills/" + DataCenter.Instance.User.CurrentPlayer.ID, m_SkillData.ID.ToString()); 
         m_Icon.SetNativeSize();
 
         m_Description.text = Skill.GetDescription(m_SkillData, m_SkillSlot.Level);
 
         int cost    = Skill.GetCost(m_SkillData, m_SkillSlot.Level);
 
-        if (GameFacade.Instance.DataCenter.User.Glass >= cost) m_Cost.text = "<sprite=1>" + cost.ToString();
+        if (DataCenter.Instance.User.Glass >= cost) m_Cost.text = "<sprite=1>" + cost.ToString();
         else m_Cost.text = _C.COLOR_RED + "<sprite=1>" + cost.ToString();
     }
 

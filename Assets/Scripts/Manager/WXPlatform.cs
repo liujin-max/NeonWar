@@ -53,10 +53,10 @@ public class WXPlatform : Platform
                     Debug.Log("点击授权按钮");
                     if (res.errCode == 0) {
                         //用户已允许获取个人信息，返回的data即为用户信息
-                        GameFacade.Instance.DataCenter.User.Data.Name       = res.userInfo.nickName;
-                        GameFacade.Instance.DataCenter.User.Data.HeadUrl    = res.userInfo.avatarUrl;
+                        DataCenter.Instance.User.Data.Name       = res.userInfo.nickName;
+                        DataCenter.Instance.User.Data.HeadUrl    = res.userInfo.avatarUrl;
 
-                        GameFacade.Instance.DataCenter.User.Upload();
+                        DataCenter.Instance.User.Upload();
 
                     } else {
                         Debug.Log("用户未允许获取个人信息");
@@ -73,8 +73,8 @@ public class WXPlatform : Platform
                     lang = "zh_CN",
                     success = (data) => {
                         // //用户已允许获取个人信息，返回的data即为用户信息
-                        GameFacade.Instance.DataCenter.User.Data.Name       = data.userInfo.nickName;
-                        GameFacade.Instance.DataCenter.User.Data.HeadUrl    = data.userInfo.avatarUrl;
+                        DataCenter.Instance.User.Data.Name       = data.userInfo.nickName;
+                        DataCenter.Instance.User.Data.HeadUrl    = data.userInfo.avatarUrl;
                     }
                 };
                 WX.GetUserInfo(userInfo);
@@ -89,17 +89,17 @@ public class WXPlatform : Platform
         string json = PlayerPrefs.GetString(SystemManager.KEY_USER);
 
         if (string.IsNullOrEmpty(json)) {
-            GameFacade.Instance.DataCenter.User.SyncRecords();
-            GameFacade.Instance.DataCenter.User.SyncFinish();
+            DataCenter.Instance.User.SyncRecords();
+            DataCenter.Instance.User.SyncFinish();
             return;
         }
         
         // Debug.Log("加载存档：" + json);
 
-        GameFacade.Instance.DataCenter.User.Data = JsonUtility.FromJson<GameUserData>(json);
+        DataCenter.Instance.User.Data = JsonUtility.FromJson<GameUserData>(json);
 
-        GameFacade.Instance.DataCenter.User.SyncRecords();
-        GameFacade.Instance.DataCenter.User.SyncFinish();
+        DataCenter.Instance.User.SyncRecords();
+        DataCenter.Instance.User.SyncFinish();
 
         // Debug.Log("====开始获取账号数据====");
         // EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPMASK, true));
@@ -116,10 +116,10 @@ public class WXPlatform : Platform
         //         if (data.ContainsKey("data"))
         //         {
         //             //将Json转换成临时的GameUserData
-        //             GameFacade.Instance.DataCenter.User.Data    = JsonUtility.FromJson<GameUserData>(JsonMapper.ToJson(data["data"]));
+        //             DataCenter.Instance.User.Data    = JsonUtility.FromJson<GameUserData>(JsonMapper.ToJson(data["data"]));
 
         //             //基础数据
-        //             GameFacade.Instance.DataCenter.User.Base    = JsonUtility.FromJson<BaseData>(JsonMapper.ToJson(data["data"]["userInfo"]));
+        //             DataCenter.Instance.User.Base    = JsonUtility.FromJson<BaseData>(JsonMapper.ToJson(data["data"]["userInfo"]));
         //         }
         //     },
         //     fail = (res) =>
@@ -129,10 +129,10 @@ public class WXPlatform : Platform
         //     complete = (res) =>
         //     {
         //         Debug.Log("====获取账号数据结束====");
-        //         GameFacade.Instance.DataCenter.User.SyncRecords();
+        //         DataCenter.Instance.User.SyncRecords();
 
 
-        //         GameFacade.Instance.DataCenter.User.SyncFinish();
+        //         DataCenter.Instance.User.SyncFinish();
                 
         //         EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPMASK, false));
         //     }
@@ -168,7 +168,7 @@ public class WXPlatform : Platform
     public override void SHARE(string text, bool show_image)
     {
         //任务：每日分享
-        // GameFacade.Instance.DataCenter.Daily.FinishTask((int)_C.TASK.SHARE);
+        // DataCenter.Instance.Daily.FinishTask((int)_C.TASK.SHARE);
 
         if (show_image == true)
         {

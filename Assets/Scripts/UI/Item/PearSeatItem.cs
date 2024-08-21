@@ -56,7 +56,7 @@ public class PearSeatItem : MonoBehaviour
 
             m_Text.text = "";
 
-            m_LockTag.SetActive(!GameFacade.Instance.DataCenter.IsPearUnlock());
+            m_LockTag.SetActive(!DataCenter.Instance.IsPearUnlock());
         }
         
     }

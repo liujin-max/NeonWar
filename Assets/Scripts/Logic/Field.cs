@@ -79,7 +79,7 @@ public class Field : MonoBehaviour
         BlinkTimer.Full();
 
 
-        m_Level = GameFacade.Instance.DataCenter.Levels.GetLevel(level_id);
+        m_Level = DataCenter.Instance.Levels.GetLevel(level_id);
         m_Level.Init();
         m_Spawn.Init(m_Level.LevelJSON);
 
@@ -194,14 +194,14 @@ public class Field : MonoBehaviour
         //额外倍率
         glass   = Mathf.CeilToInt(glass * m_Player.GlassRate.ToNumber());
 
-        GameFacade.Instance.DataCenter.User.UpdateGlass(glass);
+        DataCenter.Instance.User.UpdateGlass(glass);
     }
 
     public void InitPlayer()
     {
         if (m_Player != null) return;
 
-        int id  = GameFacade.Instance.DataCenter.User.CurrentPlayer.ID;
+        int id  = DataCenter.Instance.User.CurrentPlayer.ID;
         m_Player= GameFacade.Instance.PrefabManager.Load("Prefab/Player/Player_" + id, Vector2.zero, Land.ENTITY_ROOT).GetComponent<Player>();
         m_Player.Init(id, 270);
         m_Player.Sync();

@@ -18,6 +18,16 @@ public class DataCenter
     public Backpack Backpack;
 
 
+    private static DataCenter m_Instance;
+    public static DataCenter Instance {
+        get {
+            if (m_Instance == null) m_Instance = new DataCenter();
+
+            return m_Instance;
+        }
+    }
+
+
     public void Init()
     {
         //账号数据

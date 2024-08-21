@@ -117,7 +117,7 @@ public class GameWindow : MonoBehaviour
 
     public void Init()
     {
-        m_Glass.ForceValue(GameFacade.Instance.DataCenter.User.Glass);
+        m_Glass.ForceValue(DataCenter.Instance.User.Glass);
 
         FlushUI();
 
@@ -131,18 +131,18 @@ public class GameWindow : MonoBehaviour
     {
         if (m_WEAPONITEM != null) Destroy(m_WEAPONITEM.gameObject);
 
-        m_WEAPONITEM    = GameFacade.Instance.UIManager.LoadItem(GameFacade.Instance.DataCenter.User.CurrentPlayer.UI, m_WeaponPivot).GetComponent<WeaponItem>();
+        m_WEAPONITEM    = GameFacade.Instance.UIManager.LoadItem(DataCenter.Instance.User.CurrentPlayer.UI, m_WeaponPivot).GetComponent<WeaponItem>();
         m_WEAPONITEM.Init();
     } 
 
     void FlushUI()
     {
-        var str         = GameFacade.Instance.DataCenter.GetLevelString();
+        var str         = DataCenter.Instance.GetLevelString();
         m_Level.text    = str;
         m_SubLevel.text = str;
 
-        m_Coin.SetValue(GameFacade.Instance.DataCenter.User.Coin);
-        m_Glass.SetValue(GameFacade.Instance.DataCenter.User.Glass);
+        m_Coin.SetValue(DataCenter.Instance.User.Coin);
+        m_Glass.SetValue(DataCenter.Instance.User.Glass);
 
         if (m_WEAPONITEM != null) m_WEAPONITEM.FlushUI();
     }
@@ -271,7 +271,7 @@ public class GameWindow : MonoBehaviour
 
     private void OnUpdateGlass(GameEvent @event)
     {
-        m_Glass.SetValue(GameFacade.Instance.DataCenter.User.Glass);
+        m_Glass.SetValue(DataCenter.Instance.User.Glass);
     }
 
     private void OnUpdateHP(GameEvent @event)

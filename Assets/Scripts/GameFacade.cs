@@ -7,19 +7,7 @@ using UnityEngine;
 
 public class GameFacade : MonoBehaviour
 {
-
     public string Version = "1.0.0";
-
-    private DataCenter m_DataCenter = null;
-    public DataCenter DataCenter
-    {
-        get {
-            if (m_DataCenter == null) {
-                m_DataCenter = new DataCenter();
-            }
-            return m_DataCenter;
-        }
-    }
 
 
     #region =====  Manager =====
@@ -158,7 +146,7 @@ public class GameFacade : MonoBehaviour
         CsvManager.ReadCsvs();
 
         //加载数据类
-        DataCenter.Init();
+        DataCenter.Instance.Init();
 
 
         StartCoroutine("SYNC");
@@ -171,11 +159,11 @@ public class GameFacade : MonoBehaviour
 
         Platform.Instance.INIT(()=>{
             //加载账号数据
-            m_DataCenter.User.Sync();
+            DataCenter.Instance.User.Sync();
         });
 
         
-        while (!GameFacade.Instance.DataCenter.User.IsSyncFinished)
+        while (!DataCenter.Instance.User.IsSyncFinished)
         {
             yield return null; 
         }
@@ -193,6 +181,6 @@ public class GameFacade : MonoBehaviour
     {
         float dt = Time.deltaTime;
 
-        m_DataCenter.Update(dt);
+        DataCenter.Instance.Update(dt);
     }
 }

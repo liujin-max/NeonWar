@@ -33,18 +33,18 @@ public class PearDetailItem : MonoBehaviour
     void Start()
     {
         m_BtnEquip.onClick.AddListener(()=>{
-            if (GameFacade.Instance.DataCenter.User.IsPearSeatsFull() == true) {
+            if (DataCenter.Instance.User.IsPearSeatsFull() == true) {
                 EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "宝珠槽已满"));
                 return;
             }
 
-            GameFacade.Instance.DataCenter.User.EquipPear(m_Pear.ID);
+            DataCenter.Instance.User.EquipPear(m_Pear.ID);
 
             EventManager.SendEvent(new GameEvent(EVENT.UI_PEARCHANGE));
         });
 
         m_BtnUnEquip.onClick.AddListener(()=>{
-            GameFacade.Instance.DataCenter.User.UnloadPear(m_Pear.ID);
+            DataCenter.Instance.User.UnloadPear(m_Pear.ID);
 
             EventManager.SendEvent(new GameEvent(EVENT.UI_PEARCHANGE));
         });
@@ -70,7 +70,7 @@ public class PearDetailItem : MonoBehaviour
 
     void FlushUI()
     {
-        bool is_equip = GameFacade.Instance.DataCenter.User.IsPearEquiped(m_Pear.ID);
+        bool is_equip = DataCenter.Instance.User.IsPearEquiped(m_Pear.ID);
 
         m_BtnEquip.gameObject.SetActive(!is_equip);
         m_BtnUnEquip.gameObject.SetActive(is_equip);

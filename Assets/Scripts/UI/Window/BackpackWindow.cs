@@ -36,7 +36,7 @@ public class BackpackWindow : MonoBehaviour
     void InitPears(Pear current_pear)
     {
         var list    = new List<Pear>();
-        GameFacade.Instance.DataCenter.Backpack.Pears.ForEach(p => {
+        DataCenter.Instance.Backpack.Pears.ForEach(p => {
             list.Add(p);
         });
 

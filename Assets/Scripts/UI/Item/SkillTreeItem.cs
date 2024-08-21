@@ -41,15 +41,15 @@ public class SkillTreeItem : MonoBehaviour
     {
         //升级攻击力
         m_BtnATK.onClick.AddListener(()=>{
-            int cost = GameFacade.Instance.DataCenter.User.GetATKCost();
+            int cost = DataCenter.Instance.User.GetATKCost();
 
-            if (GameFacade.Instance.DataCenter.User.Glass < cost) {
+            if (DataCenter.Instance.User.Glass < cost) {
                 EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "<sprite=1>不足"));
                 return;
             }
 
-            GameFacade.Instance.DataCenter.User.UpdateATK(1);
-            GameFacade.Instance.DataCenter.User.UpdateGlass(-cost);
+            DataCenter.Instance.User.UpdateATK(1);
+            DataCenter.Instance.User.UpdateGlass(-cost);
 
             FlushUI();
             FlushBars(_C.PROPERTY.ATK);
@@ -60,15 +60,15 @@ public class SkillTreeItem : MonoBehaviour
 
         //升级攻速
         m_BtnASP.onClick.AddListener(()=>{
-            int cost = GameFacade.Instance.DataCenter.User.GetASPCost();
+            int cost = DataCenter.Instance.User.GetASPCost();
 
-            if (GameFacade.Instance.DataCenter.User.Glass < cost) {
+            if (DataCenter.Instance.User.Glass < cost) {
                 EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "<sprite=1>不足"));
                 return;
             }
 
-            GameFacade.Instance.DataCenter.User.UpdateASP(1);
-            GameFacade.Instance.DataCenter.User.UpdateGlass(-cost);
+            DataCenter.Instance.User.UpdateASP(1);
+            DataCenter.Instance.User.UpdateGlass(-cost);
 
             FlushUI();
             FlushBars(_C.PROPERTY.ASP);
@@ -86,14 +86,14 @@ public class SkillTreeItem : MonoBehaviour
 
     void InitUpgradePivot()
     {
-        int atk_level   = GameFacade.Instance.DataCenter.User.CurrentPlayer.ATK;
-        int asp_level   = GameFacade.Instance.DataCenter.User.CurrentPlayer.ASP;
+        int atk_level   = DataCenter.Instance.User.CurrentPlayer.ATK;
+        int asp_level   = DataCenter.Instance.User.CurrentPlayer.ASP;
 
-        int atk_cost    = GameFacade.Instance.DataCenter.User.GetATKCost();
-        int asp_cost    = GameFacade.Instance.DataCenter.User.GetASPCost();
+        int atk_cost    = DataCenter.Instance.User.GetATKCost();
+        int asp_cost    = DataCenter.Instance.User.GetASPCost();
 
-        string atk_color= GameFacade.Instance.DataCenter.User.Glass >= atk_cost ? _C.COLOR_GREEN : _C.COLOR_RED;
-        string asp_color= GameFacade.Instance.DataCenter.User.Glass >= asp_cost ? _C.COLOR_GREEN : _C.COLOR_RED;
+        string atk_color= DataCenter.Instance.User.Glass >= atk_cost ? _C.COLOR_GREEN : _C.COLOR_RED;
+        string asp_color= DataCenter.Instance.User.Glass >= asp_cost ? _C.COLOR_GREEN : _C.COLOR_RED;
 
         m_BtnATK.transform.Find("Name").GetComponent<TextMeshProUGUI>().text            = "攻击";
         m_BtnATK.transform.Find("LevelPivot/Text").GetComponent<TextMeshProUGUI>().text = atk_level.ToString();
@@ -109,12 +109,12 @@ public class SkillTreeItem : MonoBehaviour
         m_SkillSeatItems.ForEach(item => {item.gameObject.SetActive(false);});
 
 
-        List<SkillSlotMsg> slots = GameFacade.Instance.DataCenter.User.CurrentPlayer.SkillSlots;
+        List<SkillSlotMsg> slots = DataCenter.Instance.User.CurrentPlayer.SkillSlots;
 
         for (int i = 0; i < slots.Count; i++)
         {
             SkillSlotMsg skill_msg = slots[i];
-            SkillData skill_data = GameFacade.Instance.DataCenter.League.GetSkillData(skill_msg.ID);
+            SkillData skill_data = DataCenter.Instance.League.GetSkillData(skill_msg.ID);
 
             var item = new_skill_seat_item(i, m_SkillPivot.Find(skill_msg.POS));
             item.Init(skill_msg, skill_data);
@@ -125,7 +125,7 @@ public class SkillTreeItem : MonoBehaviour
 
     void InitLines()
     {
-        PlayerMsg player =  GameFacade.Instance.DataCenter.User.CurrentPlayer;
+        PlayerMsg player =  DataCenter.Instance.User.CurrentPlayer;
 
         //攻击
         {
@@ -160,7 +160,7 @@ public class SkillTreeItem : MonoBehaviour
     {
         if (m_Bars.ContainsKey(property))
         {
-            int level = GameFacade.Instance.DataCenter.User.GetPropertyLevel(property);
+            int level = DataCenter.Instance.User.GetPropertyLevel(property);
             m_Bars[property].ForEach(bar_trans => {
                 bar_trans.SetValue(level);
             });

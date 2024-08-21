@@ -54,7 +54,7 @@ public class SkillSlotMsg
     
     public bool IsUnlock()
     {
-        PlayerMsg playerMsg = GameFacade.Instance.DataCenter.User.CurrentPlayer;
+        PlayerMsg playerMsg = DataCenter.Instance.User.CurrentPlayer;
         return playerMsg.ATK >= ATK && playerMsg.ASP >= ASP;
     }
 }
@@ -199,7 +199,7 @@ public class User
         int day_of_year = DateTime.Now.DayOfYear;
 
         //同步宝珠数据
-        GameFacade.Instance.DataCenter.Backpack.SyncPears(m_Data.Pears);
+        DataCenter.Instance.Backpack.SyncPears(m_Data.Pears);
 
 
 
@@ -207,7 +207,7 @@ public class User
         // m_Data.TaskRecords.ForEach(msg => {
         //     if (msg.Day == day_of_year)
         //     {
-        //         var t = GameFacade.Instance.DataCenter.Daily.GetTask(msg.ID);
+        //         var t = DataCenter.Instance.Daily.GetTask(msg.ID);
         //         if (t != null) {
         //             t.Receive();
         //         }
@@ -216,7 +216,7 @@ public class User
 
 
         //任务：每日登录
-        // GameFacade.Instance.DataCenter.Daily.FinishTask((int)_C.TASK.LOGIN);
+        // DataCenter.Instance.Daily.FinishTask((int)_C.TASK.LOGIN);
 
 
         //未注册|新的一年重新开始
@@ -396,7 +396,7 @@ public class User
     {
         m_Data.Pears.Clear();
 
-        GameFacade.Instance.DataCenter.Backpack.Pears.ForEach(pear =>{
+        DataCenter.Instance.Backpack.Pears.ForEach(pear =>{
             m_Data.Pears.Add(new PearMsg() {
                 ID      = pear.ID,
                 Count   = pear.Count

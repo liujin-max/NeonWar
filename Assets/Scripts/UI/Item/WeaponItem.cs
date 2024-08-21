@@ -51,10 +51,10 @@ public class WeaponItem : MonoBehaviour
     {
         m_PearSeatItems.ForEach(item => {item.gameObject.SetActive(false);});
 
-        for (int i = 0; i < GameFacade.Instance.DataCenter.User.CurrentPlayer.PearSlots.Count; i++)
+        for (int i = 0; i < DataCenter.Instance.User.CurrentPlayer.PearSlots.Count; i++)
         {
-            PearSlotMsg slotMsg = GameFacade.Instance.DataCenter.User.CurrentPlayer.PearSlots[i];
-            Pear pear = GameFacade.Instance.DataCenter.Backpack.GetPear(slotMsg.ID);
+            PearSlotMsg slotMsg = DataCenter.Instance.User.CurrentPlayer.PearSlots[i];
+            Pear pear = DataCenter.Instance.Backpack.GetPear(slotMsg.ID);
 
             var item = new_pear_seat_item(i);
             item.Init(pear);

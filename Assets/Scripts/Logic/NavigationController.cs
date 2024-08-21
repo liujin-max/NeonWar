@@ -41,7 +41,7 @@ public static class NavigationController
     //打开背包
     public static void GotoBackpack(Pear pear)
     {
-        if (!GameFacade.Instance.DataCenter.IsPearUnlock())
+        if (!DataCenter.Instance.IsPearUnlock())
         {
             EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "通过关卡" + _C.PEAR_UNLOCK_LEVEL + "后解锁"));
             return;

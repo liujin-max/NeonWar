@@ -139,13 +139,13 @@ public class Backpack
         //判断合成手续费是否足够
         int cost_coin   = 50;
 
-        if (GameFacade.Instance.DataCenter.User.Coin < cost_coin) {
+        if (DataCenter.Instance.User.Coin < cost_coin) {
             EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "<sprite=0>不足"));
             return null;
         }
 
         //扣除消耗
-        GameFacade.Instance.DataCenter.User.UpdateCoin(-cost_coin);
+        DataCenter.Instance.User.UpdateCoin(-cost_coin);
 
         //消耗宝珠
         pears.ForEach(pear => {

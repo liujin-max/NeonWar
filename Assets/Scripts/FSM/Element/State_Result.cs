@@ -31,7 +31,7 @@ public class State_Result<T> : State<Field>
             if (m_Result == _C.RESULT.VICTORY)
             {   
                 //记录通关
-                GameFacade.Instance.DataCenter.User.SetLevel(Field.Instance.Level.ID);
+                DataCenter.Instance.User.SetLevel(Field.Instance.Level.ID);
             }
 
             var window = GameFacade.Instance.UIManager.LoadWindow("ResultWindow", UIManager.BOARD).GetComponent<ResultWindow>();

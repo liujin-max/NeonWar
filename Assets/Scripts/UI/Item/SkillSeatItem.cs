@@ -76,7 +76,7 @@ public class SkillSeatItem : MonoBehaviour
             m_Text.text = m_SkillData.Name;
 
             m_Icon.gameObject.SetActive(true);
-            m_Icon.sprite = AssetManager.LoadSprite("Skills/" + GameFacade.Instance.DataCenter.User.CurrentPlayer.ID, m_SkillData.ID.ToString());
+            m_Icon.sprite = AssetManager.LoadSprite("Skills/" + DataCenter.Instance.User.CurrentPlayer.ID, m_SkillData.ID.ToString());
             m_Icon.SetNativeSize();
         }
         else

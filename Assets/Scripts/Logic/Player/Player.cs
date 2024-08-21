@@ -132,8 +132,8 @@ public class Player : Unit
     //同步最新的加成等级
     public void Sync()
     {
-        int atk_level = GameFacade.Instance.DataCenter.User.CurrentPlayer.ATK;
-        int asp_level = GameFacade.Instance.DataCenter.User.CurrentPlayer.ASP;
+        int atk_level = DataCenter.Instance.User.CurrentPlayer.ATK;
+        int asp_level = DataCenter.Instance.User.CurrentPlayer.ASP;
 
 
         ATT.ATK.SetBase(NumericalManager.FML_ATK(atk_level));
@@ -145,32 +145,32 @@ public class Player : Unit
         {
             m_Skills.ForEach(skill => skill.Dispose());
             m_Skills.Clear();
-            GameFacade.Instance.DataCenter.User.CurrentPlayer.SkillSlots.ForEach(skill_msg => {
+            DataCenter.Instance.User.CurrentPlayer.SkillSlots.ForEach(skill_msg => {
                 if (skill_msg.ID > 0) {
-                    Skill sk = Skill.Create(GameFacade.Instance.DataCenter.League.GetSkillData(skill_msg.ID), this, skill_msg.Level);
+                    Skill sk = Skill.Create(DataCenter.Instance.League.GetSkillData(skill_msg.ID), this, skill_msg.Level);
                     m_Skills.Add(sk);
                 }
             });
 
             //测试技能
-            // m_Skills.Add(Skill.Create(GameFacade.Instance.DataCenter.League.GetSkillData(10160), this, 3));
+            // m_Skills.Add(Skill.Create(DataCenter.Instance.League.GetSkillData(10160), this, 3));
         }
 
         //同步宝珠
         {
             m_Pears.ForEach(pear => pear.UnEquip());
             m_Pears.Clear();
-            GameFacade.Instance.DataCenter.User.CurrentPlayer.PearSlots.ForEach(pear_msg => {
+            DataCenter.Instance.User.CurrentPlayer.PearSlots.ForEach(pear_msg => {
                 if (pear_msg.ID > 0)
                 {
-                    Pear pear = Pear.Create(GameFacade.Instance.DataCenter.Backpack.GetPearData(pear_msg.ID));
+                    Pear pear = Pear.Create(DataCenter.Instance.Backpack.GetPearData(pear_msg.ID));
                     pear.Equip(this);
                     m_Pears.Add(pear);
                 }
             });
 
             //测试宝珠
-            // Pear pear = Pear.Create(GameFacade.Instance.DataCenter.Backpack.GetPearData(20052));
+            // Pear pear = Pear.Create(DataCenter.Instance.Backpack.GetPearData(20052));
             // pear.Equip(this);
             // m_Pears.Add(pear);
         }

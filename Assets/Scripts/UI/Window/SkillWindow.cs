@@ -69,7 +69,7 @@ public class SkillWindow : MonoBehaviour
         for (int i = 0; i < skill_ids.Length; i++)
         {
             int sk_id = skill_ids[i];
-            SkillData skill_data = GameFacade.Instance.DataCenter.League.GetSkillData(sk_id);
+            SkillData skill_data = DataCenter.Instance.League.GetSkillData(sk_id);
             var item = new_skill_item(i);
             item.Init(m_SkillSlot, skill_data);
 
@@ -83,7 +83,7 @@ public class SkillWindow : MonoBehaviour
                 {
                     m_BtnReset.gameObject.SetActive(true);
                     m_BtnReset.onClick.AddListener(()=>{
-                        GameFacade.Instance.DataCenter.League.ResetSkill(m_SkillSlot);
+                        DataCenter.Instance.League.ResetSkill(m_SkillSlot);
                     });
                 }
             }
@@ -101,7 +101,7 @@ public class SkillWindow : MonoBehaviour
     #region 监听事件
     void OnSkillUpgrade(GameEvent @event)
     {
-        var data = GameFacade.Instance.DataCenter.League.GetSkillData(m_SkillSlot.ID);
+        var data = DataCenter.Instance.League.GetSkillData(m_SkillSlot.ID);
         this.Init(m_SkillSlot, data);
     }
     #endregion

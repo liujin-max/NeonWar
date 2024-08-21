@@ -26,17 +26,17 @@ public class EditorPlatform : Platform
         string json = PlayerPrefs.GetString(SystemManager.KEY_USER);
 
         if (string.IsNullOrEmpty(json)) {
-            GameFacade.Instance.DataCenter.User.SyncRecords();
-            GameFacade.Instance.DataCenter.User.SyncFinish();
+            DataCenter.Instance.User.SyncRecords();
+            DataCenter.Instance.User.SyncFinish();
             return;
         }
         
         Debug.Log("加载：" + json);
 
-        GameFacade.Instance.DataCenter.User.Data = JsonUtility.FromJson<GameUserData>(json);
+        DataCenter.Instance.User.Data = JsonUtility.FromJson<GameUserData>(json);
 
-        GameFacade.Instance.DataCenter.User.SyncRecords();
-        GameFacade.Instance.DataCenter.User.SyncFinish();
+        DataCenter.Instance.User.SyncRecords();
+        DataCenter.Instance.User.SyncFinish();
     }
 
     public override void UPLOAD(GameUserData userData)
@@ -51,7 +51,7 @@ public class EditorPlatform : Platform
     public override void SHARE(string text, bool show_image)
     {
         //任务：每日分享
-        // GameFacade.Instance.DataCenter.Daily.FinishTask((int)_C.TASK.SHARE);
+        // DataCenter.Instance.Daily.FinishTask((int)_C.TASK.SHARE);
     }
 
     //激励广告

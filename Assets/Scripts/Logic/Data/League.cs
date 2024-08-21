@@ -77,7 +77,7 @@ public class League
     {
         if (slot.ID == -1) return;
 
-        SkillData skillData = GameFacade.Instance.DataCenter.League.GetSkillData(slot.ID);
+        SkillData skillData = DataCenter.Instance.League.GetSkillData(slot.ID);
 
         int cost_total = 0;
 
@@ -87,10 +87,10 @@ public class League
         }
 
         //重置技能
-        GameFacade.Instance.DataCenter.User.ResetSkill(slot);
+        DataCenter.Instance.User.ResetSkill(slot);
 
         //返还资源
-        GameFacade.Instance.DataCenter.User.UpdateGlass(cost_total);
+        DataCenter.Instance.User.UpdateGlass(cost_total);
 
         EventManager.SendEvent(new GameEvent(EVENT.UI_SKILLUPGRADE));
         EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS));
