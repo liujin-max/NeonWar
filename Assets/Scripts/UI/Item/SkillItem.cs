@@ -82,18 +82,4 @@ public class SkillItem : MonoBehaviour
             m_Description.color = Color.gray;
         }
     }
-
-
-    #region 按钮监听
-    public void BtnUpgradeDown()
-    {
-        SoundManager.Instance.Load(SOUND.CLICK);
-        m_Cost.transform.localPosition = new Vector3(0, 2, 0);
-    }
-
-    public void BtnUpgradeUp()
-    {
-        m_Cost.transform.localPosition = new Vector3(0, 11, 0);
-    }
-    #endregion
 }

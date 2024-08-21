@@ -71,6 +71,7 @@
      <Compile Include="Assets\Scripts\FSM\Element\State_Play.cs" />
      <Compile Include="Assets\Scripts\Effect\BezierCurveAnimation.cs" />
      <Compile Include="Assets\Scripts\Logic\Area\Area_Thorns.cs" />
+     <Compile Include="Assets\Scripts\Effect\ButtonPress.cs" />
      <Compile Include="Assets\Scripts\UI\Window\SkillWindow.cs" />
      <Compile Include="Assets\Scripts\Manager\EventManager.cs" />
      <Compile Include="Assets\Scripts\Logic\Enemy\Enemy_401.cs" />
