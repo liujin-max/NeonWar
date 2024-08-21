@@ -98,4 +98,8 @@ public class SkillSeatItem : MonoBehaviour
         }
     }
 
+    public void SetTextUp(bool flag)
+    {
+        m_Text.transform.localPosition = new Vector3(0, 89 * (flag ? 1 : -1), 0);
+    }
 }

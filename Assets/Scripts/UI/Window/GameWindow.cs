@@ -21,6 +21,8 @@ public class GameWindow : MonoBehaviour
     [SerializeField] Transform m_HPPivot;
     [SerializeField] Transform m_FingerPivot;
 
+    [SerializeField] Button m_BtnSetting;
+
 
     [SerializeField] private List<CanvasGroup> m_Groups = new List<CanvasGroup>();
 
@@ -106,6 +108,11 @@ public class GameWindow : MonoBehaviour
             EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS,  1f));
         });
 
+
+        //设置
+        m_BtnSetting.onClick.AddListener(()=>{
+            GameFacade.Instance.UIManager.LoadWindow("SettingWindow", UIManager.BOARD);
+        });
     }   
 
     public void Init()

@@ -9,14 +9,10 @@ using UnityEngine.UI;
 public class SettingWindow : MonoBehaviour
 {
     [SerializeField] Button m_BtnClose;
-    [SerializeField] Slider m_MusicSlider;
-    [SerializeField] Slider m_SoundSlider;
-    [SerializeField] Toggle m_VibrateToggle;
 
-    [SerializeField] GameObject m_ButtonPivot;
-    [SerializeField] Button m_BtnReturn;
-    [SerializeField] Button m_BtnContinue;
-    [SerializeField] Button m_BtnShare;
+    [SerializeField] Transform m_Music;
+    [SerializeField] Transform m_Sound;
+
 
     private Action m_Callback;
 
@@ -28,53 +24,50 @@ public class SettingWindow : MonoBehaviour
             GameFacade.Instance.UIManager.UnloadWindow(gameObject);
         });
 
-        m_MusicSlider.onValueChanged.AddListener((float value)=>{
-            GameFacade.Instance.SystemManager.MusicVolume = value;
+        m_Music.Find("Open").GetComponent<Button>().onClick.AddListener(()=>{
+            GameFacade.Instance.SystemManager.MusicVolume = 0;
+
+            FlushUI();
         });
 
-        m_SoundSlider.onValueChanged.AddListener((float value)=>{
-            GameFacade.Instance.SystemManager.SoundVolume = value;
+        m_Music.Find("Close").GetComponent<Button>().onClick.AddListener(()=>{
+            GameFacade.Instance.SystemManager.MusicVolume = 1;
+
+            FlushUI();
         });
 
-        m_VibrateToggle.onValueChanged.AddListener((flag)=>{
-            GameFacade.Instance.SystemManager.VibrateFlag = flag;
+        //
+        m_Sound.Find("Open").GetComponent<Button>().onClick.AddListener(()=>{
+            GameFacade.Instance.SystemManager.SoundVolume = 0;
+
+            FlushUI();
         });
 
+        m_Sound.Find("Close").GetComponent<Button>().onClick.AddListener(()=>{
+            GameFacade.Instance.SystemManager.SoundVolume = 1;
 
-        //继续游戏
-        m_BtnContinue.onClick.AddListener(()=>{
-            if (m_Callback != null) m_Callback();
-            
-            GameFacade.Instance.UIManager.UnloadWindow(gameObject);
+            FlushUI();
         });
     }
 
-
-    void OnDestroy()
-    {
-
-    }
-
-    // Start is called before the first frame update
     void Start()
     {
-        // Platform.Instance.INTER_VIDEOAD("adunit-eeebbaf0e72027e2");
-
-
-        m_MusicSlider.value     = GameFacade.Instance.SystemManager.MusicVolume;
-        m_SoundSlider.value     = GameFacade.Instance.SystemManager.SoundVolume;
-
-        m_VibrateToggle.isOn    = GameFacade.Instance.SystemManager.VibrateFlag;
+        FlushUI();
     }
+    
 
     public void SetCallback(Action callback)
     {
         m_Callback = callback;
     }
 
-    public void ShowButton(bool flag)
+    void FlushUI()
     {
-        m_ButtonPivot.SetActive(flag);
-        m_BtnShare.gameObject.SetActive(flag);
+        m_Music.Find("Open").gameObject.SetActive(GameFacade.Instance.SystemManager.MusicVolume > 0);
+        m_Music.Find("Close").gameObject.SetActive(GameFacade.Instance.SystemManager.MusicVolume == 0);
+
+        //
+        m_Sound.Find("Open").gameObject.SetActive(GameFacade.Instance.SystemManager.SoundVolume > 0);
+        m_Sound.Find("Close").gameObject.SetActive(GameFacade.Instance.SystemManager.SoundVolume == 0);
     }
 }

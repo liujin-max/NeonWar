@@ -118,6 +118,7 @@ public class SkillTreeItem : MonoBehaviour
 
             var item = new_skill_seat_item(i, m_SkillPivot.Find(skill_msg.POS));
             item.Init(skill_msg, skill_data);
+            item.SetTextUp(skill_msg.POS.Equals("1"));
         }
     }
 
