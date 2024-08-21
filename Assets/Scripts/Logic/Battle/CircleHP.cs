@@ -83,7 +83,7 @@ public class CircleHP : MonoBehaviour
         if (m_HitShaking) return;
         m_HitShaking = true;
         m_BarPivot.transform.localScale = Vector3.one;
-        m_BarPivot.transform.DOShakeScale(0.3f, 0.3f, vibrato: 35, randomness: 50, fadeOut: true).OnComplete(()=>{
+        m_BarPivot.transform.DOShakeScale(0.3f, 0.35f, vibrato: 35, randomness: 50, fadeOut: true).OnComplete(()=>{
             m_HitShaking = false;
         });
     }
