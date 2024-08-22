@@ -12,8 +12,9 @@ using UnityEngine;
 //当场上没有怪物时，使序列中的下一个怪物立即出场
 public class Spawn
 {
-    private List<MonsterJSON> m_EnemyPool = new List<MonsterJSON>();
-    private List<Enemy> m_Enemys = new List<Enemy>();
+    //不在这里初始化
+    private List<MonsterJSON> m_EnemyPool;
+    private List<Enemy> m_Enemys;
     public List<Enemy> Enemys {get {return m_Enemys;}}
 
     private List<Enemy> m_EnemyRemoves  = new List<Enemy>();
@@ -28,8 +29,16 @@ public class Spawn
 
     public void Init(LevelJSON level_json)
     {
+        int enemy_max = level_json.Monsters.Count;
+
+        //根据已知的大小做初始化、避免频繁扩容
+        m_EnemyPool = new List<MonsterJSON>(enemy_max);
         m_EnemyPool.AddRange(level_json.Monsters);
-        m_KillProgress  = new Pair(0, m_EnemyPool.Count);
+
+        m_Enemys    = new List<Enemy>(enemy_max);
+
+
+        m_KillProgress  = new Pair(0, enemy_max);
     }
 
     public void Pause()
