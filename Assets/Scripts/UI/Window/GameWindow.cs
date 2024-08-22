@@ -112,7 +112,7 @@ public class GameWindow : MonoBehaviour
         //设置
         m_BtnSetting.onClick.AddListener(()=>{
             Time.timeScale = 0;
-
+ 
             GameFacade.Instance.UIManager.LoadWindow("SettingWindow", UIManager.BOARD).GetComponent<SettingWindow>().SetCallback(()=>{
                 Time.timeScale = 1;
             });
