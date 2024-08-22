@@ -11,7 +11,7 @@ public static class AssetManager
     //从SpriteAtlas中读取
     public static Sprite LoadSprite(string atlas_path, string sprite_name)
     {
-        atlas_path  = "Atlas/" + atlas_path;
+        atlas_path  = "Atlas/Dynamic/" + atlas_path;
         if (!m_SpriteAtlas.ContainsKey(atlas_path)) 
         {
             m_SpriteAtlas[atlas_path] = Resources.Load<SpriteAtlas>(atlas_path);  //图集名称

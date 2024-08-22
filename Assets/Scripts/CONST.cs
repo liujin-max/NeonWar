@@ -5,7 +5,7 @@ using UnityEngine;
 
 public static class _C
 {
-    public static int DEFAULT_FRAME = 60;   //默认帧数
+    public static int DEFAULT_FRAME = 30;   //默认帧数
 
     public static string CLOUD_ENV = "fingerblock-3gqj06sx5ebc6035";    //云开发环境ID
 
