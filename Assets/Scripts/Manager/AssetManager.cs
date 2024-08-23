@@ -1,15 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.U2D;
 
-public static class AssetManager
+public class AssetManager : MonoBehaviour
 {
-    static Dictionary<string, SpriteAtlas> m_SpriteAtlas = new Dictionary<string, SpriteAtlas>();
+    Dictionary<string, SpriteAtlas> m_SpriteAtlas = new Dictionary<string, SpriteAtlas>();
 
 
     //从SpriteAtlas中读取
-    public static Sprite LoadSprite(string atlas_path, string sprite_name)
+    public Sprite LoadSprite(string atlas_path, string sprite_name)
     {
         atlas_path  = "Atlas/Dynamic/" + atlas_path;
         if (!m_SpriteAtlas.ContainsKey(atlas_path)) 
@@ -20,5 +21,40 @@ public static class AssetManager
         Sprite spr = m_SpriteAtlas[atlas_path].GetSprite(sprite_name);
 
         return spr;
+    }
+
+    public GameObject LoadPrefab(string path, Vector3 position, Transform parent)
+    {
+        var obj = Instantiate(Resources.Load<GameObject>(path), position, Quaternion.identity, parent);
+        obj.transform.localEulerAngles = Vector3.zero;
+        obj.transform.localPosition = position;
+
+        return obj;
+    }
+
+    public void AsyncLoadPrefab(string path, Vector3 position, Transform parent, Action<GameObject> callback)
+    {
+        StartCoroutine(AsyncLoad(path, position, parent, callback));
+    }
+
+    IEnumerator AsyncLoad(string path, Vector3 position, Transform parent, Action<GameObject> callback)
+    {
+        ResourceRequest request = Resources.LoadAsync<GameObject>(path);
+        yield return request;
+
+        if (request.asset != null)
+        {
+            GameObject prefab = request.asset as GameObject;
+
+            var obj = Instantiate(prefab, position, Quaternion.identity, parent);
+            obj.transform.localEulerAngles = Vector3.zero;
+            obj.transform.localPosition = position;
+
+            if (callback != null) callback(obj);
+        }
+        else
+        {
+            Debug.LogError("Failed to load prefab from path: " + path);
+        }
     }
 }

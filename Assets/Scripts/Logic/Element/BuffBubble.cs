@@ -23,7 +23,7 @@ public class BuffBubble : MonoBehaviour
         m_BuffID    = id;
         m_BuffValue = value;
 
-        m_Sprite.sprite = AssetManager.LoadSprite("Buff" , id.ToString());
+        m_Sprite.sprite = GameFacade.Instance.AssetManager.LoadSprite("Buff" , id.ToString());
     }
 
     void Shine()

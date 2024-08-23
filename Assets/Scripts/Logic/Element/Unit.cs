@@ -150,7 +150,7 @@ public class Unit : MonoBehaviour
 
     public virtual Projectile CreateProjectile(string projectile ,_C.TRACE trace_type, Vector2 to_pos, Action callback)
     {
-        var project = GameFacade.Instance.PrefabManager.Load(projectile, Vector3.zero, Field.Instance.Land.ELEMENT_ROOT).GetComponent<Projectile>();
+        var project = GameFacade.Instance.AssetManager.LoadPrefab(projectile, Vector3.zero, Field.Instance.Land.ELEMENT_ROOT).GetComponent<Projectile>();
         project.transform.position = ShootPivot.position;
         project.Init(trace_type, this, callback);
         project.GO(to_pos);

@@ -132,7 +132,6 @@
      <Compile Include="Assets\Scripts\Manager\EditorPlatform.cs" />
      <Compile Include="Assets\Scripts\UI\Window\SettingWindow.cs" />
      <Compile Include="Assets\Scripts\Logic\Enemy\Enemy_108.cs" />
-     <Compile Include="Assets\Scripts\Manager\PrefabManager.cs" />
      <Compile Include="Assets\Scripts\UI\Item\SkillItem.cs" />
      <Compile Include="Assets\DOTween\Modules\DOTweenModulePhysics2D.cs" />
      <Compile Include="Assets\Scripts\Struct\Pair.cs" />

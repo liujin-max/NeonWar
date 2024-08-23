@@ -66,7 +66,7 @@ public class Spawn
         }
 
         m_AsyncCount++;
-        GameFacade.Instance.PrefabManager.AsyncLoad("Prefab/Enemy/" + monsterJSON.ID, point, Field.Instance.Land.ENEMY_ROOT, (obj)=>{
+        GameFacade.Instance.AssetManager.AsyncLoadPrefab("Prefab/Enemy/" + monsterJSON.ID, point, Field.Instance.Land.ENEMY_ROOT, (obj)=>{
             var enemy = obj.GetComponent<Enemy>();
             m_Enemys.Add(enemy);
             enemy.gameObject.SetActive(false);
@@ -100,7 +100,7 @@ public class Spawn
     //分裂
     public void Summon(MonsterJSON monsterJSON, Vector2 point)
     {
-        GameFacade.Instance.PrefabManager.AsyncLoad("Prefab/Enemy/" + monsterJSON.ID, point, Field.Instance.Land.ENEMY_ROOT, (obj)=>{
+        GameFacade.Instance.AssetManager.AsyncLoadPrefab("Prefab/Enemy/" + monsterJSON.ID, point, Field.Instance.Land.ENEMY_ROOT, (obj)=>{
             var enemy = obj.GetComponent<Enemy>();
             enemy.Init(monsterJSON);
             enemy.IsSummon = true;

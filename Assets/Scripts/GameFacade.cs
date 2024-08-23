@@ -55,14 +55,14 @@ public class GameFacade : MonoBehaviour
         }
     }
 
-    private PrefabManager m_PrefabManager = null;
-    public PrefabManager PrefabManager
+    private AssetManager m_AssetManager = null;
+    public AssetManager AssetManager
     {
         get {
-            if (m_PrefabManager == null) {
-                m_PrefabManager = transform.AddComponent<PrefabManager>();
+            if (m_AssetManager == null) {
+                m_AssetManager = transform.AddComponent<AssetManager>();
             }
-            return m_PrefabManager;
+            return m_AssetManager;
         }
     }
 

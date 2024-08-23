@@ -205,7 +205,7 @@ public class Field : MonoBehaviour
         if (m_Player != null) return;
 
         int id  = DataCenter.Instance.User.CurrentPlayer.ID;
-        m_Player= GameFacade.Instance.PrefabManager.Load("Prefab/Player/Player_" + id, Vector2.zero, Land.ENTITY_ROOT).GetComponent<Player>();
+        m_Player= GameFacade.Instance.AssetManager.LoadPrefab("Prefab/Player/Player_" + id, Vector2.zero, Land.ENTITY_ROOT).GetComponent<Player>();
         m_Player.Init(id, 270);
         m_Player.Sync();
     }
@@ -223,7 +223,7 @@ public class Field : MonoBehaviour
     {
         var point   = ToolUtility.FindPointOnCircle(Vector2.zero, _C.DEFAULT_RADIUS, RandomUtility.Random(0, 360));
 
-        GameFacade.Instance.PrefabManager.AsyncLoad("Prefab/Element/BuffBubble", point, Land.ELEMENT_ROOT, (obj)=>{
+        GameFacade.Instance.AssetManager.AsyncLoadPrefab("Prefab/Element/BuffBubble", point, Land.ELEMENT_ROOT, (obj)=>{
             var bubble = obj.GetComponent<BuffBubble>();
             bubble.Init(id, value);
 
@@ -241,7 +241,7 @@ public class Field : MonoBehaviour
     //在场地上生成区域
     public void PushArea(Unit caster, string area_path, Vector2 point, float time)
     {
-        GameFacade.Instance.PrefabManager.AsyncLoad(area_path, point, Land.ELEMENT_ROOT, (obj)=>{
+        GameFacade.Instance.AssetManager.AsyncLoadPrefab(area_path, point, Land.ELEMENT_ROOT, (obj)=>{
             var area = obj.GetComponent<Area>();
             area.Init(caster, time);
 
