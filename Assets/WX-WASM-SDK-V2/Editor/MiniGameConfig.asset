@@ -29,7 +29,7 @@ MonoBehaviour:
     HideAfterCallMain: 1
     preloadFiles: 
     Orientation: 0
-    bgImageSrc: Assets/Resources/Battle/100.png
+    bgImageSrc: Assets/CustomAssets/Battle/100.png
     dataFileSubPrefix: 
     maxStorage: 200
     defaultReleaseSize: 31457280
