@@ -766,8 +766,14 @@
     <Reference Include="Unity.Burst.Editor">
         <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.Burst.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.ResourceManager">
+        <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.ResourceManager.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.2D.Common.Path.Editor">
         <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.2D.Common.Path.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ScriptableBuildPipeline">
+        <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.ScriptableBuildPipeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Services.Core">
         <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.Services.Core.dll</HintPath>
@@ -826,6 +832,15 @@
     <Reference Include="Unity.VSCode.Editor">
         <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.VSCode.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.MemoryProfiler">
+        <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.MemoryProfiler.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.EditorCoroutines.Editor">
+        <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.MemoryProfiler.Editor.MemoryProfilerModule">
+        <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.MemoryProfiler.Editor.MemoryProfilerModule.dll</HintPath>
+    </Reference>
     <Reference Include="PsdPlugin">
         <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\PsdPlugin.dll</HintPath>
     </Reference>
@@ -874,6 +889,12 @@
     <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
         <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.MemoryProfiler.Editor">
+        <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.MemoryProfiler.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Addressables.Editor">
+        <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.Addressables.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.InternalAPIEditorBridge.001">
         <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.InternalAPIEditorBridge.001.dll</HintPath>
     </Reference>
@@ -895,8 +916,8 @@
     <Reference Include="Unity.VisualScripting.State">
         <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.2D.SpriteShape.Editor">
-        <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.2D.SpriteShape.Editor.dll</HintPath>
+    <Reference Include="Unity.ScriptableBuildPipeline.Editor">
+        <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.ScriptableBuildPipeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Tilemap.Editor">
         <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.2D.Tilemap.Editor.dll</HintPath>
@@ -904,8 +925,14 @@
     <Reference Include="Unity.2D.Animation.Editor">
         <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.2D.Animation.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Addressables">
+        <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.Addressables.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.2D.IK.Editor">
         <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.2D.IK.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.SpriteShape.Editor">
+        <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.2D.SpriteShape.Editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
