@@ -12,11 +12,8 @@ public static class EFFECT
     public const string CRIT        = "Prefab/Effect/fx_crit";
     public const string MISS        = "Prefab/Effect/fx_miss";
     public const string WAVE        = "Prefab/Effect/fx_wave";
-    
-
-
-    public const string BLACKHOLE   = "Prefab/Element/BlackHole";
-    public const string CRASH       = "Prefab/Element/Crash";
+    public const string BLACKHOLE   = "Prefab/Effect/fx_blackhole";
+    public const string CRASH       = "Prefab/Effect/fx_crash";
     
     
 
