@@ -185,7 +185,6 @@ public class Field : MonoBehaviour
     {
         m_Glass += value;
     }
-
     
     //根据当前的击杀进度计算出可以获得多少碎片奖励
     public void ReceiveRewards()

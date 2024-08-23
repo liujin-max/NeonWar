@@ -59,6 +59,12 @@ SpriteAtlas:
     - d986788269edbb04f87ad5da1b223885: 21300000
     - 8c3112a26a0e36e41936b4b11d3a2285: 1746649201
     - 8c3112a26a0e36e41936b4b11d3a2285: 353982763
+    - d59b93b24c7a69a459d221709570e7e0: -1815562022
+    - d59b93b24c7a69a459d221709570e7e0: 1261152707
+    - d59b93b24c7a69a459d221709570e7e0: 308408689
+    - d59b93b24c7a69a459d221709570e7e0: -880319445
+    - d59b93b24c7a69a459d221709570e7e0: 78742582
+    - d59b93b24c7a69a459d221709570e7e0: -1228232763
     - 20d45ab292f96384f8a35bfb10b7f7b6: 21300000
     - 025e2373444f36b4fa600ecbc03efa06: 21300000
     - 30fd8426b53c2624a898a444a0d7d7ea: 21300000
@@ -98,6 +104,12 @@ SpriteAtlas:
   - {fileID: 21300000, guid: d986788269edbb04f87ad5da1b223885, type: 3}
   - {fileID: 1746649201, guid: 8c3112a26a0e36e41936b4b11d3a2285, type: 3}
   - {fileID: 353982763, guid: 8c3112a26a0e36e41936b4b11d3a2285, type: 3}
+  - {fileID: -1815562022, guid: d59b93b24c7a69a459d221709570e7e0, type: 3}
+  - {fileID: 1261152707, guid: d59b93b24c7a69a459d221709570e7e0, type: 3}
+  - {fileID: 308408689, guid: d59b93b24c7a69a459d221709570e7e0, type: 3}
+  - {fileID: -880319445, guid: d59b93b24c7a69a459d221709570e7e0, type: 3}
+  - {fileID: 78742582, guid: d59b93b24c7a69a459d221709570e7e0, type: 3}
+  - {fileID: -1228232763, guid: d59b93b24c7a69a459d221709570e7e0, type: 3}
   - {fileID: 21300000, guid: 20d45ab292f96384f8a35bfb10b7f7b6, type: 3}
   - {fileID: 21300000, guid: 025e2373444f36b4fa600ecbc03efa06, type: 3}
   - {fileID: 21300000, guid: 30fd8426b53c2624a898a444a0d7d7ea, type: 3}
@@ -136,6 +148,12 @@ SpriteAtlas:
   - Universal_btn_normal
   - Universal_orange_btn_1
   - Universal_orange_btn_0
+  - Universal_icon_worth_atlas_4
+  - Universal_icon_worth_atlas_5
+  - Universal_icon_worth_atlas_2
+  - Universal_icon_worth_atlas_3
+  - Universal_icon_worth_atlas_0
+  - Universal_icon_worth_atlas_1
   - Universal_glass
   - Universal_count_frame 1
   - Universal_backpack_icon

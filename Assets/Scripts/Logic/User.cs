@@ -69,6 +69,7 @@ public class PlayerMsg
     public bool InUse;  //使用中
     public int ATK = 1;
     public int ASP = 1;
+    public int WORTH = 1;
 
     //5个技能槽
     public List<SkillSlotMsg> SkillSlots;
@@ -284,28 +285,28 @@ public class User
         m_userUpdate = true;
     }
 
-    public void UpdateATK(int value)
+    public void UpdateProperty(_C.PROPERTY property, int value)
     {
-        CurrentPlayer.ATK += value;
+        switch (property)
+        {
+            case _C.PROPERTY.ATK: CurrentPlayer.ATK += value; break;
+            case _C.PROPERTY.ASP: CurrentPlayer.ASP += value; break;
+            case _C.PROPERTY.WORTH: CurrentPlayer.WORTH += value; break;
+        }
 
         m_userUpdate = true;
     }
 
-    public void UpdateASP(int value)
+    public int GetPropertyCost(_C.PROPERTY property)
     {
-        CurrentPlayer.ASP += value;
+        switch (property)
+        {
+            case _C.PROPERTY.ATK: return NumericalManager.FML_ATKCost(CurrentPlayer.ATK);
+            case _C.PROPERTY.ASP: return NumericalManager.FML_ASPCost(CurrentPlayer.ASP);
+            case _C.PROPERTY.WORTH: return NumericalManager.FML_WORTHCost(CurrentPlayer.WORTH);
+        }
 
-        m_userUpdate = true;
-    }
-
-    public int GetATKCost()
-    {
-        return NumericalManager.FML_ATKCost(CurrentPlayer.ATK);
-    }
-
-    public int GetASPCost()
-    {
-        return NumericalManager.FML_ASPCost(CurrentPlayer.ASP);
+        return 1;
     }
 
     public int GetPropertyLevel(_C.PROPERTY property)
@@ -314,6 +315,7 @@ public class User
         {
             case _C.PROPERTY.ATK: return CurrentPlayer.ATK;
             case _C.PROPERTY.ASP: return CurrentPlayer.ASP;
+            case _C.PROPERTY.WORTH: return CurrentPlayer.WORTH;
         }
 
         return 1;

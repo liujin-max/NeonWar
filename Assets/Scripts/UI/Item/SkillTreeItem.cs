@@ -12,12 +12,14 @@ public class SkillTreeItem : MonoBehaviour
     [Header("按钮")]
     [SerializeField] Button m_BtnATK;
     [SerializeField] Button m_BtnASP;
+    [SerializeField] Button m_BtnWORTH;
 
 
     Dictionary<_C.PROPERTY, List<BarTransition>> m_Bars = new Dictionary<_C.PROPERTY, List<BarTransition>>()
     {
-        [_C.PROPERTY.ATK] = new List<BarTransition>(),
-        [_C.PROPERTY.ASP] = new List<BarTransition>()
+        [_C.PROPERTY.ATK]   = new List<BarTransition>(),
+        [_C.PROPERTY.ASP]   = new List<BarTransition>(),
+        [_C.PROPERTY.WORTH] = new List<BarTransition>()
     };
 
     List<SkillSeatItem> m_SkillSeatItems = new List<SkillSeatItem>();
@@ -41,40 +43,35 @@ public class SkillTreeItem : MonoBehaviour
     {
         //升级攻击力
         m_BtnATK.onClick.AddListener(()=>{
-            int cost = DataCenter.Instance.User.GetATKCost();
-
-            if (DataCenter.Instance.User.Glass < cost) {
-                EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "<sprite=1>不足"));
-                return;
-            }
-
-            DataCenter.Instance.User.UpdateATK(1);
-            DataCenter.Instance.User.UpdateGlass(-cost);
-
-            FlushUI();
-            FlushBars(_C.PROPERTY.ATK);
-
-            EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS));
+            UpgradeProperty(_C.PROPERTY.ATK);
         });
-
 
         //升级攻速
         m_BtnASP.onClick.AddListener(()=>{
-            int cost = DataCenter.Instance.User.GetASPCost();
-
-            if (DataCenter.Instance.User.Glass < cost) {
-                EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "<sprite=1>不足"));
-                return;
-            }
-
-            DataCenter.Instance.User.UpdateASP(1);
-            DataCenter.Instance.User.UpdateGlass(-cost);
-
-            FlushUI();
-            FlushBars(_C.PROPERTY.ASP);
-
-            EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS));
+            UpgradeProperty(_C.PROPERTY.ASP);
         });
+
+        //升级价值
+        m_BtnWORTH.onClick.AddListener(()=>{
+            UpgradeProperty(_C.PROPERTY.WORTH);
+        });
+    }
+
+    void UpgradeProperty(_C.PROPERTY property)
+    {
+        int cost = DataCenter.Instance.User.GetPropertyCost(property);
+        if (DataCenter.Instance.User.Glass < cost) {
+            EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "<sprite=1>不足"));
+            return;
+        }
+
+        DataCenter.Instance.User.UpdateProperty(property, 1);
+        DataCenter.Instance.User.UpdateGlass(-cost);
+
+        FlushUI();
+        FlushBars(property);
+
+        EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS));
     }
 
 
@@ -88,12 +85,15 @@ public class SkillTreeItem : MonoBehaviour
     {
         int atk_level   = DataCenter.Instance.User.CurrentPlayer.ATK;
         int asp_level   = DataCenter.Instance.User.CurrentPlayer.ASP;
+        int wor_level   = DataCenter.Instance.User.CurrentPlayer.WORTH;
 
-        int atk_cost    = DataCenter.Instance.User.GetATKCost();
-        int asp_cost    = DataCenter.Instance.User.GetASPCost();
+        int atk_cost    = DataCenter.Instance.User.GetPropertyCost(_C.PROPERTY.ATK);
+        int asp_cost    = DataCenter.Instance.User.GetPropertyCost(_C.PROPERTY.ASP);
+        int wor_cost    = DataCenter.Instance.User.GetPropertyCost(_C.PROPERTY.WORTH);
 
         string atk_color= DataCenter.Instance.User.Glass >= atk_cost ? _C.COLOR_GREEN : _C.COLOR_RED;
         string asp_color= DataCenter.Instance.User.Glass >= asp_cost ? _C.COLOR_GREEN : _C.COLOR_RED;
+        string wor_color= DataCenter.Instance.User.Glass >= wor_cost ? _C.COLOR_GREEN : _C.COLOR_RED;
 
         m_BtnATK.transform.Find("Name").GetComponent<TextMeshProUGUI>().text            = "攻击";
         m_BtnATK.transform.Find("LevelPivot/Text").GetComponent<TextMeshProUGUI>().text = atk_level.ToString();
@@ -102,6 +102,10 @@ public class SkillTreeItem : MonoBehaviour
         m_BtnASP.transform.Find("Name").GetComponent<TextMeshProUGUI>().text            = "攻速";
         m_BtnASP.transform.Find("LevelPivot/Text").GetComponent<TextMeshProUGUI>().text = asp_level.ToString();
         m_BtnASP.transform.Find("CostPivot/Cost").GetComponent<TextMeshProUGUI>().text  = string.Format("<sprite=1>{0}{1}", asp_color, ToolUtility.FormatNumber(asp_cost));
+
+        m_BtnWORTH.transform.Find("Name").GetComponent<TextMeshProUGUI>().text              = "价值";
+        m_BtnWORTH.transform.Find("LevelPivot/Text").GetComponent<TextMeshProUGUI>().text   = wor_level.ToString();
+        m_BtnWORTH.transform.Find("CostPivot/Cost").GetComponent<TextMeshProUGUI>().text    = string.Format("<sprite=1>{0}{1}", wor_color, ToolUtility.FormatNumber(wor_cost));
     }
 
     void InitSkills()
@@ -147,6 +151,17 @@ public class SkillTreeItem : MonoBehaviour
             var bar2 = m_LinePivot.Find("ASP2/Bar").GetComponent<BarTransition>();
             bar2.Init(player.ATK, player.SkillSlots[3].ASP);
             m_Bars[_C.PROPERTY.ASP].Add(bar2);
+        }
+
+        //价值
+        {
+            // var bar1 = m_LinePivot.Find("ASP1/Bar").GetComponent<BarTransition>();
+            // bar1.Init(player.ATK, player.SkillSlots[2].ASP);
+            // m_Bars[_C.PROPERTY.ASP].Add(bar1);
+
+            // var bar2 = m_LinePivot.Find("ASP2/Bar").GetComponent<BarTransition>();
+            // bar2.Init(player.ATK, player.SkillSlots[3].ASP);
+            // m_Bars[_C.PROPERTY.ASP].Add(bar2);
         }
     }
 

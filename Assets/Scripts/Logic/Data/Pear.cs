@@ -124,7 +124,7 @@ public class Pear_Glass : Pear
     {
         base.Equip(player);
 
-        Caster.GlassRate.PutAUL(this, m_Data.Value / 100.0f);
+        Caster.GlassRate.PutMUL(this, 1 + m_Data.Value / 100.0f);
     }
 
     public override void UnEquip()

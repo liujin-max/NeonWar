@@ -42,7 +42,8 @@ public static class _C
     public enum PROPERTY
     {
         ATK,
-        ASP
+        ASP,
+        WORTH
     }
  
     //状态机的状态列表

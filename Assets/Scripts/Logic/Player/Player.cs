@@ -134,11 +134,14 @@ public class Player : Unit
     {
         int atk_level = DataCenter.Instance.User.CurrentPlayer.ATK;
         int asp_level = DataCenter.Instance.User.CurrentPlayer.ASP;
+        int wor_level = DataCenter.Instance.User.CurrentPlayer.WORTH;
 
 
         ATT.ATK.SetBase(NumericalManager.FML_ATK(atk_level));
         ATT.ASP.SetBase(NumericalManager.FML_ASP(ATT.ASP.GetBase(), asp_level));
         ASP.Reset(ATT.ASP.ToNumber() / 1000.0f);
+
+        GlassRate.PutAUL(this, NumericalManager.FML_WORTH(wor_level) / 100.0f);
 
 
         //同步技能
