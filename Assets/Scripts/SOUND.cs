@@ -11,11 +11,11 @@ public static class SOUND
 
 
     //音效
-    public const string COIN        = "Prefab/Sound/Sound_coin";
-    public const string CLICK       = "Prefab/Sound/Sound_click";
-    public const string HIT         = "Prefab/Sound/Sound_hit";
-    public const string TIP         = "Prefab/Sound/Sound_tip";
-    public const string HIT_SHIELD  = "Prefab/Sound/Sound_hitshield";
+    public const string COIN        = "Sound_coin";
+    public const string CLICK       = "Sound_click";
+    public const string HIT         = "Sound_hit";
+    public const string TIP         = "Sound_tip";
+    public const string HIT_SHIELD  = "Sound_hitshield";
 
 
     

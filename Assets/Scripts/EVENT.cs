@@ -23,6 +23,8 @@ public static class EVENT
 
     public static string ONBATTLESTART      = "ONBATTLESTART";
     public static string ONBATTLEEND        = "ONBATTLEEND";
+    //
+    public static string ONPLAYERCREATE     = "ONPLAYERCREATE";
     //玩家血量变化
     public static string ONHPUPDATE         = "ONHPUPDATE";
     //创建子弹

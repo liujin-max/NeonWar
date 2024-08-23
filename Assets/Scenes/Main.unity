@@ -949,7 +949,7 @@ MonoBehaviour:
   Version: 1.0.0
   OpenAdvert: 1
   TestMode: 0
-  TestStage: 0
+  TestStage: 2
 --- !u!1 &1640637242
 GameObject:
   m_ObjectHideFlags: 0

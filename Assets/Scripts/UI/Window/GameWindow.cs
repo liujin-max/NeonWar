@@ -43,6 +43,7 @@ public class GameWindow : MonoBehaviour
         EventManager.AddHandler(EVENT.ONBATTLEEND,      OnBattleEnd);
         EventManager.AddHandler(EVENT.ONUPDATEGLASS,    OnUpdateGlass);
         EventManager.AddHandler(EVENT.ONHPUPDATE,       OnUpdateHP);
+        EventManager.AddHandler(EVENT.ONPLAYERCREATE,   OnPlayerCreate);
         
 
         EventManager.AddHandler(EVENT.UI_BLINKSHAKE,    OnBlinkShake);
@@ -56,7 +57,7 @@ public class GameWindow : MonoBehaviour
         EventManager.DelHandler(EVENT.ONBATTLEEND,      OnBattleEnd);
         EventManager.DelHandler(EVENT.ONUPDATEGLASS,    OnUpdateGlass);
         EventManager.DelHandler(EVENT.ONHPUPDATE,       OnUpdateHP);
-
+        EventManager.DelHandler(EVENT.ONPLAYERCREATE,   OnPlayerCreate);
 
         EventManager.DelHandler(EVENT.UI_BLINKSHAKE,    OnBlinkShake);
         EventManager.DelHandler(EVENT.UI_SKILLUPGRADE,  OnSkillUpgrade);
@@ -246,8 +247,6 @@ public class GameWindow : MonoBehaviour
     //战斗开始
     private void OnBattleStart(GameEvent @event)
     {
-        InitPlayerHP();
-
         m_Groups.ForEach(group => {
             group.DOFade(0, 0.2f).OnComplete(()=>{
                 // group.gameObject.SetActive(false);
@@ -283,6 +282,11 @@ public class GameWindow : MonoBehaviour
         if (m_HPITEM == null) return;
 
         m_HPITEM.FlushHP();
+    }
+
+    void OnPlayerCreate(GameEvent @event)
+    {
+        InitPlayerHP();
     }
 
 

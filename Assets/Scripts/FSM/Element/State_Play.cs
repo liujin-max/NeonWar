@@ -43,6 +43,8 @@ public class State_Play<T> : State<Field>
     {
         float direction = (float)@event.GetParam(0);
 
+        if (Field.Instance.Player == null) return;
+
         Field.Instance.Player.Move(direction);
     }
 

@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:yousandi.cn,2023:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Sound
+  m_EditorClassIdentifier: 
+  m_GroupName: Sound
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 0a4450c7e742ae84db77ce9e3fad948f
+  m_SerializeEntries:
+  - m_GUID: 539f3f04cf23cdc4eafd257334d53973
+    m_Address: Sound_Broken
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a5e5e6d20ae59d14ba48e13fee696063
+    m_Address: Sound_chain
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f9ccf86e48450c74fbfb7ad66b6f1e3e
+    m_Address: Sound_click
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b5c1ad073c6c95a4182fc1809b4e72a5
+    m_Address: Sound_coin
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cf8c1586edb48324fb43e7b8679e498d
+    m_Address: Sound_exchange
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 180eced2014db054d93de287dcbcc395
+    m_Address: Sound_getcoin
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b52a7dc99c0fed14dbdb96f8a21fe789
+    m_Address: Sound_hit
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d1386e4ed8758564aa8781cad2448c37
+    m_Address: Sound_hitshield
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d2d91cc2d3a385743b6329160f5650db
+    m_Address: Sound_Jump
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 85fb430b10e64eb4dababc1c144d2d56
+    m_Address: Sound_move
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 13cf442e8a2d7cc4786d2a1f8bc6fa7b
+    m_Address: Sound_rankup
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a66e9016b63a214478b46dcd61e1cf76
+    m_Address: Sound_reward
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fa1db5e2ba1e7fb4bb6ef960a5da7ffe
+    m_Address: Sound_shuffle
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 095ae01788e0c3b43b9c65186c56c5c9
+    m_Address: Sound_snap
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 199bf2bb0c9f6eb4d82d1a30eb6be3a9
+    m_Address: Sound_tip
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: f040b7e09b8d50d4fa1c2d36f8f116ad, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 52fb2917023f6124d87b7870e3924c65, type: 2}
+    - {fileID: 11400000, guid: 543cf06cd796c2b429291d10eb6e6926, type: 2}

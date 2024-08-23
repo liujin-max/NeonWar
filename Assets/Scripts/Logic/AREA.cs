@@ -4,5 +4,5 @@ using UnityEngine;
 
 public static class AREA
 {
-    public const string THORNS = "Prefab/Area/AreaThorns";
+    public const string THORNS = "AreaThorns";
 }

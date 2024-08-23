@@ -32,9 +32,7 @@ public class Spawn
         int enemy_max = level_json.Monsters.Count;
 
         //根据已知的大小做初始化、避免频繁扩容
-        m_EnemyPool = new List<MonsterJSON>(enemy_max);
-        m_EnemyPool.AddRange(level_json.Monsters);
-
+        m_EnemyPool = new List<MonsterJSON>(level_json.Monsters);
         m_Enemys    = new List<Enemy>(enemy_max);
 
 
@@ -51,10 +49,18 @@ public class Spawn
         m_Enemys.ForEach(e => e.Resume());
     }
 
+    public bool IsSpawing()
+    {
+        return m_AsyncCount != 0;
+    }
+
     public bool IsClear()
     {
-        return m_EnemyPool.Count == 0 && m_Enemys.Count == 0 && m_AsyncCount == 0;
+        if (IsSpawing()) return false;
+
+        return m_EnemyPool.Count == 0 && m_Enemys.Count == 0;
     }
+
 
     void PutEnemy(MonsterJSON monsterJSON)
     {
@@ -66,7 +72,7 @@ public class Spawn
         }
 
         m_AsyncCount++;
-        GameFacade.Instance.PrefabManager.AsyncLoad("Prefab/Enemy/" + monsterJSON.ID, point, Field.Instance.Land.ENEMY_ROOT, (obj)=>{
+        AssetManager.LoadPrefab(monsterJSON.ID.ToString(), point, Field.Instance.Land.ENEMY_ROOT, (obj)=>{
             var enemy = obj.GetComponent<Enemy>();
             m_Enemys.Add(enemy);
             enemy.gameObject.SetActive(false);
@@ -100,7 +106,7 @@ public class Spawn
     //分裂
     public void Summon(MonsterJSON monsterJSON, Vector2 point)
     {
-        GameFacade.Instance.PrefabManager.AsyncLoad("Prefab/Enemy/" + monsterJSON.ID, point, Field.Instance.Land.ENEMY_ROOT, (obj)=>{
+        AssetManager.LoadPrefab(monsterJSON.ID.ToString(), point, Field.Instance.Land.ENEMY_ROOT, (obj)=>{
             var enemy = obj.GetComponent<Enemy>();
             enemy.Init(monsterJSON);
             enemy.IsSummon = true;
@@ -115,7 +121,7 @@ public class Spawn
         if (m_EnemyPool.Count > 0)
         {
             //场上没有怪物了，则集体速减CD
-            if (m_Enemys.Count == 0) {
+            if (m_Enemys.Count == 0 && !IsSpawing()) {
                 float time = m_EnemyPool[0].Time;
 
                 m_EnemyPool.ForEach(monster_json => {

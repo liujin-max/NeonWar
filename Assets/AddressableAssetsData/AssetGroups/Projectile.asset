@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:yousandi.cn,2023:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Projectile
+  m_EditorClassIdentifier: 
+  m_GroupName: Projectile
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 540bc37d2904b954c80dafa122d3449b
+  m_SerializeEntries:
+  - m_GUID: 12bfbe67c347edc4e975e83782ea4886
+    m_Address: Projectile_Seed
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: f040b7e09b8d50d4fa1c2d36f8f116ad, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 6abc7603f08725742a47816de9f33d50, type: 2}
+    - {fileID: 11400000, guid: a9c2aaf64f2a69f49a46fa64cdd320f1, type: 2}

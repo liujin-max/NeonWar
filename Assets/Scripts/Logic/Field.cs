@@ -66,15 +66,12 @@ public class Field : MonoBehaviour
 
         GameFacade.Instance.UIManager.LoadWindow("GameWindow", UIManager.BOTTOM).GetComponent<GameWindow>().Init();
 
-
         m_FSM.Transist(_C.FSMSTATE.IDLE);
     }
 
     //开始游玩
     public void Play(int level_id)
     {
-        STATE   = _C.GAME_STATE.PLAY;
-
         BlinkTimer.Reset(_C.DEFAULT_BLINKCD);
         BlinkTimer.Full();
 
@@ -86,10 +83,17 @@ public class Field : MonoBehaviour
         Debug.Log("========  开始关卡：" + level_id + "  ========");
 
         //将最新的加成等级应用到Player身上
-        InitPlayer();
-        // m_Player.Sync();
+        int id  = DataCenter.Instance.User.CurrentPlayer.ID;
+        AssetManager.LoadPrefab("Player_" + id, Vector2.zero, Land.ENTITY_ROOT, (obj)=>{
+            m_Player = obj.GetComponent<Player>();
+            m_Player.Init(id, 270);
+            m_Player.Sync();
 
-        EventManager.SendEvent(new GameEvent(EVENT.ONBATTLESTART));
+            STATE   = _C.GAME_STATE.PLAY;
+
+            EventManager.SendEvent(new GameEvent(EVENT.ONPLAYERCREATE, m_Player));
+            EventManager.SendEvent(new GameEvent(EVENT.ONBATTLESTART));
+        });
     }
 
     //结束游玩
@@ -200,15 +204,6 @@ public class Field : MonoBehaviour
         DataCenter.Instance.User.UpdateGlass(glass);
     }
 
-    public void InitPlayer()
-    {
-        if (m_Player != null) return;
-
-        int id  = DataCenter.Instance.User.CurrentPlayer.ID;
-        m_Player= GameFacade.Instance.PrefabManager.Load("Prefab/Player/Player_" + id, Vector2.zero, Land.ENTITY_ROOT).GetComponent<Player>();
-        m_Player.Init(id, 270);
-        m_Player.Sync();
-    }
 
     public void RemovePlayer()
     {
@@ -223,7 +218,7 @@ public class Field : MonoBehaviour
     {
         var point   = ToolUtility.FindPointOnCircle(Vector2.zero, _C.DEFAULT_RADIUS, RandomUtility.Random(0, 360));
 
-        GameFacade.Instance.PrefabManager.AsyncLoad("Prefab/Element/BuffBubble", point, Land.ELEMENT_ROOT, (obj)=>{
+        AssetManager.LoadPrefab("Element/BuffBubble", point, Land.ELEMENT_ROOT, (obj)=>{
             var bubble = obj.GetComponent<BuffBubble>();
             bubble.Init(id, value);
 
@@ -241,7 +236,7 @@ public class Field : MonoBehaviour
     //在场地上生成区域
     public void PushArea(Unit caster, string area_path, Vector2 point, float time)
     {
-        GameFacade.Instance.PrefabManager.AsyncLoad(area_path, point, Land.ELEMENT_ROOT, (obj)=>{
+        AssetManager.LoadPrefab(area_path, point, Land.ELEMENT_ROOT, (obj)=>{
             var area = obj.GetComponent<Area>();
             area.Init(caster, time);
 
