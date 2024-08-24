@@ -29,6 +29,8 @@ public class Hit
 
     public Hit(Unit caster)
     {
+        Caster = caster;
+        
         ATK.SetBase(caster.ATT.ATK.ToNumber());
         CP.SetBase(caster.ATT.CP.ToNumber());
         CT.SetBase(caster.ATT.CT.ToNumber());

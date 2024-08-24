@@ -948,7 +948,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Version: 1.0.0
   OpenAdvert: 1
-  TestMode: 0
+  TestMode: 1
   TestStage: 0
 --- !u!1 &1640637242
 GameObject:

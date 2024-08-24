@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using UnityEngine;
 
 
@@ -183,7 +184,7 @@ public class Skill_10030 : Skill
             .OrderBy(obj => Vector3.Distance(o_pos, obj.transform.localPosition))
             .ToArray();
 
-            
+        
         for (int i = 0; i < Skill.ToValue(Data, Level); i++)
         {
             if (i >= sortedObjects.Length) break;
@@ -322,27 +323,36 @@ public class Skill_10120 : Skill
 
 
 
-#region 弓：急速箭矢
-//箭矢移动速度提高#%
+#region 弓：击退箭矢
+//箭矢有#%的概率击退目标
 public class Skill_10130 : Skill
 {
     public Skill_10130()
     {
-        EventManager.AddHandler(EVENT.ONBULLETCREATE,    OnBulletCreate);
+        EventManager.AddHandler(EVENT.ONBULLETHIT,  OnBulletHit);
     }
 
     public override void Dispose()
     {
-        EventManager.DelHandler(EVENT.ONBULLETCREATE,    OnBulletCreate);
+        EventManager.DelHandler(EVENT.ONBULLETHIT,  OnBulletHit);
     }
 
-    //创建子弹
-    void OnBulletCreate(GameEvent @event)
+    //子弹击中目标
+    private void OnBulletHit(GameEvent @event)
     {
         Bullet b = @event.GetParam(0) as Bullet;
         if (b.Caster != Caster) return;
 
-        b.Speed.PutAUL(this, Skill.ToValue(Data, Level) / 100.0f);
+        Enemy unit = @event.GetParam(1) as Enemy;
+
+        if (unit == null) return;
+
+        if (RandomUtility.IsHit(Skill.ToValue(Data, Level)))
+        {
+            unit.Repel(b.Velocity.normalized * 8);
+
+        }
+        
     }
 }
 #endregion
@@ -409,9 +419,69 @@ public class Skill_10170 : Skill
 
 
 
+#region 弓：疾速
+//每击杀一个目标，攻速提高#%
+public class Skill_10260 : Skill
+{
+    private int m_KillCount;
+
+    public Skill_10260()
+    {
+        EventManager.AddHandler(EVENT.ONKILLENEMY,  OnKillEnemy);
+    }
+
+    public override void Dispose()
+    {
+        EventManager.DelHandler(EVENT.ONKILLENEMY,  OnKillEnemy);
+    }
+
+    //创建子弹
+    void OnKillEnemy(GameEvent @event)
+    {
+        Hit hit = @event.GetParam(1) as Hit;
+
+        if (hit.Caster != Caster) return;
+        
+        m_KillCount++;
+
+        float value = Skill.ToValue(Data, Level) / 100.0f;
+        hit.Caster.ATT.ASP.PutAUL(this, -value * m_KillCount);
+        hit.Caster.SyncASP();
+    }
+}
+#endregion
 
 
+#region 弓：杀意
+//每击杀一个目标，攻击提高#%
+public class Skill_10270 : Skill
+{
+    private int m_KillCount;
 
+    public Skill_10270()
+    {
+        EventManager.AddHandler(EVENT.ONKILLENEMY,  OnKillEnemy);
+    }
+
+    public override void Dispose()
+    {
+        EventManager.DelHandler(EVENT.ONKILLENEMY,  OnKillEnemy);
+    }
+
+    //创建子弹
+    void OnKillEnemy(GameEvent @event)
+    {
+        Hit hit = @event.GetParam(1) as Hit;
+
+        if (hit.Caster != Caster) return;
+        
+        m_KillCount++;
+
+        float value = Skill.ToValue(Data, Level) / 100.0f;
+        hit.Caster.ATT.ATK.PutAUL(this, value * m_KillCount);  
+    }
+}
+#endregion
 
 
 
@@ -448,6 +518,10 @@ public class Skill
 
         {10160, () => new Skill_10160()},
         {10170, () => new Skill_10170()},
+
+        //弓 价值
+        {10260, () => new Skill_10260()},
+        {10270, () => new Skill_10270()},
     };
 
 
@@ -469,12 +543,12 @@ public class Skill
     //参数
     public static int ToValue(SkillData skillData, int level)
     {
-        return skillData.Values[Mathf.Min(skillData.LevelMax - 1, level)];
+        return skillData.Values[Mathf.Min(skillData.LevelMax - 1, level - 1)];
     }
 
     public static string GetDescription(SkillData skillData, int level)
     {
-        int value = Skill.ToValue(skillData, Mathf.Min(skillData.LevelMax - 1, level));
+        int value = Skill.ToValue(skillData, Mathf.Min(skillData.LevelMax, level));
 
         return skillData.Description.Replace("#", value.ToString());
     }

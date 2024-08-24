@@ -139,7 +139,7 @@ public class Player : Unit
 
         ATT.ATK.SetBase(NumericalManager.FML_ATK(atk_level));
         ATT.ASP.SetBase(NumericalManager.FML_ASP(ATT.ASP.GetBase(), asp_level));
-        ASP.Reset(ATT.ASP.ToNumber() / 1000.0f);
+        SyncASP();
 
         GlassRate.PutAUL(this, NumericalManager.FML_WORTH(wor_level) / 100.0f);
 
@@ -156,7 +156,7 @@ public class Player : Unit
             });
 
             //测试技能
-            // m_Skills.Add(Skill.Create(DataCenter.Instance.League.GetSkillData(10160), this, 3));
+            m_Skills.Add(Skill.Create(DataCenter.Instance.League.GetSkillData(10270), this, 3));
         }
 
         //同步宝珠
@@ -178,6 +178,11 @@ public class Player : Unit
             // m_Pears.Add(pear);
         }
         
+    }
+
+    public override void SyncASP()
+    {
+        ASP.SetDuration(ATT.ASP.ToNumber() / 1000.0f);
     }
 
     #endregion

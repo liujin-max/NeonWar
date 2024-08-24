@@ -118,7 +118,7 @@ public class GameUserData
                 new SkillSlotMsg() {ASP =25, POS = "12", SkillPool = new int[] {10160, 10170}},
 
                 //大招
-                new SkillSlotMsg() {ATK =30, ASP =30, POS = "99", SkillPool = new int[] {10210, 10220, 10230}}
+                // new SkillSlotMsg() {ATK =30, ASP =30, POS = "99", SkillPool = new int[] {10210, 10220, 10230}}
             },
             PearSlots   = new List<PearSlotMsg>()   //2个宝珠槽
             {

@@ -54,7 +54,7 @@ public class SkillItem : MonoBehaviour
         m_Icon.sprite   = GameFacade.Instance.AssetManager.LoadSprite("Skills/" + DataCenter.Instance.User.CurrentPlayer.ID, m_SkillData.ID.ToString()); 
         m_Icon.SetNativeSize();
 
-        m_Description.text = Skill.GetDescription(m_SkillData, m_SkillSlot.Level);
+        m_Description.text = Skill.GetDescription(m_SkillData, m_SkillSlot.Level + 1);
 
         int cost    = Skill.GetCost(m_SkillData, m_SkillSlot.Level);
 

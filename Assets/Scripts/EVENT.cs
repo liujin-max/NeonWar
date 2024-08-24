@@ -35,4 +35,6 @@ public static class EVENT
     public static string ONADDBUFF          = "ONADDBUFF";
     //闪避攻击
     public static string ONDODGE            = "ONDODGE";
+    //击杀怪物
+    public static string ONKILLENEMY        = "ONKILLENEMY";
 }

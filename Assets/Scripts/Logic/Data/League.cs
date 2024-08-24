@@ -10,7 +10,6 @@ public class SkillData
 {
     public int ID;
     public string Name;
-    public int Belong;
     public int LevelMax;
     public int[] Values;
     public int[] Glass;
@@ -22,7 +21,6 @@ public class SkillData
 public class League
 {
     private Dictionary<int, SkillData> m_SkillDic = new Dictionary<int, SkillData>();
-    private Dictionary<int, List<SkillData>> m_PlayerSkills = new Dictionary<int, List<SkillData>>();
 
     public void Init()
     {
@@ -39,37 +37,19 @@ public class League
             {
                 ID          = Convert.ToInt32(data[0]),
                 Name        = data[1],
-                Belong      = Convert.ToInt32(data[2]),
-                LevelMax    = Convert.ToInt32(data[3]),
-                Values      = data[4].Split('|').Select(int.Parse).ToArray(),
-                Glass       = data[5].Split('|').Select(int.Parse).ToArray(),
-                Description = data[6]
+                LevelMax    = Convert.ToInt32(data[2]),
+                Values      = data[3].Split('|').Select(int.Parse).ToArray(),
+                Glass       = data[4].Split('|').Select(int.Parse).ToArray(),
+                Description = data[5]
             };
 
             m_SkillDic[skill.ID]  = skill;
-
-            if (!m_PlayerSkills.ContainsKey(skill.Belong))
-            {
-                m_PlayerSkills[skill.Belong] = new List<SkillData>();
-            }
-
-            m_PlayerSkills[skill.Belong].Add(skill);
         }
     }
 
     public SkillData GetSkillData(int id)
     {
         return m_SkillDic.TryGetValue(id, out var data) ? data : null;
-    }
-
-    public List<SkillData> GetPlayerSkills(int player_id)
-    {
-        List<SkillData> skills = new List<SkillData>();
-        if (m_PlayerSkills.TryGetValue(player_id, out skills)) {
-            return skills;
-        }
-
-        return skills;
     }
 
     //重置技能

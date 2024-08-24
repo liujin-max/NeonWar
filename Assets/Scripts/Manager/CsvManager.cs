@@ -50,7 +50,7 @@ public class CsvManager: MonoBehaviour
         return null;
     }
 
-    public void ReadCsv(string table_key, string csvName)
+    void ReadCsv(string table_key, string csvName)
     {
         TextAsset csvFile = Resources.Load<TextAsset>(csvName);
 

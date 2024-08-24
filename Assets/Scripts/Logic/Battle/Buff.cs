@@ -168,7 +168,7 @@ public class Buff_ATKUP : Buff
 
     public override void Init()
     {
-        Caster.ATT.ATK.PutAUL(this, 0.5f);
+        Caster.ATT.ATK.PutMUL(this, 1.5f);
     }
 
     public override void Dispose()
@@ -190,7 +190,7 @@ public class Buff_ATKDOWN : Buff
 
     public override void Init()
     {
-        Caster.ATT.ATK.PutAUL(this, -0.5f);
+        Caster.ATT.ATK.PutMUL(this, 0.5f);
     }
 
     public override void Dispose()
@@ -212,13 +212,13 @@ public class Buff_ASPUP : Buff
     public override void Init()
     {
         Caster.ATT.ASP.PutMUL(this, 0.5f);
-        Caster.ASP.SetDuration(Caster.ATT.ASP.ToNumber() / 1000.0f);
+        Caster.SyncASP();
     }
 
     public override void Dispose()
     {
         Caster.ATT.ASP.Pop(this);
-        Caster.ASP.SetDuration(Caster.ATT.ASP.ToNumber() / 1000.0f);
+        Caster.SyncASP();
     }
 }
 #endregion
@@ -236,13 +236,13 @@ public class Buff_ASPDOWN : Buff
     public override void Init()
     {
         Caster.ATT.ASP.PutMUL(this, 1.5f);
-        Caster.ASP.SetDuration(Caster.ATT.ASP.ToNumber() / 1000.0f);
+        Caster.SyncASP();
     }
 
     public override void Dispose()
     {
         Caster.ATT.ASP.Pop(this);
-        Caster.ASP.SetDuration(Caster.ATT.ASP.ToNumber() / 1000.0f);
+        Caster.SyncASP();
     }
 }
 #endregion
@@ -258,7 +258,7 @@ public class Buff_SPEEDUP : Buff
 
     public override void Init()
     {
-        Caster.ATT.SPEED.PutAUL(this, 0.3f);
+        Caster.ATT.SPEED.PutMUL(this, 1.3f);
     }
 
     public override void Dispose()
@@ -280,7 +280,7 @@ public class Buff_SPEEDDOWN : Buff
 
     public override void Init()
     {
-        Caster.ATT.SPEED.PutAUL(this, -0.3f);
+        Caster.ATT.SPEED.PutMUL(this, 0.7f);
     }
 
     public override void Dispose()

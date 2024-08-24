@@ -164,6 +164,16 @@ public class Unit : MonoBehaviour
 
     }
 
+    public virtual void SyncSpeed()
+    {
+        
+    }
+
+    public virtual void SyncASP()
+    {
+        
+    }
+
     public Buff AddBuff(int buff_id, int value, float time = 0f)
     {
         Buff b;

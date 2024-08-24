@@ -21,6 +21,9 @@ public class Enemy : Unit
     public int Glass { get {return m_Data.Glass;}}
 
     [HideInInspector] public bool IsSummon = false;
+    private bool m_IsRepel = false;   //击退中
+    private CDTimer m_RepelTimer = new CDTimer(0.8f);
+    private Vector2 m_RepelVelocity;
 
     private Vector2 m_LastVelocity;
     private float m_LastAngularVelocity;
@@ -66,6 +69,24 @@ public class Enemy : Unit
         Destroy(gameObject);
     }
 
+    public override bool CustomUpdate(float deltaTime)
+    {
+        //击退
+        if (m_IsRepel) {
+            m_RepelTimer.Update(deltaTime);
+
+            // 逐渐恢复速度
+            m_Rigidbody.velocity = Vector3.Lerp(m_Rigidbody.velocity, m_RepelVelocity, m_RepelTimer.Progress);
+
+            if (m_RepelTimer.IsFinished() == true) {
+                m_IsRepel = false;
+            }
+        }
+        
+
+
+        return base.CustomUpdate(deltaTime);
+    }
 
     #region 表现处理
 
@@ -102,6 +123,8 @@ public class Enemy : Unit
         e.transform.right = hit.Velocity;
         e.Init(m_Color);
 
+
+        EventManager.SendEvent(new GameEvent(EVENT.ONKILLENEMY, this, hit));
     }
 
     //怪物通常没有攻击动画，所以直接执行DoAttack
@@ -131,12 +154,26 @@ public class Enemy : Unit
     //strength :力的强度，意味着移动速度
     public void Push()
     {
-        float angle = RandomUtility.Random(0, 360);
+        m_Angle = RandomUtility.Random(0, 360);
 
-        m_Rigidbody.velocity = ToolUtility.FindPointOnCircle(Vector2.zero, ATT.SPEED.ToNumber() / 100.0f, angle);
+        m_Rigidbody.velocity = ToolUtility.FindPointOnCircle(Vector2.zero, ATT.SPEED.ToNumber() / 100.0f, m_Angle);
     }
 
-    public void SyncSpeed()
+    //击退
+    public void Repel(Vector2 force)
+    {
+        //免疫击退
+        if (ATT.SPEED.GetBase() == 0) return;
+
+        if (!m_IsRepel) m_RepelVelocity = m_Rigidbody.velocity;
+
+        m_IsRepel = true;
+        m_RepelTimer.Reset();
+
+        m_Rigidbody.AddForce(force, ForceMode2D.Impulse);    
+    }
+
+    public override void SyncSpeed()
     {
         m_Rigidbody.velocity = m_Rigidbody.velocity.normalized * ATT.SPEED.ToNumber() / 100.0f;
     }

@@ -133,23 +133,31 @@ public class SkillTreeItem : MonoBehaviour
 
         //攻击
         {
+            float last_value = 1;
+
             var bar1 = m_LinePivot.Find("ATK1/Bar").GetComponent<BarTransition>();
-            bar1.Init(player.ATK, player.SkillSlots[0].ATK);
+            bar1.Init(player.ATK, player.SkillSlots[0].ATK, last_value);
             m_Bars[_C.PROPERTY.ATK].Add(bar1);
 
+            last_value = player.SkillSlots[0].ATK;
+
             var bar2 = m_LinePivot.Find("ATK2/Bar").GetComponent<BarTransition>();
-            bar2.Init(player.ATK, player.SkillSlots[1].ATK);
+            bar2.Init(player.ATK , player.SkillSlots[1].ATK , last_value);
             m_Bars[_C.PROPERTY.ATK].Add(bar2);
         }
 
         //攻速
         {
+            float last_value = 1;
+
             var bar1 = m_LinePivot.Find("ASP1/Bar").GetComponent<BarTransition>();
-            bar1.Init(player.ATK, player.SkillSlots[2].ASP);
+            bar1.Init(player.ASP, player.SkillSlots[2].ASP, last_value);
             m_Bars[_C.PROPERTY.ASP].Add(bar1);
 
+            last_value = player.SkillSlots[2].ASP;
+
             var bar2 = m_LinePivot.Find("ASP2/Bar").GetComponent<BarTransition>();
-            bar2.Init(player.ATK, player.SkillSlots[3].ASP);
+            bar2.Init(player.ASP, player.SkillSlots[3].ASP, last_value);
             m_Bars[_C.PROPERTY.ASP].Add(bar2);
         }
 
