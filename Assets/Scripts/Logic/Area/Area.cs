@@ -27,7 +27,7 @@ public class Area : MonoBehaviour
     }
 
     //自定义的Update函数
-    public void CustomUpdate(float deltaTime)
+    public virtual void CustomUpdate(float deltaTime)
     {
         m_Timer.Update(deltaTime);
     }

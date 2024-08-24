@@ -57,6 +57,10 @@ public class Player : Unit
     {
         if (!base.CustomUpdate(deltaTime)) return false;
 
+        m_Skills.ForEach(skill => {
+            skill.CustomUpdate(deltaTime);
+        });
+
         InvincibleTimer.Update(deltaTime);
 
         return true;
@@ -156,7 +160,7 @@ public class Player : Unit
             });
 
             //测试技能
-            m_Skills.Add(Skill.Create(DataCenter.Instance.League.GetSkillData(10270), this, 3));
+            m_Skills.Add(Skill.Create(DataCenter.Instance.League.GetSkillData(10220), this, 2));
         }
 
         //同步宝珠

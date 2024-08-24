@@ -265,7 +265,7 @@ public class Field : MonoBehaviour
         if (hit.IgnoreUnits.Contains(unit)) return false;
         
 
-        float demage = Mathf.RoundToInt(hit.ATK.ToNumber() * hit.ATK_INC.ToNumber() * unit.ATT.VUN_INC.ToNumber());
+        float demage = Mathf.Ceil(hit.ATK.ToNumber() * hit.ATK_INC.ToNumber() * unit.ATT.VUN_INC.ToNumber());
 
         //护盾
         if (unit.GetBuff((int)_C.BUFF.SHIELD) != null)

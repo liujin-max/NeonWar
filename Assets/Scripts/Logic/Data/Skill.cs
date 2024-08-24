@@ -13,7 +13,7 @@ public class Skill_10010 : Skill
 {
     public override bool OnShoot()
     {
-        int BulletCount = Skill.ToValue(Data, Level) + 1;
+        int BulletCount = this.Value + 1;
 
         switch (BulletCount)
         {
@@ -138,7 +138,7 @@ public class Skill_10020 : Skill
         });
         
 
-        for (int i = 0; i < Skill.ToValue(Data, Level); i++)
+        for (int i = 0; i < this.Value; i++)
         {
             var bullet = Caster.CreateBullet();
             bullet.transform.position = b.transform.position;
@@ -185,7 +185,7 @@ public class Skill_10030 : Skill
             .ToArray();
 
         
-        for (int i = 0; i < Skill.ToValue(Data, Level); i++)
+        for (int i = 0; i < Value; i++)
         {
             if (i >= sortedObjects.Length) break;
 
@@ -225,7 +225,7 @@ public class Skill_10060 : Skill
         if (b.Caster != Caster) return;
 
 
-        b.HitRemaining = 1 + Skill.ToValue(Data, Level);
+        b.HitRemaining = 1 + Value;
     }
 }
 #endregion
@@ -252,7 +252,7 @@ public class Skill_10070 : Skill
         if (b.Caster != Caster) return;
 
 
-        b.ReboundTimes = Skill.ToValue(Data, Level);
+        b.ReboundTimes = Value;
     }
 }
 #endregion
@@ -279,7 +279,7 @@ public class Skill_10110 : Skill
         Bullet b = @event.GetParam(0) as Bullet;
         if (b.Caster != Caster) return;
 
-        int rate = Skill.ToValue(Data, Level);
+        int rate = Value;
         if (RandomUtility.IsHit(rate))
         {
             //缺少特效
@@ -312,7 +312,7 @@ public class Skill_10120 : Skill
 
         Unit unit = @event.GetParam(1) as Unit;
 
-        if (RandomUtility.IsHit(Skill.ToValue(Data, Level)))
+        if (RandomUtility.IsHit(Value))
         {
             unit.AddBuff((int)_C.BUFF.STUN, 1);
         }
@@ -347,7 +347,7 @@ public class Skill_10130 : Skill
 
         if (unit == null) return;
 
-        if (RandomUtility.IsHit(Skill.ToValue(Data, Level)))
+        if (RandomUtility.IsHit(Value))
         {
             unit.Repel(b.Velocity.normalized * 8);
 
@@ -380,7 +380,7 @@ public class Skill_10160 : Skill
         Bullet b = @event.GetParam(0) as Bullet;
         if (b.Caster != Caster) return;
 
-        b.Hit.KillRate = Skill.ToValue(Data, Level);
+        b.Hit.KillRate = Value;
     }
 }
 
@@ -408,7 +408,7 @@ public class Skill_10170 : Skill
 
         Unit unit = @event.GetParam(1) as Unit;
 
-        unit.AddBuff((int)_C.BUFF.YISHANG, Skill.ToValue(Data, Level));
+        unit.AddBuff((int)_C.BUFF.YISHANG, Value);
     }
 }
 
@@ -416,6 +416,65 @@ public class Skill_10170 : Skill
 
 
 
+#region 弓：毒气陷阱
+//陷阱范围内的目标持续受到伤害，持续#秒
+public class Skill_10210 : Skill
+{
+    private CDTimer m_Timer = new CDTimer(RandomUtility.Random(300, 600) / 100.0f);
+    public override void CustomUpdate(float deltaTime)
+    {
+        m_Timer.Update(deltaTime);
+        if (!m_Timer.IsFinished()) return;
+
+        m_Timer.Reset(6f);
+
+        //投掷陷阱
+        // float radius    = 1.5f;
+        // int round_count = 0;
+        // Enemy target    = null;
+
+        // List<Enemy> enemies = Field.Instance.Spawn.Enemys;
+        // foreach (var enemy in enemies)
+        // {
+        //     Vector2 o_pos = enemy.transform.localPosition;
+        //     int count = enemies.Count(e => e != enemy && Vector3.Distance(o_pos, e.transform.localPosition) <= radius);
+        //     if (count > round_count)
+        //     {
+        //         round_count = count;
+        //         target = enemy;
+        //     }
+        // }
+
+        Vector2 point = ToolUtility.FindPointOnCircle(Vector2.zero, RandomUtility.Random(0, 420) / 100.0f, RandomUtility.Random(0, 360));
+
+        Caster.CreateProjectile(PROJECTILE.POISONWATER, _C.TRACE.PARABOLA, point, ()=>{
+            Field.Instance.PushArea(Caster, AREA.POISON, point, Value);
+        });
+    }
+}
+#endregion
+
+#region 弓：冰冻陷阱
+//陷阱范围内的目标行动缓慢，持续#秒
+public class Skill_10220 : Skill
+{
+    private CDTimer m_Timer = new CDTimer(RandomUtility.Random(300, 600) / 100.0f);
+    public override void CustomUpdate(float deltaTime)
+    {
+        m_Timer.Update(deltaTime);
+        if (!m_Timer.IsFinished()) return;
+
+        m_Timer.Reset(6f);
+
+        //投掷陷阱
+        Vector2 point = ToolUtility.FindPointOnCircle(Vector2.zero, RandomUtility.Random(0, 420) / 100.0f, RandomUtility.Random(0, 360));
+
+        Caster.CreateProjectile(PROJECTILE.ICEWATER, _C.TRACE.PARABOLA, point, ()=>{
+            Field.Instance.PushArea(Caster, AREA.ICE, point, Value);
+        });
+    }
+}
+#endregion
 
 
 
@@ -444,7 +503,7 @@ public class Skill_10260 : Skill
         
         m_KillCount++;
 
-        float value = Skill.ToValue(Data, Level) / 100.0f;
+        float value = Value / 100.0f;
         hit.Caster.ATT.ASP.PutAUL(this, -value * m_KillCount);
         hit.Caster.SyncASP();
     }
@@ -477,7 +536,7 @@ public class Skill_10270 : Skill
         
         m_KillCount++;
 
-        float value = Skill.ToValue(Data, Level) / 100.0f;
+        float value = Value / 100.0f;
         hit.Caster.ATT.ATK.PutAUL(this, value * m_KillCount);  
     }
 }
@@ -502,6 +561,8 @@ public class Skill
     public int Level;
     public Unit Caster;
 
+    public int Value {get {return Skill.ToValue(Data, Level);}}
+
     private static Dictionary<int, Func<Skill>> m_classDictionary = new Dictionary<int, Func<Skill>> {
         //弓 攻击
         {10010, () => new Skill_10010()},
@@ -520,6 +581,9 @@ public class Skill
         {10170, () => new Skill_10170()},
 
         //弓 价值
+        {10210, () => new Skill_10210()},
+        {10220, () => new Skill_10220()},
+
         {10260, () => new Skill_10260()},
         {10270, () => new Skill_10270()},
     };
@@ -579,5 +643,10 @@ public class Skill
     public virtual bool OnShoot()
     {
         return false;
+    }
+
+    public virtual void CustomUpdate(float deltaTime)
+    {
+
     }
 }

@@ -106,6 +106,7 @@
      <Compile Include="Assets\AllIn1SpriteShader\Demo\Scripts\DemoItem.cs" />
      <Compile Include="Assets\Scripts\Logic\Player\Player_10000.cs" />
      <Compile Include="Assets\AllIn1SpriteShader\Scripts\AllIn1ShaderWindow.cs" />
+     <Compile Include="Assets\Scripts\Logic\Area\Area_Poison.cs" />
      <Compile Include="Assets\Scripts\Network\FileDownloader.cs" />
      <Compile Include="Assets\Scripts\EFFECT.cs" />
      <Compile Include="Assets\Scripts\FSM\State.cs" />
@@ -168,6 +169,7 @@
      <Compile Include="Assets\Scripts\Effect\Fly.cs" />
      <Compile Include="Assets\Scripts\UI\Item\SkillSeatItem.cs" />
      <Compile Include="Assets\Scripts\Manager\SystemManager.cs" />
+     <Compile Include="Assets\Scripts\Logic\Area\Area_Ice.cs" />
      <Compile Include="Assets\Scripts\Logic\Element\Projectile.cs" />
      <Compile Include="Assets\DOTween\Modules\DOTweenModuleEPOOutline.cs" />
      <Compile Include="Assets\Scripts\UI\Window\MaskWindow.cs" />
