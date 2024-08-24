@@ -160,7 +160,7 @@ public class Player : Unit
             });
 
             //测试技能
-            m_Skills.Add(Skill.Create(DataCenter.Instance.League.GetSkillData(10220), this, 2));
+            m_Skills.Add(Skill.Create(DataCenter.Instance.League.GetSkillData(10230), this, 3));
         }
 
         //同步宝珠

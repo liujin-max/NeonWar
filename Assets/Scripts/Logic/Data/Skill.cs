@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.SocialPlatforms;
 
 
 
@@ -426,28 +427,16 @@ public class Skill_10210 : Skill
         m_Timer.Update(deltaTime);
         if (!m_Timer.IsFinished()) return;
 
-        m_Timer.Reset(6f);
-
         //投掷陷阱
-        // float radius    = 1.5f;
-        // int round_count = 0;
-        // Enemy target    = null;
+        Enemy target    = Field.Instance.Spawn.FindEnemyGather(1.5f);
 
-        // List<Enemy> enemies = Field.Instance.Spawn.Enemys;
-        // foreach (var enemy in enemies)
-        // {
-        //     Vector2 o_pos = enemy.transform.localPosition;
-        //     int count = enemies.Count(e => e != enemy && Vector3.Distance(o_pos, e.transform.localPosition) <= radius);
-        //     if (count > round_count)
-        //     {
-        //         round_count = count;
-        //         target = enemy;
-        //     }
-        // }
+        if (target == null) return;
 
-        Vector2 point = ToolUtility.FindPointOnCircle(Vector2.zero, RandomUtility.Random(0, 420) / 100.0f, RandomUtility.Random(0, 360));
+        m_Timer.Reset(6f);
+        
+        Vector2 point = target.transform.localPosition;
 
-        Caster.CreateProjectile(PROJECTILE.POISONWATER, _C.TRACE.PARABOLA, point, ()=>{
+        Caster.CreateProjectile(PROJECTILE.POISONWATER, _C.TRACE.PARABOLA, point, 0.4f, ()=>{
             Field.Instance.PushArea(Caster, AREA.POISON, point, Value);
         });
     }
@@ -464,17 +453,50 @@ public class Skill_10220 : Skill
         m_Timer.Update(deltaTime);
         if (!m_Timer.IsFinished()) return;
 
+        //投掷陷阱
+        Enemy target    = Field.Instance.Spawn.FindEnemyGather(1.5f);
+
+        if (target == null) return;
+
         m_Timer.Reset(6f);
 
         //投掷陷阱
-        Vector2 point = ToolUtility.FindPointOnCircle(Vector2.zero, RandomUtility.Random(0, 420) / 100.0f, RandomUtility.Random(0, 360));
+        Vector2 point = target.transform.localPosition;
 
-        Caster.CreateProjectile(PROJECTILE.ICEWATER, _C.TRACE.PARABOLA, point, ()=>{
+        Caster.CreateProjectile(PROJECTILE.ICEWATER, _C.TRACE.PARABOLA, point, 0.4f, ()=>{
             Field.Instance.PushArea(Caster, AREA.ICE, point, Value);
         });
     }
 }
 #endregion
+
+#region 弓：引力陷阱
+//将范围#内的目标向陷阱中心拖拽
+public class Skill_10230 : Skill
+{
+    private CDTimer m_Timer = new CDTimer(RandomUtility.Random(300, 600) / 100.0f);
+    public override void CustomUpdate(float deltaTime)
+    {
+        m_Timer.Update(deltaTime);
+        if (!m_Timer.IsFinished()) return;
+
+        float radius    = Value / 100.0f;
+        Enemy target    = Field.Instance.Spawn.FindEnemyGather(radius);
+
+        if (target == null) return;
+
+        m_Timer.Reset(6f);
+
+        var point = target.transform.localPosition;
+
+        Caster.CreateProjectile(PROJECTILE.ROPE, _C.TRACE.PARABOLA, point, 0.4f, ()=>{
+            Field.Instance.PushArea(Caster, AREA.ROPE, point, 4f, radius);
+        });
+    }
+}
+#endregion
+
+
 
 
 
@@ -583,6 +605,7 @@ public class Skill
         //弓 价值
         {10210, () => new Skill_10210()},
         {10220, () => new Skill_10220()},
+        {10230, () => new Skill_10230()},
 
         {10260, () => new Skill_10260()},
         {10270, () => new Skill_10270()},

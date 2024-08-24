@@ -20,9 +20,9 @@ public class Projectile : MonoBehaviour
         m_Callback  = callback;
     }
 
-    public void GO(Vector2 to_pos)
+    public void GO(Vector2 to_pos, float time)
     {
-        m_Trace.GO(to_pos);
+        m_Trace.GO(to_pos, time);
     }
 
     void Dispose()

@@ -148,12 +148,12 @@ public class Unit : MonoBehaviour
         return bullet;
     }
 
-    public virtual Projectile CreateProjectile(string projectile ,_C.TRACE trace_type, Vector2 to_pos, Action callback)
+    public virtual Projectile CreateProjectile(string projectile ,_C.TRACE trace_type, Vector2 to_pos, float time, Action callback)
     {
         var project = GameFacade.Instance.AssetManager.LoadPrefab(projectile, Vector3.zero, Field.Instance.Land.ELEMENT_ROOT).GetComponent<Projectile>();
         project.transform.position = ShootPivot.position;
         project.Init(trace_type, this, callback);
-        project.GO(to_pos);
+        project.GO(to_pos, time);
 
         return project;
     }

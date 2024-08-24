@@ -238,11 +238,12 @@ public class Field : MonoBehaviour
     }
 
     //在场地上生成区域
-    public void PushArea(Unit caster, string area_path, Vector2 point, float time)
+    public void PushArea(Unit caster, string area_path, Vector2 point, float time, float scale = 1.0f)
     {
         GameFacade.Instance.AssetManager.AsyncLoadPrefab(area_path, point, Land.ELEMENT_ROOT, (obj)=>{
             var area = obj.GetComponent<Area>();
             area.Init(caster, time);
+            area.transform.localScale = new Vector3(scale, scale, 1);
 
             m_Areas.Add(area);
         });

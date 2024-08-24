@@ -10,11 +10,11 @@ public class Trace_Parabola : Trace
     Vector3 m_BigScale = new Vector3(2f, 2f, 2f);
 
 
-    public override void GO(Vector2 to_pos)
+    public override void GO(Vector2 to_pos, float time)
     {
-        base.GO(to_pos);
+        base.GO(to_pos, time);
 
-        m_Timer.Reset(0.7f);
+        m_Timer.Reset(time);
     }
 
     public override void CustomUpdate(float deltaTime)
@@ -39,7 +39,7 @@ public class Trace
     protected Vector2 m_OPos;       //起始位置
 
     protected Vector2 m_ToPos;      //目标位置
-    protected CDTimer m_Timer = new CDTimer(0.8f);
+    protected CDTimer m_Timer;
 
 
     private static Dictionary<_C.TRACE, Func<Trace>> m_classDictionary = new Dictionary<_C.TRACE, Func<Trace>> {
@@ -58,15 +58,15 @@ public class Trace
         }
 
         trace.transform = transform;
-        
 
         return trace;
     }
 
-    public virtual void GO(Vector2 to_pos)
+    public virtual void GO(Vector2 to_pos, float time)
     {
         m_OPos  = transform.localPosition;
         m_ToPos = to_pos;
+        m_Timer = new CDTimer(time);
     }
 
     public virtual bool IsReach()

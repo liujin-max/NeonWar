@@ -59,6 +59,7 @@ SpriteAtlas:
     - 4b2ad6a3ad6e17b499b6dad0401c1c9b: 1817806486
     - 4b2ad6a3ad6e17b499b6dad0401c1c9b: 1293992038
     - 4b2ad6a3ad6e17b499b6dad0401c1c9b: 39483535
+    - 9816ab48ea5b23f4dbcb16ce115e5026: 21300000
     - ec9b6ae89b0908c42be1a22ded8cb344: 21300000
     - b3c25cebbe2597a4a9dc6614f4bfa96d: 21300000
     - 60ebcbac73fd6e9429544695c0d72105: 21300000
@@ -73,6 +74,7 @@ SpriteAtlas:
   - {fileID: 1817806486, guid: 4b2ad6a3ad6e17b499b6dad0401c1c9b, type: 3}
   - {fileID: 1293992038, guid: 4b2ad6a3ad6e17b499b6dad0401c1c9b, type: 3}
   - {fileID: 39483535, guid: 4b2ad6a3ad6e17b499b6dad0401c1c9b, type: 3}
+  - {fileID: 21300000, guid: 9816ab48ea5b23f4dbcb16ce115e5026, type: 3}
   - {fileID: 21300000, guid: ec9b6ae89b0908c42be1a22ded8cb344, type: 3}
   - {fileID: 21300000, guid: b3c25cebbe2597a4a9dc6614f4bfa96d, type: 3}
   - {fileID: 21300000, guid: 60ebcbac73fd6e9429544695c0d72105, type: 3}
@@ -86,6 +88,7 @@ SpriteAtlas:
   - finger_0
   - finger_3
   - finger_2
+  - rope_water
   - ice_water
   - poison_water
   - thorns

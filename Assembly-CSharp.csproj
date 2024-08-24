@@ -136,6 +136,7 @@
      <Compile Include="Assets\Scripts\UI\Item\SkillItem.cs" />
      <Compile Include="Assets\DOTween\Modules\DOTweenModulePhysics2D.cs" />
      <Compile Include="Assets\Scripts\Struct\Pair.cs" />
+     <Compile Include="Assets\Scripts\Logic\Area\Area_Rope.cs" />
      <Compile Include="Assets\Scripts\UI\Item\PearSeatItem.cs" />
      <Compile Include="Assets\Scripts\Utility\Crypt.cs" />
      <Compile Include="Assets\Scripts\Utility\UIMaskUtility.cs" />

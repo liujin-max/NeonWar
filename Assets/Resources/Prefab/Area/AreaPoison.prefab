@@ -34,7 +34,7 @@ Transform:
   m_Children:
   - {fileID: 2822495802654919403}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &7938995314296147883
 CircleCollider2D:
@@ -4771,7 +4771,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -20
   m_RenderMode: 4
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -6051,7 +6051,7 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 0.13333334, g: 0.5058824, b: 0.08627451, a: 1}
-        key1: {r: 0.13333334, g: 0.5058824, b: 0.08627451, a: 1}
+        key1: {r: 0.092047215, g: 0.8207547, b: 0, a: 1}
         key2: {r: 0.13333334, g: 0.5058824, b: 0.08627451, a: 0}
         key3: {r: 0.05882353, g: 0.24313726, b: 0.05882353, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -9544,7 +9544,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -20
   m_RenderMode: 4
   m_MeshDistribution: 0
   m_SortMode: 0
@@ -14306,7 +14306,7 @@ ParticleSystemRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -20
   m_RenderMode: 4
   m_MeshDistribution: 0
   m_SortMode: 0

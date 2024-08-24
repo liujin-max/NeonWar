@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using DG.Tweening;
 using UnityEngine;
 
@@ -108,6 +109,26 @@ public class Spawn
             
             m_Enemys.Add(enemy);
         });
+    }
+
+    //挑选周围怪物最多的怪
+    public Enemy FindEnemyGather(float radius)
+    {
+        int round_count = 0;
+        Enemy target    = null;
+
+        foreach (var enemy in m_Enemys)
+        {
+            Vector2 o_pos = enemy.transform.localPosition;
+            int count = m_Enemys.Count(e => Vector3.Distance(o_pos, e.transform.localPosition) <= radius);
+            if (count > round_count)
+            {
+                round_count = count;
+                target = enemy;
+            }
+        }
+
+        return target;
     }
 
     public void CustomUpdate(float deltaTime)

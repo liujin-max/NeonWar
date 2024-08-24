@@ -18,7 +18,7 @@ public class Enemy_105 : Enemy
             //投掷种子
             Vector2 point = ToolUtility.FindPointOnCircle(Vector2.zero, 4.5f, RandomUtility.Random(0, 360));
 
-            this.CreateProjectile(PROJECTILE.SEED, _C.TRACE.PARABOLA, point, ()=>{
+            this.CreateProjectile(PROJECTILE.SEED, _C.TRACE.PARABOLA, point, 0.8f, ()=>{
                 Field.Instance.PushArea(this, AREA.THORNS, point, 8f);
             });
         }
