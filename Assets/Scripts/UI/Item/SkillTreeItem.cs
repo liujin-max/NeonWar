@@ -163,13 +163,17 @@ public class SkillTreeItem : MonoBehaviour
 
         //价值
         {
-            // var bar1 = m_LinePivot.Find("ASP1/Bar").GetComponent<BarTransition>();
-            // bar1.Init(player.ATK, player.SkillSlots[2].ASP);
-            // m_Bars[_C.PROPERTY.ASP].Add(bar1);
+            float last_value = 1;
 
-            // var bar2 = m_LinePivot.Find("ASP2/Bar").GetComponent<BarTransition>();
-            // bar2.Init(player.ATK, player.SkillSlots[3].ASP);
-            // m_Bars[_C.PROPERTY.ASP].Add(bar2);
+            var bar1 = m_LinePivot.Find("WOR1/Bar").GetComponent<BarTransition>();
+            bar1.Init(player.WORTH, player.SkillSlots[4].WOR, last_value);
+            m_Bars[_C.PROPERTY.WORTH].Add(bar1);
+
+            last_value = player.SkillSlots[4].WOR;
+
+            var bar2 = m_LinePivot.Find("WOR2/Bar").GetComponent<BarTransition>();
+            bar2.Init(player.WORTH, player.SkillSlots[5].WOR, last_value);
+            m_Bars[_C.PROPERTY.WORTH].Add(bar2);
         }
     }
 

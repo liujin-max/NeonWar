@@ -101,7 +101,7 @@ public class Enemy : Unit
 
     public override void Affected(Hit hit)
     {
-        m_Sprite.GetComponent<Affected>().DoAnimation();
+        m_Sprite.GetComponent<Affected>().DO(hit);
 
         if (m_HPBar != null) m_HPBar.Affected();
 

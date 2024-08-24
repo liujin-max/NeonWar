@@ -26,6 +26,7 @@ public class Hit
     //物理特性
     public Vector3 Position;    //受击位置
     public Vector3 Velocity;    //击打的方向
+    public Color HitColor = Color.white;      //受击颜色
 
     public Hit(Unit caster)
     {

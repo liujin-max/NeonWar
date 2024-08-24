@@ -58,8 +58,8 @@ public class SkillItem : MonoBehaviour
 
         int cost    = Skill.GetCost(m_SkillData, m_SkillSlot.Level);
 
-        if (DataCenter.Instance.User.Glass >= cost) m_Cost.text = "<sprite=1>" + cost.ToString();
-        else m_Cost.text = _C.COLOR_RED + "<sprite=1>" + cost.ToString();
+        if (DataCenter.Instance.User.Glass >= cost) m_Cost.text = "<sprite=1>" + ToolUtility.FormatNumber(cost);
+        else m_Cost.text = _C.COLOR_RED + "<sprite=1>" + ToolUtility.FormatNumber(cost);
     }
 
     public void ShowBtnUpgrade(bool flag)

@@ -48,6 +48,7 @@ public class SkillSlotMsg
     //解锁条件及技能池
     [NonSerialized] public int ATK;
     [NonSerialized] public int ASP;
+    [NonSerialized] public int WOR;
     [NonSerialized] public string POS;  //对应SkillTreeItem的SkillPivot下的支点名称
     [NonSerialized] public int[] SkillPool;
 
@@ -55,7 +56,7 @@ public class SkillSlotMsg
     public bool IsUnlock()
     {
         PlayerMsg playerMsg = DataCenter.Instance.User.CurrentPlayer;
-        return playerMsg.ATK >= ATK && playerMsg.ASP >= ASP;
+        return playerMsg.ATK >= ATK && playerMsg.ASP >= ASP && playerMsg.WORTH >= WOR;
     }
 }
 
@@ -117,6 +118,10 @@ public class GameUserData
                 new SkillSlotMsg() {ASP = 8, POS = "11", SkillPool = new int[] {10110, 10120, 10130}},
                 new SkillSlotMsg() {ASP =25, POS = "12", SkillPool = new int[] {10160, 10170}},
 
+                //价值分支
+                new SkillSlotMsg() {WOR = 5, POS = "21", SkillPool = new int[] {10210, 10220, 10230}},
+                new SkillSlotMsg() {WOR =20, POS = "22", SkillPool = new int[] {10260, 10270}},
+            
                 //大招
                 // new SkillSlotMsg() {ATK =30, ASP =30, POS = "99", SkillPool = new int[] {10210, 10220, 10230}}
             },

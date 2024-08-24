@@ -45,6 +45,7 @@ public class Area_Poison : Area
             var hit = new Hit(Caster);
             hit.CP.SetBase(0);
             hit.ATK_INC.PutMUL(this, 0.1f);
+            hit.HitColor = Color.green;
 
             Field.Instance.SettleHit(hit, u);
         });

@@ -27,24 +27,9 @@ public class SkillSeatItem : MonoBehaviour
             if (!m_SkillSlot.IsUnlock()) {
                 StringBuilder sb = new StringBuilder();
 
-                if (m_SkillSlot.ATK == m_SkillSlot.ASP)
-                {
-                    sb.Append(string.Format("攻击、攻速达到{0}级", m_SkillSlot.ATK));
-                }
-                else
-                {
-                    if (m_SkillSlot.ATK > 0)
-                    {
-                        sb.Append(string.Format("攻击达到{0}级", m_SkillSlot.ATK));
-                    }
-
-                    if (m_SkillSlot.ASP > 0)
-                    {
-                        if (m_SkillSlot.ATK > 0) sb.Append("、");
-
-                        sb.Append(string.Format("攻速达到{0}级", m_SkillSlot.ASP));
-                    }
-                }
+                if (m_SkillSlot.ATK > 0) sb.Append(string.Format("攻击达到{0}级", m_SkillSlot.ATK));
+                if (m_SkillSlot.ASP > 0) sb.Append(string.Format("攻速达到{0}级", m_SkillSlot.ASP));
+                if (m_SkillSlot.WOR > 0) sb.Append(string.Format("价值达到{0}级", m_SkillSlot.WOR));
 
                 sb.Append("后解锁");
 
