@@ -7,7 +7,7 @@ using UnityEngine;
 public class Enemy_109 : Enemy
 {
     //治疗频率
-    private CDTimer m_Timer = new CDTimer(3f);
+    private CDTimer m_Timer = new CDTimer(5f);
 
     public override void Init(MonsterJSON monster_data)
     {

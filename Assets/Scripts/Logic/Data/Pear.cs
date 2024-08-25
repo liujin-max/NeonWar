@@ -93,12 +93,12 @@ public class Pear_Buff : Pear
     {
         base.Equip(player);
 
-        EventManager.AddHandler(EVENT.ONADDBUFF,    OnBuffAdd);
+        EventManager.AddHandler(EVENT.ONBUFFADD,    OnBuffAdd);
     }
 
     public override void UnEquip()
     {
-        EventManager.AddHandler(EVENT.ONADDBUFF,    OnBuffAdd);
+        EventManager.AddHandler(EVENT.ONBUFFADD,    OnBuffAdd);
 
         base.UnEquip();
     }

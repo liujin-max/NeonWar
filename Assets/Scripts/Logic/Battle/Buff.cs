@@ -103,6 +103,7 @@ public class Buff_Chaos : Buff
 {
     public Buff_Chaos()
     {
+        Name    = "混乱";
         TYPE    = _C.BUFF_TYPE.DE;
         Duration= new CDTimer(5);
     }
@@ -163,6 +164,7 @@ public class Buff_ATKUP : Buff
 {
     public Buff_ATKUP()
     {
+        Name    = "攻击增强";
         Duration= new CDTimer(5f);
     }
 
@@ -184,6 +186,7 @@ public class Buff_ATKDOWN : Buff
 {
     public Buff_ATKDOWN()
     {
+        Name    = "攻击削弱";
         TYPE    = _C.BUFF_TYPE.DE;
         Duration= new CDTimer(5f);
     }
@@ -206,6 +209,7 @@ public class Buff_ASPUP : Buff
 {
     public Buff_ASPUP()
     {
+        Name    = "攻速提高";
         Duration= new CDTimer(5f);
     }
 
@@ -229,6 +233,7 @@ public class Buff_ASPDOWN : Buff
 {
     public Buff_ASPDOWN()
     {
+        Name    = "攻速降低";
         TYPE    = _C.BUFF_TYPE.DE;
         Duration= new CDTimer(5f);
     }
@@ -253,6 +258,7 @@ public class Buff_SPEEDUP : Buff
 {
     public Buff_SPEEDUP()
     {
+        Name    = "移速提高";
         Duration= new CDTimer(5f);
     }
 
@@ -274,6 +280,7 @@ public class Buff_SPEEDDOWN : Buff
 {
     public Buff_SPEEDDOWN()
     {
+        Name    = "移速降低";
         TYPE    = _C.BUFF_TYPE.DE;
         Duration= new CDTimer(5f);
     }
@@ -296,6 +303,7 @@ public class Buff_CP : Buff
 {
     public Buff_CP()
     {
+        Name    = "暴击提高";
         Duration= new CDTimer(5f);
     }
 
@@ -317,6 +325,7 @@ public class Buff_DODGEUP : Buff
 {
     public Buff_DODGEUP()
     {
+        Name    = "闪避增强";
         Duration= new CDTimer(8f);
     }
 
@@ -338,6 +347,7 @@ public class Buff_SPDMUL : Buff
 {
     public Buff_SPDMUL()
     {
+        Name    = "减速全场";
         Duration= new CDTimer(3.5f);
     }
 
@@ -377,6 +387,7 @@ public class Buff
     public int ID;
     public int Value = 0;   //参数
     public _C.BUFF_TYPE TYPE = _C.BUFF_TYPE.GAIN;
+    public string Name = "未知";
     public CDTimer Duration = new CDTimer(999999);  //持续时间
     
 

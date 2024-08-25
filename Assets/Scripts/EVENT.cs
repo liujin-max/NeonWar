@@ -32,7 +32,8 @@ public static class EVENT
     //发射子弹
     public static string ONBULLETSHOOT      = "ONBULLETSHOOT";
     //获得Buff后
-    public static string ONADDBUFF          = "ONADDBUFF";
+    public static string ONBUFFADD          = "ONBUFFADD";
+    public static string ONBUFFREMOVE       = "ONBUFFREMOVE";
     //闪避攻击
     public static string ONDODGE            = "ONDODGE";
     //击杀怪物

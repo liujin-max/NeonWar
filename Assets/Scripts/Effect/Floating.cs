@@ -12,13 +12,5 @@ public class Floating : MonoBehaviour
         float progress = RandomUtility.Random(0, 100) / 100.0f;
         // 创建浮动动画
         transform.DOMoveY(transform.position.y + 0.5f, 1.5f).SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine).Goto(progress, true);
-
- 
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

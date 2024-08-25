@@ -192,7 +192,7 @@ public class Unit : MonoBehaviour
 
             m_BuffDic[buff_id] = b;
 
-            EventManager.SendEvent(new GameEvent(EVENT.ONADDBUFF, b));
+            EventManager.SendEvent(new GameEvent(EVENT.ONBUFFADD, b));
         }
 
         return b;
@@ -201,6 +201,8 @@ public class Unit : MonoBehaviour
     public void RemoveBuff(Buff buff)
     {
         buff.Dispose();
+
+        EventManager.SendEvent(new GameEvent(EVENT.ONBUFFREMOVE, buff));
         
         if (m_BuffDic.ContainsKey(buff.ID)) {
             m_BuffDic.Remove(buff.ID);
@@ -219,7 +221,7 @@ public class Unit : MonoBehaviour
     {
         //清空Buff
         foreach (var item in m_BuffDic) {
-            item.Value.Dispose();
+            RemoveBuff(item.Value);
         }
         m_BuffDic.Clear();
     }

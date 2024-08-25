@@ -19,6 +19,7 @@ public class GameWindow : MonoBehaviour
     [SerializeField] GameObject m_BlinkPivot;
     [SerializeField] Transform m_WeaponPivot;
     [SerializeField] Transform m_HPPivot;
+    [SerializeField] Transform m_BuffPivot;
     [SerializeField] Transform m_FingerPivot;
 
     [SerializeField] Button m_BtnSetting;
@@ -27,6 +28,7 @@ public class GameWindow : MonoBehaviour
     [SerializeField] private List<CanvasGroup> m_Groups = new List<CanvasGroup>();
 
     private PlayerHPItem m_HPITEM = null;
+    private BuffListItem m_BUFFLISTITEM = null;
     private WeaponItem m_WEAPONITEM = null;
 
 
@@ -160,10 +162,20 @@ public class GameWindow : MonoBehaviour
         }
 
         m_HPITEM.transform.GetComponent<RectTransform>().anchoredPosition = Vector3.zero;
-        // m_HPITEM.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
         m_HPITEM.Show(true);
 
         m_HPITEM.Init(Field.Instance.Player);
+    }
+
+    //Buff区域
+    void InitBuffPivot()
+    {
+        if (m_BUFFLISTITEM == null) {
+            m_BUFFLISTITEM = GameFacade.Instance.UIManager.LoadItem("BuffListItem", m_BuffPivot).GetComponent<BuffListItem>();
+        }
+        m_BUFFLISTITEM.gameObject.SetActive(true);
+
+        m_BUFFLISTITEM.Init();
     }
 
     void Update()
@@ -247,10 +259,10 @@ public class GameWindow : MonoBehaviour
     private void OnBattleStart(GameEvent @event)
     {
         InitPlayerHP();
+        InitBuffPivot();
 
         m_Groups.ForEach(group => {
             group.DOFade(0, 0.2f).OnComplete(()=>{
-                // group.gameObject.SetActive(false);
                 group.blocksRaycasts = false;
             });
         });
