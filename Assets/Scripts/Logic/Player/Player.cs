@@ -107,7 +107,7 @@ public class Player : Unit
     protected override void Attack()
     {
         //播放速度随攻速的变化而变化
-        m_Animator.speed  = 1 / Mathf.Min(1, (ASP.Duration / (ATT.ASP.GetOrigin() / 1000.0f)));
+        m_Animator.speed  = CPS.ToNumber();
         m_Animator.Play("Attack", 0, 0);
     }
     #endregion
@@ -142,10 +142,11 @@ public class Player : Unit
 
 
         ATT.ATK.SetBase(NumericalManager.FML_ATK(atk_level));
-        ATT.ASP.SetBase(NumericalManager.FML_ASP(ATT.ASP.GetBase(), asp_level));
-        SyncASP();
+        ASP.Reset(ATT.ASP.ToNumber() / 1000.0f);
+        CPS.SetBase(NumericalManager.FML_ASP(ATT.ASP.GetBase(), asp_level));
 
         GlassRate.PutAUL(this, NumericalManager.FML_WORTH(wor_level) / 100.0f);
+
 
 
         //同步技能
@@ -182,11 +183,6 @@ public class Player : Unit
             // m_Pears.Add(pear);
         }
         
-    }
-
-    public override void SyncASP()
-    {
-        ASP.SetDuration(ATT.ASP.ToNumber() / 1000.0f);
     }
 
     #endregion

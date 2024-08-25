@@ -526,8 +526,7 @@ public class Skill_10260 : Skill
         m_KillCount++;
 
         float value = Value / 100.0f;
-        hit.Caster.ATT.ASP.PutAUL(this, -value * m_KillCount);
-        hit.Caster.SyncASP();
+        hit.Caster.CPS.PutAUL(this, value * m_KillCount);
     }
 }
 #endregion

@@ -215,14 +215,12 @@ public class Buff_ASPUP : Buff
 
     public override void Init()
     {
-        Caster.ATT.ASP.PutMUL(this, 0.5f);
-        Caster.SyncASP();
+        Caster.CPS.PutMUL(this, 1.5f);
     }
 
     public override void Dispose()
     {
-        Caster.ATT.ASP.Pop(this);
-        Caster.SyncASP();
+        Caster.CPS.Pop(this);
     }
 }
 #endregion
@@ -240,14 +238,12 @@ public class Buff_ASPDOWN : Buff
 
     public override void Init()
     {
-        Caster.ATT.ASP.PutMUL(this, 1.5f);
-        Caster.SyncASP();
+        Caster.CPS.PutMUL(this, 0.5f);
     }
 
     public override void Dispose()
     {
-        Caster.ATT.ASP.Pop(this);
-        Caster.SyncASP();
+        Caster.CPS.Pop(this);
     }
 }
 #endregion
