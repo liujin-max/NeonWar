@@ -15,9 +15,11 @@ public static class NumericalManager
     #endregion
 
     #region 攻速成长系数
-    public static int FML_ASP_GC(int level)
+    public static float FML_ASP_GC(int level)
     {
-        return Mathf.FloorToInt((level - 1) / 5) + 1;
+        float base_gc = 5.0f;
+        // return Mathf.FloorToInt((level - 1) / 5) + 1;
+        return base_gc * Mathf.Pow(0.99f, level);
     }
     #endregion
 
@@ -51,9 +53,8 @@ public static class NumericalManager
         //每级攻速提高1%
         float asp_rate = 0.01f;
         //成长系数
-        int gc = FML_ASP_GC(level);
+        float gc = FML_ASP_GC(level);
 
-        // return base_asp / (1 + ((level - 1) * gc * asp_rate));
         return 1 + gc * ((level - 1) * asp_rate);
     }
     #endregion
@@ -91,20 +92,22 @@ public static class NumericalManager
     }
     #endregion
 
+
     #region 攻速消耗公式
     //消耗=初始消耗*等级^成长指数*成长系数
     public static int FML_ASPCost(int level)
     {
         //第一次升级消耗的数量
         int cost_base = 2;
-        //成长指数
-        float power = 1.85f;
+        //消耗指数
+        float power = 2f;
         //成长系数
-        int gc = FML_ASP_GC(level);
+        float gc = FML_ASP_GC(level);
 
         return Mathf.FloorToInt(cost_base * Mathf.Pow(level, power) * gc);
     }
     #endregion
+
 
     #region 价值消耗公式
     public static int FML_WORTHCost(int level)
