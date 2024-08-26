@@ -34,11 +34,18 @@ public class State_Result<T> : State<Field>
                 DataCenter.Instance.User.SetLevel(Field.Instance.Level.ID);
             }
 
-            var window = GameFacade.Instance.UIManager.LoadWindow("ResultWindow", UIManager.BOARD).GetComponent<ResultWindow>();
-            window.Init(m_Result);
 
-            //结算奖励
-            Field.Instance.ReceiveRewards();
+            //计算奖励
+            Field.Instance.GenerateGlassRewards(out int base_glass, out int worth_glass);
+
+            var window = GameFacade.Instance.UIManager.LoadWindow("ResultWindow", UIManager.BOARD).GetComponent<ResultWindow>();
+            window.Init(m_Result, base_glass, worth_glass, (rate)=>{
+                DataCenter.Instance.User.UpdateGlass((base_glass + worth_glass) * rate);
+
+                EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS));
+            });
+
+            
             
             Field.Instance.End();
 

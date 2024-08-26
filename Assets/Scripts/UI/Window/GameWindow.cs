@@ -48,7 +48,7 @@ public class GameWindow : MonoBehaviour
         
 
         EventManager.AddHandler(EVENT.UI_BLINKSHAKE,    OnBlinkShake);
-        EventManager.AddHandler(EVENT.UI_SKILLUPGRADE,  OnSkillUpgrade);
+        // EventManager.AddHandler(EVENT.UI_SKILLUPGRADE,  OnSkillUpgrade);
         EventManager.AddHandler(EVENT.UI_PEARCHANGE,    OnPearChange);
     }
 
@@ -61,7 +61,7 @@ public class GameWindow : MonoBehaviour
 
 
         EventManager.DelHandler(EVENT.UI_BLINKSHAKE,    OnBlinkShake);
-        EventManager.DelHandler(EVENT.UI_SKILLUPGRADE,  OnSkillUpgrade);
+        // EventManager.DelHandler(EVENT.UI_SKILLUPGRADE,  OnSkillUpgrade);
         EventManager.DelHandler(EVENT.UI_PEARCHANGE,    OnPearChange);
     }
 
@@ -288,6 +288,8 @@ public class GameWindow : MonoBehaviour
     private void OnUpdateGlass(GameEvent @event)
     {
         m_Glass.SetValue(DataCenter.Instance.User.Glass);
+
+        FlushUI();
     }
 
     private void OnUpdateHP(GameEvent @event)
@@ -311,10 +313,10 @@ public class GameWindow : MonoBehaviour
         m_BlinkTweener = m_BlinkPivot.transform.DOShakePosition(0.25f, new Vector3(10, 0, 0), 40, 50);
     }
 
-    void OnSkillUpgrade(GameEvent @event)
-    {
-        FlushUI();
-    }
+    // void OnSkillUpgrade(GameEvent @event)
+    // {
+    //     FlushUI();
+    // }
     
     private void OnPearChange(GameEvent @event)
     {

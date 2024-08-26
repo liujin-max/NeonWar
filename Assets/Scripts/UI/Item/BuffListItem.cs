@@ -55,12 +55,16 @@ public class BuffListItem : MonoBehaviour
     {
         var buff = @event.GetParam(0) as Buff;
 
+        if (buff.Caster != Field.Instance.Player) return;
+
         AddBuff(buff);
     }
 
     private void OnBuffRemove(GameEvent @event)
     {
         var buff = @event.GetParam(0) as Buff;
+
+        if (buff.Caster != Field.Instance.Player) return;
 
         RemoveBuff(buff);
     }

@@ -187,16 +187,14 @@ public class Field : MonoBehaviour
     }
     
     //根据当前的击杀进度计算出可以获得多少碎片奖励
-    public void ReceiveRewards()
+    public void GenerateGlassRewards(out int base_value, out int worth_value)
     {
         float kill_rate = m_Spawn.KillProgress;
 
-        int glass = Mathf.FloorToInt(m_Level.LevelJSON.Glass * kill_rate) + m_Glass;
+        base_value = Mathf.FloorToInt(m_Level.LevelJSON.Glass * kill_rate) + m_Glass;
 
         //额外倍率
-        glass   = Mathf.CeilToInt(glass * m_Player.GlassRate.ToNumber());
-
-        DataCenter.Instance.User.UpdateGlass(glass);
+        worth_value = Mathf.CeilToInt(base_value * m_Player.GlassRate.ToNumber()) - base_value;
     }
 
     public void InitPlayer()

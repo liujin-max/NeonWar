@@ -218,7 +218,8 @@ public class Unit : MonoBehaviour
     {
         //清空Buff
         foreach (var item in m_BuffDic) {
-            RemoveBuff(item.Value);
+            item.Value.Dispose();
+            EventManager.SendEvent(new GameEvent(EVENT.ONBUFFREMOVE, item.Value));
         }
         m_BuffDic.Clear();
     }

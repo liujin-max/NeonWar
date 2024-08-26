@@ -17,11 +17,11 @@ public class Spawn
     private List<MonsterJSON> m_EnemyPool;
     private List<Enemy> m_Enemys;
     public List<Enemy> Enemys {get {return m_Enemys;}}
+    public List<SpawnThread> m_Threads = new List<SpawnThread>();
 
     private List<Enemy> m_EnemyRemoves  = new List<Enemy>();
     private List<Enemy> m_EnemyTemps    = new List<Enemy>();
 
-    private int m_AsyncCount    = 0;
 
     //击杀进度
     private Pair m_KillProgress;
@@ -54,7 +54,7 @@ public class Spawn
 
     public bool IsClear()
     {
-        return m_EnemyPool.Count == 0 && m_Enemys.Count == 0 && m_AsyncCount == 0;
+        return m_EnemyPool.Count == 0 && m_Enemys.Count == 0 && m_Threads.Count == 0;
     }
 
     void PutEnemy(MonsterJSON monsterJSON)
@@ -66,36 +66,9 @@ public class Spawn
             point = ToolUtility.FindPointOnCircle(Vector3.zero, monsterJSON.Radius, monsterJSON.Angle);
         }
 
-        m_AsyncCount++;
-        GameFacade.Instance.AssetManager.AsyncLoadPrefab("Prefab/Enemy/" + monsterJSON.ID, point, Field.Instance.Land.ENEMY_ROOT, (obj)=>{
-            var enemy = obj.GetComponent<Enemy>();
-            m_Enemys.Add(enemy);
-            enemy.gameObject.SetActive(false);
-            enemy.SetValid(false);
-
-            var hole = GameFacade.Instance.EffectManager.Load(EFFECT.BLACKHOLE, point, Field.Instance.Land.ELEMENT_ROOT.gameObject).transform;
-            hole.localScale = Vector3.zero;
-            
-            Sequence seq = DOTween.Sequence();
-            seq.Append(hole.DOScale(Vector3.one, 0.5f));
-            seq.AppendInterval(0.4f);
-            
-            seq.AppendCallback(()=>{
-                enemy.gameObject.SetActive(true);
-                enemy.SetValid(true);
-                enemy.Init(monsterJSON);
-                enemy.Push();
-
-                if (monsterJSON.Type == _C.ENEMY_TYPE.BOSS) enemy.transform.localScale = new Vector3(1.25f, 1.25f, 1.25f);
-            });
-
-            seq.AppendInterval(0.2f);
-            seq.Append(hole.DOScale(1.3f, 0.15f));
-            seq.Append(hole.DOScale(0, 0.4f));
-            seq.Play();
-
-            m_AsyncCount--;
-        });
+        SpawnThread thread = new SpawnThread();
+        thread.Start(m_Enemys, monsterJSON, point);
+        m_Threads.Add(thread);
     }
 
     //分裂
@@ -133,6 +106,7 @@ public class Spawn
 
     public void CustomUpdate(float deltaTime)
     {
+        //怪物池线程
         if (m_EnemyPool.Count > 0)
         {
             //场上没有怪物了，则集体速减CD
@@ -156,6 +130,15 @@ public class Spawn
                     m_EnemyPool.Remove(monster_json);
                 }
             }
+        }
+
+        //怪物出场线程
+        for (int i = m_Threads.Count - 1; i >= 0; i--)
+        {
+            var thread = m_Threads[i];
+            thread.CustomUpdate(deltaTime);
+
+            if (thread.IsFinished) m_Threads.Remove(thread);
         }
         
 
@@ -189,7 +172,7 @@ public class Spawn
 
     public void Dispose()
     {
-        m_AsyncCount = 0;
+        // m_AsyncCount = 0;
 
         m_EnemyPool.Clear();
         m_KillProgress.Clear();
@@ -198,5 +181,10 @@ public class Spawn
             e.Dispose();
         });
         m_Enemys.Clear();
+
+        m_Threads.ForEach(t => {
+            t.Dispose();
+        });
+        m_Threads.Clear();
     }
 }

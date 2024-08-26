@@ -47,6 +47,13 @@ public class SkillWindow : MonoBehaviour
         m_BtnClose.onClick.AddListener(()=>{
             GameFacade.Instance.UIManager.UnloadWindow(gameObject);
         });
+
+        //重置技能
+        m_BtnReset.onClick.AddListener(()=>{
+            Platform.Instance.REWARD_VIDEOAD("", ()=>{
+                DataCenter.Instance.League.ResetSkill(m_SkillSlot);
+            });
+        });
     }
 
 
@@ -79,13 +86,7 @@ public class SkillWindow : MonoBehaviour
                 item.ShowBtnUpgrade(m_SkillSlot.Level < skill_data.LevelMax);
 
                 //重置技能
-                if (m_SkillData != null)
-                {
-                    m_BtnReset.gameObject.SetActive(true);
-                    m_BtnReset.onClick.AddListener(()=>{
-                        DataCenter.Instance.League.ResetSkill(m_SkillSlot);
-                    });
-                }
+                m_BtnReset.gameObject.SetActive(m_SkillData != null);
             }
             else
             {

@@ -132,7 +132,7 @@ GameObject:
   serializedVersion: 7
   m_Component:
   - component: {fileID: 3014274062861392460}
-  - component: {fileID: 887894130549375324}
+  - component: {fileID: 976527770615760834}
   - component: {fileID: 7338856710178373493}
   m_Layer: 6
   m_HasEditorInfo: 1
@@ -159,8 +159,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &887894130549375324
-BoxCollider2D:
+--- !u!58 &976527770615760834
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -191,19 +191,9 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.15, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
+  m_Offset: {x: 0.1, y: 0}
   serializedVersion: 2
-  m_Size: {x: 0.85, y: 1.3}
-  m_EdgeRadius: 0
+  m_Radius: 0.45
 --- !u!114 &7338856710178373493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,6 +211,9 @@ MonoBehaviour:
   ID: 0
   Side: 0
   ATT: {fileID: 11400000, guid: bea9157e7a133be41a8ad88c5659b7ed, type: 2}
+  CPS:
+    m_Base: 1
+    m_Origin: 1
   StunFlag: 0
   MoveDirection: 1
   GlassRate:

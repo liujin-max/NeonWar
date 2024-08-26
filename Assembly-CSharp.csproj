@@ -151,8 +151,8 @@
      <Compile Include="Assets\Scripts\Utility\BGM.cs" />
      <Compile Include="Assets\DOTween\Modules\DOTweenModuleSprite.cs" />
      <Compile Include="Assets\Scripts\Logic\DataCenter.cs" />
-     <Compile Include="Assets\Scripts\Logic\Element\Unit.cs" />
      <Compile Include="Assets\Scripts\UI\Item\BuffListItem.cs" />
+     <Compile Include="Assets\Scripts\Logic\Element\Unit.cs" />
      <Compile Include="Assets\Scripts\Effect\Miss.cs" />
      <Compile Include="Assets\Scripts\Logic\Battle\Buff.cs" />
      <Compile Include="Assets\Scripts\FSM\Element\State_Result.cs" />
@@ -175,6 +175,7 @@
      <Compile Include="Assets\Scripts\Logic\Area\Area_Ice.cs" />
      <Compile Include="Assets\Scripts\Logic\Element\Projectile.cs" />
      <Compile Include="Assets\DOTween\Modules\DOTweenModuleEPOOutline.cs" />
+     <Compile Include="Assets\Scripts\Logic\Battle\SpawnThread.cs" />
      <Compile Include="Assets\Scripts\UI\Window\MaskWindow.cs" />
      <Compile Include="Assets\Scripts\UI\Window\GameWindow.cs" />
      <Compile Include="Assets\Scripts\Manager\OBJPool.cs" />

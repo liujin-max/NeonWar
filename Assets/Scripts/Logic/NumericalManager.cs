@@ -17,9 +17,9 @@ public static class NumericalManager
     #region 攻速成长系数
     public static float FML_ASP_GC(int level)
     {
-        float base_gc = 5.0f;
+        float base_gc = 4.0f;
         // return Mathf.FloorToInt((level - 1) / 5) + 1;
-        return base_gc * Mathf.Pow(0.99f, level);
+        return base_gc * Mathf.Pow(0.995f, level);
     }
     #endregion
 

@@ -343,7 +343,7 @@ public class Buff_SPDMUL : Buff
 {
     public Buff_SPDMUL()
     {
-        Name    = "减速全场";
+        Name    = "子弹时间";
         Duration= new CDTimer(3.5f);
     }
 

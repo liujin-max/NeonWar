@@ -58,6 +58,15 @@ public class SkillSlotMsg
         PlayerMsg playerMsg = DataCenter.Instance.User.CurrentPlayer;
         return playerMsg.ATK >= ATK && playerMsg.ASP >= ASP && playerMsg.WORTH >= WOR;
     }
+
+    public bool IsLevelMax()
+    {
+        var skill_data = DataCenter.Instance.League.GetSkillData(ID);
+        if (skill_data != null) {
+            return Level >= skill_data.LevelMax;
+        }
+        return false;
+    }
 }
 
 //武器数据

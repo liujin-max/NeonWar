@@ -16,6 +16,8 @@ public class SkillSeatItem : MonoBehaviour
     [SerializeField] Image m_Icon;
     [SerializeField] GameObject m_LockTag;
     [SerializeField] TextMeshProUGUI m_Text;
+    [SerializeField] GameObject m_Max;
+    [SerializeField] GameObject m_RedPoint;
 
 
     private SkillSlotMsg m_SkillSlot;
@@ -56,6 +58,10 @@ public class SkillSeatItem : MonoBehaviour
     {
         m_LockTag.SetActive(false);
 
+        m_Max.SetActive(m_SkillSlot.IsLevelMax());
+
+        FlushRedPoint();
+
         if (m_SkillData != null)
         {
             m_Frame.color   = Color.white;
@@ -81,6 +87,27 @@ public class SkillSeatItem : MonoBehaviour
                 m_Frame.color   = Color.green;
                 m_Text.text     = _C.COLOR_GREEN + "可使用";
             }
+        }
+    }
+
+    //红点逻辑
+    void FlushRedPoint()
+    {
+        if (m_SkillData != null)
+        {
+            m_RedPoint.SetActive(false);
+
+            if (!m_SkillSlot.IsLevelMax()) 
+            {
+                if (DataCenter.Instance.User.Glass >= Skill.GetCost(m_SkillData, m_SkillSlot.Level))
+                {
+                    m_RedPoint.SetActive(true);
+                }
+            }
+        }
+        else
+        {
+            m_RedPoint.SetActive(m_SkillSlot.IsUnlock());
         }
     }
 
