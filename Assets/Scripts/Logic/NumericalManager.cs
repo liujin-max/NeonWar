@@ -98,9 +98,9 @@ public static class NumericalManager
     public static int FML_ASPCost(int level)
     {
         //第一次升级消耗的数量
-        int cost_base = 2;
+        int cost_base = 1;
         //消耗指数
-        float power = 2f;
+        float power = 2.2f;
         //成长系数
         float gc = FML_ASP_GC(level);
 
