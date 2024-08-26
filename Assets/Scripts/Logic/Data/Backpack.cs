@@ -29,6 +29,19 @@ public class Backpack
     private Dictionary<int, Dictionary<int, PearData>> m_PearLevelPairs = new Dictionary<int, Dictionary<int, PearData>>();
 
 
+    public Dictionary<int, int[]> PearPools = new Dictionary<int, int[]>()
+    {
+        //根据Level(品质)进行分类
+        [1] = new int[] {20000, 20010, 20020, 20030, 20040, 20050, 20060, 20070},
+        [2] = new int[] {20001, 20011, 20021, 20031, 20041, 20051, 20061, 20071},
+        [3] = new int[] {20002, 20012, 20022, 20032, 20042, 20052, 20062, 20072},
+        [4] = new int[] {20003, 20013, 20023, 20033, 20043, 20053, 20063, 20073},
+
+
+        [99] = new int[] {20030}  //特殊：15关的掉落池
+    };
+
+
     public void Init()
     {
         InitPearDatas();
@@ -69,10 +82,7 @@ public class Backpack
 
     Pear AddPear(int id, int count)
     {
-        var data    = this.GetPearData(id);
-        if (data == null) return null;
-
-        Pear pear = Pear.Create((PearData)data, count);
+        Pear pear = Pear.Create(id, count);
         m_Pears.Add(pear);
         m_PearsDic[pear.ID] = pear;
 

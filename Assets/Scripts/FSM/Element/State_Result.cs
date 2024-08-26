@@ -37,13 +37,26 @@ public class State_Result<T> : State<Field>
 
             //计算奖励
             Field.Instance.GenerateGlassRewards(out int base_glass, out int worth_glass);
+            Field.Instance.GeneratePearRewards(out Dictionary<int, int> pear_dic);
+
+     
+            //获得碎片
+            int glass_total = base_glass + worth_glass;
+            DataCenter.Instance.User.UpdateGlass(glass_total);
+            EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS));
+
+            //获得宝珠
+            if (pear_dic.Count > 0) {
+                foreach (var pear_keypairs in pear_dic) {
+                    DataCenter.Instance.Backpack.PushPear(pear_keypairs.Key, pear_keypairs.Value);
+                }
+            }
 
             var window = GameFacade.Instance.UIManager.LoadWindow("ResultWindow", UIManager.BOARD).GetComponent<ResultWindow>();
             window.Init(m_Result, base_glass, worth_glass, (rate)=>{
-                DataCenter.Instance.User.UpdateGlass((base_glass + worth_glass) * rate);
-
-                EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS));
+                DataCenter.Instance.User.UpdateGlass(glass_total * rate);
             });
+            window.InitPears(pear_dic);
 
             
             

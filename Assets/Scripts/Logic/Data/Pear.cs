@@ -205,7 +205,7 @@ public class Pear
         get {
             int base_order = Level;
 
-            if (DataCenter.Instance.User.IsPearEquiped(this.ID)) base_order += 10;
+            if (DataCenter.Instance.User.IsPearEquiped(this.Class)) base_order += 10;
 
             return base_order;
         }
@@ -229,8 +229,14 @@ public class Pear
     };
     #endregion
 
-    public static Pear Create(PearData pearData, int count = 1)
+    public static Pear Create(int id, int count = 1)
     {
+        PearData pearData = DataCenter.Instance.Backpack.GetPearData(id);
+        if (pearData == null) {
+            Debug.LogError("未找到宝珠ID ： " + id);
+            return null;
+        }
+
         Pear pear;
         if (m_classDictionary.ContainsKey(pearData.Class)) pear = m_classDictionary[pearData.Class]();
         else {

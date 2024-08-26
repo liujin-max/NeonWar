@@ -35,6 +35,15 @@ public class TaskMsg
 public class PearSlotMsg
 {
     public int ID;
+
+    [NonSerialized] private PearData m_Data;
+    public int Class {
+        get {
+            if (ID == -1) return 0;
+            if (m_Data == null) m_Data = DataCenter.Instance.Backpack.GetPearData(ID);
+            return m_Data.Class;
+        }
+    }
 }
 
 //技能槽数据
@@ -399,10 +408,10 @@ public class User
         }
     }
 
-    public bool IsPearEquiped(int pear_id)
+    public bool IsPearEquiped(int pear_class)
     {
         foreach (var slot_msg in CurrentPlayer.PearSlots) {
-            if (slot_msg.ID == pear_id) return true;
+            if (slot_msg.Class == pear_class) return true;
         }
         return false;
     }

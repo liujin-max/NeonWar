@@ -10,6 +10,8 @@ public class ResultWindow : MonoBehaviour
     [SerializeField] TextMeshProUGUI m_Glass;
     [SerializeField] GameObject m_WorthPivot;
     [SerializeField] TextMeshProUGUI m_WorthGlass;
+    [SerializeField] GameObject m_PearPivot;
+    [SerializeField] Transform m_PearContent;
     [SerializeField] GameObject m_Tip;
 
     [Header("按钮")]
@@ -28,14 +30,12 @@ public class ResultWindow : MonoBehaviour
     void Start()
     {
         m_BtnContinue.onClick.AddListener(()=>{
-            m_RewardCall?.Invoke(1);
-
             Field.Instance.Transist(_C.FSMSTATE.IDLE);
         });
 
         m_BtnVideo.onClick.AddListener(()=>{
             Platform.Instance.REWARD_VIDEOAD("", ()=>{
-                m_RewardCall?.Invoke(3);
+                m_RewardCall?.Invoke(2);
 
                 Field.Instance.Transist(_C.FSMSTATE.IDLE);
             });
@@ -52,6 +52,20 @@ public class ResultWindow : MonoBehaviour
         m_WorthValue.SetValue(worth_glass);
 
         m_Tip.SetActive(result == _C.RESULT.LOSE);
+    }
+
+    public void InitPears(Dictionary<int,int> pear_dic)
+    {
+        m_PearPivot.SetActive(pear_dic.Count > 0);
+
+        foreach (var pear_keyparis in pear_dic)
+        {
+            var item = GameFacade.Instance.UIManager.LoadItem("PearItem", m_PearContent).GetComponent<PearItem>();
+
+            Pear pear= Pear.Create(pear_keyparis.Key, pear_keyparis.Value);
+            item.Init(pear);
+            item.ShowTagEquip(false);
+        }
     }
 
     void Update()

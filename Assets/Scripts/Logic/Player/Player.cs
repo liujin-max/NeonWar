@@ -171,7 +171,7 @@ public class Player : Unit
             DataCenter.Instance.User.CurrentPlayer.PearSlots.ForEach(pear_msg => {
                 if (pear_msg.ID > 0)
                 {
-                    Pear pear = Pear.Create(DataCenter.Instance.Backpack.GetPearData(pear_msg.ID));
+                    Pear pear = Pear.Create(pear_msg.ID);
                     pear.Equip(this);
                     m_Pears.Add(pear);
                 }

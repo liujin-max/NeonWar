@@ -1,6 +1,8 @@
 {
     "Glass" : 690,
     "HP" : 320,
+    "PearPool" : 1,
+    "PearCount" : "0-1",
     "Monsters": 
     [
         {"Time":    0, "ID": 107, "HP": 600, "Radius": 2.5, "Angle":90},

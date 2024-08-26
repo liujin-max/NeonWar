@@ -8,6 +8,8 @@ using UnityEngine;
 public struct LevelJSON
 {
     public int Glass;
+    public int PearPool;
+    public string PearCount;
     public List<MonsterJSON> Monsters;
 }
 

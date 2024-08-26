@@ -197,6 +197,34 @@ public class Field : MonoBehaviour
         worth_value = Mathf.CeilToInt(base_value * m_Player.GlassRate.ToNumber()) - base_value;
     }
 
+    //计算宝珠奖励
+    public void GeneratePearRewards(out Dictionary<int , int> pear_dic)
+    {
+        pear_dic  = new Dictionary<int, int>();
+
+        Debug.Log(m_Level.LevelJSON.PearPool);
+
+        if (m_Level.LevelJSON.PearPool == 0) {
+            return;
+        }
+
+        int[] section   = m_Level.LevelJSON.PearCount.Split("-").Select(int.Parse).ToArray();
+        int count       = RandomUtility.Random(section[0], section[1] + 1);
+        int[] pool      = DataCenter.Instance.Backpack.PearPools[m_Level.LevelJSON.PearPool];
+
+
+        for (int i = 0; i < count; i++)
+        {
+            int rand    = RandomUtility.Random(0, pool.Length);
+            int id      = pool[rand];
+
+            if (!pear_dic.ContainsKey(id)) {
+                pear_dic.Add(id, 0);
+            }
+            pear_dic[id] ++;
+        }
+    }
+
     public void InitPlayer()
     {
         if (m_Player != null) return;

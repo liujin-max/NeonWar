@@ -70,7 +70,7 @@ public class PearDetailItem : MonoBehaviour
 
     void FlushUI()
     {
-        bool is_equip = DataCenter.Instance.User.IsPearEquiped(m_Pear.ID);
+        bool is_equip = DataCenter.Instance.User.IsPearEquiped(m_Pear.Class);
 
         m_BtnEquip.gameObject.SetActive(!is_equip);
         m_BtnUnEquip.gameObject.SetActive(is_equip);
