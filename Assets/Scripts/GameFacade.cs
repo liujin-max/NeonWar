@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 
 public class GameFacade : MonoBehaviour
@@ -149,6 +150,7 @@ public class GameFacade : MonoBehaviour
         DataCenter.Instance.Init();
 
 
+
         StartCoroutine("SYNC");
     }
 
@@ -171,7 +173,8 @@ public class GameFacade : MonoBehaviour
 
         //进入游戏
         NavigationController.GotoGame();
-    
+
+ 
         
         yield return null; 
     }
@@ -183,4 +186,5 @@ public class GameFacade : MonoBehaviour
 
         DataCenter.Instance.Update(dt);
     }
+
 }

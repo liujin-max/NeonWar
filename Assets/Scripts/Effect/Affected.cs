@@ -79,7 +79,7 @@ public class Affected : MonoBehaviour
         m_Value -= Time.deltaTime * 5;
         m_Mat.SetFloat("_HitEffectBlend", m_Value);
         m_Mat.SetColor("_HitEffectColor", m_Hit.HitColor);
-
+        
         if (m_Value <= 0) {
             m_IsDoing = false;
         }

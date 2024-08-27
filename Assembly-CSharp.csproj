@@ -338,6 +338,9 @@
     <Reference Include="UnityEngine.TLSModule">
         <HintPath>D:\Tuanjie Hub\2022.3.2t15\Editor\Data\Managed\UnityEngine\UnityEngine.TLSModule.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEngine.TerrainModule">
+        <HintPath>D:\Tuanjie Hub\2022.3.2t15\Editor\Data\Managed\UnityEngine\UnityEngine.TerrainModule.dll</HintPath>
+    </Reference>
     <Reference Include="UnityEngine.TextCoreFontEngineModule">
         <HintPath>D:\Tuanjie Hub\2022.3.2t15\Editor\Data\Managed\UnityEngine\UnityEngine.TextCoreFontEngineModule.dll</HintPath>
     </Reference>
@@ -842,6 +845,9 @@
     <Reference Include="Unity.2D.IK.Runtime">
         <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.2D.IK.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Runtime">
+        <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Burst.Editor">
         <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.Burst.Editor.dll</HintPath>
     </Reference>
@@ -872,6 +878,9 @@
     <Reference Include="MiniGameHost.Editor">
         <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\MiniGameHost.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.Editor">
+        <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.RenderPipelines.Core.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VisualScripting.Flow">
         <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
     </Reference>
@@ -883,6 +892,9 @@
     </Reference>
     <Reference Include="Unity.Services.Core.Environments">
         <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.Services.Core.Environments.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
+        <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Collections">
         <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.Collections.dll</HintPath>
@@ -908,6 +920,9 @@
     <Reference Include="Unity.MemoryProfiler">
         <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.MemoryProfiler.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
+        <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.EditorCoroutines.Editor">
         <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.EditorCoroutines.Editor.dll</HintPath>
     </Reference>
@@ -925,6 +940,9 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.Shared.Editor">
         <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.ShaderGraph.Editor">
+        <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.ShaderGraph.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualStudio.Editor">
         <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
@@ -982,6 +1000,9 @@
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
         <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Searcher.Editor">
+        <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.Searcher.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.State">
         <HintPath>D:\Work\NeonWar\Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
