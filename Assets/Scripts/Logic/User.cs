@@ -35,15 +35,7 @@ public class TaskMsg
 public class PearSlotMsg
 {
     public int ID;
-
-    [NonSerialized] private PearData m_Data;
-    public int Class {
-        get {
-            if (ID == -1) return 0;
-            if (m_Data == null) m_Data = DataCenter.Instance.Backpack.GetPearData(ID);
-            return m_Data.Class;
-        }
-    }
+    public int Class;
 }
 
 //技能槽数据
@@ -382,14 +374,15 @@ public class User
     }
 
     //穿脱宝珠
-    public void EquipPear(int pear_id)
+    public void EquipPear(Pear pear)
     {
         for (int i = 0; i < CurrentPlayer.PearSlots.Count; i++)
         {
             var slot = CurrentPlayer.PearSlots[i];
             if (slot.ID == -1) {
                 m_userUpdate = true;
-                CurrentPlayer.PearSlots[i].ID = pear_id;
+                CurrentPlayer.PearSlots[i].ID = pear.ID;
+                CurrentPlayer.PearSlots[i].Class = pear.Class;
                 break;
             }
         } 
@@ -403,6 +396,7 @@ public class User
             if (slot.ID == pear_id) {
                 m_userUpdate = true;
                 CurrentPlayer.PearSlots[i].ID = -1;
+                CurrentPlayer.PearSlots[i].Class = -1;
                 break;
             }
         }

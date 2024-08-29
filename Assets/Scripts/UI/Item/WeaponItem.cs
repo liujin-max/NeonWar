@@ -66,4 +66,13 @@ public class WeaponItem : MonoBehaviour
         if (m_SkillTreeItem != null) m_SkillTreeItem.FlushUI();
         InitPears();
     }
+
+    public void OnBackpackOpen(bool flag)
+    {
+        var obj = GameFacade.Instance.UIManager.GetWindow("BackpackWindow");
+        if (obj == null) return;
+
+        if (flag) m_PearPivot.transform.SetParent(obj.transform);
+        else m_PearPivot.transform.SetParent(transform);
+    }
 }

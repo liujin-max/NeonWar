@@ -110,8 +110,8 @@
      <Compile Include="Assets\Scripts\Logic\Area\Area_Poison.cs" />
      <Compile Include="Assets\Scripts\Network\FileDownloader.cs" />
      <Compile Include="Assets\Scripts\EFFECT.cs" />
-     <Compile Include="Assets\Scripts\FSM\State.cs" />
      <Compile Include="Assets\Scripts\FSM\Element\State_Idle.cs" />
+     <Compile Include="Assets\Scripts\FSM\State.cs" />
      <Compile Include="Assets\Scripts\Manager\OBJManager.cs" />
      <Compile Include="Assets\AllIn1SpriteShader\Scripts\AllIn1Shader.cs" />
      <Compile Include="Assets\AllIn1SpriteShader\Demo\Scripts\All1ShaderDemoController.cs" />
@@ -127,8 +127,8 @@
      <Compile Include="Assets\Scripts\CONST.cs" />
      <Compile Include="Assets\Scripts\Logic\Enemy\Enemy.cs" />
      <Compile Include="Assets\Scripts\Logic\NavigationController.cs" />
-     <Compile Include="Assets\Scripts\Logic\Data\Levels.cs" />
      <Compile Include="Assets\AllIn1SpriteShader\Demo\Scripts\Demo2AutoScroll.cs" />
+     <Compile Include="Assets\Scripts\Logic\Data\Levels.cs" />
      <Compile Include="Assets\Scripts\Utility\BarTransition.cs" />
      <Compile Include="Assets\Scripts\Logic\Element\Bullet.cs" />
      <Compile Include="Assets\Scripts\Manager\EditorPlatform.cs" />
@@ -178,8 +178,8 @@
      <Compile Include="Assets\Scripts\Logic\Battle\SpawnThread.cs" />
      <Compile Include="Assets\Scripts\UI\Window\MaskWindow.cs" />
      <Compile Include="Assets\Scripts\UI\Window\GameWindow.cs" />
-     <Compile Include="Assets\Scripts\Manager\OBJPool.cs" />
      <Compile Include="Assets\Scripts\Logic\Enemy\Enemy_106.cs" />
+     <Compile Include="Assets\Scripts\Manager\OBJPool.cs" />
      <Compile Include="Assets\Scripts\Utility\CSVUtility.cs" />
      <Compile Include="Assets\Scripts\Logic\Data\Skill.cs" />
      <Compile Include="Assets\Scripts\Manager\AssetManager.cs" />

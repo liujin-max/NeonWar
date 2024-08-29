@@ -10,6 +10,7 @@ public static class EVENT
     public static string UI_BLINKSHAKE      = "UI_BLINKSHAKE";
     public static string UI_SKILLUPGRADE    = "UI_SKILLUPGRADE";
     public static string UI_PEARCHANGE      = "UI_PEARCHANGE";
+    public static string UI_BACKPACKOPEN    = "UI_BACKPACKOPEN";
     
 
 

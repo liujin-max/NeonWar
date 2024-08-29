@@ -18,6 +18,7 @@ public class BackpackWindow : MonoBehaviour
 
     private float m_EnterTimer = 0.4f;
     private float m_ExitTimer = 0.2f;
+    private bool m_IsAwake = false;
 
     void Start()
     {
@@ -30,7 +31,9 @@ public class BackpackWindow : MonoBehaviour
     {
         InitPears(current_pear);
 
-        StartCoroutine(EnterAnim());
+        if (!m_IsAwake) StartCoroutine(EnterAnim());
+
+        m_IsAwake = true;
     }
 
     void InitPears(Pear current_pear)
@@ -44,6 +47,12 @@ public class BackpackWindow : MonoBehaviour
         list.Sort((a1, a2)=>{
             return a2.SortOrder.CompareTo(a1.SortOrder);
         });
+
+        if (m_PearItem != null) {
+            m_PearItem.Select(false);
+            m_PearItem = null;
+
+        }
 
         m_PearView.Init(list.Count, (obj, index, is_init)=>{
             PearItem item = obj.transform.GetComponent<PearItem>();
@@ -98,6 +107,7 @@ public class BackpackWindow : MonoBehaviour
         yield return new WaitForSeconds(m_EnterTimer);
 
         EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPMASK, false));
+        EventManager.SendEvent(new GameEvent(EVENT.UI_BACKPACKOPEN, true));
 
         yield return null;
     }
@@ -116,6 +126,8 @@ public class BackpackWindow : MonoBehaviour
         yield return new WaitForSeconds(m_ExitTimer);
 
         EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPMASK, false));
+        EventManager.SendEvent(new GameEvent(EVENT.UI_BACKPACKOPEN, false));
+
         GameFacade.Instance.UIManager.UnloadWindow(gameObject);
 
         yield return null;

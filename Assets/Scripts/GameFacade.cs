@@ -137,7 +137,7 @@ public class GameFacade : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         DontDestroyOnLoad(GameObject.Find("POOL"));
         DontDestroyOnLoad(GameObject.Find("Canvas"));
-        DontDestroyOnLoad(GameObject.Find("UICamera"));
+        // DontDestroyOnLoad(GameObject.Find("UICamera"));
         DontDestroyOnLoad(GameObject.Find("EventSystem"));
     }
 
@@ -147,9 +147,9 @@ public class GameFacade : MonoBehaviour
         CsvManager.ReadCsvs();
 
         //加载数据类
-        DataCenter.Instance.Init();
+        DataCenter.Instance.Init(); 
 
-
+        
 
         StartCoroutine("SYNC");
     }

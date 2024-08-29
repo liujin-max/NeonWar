@@ -9,7 +9,6 @@ using UnityEngine.UI;
 public class GameWindow : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI m_Level;
-    [SerializeField] TextMeshProUGUI m_SubLevel;
     [SerializeField] NumberTransition m_Coin;
     [SerializeField] NumberTransition m_Glass;
 
@@ -50,6 +49,7 @@ public class GameWindow : MonoBehaviour
         EventManager.AddHandler(EVENT.UI_BLINKSHAKE,    OnBlinkShake);
         // EventManager.AddHandler(EVENT.UI_SKILLUPGRADE,  OnSkillUpgrade);
         EventManager.AddHandler(EVENT.UI_PEARCHANGE,    OnPearChange);
+        EventManager.AddHandler(EVENT.UI_BACKPACKOPEN,  OnBackpackOpen);
     }
 
     void OnDestroy()
@@ -63,6 +63,7 @@ public class GameWindow : MonoBehaviour
         EventManager.DelHandler(EVENT.UI_BLINKSHAKE,    OnBlinkShake);
         // EventManager.DelHandler(EVENT.UI_SKILLUPGRADE,  OnSkillUpgrade);
         EventManager.DelHandler(EVENT.UI_PEARCHANGE,    OnPearChange);
+        EventManager.DelHandler(EVENT.UI_BACKPACKOPEN,  OnBackpackOpen);
     }
 
 
@@ -145,7 +146,6 @@ public class GameWindow : MonoBehaviour
     {
         var str         = DataCenter.Instance.GetLevelString();
         m_Level.text    = str;
-        m_SubLevel.text = str;
 
         m_Coin.SetValue(DataCenter.Instance.User.Coin);
         m_Glass.SetValue(DataCenter.Instance.User.Glass);
@@ -323,6 +323,13 @@ public class GameWindow : MonoBehaviour
         if (m_WEAPONITEM == null) return;
 
         m_WEAPONITEM.InitPears();
+    }
+
+    private void OnBackpackOpen(GameEvent @event)
+    {
+        bool flag = (bool)@event.GetParam(0);
+
+        m_WEAPONITEM.OnBackpackOpen(flag);
     }
 
     #endregion

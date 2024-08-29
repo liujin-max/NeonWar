@@ -38,7 +38,7 @@ public class PearDetailItem : MonoBehaviour
                 return;
             }
 
-            DataCenter.Instance.User.EquipPear(m_Pear.ID);
+            DataCenter.Instance.User.EquipPear(m_Pear);
 
             EventManager.SendEvent(new GameEvent(EVENT.UI_PEARCHANGE));
         });

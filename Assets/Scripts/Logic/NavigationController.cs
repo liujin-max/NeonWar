@@ -11,13 +11,7 @@ public static class NavigationController
     //前往主页
     public static void GotoLogin()
     {
-        // SoundManager.Instance.PlayBGM(SOUND.BGM);
 
-        //加载loading界面
-        // GameFacade.Instance.ScenePool.LoadSceneAsync("Login", () => {
-        //     var window = GameFacade.Instance.UIManager.LoadWindow("LoginWindow", UIManager.BOTTOM).GetComponent<LoginWindow>();
-        //     window.Init();
-        // });
     }
 
     //前往关卡模式
@@ -26,16 +20,6 @@ public static class NavigationController
         GameFacade.Instance.ScenePool.LoadSceneAsync("Game", () => {
             Field.Instance.Enter();
         });
-
-
-
-        // GameFacade.Instance.EffectManager.Load(EFFECT.SWITCH, Vector3.zero, UIManager.EFFECT.gameObject).GetComponent<SceneSwitch>().Enter(()=>{
-        //     // SoundManager.Instance.PlayBGM(SOUND.BGM);
-
-        //     GameFacade.Instance.ScenePool.LoadSceneAsync("Game", () => {
-        //         Field.Instance.Enter(level);
-        //     });
-        // });
     }
 
     //打开背包
@@ -47,8 +31,13 @@ public static class NavigationController
             return;
         }
 
-        var window = GameFacade.Instance.UIManager.LoadWindow("BackpackWindow", UIManager.MAJOR).GetComponent<BackpackWindow>();
-        window.Init(pear);
+        var obj = GameFacade.Instance.UIManager.GetWindow("BackpackWindow");
+        if (obj == null) {
+            obj = GameFacade.Instance.UIManager.LoadWindow("BackpackWindow", UIManager.MAJOR);
+        }
+
+        
+        obj.GetComponent<BackpackWindow>().Init(pear);
     }
 }
 
