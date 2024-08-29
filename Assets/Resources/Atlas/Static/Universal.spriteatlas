@@ -33,7 +33,7 @@ SpriteAtlas:
       m_CompressionQuality: 100
       m_CrunchedCompression: 0
       m_AllowsAlphaSplitting: 0
-      m_Overridden: 0
+      m_Overridden: 1
       m_IgnorePlatformSupport: 0
       m_AndroidETC2FallbackOverride: 0
       m_ForceMaximumCompressionQuality_BC6H_BC7: 0
@@ -67,7 +67,6 @@ SpriteAtlas:
     - d59b93b24c7a69a459d221709570e7e0: 78742582
     - d59b93b24c7a69a459d221709570e7e0: -1228232763
     - 20d45ab292f96384f8a35bfb10b7f7b6: 21300000
-    - 025e2373444f36b4fa600ecbc03efa06: 21300000
     - 30fd8426b53c2624a898a444a0d7d7ea: 21300000
     - a9c28a072831b144d859f186d3f80b0f: 21300000
     - 35167688f7d892b41964cb37ed41b011: 21300000
@@ -115,7 +114,6 @@ SpriteAtlas:
   - {fileID: 78742582, guid: d59b93b24c7a69a459d221709570e7e0, type: 3}
   - {fileID: -1228232763, guid: d59b93b24c7a69a459d221709570e7e0, type: 3}
   - {fileID: 21300000, guid: 20d45ab292f96384f8a35bfb10b7f7b6, type: 3}
-  - {fileID: 21300000, guid: 025e2373444f36b4fa600ecbc03efa06, type: 3}
   - {fileID: 21300000, guid: 30fd8426b53c2624a898a444a0d7d7ea, type: 3}
   - {fileID: 21300000, guid: a9c28a072831b144d859f186d3f80b0f, type: 3}
   - {fileID: 21300000, guid: 35167688f7d892b41964cb37ed41b011, type: 3}
@@ -162,7 +160,6 @@ SpriteAtlas:
   - Universal_icon_worth_atlas_0
   - Universal_icon_worth_atlas_1
   - Universal_glass
-  - Universal_count_frame 1
   - Universal_backpack_icon
   - Universal_mask_white
   - Universal_lock

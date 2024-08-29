@@ -1,0 +1,74 @@
+%YAML 1.1
+%TAG !u! tag:yousandi.cn,2023:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Grass
+  serializedVersion: 2
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 3
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 0
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      webStreaming: 0
+      sRGB: 1
+    platformSettings:
+    - serializedVersion: 3
+      m_BuildTarget: WeixinMiniGame
+      m_MaxTextureSize: 2048
+      m_MaxPlaceholderSize: 32
+      m_ResizeAlgorithm: 0
+      m_TextureFormat: 48
+      m_TextureCompression: 1
+      m_CompressionQuality: 100
+      m_CrunchedCompression: 0
+      m_AllowsAlphaSplitting: 0
+      m_Overridden: 1
+      m_IgnorePlatformSupport: 0
+      m_AndroidETC2FallbackOverride: 0
+      m_ForceMaximumCompressionQuality_BC6H_BC7: 0
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 1
+      enableAlphaDilation: 1
+    secondaryTextureSettings: {}
+    variantMultiplier: 1
+    packables:
+    - {fileID: 102900000, guid: 096909e2be1af574aa2061f5230a71a2, type: 3}
+    bindAsDefault: 1
+    isAtlasV2: 0
+    cachedData: {fileID: 0}
+    packedSpriteRenderDataKeys:
+    - 6724c0205d7058542aeab0012703dc82: 21300000
+    - 8f7be34a494291f4582ad4b5c77796f8: 21300000
+    - d2ecbfedf8d6df140b89d9227e5a6f99: 21300000
+    - a4eb3b7f4d04f034fa7ae1c3bf492852: 21300000
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: 6724c0205d7058542aeab0012703dc82, type: 3}
+  - {fileID: 21300000, guid: 8f7be34a494291f4582ad4b5c77796f8, type: 3}
+  - {fileID: 21300000, guid: d2ecbfedf8d6df140b89d9227e5a6f99, type: 3}
+  - {fileID: 21300000, guid: a4eb3b7f4d04f034fa7ae1c3bf492852, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - mushroom
+  - stone1
+  - stone2
+  - grass_stone
+  m_RenderDataMap: {}
+  m_Tag: Grass
+  m_IsVariant: 0
+  m_IsPlaceholder: 0

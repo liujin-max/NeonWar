@@ -415,8 +415,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 7525713387758829920}
   - {fileID: 1141294445863416668}
+  - {fileID: 7525713387758829920}
   - {fileID: 3760396601257252927}
   - {fileID: 3626869093230229903}
   m_Father: {fileID: 3956288724007292595}
@@ -447,7 +447,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -548,7 +548,7 @@ MonoBehaviour:
   m_text: "\u51FB\u4E2D\u76EE\u6807\u65F6\u9644\u52A0#\u5C42\u4E2D\u6BD2\u6548\u679C"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8d56633f6aa035949848b6f4f14a6ebd, type: 2}
-  m_sharedMaterial: {fileID: 2136087169309321419, guid: 8d56633f6aa035949848b6f4f14a6ebd, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 156a3c5e3ed29d94389ed3dc7f72be7c, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
