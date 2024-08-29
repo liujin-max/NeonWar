@@ -7,7 +7,8 @@ public class CameraUtility : MonoBehaviour
 {
     private Camera m_Camera;
 
-    private Tweener m_Tweener;
+    private Tweener m_SmallShakeTweener;
+    private Tweener m_ShakeTweener;
 
     // Start is called before the first frame update
     void Awake()
@@ -68,23 +69,25 @@ public class CameraUtility : MonoBehaviour
     {
         Platform.Instance.VIBRATE(_C.VIBRATELEVEL.HEAVY);
 
-        if (m_Tweener != null) {
+        if (m_ShakeTweener != null) {
             transform.localPosition = new Vector3(0, 0, -10);
-            m_Tweener.Kill();
+            m_ShakeTweener.Restart();
+            return;
         }
 
-        m_Tweener = transform.DOShakePosition(0.4f, 0.3f, 15, 60);
+        m_ShakeTweener = transform.DOShakePosition(0.4f, 0.3f, 15, 60).SetAutoKill(false);
     }
 
     public void DoSmallShake()
     {
         Platform.Instance.VIBRATE(_C.VIBRATELEVEL.HEAVY);
 
-        if (m_Tweener != null) {
+        if (m_SmallShakeTweener != null) {
             transform.localPosition = new Vector3(0, 0, -10);
-            m_Tweener.Kill();
+            m_SmallShakeTweener.Restart();
+            return;
         }
 
-        m_Tweener = transform.DOShakePosition(0.1f, 0.1f, 35, 60);
+        m_SmallShakeTweener = transform.DOShakePosition(0.1f, 0.1f, 35, 60).SetAutoKill(false);
     }
 }

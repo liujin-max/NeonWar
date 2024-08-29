@@ -2,11 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using TMPro;
 using UnityEngine;
 
 public static class ToolUtility
 {
+    private static StringBuilder m_FormateBuilder = new StringBuilder();
+
     public static long GetUnixTimestamp()
     {
         long unixTimestamp = (long)(DateTime.UtcNow - new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc)).TotalSeconds;
@@ -61,21 +64,25 @@ public static class ToolUtility
     //数字转换成单位
     public static string FormatNumber(double num)
     {
+        m_FormateBuilder.Clear();
+
         if (num >= 1000000000)
         {
-            return (num / 1000000000D).ToString("0.#") + "B";
+            m_FormateBuilder.Append((num / 1000000000D).ToString("0.#")).Append("B");
         }
         else if (num >= 1000000)
         {
-            return (num / 1000000D).ToString("0.#") + "M";
+            m_FormateBuilder.Append((num / 1000000D).ToString("0.#")).Append("M");
         }
         else if (num >= 1000)
         {
-            return (num / 1000D).ToString("0.#") + "K";
+            m_FormateBuilder.Append((num / 1000D).ToString("0.#")).Append("K");
         }
         else
         {
-            return num.ToString();
+            m_FormateBuilder.Append(num);
         }
+
+        return m_FormateBuilder.ToString();
     }
 }

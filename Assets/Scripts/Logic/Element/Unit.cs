@@ -36,6 +36,7 @@ public class Unit : MonoBehaviour
 
     //Buff
     private Dictionary<int, Buff> m_BuffDic = new Dictionary<int, Buff>();
+    private List<Buff> m_RemoveBuffs = new List<Buff>();
 
     //各种状态
     [HideInInspector]public int StunFlag = 0;    //晕眩
@@ -70,17 +71,19 @@ public class Unit : MonoBehaviour
     {
         if (!IsValid) return false;
 
-        List<Buff> remove_buffs = new List<Buff>();
+        
         //刷新Buff
-        foreach (var item in m_BuffDic)
+        foreach (Buff buff in m_BuffDic.Values)
         {
-            Buff buff = item.Value;
             buff.Update(deltaTime);
 
-            if (buff.IsEnd()) remove_buffs.Add(buff);
+            if (buff.IsEnd()) m_RemoveBuffs.Add(buff);
         }
 
-        remove_buffs.ForEach(buff => this.RemoveBuff(buff));
+        foreach (var buff in m_RemoveBuffs) {
+            this.RemoveBuff(buff);
+        }
+        m_RemoveBuffs.Clear();
 
         //晕眩不会影响Buff计时
         if (StunFlag > 0) return false;

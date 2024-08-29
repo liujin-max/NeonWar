@@ -113,9 +113,9 @@ public class Spawn
             if (m_Enemys.Count == 0) {
                 float time = m_EnemyPool[0].Time;
 
-                m_EnemyPool.ForEach(monster_json => {
+                foreach (var monster_json in m_EnemyPool) {
                     monster_json.Time -= time;
-                });
+                }
             }
 
             for (int i = m_EnemyPool.Count - 1; i >= 0; i--)
@@ -146,7 +146,8 @@ public class Spawn
         m_EnemyTemps.Clear();
         m_EnemyTemps.AddRange(m_Enemys);
         
-        m_EnemyTemps.ForEach(e => {
+        foreach (var e in m_EnemyTemps)
+        {
             e.CustomUpdate(deltaTime);
 
             if (e.IsDead() == true) {
@@ -157,14 +158,14 @@ public class Spawn
 
                 m_EnemyRemoves.Add(e);
             }
-        });
+        }
 
         if (m_EnemyRemoves.Count > 0) {
-            m_EnemyRemoves.ForEach(e => {
+            foreach (var e in m_EnemyRemoves) {
                 m_Enemys.Remove(e);
 
                 e.Dispose();
-            });
+            }
 
             m_EnemyRemoves.Clear();
         }

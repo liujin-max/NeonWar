@@ -137,7 +137,7 @@ public class GameFacade : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         DontDestroyOnLoad(GameObject.Find("POOL"));
         DontDestroyOnLoad(GameObject.Find("Canvas"));
-        // DontDestroyOnLoad(GameObject.Find("UICamera"));
+        DontDestroyOnLoad(GameObject.Find("UICamera"));
         DontDestroyOnLoad(GameObject.Find("EventSystem"));
     }
 

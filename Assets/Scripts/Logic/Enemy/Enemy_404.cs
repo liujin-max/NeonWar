@@ -26,17 +26,15 @@ public class Enemy_404 : Enemy
 
             List<object> obj_list = new List<object>();
 
-            Field.Instance.Spawn.Enemys.ForEach(e => {
+            foreach (var e in Field.Instance.Spawn.Enemys) {
                 if (e.IsValid && e.GetBuff((int)_C.BUFF.SHIELD) == null) obj_list.Add(e);
-            });
+            }
 
             //缺少特效
             List<object> random_list = RandomUtility.Pick(2, obj_list);
-            random_list.ForEach(o => {
-                Enemy e = o as Enemy;
-
+            foreach (Enemy e in random_list) {
                 e.AddBuff((int)_C.BUFF.SHIELD, 2);
-            });
+            }
         }
 
         return true;

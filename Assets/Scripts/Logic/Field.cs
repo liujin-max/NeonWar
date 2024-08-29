@@ -155,16 +155,14 @@ public class Field : MonoBehaviour
         
 
         //区域
-        m_Areas.ForEach(a => {
+        foreach (var a in m_Areas) {
             a.CustomUpdate(deltaTime);
 
             if (a.IsFinished()) m_AreaRemoves.Add(a);
-        });
+        }
 
         if (m_AreaRemoves.Count > 0) {
-            m_AreaRemoves.ForEach(a => {
-                Field.Instance.RemoveArea(a);
-            });
+            foreach (var a in m_AreaRemoves) Field.Instance.RemoveArea(a);
             m_AreaRemoves.Clear();
         }
         

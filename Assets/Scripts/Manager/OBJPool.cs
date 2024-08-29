@@ -87,17 +87,17 @@ public class OBJPool<T> where T : MonoBehaviour
 
     public void CustomUpdate(float dt)
     {
-        m_Caches.ForEach(obj_entity => {
+        foreach (var obj_entity in m_Caches) {
             obj_entity.CustomUpdate(dt);
             if (obj_entity.IsUnUsed()) m_Removes.Add(obj_entity);
-        });
+        }
 
-        m_Removes.ForEach(obj_entity => {
+        foreach (var obj_entity in m_Removes) {
             m_KeyPairs.Remove(obj_entity.Entity);
             m_Caches.Remove(obj_entity);
 
             obj_entity.Dispose();
-        });
+        }
         m_Removes.Clear();
     }
 }

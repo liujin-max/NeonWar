@@ -57,9 +57,9 @@ public class Player : Unit
     {
         if (!base.CustomUpdate(deltaTime)) return false;
 
-        m_Skills.ForEach(skill => {
+        foreach (var skill in m_Skills) {
             skill.CustomUpdate(deltaTime);
-        });
+        }
 
         InvincibleTimer.Update(deltaTime);
 

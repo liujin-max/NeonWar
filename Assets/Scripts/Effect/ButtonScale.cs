@@ -8,7 +8,8 @@ using UnityEngine.UI;
 public class ButtonScale : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     private Button m_button;
-    private Tweener m_Tweener = null;
+    private Tweener m_DownTweener = null;
+    private Tweener m_UpTweener;
 
     void Awake()
     {
@@ -20,19 +21,21 @@ public class ButtonScale : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         SoundManager.Instance.Load(SOUND.CLICK);
         Platform.Instance.VIBRATE(_C.VIBRATELEVEL.LIGHT);
 
-        if (m_Tweener != null) {
-            m_Tweener.Kill();
+        if (m_DownTweener != null) {
+            m_DownTweener.Restart();
+            return;
         }
 
-        m_Tweener = m_button.transform.DOScale(new Vector3(0.9f, 0.9f, 0.9f), 0.2f);
+        m_DownTweener = m_button.transform.DOScale(new Vector3(0.9f, 0.9f, 0.9f), 0.2f).SetAutoKill(false);
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        if (m_Tweener != null) {
-            m_Tweener.Kill();
+        if (m_UpTweener != null) {
+            m_UpTweener.Restart();
+            return;
         }
 
-        m_Tweener = m_button.transform.DOScale(Vector3.one, 0.1f);
+        m_UpTweener = m_button.transform.DOScale(Vector3.one, 0.1f).SetAutoKill(false);
     }
 }

@@ -10,9 +10,9 @@ public class AttributeValue
     [SerializeField] private float m_Origin;
     private bool m_IsInt = false;
 
-    Dictionary<object, float> ADDDic = new Dictionary<object, float>();
-    Dictionary<object, float> AULDic = new Dictionary<object, float>();
-    Dictionary<object, float> MULDic = new Dictionary<object, float>();
+    Dictionary<object, float> ADDDic = null;
+    Dictionary<object, float> AULDic = null;
+    Dictionary<object, float> MULDic = null;
     public AttributeValue(float value, bool int_flag = true)
     {
         m_Base  = value;
@@ -37,6 +37,8 @@ public class AttributeValue
 
     public void PutADD(object obj, float value)
     {
+        if (ADDDic == null) ADDDic = new Dictionary<object, float>();
+
         if (ADDDic.ContainsKey(obj) == true) {
             ADDDic[obj] = value;
             return;
@@ -46,6 +48,8 @@ public class AttributeValue
 
     public void PutAUL(object obj, float value)
     {
+        if (AULDic == null) AULDic = new Dictionary<object, float>();
+
         if (AULDic.ContainsKey(obj) == true) {
             AULDic[obj] = value;
             return;
@@ -55,6 +59,8 @@ public class AttributeValue
 
     public void PutMUL(object obj, float value)
     {
+        if (MULDic == null) MULDic = new Dictionary<object, float>();
+        
         if (MULDic.ContainsKey(obj) == true) {
             MULDic[obj] = value;
             return;
@@ -64,17 +70,17 @@ public class AttributeValue
 
     public void Pop(object obj)
     {
-        if (ADDDic.ContainsKey(obj) == true)
+        if (ADDDic != null && ADDDic.ContainsKey(obj) == true)
         {
             ADDDic.Remove(obj);
         }
         
-        if (AULDic.ContainsKey(obj) == true)
+        if (AULDic != null && AULDic.ContainsKey(obj) == true)
         {
             AULDic.Remove(obj);
         }
 
-        if (MULDic.ContainsKey(obj) == true)
+        if (MULDic != null && MULDic.ContainsKey(obj) == true)
         {
             MULDic.Remove(obj);
         }
@@ -82,18 +88,19 @@ public class AttributeValue
 
     public void Clear()
     {
-        ADDDic.Clear();
-        AULDic.Clear();
-        MULDic.Clear();
+        ADDDic?.Clear();
+        AULDic?.Clear();
+        MULDic?.Clear();
     }
 
     public float ToADDNumber()
     {
         var base_value  = m_Base;
 
-        foreach (var item in ADDDic) {
-            base_value += item.Value;
+        if (ADDDic != null) {
+            foreach (var item in ADDDic) base_value += item.Value;
         }
+
 
         if (m_IsInt == true) {
             base_value = (float)Math.Floor(base_value);
@@ -110,19 +117,18 @@ public class AttributeValue
         var aul_value   = 1f;
         var mul_value   = 1f;
 
-
-        foreach (var item in ADDDic) {
-            add_value += item.Value;
+        if (ADDDic != null) {
+            foreach (var value in ADDDic.Values) add_value += value;
         }
 
-
-        foreach (var item in AULDic) {
-            aul_value += item.Value;
+        if (AULDic != null) {
+            foreach (var value in AULDic.Values) aul_value += value;
         }
 
-        foreach (var item in MULDic) {
-            mul_value *= item.Value;
+        if (MULDic != null) {
+            foreach (var value in MULDic.Values) mul_value *= value;
         }
+
 
         base_value = (base_value + add_value)  * aul_value * mul_value;
 

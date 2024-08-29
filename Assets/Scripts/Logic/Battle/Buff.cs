@@ -356,18 +356,20 @@ public class Buff_SPDMUL : Buff
     {
         base.Update(deltaTime);
 
-        Field.Instance.Spawn.Enemys.ForEach(e => {
+        foreach (var e in Field.Instance.Spawn.Enemys)
+        {
             e.ATT.SPEED.PutMUL(this, 0.4f);
             e.SyncSpeed();
-        });
+        }
     }
 
     public override void Dispose()
     {
-        Field.Instance.Spawn.Enemys.ForEach(e => {
+        foreach (var e in Field.Instance.Spawn.Enemys)
+        {
             e.ATT.SPEED.Pop(this);
             e.SyncSpeed();
-        });
+        }
     }
 }
 #endregion
