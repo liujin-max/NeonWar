@@ -18,9 +18,11 @@ public static class _C
     public static float DEFAULT_BLINKCD= 1.5f;  //闪现冷却
 
 
-
-    
-
+    //碰撞体标记
+    public static string COLLIDER_BOARD = "Board";
+    public static string COLLIDER_WALL  = "Wall";
+    public static string COLLIDER_PLAYER= "Player";
+    public static string COLLIDER_ENEMY = "Enemy";
 
 
 

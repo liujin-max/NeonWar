@@ -214,7 +214,7 @@ public class Enemy : Unit
     #region 碰撞检测
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == _C.COLLIDER_PLAYER)
         {
             Field.Instance.Crash(this, collision.gameObject.GetComponent<Player>());
         }
