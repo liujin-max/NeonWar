@@ -33,8 +33,8 @@ public class OBJPool<T> where T : MonoBehaviour
     {
         if (m_Caches.Count > 0)
         {
-            T obj = m_Caches[0].Entity;
-            m_Caches.RemoveAt(0); // 移除队列中的第一个对象
+            T obj = m_Caches[m_Caches.Count - 1].Entity;
+            m_Caches.RemoveAt(m_Caches.Count - 1); // 移除队列中的第一个对象
             return obj;
         }
         else
@@ -50,8 +50,8 @@ public class OBJPool<T> where T : MonoBehaviour
     {
         if (m_Caches.Count > 0)
         {
-            T obj = m_Caches[0].Entity;
-            m_Caches.RemoveAt(0); // 移除队列中的第一个对象
+            T obj = m_Caches[m_Caches.Count - 1].Entity;
+            m_Caches.RemoveAt(m_Caches.Count - 1); // 移除队列中的第一个对象
             return obj;
         }
         else

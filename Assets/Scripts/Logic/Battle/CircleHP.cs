@@ -26,6 +26,7 @@ public class CircleHP : MonoBehaviour
 
     private Tweener m_HPTweener;
     private List<Tweener> m_ShakeTweeners = new List<Tweener>();
+    private Tweener m_BarTweener;
     private bool m_HitShaking = false;
 
     public void Init(Enemy enemy)
@@ -55,10 +56,10 @@ public class CircleHP : MonoBehaviour
 
         if (m_HPTweener != null) {
             m_HPText.transform.localPosition  = Vector3.zero;
-            m_HPTweener.Kill();
+            m_HPTweener.Restart();
+        } else {
+            m_HPTweener = m_HPText.transform.DOShakePosition(0.2f, new Vector3(0.03f, 0.03f, 0), 50).SetAutoKill(false);
         }
-        
-        m_HPTweener = m_HPText.transform.DOShakePosition(0.2f, new Vector3(0.03f, 0.03f, 0), 50);
 
 
         for (int i = 0; i < m_ShakePivot.childCount; i++)
@@ -67,14 +68,15 @@ public class CircleHP : MonoBehaviour
             hp_text.transform.localPosition  = Vector3.zero;
             hp_text.text= m_HPText.GetText();
 
-            var tweener = hp_text.transform.DOShakePosition(0.4f, new Vector3(0.1f, 0.1f, 0), 50);
-
-            if (m_ShakeTweeners.Count > i) 
+            
+            if (m_ShakeTweeners.Count > i)
             {
-                m_ShakeTweeners[i].Kill();
-                m_ShakeTweeners[i] = tweener;
+                m_ShakeTweeners[i].Restart();
             }
-            else m_ShakeTweeners.Add(tweener);
+            else
+            {
+                m_ShakeTweeners.Add(hp_text.transform.DOShakePosition(0.4f, new Vector3(0.1f, 0.1f, 0), 50).SetAutoKill(false));
+            }
         }
     }
 
@@ -83,9 +85,14 @@ public class CircleHP : MonoBehaviour
         if (m_HitShaking) return;
         m_HitShaking = true;
         m_BarPivot.transform.localScale = Vector3.one;
-        m_BarPivot.transform.DOShakeScale(0.3f, 0.35f, vibrato: 35, randomness: 50, fadeOut: true).OnComplete(()=>{
-            m_HitShaking = false;
-        });
+
+        if (m_BarTweener != null) m_BarTweener.Restart();
+        else
+        {
+            m_BarTweener = m_BarPivot.transform.DOShakeScale(0.3f, 0.35f, vibrato: 35, randomness: 50, fadeOut: true).OnComplete(()=>{
+                m_HitShaking = false;
+            }).SetAutoKill(false);
+        }
     }
 
     void Update()

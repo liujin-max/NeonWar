@@ -136,6 +136,7 @@ GameObject:
   - component: {fileID: 41287358}
   - component: {fileID: 41287357}
   - component: {fileID: 41287356}
+  - component: {fileID: 41287359}
   m_Layer: 5
   m_HasEditorInfo: 1
   m_Name: Canvas
@@ -217,6 +218,14 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!81 &41287359
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41287354}
+  m_Enabled: 1
 --- !u!1 &102179907
 GameObject:
   m_ObjectHideFlags: 0
@@ -902,7 +911,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1447044672}
   - component: {fileID: 1447044673}
-  - component: {fileID: 1447044674}
   m_Layer: 0
   m_HasEditorInfo: 1
   m_Name: GameStart
@@ -940,16 +948,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Version: 1.0.0
   OpenAdvert: 1
-  TestMode: 1
+  TestMode: 0
   TestStage: 0
---- !u!81 &1447044674
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1447044671}
-  m_Enabled: 1
 --- !u!1 &1640637242
 GameObject:
   m_ObjectHideFlags: 0
