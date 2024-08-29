@@ -65,6 +65,8 @@ public class Enemy : Unit
     public override void Dispose()
     {
         base.Dispose();
+
+        GameFacade.Instance.PoolManager.RecycleHP(m_HPBar);
         
         Destroy(gameObject);
     }
@@ -92,14 +94,19 @@ public class Enemy : Unit
 
     void InitHPBar()
     {
-        GameFacade.Instance.AssetManager.AsyncLoadPrefab("Prefab/Element/CircleHP", Vector2.zero, m_HPPivot, (obj)=>{
-            m_HPBar = obj.GetComponent<CircleHP>();
-            m_HPBar.Init(this);
-        });
+        m_HPBar = GameFacade.Instance.PoolManager.AllocateHP();
+        m_HPBar.transform.SetParent(m_HPPivot);
+        m_HPBar.transform.localPosition = Vector3.zero;
+        m_HPBar.Init(this);
+
+        // GameFacade.Instance.AssetManager.AsyncLoadPrefab("Prefab/Element/CircleHP", Vector2.zero, m_HPPivot, (obj)=>{
+        //     m_HPBar = obj.GetComponent<CircleHP>();
+        //     m_HPBar.Init(this);
+        // });
     }
 
 
-    public override void Affected(Hit hit)
+    public override void Affected(Hit hit = default)
     {
         m_Sprite.GetComponent<Affected>().DO(hit);
 
@@ -107,7 +114,7 @@ public class Enemy : Unit
 
     }
 
-    public override void Dead(Hit hit)
+    public override void Dead(Hit hit = default)
     {
         //掉落Buff逻辑
         if (m_Data.Buffs.Length > 0)

@@ -46,7 +46,9 @@ public class Affected : MonoBehaviour
     private SpriteRenderer m_Sprite;
     public Material m_MatTemplate;
     private Material m_Mat = null;
-
+    private MaterialPropertyBlock m_Mpb;
+    private int m_BlendID;
+    private int m_ColorID;
 
     private bool m_IsDoing = false;
     private float m_Value;
@@ -54,7 +56,15 @@ public class Affected : MonoBehaviour
 
     void Awake()
     {
-        m_Sprite = GetComponent<SpriteRenderer>();
+        m_Sprite= GetComponent<SpriteRenderer>();
+        m_Sprite.material = m_MatTemplate;
+
+
+        m_Mpb   = new MaterialPropertyBlock();
+        m_Mpb.SetTexture("_MainTex", m_Sprite.sprite.texture);
+
+        m_BlendID = Shader.PropertyToID("_HitEffectBlend");
+        m_ColorID = Shader.PropertyToID("_HitEffectColor");
     }
 
     public void DO(Hit hit)
@@ -62,13 +72,10 @@ public class Affected : MonoBehaviour
         m_Hit = hit;
         if (m_IsDoing) return;
 
-        if (m_Mat == null) {
-            m_Mat   = Instantiate<Material>(m_MatTemplate); //Resources.Load<Material>("Meterial/Enemy");
-            m_Sprite.material   = m_Mat;
-        }
-
         m_IsDoing   = true;
         m_Value     = 1;
+
+        m_Mpb.SetColor(m_ColorID, m_Hit.HitColor);
     }
 
 
@@ -77,8 +84,9 @@ public class Affected : MonoBehaviour
         if (!m_IsDoing) return;
 
         m_Value -= Time.deltaTime * 5;
-        m_Mat.SetFloat("_HitEffectBlend", m_Value);
-        m_Mat.SetColor("_HitEffectColor", m_Hit.HitColor);
+
+        m_Mpb.SetFloat(m_BlendID, m_Value);
+        m_Sprite.SetPropertyBlock(m_Mpb);
         
         if (m_Value <= 0) {
             m_IsDoing = false;

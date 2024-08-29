@@ -38,13 +38,15 @@ public class OBJEntity<T> where T : MonoBehaviour
 
 public class OBJManager: MonoBehaviour
 {
-    private Transform PoolLayer;
+    public Transform PoolLayer;
 
     //子弹池
     private Dictionary<string, OBJPool<Bullet>> m_BulletPools = new Dictionary<string, OBJPool<Bullet>>();
     //特效池
     private Dictionary<string, OBJPool<Effect>> m_EffectPools = new Dictionary<string, OBJPool<Effect>>();
-    
+    //血条池
+    OBJPool<CircleHP> m_HPPools = new OBJPool<CircleHP>();
+
 
 
     void Awake()
@@ -72,7 +74,6 @@ public class OBJManager: MonoBehaviour
 
         Bullet bullet = m_BulletPools[name].Get(bullet_template);
         bullet.Name = name;
-        bullet.gameObject.SetActive(true);
         bullet.transform.SetParent(Field.Instance.Land.ELEMENT_ROOT);
         bullet.transform.localPosition = pos;
         bullet.transform.localEulerAngles = Vector3.zero;
@@ -85,15 +86,10 @@ public class OBJManager: MonoBehaviour
     {
         string name = bullet.Name;
 
-        bullet.transform.SetParent(PoolLayer);
-        bullet.gameObject.SetActive(false);
-
-        // 正常不会有这种情况
-        // if (!m_BulletPools.ContainsKey(name)) {
-        //     m_BulletPools.Add(name, new OBJPool<Bullet>());
-        // }
-
-        if (m_BulletPools[name].Has(bullet)) return;
+        if (m_BulletPools[name].Has(bullet)) {
+            Destroy(bullet.gameObject);
+            return;
+        }
 
         m_BulletPools[name].Recyle(bullet);
     }
@@ -111,7 +107,6 @@ public class OBJManager: MonoBehaviour
         effect.transform.localPosition = pos;
         effect.ResPath   = effect_path;
         effect.Restart();
-        effect.gameObject.SetActive(true);
 
 
         return effect;
@@ -119,12 +114,23 @@ public class OBJManager: MonoBehaviour
 
     public void RecycleEffect(Effect effect)
     {
-        effect.transform.SetParent(PoolLayer);
-        effect.transform.localPosition = Vector3.zero;
-        effect.gameObject.SetActive(false);
-
-        if (m_EffectPools[effect.ResPath].Has(effect)) return;
+        if (m_EffectPools[effect.ResPath].Has(effect)) {
+            Destroy(effect.gameObject);
+            return;
+        }
 
         m_EffectPools[effect.ResPath].Recyle(effect);
+    }
+
+
+    //加载血条
+    public CircleHP AllocateHP()
+    {
+        return m_HPPools.Get("Prefab/Element/CircleHP");
+    }
+
+    public void RecycleHP(CircleHP hp)
+    {
+        m_HPPools.Recyle(hp);
     }
 }

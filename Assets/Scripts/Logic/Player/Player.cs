@@ -90,7 +90,7 @@ public class Player : Unit
     #region 表现处理
 
     //碰撞造成伤害时， hit为空 
-    public override void Affected(Hit hit)
+    public override void Affected(Hit hit = default)
     {
         InvincibleTimer.ForceReset();
 
@@ -98,7 +98,7 @@ public class Player : Unit
         GameFacade.Instance.EffectManager.Load(EFFECT.CRASH, Vector3.zero, Field.Instance.Land.ELEMENT_ROOT.gameObject);
     }
 
-    public override void Dead(Hit hit)
+    public override void Dead(Hit hit = default)
     {
         Field.Instance.Land.DoShake();
     }

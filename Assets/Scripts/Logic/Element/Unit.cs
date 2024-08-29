@@ -102,12 +102,12 @@ public class Unit : MonoBehaviour
 
     #region 表现处理
     //受击
-    public virtual void Affected(Hit hit)
+    public virtual void Affected(Hit hit = default)
     {
 
     }
 
-    public virtual void Dead(Hit hit)
+    public virtual void Dead(Hit hit = default)
     {
 
     }

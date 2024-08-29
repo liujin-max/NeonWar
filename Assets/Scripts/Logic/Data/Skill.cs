@@ -519,7 +519,7 @@ public class Skill_10260 : Skill
     //创建子弹
     void OnKillEnemy(GameEvent @event)
     {
-        Hit hit = @event.GetParam(1) as Hit;
+        Hit hit = (Hit)@event.GetParam(1);
 
         if (hit.Caster != Caster) return;
         
@@ -551,7 +551,7 @@ public class Skill_10270 : Skill
     //创建子弹
     void OnKillEnemy(GameEvent @event)
     {
-        Hit hit = @event.GetParam(1) as Hit;
+        Hit hit = (Hit)@event.GetParam(1);
 
         if (hit.Caster != Caster) return;
         

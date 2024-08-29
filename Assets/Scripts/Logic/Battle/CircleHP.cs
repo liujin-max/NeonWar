@@ -11,7 +11,6 @@ public class CircleHP : MonoBehaviour
     [SerializeField] private NumberTransition m_HPText;
     [SerializeField] private Transform m_BarPivot;
     [SerializeField] private Transform m_ShakePivot;
-    // [SerializeField] private Transform m_ShadowPivot;
     [SerializeField] private float m_Height;
 
 

@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour
 
     public Vector2 Velocity {get { return m_Rigidbody.velocity;}}
     public AttributeValue Speed = new AttributeValue(500);
-    public Hit Hit = null;
+    public Hit Hit;
 
 
 

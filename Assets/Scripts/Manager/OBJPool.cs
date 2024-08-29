@@ -35,6 +35,7 @@ public class OBJPool<T> where T : MonoBehaviour
         {
             T obj = m_Caches[m_Caches.Count - 1].Entity;
             m_Caches.RemoveAt(m_Caches.Count - 1); // 移除队列中的第一个对象
+            obj.gameObject.SetActive(true);
             return obj;
         }
         else
@@ -52,6 +53,7 @@ public class OBJPool<T> where T : MonoBehaviour
         {
             T obj = m_Caches[m_Caches.Count - 1].Entity;
             m_Caches.RemoveAt(m_Caches.Count - 1); // 移除队列中的第一个对象
+            obj.gameObject.SetActive(true);
             return obj;
         }
         else
@@ -73,6 +75,10 @@ public class OBJPool<T> where T : MonoBehaviour
             obj_entity.Dispose();
             return;
         }
+
+        value.transform.SetParent(GameFacade.Instance.PoolManager.PoolLayer);
+        value.transform.localPosition = Vector3.zero;
+        value.gameObject.SetActive(false);
 
         obj_entity.Reset();
 

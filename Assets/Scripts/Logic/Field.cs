@@ -368,6 +368,7 @@ public class Field : MonoBehaviour
             return;
         }
 
+        var hit = new Hit(enemy);
 
         //撞击伤害
         int demage = enemy.TYPE == _C.ENEMY_TYPE.BOSS ? 3 : 1;
@@ -378,11 +379,11 @@ public class Field : MonoBehaviour
         //受击表现
         if (player.IsDead() == true)
         {
-            player.Dead(null);
+            player.Dead();
         }
         else
         {
-            player.Affected(null);
+            player.Affected();
         }
     }
 
