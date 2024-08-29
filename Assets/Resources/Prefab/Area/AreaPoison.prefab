@@ -34,7 +34,7 @@ Transform:
   m_Children:
   - {fileID: 2822495802654919403}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!58 &7938995314296147883
 CircleCollider2D:
@@ -4751,7 +4751,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c668c049c5ac6d145aa21f5895d13c30, type: 2}
+  - {fileID: 2100000, guid: 017b7d7453be7cb429fab5320912d2db, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
