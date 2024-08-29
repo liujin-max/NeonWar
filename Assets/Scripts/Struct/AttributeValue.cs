@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static System.Collections.Generic.Dictionary<object, float>;
+
 
 [System.Serializable]
 public struct AttributeValue
@@ -13,6 +15,12 @@ public struct AttributeValue
     Dictionary<object, float> ADDDic;
     Dictionary<object, float> AULDic;
     Dictionary<object, float> MULDic;
+
+    ValueCollection ADDValues;
+    ValueCollection AULValues;
+    ValueCollection MULValues;
+
+
     public AttributeValue(float value, bool int_flag = true)
     {
         m_Base  = value;
@@ -22,6 +30,10 @@ public struct AttributeValue
         ADDDic = new Dictionary<object, float>();
         AULDic = new Dictionary<object, float>();
         MULDic = new Dictionary<object, float>();
+
+        ADDValues   = ADDDic.Values;
+        AULValues   = AULDic.Values;
+        MULValues   = MULDic.Values;
     }
 
     public void SetBase(float value)
@@ -122,15 +134,15 @@ public struct AttributeValue
         var mul_value   = 1f;
 
         if (ADDDic != null) {
-            foreach (var value in ADDDic.Values) add_value += value;
+            foreach (var value in ADDValues) add_value += value;
         }
 
         if (AULDic != null) {
-            foreach (var value in AULDic.Values) aul_value += value;
+            foreach (var value in AULValues) aul_value += value;
         }
 
         if (MULDic != null) {
-            foreach (var value in MULDic.Values) mul_value *= value;
+            foreach (var value in MULValues) mul_value *= value;
         }
 
 
