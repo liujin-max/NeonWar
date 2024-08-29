@@ -73,6 +73,7 @@ SpriteAtlas:
     - 35167688f7d892b41964cb37ed41b011: 21300000
     - b08445a9be0ff9647b90795906d4c22a: -116747414
     - b08445a9be0ff9647b90795906d4c22a: -308385493
+    - cdf832f969cfcb34a9aa0d1687e810fb: 21300000
     - 4ef7482a60195c647b544d70e900b285: 21300000
     - 07a4ce2a8488af04da74ad16a1dd6d36: 1281455949
     - 07a4ce2a8488af04da74ad16a1dd6d36: -387372762
@@ -120,6 +121,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 35167688f7d892b41964cb37ed41b011, type: 3}
   - {fileID: -116747414, guid: b08445a9be0ff9647b90795906d4c22a, type: 3}
   - {fileID: -308385493, guid: b08445a9be0ff9647b90795906d4c22a, type: 3}
+  - {fileID: 21300000, guid: cdf832f969cfcb34a9aa0d1687e810fb, type: 3}
   - {fileID: 21300000, guid: 4ef7482a60195c647b544d70e900b285, type: 3}
   - {fileID: 1281455949, guid: 07a4ce2a8488af04da74ad16a1dd6d36, type: 3}
   - {fileID: -387372762, guid: 07a4ce2a8488af04da74ad16a1dd6d36, type: 3}
@@ -166,6 +168,7 @@ SpriteAtlas:
   - Universal_lock
   - Universal_switch_btn_1
   - Universal_switch_btn_0
+  - 10000
   - Universal_icon_video
   - Universal_icon_atk_atlas_0
   - Universal_icon_atk_atlas_1
