@@ -4,20 +4,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class AttributeValue
+public struct AttributeValue
 {
     [SerializeField] private float m_Base;
     [SerializeField] private float m_Origin;
-    private bool m_IsInt = false;
+    private bool m_IsInt;
 
-    Dictionary<object, float> ADDDic = null;
-    Dictionary<object, float> AULDic = null;
-    Dictionary<object, float> MULDic = null;
+    Dictionary<object, float> ADDDic;
+    Dictionary<object, float> AULDic;
+    Dictionary<object, float> MULDic;
     public AttributeValue(float value, bool int_flag = true)
     {
         m_Base  = value;
         m_Origin= value;
         m_IsInt = int_flag;
+
+        ADDDic = new Dictionary<object, float>();
+        AULDic = new Dictionary<object, float>();
+        MULDic = new Dictionary<object, float>();
     }
 
     public void SetBase(float value)
@@ -60,7 +64,7 @@ public class AttributeValue
     public void PutMUL(object obj, float value)
     {
         if (MULDic == null) MULDic = new Dictionary<object, float>();
-        
+
         if (MULDic.ContainsKey(obj) == true) {
             MULDic[obj] = value;
             return;

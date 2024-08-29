@@ -58,8 +58,8 @@ public class OBJManager: MonoBehaviour
     void Update()
     {
         float dt = Time.deltaTime;
-        foreach (var item in m_BulletPools) {
-            item.Value.CustomUpdate(dt);
+        foreach (var pool in m_BulletPools.Values) {
+            pool.CustomUpdate(dt);
         }
     }
 

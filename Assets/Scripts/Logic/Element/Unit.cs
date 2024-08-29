@@ -220,9 +220,9 @@ public class Unit : MonoBehaviour
     public virtual void Dispose()
     {
         //清空Buff
-        foreach (var item in m_BuffDic) {
-            item.Value.Dispose();
-            EventManager.SendEvent(new GameEvent(EVENT.ONBUFFREMOVE, item.Value));
+        foreach (var buff in m_BuffDic.Values) {
+            buff.Dispose();
+            EventManager.SendEvent(new GameEvent(EVENT.ONBUFFREMOVE, buff));
         }
         m_BuffDic.Clear();
     }
