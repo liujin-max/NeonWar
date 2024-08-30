@@ -361,6 +361,12 @@ public class Buff_SPDMUL : Buff
             e.ATT.SPEED.PutMUL(this, 0.4f);
             e.SyncSpeed();
         }
+
+        foreach (var b in Field.Instance.Bullets)
+        {
+            b.Speed.PutMUL(this, 0.4f);
+            b.SyncSpeed();
+        }
     }
 
     public override void Dispose()
@@ -369,6 +375,12 @@ public class Buff_SPDMUL : Buff
         {
             e.ATT.SPEED.Pop(this);
             e.SyncSpeed();
+        }
+
+        foreach (var b in Field.Instance.Bullets)
+        {
+            b.Speed.Pop(this);
+            b.SyncSpeed();
         }
     }
 }

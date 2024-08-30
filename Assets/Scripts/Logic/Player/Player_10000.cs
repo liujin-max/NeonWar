@@ -14,7 +14,7 @@ public class Player_10000 : Player
         }
 
         //默认攻击
-        var bullet = CreateBullet();
+        var bullet = Field.Instance.CreateBullet(this);
         bullet.Shoot(this.GetAngle() + 180);
     }
 }

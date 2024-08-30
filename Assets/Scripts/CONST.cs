@@ -13,9 +13,11 @@ public static class _C
 
 
 
-    public static int PEAR_UNLOCK_LEVEL= 15;    //通过15关后开放宝珠系统
+    public static int PEAR_UNLOCK_LEVEL= 1;    //通过15关后开放宝珠系统
     public static float DEFAULT_RADIUS = 5.4f;  //圆弧半径
     public static float DEFAULT_BLINKCD= 1.5f;  //闪现冷却
+
+    public static int COMPOSE_COUNTMAX  = 3;    //合成数量上限
 
 
     //碰撞体标记
@@ -27,6 +29,7 @@ public static class _C
 
 
     public static string COLOR_RED      = "<#FF0000>";
+    public static string COLOR_ORANGE   = "<#FF9704>";
     public static string COLOR_GREEN    = "<#33FF07>";
     public static string COLOR_GREEN2   = "<#1D9F00>";
 

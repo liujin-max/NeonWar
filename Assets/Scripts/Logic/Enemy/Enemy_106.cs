@@ -8,8 +8,8 @@ public class Enemy_106 : Enemy
     {
         float base_angle = ToolUtility.VectorToAngle(Field.Instance.Player.transform.localPosition - transform.localPosition);
 
-        CreateBullet().Shoot(base_angle);
-        CreateBullet().Shoot(base_angle - 45);
-        CreateBullet().Shoot(base_angle + 45);
+        Field.Instance.CreateBullet(this).Shoot(base_angle);
+        Field.Instance.CreateBullet(this).Shoot(base_angle - 45);
+        Field.Instance.CreateBullet(this).Shoot(base_angle + 45);
     }
 }

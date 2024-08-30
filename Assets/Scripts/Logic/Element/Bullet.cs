@@ -48,6 +48,11 @@ public class Bullet : MonoBehaviour
         InitStatus();
     }
     
+    public void SyncSpeed()
+    {
+        m_Rigidbody.velocity = m_Rigidbody.velocity.normalized * Speed.ToNumber() / 100.0f;
+    }
+
     public void Shoot(float angle , bool is_shoot = true)
     {
         m_Rigidbody.velocity = ToolUtility.FindPointOnCircle(Vector2.zero, Speed.ToNumber() / 100.0f, angle);
@@ -69,7 +74,7 @@ public class Bullet : MonoBehaviour
 
     void Dispose()
     {
-        GameFacade.Instance.PoolManager.RecycleBullet(this);
+        Field.Instance.RecycleBullet(this);
     }
 
     void LateUpdate()

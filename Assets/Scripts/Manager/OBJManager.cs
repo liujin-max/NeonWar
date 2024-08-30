@@ -25,7 +25,7 @@ public class OBJEntity<T> where T : MonoBehaviour
         m_Timer -= dt;
     }
 
-    public void Reset() {m_Timer = 60;}
+    public void Reset() {m_Timer = 30;}
     //长时间未使用
     public bool IsUnUsed() { return m_Timer <= 0;}
 

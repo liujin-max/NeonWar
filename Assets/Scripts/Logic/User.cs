@@ -193,7 +193,7 @@ public class User
     }
 
     private bool m_userUpdate = false;  //账号数据变动标记
-    public bool IsDirty {get { return m_userUpdate;}}
+    public bool IsDirty {get { return m_userUpdate;} set { m_userUpdate = value;}}
 
     
 

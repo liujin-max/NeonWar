@@ -141,17 +141,6 @@ public class Unit : MonoBehaviour
         ATT.HP = Mathf.Clamp(ATT.HP + value, 0, ATT.HPMAX);
     }
 
-    public virtual Bullet CreateBullet()
-    {
-        var bullet = GameFacade.Instance.PoolManager.AllocateBullet(BulletTemplate, Vector3.zero);
-        bullet.transform.position = ShootPivot.position;
-        bullet.Init(this);
-
-        EventManager.SendEvent(new GameEvent(EVENT.ONBULLETCREATE, bullet));
-
-        return bullet;
-    }
-
     public virtual Projectile CreateProjectile(string projectile ,_C.TRACE trace_type, Vector2 to_pos, float time, Action callback)
     {
         var project = GameFacade.Instance.AssetManager.LoadPrefab(projectile, Vector3.zero, Field.Instance.Land.ELEMENT_ROOT).GetComponent<Projectile>();

@@ -26,7 +26,7 @@ public class Backpack
 
     //
     private Dictionary<int, PearData> m_PearDataDic = new Dictionary<int, PearData>();
-    private Dictionary<int, Dictionary<int, PearData>> m_PearLevelPairs = new Dictionary<int, Dictionary<int, PearData>>();
+    private Dictionary<int, List<PearData>> m_PearLevelPairs = new Dictionary<int, List<PearData>>();
 
 
     public Dictionary<int, int[]> PearPools = new Dictionary<int, int[]>()
@@ -67,10 +67,10 @@ public class Backpack
 
             if (!m_PearLevelPairs.ContainsKey(pear.Level))
             {
-                m_PearLevelPairs[pear.Level] = new Dictionary<int, PearData>();
+                m_PearLevelPairs[pear.Level] = new List<PearData>();
             }
 
-            m_PearLevelPairs[pear.Level][pear.ID] = pear;
+            m_PearLevelPairs[pear.Level].Add(pear);
         }
     }
 
@@ -91,6 +91,11 @@ public class Backpack
     public Pear GetPear(int id)
     {
         return m_PearsDic.TryGetValue(id, out Pear value) ? value : default;
+    }
+
+    public List<PearData> GetPearDatasByLevel(int level)
+    {
+        return m_PearLevelPairs[level];
     }
 
     public void SyncPears(List<PearMsg> pear_msgs)
@@ -135,67 +140,5 @@ public class Backpack
         }
     }
 
-    // 合成宝珠
-    // 宝珠合成系统，任意相同品质三颗宝珠可以合成更高品质的随机宝珠
-    // 三颗相同品质宝珠可以合成下一品质宝珠
-    // 如果只花2颗宝珠合成，则成功率只有50%
-    public Pear Synthesis(List<Pear> pears)
-    {
-        if (pears.Count <= 1) return null;
 
-        int success_rate = (pears.Count - 1) * 50;
-
-        //判断合成手续费是否足够
-        int cost_coin   = 50;
-
-        if (DataCenter.Instance.User.Coin < cost_coin) {
-            EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "<sprite=0>不足"));
-            return null;
-        }
-
-        //扣除消耗
-        DataCenter.Instance.User.UpdateCoin(-cost_coin);
-
-        //消耗宝珠
-        pears.ForEach(pear => {
-            RemovePear(pear.ID, 1);
-        });
-
-
-        if (!RandomUtility.IsHit(success_rate)) {
-            EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "合成失败"));
-            return null;
-        }
-
-        bool is_same    = true;
-        int last_id     = pears[0].ID;
-
-        for (int i = 0; i < pears.Count; i++)
-        {
-            if (pears[i].ID != last_id) {
-                is_same = false;
-                break;
-            }
-        }
-
-
-        int next_id;
-        if (is_same == true)
-        {
-            next_id = pears[0].ID + 1;
-        }
-        else
-        {
-            Dictionary<int, PearData> keyValuePairs = m_PearLevelPairs[pears[0].Level + 1];
-
-            List<PearData> pear_datas = new List<PearData>(keyValuePairs.Values);
-            int rand = RandomUtility.Random(0, pear_datas.Count);
-            
-            next_id = pear_datas[rand].ID;
-        }
-
-        Pear pear = PushPear(next_id);
-
-        return pear;
-    }
 }

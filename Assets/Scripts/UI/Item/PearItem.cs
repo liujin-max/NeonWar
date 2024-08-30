@@ -17,6 +17,7 @@ public class PearItem : MonoBehaviour
 
 
     private Pear m_Pear;
+    public Pear Pear {get { return m_Pear;}}
 
     void Awake()
     {
@@ -56,6 +57,11 @@ public class PearItem : MonoBehaviour
     {
         m_TagEquiped.SetActive(flag);
         m_Count.gameObject.SetActive(!flag);
+    }
+
+    public void ShowName(bool flag)
+    {
+        m_Text.gameObject.SetActive(flag);
     }
 
     public void Select(bool flag)

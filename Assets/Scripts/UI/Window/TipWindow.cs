@@ -28,9 +28,8 @@ public class TipWindow : MonoBehaviour
     {
         Platform.Instance.VIBRATE(_C.VIBRATELEVEL.MEDIUM);
         SoundManager.Instance.Load(SOUND.TIP);
-
  
-        var text = (string)@event.GetParam(0);
+        var text        = (string)@event.GetParam(0);
 
         m_TipPivot.SetActive(true);
         m_TipPivot.transform.Find("Text").GetComponent<TextMeshProUGUI>().text = text;

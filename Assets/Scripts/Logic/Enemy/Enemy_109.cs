@@ -51,7 +51,7 @@ public class Enemy_109 : Enemy
         {
             float angle = rand + i * 60f;
 
-            var bullet = CreateBullet();
+            var bullet = Field.Instance.CreateBullet(this);
             bullet.Shoot(angle);
         }
     }

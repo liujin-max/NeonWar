@@ -25,6 +25,9 @@ public class Field : MonoBehaviour
     private Level m_Level;
     public Level Level {get {return m_Level;}}
 
+    private List<Bullet> m_Bullets = new List<Bullet>();
+    public List<Bullet> Bullets {get {return m_Bullets;}}
+
     private List<BuffBubble> m_BuffBubbles = new List<BuffBubble>();
     private List<Area> m_Areas = new List<Area>();
     private List<Area> m_AreaRemoves = new List<Area>();
@@ -239,6 +242,27 @@ public class Field : MonoBehaviour
             m_Player.Dispose();
             m_Player = null;
         }
+    }
+
+    //子弹
+    public Bullet CreateBullet(Unit unit)
+    {
+        var bullet = GameFacade.Instance.PoolManager.AllocateBullet(unit.BulletTemplate, Vector3.zero);
+        bullet.transform.position = unit.ShootPivot.position;
+        bullet.Init(unit);
+
+        m_Bullets.Add(bullet);
+
+        EventManager.SendEvent(new GameEvent(EVENT.ONBULLETCREATE, bullet));
+
+        return bullet;
+    }
+
+    public void RecycleBullet(Bullet bullet)
+    {
+        m_Bullets.Remove(bullet);
+
+        GameFacade.Instance.PoolManager.RecycleBullet(bullet);
     }
 
     //在场地上生成可拾取的Buff

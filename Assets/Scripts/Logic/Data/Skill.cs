@@ -20,7 +20,7 @@ public class Skill_10010 : Skill
         {
             case 1:
             {
-                var bullet = Caster.CreateBullet();
+                var bullet = Field.Instance.CreateBullet(Caster);
                 bullet.Shoot(Caster.GetAngle() + 180);
             }
             break;
@@ -34,13 +34,13 @@ public class Skill_10010 : Skill
                 var offset2 = shoot_point + new Vector2( dir.y, -dir.x) * 0.25f;
 
                 {
-                    var bullet = Caster.CreateBullet();
+                    var bullet = Field.Instance.CreateBullet(Caster);
                     bullet.transform.position = offset1;
                     bullet.Shoot(Caster.GetAngle() + 180);
                 }
 
                 {
-                    var bullet = Caster.CreateBullet();
+                    var bullet = Field.Instance.CreateBullet(Caster);
                     bullet.transform.position = offset2;
                     bullet.Shoot(Caster.GetAngle() + 180);
                 }
@@ -50,17 +50,17 @@ public class Skill_10010 : Skill
             case 3:
             {
                 {
-                    var bullet = Caster.CreateBullet();
+                    var bullet = Field.Instance.CreateBullet(Caster);
                     bullet.Shoot(Caster.GetAngle() + 180 - 15);
                 }
 
                 {
-                    var bullet = Caster.CreateBullet();
+                    var bullet = Field.Instance.CreateBullet(Caster);
                     bullet.Shoot(Caster.GetAngle() + 180);
                 }
 
                 {
-                    var bullet = Caster.CreateBullet();
+                    var bullet = Field.Instance.CreateBullet(Caster);
                     bullet.Shoot(Caster.GetAngle() + 180 + 15);
                 }
             }
@@ -75,25 +75,25 @@ public class Skill_10010 : Skill
                 var offset2 = shoot_point + new Vector2( dir.y, -dir.x) * 0.15f;
 
                 {
-                    var bullet = Caster.CreateBullet();
+                    var bullet = Field.Instance.CreateBullet(Caster);
                     bullet.transform.position = offset1;
                     bullet.Shoot(Caster.GetAngle() + 180);
                 }
 
                 {
-                    var bullet = Caster.CreateBullet();
+                    var bullet = Field.Instance.CreateBullet(Caster);
                     bullet.transform.position = offset2;
                     bullet.Shoot(Caster.GetAngle() + 180);
                 }
 
                 {
-                    var bullet = Caster.CreateBullet();
+                    var bullet = Field.Instance.CreateBullet(Caster);
                     bullet.transform.position = offset1;
                     bullet.Shoot(Caster.GetAngle() + 180 - 20);
                 }
 
                 {
-                    var bullet = Caster.CreateBullet();
+                    var bullet = Field.Instance.CreateBullet(Caster);
                     bullet.transform.position = offset2;
                     bullet.Shoot(Caster.GetAngle() + 180 + 20);
                 }
@@ -141,7 +141,7 @@ public class Skill_10020 : Skill
 
         for (int i = 0; i < this.Value; i++)
         {
-            var bullet = Caster.CreateBullet();
+            var bullet = Field.Instance.CreateBullet(Caster);
             bullet.transform.position = b.transform.position;
             bullet.IsSplit = true;
             bullet.Hit.IgnoreUnits.Add(unit);
@@ -193,7 +193,7 @@ public class Skill_10030 : Skill
             Enemy e = sortedObjects[i].GetComponent<Enemy>();
 
             //向目标发射子弹
-            var bullet = Caster.CreateBullet();
+            var bullet = Field.Instance.CreateBullet(Caster);
             bullet.Shoot(ToolUtility.VectorToAngle(e.transform.localPosition - Caster.transform.localPosition));
         }
 

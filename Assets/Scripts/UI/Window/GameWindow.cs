@@ -329,7 +329,11 @@ public class GameWindow : MonoBehaviour
     {
         bool flag = (bool)@event.GetParam(0);
 
-        m_WEAPONITEM.OnBackpackOpen(flag);
+        // m_WEAPONITEM.OnBackpackOpen(flag);
+
+        if (flag) m_WEAPONITEM.ResetPearParent(@event.GetParam(1) as Transform);
+        else m_WEAPONITEM.ResetPearParent(m_WEAPONITEM.transform);
+
     }
 
     #endregion

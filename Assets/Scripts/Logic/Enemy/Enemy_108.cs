@@ -10,8 +10,8 @@ public class Enemy_108 : Enemy
     {
         int random = RandomUtility.Random(0, 360);
         
-        CreateBullet().Shoot(random);
-        CreateBullet().Shoot(random + 120);
-        CreateBullet().Shoot(random - 120);
+        Field.Instance.CreateBullet(this).Shoot(random);
+        Field.Instance.CreateBullet(this).Shoot(random + 120);
+        Field.Instance.CreateBullet(this).Shoot(random - 120);
     }
 }

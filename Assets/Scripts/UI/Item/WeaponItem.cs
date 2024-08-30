@@ -9,6 +9,7 @@ public class WeaponItem : MonoBehaviour
     [SerializeField] protected Transform m_SkillPivot;
     [SerializeField] protected Transform m_PearPivot;
 
+    
 
     protected SkillTreeItem m_SkillTreeItem = null;
     protected List<PearSeatItem> m_PearSeatItems = new List<PearSeatItem>();
@@ -67,12 +68,8 @@ public class WeaponItem : MonoBehaviour
         InitPears();
     }
 
-    public void OnBackpackOpen(bool flag)
+    public void ResetPearParent(Transform trans)
     {
-        var obj = GameFacade.Instance.UIManager.GetWindow("BackpackWindow");
-        if (obj == null) return;
-
-        if (flag) m_PearPivot.transform.SetParent(obj.transform);
-        else m_PearPivot.transform.SetParent(transform);
+        m_PearPivot.transform.SetParent(trans);
     }
 }

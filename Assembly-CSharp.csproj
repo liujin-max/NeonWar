@@ -76,6 +76,7 @@
      <Compile Include="Assets\Scripts\UI\Window\SkillWindow.cs" />
      <Compile Include="Assets\Scripts\Manager\EventManager.cs" />
      <Compile Include="Assets\Scripts\Logic\Enemy\Enemy_401.cs" />
+     <Compile Include="Assets\Scripts\UI\Item\PearComposeItem.cs" />
      <Compile Include="Assets\Scripts\Effect\ShakeText.cs" />
      <Compile Include="Assets\Scripts\Utility\BoxColliderUtility.cs" />
      <Compile Include="Assets\Scripts\Utility\TextSpacing.cs" />
@@ -165,6 +166,7 @@
      <Compile Include="Assets\Scripts\Manager\EffectManager.cs" />
      <Compile Include="Assets\Scripts\Struct\CDTimer.cs" />
      <Compile Include="Assets\Scripts\UI\Item\BowItem.cs" />
+     <Compile Include="Assets\Scripts\UI\Window\PearRewardWindow.cs" />
      <Compile Include="Assets\Scripts\Utility\UIFitter.cs" />
      <Compile Include="Assets\Scripts\UI\Item\PlayerHPPointItem.cs" />
      <Compile Include="Assets\Scripts\UI\Window\TipWindow.cs" />

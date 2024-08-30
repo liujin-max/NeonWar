@@ -6,7 +6,7 @@ using static System.Collections.Generic.Dictionary<object, float>;
 
 
 [System.Serializable]
-public struct AttributeValue
+public class AttributeValue
 {
     [SerializeField] private float m_Base;
     [SerializeField] private float m_Origin;
@@ -27,13 +27,13 @@ public struct AttributeValue
         m_Origin= value;
         m_IsInt = int_flag;
 
-        ADDDic = new Dictionary<object, float>();
-        AULDic = new Dictionary<object, float>();
-        MULDic = new Dictionary<object, float>();
+        // ADDDic = new Dictionary<object, float>();
+        // AULDic = new Dictionary<object, float>();
+        // MULDic = new Dictionary<object, float>();
 
-        ADDValues   = ADDDic.Values;
-        AULValues   = AULDic.Values;
-        MULValues   = MULDic.Values;
+        // ADDValues   = ADDDic.Values;
+        // AULValues   = AULDic.Values;
+        // MULValues   = MULDic.Values;
     }
 
     public void SetBase(float value)
@@ -53,7 +53,10 @@ public struct AttributeValue
 
     public void PutADD(object obj, float value)
     {
-        if (ADDDic == null) ADDDic = new Dictionary<object, float>();
+        if (ADDDic == null) {
+            ADDDic = new Dictionary<object, float>();
+            ADDValues = ADDDic.Values;
+        }
 
         if (ADDDic.ContainsKey(obj) == true) {
             ADDDic[obj] = value;
@@ -64,7 +67,10 @@ public struct AttributeValue
 
     public void PutAUL(object obj, float value)
     {
-        if (AULDic == null) AULDic = new Dictionary<object, float>();
+        if (AULDic == null) {
+            AULDic = new Dictionary<object, float>();
+            AULValues = AULDic.Values;
+        }
 
         if (AULDic.ContainsKey(obj) == true) {
             AULDic[obj] = value;
@@ -75,7 +81,10 @@ public struct AttributeValue
 
     public void PutMUL(object obj, float value)
     {
-        if (MULDic == null) MULDic = new Dictionary<object, float>();
+        if (MULDic == null) {
+            MULDic = new Dictionary<object, float>();
+            MULValues = MULDic.Values;
+        }
 
         if (MULDic.ContainsKey(obj) == true) {
             MULDic[obj] = value;

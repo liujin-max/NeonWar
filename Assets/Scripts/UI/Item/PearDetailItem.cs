@@ -51,7 +51,7 @@ public class PearDetailItem : MonoBehaviour
 
         //合成
         BtnSynthesis.onClick.AddListener(()=>{
-            
+            EventManager.SendEvent(new GameEvent(EVENT.UI_PEARCOMPOSE, m_Pear));
         });
     }
 
@@ -75,7 +75,8 @@ public class PearDetailItem : MonoBehaviour
         m_BtnEquip.gameObject.SetActive(!is_equip);
         m_BtnUnEquip.gameObject.SetActive(is_equip);
 
-        BtnSynthesis.gameObject.SetActive(!m_Pear.IsLevelMax());
+        //装备着的宝珠无法合成
+        BtnSynthesis.gameObject.SetActive(!m_Pear.IsLevelMax() && !is_equip);
     }
 
 

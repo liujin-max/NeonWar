@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 public class PearSeatItem : MonoBehaviour
@@ -16,9 +18,10 @@ public class PearSeatItem : MonoBehaviour
 
 
     private Pear m_Pear;
+    public Pear Pear {get { return m_Pear;}}
 
 
-    void Start()
+    void Awake()
     {
         m_Touch.onClick.AddListener(()=>{
             NavigationController.GotoBackpack(m_Pear);
@@ -30,6 +33,12 @@ public class PearSeatItem : MonoBehaviour
         m_Pear = pear;
 
         FlushUI();
+    }
+
+    public void RegisterTouchListener(UnityAction callback)
+    {
+        m_Touch.onClick.RemoveAllListeners();
+        m_Touch.onClick.AddListener(callback);
     }
 
     void FlushUI()

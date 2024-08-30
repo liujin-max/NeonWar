@@ -97,12 +97,8 @@ public class Enemy : Unit
         m_HPBar = GameFacade.Instance.PoolManager.AllocateHP();
         m_HPBar.transform.SetParent(m_HPPivot);
         m_HPBar.transform.localPosition = Vector3.zero;
+        m_HPBar.transform.localScale = Vector3.one;
         m_HPBar.Init(this);
-
-        // GameFacade.Instance.AssetManager.AsyncLoadPrefab("Prefab/Element/CircleHP", Vector2.zero, m_HPPivot, (obj)=>{
-        //     m_HPBar = obj.GetComponent<CircleHP>();
-        //     m_HPBar.Init(this);
-        // });
     }
 
 
