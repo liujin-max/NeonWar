@@ -37,7 +37,7 @@ public static class _C
     public static Dictionary<int, string> LEVELCOLOR_PAIRS = new Dictionary<int, string>()
     {
         [1] = "<#FFFFFF>",
-        [2] = "<#39B317>",
+        [2] = "<#33FF07>",
         [3] = "<#1790B2>",
         [4] = "<#9717B2>",
         [5] = "<#B21F17>",
