@@ -857,6 +857,8 @@ PlayerSettings:
   openHarmonySplashScreen: {fileID: 0}
   openHarmonySplashScreenScale: 0
   OpenHarmonyTargetArchitectures: 2
+  openHarmonyClientID: 
+  openHarmonyAppID: 
   openHarmonyDeviceTypes: 7
   openHarmonySupportWindowModes: 1
   OpenHarmonyBundleVersionCode: 1

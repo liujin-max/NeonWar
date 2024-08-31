@@ -1,7 +1,5 @@
 {
     "Glass" : 15,
-    "PearPool" : 1,
-    "PearCount" : "8-12",
     "Monsters": 
     [
         {"Time":    0, "ID": 100, "HP": 2},

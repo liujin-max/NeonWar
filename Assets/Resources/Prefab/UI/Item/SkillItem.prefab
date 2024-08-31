@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5523607923328437590}
   - component: {fileID: 8041978540765753659}
   - component: {fileID: 4570593527906768814}
-  - component: {fileID: 8332289040566573149}
+  - component: {fileID: 6093917642380843100}
   m_Layer: 5
   m_HasEditorInfo: 1
   m_Name: Icon
@@ -78,7 +78,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8332289040566573149
+--- !u!114 &6093917642380843100
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

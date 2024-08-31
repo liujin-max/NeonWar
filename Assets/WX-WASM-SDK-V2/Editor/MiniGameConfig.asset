@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: MiniGameConfig
   m_EditorClassIdentifier: 
   ProjectConf:
-    projectName: "\u5706\u5F27\u4E4B\u6218"
-    Appid: wx4084a464d1d00b1d
+    projectName: "\u50CF\u7D20\u730E\u4EBA"
+    Appid: wxc30723cf59aedcb1
     CDN: 
     assetLoadType: 1
     compressDataPackage: 0
@@ -29,7 +29,7 @@ MonoBehaviour:
     HideAfterCallMain: 1
     preloadFiles: 
     Orientation: 0
-    bgImageSrc: Assets/Resources/Battle/100.png
+    bgImageSrc: Assets/Loading.png
     dataFileSubPrefix: 
     maxStorage: 200
     defaultReleaseSize: 31457280

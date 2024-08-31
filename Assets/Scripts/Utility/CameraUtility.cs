@@ -60,9 +60,9 @@ public class CameraUtility : MonoBehaviour
         }
     }
 
-    public void AddOSize(float value)
+    void FixedUpdate()
     {
-        transform.GetComponent<Camera>().orthographicSize += value;
+        FilterOrthographic(m_Camera);
     }
 
     public void DoShake()
