@@ -62,8 +62,7 @@ public class PearSeatItem : MonoBehaviour
         {
             m_Icon.gameObject.SetActive(false);
 
-            m_Frame.sprite = GameFacade.Instance.AssetManager.LoadSprite("Quality" , "Quality_1");
-            m_Frame.SetNativeSize();
+            m_Frame.color  = Color.white;
 
             m_Text.text = "";
 
