@@ -55,6 +55,10 @@ SpriteAtlas:
     packedSpriteRenderDataKeys:
     - 443887c0448aa5a43b1f8b2ababb31ab: 21300000
     - 48ab82020b3e6894fa3a129b0a40c635: 21300000
+    - 815b10a3ea71d6249a90911e86b104f3: -888596536
+    - 815b10a3ea71d6249a90911e86b104f3: -1918445197
+    - 815b10a3ea71d6249a90911e86b104f3: -716221961
+    - 815b10a3ea71d6249a90911e86b104f3: -176825316
     - 4b2ad6a3ad6e17b499b6dad0401c1c9b: -207039474
     - 4b2ad6a3ad6e17b499b6dad0401c1c9b: 1817806486
     - 4b2ad6a3ad6e17b499b6dad0401c1c9b: 1293992038
@@ -80,6 +84,10 @@ SpriteAtlas:
   m_PackedSprites:
   - {fileID: 21300000, guid: 443887c0448aa5a43b1f8b2ababb31ab, type: 3}
   - {fileID: 21300000, guid: 48ab82020b3e6894fa3a129b0a40c635, type: 3}
+  - {fileID: -888596536, guid: 815b10a3ea71d6249a90911e86b104f3, type: 3}
+  - {fileID: -1918445197, guid: 815b10a3ea71d6249a90911e86b104f3, type: 3}
+  - {fileID: -716221961, guid: 815b10a3ea71d6249a90911e86b104f3, type: 3}
+  - {fileID: -176825316, guid: 815b10a3ea71d6249a90911e86b104f3, type: 3}
   - {fileID: -207039474, guid: 4b2ad6a3ad6e17b499b6dad0401c1c9b, type: 3}
   - {fileID: 1817806486, guid: 4b2ad6a3ad6e17b499b6dad0401c1c9b, type: 3}
   - {fileID: 1293992038, guid: 4b2ad6a3ad6e17b499b6dad0401c1c9b, type: 3}
@@ -104,6 +112,10 @@ SpriteAtlas:
   m_PackedSpriteNamesToIndex:
   - wave
   - Element_net_shield
+  - chaos_0
+  - chaos_1
+  - chaos_2
+  - chaos_3
   - finger_1
   - finger_0
   - finger_3

@@ -15,5 +15,7 @@ public static class EFFECT
     public const string BLACKHOLE   = "Prefab/Effect/fx_blackhole";
     public const string CRASH       = "Prefab/Effect/fx_crash";
     public const string STUN        = "Prefab/Effect/fx_stun";
+    public const string CHAOS       = "Prefab/Effect/fx_chaos";
+    
 
 }

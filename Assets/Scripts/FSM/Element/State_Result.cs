@@ -57,13 +57,15 @@ public class State_Result<T> : State<Field>
             }
             
 
-            var window = GameFacade.Instance.UIManager.LoadWindow("ResultWindow", UIManager.BOARD).GetComponent<ResultWindow>();
-            window.Init(m_Result, base_glass, worth_glass, (rate)=>{
-                DataCenter.Instance.User.UpdateGlass(glass_total * rate);
+            GameFacade.Instance.UIManager.LoadWindowAsync("ResultWindow", UIManager.BOARD, (obj)=>{
+                var window = obj.GetComponent<ResultWindow>();
+                window.Init(m_Result, base_glass, worth_glass, (rate)=>{
+                    DataCenter.Instance.User.UpdateGlass(glass_total * rate);
 
-                EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS));
+                    EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS));
+                });
+                window.InitPears(pear_dic);
             });
-            window.InitPears(pear_dic);
 
             
             

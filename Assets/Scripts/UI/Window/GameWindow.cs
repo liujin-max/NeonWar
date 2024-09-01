@@ -81,7 +81,7 @@ public class GameWindow : MonoBehaviour
     void Start()
     {
         //往左
-        m_BtnLeft.SetCallback(()=>{
+        m_BtnLeft.SetCallback((eventData)=>{
             LeftPressTime   = Time.time;
 
             if (CheckBlink()) {
@@ -92,14 +92,18 @@ public class GameWindow : MonoBehaviour
             else EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS, -1f));
 
             m_BtnLeft.transform.Find("Wave").GetComponent<CanvasGroup>().alpha = 1;
+            m_BtnLeft.transform.Find("Wave").transform.position = eventData.position;
         }, 
-        ()=>{ m_BtnLeft.transform.Find("Wave").GetComponent<CanvasGroup>().alpha = 0; }, 
+        ()=>{ 
+            m_BtnLeft.transform.Find("Wave").GetComponent<CanvasGroup>().alpha = 0; 
+            m_BtnLeft.transform.Find("Wave").transform.localPosition = new Vector3(0, 100, 0);
+        }, 
         ()=>{
             EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS, -1f));
         });
 
         //往右
-        m_BtnRight.SetCallback(()=>{
+        m_BtnRight.SetCallback((eventData)=>{
             RightPressTime = Time.time;
 
             if (CheckBlink()) {
@@ -110,8 +114,12 @@ public class GameWindow : MonoBehaviour
             else EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS,  1f));
 
             m_BtnRight.transform.Find("Wave").GetComponent<CanvasGroup>().alpha = 1;
+            m_BtnRight.transform.Find("Wave").transform.position = eventData.position;
         }, 
-        ()=>{ m_BtnRight.transform.Find("Wave").GetComponent<CanvasGroup>().alpha = 0; }, 
+        ()=>{ 
+            m_BtnRight.transform.Find("Wave").GetComponent<CanvasGroup>().alpha = 0; 
+            m_BtnRight.transform.Find("Wave").transform.localPosition = new Vector3(0, 100, 0);
+        }, 
         ()=>{
             EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS,  1f));
         });
@@ -120,9 +128,10 @@ public class GameWindow : MonoBehaviour
         //设置
         m_BtnSetting.onClick.AddListener(()=>{
             Time.timeScale = 0;
- 
-            GameFacade.Instance.UIManager.LoadWindow("SettingWindow", UIManager.BOARD).GetComponent<SettingWindow>().SetCallback(()=>{
-                Time.timeScale = 1;
+            GameFacade.Instance.UIManager.LoadWindowAsync("SettingWindow", UIManager.BOARD, (obj)=>{
+                obj.GetComponent<SettingWindow>().SetCallback(()=>{
+                    Time.timeScale = 1;
+                });
             });
         });
     }   

@@ -211,8 +211,8 @@ public class BackpackWindow : MonoBehaviour
         m_DetailPivot.GetComponent<CanvasGroup>().DOFade(0, m_ExitTimer);
         m_ComposePivot.GetComponent<CanvasGroup>().DOFade(0, m_ExitTimer);
 
-        float origin_y = -960;
-        m_PearView.transform.DOLocalMoveY(origin_y, m_ExitTimer).SetEase(Ease.InCubic);
+
+        m_PearView.transform.DOLocalMoveY(-1500f, m_ExitTimer).SetEase(Ease.InCubic);
 
         yield return new WaitForSeconds(m_ExitTimer);
 

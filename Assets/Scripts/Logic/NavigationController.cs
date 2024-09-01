@@ -33,11 +33,14 @@ public static class NavigationController
 
         var obj = GameFacade.Instance.UIManager.GetWindow("BackpackWindow");
         if (obj == null) {
-            obj = GameFacade.Instance.UIManager.LoadWindow("BackpackWindow", UIManager.MAJOR);
+            GameFacade.Instance.UIManager.LoadWindowAsync("BackpackWindow", UIManager.MAJOR, (obj)=>{
+                obj.GetComponent<BackpackWindow>().Init(pear);
+            });
         }
-
-        
-        obj.GetComponent<BackpackWindow>().Init(pear);
+        else
+        {
+            obj.GetComponent<BackpackWindow>().Init(pear);
+        }
     }
 }
 

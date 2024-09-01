@@ -40,8 +40,10 @@ public class SkillSeatItem : MonoBehaviour
                 return;
             }
 
-            var window = GameFacade.Instance.UIManager.LoadWindow("SkillWindow", UIManager.BOARD).GetComponent<SkillWindow>();
-            window.Init(m_SkillSlot, m_SkillData);
+            GameFacade.Instance.UIManager.LoadWindowAsync("SkillWindow", UIManager.BOARD, (obj)=>{
+                var window = obj.GetComponent<SkillWindow>();
+                window.Init(m_SkillSlot, m_SkillData);
+            });
         });
     }
     

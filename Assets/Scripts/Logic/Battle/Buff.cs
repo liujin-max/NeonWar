@@ -116,6 +116,8 @@ public class Buff_Chaos : Buff
         if (player == null) return;
 
         player.MoveDirection = -1;
+
+        m_Effect = GameFacade.Instance.EffectManager.Load(EFFECT.CHAOS, Vector3.zero, Caster.HeadPivot.gameObject);
     }
 
     public override void Dispose()

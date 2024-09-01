@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -26,14 +27,24 @@ public class UIManager : MonoBehaviour
         TIP     = GameObject.Find("Canvas/TIP").transform;
     }
 
-    public GameObject LoadWindow(string path, Transform parent)
+    // public GameObject LoadWindow(string path, Transform parent)
+    // {
+    //     path    = "Prefab/UI/Window/" + path;
+
+    //     GameObject obj = Instantiate<GameObject>(Resources.Load<GameObject>(path), parent);
+    //     WindowCaches[obj.name.Replace("(Clone)", "")] = obj;
+
+    //     return obj;
+    // }
+
+    public void LoadWindowAsync(string path, Transform parent , Action<GameObject> callback)
     {
         path    = "Prefab/UI/Window/" + path;
 
-        GameObject obj = Instantiate<GameObject>(Resources.Load<GameObject>(path), parent);
-        WindowCaches[obj.name.Replace("(Clone)", "")] = obj;
-
-        return obj;
+        GameFacade.Instance.AssetManager.AsyncLoadPrefab(path, Vector3.zero, parent, (obj)=>{
+            if (callback != null) callback(obj);
+            WindowCaches[obj.name.Replace("(Clone)", "")] = obj;
+        });
     }
 
     public void UnloadWindow(GameObject window)

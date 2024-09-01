@@ -44,7 +44,9 @@ public class PearComposeItem : MonoBehaviour
                 List<Pear> rewards = new List<Pear>();
                 rewards.Add(final);
 
-                GameFacade.Instance.UIManager.LoadWindow("PearRewardWindow", UIManager.BOARD).GetComponent<PearRewardWindow>().Init(rewards);
+                GameFacade.Instance.UIManager.LoadWindowAsync("PearRewardWindow", UIManager.BOARD, (obj)=>{
+                    obj.GetComponent<PearRewardWindow>().Init(rewards);
+                });
 
             } 
 

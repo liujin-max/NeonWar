@@ -8,11 +8,11 @@ public class LongPressButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
     private bool isPointerDown = false;
     private float pointerDownTimer = 0;
 
-    private Action m_DownCallback;
+    private Action<PointerEventData> m_DownCallback;
     private Action m_UpCallback;
     private Action m_PressCallback;
 
-    public void SetCallback(Action down_callback, Action up_callback, Action press_callback)
+    public void SetCallback(Action<PointerEventData> down_callback, Action up_callback, Action press_callback)
     {
         m_DownCallback  = down_callback;
         m_UpCallback    = up_callback;
@@ -24,7 +24,7 @@ public class LongPressButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         isPointerDown = true;
         pointerDownTimer = 0;
 
-        if (m_DownCallback != null) m_DownCallback();
+        if (m_DownCallback != null) m_DownCallback(eventData);
     }
 
     public void OnPointerUp(PointerEventData eventData)

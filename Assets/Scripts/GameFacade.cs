@@ -156,8 +156,8 @@ public class GameFacade : MonoBehaviour
 
     IEnumerator SYNC()
     {
-        UIManager.LoadWindow("TipWindow", UIManager.TIP);
-        UIManager.LoadWindow("MaskWindow", UIManager.TIP);
+        UIManager.LoadWindowAsync("TipWindow", UIManager.TIP, (obj)=>{});
+        UIManager.LoadWindowAsync("MaskWindow", UIManager.TIP, (obj)=>{});
 
         Platform.Instance.INIT(()=>{
             //加载账号数据
