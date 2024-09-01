@@ -338,7 +338,7 @@ public class Buff_DODGEUP : Buff
 #endregion
 
 
-#region 减速敌人
+#region 子弹时间
 public class Buff_SPDMUL : Buff
 {
     public Buff_SPDMUL()
@@ -364,6 +364,7 @@ public class Buff_SPDMUL : Buff
 
         foreach (var b in Field.Instance.Bullets)
         {
+            if (b.Caster == Field.Instance.Player) continue;
             b.Speed.PutMUL(this, 0.4f);
             b.SyncSpeed();
         }
@@ -379,6 +380,7 @@ public class Buff_SPDMUL : Buff
 
         foreach (var b in Field.Instance.Bullets)
         {
+            if (b.Caster == Field.Instance.Player) continue;
             b.Speed.Pop(this);
             b.SyncSpeed();
         }

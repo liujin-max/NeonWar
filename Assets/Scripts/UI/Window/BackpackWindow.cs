@@ -191,8 +191,8 @@ public class BackpackWindow : MonoBehaviour
         EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPMASK, true));
 
 
-        float origin_y = -750;
-        m_PearView.transform.localPosition = new Vector3(0, origin_y - m_PearView.GetComponent<RectTransform>().rect.height - 100, 0);
+        float origin_y = -960;
+        m_PearView.transform.localPosition = new Vector3(0, -1500, 0);
 
         m_PearView.transform.DOLocalMoveY(origin_y, m_EnterTimer).SetEase(Ease.OutCubic);
 
@@ -208,13 +208,11 @@ public class BackpackWindow : MonoBehaviour
     {
         EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPMASK, true));
 
-
-        float origin_y = -750;
-
         m_DetailPivot.GetComponent<CanvasGroup>().DOFade(0, m_ExitTimer);
         m_ComposePivot.GetComponent<CanvasGroup>().DOFade(0, m_ExitTimer);
 
-        m_PearView.transform.DOLocalMoveY(origin_y - m_PearView.GetComponent<RectTransform>().rect.height - 100, m_ExitTimer).SetEase(Ease.InCubic);
+        float origin_y = -960;
+        m_PearView.transform.DOLocalMoveY(origin_y, m_ExitTimer).SetEase(Ease.InCubic);
 
         yield return new WaitForSeconds(m_ExitTimer);
 

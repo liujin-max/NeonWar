@@ -117,7 +117,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -168, y: -58}
+  m_AnchoredPosition: {x: -419, y: -58}
   m_SizeDelta: {x: 213.78, y: 66}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6055384238992664194
@@ -384,7 +384,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b81c16ddde6ae64aad42dd4f677fc33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SpeedMin: 1
   m_IsFormat: 1
 --- !u!1 &1631835290103854049
 GameObject:
@@ -1268,7 +1267,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5820921004929642528
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1478,7 +1477,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b81c16ddde6ae64aad42dd4f677fc33, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SpeedMin: 1
   m_IsFormat: 1
 --- !u!1 &6664343987004147284
 GameObject:
@@ -1573,7 +1571,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Level: {fileID: 4564488955120782356}
-  m_SubLevel: {fileID: 0}
   m_Coin: {fileID: 392197034587789423}
   m_Glass: {fileID: 4551848800263374708}
   m_BtnLeft: {fileID: 4311378433792047239}

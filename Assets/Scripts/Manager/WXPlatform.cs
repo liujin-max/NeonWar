@@ -201,34 +201,36 @@ public class WXPlatform : Platform
     //激励广告
     public override void REWARD_VIDEOAD(string ad_id, Action callback)
     {
-        WXCreateRewardedVideoAdParam param = new WXCreateRewardedVideoAdParam();
-        param.adUnitId = ad_id;
+        if (callback != null) callback();
+        
+        // WXCreateRewardedVideoAdParam param = new WXCreateRewardedVideoAdParam();
+        // param.adUnitId = ad_id;
 
-        WXRewardedVideoAd ad = WX.CreateRewardedVideoAd(param);
-        ad.OnError((WXADErrorResponse response)=>{
-            //上报事件:广告错误
+        // WXRewardedVideoAd ad = WX.CreateRewardedVideoAd(param);
+        // ad.OnError((WXADErrorResponse response)=>{
+        //     //上报事件:广告错误
 
-        });
+        // });
 
-        this.LoadAD(ad, ()=>{
-            ad.Show((WXTextResponse reponse)=>{
+        // this.LoadAD(ad, ()=>{
+        //     ad.Show((WXTextResponse reponse)=>{
                 
-            }, (WXTextResponse error_reponse)=>{
-                //上报事件:广告错误
-                EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "暂无广告"));
-            });
-        });
+        //     }, (WXTextResponse error_reponse)=>{
+        //         //上报事件:广告错误
+        //         EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "暂无广告"));
+        //     });
+        // });
 
-        ad.OnClose((WXRewardedVideoAdOnCloseResponse reponse)=>{
-            // Debug.Log("是否完成观看：" + reponse.isEnded);
-            if (reponse != null && reponse.isEnded == true) {
-                //上报事件:观看广告
+        // ad.OnClose((WXRewardedVideoAdOnCloseResponse reponse)=>{
+        //     // Debug.Log("是否完成观看：" + reponse.isEnded);
+        //     if (reponse != null && reponse.isEnded == true) {
+        //         //上报事件:观看广告
 
-                if (callback != null) {
-                    callback();
-                }  
-            }
-        });  
+        //         if (callback != null) {
+        //             callback();
+        //         }  
+        //     }
+        // });  
     }
 
     //Banner广告

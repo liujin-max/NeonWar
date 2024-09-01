@@ -10,7 +10,6 @@ public class CircleHP : MonoBehaviour
     [SerializeField] private SpriteRenderer m_Red;
     [SerializeField] private NumberTransition m_HPText;
     [SerializeField] private Transform m_BarPivot;
-    [SerializeField] private Transform m_ShakePivot;
     [SerializeField] private float m_Height;
 
 
@@ -24,7 +23,6 @@ public class CircleHP : MonoBehaviour
 
 
     private Tweener m_HPTweener;
-    private List<Tweener> m_ShakeTweeners = new List<Tweener>();
     private Tweener m_BarTweener;
     private bool m_HitShaking = false;
 
@@ -38,11 +36,6 @@ public class CircleHP : MonoBehaviour
         m_RedValue.ForceValue(hp);
 
         m_Red.color = GREEN;
-
-        for (int i = 0; i < m_ShakePivot.childCount; i++)
-        {
-            m_ShakePivot.GetChild(i).GetComponent<TextMeshPro>().text = m_HPText.GetText();
-        }
     }
 
 
@@ -58,24 +51,6 @@ public class CircleHP : MonoBehaviour
             m_HPTweener.Restart();
         } else {
             m_HPTweener = m_HPText.transform.DOShakePosition(0.2f, new Vector3(0.03f, 0.03f, 0), 50).SetAutoKill(false);
-        }
-
-
-        for (int i = 0; i < m_ShakePivot.childCount; i++)
-        {
-            var hp_text = m_ShakePivot.GetChild(i).GetComponent<TextMeshPro>();
-            hp_text.transform.localPosition  = Vector3.zero;
-            hp_text.text= m_HPText.GetText();
-
-            
-            if (m_ShakeTweeners.Count > i)
-            {
-                m_ShakeTweeners[i].Restart();
-            }
-            else
-            {
-                m_ShakeTweeners.Add(hp_text.transform.DOShakePosition(0.4f, new Vector3(0.1f, 0.1f, 0), 50).SetAutoKill(false));
-            }
         }
     }
 
@@ -119,10 +94,6 @@ public class CircleHP : MonoBehaviour
         else
         {
             m_Red.color = RED;
-        }
-
-        for (int i = 0; i < m_ShakePivot.childCount; i++) {
-            m_ShakePivot.GetChild(i).GetComponent<TextMeshPro>().text= m_HPText.GetText();
         }
 
         // m_ShadowPivot.transform.localPosition = m_Enemy.transform.localPosition / 25f;
