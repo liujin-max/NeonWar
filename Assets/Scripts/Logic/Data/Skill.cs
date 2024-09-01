@@ -168,6 +168,15 @@ public class Skill_10020 : Skill
 //箭矢最多可以追踪场上距离最近的#个敌人
 public class Skill_10030 : Skill
 {
+    public override bool Useable()
+    {
+        foreach (var e in Field.Instance.Spawn.Enemys) {
+            if (e.IsValid) return true;
+        }
+
+        return false;
+    }
+
     public override bool OnShoot()
     {
         List<GameObject> enemys = new List<GameObject>();
@@ -181,9 +190,7 @@ public class Skill_10030 : Skill
         Vector3 o_pos = Caster.transform.localPosition;
         
         //使用 LINQ 根据距离进行排序
-        GameObject[] sortedObjects = EnemiesToSort
-            .OrderBy(obj => Vector3.Distance(o_pos, obj.transform.localPosition))
-            .ToArray();
+        GameObject[] sortedObjects = EnemiesToSort.OrderBy(obj => Vector3.Distance(o_pos, obj.transform.localPosition)).ToArray();
 
         
         for (int i = 0; i < Value; i++)
@@ -660,6 +667,11 @@ public class Skill
     public bool IsLevelMax()
     {
         return Level >= Data.LevelMax;
+    }
+
+    public virtual bool Useable()
+    {
+        return true;
     }
 
     public virtual bool OnShoot()

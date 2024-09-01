@@ -397,6 +397,7 @@ GameObject:
   - component: {fileID: 4530194085831007877}
   - component: {fileID: 4758616089733798637}
   - component: {fileID: 6793048179439485032}
+  - component: {fileID: 7710664859345817522}
   m_Layer: 5
   m_HasEditorInfo: 1
   m_Name: Wave
@@ -479,6 +480,18 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!225 &7710664859345817522
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1631835290103854049}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &2164646112005014323
 GameObject:
   m_ObjectHideFlags: 0
@@ -2171,6 +2184,7 @@ GameObject:
   - component: {fileID: 5119337619759522993}
   - component: {fileID: 3805861692488027432}
   - component: {fileID: 5599011094363373636}
+  - component: {fileID: 5430678428158958829}
   m_Layer: 5
   m_HasEditorInfo: 1
   m_Name: Wave
@@ -2253,6 +2267,18 @@ Animation:
   m_PlayAutomatically: 1
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!225 &5430678428158958829
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8058287901873814019}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &8331219917593172711
 GameObject:
   m_ObjectHideFlags: 0

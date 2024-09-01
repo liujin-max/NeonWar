@@ -25,6 +25,7 @@ public class Player : Unit
         m_Animator  = transform.Find("Entity").GetComponent<Animator>();
 
         ShootPivot  = transform.Find("Shoot");
+        HeadPivot   = transform.Find("Head");
     }
 
     public void Init(int id, float angle)
@@ -52,6 +53,17 @@ public class Player : Unit
     public override bool IsInvincible()
     {
         return !InvincibleTimer.IsFinished();
+    }
+
+    public override bool CanAttack()
+    {
+        if (!base.CanAttack()) return false;
+
+        foreach (var sk in m_Skills) {
+            if (!sk.Useable()) return false;
+        }
+
+        return true;
     }
 
     // Update is called once per frame

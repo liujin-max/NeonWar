@@ -91,9 +91,9 @@ public class GameWindow : MonoBehaviour
             }
             else EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS, -1f));
 
-            m_BtnLeft.transform.Find("Wave").gameObject.SetActive(true);
+            m_BtnLeft.transform.Find("Wave").GetComponent<CanvasGroup>().alpha = 1;
         }, 
-        ()=>{m_BtnLeft.transform.Find("Wave").gameObject.SetActive(false);}, 
+        ()=>{ m_BtnLeft.transform.Find("Wave").GetComponent<CanvasGroup>().alpha = 0; }, 
         ()=>{
             EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS, -1f));
         });
@@ -109,9 +109,9 @@ public class GameWindow : MonoBehaviour
             }
             else EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS,  1f));
 
-            m_BtnRight.transform.Find("Wave").gameObject.SetActive(true);
+            m_BtnRight.transform.Find("Wave").GetComponent<CanvasGroup>().alpha = 1;
         }, 
-        ()=>{m_BtnRight.transform.Find("Wave").gameObject.SetActive(false);}, 
+        ()=>{ m_BtnRight.transform.Find("Wave").GetComponent<CanvasGroup>().alpha = 0; }, 
         ()=>{
             EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS,  1f));
         });
@@ -243,6 +243,7 @@ public class GameWindow : MonoBehaviour
     #region 协程
     IEnumerator FingerAnim()
     {
+        Debug.Log("FingerAnim");
         var origin = m_FingerPivot.localPosition;
         m_FingerPivot.localPosition = new Vector3(9999, 9999, 0);
         
@@ -256,7 +257,12 @@ public class GameWindow : MonoBehaviour
         m_BtnRight.transform.localPosition = new Vector3(9999, 9999, 0);
 
         m_BtnLeft.transform.Find("Wave").gameObject.SetActive(true);
+        m_BtnLeft.transform.Find("Wave").GetComponent<CanvasGroup>().alpha = 1;
+
         m_BtnRight.transform.Find("Wave").gameObject.SetActive(false);
+        m_BtnRight.transform.Find("Wave").GetComponent<CanvasGroup>().alpha = 0;
+
+        
 
         yield return new WaitForSeconds(0.4f);
 
@@ -266,7 +272,10 @@ public class GameWindow : MonoBehaviour
 
         m_BtnLeft.transform.localPosition = left_origin;
         m_BtnRight.transform.localPosition = right_origin;
+
         m_BtnRight.transform.Find("Wave").gameObject.SetActive(true);
+        m_BtnRight.transform.Find("Wave").GetComponent<CanvasGroup>().alpha = 1;
+  
 
 
         yield return null;
@@ -287,8 +296,8 @@ public class GameWindow : MonoBehaviour
             });
         });
 
-        m_BtnLeft.transform.Find("Wave").gameObject.SetActive(false);
-        m_BtnRight.transform.Find("Wave").gameObject.SetActive(false);
+        m_BtnLeft.transform.Find("Wave").GetComponent<CanvasGroup>().alpha = 0;
+        m_BtnRight.transform.Find("Wave").GetComponent<CanvasGroup>().alpha = 0;
     }
 
     //战斗结束
@@ -305,6 +314,9 @@ public class GameWindow : MonoBehaviour
         if (m_HPITEM != null) {
             m_HPITEM.Show(false);
         }
+
+        m_BtnLeft.transform.Find("Wave").GetComponent<CanvasGroup>().alpha = 1;
+        m_BtnRight.transform.Find("Wave").GetComponent<CanvasGroup>().alpha = 1;
     }
 
 

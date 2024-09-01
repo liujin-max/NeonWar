@@ -69,6 +69,14 @@ public class Unit : MonoBehaviour
         return false;
     }
 
+    //能否攻击
+    public virtual bool CanAttack()
+    {
+        if (StunFlag > 0) return false;
+
+        return true;
+    }
+
     public virtual bool CustomUpdate(float deltaTime)
     {
         if (!IsValid) return false;
@@ -87,17 +95,17 @@ public class Unit : MonoBehaviour
         }
         m_RemoveBuffs.Clear();
 
-        //晕眩不会影响Buff计时
-        if (StunFlag > 0) return false;
-
         //攻击间隔
         if (ASP.Duration > 0)
         {
-            ASP.Update(deltaTime * CPS.ToNumber());
-            if (ASP.IsFinished() == true) {
-                ASP.Reset();
+            if (CanAttack() == true)
+            {
+                ASP.Update(deltaTime * CPS.ToNumber());
+                if (ASP.IsFinished() == true) {
+                    ASP.Reset();
 
-                Attack();
+                    Attack();
+                }
             }
         }
         

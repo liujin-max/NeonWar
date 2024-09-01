@@ -203,8 +203,6 @@ public class Field : MonoBehaviour
     {
         pear_dic  = new Dictionary<int, int>();
 
-        Debug.Log(m_Level.LevelJSON.PearPool);
-
         if (m_Level.LevelJSON.PearPool == 0) {
             return;
         }
