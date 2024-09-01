@@ -73,7 +73,8 @@ public class GameWindow : MonoBehaviour
     //同时按下的时间间隔小于0.05秒
     bool CheckBlink()
     {
-        return LeftPressTime > 0 && RightPressTime > 0 && Mathf.Abs(LeftPressTime - RightPressTime) <= 0.05f;
+        // return LeftPressTime > 0 && RightPressTime > 0 && Mathf.Abs(LeftPressTime - RightPressTime) <= 0.05f;
+        return false;
     }
 
     // Start is called before the first frame update
@@ -89,8 +90,10 @@ public class GameWindow : MonoBehaviour
                 EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_DOUBLE));
             }
             else EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS, -1f));
+
+            m_BtnLeft.transform.Find("Wave").gameObject.SetActive(true);
         }, 
-        ()=>{}, 
+        ()=>{m_BtnLeft.transform.Find("Wave").gameObject.SetActive(false);}, 
         ()=>{
             EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS, -1f));
         });
@@ -105,8 +108,10 @@ public class GameWindow : MonoBehaviour
                 EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_DOUBLE));
             }
             else EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS,  1f));
+
+            m_BtnRight.transform.Find("Wave").gameObject.SetActive(true);
         }, 
-        ()=>{}, 
+        ()=>{m_BtnRight.transform.Find("Wave").gameObject.SetActive(false);}, 
         ()=>{
             EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS,  1f));
         });
@@ -244,10 +249,25 @@ public class GameWindow : MonoBehaviour
         m_FingerPivot.Find("Left").gameObject.SetActive(true);
         m_FingerPivot.Find("Right").gameObject.SetActive(false);
 
+        var left_origin = m_BtnLeft.transform.localPosition;
+        m_BtnLeft.transform.localPosition = new Vector3(9999, 9999, 0);
+
+        var right_origin = m_BtnRight.transform.localPosition;
+        m_BtnRight.transform.localPosition = new Vector3(9999, 9999, 0);
+
+        m_BtnLeft.transform.Find("Wave").gameObject.SetActive(true);
+        m_BtnRight.transform.Find("Wave").gameObject.SetActive(false);
+
         yield return new WaitForSeconds(0.4f);
 
         m_FingerPivot.Find("Right").gameObject.SetActive(true);
         m_FingerPivot.localPosition = origin;
+
+
+        m_BtnLeft.transform.localPosition = left_origin;
+        m_BtnRight.transform.localPosition = right_origin;
+        m_BtnRight.transform.Find("Wave").gameObject.SetActive(true);
+
 
         yield return null;
     }
@@ -266,6 +286,9 @@ public class GameWindow : MonoBehaviour
                 group.blocksRaycasts = false;
             });
         });
+
+        m_BtnLeft.transform.Find("Wave").gameObject.SetActive(false);
+        m_BtnRight.transform.Find("Wave").gameObject.SetActive(false);
     }
 
     //战斗结束
