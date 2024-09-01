@@ -241,7 +241,6 @@ MonoBehaviour:
   m_Red: {fileID: 7173966047593763817}
   m_HPText: {fileID: 6488988105342462980}
   m_BarPivot: {fileID: 8883879665031851815}
-  m_ShakePivot: {fileID: 0}
   m_Height: 1.34
 --- !u!1 &4768764823415867605
 GameObject:

@@ -15,7 +15,7 @@
         {"Time": 2000, "ID": 106, "HP": 280, "Radius": 1.5, "Angle":120},
         {"Time": 2000, "ID": 106, "HP": 280, "Radius": 1.5, "Angle":240},
 
-        {"Time": 4000, "ID": 107, "HP":2680, "Type" : 2, "Glass" : 55, "Radius": 0, "Angle":0},
+        {"Time": 4000, "ID": 107, "HP":2680, "Type" : 2, "Glass" : 455, "Radius": 0, "Angle":0},
         {"Time": 5500, "ID": 104, "HP": 350},
         {"Time": 5500, "ID": 104, "HP": 350},
 

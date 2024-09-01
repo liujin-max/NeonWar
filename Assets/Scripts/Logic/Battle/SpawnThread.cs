@@ -13,7 +13,7 @@ public class SpawnThread
     private MonsterJSON m_JSON;
     private Enemy m_Enemy = null;
 
-    private CDTimer m_Timer = new CDTimer(0.4f);
+    private CDTimer m_Timer = new CDTimer(0.6f);
 
     public void Start(List<Enemy> enemies, MonsterJSON monsterJSON, Vector2 point)
     {
@@ -25,7 +25,7 @@ public class SpawnThread
 
         Sequence seq = DOTween.Sequence();
         seq.Append(hole.DOScale(Vector3.one, 0.5f));
-        seq.AppendInterval(0.6f);
+        seq.AppendInterval(0.3f);
         seq.Append(hole.DOScale(1.3f, 0.15f));
         seq.Append(hole.DOScale(0, 0.4f));
         seq.Play();

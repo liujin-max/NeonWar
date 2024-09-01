@@ -25,8 +25,10 @@ public class ATT
 //基础单位
 public class Unit : MonoBehaviour
 {
-    public Transform ShootPivot;
     public GameObject BulletTemplate;
+
+    [HideInInspector] public Transform ShootPivot;
+    [HideInInspector] public Transform HeadPivot;
 
     [HideInInspector] public int ID;
     [HideInInspector] public _C.SIDE Side = _C.SIDE.PLAYER;

@@ -19,6 +19,8 @@ public class Buff_Stun : Buff
     {
         Caster.StunFlag++;
         Caster.Stop();
+
+        m_Effect = GameFacade.Instance.EffectManager.Load(EFFECT.STUN, Vector3.zero, Caster.HeadPivot.gameObject);
     }
 
     public override void Dispose()

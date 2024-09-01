@@ -37,6 +37,9 @@ public class Enemy : Unit
 
         m_Sprite    = transform.Find("Sprite").GetComponent<SpriteRenderer>();
         m_HPPivot   = transform.Find("HPPivot");
+
+        ShootPivot  = transform.Find("Shoot");
+        HeadPivot   = transform.Find("Head");
     }
 
     void Start()
@@ -66,7 +69,11 @@ public class Enemy : Unit
     {
         base.Dispose();
 
-        GameFacade.Instance.PoolManager.RecycleHP(m_HPBar);
+        // GameFacade.Instance.PoolManager.RecycleHP(m_HPBar);
+        if (m_HPBar != null) {
+            Destroy(m_HPBar.gameObject);
+            m_HPBar = null;
+        }
         
         Destroy(gameObject);
     }
@@ -94,11 +101,16 @@ public class Enemy : Unit
 
     void InitHPBar()
     {
-        m_HPBar = GameFacade.Instance.PoolManager.AllocateHP();
-        m_HPBar.transform.SetParent(m_HPPivot);
-        m_HPBar.transform.localPosition = Vector3.zero;
-        m_HPBar.transform.localScale = Vector3.one;
-        m_HPBar.Init(this);
+        GameFacade.Instance.AssetManager.AsyncLoadPrefab("Prefab/Element/CircleHP", Vector3.zero, m_HPPivot, (obj)=>{
+            m_HPBar = obj.GetComponent<CircleHP>();
+            m_HPBar.Init(this);
+        });
+
+        // m_HPBar = GameFacade.Instance.PoolManager.AllocateHP();
+        // m_HPBar.transform.SetParent(m_HPPivot);
+        // m_HPBar.transform.localPosition = Vector3.zero;
+        // m_HPBar.transform.localScale = Vector3.one;
+        // m_HPBar.Init(this);
     }
 
 

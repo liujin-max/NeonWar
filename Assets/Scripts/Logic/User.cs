@@ -124,12 +124,12 @@ public class GameUserData
                 new SkillSlotMsg() {ATK =15, POS = "2", SkillPool = new int[] {10060, 10070}},
 
                 //攻速分支
-                new SkillSlotMsg() {ASP = 8, POS = "11", SkillPool = new int[] {10110, 10120, 10130}},
-                new SkillSlotMsg() {ASP =25, POS = "12", SkillPool = new int[] {10160, 10170}},
+                new SkillSlotMsg() {ASP = 5, POS = "11", SkillPool = new int[] {10110, 10120, 10130}},
+                new SkillSlotMsg() {ASP =20, POS = "12", SkillPool = new int[] {10160, 10170}},
 
                 //价值分支
-                new SkillSlotMsg() {WOR = 5, POS = "21", SkillPool = new int[] {10210, 10220, 10230}},
-                new SkillSlotMsg() {WOR =20, POS = "22", SkillPool = new int[] {10260, 10270}},
+                new SkillSlotMsg() {WOR = 8, POS = "21", SkillPool = new int[] {10210, 10220, 10230}},
+                new SkillSlotMsg() {WOR =25, POS = "22", SkillPool = new int[] {10260, 10270}},
             
                 //大招
                 // new SkillSlotMsg() {ATK =30, ASP =30, POS = "99", SkillPool = new int[] {10210, 10220, 10230}}

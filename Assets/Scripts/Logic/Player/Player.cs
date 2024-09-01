@@ -22,7 +22,9 @@ public class Player : Unit
 
     void Awake()
     {
-        m_Animator = transform.Find("Entity").GetComponent<Animator>();
+        m_Animator  = transform.Find("Entity").GetComponent<Animator>();
+
+        ShootPivot  = transform.Find("Shoot");
     }
 
     public void Init(int id, float angle)
