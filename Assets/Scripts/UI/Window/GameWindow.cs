@@ -198,25 +198,36 @@ public class GameWindow : MonoBehaviour
         // 检测方向键输入
         if (Input.GetKeyDown(KeyCode.LeftArrow)) {
             LeftPressTime = Time.time;
+
+            m_BtnLeft.transform.Find("Wave").GetComponent<CanvasGroup>().alpha = 1;
         }
-
-        if (Input.GetKeyUp(KeyCode.LeftArrow)) {}
-
-        if (Input.GetKeyDown(KeyCode.RightArrow)) {
-            RightPressTime = Time.time;
-        }
-
-        if (Input.GetKeyUp(KeyCode.RightArrow)) {}
 
         if (Input.GetKey(KeyCode.LeftArrow))
         {
             EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS, -1f));
         }
 
+        if (Input.GetKeyUp(KeyCode.LeftArrow)) {
+            m_BtnLeft.transform.Find("Wave").GetComponent<CanvasGroup>().alpha = 0;
+        }
+
+        //向右
+        if (Input.GetKeyDown(KeyCode.RightArrow)) {
+            RightPressTime = Time.time;
+
+            m_BtnRight.transform.Find("Wave").GetComponent<CanvasGroup>().alpha = 1;
+        }
+
         if (Input.GetKey(KeyCode.RightArrow))
         {
             EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS,  1f));
         }
+
+        if (Input.GetKeyUp(KeyCode.RightArrow)) {
+            m_BtnRight.transform.Find("Wave").GetComponent<CanvasGroup>().alpha = 0;
+        }
+
+        
 
         if (CheckBlink() == true)
         {
