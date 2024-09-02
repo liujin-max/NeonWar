@@ -120,6 +120,8 @@ public class Enemy : Unit
 
     public override void Dead(Hit hit = default)
     {
+        SoundManager.Instance.Load(SOUND.DEAD);
+
         //掉落Buff逻辑
         if (m_Data.Buffs.Length > 0)
         {

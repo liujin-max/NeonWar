@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: Wn5J4SP5BymnQVAxiFh5+P5KN1xrwWIa+IWDX7rze1FWWMRS9K8ewww=
+guid: DXhMtnn4U3kea99o8yXwmRdt0j9FSt5veM4qs1O5W99AhmrbHz/Pbe8=
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -114,10 +114,10 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
     buildTarget: WeixinMiniGame
-    maxTextureSize: 64
+    maxTextureSize: 128
     maxPlaceholderSize: 32
     resizeAlgorithm: 0
-    textureFormat: 48
+    textureFormat: 51
     textureCompression: 1
     compressionQuality: 100
     crunchedCompression: 0

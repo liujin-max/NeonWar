@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 7121837687698471663}
   m_Layer: 0
   m_HasEditorInfo: 1
-  m_Name: Sound_hit
+  m_Name: Sound_dead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -45,9 +45,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 7143b1425f1ee8844a78e281a4666ada, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 1a1349d71bc05c84b8a57efbfed80179, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.4
+  m_Volume: 1
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -143,5 +143,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45d3534610030564eb00e88b69fbcb96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayLimit: 3
+  PlayLimit: 999
   AutoDestroy: 1

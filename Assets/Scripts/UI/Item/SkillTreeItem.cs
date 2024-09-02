@@ -43,18 +43,18 @@ public class SkillTreeItem : MonoBehaviour
     {
         //升级攻击力
         m_BtnATK.onClick.AddListener(()=>{
-            if (UpgradeProperty(_C.PROPERTY.ATK)) GameFacade.Instance.EffectManager.LoadUIEffect(EFFECT.ATTUP, m_BtnATK.transform.position, new Vector3(100, 100, 100));
+            if (UpgradeProperty(_C.PROPERTY.ATK)) GameFacade.Instance.EffectManager.LoadUIEffect(EFFECT.ATKUP, m_BtnATK.transform.position, new Vector3(100, 100, 100));
         });
 
         //升级攻速
         m_BtnASP.onClick.AddListener(()=>{
-            if (UpgradeProperty(_C.PROPERTY.ASP)) GameFacade.Instance.EffectManager.LoadUIEffect(EFFECT.ATTUP, m_BtnASP.transform.position, new Vector3(100, 100, 100));
+            if (UpgradeProperty(_C.PROPERTY.ASP)) GameFacade.Instance.EffectManager.LoadUIEffect(EFFECT.ASPUP, m_BtnASP.transform.position, new Vector3(100, 100, 100));
 
         });
 
         //升级价值
         m_BtnWORTH.onClick.AddListener(()=>{
-            if (UpgradeProperty(_C.PROPERTY.WORTH)) GameFacade.Instance.EffectManager.LoadUIEffect(EFFECT.ATTUP, m_BtnWORTH.transform.position, new Vector3(100, 100, 100));
+            if (UpgradeProperty(_C.PROPERTY.WORTH)) GameFacade.Instance.EffectManager.LoadUIEffect(EFFECT.WORUP, m_BtnWORTH.transform.position, new Vector3(100, 100, 100));
         });
     }
 
