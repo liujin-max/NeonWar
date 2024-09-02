@@ -105,17 +105,13 @@ public class Enemy : Unit
             m_HPBar = obj.GetComponent<CircleHP>();
             m_HPBar.Init(this);
         });
-
-        // m_HPBar = GameFacade.Instance.PoolManager.AllocateHP();
-        // m_HPBar.transform.SetParent(m_HPPivot);
-        // m_HPBar.transform.localPosition = Vector3.zero;
-        // m_HPBar.transform.localScale = Vector3.one;
-        // m_HPBar.Init(this);
     }
 
 
     public override void Affected(Hit hit = default)
     {
+        SoundManager.Instance.Load(SOUND.HIT);
+
         m_Sprite.GetComponent<Affected>().DO(hit);
 
         if (m_HPBar != null) m_HPBar.Affected();

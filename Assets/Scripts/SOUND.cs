@@ -16,6 +16,7 @@ public static class SOUND
     public const string HIT         = "Prefab/Sound/Sound_hit";
     public const string TIP         = "Prefab/Sound/Sound_tip";
     public const string HIT_SHIELD  = "Prefab/Sound/Sound_hitshield";
+    public const string BOW         = "Prefab/Sound/Sound_bow";
 
 
     

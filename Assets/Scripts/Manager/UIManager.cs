@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
 
 
     private Dictionary<string, GameObject> WindowCaches = new Dictionary<string, GameObject>();
+    private HashSet<string> WindowsHash = new HashSet<string>();
 
     void Awake()
     {
@@ -37,38 +38,38 @@ public class UIManager : MonoBehaviour
     //     return obj;
     // }
 
+    //异步加载UI
     public void LoadWindowAsync(string path, Transform parent , Action<GameObject> callback)
     {
-        path    = "Prefab/UI/Window/" + path;
+        //如果存在这个界面
+        if (WindowsHash.Contains(path)) {
+            if (WindowCaches.ContainsKey(path)) {
+                callback(WindowCaches[path]);
+            }
+            return;
+        }
 
-        GameFacade.Instance.AssetManager.AsyncLoadPrefab(path, Vector3.zero, parent, (obj)=>{
+
+        WindowsHash.Add(path);
+
+        GameFacade.Instance.AssetManager.AsyncLoadPrefab("Prefab/UI/Window/" + path, Vector3.zero, parent, (obj)=>{
+            obj.name = path;
             if (callback != null) callback(obj);
-            WindowCaches[obj.name.Replace("(Clone)", "")] = obj;
+            WindowCaches[path] = obj;
         });
     }
 
     public void UnloadWindow(GameObject window)
     {
-        WindowCaches[window.name] = null;
+        WindowCaches.Remove(window.name);
+        WindowsHash.Remove(window.name);
 
         Destroy(window);
     }
 
-    public void UnloadWindow(string name)
-    {
-        var window = GetWindow(name);
-        if (window != null) {
-            UnloadWindow(window);
-        }
-    }
-
     public GameObject GetWindow(string name)
     {
-        GameObject window;
-        if (WindowCaches.TryGetValue(name, out window)) {
-            return window;
-        }
-        return null;
+        return WindowCaches.TryGetValue(name, out var window) ? window : null;
     }
 
     public GameObject LoadItem(string path, Transform parent)
@@ -79,10 +80,5 @@ public class UIManager : MonoBehaviour
         obj.transform.localPosition = Vector3.zero;
 
         return obj;
-    }
-
-    public bool HasBoard()
-    {
-        return BOARD.childCount > 0;
     }
 }

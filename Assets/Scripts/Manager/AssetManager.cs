@@ -32,7 +32,7 @@ public class AssetManager : MonoBehaviour
         return obj;
     }
 
-    public void AsyncLoadPrefab(string path, Vector3 position, Transform parent, Action<GameObject> callback)
+    public void AsyncLoadPrefab(string path, Vector3 position, Transform parent = null, Action<GameObject> callback = null)
     {
         StartCoroutine(AsyncLoad(path, position, parent, callback));
     }

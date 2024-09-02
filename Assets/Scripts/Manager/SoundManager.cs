@@ -14,9 +14,9 @@ public  class SoundManager
 
     private GameObject m_BGM = null;
 
-    private int m_PlayingSoundMax = 3;
+    // private int m_PlayingSoundMax = 3;
     private Dictionary<string, int> m_PlayingSounds = new Dictionary<string, int>();
-
+    private Dictionary<string, int> m_PlayCountMax  = new Dictionary<string, int>();
 
 
     //加载音效
@@ -26,31 +26,35 @@ public  class SoundManager
             return;
         }
         
-
-        GameObject.Instantiate(Resources.Load<GameObject>(path), Vector3.zero, Quaternion.identity);
+        // GameObject.Instantiate(Resources.Load<GameObject>(path), Vector3.zero, Quaternion.identity);
+        GameFacade.Instance.AssetManager.AsyncLoadPrefab(path, Vector3.zero);
     }
 
     public bool IsPlayingSoundFull(string path)
     {
+        if (!m_PlayCountMax.ContainsKey(path)) return false;
+
         if (m_PlayingSounds.ContainsKey(path))
         {
-            return m_PlayingSounds[path] >= m_PlayingSoundMax;
+            return m_PlayingSounds[path] >= m_PlayCountMax[path];
         }
         return false;
     }
 
-    public void AddPlayingSound(string path)
+    public void AddPlayingSound(Sound sound)
     {
-        if (!m_PlayingSounds.ContainsKey(path))
-        {
-            m_PlayingSounds[path] = 0;
-        }
+        string path = sound.Clip.name;
+
+        if (!m_PlayCountMax.ContainsKey(path)) m_PlayCountMax[path] = sound.PlayLimit;
+        if (!m_PlayingSounds.ContainsKey(path)) m_PlayingSounds[path] = 0;
 
         m_PlayingSounds[path]++;
     }
 
-    public void ReducePlayingSound(string path)
+    public void ReducePlayingSound(Sound sound)
     {
+        string path = sound.Clip.name;
+        
         if (m_PlayingSounds.ContainsKey(path))
         {
             if (m_PlayingSounds[path] > 0) {

@@ -8,12 +8,6 @@ using UnityEngine;
 
 public static class NavigationController
 {
-    //前往主页
-    public static void GotoLogin()
-    {
-
-    }
-
     //前往关卡模式
     public static void GotoGame()
     {
@@ -31,16 +25,9 @@ public static class NavigationController
             return;
         }
 
-        var obj = GameFacade.Instance.UIManager.GetWindow("BackpackWindow");
-        if (obj == null) {
-            GameFacade.Instance.UIManager.LoadWindowAsync("BackpackWindow", UIManager.MAJOR, (obj)=>{
-                obj.GetComponent<BackpackWindow>().Init(pear);
-            });
-        }
-        else
-        {
+        GameFacade.Instance.UIManager.LoadWindowAsync("BackpackWindow", UIManager.MAJOR, (obj)=>{
             obj.GetComponent<BackpackWindow>().Init(pear);
-        }
+        });
     }
 }
 
