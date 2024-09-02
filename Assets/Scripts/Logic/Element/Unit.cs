@@ -34,7 +34,7 @@ public class Unit : MonoBehaviour
     [HideInInspector] public _C.SIDE Side = _C.SIDE.PLAYER;
     public ATTConfig ATT;
     public CDTimer ASP = new CDTimer(0f);
-    public AttributeValue CPS = new AttributeValue(1f, false);  //冷却值的恢复倍率
+    [HideInInspector] public AttributeValue CPS = new AttributeValue(1f, false);  //冷却值的恢复倍率
 
     //Buff
     private Dictionary<int, Buff> m_BuffDic = new Dictionary<int, Buff>();

@@ -10,7 +10,7 @@ public class Player : Unit
     protected Animator m_Animator;
 
     public CDTimer InvincibleTimer = new CDTimer(1f);   //无敌时间
-    public int MoveDirection = 1;
+    [HideInInspector] public int MoveDirection = 1;
 
     protected List<Skill> m_Skills = new List<Skill>();
     protected List<Pear> m_Pears = new List<Pear>();
@@ -175,7 +175,7 @@ public class Player : Unit
             });
 
             //测试技能
-            m_Skills.Add(Skill.Create(DataCenter.Instance.League.GetSkillData(10270), this, 2));
+            // m_Skills.Add(Skill.Create(DataCenter.Instance.League.GetSkillData(10270), this, 2));
         }
 
         //同步宝珠
