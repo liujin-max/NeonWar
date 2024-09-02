@@ -9,8 +9,10 @@ public class BuffItem : MonoBehaviour
     [SerializeField] Image m_Icon;
     [SerializeField] Image m_Mask;
     [SerializeField] TextMeshProUGUI m_Text;
+    [SerializeField] TextMeshProUGUI m_Count;
 
     public Buff Buff;
+    private int m_BuffCount;
 
     public void Init(Buff buff)
     {
@@ -23,11 +25,15 @@ public class BuffItem : MonoBehaviour
         m_Text.text = col + Buff.Name;
 
         FlushUI();
+
+        m_BuffCount = buff.Count;
     }
 
     void FlushUI()
     {
         m_Mask.fillAmount = Buff.Duration.Progress;
+
+        if (m_BuffCount != Buff.Count) m_Count.text = Buff.Count > 1 ? Buff.Count.ToString() : "";
     }
 
     void Update()

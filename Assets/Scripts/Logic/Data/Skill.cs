@@ -511,8 +511,6 @@ public class Skill_10230 : Skill
 //每击杀一个目标，攻速提高#%
 public class Skill_10260 : Skill
 {
-    private int m_KillCount;
-
     public Skill_10260()
     {
         EventManager.AddHandler(EVENT.ONKILLENEMY,  OnKillEnemy);
@@ -529,11 +527,13 @@ public class Skill_10260 : Skill
         Hit hit = (Hit)@event.GetParam(1);
 
         if (hit.Caster != Caster) return;
-        
-        m_KillCount++;
 
-        float value = Value / 100.0f;
-        hit.Caster.CPS.PutAUL(this, value * m_KillCount);
+        hit.Caster.AddBuff((int)_C.BUFF.FASTSPD, Value);
+        
+        // m_KillCount++;
+
+        // float value = Value / 100.0f;
+        // hit.Caster.CPS.PutAUL(this, value * m_KillCount);
     }
 }
 #endregion
@@ -543,8 +543,6 @@ public class Skill_10260 : Skill
 //每击杀一个目标，攻击提高#%
 public class Skill_10270 : Skill
 {
-    private int m_KillCount;
-
     public Skill_10270()
     {
         EventManager.AddHandler(EVENT.ONKILLENEMY,  OnKillEnemy);
@@ -562,10 +560,12 @@ public class Skill_10270 : Skill
 
         if (hit.Caster != Caster) return;
         
-        m_KillCount++;
+        hit.Caster.AddBuff((int)_C.BUFF.KILL, Value);
 
-        float value = Value / 100.0f;
-        hit.Caster.ATT.ATK.PutAUL(this, value * m_KillCount);  
+        // m_KillCount++;
+
+        // float value = Value / 100.0f;
+        // hit.Caster.ATT.ATK.PutAUL(this, value * m_KillCount);  
     }
 }
 #endregion

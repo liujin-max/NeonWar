@@ -91,6 +91,8 @@ public static class _C
         YISHANG,
         SHIELD,
         CHAOS,
+        FASTSPD,    //疾速
+        KILL,
 
 
         ATK_UP      = 60000,    //攻击力提高

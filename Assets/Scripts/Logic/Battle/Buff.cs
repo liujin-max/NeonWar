@@ -132,7 +132,66 @@ public class Buff_Chaos : Buff
 }
 #endregion
 
+#region 疾速
+public class Buff_FastSPD : Buff
+{
+    public Buff_FastSPD()
+    {
+        Name    = "疾速";
+        Duration= new CDTimer(9999999);
+    }
 
+    public override void Init()
+    {
+        Caster.CPS.PutAUL(this, Value / 100.0f * Count);
+    }
+
+    public override void Dispose()
+    {
+        Caster.CPS.Pop(this);
+    }
+
+    public override void Flush(float time)
+    {
+        base.Flush(time);
+
+        Count++;
+
+        Caster.CPS.PutAUL(this, Value / 100.0f * Count);
+    }
+}
+#endregion
+
+
+#region 杀意
+public class Buff_Kill : Buff
+{
+    public Buff_Kill()
+    {
+        Name    = "杀意";
+        Duration= new CDTimer(9999999);
+    }
+
+    public override void Init()
+    {
+        Caster.ATT.ATK.PutAUL(this, Value / 100.0f * Count);
+    }
+
+    public override void Dispose()
+    {
+        Caster.ATT.ATK.Pop(this);
+    }
+
+    public override void Flush(float time)
+    {
+        base.Flush(time);
+
+        Count++;
+
+        Caster.ATT.ATK.PutAUL(this, Value / 100.0f * Count);
+    }
+}
+#endregion
 
 
 
@@ -402,6 +461,7 @@ public class Buff
 
     public int ID;
     public int Value = 0;   //参数
+    public int Count = 1;   //层数
     public _C.BUFF_TYPE TYPE = _C.BUFF_TYPE.GAIN;
     public string Name = "未知";
     public CDTimer Duration = new CDTimer(999999);  //持续时间
@@ -415,6 +475,9 @@ public class Buff
         {(int)_C.BUFF.YISHANG,  () => new Buff_YiShang()},
         {(int)_C.BUFF.SHIELD,   () => new Buff_Shield()},
         {(int)_C.BUFF.CHAOS,    () => new Buff_Chaos()},
+        {(int)_C.BUFF.FASTSPD,  () => new Buff_FastSPD()},
+        {(int)_C.BUFF.KILL,     () => new Buff_Kill()},
+
 
 
         //场上Buff

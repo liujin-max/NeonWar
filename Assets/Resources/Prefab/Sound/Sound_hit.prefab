@@ -143,5 +143,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45d3534610030564eb00e88b69fbcb96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayLimit: 3
+  PlayLimit: 4
   AutoDestroy: 1
