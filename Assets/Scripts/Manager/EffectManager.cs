@@ -5,10 +5,11 @@ using UnityEngine;
 public class EffectManager : MonoBehaviour
 {
     //加载UI特效
-    public Effect LoadUIEffect(string path, Vector3 world_pos)
+    public Effect LoadUIEffect(string path, Vector3 world_pos, Vector3 scale)
     {
         var e = GameFacade.Instance.EffectManager.Load(path, world_pos, UIManager.EFFECT.gameObject);
         e.transform.position = world_pos;
+        e.transform.localScale = scale;
 
         return e;
     }

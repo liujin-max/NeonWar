@@ -43,29 +43,28 @@ public class SkillTreeItem : MonoBehaviour
     {
         //升级攻击力
         m_BtnATK.onClick.AddListener(()=>{
-            UpgradeProperty(_C.PROPERTY.ATK);
+            if (UpgradeProperty(_C.PROPERTY.ATK)) GameFacade.Instance.EffectManager.LoadUIEffect(EFFECT.ATTUP, m_BtnATK.transform.position, new Vector3(100, 100, 100));
         });
 
         //升级攻速
         m_BtnASP.onClick.AddListener(()=>{
-            UpgradeProperty(_C.PROPERTY.ASP);
+            if (UpgradeProperty(_C.PROPERTY.ASP)) GameFacade.Instance.EffectManager.LoadUIEffect(EFFECT.ATTUP, m_BtnASP.transform.position, new Vector3(100, 100, 100));
+
         });
 
         //升级价值
         m_BtnWORTH.onClick.AddListener(()=>{
-            UpgradeProperty(_C.PROPERTY.WORTH);
+            if (UpgradeProperty(_C.PROPERTY.WORTH)) GameFacade.Instance.EffectManager.LoadUIEffect(EFFECT.ATTUP, m_BtnWORTH.transform.position, new Vector3(100, 100, 100));
         });
     }
 
-    void UpgradeProperty(_C.PROPERTY property)
+    bool UpgradeProperty(_C.PROPERTY property)
     {
         int cost = DataCenter.Instance.User.GetPropertyCost(property);
         if (DataCenter.Instance.User.Glass < cost) {
             EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "<sprite=1>不足"));
-            return;
+            return false;
         }
-
-        SoundManager.Instance.Load(SOUND.UPGRADE);
 
         DataCenter.Instance.User.UpdateProperty(property, 1);
         DataCenter.Instance.User.UpdateGlass(-cost);
@@ -74,6 +73,8 @@ public class SkillTreeItem : MonoBehaviour
         FlushBars(property);
 
         EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS));
+
+        return true;
     }
 
 

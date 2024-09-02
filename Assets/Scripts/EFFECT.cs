@@ -19,5 +19,5 @@ public static class EFFECT
 
 
     public const string SKILLUP     = "Prefab/Effect/fx_skillUpgrade";
-
+    public const string ATTUP       = "Prefab/Effect/fx_attUpgrade";
 }
