@@ -65,6 +65,8 @@ public class SkillTreeItem : MonoBehaviour
             return;
         }
 
+        SoundManager.Instance.Load(SOUND.UPGRADE);
+
         DataCenter.Instance.User.UpdateProperty(property, 1);
         DataCenter.Instance.User.UpdateGlass(-cost);
 

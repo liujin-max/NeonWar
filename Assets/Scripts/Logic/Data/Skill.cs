@@ -639,11 +639,24 @@ public class Skill
         return skillData.Values[Mathf.Min(skillData.LevelMax - 1, level - 1)];
     }
 
-    public static string GetDescription(SkillData skillData, int level)
+    public static string GetDescription(SkillData skillData, int level, string color = "<#FFFFFF>")
     {
         int value = Skill.ToValue(skillData, Mathf.Min(skillData.LevelMax, level));
 
-        return skillData.Description.Replace("#", value.ToString());
+        return skillData.Description.Replace("#", (color + value + "</color>"));
+    }
+
+    public static string CompareDescription(SkillData skillData, int o_level, int t_level)
+    {
+        if (o_level == 0) return GetDescription(skillData, t_level, _C.COLOR_GREEN);
+        if (o_level == skillData.LevelMax) return GetDescription(skillData, o_level, _C.COLOR_GREEN);
+
+        int o_value = Skill.ToValue(skillData, Mathf.Min(skillData.LevelMax, o_level));
+        int t_value = Skill.ToValue(skillData, Mathf.Min(skillData.LevelMax, t_level));
+
+        string str = _C.COLOR_GREEN + o_value + "</color>->" + _C.COLOR_GREEN + t_value + "</color>";
+
+        return skillData.Description.Replace("#", str);
     }
 
     public static int GetCost(SkillData skillData, int level)

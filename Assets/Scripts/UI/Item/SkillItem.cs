@@ -30,6 +30,8 @@ public class SkillItem : MonoBehaviour
                 EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "<sprite=1>不足"));
                 return;
             }
+
+            SoundManager.Instance.Load(SOUND.SKILLUP);
             
             DataCenter.Instance.User.UpdateGlass(-cost);
 
@@ -54,7 +56,7 @@ public class SkillItem : MonoBehaviour
         m_Icon.sprite   = GameFacade.Instance.AssetManager.LoadSprite("Skills/" + DataCenter.Instance.User.CurrentPlayer.ID, m_SkillData.ID.ToString()); 
         m_Icon.SetNativeSize();
 
-        m_Description.text = Skill.GetDescription(m_SkillData, m_SkillSlot.Level + 1);
+        m_Description.text = Skill.CompareDescription(m_SkillData, m_SkillSlot.Level, m_SkillSlot.Level + 1);
 
         int cost    = Skill.GetCost(m_SkillData, m_SkillSlot.Level);
 

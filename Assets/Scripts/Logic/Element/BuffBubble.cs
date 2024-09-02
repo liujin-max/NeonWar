@@ -58,6 +58,8 @@ public class BuffBubble : MonoBehaviour
     {
         if (collider.gameObject.tag != "Player") return;
 
+        SoundManager.Instance.Load(SOUND.BUFF);
+
         //缺少特效
         collider.GetComponent<Unit>().AddBuff(m_BuffID, m_BuffValue);
         Field.Instance.RemoveBuffBubble(this);
