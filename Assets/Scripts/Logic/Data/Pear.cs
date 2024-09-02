@@ -116,20 +116,20 @@ public class Pear_Buff : Pear
 #endregion
 
 
-#region 碎片加成
-// 关卡获得的碎片数量提高#%
-public class Pear_Glass : Pear
+#region 闪避
+// 武器闪避率提高#%
+public class Pear_Dodge : Pear
 {
     public override void Equip(Player player)
     {
         base.Equip(player);
 
-        Caster.GlassRate.PutMUL(this, 1 + m_Data.Value / 100.0f);
+        Caster.ATT.DODGE.PutADD(this, m_Data.Value);
     }
 
     public override void UnEquip()
     {
-        Caster.GlassRate.Pop(this);
+        Caster.ATT.DODGE.Pop(this);
 
         base.UnEquip();
     }
@@ -223,7 +223,7 @@ public class Pear
         {20020, () => new Pear_Speed()},
         {20030, () => new Pear_HP()},
         {20040, () => new Pear_Buff()},
-        {20050, () => new Pear_Glass()},
+        {20050, () => new Pear_Dodge()},
         {20060, () => new Pear_Boss()},
         {20070, () => new Pear_Arrow()}
     };
