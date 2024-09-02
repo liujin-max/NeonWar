@@ -16,6 +16,8 @@ public static class EFFECT
     public const string CRASH       = "Prefab/Effect/fx_crash";
     public const string STUN        = "Prefab/Effect/fx_stun";
     public const string CHAOS       = "Prefab/Effect/fx_chaos";
-    
+
+
+    public const string SKILLUP     = "Prefab/Effect/fx_skillUpgrade";
 
 }

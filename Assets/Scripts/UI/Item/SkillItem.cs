@@ -32,6 +32,7 @@ public class SkillItem : MonoBehaviour
             }
 
             SoundManager.Instance.Load(SOUND.SKILLUP);
+            GameFacade.Instance.EffectManager.LoadUIEffect(EFFECT.SKILLUP, transform.position);
             
             DataCenter.Instance.User.UpdateGlass(-cost);
 
