@@ -40,17 +40,17 @@ public class BuffBubble : MonoBehaviour
         Destroy(gameObject);
     }
 
-    void Update()
+    public bool IsFinished()
+    {
+        return m_Timer.IsFinished();
+    }
+
+    public void CustomUpdate(float deltaTime)
     {
         //生命周期
         m_Timer.Update(Time.deltaTime);
 
         if (m_Timer.Progress >= 0.7f) Shine();
-
-        if (m_Timer.IsFinished() == true)
-        {
-            Field.Instance.RemoveBuffBubble(this);
-        }
     }
 
     #region 碰撞检测

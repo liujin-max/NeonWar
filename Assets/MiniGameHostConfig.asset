@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0f9af4746d7a82d4990ca90bc799b2ca, type: 3}
+  m_Script: {fileID: 11500000, guid: 125129ba3aa0a49489a3d327a5367639, type: 3}
   m_Name: MiniGameHostConfig
   m_EditorClassIdentifier: 
   cdnUrl: 

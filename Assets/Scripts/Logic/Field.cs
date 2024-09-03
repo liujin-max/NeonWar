@@ -29,6 +29,8 @@ public class Field : MonoBehaviour
     public List<Bullet> Bullets {get {return m_Bullets;}}
 
     private List<BuffBubble> m_BuffBubbles = new List<BuffBubble>();
+    private List<BuffBubble> m_BuffRemoves = new List<BuffBubble>();
+
     private List<Area> m_Areas = new List<Area>();
     private List<Area> m_AreaRemoves = new List<Area>();
     
@@ -152,10 +154,12 @@ public class Field : MonoBehaviour
     {
         if (this.STATE != _C.GAME_STATE.PLAY) return;
 
-        float deltaTime = Time.deltaTime;
+        if (m_FSM != null) m_FSM.Update();
+    }
 
-        BlinkTimer.Update(deltaTime);
-
+    //自定义刷新
+    public void CustomUpdate(float deltaTime)
+    {
         m_Player.CustomUpdate(deltaTime);
         m_Spawn.CustomUpdate(deltaTime);
         
@@ -171,9 +175,28 @@ public class Field : MonoBehaviour
             foreach (var a in m_AreaRemoves) Field.Instance.RemoveArea(a);
             m_AreaRemoves.Clear();
         }
-        
 
-        if (m_FSM != null) m_FSM.Update();
+        //Buff
+        foreach (var b in m_BuffBubbles) {
+            b.CustomUpdate(deltaTime);
+
+            if (b.IsFinished()) m_BuffRemoves.Add(b);
+        }
+
+        if (m_BuffRemoves.Count > 0) {
+            foreach (var b in m_BuffRemoves) Field.Instance.RemoveBuffBubble(b);
+            m_BuffRemoves.Clear();
+        }
+    }
+
+    //每波结束时 做一些战场清理的操作
+    public void ClearFieldWhenWaveFinished()
+    {
+        foreach (var a in m_Areas) a.Dispose();
+        m_Areas.Clear();
+
+        foreach (var b in m_BuffBubbles) b.Dispose();
+        m_BuffBubbles.Clear();
     }
 
     public _C.RESULT CheckResult()

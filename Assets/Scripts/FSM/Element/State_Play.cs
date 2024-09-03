@@ -22,6 +22,9 @@ public class State_Play<T> : State<Field>
 
     public override void Update()
     {
+        Field.Instance.CustomUpdate(Time.deltaTime);
+
+
         var result = Field.Instance.CheckResult();
         if (result != _C.RESULT.NONE) {
             if (result == _C.RESULT.UPGRADE) 
@@ -38,6 +41,8 @@ public class State_Play<T> : State<Field>
     public override void Exit()
     {
         Platform.Instance.UPDATETARGETFRAME(30);
+
+        Field.Instance.ClearFieldWhenWaveFinished();
 
         EventManager.DelHandler(EVENT.ONJOYSTICK_PRESS,     OnJoyStickPress);
         EventManager.DelHandler(EVENT.ONJOYSTICK_DOUBLE,    OnJoyStickDouble);
