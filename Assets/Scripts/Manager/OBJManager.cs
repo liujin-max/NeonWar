@@ -64,7 +64,7 @@ public class OBJManager: MonoBehaviour
     }
 
     //加载子弹
-    public Bullet AllocateBullet(GameObject bullet_template, Vector3 pos)
+    public Bullet AllocateBullet(GameObject bullet_template)
     {
         string name     = bullet_template.name;
 
@@ -75,7 +75,7 @@ public class OBJManager: MonoBehaviour
         Bullet bullet = m_BulletPools[name].Get(bullet_template);
         bullet.Name = name;
         bullet.transform.SetParent(Field.Instance.Land.ELEMENT_ROOT);
-        bullet.transform.localPosition = pos;
+        bullet.transform.localScale = Vector3.one;
         bullet.transform.localEulerAngles = Vector3.zero;
 
         return bullet;

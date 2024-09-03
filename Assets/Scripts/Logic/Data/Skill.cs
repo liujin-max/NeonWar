@@ -14,7 +14,7 @@ public class Skill_10010 : Skill
 {
     public override bool OnShoot()
     {
-        int BulletCount = this.Value + 1;
+        int BulletCount = this.Value;
 
         switch (BulletCount)
         {
@@ -173,6 +173,7 @@ public class Skill_10020 : Skill
         {
             var bullet = Field.Instance.CreateBullet(Caster);
             bullet.transform.position = b.transform.position;
+            bullet.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
             bullet.IsSplit = true;
             bullet.Hit.IgnoreUnits.Add(unit);
 
@@ -324,6 +325,43 @@ public class Skill_10070 : Skill
 }
 #endregion
 
+
+#region 弓：吸血
+//箭矢将造成伤害的#%转换成自身的生命
+public class Skill_10080 : Skill
+{
+    public Skill_10080()
+    {
+        EventManager.AddHandler(EVENT.ONBULLETHIT,   OnBulletHit);
+    }
+
+    public override void Dispose()
+    {
+        EventManager.DelHandler(EVENT.ONBULLETHIT,   OnBulletHit);
+    }
+
+    //子弹击中目标
+    private void OnBulletHit(GameEvent @event)
+    {
+        Bullet b = @event.GetParam(0) as Bullet;
+        if (b.Caster != Caster) return;
+        if (b.IsSplit == true) return;
+
+        Unit unit = @event.GetParam(1) as Unit;
+
+        if (!unit.IsDead()) return;
+
+        int heal = Mathf.CeilToInt(b.Hit.FINAL * Value / 100.0f);
+        Caster.UpdateHP(heal);
+
+        // Debug.Log("治疗：" + b.Hit.FINAL);
+
+        GameFacade.Instance.EffectManager.Load(EFFECT.HEAL, Vector3.zero, Caster.gameObject);
+
+        EventManager.SendEvent(new GameEvent(EVENT.ONHPUPDATE));
+    }
+}
+#endregion
 
 
 #region 弓：快速射击
@@ -703,6 +741,7 @@ public class Skill
 
         {10060, () => new Skill_10060()},
         {10070, () => new Skill_10070()},
+        {10080, () => new Skill_10080()},
 
         //弓 攻速
         {10110, () => new Skill_10110()},
@@ -711,7 +750,7 @@ public class Skill
 
         {10160, () => new Skill_10160()},
         {10170, () => new Skill_10170()},
-
+        
         //弓 价值
         {10210, () => new Skill_10210()},
         {10220, () => new Skill_10220()},

@@ -284,7 +284,7 @@ public class Field : MonoBehaviour
     //子弹
     public Bullet CreateBullet(Unit unit)
     {
-        var bullet = GameFacade.Instance.PoolManager.AllocateBullet(unit.BulletTemplate, Vector3.zero);
+        var bullet = GameFacade.Instance.PoolManager.AllocateBullet(unit.BulletTemplate);
         bullet.transform.position = unit.ShootPivot.position;
         bullet.Init(unit);
 
@@ -396,7 +396,8 @@ public class Field : MonoBehaviour
             }
         }
 
-        demage  = Mathf.FloorToInt(demage);
+        hit.FINAL   = Mathf.FloorToInt(demage);
+        demage      = hit.FINAL;
 
         unit.UpdateHP(-(int)demage); 
 
@@ -413,6 +414,7 @@ public class Field : MonoBehaviour
                 unit.Affected(hit);
             }
         }
+
 
         return true;
     }

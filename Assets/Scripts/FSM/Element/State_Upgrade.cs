@@ -30,9 +30,9 @@ public class State_Upgrade<T> : State<Field>
         foreach (var skill in Field.Instance.Player.Skills) {
             if (!skill.IsLevelMax()) {
                 can_upgrade_skills.Add(skill.ID, skill.Data.Weight);
-                skills_pool.Remove(skill.ID);
-                Debug.Log("移除：" + skill.ID);
             }
+            skills_pool.Remove(skill.ID);
+            Debug.Log("移除：" + skill.ID);
 
             //将互斥技能从技能池中移除
             foreach (var id in skill.Data.Excludes) {
