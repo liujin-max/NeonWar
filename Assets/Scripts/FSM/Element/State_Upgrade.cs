@@ -9,6 +9,11 @@ public class State_Upgrade<T> : State<Field>
     public override void Enter(params object[] values)
     { 
         Debug.Log("进入升级阶段");
+
+        GameFacade.Instance.UIManager.LoadWindowAsync("SkillWindow", UIManager.BOARD, (obj)=>{
+            var window = obj.GetComponent<SkillWindow>();
+            window.Init();
+        });
     }
 
     public override void Update()

@@ -16,7 +16,7 @@ using UnityEngine;
 public class Spawn
 {
     private List<Wave> m_Waves;
-    private int m_WaveOrder = 0;
+    private int m_WaveOrder;
 
     public Wave CurrentWave { get {return m_Waves[m_WaveOrder]; }}
     public List<Enemy> Enemys {get {return CurrentWave.Enemys; }}
@@ -29,6 +29,7 @@ public class Spawn
     public void Init(LevelJSON level_json)
     {
         m_Waves    = new List<Wave>(level_json.Waves.Length);
+        m_WaveOrder= 0;
 
         foreach (var wave_json in level_json.Waves) {
             var wave = new Wave(wave_json);

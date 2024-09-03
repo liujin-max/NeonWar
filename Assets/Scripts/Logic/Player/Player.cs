@@ -147,6 +147,14 @@ public class Player : Unit
         this.SetPosition(ToolUtility.FindPointOnCircle(Vector2.zero, _C.DEFAULT_RADIUS, m_Angle));
     }
 
+    public Skill AddSkill(SkillData skillData, int level)
+    {
+        Skill sk = Skill.Create(skillData, this, level);
+        m_Skills.Add(sk);
+
+        return sk;
+    }
+
     //同步最新的加成等级
     public void Sync()
     {

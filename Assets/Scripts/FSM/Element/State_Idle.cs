@@ -40,6 +40,7 @@ public class State_Idle<T> : State<Field>
             return;
         }
 
-        m_FSM.Transist(_C.FSMSTATE.PLAY, level_id);
+        
+        Field.Instance.Play(level_id);
     }
 }

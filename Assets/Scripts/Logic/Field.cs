@@ -95,7 +95,8 @@ public class Field : MonoBehaviour
 
         //将最新的加成等级应用到Player身上
         InitPlayer();
-        // m_Player.Sync();
+
+        m_FSM.Transist(_C.FSMSTATE.PLAY);
 
         EventManager.SendEvent(new GameEvent(EVENT.ONBATTLESTART));
     }
@@ -147,6 +148,13 @@ public class Field : MonoBehaviour
         if (m_FSM == null || m_FSM.CurrentState == null) return _C.FSMSTATE.IDLE;
 
         return m_FSM.CurrentState.ID;
+    }
+
+    public void NextWave()
+    {
+        m_Spawn.NextWave();
+
+        m_FSM.Transist(_C.FSMSTATE.PLAY);
     }
 
 
