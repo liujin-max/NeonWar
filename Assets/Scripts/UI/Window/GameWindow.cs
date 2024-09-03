@@ -263,7 +263,6 @@ public class GameWindow : MonoBehaviour
     #region 协程
     IEnumerator FingerAnim()
     {
-        Debug.Log("FingerAnim");
         var origin = m_FingerPivot.localPosition;
         m_FingerPivot.localPosition = new Vector3(9999, 9999, 0);
         

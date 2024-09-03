@@ -121,23 +121,23 @@ public class GameUserData
             UnlockFlag  = true, 
             InUse       = true, 
             SkillPools  = new int[] {10010, 10020, 10030, 10060, 10070, 10110, 10120, 10130, 10160, 10170, 10210, 10220, 10230, 10260, 10270 },
-            SkillSlots  = new List<SkillSlotMsg>()
-            {
-                //攻击分支
-                new SkillSlotMsg() {ATK = 3, POS = "1", SkillPool = new int[] {10010, 10020, 10030}},
-                new SkillSlotMsg() {ATK =15, POS = "2", SkillPool = new int[] {10060, 10070}},
+            // SkillSlots  = new List<SkillSlotMsg>()
+            // {
+            //     //攻击分支
+            //     new SkillSlotMsg() {ATK = 3, POS = "1", SkillPool = new int[] {10010, 10020, 10030}},
+            //     new SkillSlotMsg() {ATK =15, POS = "2", SkillPool = new int[] {10060, 10070}},
 
-                //攻速分支
-                new SkillSlotMsg() {ASP = 5, POS = "11", SkillPool = new int[] {10110, 10120, 10130}},
-                new SkillSlotMsg() {ASP =20, POS = "12", SkillPool = new int[] {10160, 10170}},
+            //     //攻速分支
+            //     new SkillSlotMsg() {ASP = 5, POS = "11", SkillPool = new int[] {10110, 10120, 10130}},
+            //     new SkillSlotMsg() {ASP =20, POS = "12", SkillPool = new int[] {10160, 10170}},
 
-                //价值分支
-                new SkillSlotMsg() {WOR = 8, POS = "21", SkillPool = new int[] {10210, 10220, 10230}},
-                new SkillSlotMsg() {WOR =25, POS = "22", SkillPool = new int[] {10260, 10270}},
+            //     //价值分支
+            //     new SkillSlotMsg() {WOR = 8, POS = "21", SkillPool = new int[] {10210, 10220, 10230}},
+            //     new SkillSlotMsg() {WOR =25, POS = "22", SkillPool = new int[] {10260, 10270}},
             
-                //大招
-                // new SkillSlotMsg() {ATK =30, ASP =30, POS = "99", SkillPool = new int[] {10210, 10220, 10230}}
-            },
+            //     //大招
+            //     // new SkillSlotMsg() {ATK =30, ASP =30, POS = "99", SkillPool = new int[] {10210, 10220, 10230}}
+            // },
             PearSlots   = new List<PearSlotMsg>()   //2个宝珠槽
             {
                 new PearSlotMsg() {ID = -1},

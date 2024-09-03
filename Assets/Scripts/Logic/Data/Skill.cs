@@ -30,18 +30,15 @@ public class Skill_10010 : Skill
                 var dir = ToolUtility.AngleToVector(Caster.GetAngle());
                 Vector2 shoot_point = Caster.ShootPivot.position;
 
-                var offset1 = shoot_point + new Vector2(-dir.y, dir.x) * 0.25f;
-                var offset2 = shoot_point + new Vector2( dir.y, -dir.x) * 0.25f;
-
                 {
                     var bullet = Field.Instance.CreateBullet(Caster);
-                    bullet.transform.position = offset1;
+                    bullet.transform.position = shoot_point + new Vector2(-dir.y, dir.x) * 0.25f;
                     bullet.Shoot(Caster.GetAngle() + 180);
                 }
 
                 {
                     var bullet = Field.Instance.CreateBullet(Caster);
-                    bullet.transform.position = offset2;
+                    bullet.transform.position = shoot_point + new Vector2( dir.y, -dir.x) * 0.25f;
                     bullet.Shoot(Caster.GetAngle() + 180);
                 }
             }
@@ -49,19 +46,25 @@ public class Skill_10010 : Skill
 
             case 3:
             {
-                {
-                    var bullet = Field.Instance.CreateBullet(Caster);
-                    bullet.Shoot(Caster.GetAngle() + 180 - 15);
-                }
+                var dir = ToolUtility.AngleToVector(Caster.GetAngle());
+                Vector2 shoot_point = Caster.ShootPivot.position;
 
                 {
                     var bullet = Field.Instance.CreateBullet(Caster);
+                    bullet.transform.position = shoot_point;
                     bullet.Shoot(Caster.GetAngle() + 180);
                 }
 
                 {
                     var bullet = Field.Instance.CreateBullet(Caster);
-                    bullet.Shoot(Caster.GetAngle() + 180 + 15);
+                    bullet.transform.position = shoot_point + new Vector2(-dir.y, dir.x) * 0.35f;
+                    bullet.Shoot(Caster.GetAngle() + 180);
+                }
+
+                {
+                    var bullet = Field.Instance.CreateBullet(Caster);
+                    bullet.transform.position = shoot_point + new Vector2( dir.y, -dir.x) * 0.35f;
+                    bullet.Shoot(Caster.GetAngle() + 180);
                 }
             }
             break;
@@ -70,31 +73,66 @@ public class Skill_10010 : Skill
             {
                 var dir = ToolUtility.AngleToVector(Caster.GetAngle());
                 Vector2 shoot_point = Caster.ShootPivot.position;
-
-                var offset1 = shoot_point + new Vector2(-dir.y, dir.x) * 0.15f;
-                var offset2 = shoot_point + new Vector2( dir.y, -dir.x) * 0.15f;
-
+                
                 {
                     var bullet = Field.Instance.CreateBullet(Caster);
-                    bullet.transform.position = offset1;
+                    bullet.transform.position = shoot_point + new Vector2(-dir.y, dir.x) * 0.25f;
                     bullet.Shoot(Caster.GetAngle() + 180);
                 }
 
                 {
                     var bullet = Field.Instance.CreateBullet(Caster);
-                    bullet.transform.position = offset2;
+                    bullet.transform.position = shoot_point + new Vector2(-dir.y, dir.x) * 0.25f;
+                    bullet.Shoot(Caster.GetAngle() + 180 - 15);
+                }
+
+                {
+                    var bullet = Field.Instance.CreateBullet(Caster);
+                    bullet.transform.position = shoot_point + new Vector2( dir.y, -dir.x) * 0.25f;
                     bullet.Shoot(Caster.GetAngle() + 180);
                 }
 
                 {
                     var bullet = Field.Instance.CreateBullet(Caster);
-                    bullet.transform.position = offset1;
+                    bullet.transform.position = shoot_point + new Vector2( dir.y, -dir.x) * 0.25f;
+                    bullet.Shoot(Caster.GetAngle() + 180 + 15);
+                }
+            }
+            break;
+
+            case 5:
+            {
+                var dir = ToolUtility.AngleToVector(Caster.GetAngle());
+                Vector2 shoot_point = Caster.ShootPivot.position;
+
+                {
+                    var bullet = Field.Instance.CreateBullet(Caster);
+                    bullet.transform.position = shoot_point;
+                    bullet.Shoot(Caster.GetAngle() + 180);
+                }
+
+                {
+                    var bullet = Field.Instance.CreateBullet(Caster);
+                    bullet.transform.position = shoot_point + new Vector2(-dir.y, dir.x) * 0.35f;
+                    bullet.Shoot(Caster.GetAngle() + 180);
+                }
+
+                {
+                    var bullet = Field.Instance.CreateBullet(Caster);
+                    bullet.transform.position = shoot_point + new Vector2( dir.y, -dir.x) * 0.35f;
+                    bullet.Shoot(Caster.GetAngle() + 180);
+                }
+
+
+                {
+                    var bullet = Field.Instance.CreateBullet(Caster);
+                    bullet.transform.position = shoot_point + new Vector2(-dir.y, dir.x) * 0.35f;
                     bullet.Shoot(Caster.GetAngle() + 180 - 20);
                 }
 
                 {
                     var bullet = Field.Instance.CreateBullet(Caster);
-                    bullet.transform.position = offset2;
+                    bullet.transform.position = shoot_point + new Vector2( dir.y, -dir.x) * 0.35f;
                     bullet.Shoot(Caster.GetAngle() + 180 + 20);
                 }
             }
