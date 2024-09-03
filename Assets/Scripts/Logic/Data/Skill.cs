@@ -698,6 +698,7 @@ public class Skill
         //弓 攻击
         {10010, () => new Skill_10010()},
         {10020, () => new Skill_10020()},
+        {10021, () => new Skill_10021()},
         {10030, () => new Skill_10030()},
 
         {10060, () => new Skill_10060()},
