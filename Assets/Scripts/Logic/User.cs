@@ -120,8 +120,8 @@ public class GameUserData
             UI          = "BowItem",
             UnlockFlag  = true, 
             InUse       = true, 
-            // SkillPools  = new int[] {10010, 10020, 10021, 10030, 10060, 10070, 10080, 10110, 10120, 10130, 10160, 10170, 10210, 10220, 10230, 10260, 10270 },
-            SkillPools  = new int[] {10010, 10020, 10030 , 10080, 99901},
+            SkillPools  = new int[] {10010, 10020, 10021, 10030, 10060, 10070, 10080, 10110, 10120, 10130, 10160, 10170, 10210, 10220, 10230, 10260, 10270 },
+            // SkillPools  = new int[] {10010, 10020, 10030 , 10080, 99901},
 
 
             // SkillSlots  = new List<SkillSlotMsg>()

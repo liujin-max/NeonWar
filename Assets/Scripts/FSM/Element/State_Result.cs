@@ -27,6 +27,9 @@ public class State_Result<T> : State<Field>
     {
         m_DelayTimer.Update(Time.deltaTime);
         if (m_DelayTimer.IsFinished() == true) {
+            Debug.Log("结算");
+            Field.Instance.STATE = _C.GAME_STATE.PAUSE;
+
             //胜利
             if (m_Result == _C.RESULT.VICTORY)
             {   
@@ -69,9 +72,7 @@ public class State_Result<T> : State<Field>
 
             
             
-            Field.Instance.End();
-
-            Field.Instance.RemovePlayer();
+            // Field.Instance.End();
         }
     }
 

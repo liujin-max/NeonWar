@@ -723,8 +723,7 @@ public class Skill_10270 : Skill
 
 
 
-#region 通用技能
-
+#region ====================== 通用技能 ======================
 
 #region 增强体质
 //提高1点生命上限
@@ -737,19 +736,23 @@ public class Skill_99901 : Skill
 
         EventManager.SendEvent(new GameEvent(EVENT.ONHPUPDATE));
     }
+}
+#endregion
 
-    public override void Upgrade(int level)
+
+#region 治疗
+//恢复50%的生命值
+public class Skill_99902 : Skill
+{
+    public override void Equip()
     {
-        base.Upgrade(level);
-
-        Caster.ATT.HPMAX++;
-        Caster.UpdateHP(1);
+        int value = Mathf.CeilToInt(Caster.ATT.HPMAX / 2.0f);
+        Caster.UpdateHP(value);
 
         EventManager.SendEvent(new GameEvent(EVENT.ONHPUPDATE));
     }
 }
 #endregion
-
 
 #endregion
 
@@ -815,6 +818,7 @@ public class Skill
 
         //通用
         {99901, () => new Skill_99901()},
+        {99902, () => new Skill_99902()},
     };
 
 

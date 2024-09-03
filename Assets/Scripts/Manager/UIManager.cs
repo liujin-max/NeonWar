@@ -59,12 +59,43 @@ public class UIManager : MonoBehaviour
         });
     }
 
+    public void ShowWindow(string name)
+    {
+        var window = GetWindow(name);
+        if (window == null) {
+            return;
+        }
+
+        window.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+    }
+
+    public void HideWindow(string name)
+    {
+        var window = GetWindow(name);
+        if (window == null) {
+            return;
+        }
+
+        window.GetComponent<RectTransform>().anchoredPosition = new Vector2(9999, 9999);
+    }
+
     public void UnloadWindow(GameObject window)
     {
         WindowCaches.Remove(window.name);
         WindowsHash.Remove(window.name);
 
         Destroy(window);
+    }
+
+    public void UnloadWindow(string name)
+    {
+        var window = GetWindow(name);
+        if (window == null) {
+            WindowsHash.Remove(name);
+            return;
+        }
+
+        UnloadWindow(window);
     }
 
     public GameObject GetWindow(string name)

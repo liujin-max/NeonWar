@@ -98,6 +98,11 @@ public class Field : MonoBehaviour
 
         m_FSM.Transist(_C.FSMSTATE.PLAY);
 
+
+        GameFacade.Instance.UIManager.LoadWindowAsync("BattleWindow", UIManager.BOTTOM, (obj)=>{
+            obj.GetComponent<BattleWindow>().Init();
+        });
+
         EventManager.SendEvent(new GameEvent(EVENT.ONBATTLESTART));
     }
 
@@ -119,6 +124,10 @@ public class Field : MonoBehaviour
         m_Areas.ForEach(a => a.Dispose());
         m_Areas.Clear();
 
+
+        RemovePlayer();
+
+        GameFacade.Instance.UIManager.UnloadWindow("BattleWindow");
 
         EventManager.SendEvent(new GameEvent(EVENT.ONBATTLEEND));
     }

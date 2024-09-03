@@ -198,6 +198,7 @@
     <Compile Include="Assets\Scripts\UI\Window\TipWindow.cs" />
     <Compile Include="Assets\Scripts\Utility\RandomUtility.cs" />
     <Compile Include="Assets\Scripts\Effect\Fly.cs" />
+    <Compile Include="Assets\Scripts\UI\Window\BattleWindow.cs" />
     <Compile Include="Assets\Scripts\UI\Item\SkillSeatItem.cs" />
     <Compile Include="Assets\Scripts\Manager\SystemManager.cs" />
     <Compile Include="Assets\Scripts\Logic\Area\Area_Ice.cs" />

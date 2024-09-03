@@ -30,6 +30,7 @@ public class ResultWindow : MonoBehaviour
     void Start()
     {
         m_BtnContinue.onClick.AddListener(()=>{
+            Field.Instance.End();
             Field.Instance.Transist(_C.FSMSTATE.IDLE);
         });
 
@@ -37,6 +38,7 @@ public class ResultWindow : MonoBehaviour
             Platform.Instance.REWARD_VIDEOAD("", ()=>{
                 m_RewardCall?.Invoke(2);
 
+                Field.Instance.End();
                 Field.Instance.Transist(_C.FSMSTATE.IDLE);
             });
         });
