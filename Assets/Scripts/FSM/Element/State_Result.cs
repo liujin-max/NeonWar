@@ -20,8 +20,6 @@ public class State_Result<T> : State<Field>
         m_Result = (_C.RESULT) values[0];
         m_DelayTimer.ForceReset();
 
-        Platform.Instance.UPDATETARGETFRAME(30);
-
         GameFacade.Instance.TimeManager.BulletTime();
     }
 

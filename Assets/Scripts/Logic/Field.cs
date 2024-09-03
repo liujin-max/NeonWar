@@ -56,6 +56,7 @@ public class Field : MonoBehaviour
         m_FSM = new FSM<Field>(this,  new State<Field>[] {
             new State_Idle<Field>(_C.FSMSTATE.IDLE),
             new State_Play<Field>(_C.FSMSTATE.PLAY),
+            new State_Upgrade<Field>(_C.FSMSTATE.UPGRADE),
             new State_Result<Field>(_C.FSMSTATE.RESULT),
         });
     }
@@ -179,6 +180,7 @@ public class Field : MonoBehaviour
     {
         if (m_Spawn.IsClear() == true) return _C.RESULT.VICTORY;
         if (m_Player.IsDead() == true) return _C.RESULT.LOSE;
+        if (m_Spawn.IsCurrentClear() == true) return _C.RESULT.UPGRADE;
 
         return _C.RESULT.NONE;
     }

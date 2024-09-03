@@ -128,6 +128,7 @@
     <Compile Include="Assets\Scripts\Effect\Affected.cs" />
     <Compile Include="Assets\Scripts\Logic\Battle\Spawn.cs" />
     <Compile Include="Assets\Scripts\Utility\TextureImporterSettings.cs" />
+    <Compile Include="Assets\Scripts\FSM\Element\State_Upgrade.cs" />
     <Compile Include="Assets\Scripts\Struct\AttributeValue.cs" />
     <Compile Include="Assets\AllIn1SpriteShader\Demo\Scripts\DemoItem.cs" />
     <Compile Include="Assets\Scripts\Logic\Player\Player_10000.cs" />
@@ -139,6 +140,7 @@
     <Compile Include="Assets\Scripts\FSM\Element\State_Idle.cs" />
     <Compile Include="Assets\Scripts\Manager\OBJManager.cs" />
     <Compile Include="Assets\AllIn1SpriteShader\Scripts\AllIn1Shader.cs" />
+    <Compile Include="Assets\Scripts\Logic\Battle\Wave.cs" />
     <Compile Include="Assets\AllIn1SpriteShader\Demo\Scripts\All1ShaderDemoController.cs" />
     <Compile Include="Assets\Scripts\Logic\Enemy\Enemy_205.cs" />
     <Compile Include="Assets\Scripts\Logic\Field.cs" />

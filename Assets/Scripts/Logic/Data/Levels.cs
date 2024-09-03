@@ -10,7 +10,14 @@ public struct LevelJSON
     public int Glass;
     public int PearPool;
     public string PearCount;
-    public List<MonsterJSON> Monsters;
+    public WaveJSON[] Waves;
+}
+
+//战斗波数据
+[System.Serializable]
+public struct WaveJSON
+{
+    public MonsterJSON[] Monsters;
 }
 
 //怪物Json数据

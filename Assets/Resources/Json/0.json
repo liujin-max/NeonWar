@@ -1,10 +1,22 @@
 {
     "Glass" : 0,
-    "Monsters": 
+    "Waves": 
     [
-        {"Time": 0, "ID": 100, "HP":10000, "Radius": 0.5, "Angle":0},
-        {"Time": 0, "ID": 101, "HP":10000, "Radius": 0.5, "Angle":0},
-        {"Time": 0, "ID": 100, "HP":10000, "Radius": 0.5, "Angle":0}
+        {
+            "Monsters":
+            [
+                {"Time": 0, "ID": 100, "HP":3},
+                {"Time": 0, "ID": 100, "HP":3}
+            ]
+        },
+
+        {
+            "Monsters":
+            [
+                {"Time": 0, "ID": 101, "HP":10},
+                {"Time": 0, "ID": 101, "HP":10}
+            ]
+        }
     ]
 }
   

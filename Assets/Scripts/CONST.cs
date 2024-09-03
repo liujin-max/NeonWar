@@ -56,6 +56,7 @@ public static class _C
     {
         IDLE,       //待机阶段(可以进行局外操作)
         PLAY,       //游戏阶段
+        UPGRADE,    //升级阶段
         RESULT      //结算奖励阶段
     }
 
@@ -123,6 +124,7 @@ public static class _C
     {
         VICTORY,
         LOSE,
+        UPGRADE,
         NONE
     }
 

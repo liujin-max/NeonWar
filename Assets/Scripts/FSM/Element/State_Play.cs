@@ -24,13 +24,20 @@ public class State_Play<T> : State<Field>
     {
         var result = Field.Instance.CheckResult();
         if (result != _C.RESULT.NONE) {
-            m_FSM.Transist(_C.FSMSTATE.RESULT, result);
+            if (result == _C.RESULT.UPGRADE) 
+            {
+                m_FSM.Transist(_C.FSMSTATE.UPGRADE);
+            }
+            else
+            {
+                m_FSM.Transist(_C.FSMSTATE.RESULT, result);
+            }
         }
     }
 
     public override void Exit()
     {
-    
+        Platform.Instance.UPDATETARGETFRAME(30);
 
         EventManager.DelHandler(EVENT.ONJOYSTICK_PRESS,     OnJoyStickPress);
         EventManager.DelHandler(EVENT.ONJOYSTICK_DOUBLE,    OnJoyStickDouble);
