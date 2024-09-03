@@ -161,8 +161,13 @@ public class Player : Unit
         if (sk == null) 
         {
             sk = Skill.Create(skillData, this, level);
-            m_Skills.Add(sk);
-            m_SkillDic[skillData.ID] = sk;
+            sk.Equip();
+
+            if (skillData.Type != _C.SKILL_TYPE.ONEOFF)
+            {
+                m_Skills.Add(sk);
+                m_SkillDic[skillData.ID] = sk;
+            }
         }
         else
         {

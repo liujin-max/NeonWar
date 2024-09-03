@@ -723,6 +723,54 @@ public class Skill_10270 : Skill
 
 
 
+#region 通用技能
+
+
+#region 增强体质
+//提高1点生命上限
+public class Skill_99901 : Skill
+{
+    public override void Equip()
+    {
+        Caster.ATT.HPMAX++;
+        Caster.UpdateHP(1);
+
+        EventManager.SendEvent(new GameEvent(EVENT.ONHPUPDATE));
+    }
+
+    public override void Upgrade(int level)
+    {
+        base.Upgrade(level);
+
+        Caster.ATT.HPMAX++;
+        Caster.UpdateHP(1);
+
+        EventManager.SendEvent(new GameEvent(EVENT.ONHPUPDATE));
+    }
+}
+#endregion
+
+
+#endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 public class Skill
 {
     public SkillData Data;
@@ -760,6 +808,13 @@ public class Skill
 
         {10260, () => new Skill_10260()},
         {10270, () => new Skill_10270()},
+
+
+
+
+
+        //通用
+        {99901, () => new Skill_99901()},
     };
 
 
@@ -821,6 +876,13 @@ public class Skill
         Data    = data;
         Caster  = caster;
         Level   = level;
+    }
+
+    //穿戴技能
+    //某些通用逻辑也用技能来实现了，但是这类逻辑通常只在穿戴的时候生效
+    public virtual void Equip()
+    {
+
     }
 
     public virtual void Upgrade(int level)

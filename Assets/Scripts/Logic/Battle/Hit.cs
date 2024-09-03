@@ -34,7 +34,7 @@ public class Hit
     {
         Caster = caster;
         
-        ATK = new AttributeValue(caster.ATT.ATK.ToNumber());
+        ATK = new AttributeValue(caster.ATT.ATK.ToNumber(false));
         CP  = new AttributeValue(caster.ATT.CP.ToNumber());
         CT  = new AttributeValue(caster.ATT.CT.ToNumber());
 

@@ -134,7 +134,7 @@ public class AttributeValue
         return base_value;
     }
 
-    public float ToNumber()
+    public float ToNumber(bool is_floor = true)
     {
         var base_value  = m_Base;
 
@@ -158,7 +158,8 @@ public class AttributeValue
         base_value = (base_value + add_value)  * aul_value * mul_value;
 
         if (m_IsInt == true) {
-            base_value = (float)Math.Floor(base_value);
+            if (is_floor) base_value = (float)Mathf.Floor(base_value);
+            else base_value = (float)Mathf.Ceil(base_value);
         }
 
         return base_value;

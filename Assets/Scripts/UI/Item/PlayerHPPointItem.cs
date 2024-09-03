@@ -18,9 +18,6 @@ public class PlayerHPPointItem : MonoBehaviour
         m_Frame_Center.SetActive(order > 1 && order < total_order);
         m_Frame_Left.SetActive(order == 1);
         m_Frame_Right.SetActive(order == total_order);
-
-        ShowPoint(true);
-        Green();
     }
 
     public void ShowPoint(bool flag)

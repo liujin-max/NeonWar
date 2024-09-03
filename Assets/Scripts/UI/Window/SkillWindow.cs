@@ -81,6 +81,8 @@ public class SkillWindow : MonoBehaviour
                 Field.Instance.Player.AddSkill(skill_data, level + 1);
                 Field.Instance.NextWave();
 
+                GameFacade.Instance.EffectManager.LoadUIEffect(EFFECT.SKILLUP, item.transform.position);
+
                 GameFacade.Instance.UIManager.UnloadWindow(gameObject);
             });
         }

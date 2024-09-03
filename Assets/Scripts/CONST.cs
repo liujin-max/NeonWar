@@ -128,7 +128,11 @@ public static class _C
         NONE
     }
 
-
+    public enum SKILL_TYPE
+    {
+        NORMAL,     //普通技能
+        ONEOFF,     //一次性技能
+    }
 
 
 

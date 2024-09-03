@@ -43,6 +43,7 @@ public class PlayerHPItem : MonoBehaviour
         {
             var item = new_point_item(i);
             item.Init(i + 1, m_Caster.ATT.HPMAX);
+            item.Green();
         }
     }
 
@@ -53,6 +54,7 @@ public class PlayerHPItem : MonoBehaviour
         for (int i = 0; i < m_Caster.ATT.HPMAX; i++)
         {
             var item = new_point_item(i);
+            item.Init(i + 1, m_Caster.ATT.HPMAX);
             item.ShowPoint((i + 1) <= m_Caster.ATT.HP);
 
             if (hp_rate >= 0.8f) item.Green();

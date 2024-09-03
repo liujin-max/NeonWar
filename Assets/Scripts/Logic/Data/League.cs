@@ -10,6 +10,7 @@ public class SkillData
 {
     public int ID;
     public string Name;
+    public _C.SKILL_TYPE Type;
     public int Weight;
     public int LevelMax;
     public int[] Values;
@@ -41,13 +42,14 @@ public class League
             {
                 ID          = Convert.ToInt32(data[0]),
                 Name        = data[1],
-                Weight      = Convert.ToInt32(data[2]),
-                Values      = data[3].Split('|').Where(s => !string.IsNullOrWhiteSpace(s)).Select(int.Parse).ToArray(),
-                Previous    = data[4].Split('|').Where(s => !string.IsNullOrWhiteSpace(s)).Select(int.Parse).ToArray(),
-                PreviousAll = data[5].Split('|').Where(s => !string.IsNullOrWhiteSpace(s)).Select(int.Parse).ToArray(),
-                Excludes    = data[6].Split('|').Where(s => !string.IsNullOrWhiteSpace(s)).Select(int.Parse).ToArray(),
-                Icon        = Convert.ToInt32(data[7]),
-                Description = data[8]
+                Type        = (_C.SKILL_TYPE)Convert.ToInt32(data[2]),
+                Weight      = Convert.ToInt32(data[3]),
+                Values      = data[4].Split('|').Where(s => !string.IsNullOrWhiteSpace(s)).Select(int.Parse).ToArray(),
+                Previous    = data[5].Split('|').Where(s => !string.IsNullOrWhiteSpace(s)).Select(int.Parse).ToArray(),
+                PreviousAll = data[6].Split('|').Where(s => !string.IsNullOrWhiteSpace(s)).Select(int.Parse).ToArray(),
+                Excludes    = data[7].Split('|').Where(s => !string.IsNullOrWhiteSpace(s)).Select(int.Parse).ToArray(),
+                Icon        = Convert.ToInt32(data[8]),
+                Description = data[9]
             };
             skill.LevelMax  = skill.Values.Length;
 
