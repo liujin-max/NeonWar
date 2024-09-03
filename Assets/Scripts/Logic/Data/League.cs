@@ -10,9 +10,9 @@ public class SkillData
 {
     public int ID;
     public string Name;
+    public int Weight;
     public int LevelMax;
     public int[] Values;
-    public int[] Glass;
     public string Description;
 }
 
@@ -37,11 +37,11 @@ public class League
             {
                 ID          = Convert.ToInt32(data[0]),
                 Name        = data[1],
-                LevelMax    = Convert.ToInt32(data[2]),
+                Weight      = Convert.ToInt32(data[2]),
                 Values      = data[3].Split('|').Select(int.Parse).ToArray(),
-                Glass       = data[4].Split('|').Select(int.Parse).ToArray(),
-                Description = data[5]
+                Description = data[4]
             };
+            skill.LevelMax  = skill.Values.Length;
 
             m_SkillDic[skill.ID]  = skill;
         }

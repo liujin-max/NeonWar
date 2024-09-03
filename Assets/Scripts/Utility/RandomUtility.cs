@@ -38,13 +38,13 @@ public static class RandomUtility
         }
     }
 
-    public static List<object> Pick(int number, List<object> list)
+    public static List<T> Pick<T>(int number, List<T> list)
     {
-        List<object> temp = new List<object>();
+        List<T> temp = new List<T>();
         temp.AddRange(list);
 
         
-        List<object> pickes = new List<object>();
+        List<T> pickes = new List<T>();
 
         for (int i = 0; i < number; i++)
         {
@@ -64,7 +64,7 @@ public static class RandomUtility
 
 
     //根据权重
-    public static object PickByWeight(Dictionary<object, int> objs)
+    public static T PickByWeight<T>(Dictionary<T, int> objs)
     {
         // 计算总权重
         int totalWeight = 0;

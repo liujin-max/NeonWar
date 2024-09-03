@@ -13,6 +13,9 @@ public class Player : Unit
     [HideInInspector] public int MoveDirection = 1;
 
     protected List<Skill> m_Skills = new List<Skill>();
+    public List<Skill> Skills {get {return m_Skills;}}
+    protected Dictionary<int, Skill> m_SkillDic = new Dictionary<int, Skill>();
+
     protected List<Pear> m_Pears = new List<Pear>();
 
 
@@ -147,11 +150,25 @@ public class Player : Unit
         this.SetPosition(ToolUtility.FindPointOnCircle(Vector2.zero, _C.DEFAULT_RADIUS, m_Angle));
     }
 
+    public Skill GetSkill(int skill_id)
+    {
+        return m_SkillDic.TryGetValue(skill_id, out var skill) ? skill : null;
+    }
+
     public Skill AddSkill(SkillData skillData, int level)
     {
-        Skill sk = Skill.Create(skillData, this, level);
-        m_Skills.Add(sk);
-
+        Skill sk = GetSkill(skillData.ID);
+        if (sk == null) 
+        {
+            sk = Skill.Create(skillData, this, level);
+            m_Skills.Add(sk);
+            m_SkillDic[skillData.ID] = sk;
+        }
+        else
+        {
+            sk.Upgrade(level);
+        }
+        
         return sk;
     }
 

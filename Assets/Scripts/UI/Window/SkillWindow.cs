@@ -55,23 +55,24 @@ public class SkillWindow : MonoBehaviour
     }
 
 
-    public void Init()
+    public void Init(int[] skill_ids)
     {
-        InitSkills();
+        InitSkills(skill_ids);
     }
 
-    public void InitSkills()
+    public void InitSkills(int[] skill_ids)
     {
         m_BtnReset.gameObject.SetActive(false);
 
         m_SkillItems.ForEach(item => {item.gameObject.SetActive(false); });
 
-        int[] skill_ids = {10010, 10020, 10030};
 
         for (int i = 0; i < skill_ids.Length; i++)
         {
-            int sk_id = skill_ids[i];
-            int level = 0;
+            int sk_id   = skill_ids[i];
+            var skill   = Field.Instance.Player.GetSkill(sk_id) ;
+            int level   = skill != null ? skill.Level : 0;
+
             SkillData skill_data = DataCenter.Instance.League.GetSkillData(sk_id);
             var item = new_skill_item(i);
             item.Init(skill_data, level, ()=>{

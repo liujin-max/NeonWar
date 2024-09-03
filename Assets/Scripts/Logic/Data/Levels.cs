@@ -28,8 +28,6 @@ public class MonsterJSON
     public int ID;
     public _C.ENEMY_TYPE Type = _C.ENEMY_TYPE.NORMAL;
     public int HP;
-    //掉落的碎片数量
-    public int Glass;
     //和圆点的角度
     public int Angle = -1;
     public int Radius;

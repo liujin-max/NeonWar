@@ -586,6 +586,7 @@ public class Skill_10270 : Skill
 public class Skill
 {
     public SkillData Data;
+    public int ID {get {return Data.ID;}}
     public int Level;
     public Unit Caster;
 
@@ -661,7 +662,8 @@ public class Skill
 
     public static int GetCost(SkillData skillData, int level)
     {
-        return skillData.Glass[Mathf.Min(skillData.LevelMax - 1, level)];
+        // return skillData.Glass[Mathf.Min(skillData.LevelMax - 1, level)];
+        return 0;
     }
 
     public virtual void Dispose()
@@ -674,6 +676,11 @@ public class Skill
     {
         Data    = data;
         Caster  = caster;
+        Level   = level;
+    }
+
+    public virtual void Upgrade(int level)
+    {
         Level   = level;
     }
 

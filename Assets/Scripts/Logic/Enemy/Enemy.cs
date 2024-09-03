@@ -18,7 +18,6 @@ public class Enemy : Unit
 
     private MonsterJSON m_Data;
     public _C.ENEMY_TYPE TYPE {get {return m_Data.Type;}}
-    public int Glass { get {return m_Data.Glass;}}
 
     [HideInInspector] public bool IsSummon = false;
     private bool m_IsRepel = false;   //击退中

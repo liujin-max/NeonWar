@@ -116,10 +116,6 @@ public class Wave
             e.CustomUpdate(deltaTime);
 
             if (e.IsDead() == true) {
-                if (!e.IsSummon) {
-                    Field.Instance.UpdateGlass(e.Glass);
-                }
-
                 m_EnemyRemoves.Add(e);
             }
         }
