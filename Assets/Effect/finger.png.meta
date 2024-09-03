@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: Cygd5H6rAngGrW3scu5y6Q3tllFqIpITPozyvBzvGCw8YlTroLe9BfE=
+guid: C3wctS6lAn9NTH580cksHvAEBfnnF0AS56srYXf4EqxJrX5aMA1BezM=
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 16
@@ -149,8 +149,8 @@ TextureImporter:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 16
-        height: 24
+        width: 58
+        height: 72
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,8 +158,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1730dc1a626f4264fb2b8139675566bb
-      internalID: 1817806486
+      spriteID: 304ea6fd0a6c3b54badf51db89f4d3d6
+      internalID: 1505179944
       vertices: []
       indices: 
       edges: []
@@ -168,10 +168,10 @@ TextureImporter:
       name: finger_1
       rect:
         serializedVersion: 2
-        x: 16
+        x: 58
         y: 0
-        width: 16
-        height: 24
+        width: 58
+        height: 72
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -179,8 +179,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0052ca4941320384aaa0bac98d0b72ec
-      internalID: -207039474
+      spriteID: 49e9d88b2f96a4940b2597b4fcb24a11
+      internalID: -22365895
       vertices: []
       indices: 
       edges: []
@@ -189,10 +189,10 @@ TextureImporter:
       name: finger_2
       rect:
         serializedVersion: 2
-        x: 32
+        x: 116
         y: 0
-        width: 16
-        height: 24
+        width: 58
+        height: 72
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -200,8 +200,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 3d379604d1b3c7f44b6cc9e211400a44
-      internalID: 39483535
+      spriteID: f38a06ed914a56245b0f0c3ad7e1998b
+      internalID: -111231530
       vertices: []
       indices: 
       edges: []
@@ -210,10 +210,10 @@ TextureImporter:
       name: finger_3
       rect:
         serializedVersion: 2
-        x: 48
+        x: 174
         y: 0
-        width: 16
-        height: 24
+        width: 58
+        height: 72
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -221,8 +221,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8554d55dc54519245a1c0c09b5c674d3
-      internalID: 1293992038
+      spriteID: 4470c2a3c285227488ebc1490637a902
+      internalID: -1935784624
       vertices: []
       indices: 
       edges: []
@@ -238,10 +238,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      finger_0: 1817806486
-      finger_1: -207039474
-      finger_2: 39483535
-      finger_3: 1293992038
+      finger_0: 1505179944
+      finger_1: -22365895
+      finger_2: -111231530
+      finger_3: -1935784624
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
