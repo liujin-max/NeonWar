@@ -121,6 +121,8 @@ public class GameUserData
             UnlockFlag  = true, 
             InUse       = true, 
             SkillPools  = new int[] {10010, 10020, 10030, 10060, 10070, 10110, 10120, 10130, 10160, 10170, 10210, 10220, 10230, 10260, 10270 },
+            // SkillPools  = new int[] {10210, 10220, 10230, 10250 },
+
             // SkillSlots  = new List<SkillSlotMsg>()
             // {
             //     //攻击分支

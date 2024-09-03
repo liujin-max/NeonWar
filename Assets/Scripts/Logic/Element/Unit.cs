@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using static System.Collections.Generic.Dictionary<int, Buff>;
 
 //基础属性
 [System.Serializable]
@@ -38,7 +40,9 @@ public class Unit : MonoBehaviour
 
     //Buff
     private Dictionary<int, Buff> m_BuffDic = new Dictionary<int, Buff>();
+    public ValueCollection Buffs {get {return m_BuffDic.Values;}}
     private List<Buff> m_RemoveBuffs = new List<Buff>();
+    
 
     //各种状态
     [HideInInspector]public int StunFlag = 0;    //晕眩
@@ -213,16 +217,22 @@ public class Unit : MonoBehaviour
         return m_BuffDic.TryGetValue(buff_id, out var buff) ? buff : null;
     }
 
-    #endregion
-
-
-    public virtual void Dispose()
+    //清空Buff
+    public void ClearBuffs()
     {
-        //清空Buff
         foreach (var buff in m_BuffDic.Values) {
             buff.Dispose();
             EventManager.SendEvent(new GameEvent(EVENT.ONBUFFREMOVE, buff));
         }
         m_BuffDic.Clear();
+    }
+
+    #endregion
+
+
+
+    public virtual void Dispose()
+    {
+        ClearBuffs();
     }
 }

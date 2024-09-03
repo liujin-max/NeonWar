@@ -70,6 +70,8 @@ public class SkillWindow : MonoBehaviour
         for (int i = 0; i < skill_ids.Length; i++)
         {
             int sk_id   = skill_ids[i];
+            if (sk_id == 0) continue;
+            
             var skill   = Field.Instance.Player.GetSkill(sk_id) ;
             int level   = skill != null ? skill.Level : 0;
 

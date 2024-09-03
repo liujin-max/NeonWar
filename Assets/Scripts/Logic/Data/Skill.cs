@@ -169,14 +169,6 @@ public class Skill_10020 : Skill
 
         Unit unit = @event.GetParam(1) as Unit;
 
-        List<object> enemy_pool = new List<object>();
-        Field.Instance.Spawn.Enemys.ForEach(enemy => {
-            if (enemy.gameObject != unit.gameObject) {
-                enemy_pool.Add(enemy);
-            }
-        });
-        
-
         for (int i = 0; i < this.Value; i++)
         {
             var bullet = Field.Instance.CreateBullet(Caster);
@@ -184,23 +176,52 @@ public class Skill_10020 : Skill
             bullet.IsSplit = true;
             bullet.Hit.IgnoreUnits.Add(unit);
 
-            if (enemy_pool.Count > 0)
-            {
-                Enemy e = RandomUtility.Pick(1, enemy_pool)[0] as Enemy;
-                enemy_pool.Remove(e);
-
-                //分裂箭射向其他目标
-                bullet.Shoot(ToolUtility.VectorToAngle(e.transform.localPosition - bullet.transform.localPosition));
-            }
-            else
-            {
-                bullet.Shoot(RandomUtility.Random(0, 360));
-            }
+            bullet.Shoot(RandomUtility.Random(0, 360));
         }
         
     }
 }
 #endregion
+
+#region 弓：精准分裂
+//分裂出的箭矢会自动瞄准附近的敌人
+public class Skill_10021 : Skill
+{
+    public Skill_10021()
+    {
+        EventManager.AddHandler(EVENT.ONBULLETSHOOT,  OnBulletShoot);
+    }
+
+    public override void Dispose()
+    {
+        EventManager.DelHandler(EVENT.ONBULLETSHOOT,  OnBulletShoot);
+    }
+
+    //子弹击中目标
+    private void OnBulletShoot(GameEvent @event)
+    {
+        Bullet b = @event.GetParam(0) as Bullet;
+        if (b.Caster != Caster) return;
+        if (b.IsSplit == false) return;   //只影响分裂出的箭矢
+
+
+        if (Field.Instance.Spawn.Enemys.Count == 0) return;
+
+        List<Enemy> enemys = new List<Enemy>(Field.Instance.Spawn.Enemys);
+        foreach (var unit in b.Hit.IgnoreUnits) {
+            enemys.Remove(unit as Enemy);
+        }
+    
+
+        int rand= RandomUtility.Random(0, Field.Instance.Spawn.Enemys.Count);
+        Enemy e = Field.Instance.Spawn.Enemys[rand];
+
+        //分裂箭射向其他目标
+        b.Turn(ToolUtility.VectorToAngle(e.transform.localPosition - b.transform.localPosition)); 
+    }
+}
+#endregion
+
 
 #region 弓：瞄准射击
 //箭矢最多可以追踪场上距离最近的#个敌人
@@ -525,8 +546,7 @@ public class Skill_10230 : Skill
         m_Timer.Update(deltaTime);
         if (!m_Timer.IsFinished()) return;
 
-        float radius    = Value / 100.0f;
-        Enemy target    = Field.Instance.Spawn.FindEnemyGather(radius);
+        Enemy target    = Field.Instance.Spawn.FindEnemyGather(1.5f);
 
         if (target == null) return;
 
@@ -535,11 +555,60 @@ public class Skill_10230 : Skill
         var point = target.transform.localPosition;
 
         Caster.CreateProjectile(PROJECTILE.ROPE, _C.TRACE.PARABOLA, point, 0.4f, ()=>{
-            Field.Instance.PushArea(Caster, AREA.ROPE, point, 4f, radius);
+            Field.Instance.PushArea(Caster, AREA.ROPE, point, Value);
         });
     }
 }
 #endregion
+
+#region 弓：扩大陷阱
+//陷阱的范围增加至#
+public class Skill_10240 : Skill
+{
+    public Skill_10240()
+    {
+        EventManager.AddHandler(EVENT.ONPUSHAREA,   OnPushArea);
+    }
+
+    public override void Dispose()
+    {
+        EventManager.DelHandler(EVENT.ONPUSHAREA,   OnPushArea);
+    }
+
+    private void OnPushArea(GameEvent @event)
+    {
+        Area area = @event.GetParam(0) as Area;
+
+        if (area.transform.GetComponent<Area_Poison>() != null 
+            || area.transform.GetComponent<Area_Ice>() != null 
+            || area.transform.GetComponent<Area_Rope>() != null)
+        {
+            float radius    = Value / 100.0f;
+            area.transform.localScale = new Vector3(radius, radius, 1);
+        }
+    }
+}
+#endregion
+
+
+#region 弓：急速陷阱
+//陷阱的冷却速度提高#%
+public class Skill_10250 : Skill
+{
+
+    public override void CustomUpdate(float deltaTime)
+    {
+        foreach (var sk in Caster.Skills)
+        {
+            if (sk.ID == 10210 || sk.ID == 10220 || sk.ID == 10230)
+            {
+                sk.CustomUpdate(deltaTime * Value / 100.0f);
+            }
+        }
+    }
+}
+#endregion
+
 
 
 
@@ -599,11 +668,6 @@ public class Skill_10270 : Skill
         if (hit.Caster != Caster) return;
         
         hit.Caster.AddBuff((int)_C.BUFF.KILL, Value);
-
-        // m_KillCount++;
-
-        // float value = Value / 100.0f;
-        // hit.Caster.ATT.ATK.PutAUL(this, value * m_KillCount);  
     }
 }
 #endregion
@@ -626,7 +690,7 @@ public class Skill
     public SkillData Data;
     public int ID {get {return Data.ID;}}
     public int Level;
-    public Unit Caster;
+    public Player Caster;
 
     public int Value {get {return Skill.ToValue(Data, Level);}}
 
@@ -651,13 +715,15 @@ public class Skill
         {10210, () => new Skill_10210()},
         {10220, () => new Skill_10220()},
         {10230, () => new Skill_10230()},
+        {10240, () => new Skill_10240()},
+        {10250, () => new Skill_10250()},
 
         {10260, () => new Skill_10260()},
         {10270, () => new Skill_10270()},
     };
 
 
-    public static Skill Create(SkillData data, Unit caster, int level)
+    public static Skill Create(SkillData data, Player caster, int level)
     {
         Skill skill;
         if (m_classDictionary.ContainsKey(data.ID)) skill = m_classDictionary[data.ID]();
@@ -710,7 +776,7 @@ public class Skill
     }
 
 
-    public void Init(SkillData data, Unit caster, int level)
+    public void Init(SkillData data, Player caster, int level)
     {
         Data    = data;
         Caster  = caster;

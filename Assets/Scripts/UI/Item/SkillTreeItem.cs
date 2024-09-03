@@ -118,15 +118,15 @@ public class SkillTreeItem : MonoBehaviour
 
         List<SkillSlotMsg> slots = DataCenter.Instance.User.CurrentPlayer.SkillSlots;
 
-        for (int i = 0; i < slots.Count; i++)
-        {
-            SkillSlotMsg skill_msg = slots[i];
-            SkillData skill_data = DataCenter.Instance.League.GetSkillData(skill_msg.ID);
+        // for (int i = 0; i < slots.Count; i++)
+        // {
+        //     SkillSlotMsg skill_msg = slots[i];
+        //     SkillData skill_data = DataCenter.Instance.League.GetSkillData(skill_msg.ID);
 
-            var item = new_skill_seat_item(i, m_SkillPivot.Find(skill_msg.POS));
-            item.Init(skill_msg, skill_data);
-            item.SetTextUp(skill_msg.POS.Equals("1"));
-        }
+        //     var item = new_skill_seat_item(i, m_SkillPivot.Find(skill_msg.POS));
+        //     item.Init(skill_msg, skill_data);
+        //     item.SetTextUp(skill_msg.POS.Equals("1"));
+        // }
     }
 
 

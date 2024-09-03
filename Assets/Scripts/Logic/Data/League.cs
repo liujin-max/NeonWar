@@ -13,9 +13,10 @@ public class SkillData
     public int Weight;
     public int LevelMax;
     public int[] Values;
-    public int[] Previous;  //前置技能
-    public int[] Excludes;  //互斥技能
-
+    public int[] Previous;      //前置技能(满足其一即可)
+    public int[] PreviousAll;   //前置技能(需要全部满足)
+    public int[] Excludes;      //互斥技能
+    public int Icon;
     public string Description;
 }
 
@@ -41,10 +42,12 @@ public class League
                 ID          = Convert.ToInt32(data[0]),
                 Name        = data[1],
                 Weight      = Convert.ToInt32(data[2]),
-                Values      = data[3].Split('|').Select(int.Parse).ToArray(),
+                Values      = data[3].Split('|').Where(s => !string.IsNullOrWhiteSpace(s)).Select(int.Parse).ToArray(),
                 Previous    = data[4].Split('|').Where(s => !string.IsNullOrWhiteSpace(s)).Select(int.Parse).ToArray(),
-                Excludes    = data[5].Split('|').Where(s => !string.IsNullOrWhiteSpace(s)).Select(int.Parse).ToArray(),
-                Description = data[6]
+                PreviousAll = data[5].Split('|').Where(s => !string.IsNullOrWhiteSpace(s)).Select(int.Parse).ToArray(),
+                Excludes    = data[6].Split('|').Where(s => !string.IsNullOrWhiteSpace(s)).Select(int.Parse).ToArray(),
+                Icon        = Convert.ToInt32(data[7]),
+                Description = data[8]
             };
             skill.LevelMax  = skill.Values.Length;
 

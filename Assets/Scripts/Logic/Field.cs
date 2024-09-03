@@ -200,6 +200,10 @@ public class Field : MonoBehaviour
     //每波结束时 做一些战场清理的操作
     public void ClearFieldWhenWaveFinished()
     {
+        //释放Buff等
+        m_Player.ClearBuffs();
+
+        //
         foreach (var a in m_Areas) a.Dispose();
         m_Areas.Clear();
 
@@ -327,6 +331,8 @@ public class Field : MonoBehaviour
             area.transform.localScale = new Vector3(scale, scale, 1);
 
             m_Areas.Add(area);
+
+            EventManager.SendEvent(new GameEvent(EVENT.ONPUSHAREA, area));
         });
     }
 

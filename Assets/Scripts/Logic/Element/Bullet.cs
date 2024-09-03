@@ -53,11 +53,16 @@ public class Bullet : MonoBehaviour
         m_Rigidbody.velocity = m_Rigidbody.velocity.normalized * Speed.ToNumber() / 100.0f;
     }
 
-    public void Shoot(float angle , bool is_shoot = true)
+    public void Shoot(float angle)
     {
-        m_Rigidbody.velocity = ToolUtility.FindPointOnCircle(Vector2.zero, Speed.ToNumber() / 100.0f, angle);
+        Turn(angle);
 
         EventManager.SendEvent(new GameEvent(EVENT.ONBULLETSHOOT, this));
+    }
+
+    public void Turn(float angle)
+    {
+        m_Rigidbody.velocity = ToolUtility.FindPointOnCircle(Vector2.zero, Speed.ToNumber() / 100.0f, angle);
     }
 
     void Rebound()
@@ -69,7 +74,7 @@ public class Bullet : MonoBehaviour
         //给一个随机的偏移
         angle += 180 + RandomUtility.Random(-45, 45);
 
-        Shoot(angle, false);
+        Turn(angle);
     }
 
     void Dispose()

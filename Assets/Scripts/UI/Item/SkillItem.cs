@@ -34,7 +34,7 @@ public class SkillItem : MonoBehaviour
     void FlushUI()
     {
         m_Text.text     = m_SkillData.Name;
-        m_Icon.sprite   = GameFacade.Instance.AssetManager.LoadSprite("Skills/" + DataCenter.Instance.User.CurrentPlayer.ID, m_SkillData.ID.ToString()); 
+        m_Icon.sprite   = GameFacade.Instance.AssetManager.LoadSprite("Skills/" + DataCenter.Instance.User.CurrentPlayer.ID, m_SkillData.Icon.ToString()); 
         m_Icon.SetNativeSize();
 
         m_Description.text = Skill.CompareDescription(m_SkillData, m_SkillLevel, m_SkillLevel + 1);

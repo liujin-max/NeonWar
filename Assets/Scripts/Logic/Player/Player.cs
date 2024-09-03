@@ -189,19 +189,19 @@ public class Player : Unit
 
 
         //同步技能
-        {
-            m_Skills.ForEach(skill => skill.Dispose());
-            m_Skills.Clear();
-            DataCenter.Instance.User.CurrentPlayer.SkillSlots.ForEach(skill_msg => {
-                if (skill_msg.ID > 0) {
-                    Skill sk = Skill.Create(DataCenter.Instance.League.GetSkillData(skill_msg.ID), this, skill_msg.Level);
-                    m_Skills.Add(sk);
-                }
-            });
+        // {
+        //     m_Skills.ForEach(skill => skill.Dispose());
+        //     m_Skills.Clear();
+        //     DataCenter.Instance.User.CurrentPlayer.SkillSlots.ForEach(skill_msg => {
+        //         if (skill_msg.ID > 0) {
+        //             Skill sk = Skill.Create(DataCenter.Instance.League.GetSkillData(skill_msg.ID), this, skill_msg.Level);
+        //             m_Skills.Add(sk);
+        //         }
+        //     });
 
-            //测试技能
-            // m_Skills.Add(Skill.Create(DataCenter.Instance.League.GetSkillData(10270), this, 2));
-        }
+        //     //测试技能
+        //     // m_Skills.Add(Skill.Create(DataCenter.Instance.League.GetSkillData(10270), this, 2));
+        // }
 
         //同步宝珠
         {
