@@ -617,7 +617,7 @@ public class Skill_10221 : Skill
 
             foreach (var t in ice.Units)
             {
-                if (t.Value >= 2.5f) 
+                if (t.Value >= 0.5f) 
                 {
                     t.Key.AddBuff((int)_C.BUFF.FROZEN, 1, 1.5f);
                 }

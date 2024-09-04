@@ -9,9 +9,10 @@ using UnityEngine;
 public class Enemy : Unit
 {
     private Rigidbody2D m_Rigidbody;
-    private SpriteRenderer m_Sprite;
     private Transform m_HPPivot;
     private CircleHP m_HPBar;
+
+    
 
     [SerializeField] private ParticleSystem.MinMaxGradient m_Color;
 
@@ -111,7 +112,7 @@ public class Enemy : Unit
     {
         SoundManager.Instance.Load(SOUND.HIT);
 
-        m_Sprite.GetComponent<Affected>().DO(hit);
+        AffectedEffect.DoHit(hit);
 
         if (m_HPBar != null) m_HPBar.Affected();
 

@@ -12,7 +12,7 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
-  - SHINE_ON
+  - INNEROUTLINE_ON
   m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -79,7 +79,7 @@ Material:
     - _ClipUvUp: 0
     - _ColorChangeLuminosity: 0.154
     - _ColorChangeTolerance: 0.613
-    - _ColorRampLuminosity: 0.052
+    - _ColorRampLuminosity: 0.389
     - _ColorRampOutline: 0
     - _ColorSwapBlueLuminosity: 0.5
     - _ColorSwapGreenLuminosity: 0.5
@@ -87,7 +87,7 @@ Material:
     - _DistortAmount: 0.1
     - _DistortTexXSpeed: 1
     - _DistortTexYSpeed: 0
-    - _FadeAmount: -0.1
+    - _FadeAmount: 0.553
     - _FadeBurnGlow: 4.4
     - _FadeBurnTransition: 0.084
     - _FadeBurnWidth: 0.208
@@ -101,12 +101,12 @@ Material:
     - _GlitchSize: 0.25
     - _Glow: 0
     - _GlowTexUsed: 0
-    - _GradBlend: 0.342
+    - _GradBlend: 0.109
     - _GrassManualAnim: 1
     - _GrassManualToggle: 0
     - _GrassSpeed: 8
     - _GrassWind: 20
-    - _GreyscaleLuminosity: 1
+    - _GreyscaleLuminosity: -1
     - _GreyscaleOutline: 0
     - _HandDrawnAmount: 10
     - _HandDrawnSpeed: 3
@@ -120,9 +120,9 @@ Material:
     - _HsvBright: 1
     - _HsvSaturation: 1
     - _HsvShift: 0
-    - _InnerOutlineAlpha: 1
-    - _InnerOutlineGlow: 10.6
-    - _InnerOutlineThickness: 2.4
+    - _InnerOutlineAlpha: 0.5
+    - _InnerOutlineGlow: 1
+    - _InnerOutlineThickness: 1.5
     - _MaxXUV: 1
     - _MaxYUV: 1
     - _MinXUV: 0
@@ -153,7 +153,7 @@ Material:
     - _PinchUvAmount: 0.31
     - _PixelateSize: 19
     - _PosterizeGamma: 0.75
-    - _PosterizeNumColors: 13.7
+    - _PosterizeNumColors: 39.2
     - _PosterizeOutline: 0
     - _RandomSeed: 0
     - _RectSize: 1
@@ -197,7 +197,7 @@ Material:
     - _GradTopRightCol: {r: 1, g: 0, b: 0, a: 1}
     - _GreyscaleTintColor: {r: 1, g: 1, b: 1, a: 1}
     - _HitEffectColor: {r: 1, g: 1, b: 1, a: 1}
-    - _InnerOutlineColor: {r: 1, g: 0.03272705, b: 0, a: 1}
+    - _InnerOutlineColor: {r: 0.12459949, g: 0.64176965, b: 0.754717, a: 1}
     - _OutlineColor: {r: 0, g: 0, b: 0, a: 1}
     - _ShadowColor: {r: 0, g: 0, b: 0, a: 1}
     - _ShineColor: {r: 1, g: 1, b: 1, a: 1}

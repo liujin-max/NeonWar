@@ -206,6 +206,8 @@ public class Buff_Frozen : Buff
     {
         Caster.StunReference++;
         Caster.Stop();
+
+        Caster.AffectedEffect.Frozen(true);
     }
 
     public override void Dispose()
@@ -214,6 +216,8 @@ public class Buff_Frozen : Buff
 
         Caster.StunReference--;
         Caster.Resume();
+
+        Caster.AffectedEffect.Frozen(false);
     }
 }
 #endregion

@@ -6,31 +6,33 @@ using UnityEngine;
 using static System.Collections.Generic.Dictionary<int, Buff>;
 
 //基础属性
-[System.Serializable]
-public class ATT
-{
-    public int HPMAX   = 3;
-    [HideInInspector] public int HP = 3;
-    [HideInInspector] public AttributeValue ATK  = new AttributeValue(1);
-    [Header("攻速(毫秒)")] public AttributeValue ASP = new AttributeValue(0);    //攻速 
-    [Header("暴击率(千分制)")] public AttributeValue CP = new AttributeValue(0);
-    [Header("暴击伤害(千分制)")] public AttributeValue CT = new AttributeValue(0);
-    [Header("闪避率(千分制)")] public AttributeValue DODGE = new AttributeValue(0);
-    [Header("移动速度")] public AttributeValue SPEED = new AttributeValue(0);
+// [System.Serializable]
+// public class ATT
+// {
+//     public int HPMAX   = 3;
+//     [HideInInspector] public int HP = 3;
+//     [HideInInspector] public AttributeValue ATK  = new AttributeValue(1);
+//     [Header("攻速(毫秒)")] public AttributeValue ASP = new AttributeValue(0);    //攻速 
+//     [Header("暴击率(千分制)")] public AttributeValue CP = new AttributeValue(0);
+//     [Header("暴击伤害(千分制)")] public AttributeValue CT = new AttributeValue(0);
+//     [Header("闪避率(千分制)")] public AttributeValue DODGE = new AttributeValue(0);
+//     [Header("移动速度")] public AttributeValue SPEED = new AttributeValue(0);
     
-    //易伤倍率
-    [HideInInspector] public AttributeValue VUN_INC     = new AttributeValue(1f, false);
-    //对头目伤害加成
-    [HideInInspector] public AttributeValue BOSS_INC    = new AttributeValue(1f, false);
-}
+//     //易伤倍率
+//     [HideInInspector] public AttributeValue VUN_INC     = new AttributeValue(1f, false);
+//     //对头目伤害加成
+//     [HideInInspector] public AttributeValue BOSS_INC    = new AttributeValue(1f, false);
+// }
 
 //基础单位
 public class Unit : MonoBehaviour
 {
     public GameObject BulletTemplate;
 
+    protected SpriteRenderer m_Sprite;
     [HideInInspector] public Transform ShootPivot;
     [HideInInspector] public Transform HeadPivot;
+    
 
     [HideInInspector] public int ID;
     [HideInInspector] public _C.SIDE Side = _C.SIDE.PLAYER;
@@ -43,6 +45,14 @@ public class Unit : MonoBehaviour
     public ValueCollection Buffs {get {return m_BuffDic.Values;}}
     private List<Buff> m_RemoveBuffs = new List<Buff>();
     
+    
+    private Affected m_Affected;
+    public Affected AffectedEffect {
+        get {
+            if (m_Affected == null) m_Affected = m_Sprite.GetComponent<Affected>(); 
+            return m_Affected;
+        }
+    }
 
     //各种状态
     [HideInInspector] public int StunReference;    //晕眩

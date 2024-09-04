@@ -22,7 +22,7 @@ public class Hit
 
 
     public HashSet<Unit> IgnoreUnits = new HashSet<Unit>();
-    public int KillRate = 50;        //必杀概率
+    public int KillRate = 0;        //必杀概率
     public bool IsHitKill;      //触发必杀
 
     //物理特性
