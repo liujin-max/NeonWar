@@ -10,11 +10,12 @@ public class Affected : MonoBehaviour
     private SpriteRenderer m_Sprite;
     public Material m_MatTemplate;
     private MaterialPropertyBlock m_Mpb;
-    private int m_BlendID;
-    private int m_ColorID;
+   
 
 
     //打击相关
+    private int m_HitID;
+    private int m_ColorID;
     private bool m_IsHiting = false;
     private float m_Value;
     private Hit m_Hit;
@@ -32,7 +33,7 @@ public class Affected : MonoBehaviour
         m_Mpb   = new MaterialPropertyBlock();
         m_Mpb.SetTexture("_MainTex", m_Sprite.sprite.texture);
 
-        m_BlendID   = Shader.PropertyToID("_HitEffectBlend");
+        m_HitID     = Shader.PropertyToID("_HitEffectBlend");
         m_ColorID   = Shader.PropertyToID("_HitEffectColor");
 
         m_FrozenID  = Shader.PropertyToID("_InnerOutlineThickness");
@@ -66,7 +67,7 @@ public class Affected : MonoBehaviour
 
         m_Value -= Time.deltaTime * 5;
 
-        m_Mpb.SetFloat(m_BlendID, m_Value);
+        m_Mpb.SetFloat(m_HitID, m_Value);
         m_Sprite.SetPropertyBlock(m_Mpb);
         
         if (m_Value <= 0) {
