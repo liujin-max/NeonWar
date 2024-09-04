@@ -17,6 +17,7 @@ public class Spawn
 {
     private List<Wave> m_Waves;
     private int m_WaveOrder;
+    public string Order {get {return (m_WaveOrder + 1).ToString();}}
 
     public Wave CurrentWave { get {return m_Waves[m_WaveOrder]; }}
     public List<Enemy> Enemys {get {return CurrentWave.Enemys; }}
@@ -55,7 +56,9 @@ public class Spawn
     public bool IsClear()
     {
         foreach (var wave in m_Waves) {
-            if (!wave.IsClear()) return false;
+            if (!wave.IsClear()) {
+                return false;
+            }
         }
         return true;
     }

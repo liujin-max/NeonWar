@@ -55,6 +55,7 @@ SpriteAtlas:
     packedSpriteRenderDataKeys:
     - 9a5952000633a134dab9eb06bd24f40a: 21300000
     - a317d4e048a9bff48bbf51a4e7ed0862: 21300000
+    - 360be722cf45a834caadc020eb7b85b5: 21300000
     - 04b3ae72717d55145a3eadee1b647dca: 21300000
     - 44ca5c5532755304dae84eda0c4a431d: 21300000
     - c482002662acc074eb558e839c3a8408: 21300000
@@ -62,6 +63,8 @@ SpriteAtlas:
     - b58afda6a5c98944abc5c061f7a486d9: 21300000
     - 7ce03bd6f2e6e28499a3b159bd3ac194: 21300000
     - 51f387a7acbcce645adef682cb9e1bad: 21300000
+    - 5e3153c7415f9e14b9e48bdd8643b375: 21300000
+    - f1bdf89891c3d584d9791a6ff5ecd4e0: 21300000
     - 206e7f49af99a214cac57d21af166610: 21300000
     - 752be82aa82fbf1419cd30f265e54848: 21300000
     - 898f9a8a3594b5940875180d12fc4e0e: 21300000
@@ -72,6 +75,7 @@ SpriteAtlas:
   m_PackedSprites:
   - {fileID: 21300000, guid: 9a5952000633a134dab9eb06bd24f40a, type: 3}
   - {fileID: 21300000, guid: a317d4e048a9bff48bbf51a4e7ed0862, type: 3}
+  - {fileID: 21300000, guid: 360be722cf45a834caadc020eb7b85b5, type: 3}
   - {fileID: 21300000, guid: 04b3ae72717d55145a3eadee1b647dca, type: 3}
   - {fileID: 21300000, guid: 44ca5c5532755304dae84eda0c4a431d, type: 3}
   - {fileID: 21300000, guid: c482002662acc074eb558e839c3a8408, type: 3}
@@ -79,6 +83,8 @@ SpriteAtlas:
   - {fileID: 21300000, guid: b58afda6a5c98944abc5c061f7a486d9, type: 3}
   - {fileID: 21300000, guid: 7ce03bd6f2e6e28499a3b159bd3ac194, type: 3}
   - {fileID: 21300000, guid: 51f387a7acbcce645adef682cb9e1bad, type: 3}
+  - {fileID: 21300000, guid: 5e3153c7415f9e14b9e48bdd8643b375, type: 3}
+  - {fileID: 21300000, guid: f1bdf89891c3d584d9791a6ff5ecd4e0, type: 3}
   - {fileID: 21300000, guid: 206e7f49af99a214cac57d21af166610, type: 3}
   - {fileID: 21300000, guid: 752be82aa82fbf1419cd30f265e54848, type: 3}
   - {fileID: 21300000, guid: 898f9a8a3594b5940875180d12fc4e0e, type: 3}
@@ -88,6 +94,7 @@ SpriteAtlas:
   m_PackedSpriteNamesToIndex:
   - 10120
   - 10170
+  - 10240
   - 10060
   - 10220
   - 10210
@@ -95,6 +102,8 @@ SpriteAtlas:
   - 10020
   - 10110
   - 10010
+  - 10250
+  - 10161
   - 10260
   - 10270
   - 10230

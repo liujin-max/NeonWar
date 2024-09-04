@@ -11,12 +11,11 @@ public class Area_Rope : Area
     {
         base.CustomUpdate(deltaTime);
 
-
-        m_Units.ForEach(u => {
+        foreach (var u in m_Units.Keys) {
             Enemy e = u.GetComponent<Enemy>();
             if (e != null) {
                 e.Repel((transform.localPosition - e.transform.localPosition) * 0.15f);
             }
-        });
+        }
     }
 }

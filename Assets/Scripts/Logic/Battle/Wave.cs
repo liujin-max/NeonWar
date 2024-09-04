@@ -16,15 +16,20 @@ public class Wave
     private List<Enemy> m_EnemyRemoves  = new List<Enemy>();
     private List<Enemy> m_EnemyTemps    = new List<Enemy>();
 
+
+    public int KillCount;
+    public int Total;
+
+
     public Wave(WaveJSON waveJSON)
     {
-        int enemy_max = waveJSON.Monsters.Length;
+        Total = waveJSON.Monsters.Length;
 
         //根据已知的大小做初始化、避免频繁扩容
-        m_EnemyPool = new List<MonsterJSON>(enemy_max);
+        m_EnemyPool = new List<MonsterJSON>(Total);
         m_EnemyPool.AddRange(waveJSON.Monsters);
 
-        m_Enemys    = new List<Enemy>(enemy_max);
+        m_Enemys    = new List<Enemy>(Total);
     }
 
     public void Pause()
@@ -110,13 +115,16 @@ public class Wave
         //销毁死亡的敌人
         m_EnemyTemps.Clear();
         m_EnemyTemps.AddRange(m_Enemys);
-        
         foreach (var e in m_EnemyTemps)
         {
             e.CustomUpdate(deltaTime);
 
             if (e.IsDead() == true) {
                 m_EnemyRemoves.Add(e);
+                if (!e.IsSummon) {
+                    KillCount++;
+                    EventManager.SendEvent(new GameEvent(EVENT.UI_ENEMYDEAD, KillCount));
+                }
             }
         }
 

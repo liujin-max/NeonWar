@@ -77,7 +77,7 @@ public class Bullet : MonoBehaviour
         Turn(angle);
     }
 
-    void Dispose()
+    public void Dispose()
     {
         Field.Instance.RecycleBullet(this);
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -9,6 +10,9 @@ public class BattleWindow : MonoBehaviour
     [SerializeField] TextMeshProUGUI m_Level;
     [SerializeField] Transform m_HPPivot;
     [SerializeField] Transform m_BuffPivot;
+    [SerializeField] TextMeshProUGUI m_Progress;
+    [SerializeField] BarTransition m_ProgressBar;
+
 
     [Header("按钮")]
     [SerializeField] Button m_BtnSetting;
@@ -24,6 +28,11 @@ public class BattleWindow : MonoBehaviour
     void Awake()
     {
         EventManager.AddHandler(EVENT.ONHPUPDATE,       OnUpdateHP);
+        EventManager.AddHandler(EVENT.ONNEXTWAVE,       OnNextWave);
+        
+        EventManager.AddHandler(EVENT.UI_ENEMYDEAD,     OnEnemyDead);
+
+
 
         m_BtnLeft.transform.Find("Wave").gameObject.SetActive(false);
         m_BtnRight.transform.Find("Wave").gameObject.SetActive(false);
@@ -35,12 +44,8 @@ public class BattleWindow : MonoBehaviour
             m_BtnLeft.transform.Find("Wave").gameObject.SetActive(true);
             m_BtnLeft.transform.Find("Wave").transform.position = eventData.position;
         }, 
-        ()=>{ 
-            m_BtnLeft.transform.Find("Wave").gameObject.SetActive(false);
-        }, 
-        ()=>{
-            EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS, -1f));
-        });
+        ()=>{ m_BtnLeft.transform.Find("Wave").gameObject.SetActive(false);}, 
+        ()=>{ EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS, -1f));});
 
         //往右
         m_BtnRight.SetCallback((eventData)=>{
@@ -49,12 +54,8 @@ public class BattleWindow : MonoBehaviour
             m_BtnRight.transform.Find("Wave").gameObject.SetActive(true);
             m_BtnRight.transform.Find("Wave").transform.position = eventData.position;
         }, 
-        ()=>{ 
-            m_BtnRight.transform.Find("Wave").gameObject.SetActive(false);
-        }, 
-        ()=>{
-            EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS,  1f));
-        });
+        ()=>{ m_BtnRight.transform.Find("Wave").gameObject.SetActive(false);}, 
+        ()=>{ EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS,  1f));});
 
 
         //设置
@@ -75,12 +76,17 @@ public class BattleWindow : MonoBehaviour
     void OnDestroy()
     {
         EventManager.DelHandler(EVENT.ONHPUPDATE,       OnUpdateHP);
+        EventManager.DelHandler(EVENT.ONNEXTWAVE,       OnNextWave);
+
+        EventManager.DelHandler(EVENT.UI_ENEMYDEAD,     OnEnemyDead);
     }
 
     public void Init()
     {
         InitPlayerHP();
         InitBuffPivot();
+        InitProgress();
+
     }
 
     //玩家血条
@@ -104,6 +110,12 @@ public class BattleWindow : MonoBehaviour
         m_BUFFLISTITEM.gameObject.SetActive(true);
 
         m_BUFFLISTITEM.Init();
+    }
+
+    void InitProgress()
+    {
+        m_Progress.text = string.Format("第{0}波", Field.Instance.Spawn.Order);
+        m_ProgressBar.Init(Field.Instance.Spawn.CurrentWave.KillCount, Field.Instance.Spawn.CurrentWave.Total);
     }
 
     void Update()
@@ -145,6 +157,18 @@ public class BattleWindow : MonoBehaviour
         if (m_HPITEM == null) return;
 
         m_HPITEM.FlushHP();
+    }
+
+    private void OnNextWave(GameEvent @event)
+    {
+        InitProgress();
+    }
+
+    private void OnEnemyDead(GameEvent @event)
+    {
+        int count = (int)@event.GetParam(0);
+
+        m_ProgressBar.SetValue(count);
     }
 
     #endregion

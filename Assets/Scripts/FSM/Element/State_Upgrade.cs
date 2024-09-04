@@ -9,7 +9,7 @@ public class State_Upgrade<T> : State<Field>
     public State_Upgrade(_C.FSMSTATE id) : base(id) {}
 
     //生成3个技能供选择
-    int[] GenerateSkillsPool()
+    public static int[] GenerateSkillsPool()
     {
         int skill_max   = 3;
         int skill_order = 0;
@@ -78,7 +78,7 @@ public class State_Upgrade<T> : State<Field>
         
         //3个技能中有M个技能是从现有的技能中
         //剩下的N个技能从大池子中随机取
-        int m = RandomUtility.Random(0, can_upgrade_skills.Count);
+        int m = Mathf.Min(RandomUtility.Random(0, can_upgrade_skills.Count), skill_max);
         int n = Mathf.Max(0, skill_max - m);
 
         if (m > 0)

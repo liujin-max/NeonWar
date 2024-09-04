@@ -10,6 +10,8 @@ public class Area_Poison : Area
     private CDTimer m_CountDown = new CDTimer(0.2f);
     [SerializeField] ParticleSystem m_ParticleSystem;
 
+    public bool CritFlag = false;
+
     void Start()
     {
         m_ParticleSystem.Stop();
@@ -41,13 +43,15 @@ public class Area_Poison : Area
 
         m_CountDown.Reset();
         //毒气伤害无法暴击
-        m_Units.ForEach(u => {
+        foreach (var u in m_Units.Keys)
+        {
             var hit = new Hit(Caster);
-            hit.CP.SetBase(0);
             hit.ATK_INC.PutMUL(this, 0.15f);
             hit.HitColor = Color.green;
 
+            if (!CritFlag) hit.CP.SetBase(0);
+
             Field.Instance.SettleHit(hit, u);
-        });
+        }
     }
 }

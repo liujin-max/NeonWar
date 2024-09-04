@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -13,7 +14,9 @@ public class Area : MonoBehaviour
     [HideInInspector] public Unit Caster;
 
     //处于区域内的单位
-    protected List<Unit> m_Units = new List<Unit>();
+    protected Dictionary<Unit, float> m_Units = new Dictionary<Unit, float>();
+    public Dictionary<Unit, float> Units {get { return m_Units;}}
+
     //持续时间
     protected CDTimer m_Timer = new CDTimer(999999);
 
@@ -30,6 +33,8 @@ public class Area : MonoBehaviour
     public virtual void CustomUpdate(float deltaTime)
     {
         m_Timer.Update(deltaTime);
+
+        foreach (var key in m_Units.Keys.ToList()) m_Units[key] += deltaTime;
     }
 
     //进入区域
@@ -53,7 +58,7 @@ public class Area : MonoBehaviour
 
     public virtual void Dispose()
     {
-        m_Units.ForEach(unit => Exit(unit));
+        foreach (var unit in m_Units.Keys) Exit(unit);
         m_Units.Clear();
 
         Destroy(gameObject);
@@ -68,10 +73,10 @@ public class Area : MonoBehaviour
         //通常是对敌人生效
         //也不排除后续会对友方生效，例如在地上铺一个治疗区域
         if (unit.Side == Caster.Side) return;
-        if (m_Units.Contains(unit)) return;
+        if (m_Units.ContainsKey(unit)) return;
 
         Enter(unit);
-        m_Units.Add(unit);
+        m_Units.Add(unit, 0);
     }
 
     void OnTriggerStay2D(Collider2D collider)
@@ -85,11 +90,10 @@ public class Area : MonoBehaviour
         var unit = collider.GetComponent<Unit>();
         if (unit == null) return;
 
-        if (m_Units.Contains(unit))
-        {
-            Exit(unit);
-            m_Units.Remove(unit);
-        }
+        if (!m_Units.ContainsKey(unit)) return;
+
+        Exit(unit);
+        m_Units.Remove(unit);
     }
     #endregion
 }

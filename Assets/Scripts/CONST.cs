@@ -94,6 +94,8 @@ public static class _C
         CHAOS,
         FASTSPD,    //疾速
         KILL,
+        FROZEN,     //冰冻
+
 
 
         ATK_UP      = 60000,    //攻击力提高

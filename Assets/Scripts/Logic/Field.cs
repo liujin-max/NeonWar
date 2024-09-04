@@ -32,6 +32,7 @@ public class Field : MonoBehaviour
     private List<BuffBubble> m_BuffRemoves = new List<BuffBubble>();
 
     private List<Area> m_Areas = new List<Area>();
+    public List<Area> Areas {get {return m_Areas;}}
     private List<Area> m_AreaRemoves = new List<Area>();
     
     //累计获得的碎片
@@ -163,6 +164,8 @@ public class Field : MonoBehaviour
     {
         m_Spawn.NextWave();
 
+        EventManager.SendEvent(new GameEvent(EVENT.ONNEXTWAVE));
+
         m_FSM.Transist(_C.FSMSTATE.PLAY);
     }
 
@@ -212,6 +215,9 @@ public class Field : MonoBehaviour
         //释放Buff等
         m_Player.ClearBuffs();
 
+        //
+        for (int i = m_Bullets.Count - 1; i >= 0; i--) m_Bullets[i].Dispose();
+        m_Bullets.Clear();
         //
         foreach (var a in m_Areas) a.Dispose();
         m_Areas.Clear();
@@ -383,6 +389,10 @@ public class Field : MonoBehaviour
             if (RandomUtility.IsHit(hit.KillRate) == true && (unit.Side == _C.SIDE.ENEMY && unit.GetComponent<Enemy>().TYPE != _C.ENEMY_TYPE.BOSS))   //一击必杀
             {
                 demage = unit.ATT.HPMAX;
+
+                //必杀特效
+                hit.IsHitKill = true;
+                GameFacade.Instance.EffectManager.Load(EFFECT.CRITKILL, unit.transform.localPosition, Land.ELEMENT_ROOT.gameObject);
             }
             else
             {

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class Shine : MonoBehaviour
 {
     public float m_Interval = 2;
+    public float m_Speed = 1f;
     public bool m_IsLoop = true;
 
     private Image m_Image;
@@ -37,7 +38,7 @@ public class Shine : MonoBehaviour
         m_ShineTimer.Update(Time.deltaTime);
         if (m_ShineTimer.IsFinished() == true)
         {
-            m_ShineDuration += Time.deltaTime;
+            m_ShineDuration += Time.deltaTime * m_Speed;
             m_Image.material.SetFloat("_ShineLocation", Mathf.Lerp(0, 1, m_ShineDuration));
 
             if (m_ShineDuration >= 1) {

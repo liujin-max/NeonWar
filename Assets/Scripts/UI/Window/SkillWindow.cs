@@ -8,7 +8,7 @@ public class SkillWindow : MonoBehaviour
 {
     [SerializeField] Transform m_SkillPivot;
     [SerializeField] Button m_BtnReset;
-    [SerializeField] Button m_BtnClose;
+
 
 
     private List<SkillItem> m_SkillItems = new List<SkillItem>();
@@ -33,6 +33,16 @@ public class SkillWindow : MonoBehaviour
     void Awake()
     {
         EventManager.AddHandler(EVENT.UI_SKILLUPGRADE,  OnSkillUpgrade);
+
+
+        //刷新技能
+        m_BtnReset.onClick.AddListener(()=>{
+            Platform.Instance.REWARD_VIDEOAD("", ()=>{
+                int[] skill_ids = State_Upgrade<Field>.GenerateSkillsPool();
+
+                Init(skill_ids);
+            });
+        });
     }
 
     void OnDestroy()
@@ -40,30 +50,17 @@ public class SkillWindow : MonoBehaviour
         EventManager.DelHandler(EVENT.UI_SKILLUPGRADE,  OnSkillUpgrade);
     }
 
-    void Start()
-    {
-        m_BtnClose.onClick.AddListener(()=>{
-            GameFacade.Instance.UIManager.UnloadWindow(gameObject);
-        });
-
-        //重置技能
-        // m_BtnReset.onClick.AddListener(()=>{
-        //     Platform.Instance.REWARD_VIDEOAD("", ()=>{
-        //         DataCenter.Instance.League.ResetSkill(m_SkillSlot);
-        //     });
-        // });
-    }
 
 
     public void Init(int[] skill_ids)
     {
+        SoundManager.Instance.Load(SOUND.SHINE);
+        
         InitSkills(skill_ids);
     }
 
     public void InitSkills(int[] skill_ids)
     {
-        m_BtnReset.gameObject.SetActive(false);
-
         m_SkillItems.ForEach(item => {item.gameObject.SetActive(false); });
 
 

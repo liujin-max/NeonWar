@@ -13,6 +13,7 @@ public static class EVENT
     public static string UI_BACKPACKOPEN    = "UI_BACKPACKOPEN";
     public static string UI_PEARCOMPOSE     = "UI_PEARCOMPOSE";
     public static string UI_COMPOSECHANGE   = "UI_COMPOSECHANGE";
+    public static string UI_ENEMYDEAD       = "UI_ENEMYDEAD";
 
 
 
@@ -25,6 +26,9 @@ public static class EVENT
 
     public static string ONBATTLESTART      = "ONBATTLESTART";
     public static string ONBATTLEEND        = "ONBATTLEEND";
+    //进入下一波
+    public static string ONNEXTWAVE         = "ONNEXTWAVE";
+    
     //玩家血量变化
     public static string ONHPUPDATE         = "ONHPUPDATE";
     //创建子弹
@@ -42,4 +46,5 @@ public static class EVENT
     public static string ONKILLENEMY        = "ONKILLENEMY";
     //放置陷阱
     public static string ONPUSHAREA         = "ONPUSHAREA";
+    
 }

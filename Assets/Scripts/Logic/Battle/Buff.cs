@@ -17,7 +17,7 @@ public class Buff_Stun : Buff
 
     public override void Init()
     {
-        Caster.StunFlag++;
+        Caster.StunReference++;
         Caster.Stop();
 
         m_Effect = GameFacade.Instance.EffectManager.Load(EFFECT.STUN, Vector3.zero, Caster.HeadPivot.gameObject);
@@ -27,7 +27,7 @@ public class Buff_Stun : Buff
     {
         base.Dispose();
 
-        Caster.StunFlag--;
+        Caster.StunReference--;
         Caster.Resume();
     }
 }
@@ -192,6 +192,34 @@ public class Buff_Kill : Buff
     }
 }
 #endregion
+
+#region 冰冻
+public class Buff_Frozen : Buff
+{
+    public Buff_Frozen()
+    {
+        Name    = "冰冻";
+        TYPE    = _C.BUFF_TYPE.DE;
+    }
+
+    public override void Init()
+    {
+        Caster.StunReference++;
+        Caster.Stop();
+    }
+
+    public override void Dispose()
+    {
+        base.Dispose();
+
+        Caster.StunReference--;
+        Caster.Resume();
+    }
+}
+#endregion
+
+
+
 
 
 
@@ -477,7 +505,7 @@ public class Buff
         {(int)_C.BUFF.CHAOS,    () => new Buff_Chaos()},
         {(int)_C.BUFF.FASTSPD,  () => new Buff_FastSPD()},
         {(int)_C.BUFF.KILL,     () => new Buff_Kill()},
-
+        {(int)_C.BUFF.FROZEN,   () => new Buff_Frozen()},
 
 
         //场上Buff

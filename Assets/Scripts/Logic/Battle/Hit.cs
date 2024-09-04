@@ -21,9 +21,9 @@ public class Hit
     public int FINAL;   
 
 
-    [HideInInspector] public HashSet<Unit> IgnoreUnits = new HashSet<Unit>();
-    [HideInInspector] public int KillRate;          //必杀概率
-
+    public HashSet<Unit> IgnoreUnits = new HashSet<Unit>();
+    public int KillRate = 50;        //必杀概率
+    public bool IsHitKill;      //触发必杀
 
     //物理特性
     public Vector3 Position;    //受击位置

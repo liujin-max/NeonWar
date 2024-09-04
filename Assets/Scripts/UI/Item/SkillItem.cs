@@ -14,7 +14,7 @@ public class SkillItem : MonoBehaviour
     [SerializeField] Image m_Icon;
     [SerializeField] TextMeshProUGUI m_Description;
     [SerializeField] Button m_BtnUpgrade;
-    [SerializeField] TextMeshProUGUI m_Cost;
+    [SerializeField] Shine m_Shine;
 
 
     private SkillData m_SkillData;
@@ -26,15 +26,18 @@ public class SkillItem : MonoBehaviour
         m_SkillData     = skill_data;
         m_SkillLevel    = level;
 
+        m_BtnUpgrade.onClick.RemoveAllListeners();
         m_BtnUpgrade.onClick.AddListener(callback);
 
         FlushUI();
+
+        m_Shine.Restart();
     }
 
     void FlushUI()
     {
         m_Text.text     = m_SkillData.Name;
-        m_Icon.sprite   = GameFacade.Instance.AssetManager.LoadSprite("Skills/" + DataCenter.Instance.User.CurrentPlayer.ID, m_SkillData.Icon.ToString()); 
+        m_Icon.sprite   = GameFacade.Instance.AssetManager.LoadSprite("Skills/" + m_SkillData.Atlas, m_SkillData.Icon.ToString()); 
         m_Icon.SetNativeSize();
 
         m_Description.text = Skill.CompareDescription(m_SkillData, m_SkillLevel, m_SkillLevel + 1);

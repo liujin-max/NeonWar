@@ -45,7 +45,8 @@ public class Unit : MonoBehaviour
     
 
     //各种状态
-    [HideInInspector]public int StunFlag = 0;    //晕眩
+    [HideInInspector] public int StunReference;    //晕眩
+    [HideInInspector] public int FrozenReference;    //冰冻
 
     protected float m_Angle;      //角度
     protected bool m_ValidFlag = true;
@@ -76,7 +77,7 @@ public class Unit : MonoBehaviour
     //能否攻击
     public virtual bool CanAttack()
     {
-        if (StunFlag > 0) return false;
+        if (StunReference > 0 || FrozenReference > 0) return false;
 
         return true;
     }
