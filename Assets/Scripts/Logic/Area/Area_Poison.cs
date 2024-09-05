@@ -46,7 +46,7 @@ public class Area_Poison : Area
         foreach (var u in m_Units.Keys)
         {
             var hit = new Hit(Caster);
-            hit.ATK_INC.PutMUL(this, 0.15f);
+            hit.ATK_INC.PutMUL(this, 0.5f);
             hit.HitColor = Color.green;
 
             if (!CritFlag) hit.CP.SetBase(0);

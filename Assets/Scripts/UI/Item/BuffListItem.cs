@@ -55,7 +55,7 @@ public class BuffListItem : MonoBehaviour
     {
         var buff = @event.GetParam(0) as Buff;
 
-        if (buff.Caster != Field.Instance.Player) return;
+        if (buff.Belong != Field.Instance.Player) return;
 
         AddBuff(buff);
     }
@@ -64,7 +64,7 @@ public class BuffListItem : MonoBehaviour
     {
         var buff = @event.GetParam(0) as Buff;
 
-        if (buff.Caster != Field.Instance.Player) return;
+        if (buff.Belong != Field.Instance.Player) return;
 
         RemoveBuff(buff);
     }

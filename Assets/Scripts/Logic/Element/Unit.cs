@@ -84,7 +84,7 @@ public class Unit : MonoBehaviour
         //刷新Buff
         foreach (Buff buff in m_BuffDic.Values)
         {
-            buff.Update(deltaTime);
+            buff.CustomUpdate(deltaTime);
 
             if (buff.IsEnd()) m_RemoveBuffs.Add(buff);
         }
@@ -172,7 +172,7 @@ public class Unit : MonoBehaviour
     }
 
 
-    public Buff AddBuff(int buff_id, int value, float time = 0f)
+    public Buff AddBuff(Unit caster, int buff_id, int value, float time = 0f)
     {
         Buff b;
 
@@ -185,7 +185,7 @@ public class Unit : MonoBehaviour
         }
         else
         {
-            b = Buff.Create(buff_id, value, this, time);
+            b = Buff.Create(buff_id, value, caster, this, time);
             b.Init();
 
             m_BuffDic[buff_id] = b;

@@ -192,24 +192,31 @@ public class Enemy : Unit
     //暂停运动
     public override void Stop()
     {
-        if (m_Rigidbody.isKinematic == true) return;
+        // if (m_Rigidbody.isKinematic == true) return;
 
-        m_LastVelocity          = m_Rigidbody.velocity;
-        m_LastAngularVelocity   = m_Rigidbody.angularVelocity;
+        // m_LastVelocity          = m_Rigidbody.velocity;
+        // m_LastAngularVelocity   = m_Rigidbody.angularVelocity;
 
-        m_Rigidbody.velocity    = Vector3.zero;
-        m_Rigidbody.angularVelocity = 0;
-        m_Rigidbody.isKinematic = true;
+        // m_Rigidbody.velocity    = Vector3.zero;
+        // m_Rigidbody.angularVelocity = 0;
+        // m_Rigidbody.isKinematic = true;
+
+        ATT.SPEED.PutMUL(this, 0);
+        SyncSpeed();
     }
 
     //恢复运动
     public override void Resume()
     {
-        if (!m_Rigidbody.isKinematic) return;
+        ATT.SPEED.Pop(this);
+        m_Rigidbody.velocity = ToolUtility.FindPointOnCircle(Vector2.zero, ATT.SPEED.ToNumber() / 100.0f, m_Angle);
 
-        m_Rigidbody.isKinematic = false;
-        m_Rigidbody.velocity    = m_LastVelocity;
-        m_Rigidbody.angularVelocity = m_LastAngularVelocity;
+
+        // if (!m_Rigidbody.isKinematic) return;
+
+        // m_Rigidbody.isKinematic = false;
+        // m_Rigidbody.velocity    = m_LastVelocity;
+        // m_Rigidbody.angularVelocity = m_LastAngularVelocity;
     }
 
     #endregion

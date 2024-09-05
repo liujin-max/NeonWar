@@ -384,7 +384,7 @@ public class Skill_10120 : Skill
 
         if (RandomUtility.IsHit(Value))
         {
-            unit.AddBuff((int)_C.BUFF.STUN, 1);
+            unit.AddBuff(Caster, (int)_C.BUFF.STUN, 1);
         }
         
     }
@@ -516,7 +516,7 @@ public class Skill_10170 : Skill
 
         Unit unit = @event.GetParam(1) as Unit;
 
-        unit.AddBuff((int)_C.BUFF.YISHANG, Value);
+        unit.AddBuff(Caster, (int)_C.BUFF.YISHANG, Value);
     }
 }
 
@@ -539,7 +539,7 @@ public class Skill_10210 : Skill
 
         if (target == null) return;
 
-        m_Timer.Reset(6f);
+        m_Timer.Reset(RandomUtility.Random(500, 700) / 100.0f);
         
         Vector2 point = target.transform.localPosition;
 
@@ -575,13 +575,69 @@ public class Skill_10211 : Skill
 }
 #endregion
 
+#region 弓：毒气蔓延
+//毒气陷阱周期性的为范围内的目标附加中毒效果
+public class Skill_10212 : Skill
+{
+    private Dictionary<Area_Poison, float> m_Records = new Dictionary<Area_Poison, float>();
+    
+    public Skill_10212()
+    {
+        EventManager.AddHandler(EVENT.ONPUSHAREA,   OnPushArea);
+        EventManager.AddHandler(EVENT.ONREMOVEAREA, OnRemoveArea);
+    }
+
+    public override void Dispose()
+    {
+        EventManager.DelHandler(EVENT.ONPUSHAREA,   OnPushArea);
+        EventManager.DelHandler(EVENT.ONREMOVEAREA, OnRemoveArea);
+    }
+
+    private void OnPushArea(GameEvent @event)
+    {
+        Area_Poison area = @event.GetParam(0) as Area_Poison;
+        
+        if (area == null) return;
+
+        m_Records.Add(area, 0);
+    }
+
+    private void OnRemoveArea(GameEvent @event)
+    {
+        Area_Poison area = @event.GetParam(0) as Area_Poison;
+        
+        if (area == null) return;
+
+        m_Records.Remove(area);
+    }
+
+    public override void CustomUpdate(float deltaTime)
+    {
+        foreach (var area in m_Records.Keys.ToList())
+        {
+            m_Records[area] += deltaTime;
+
+            if (m_Records[area] >= 1f)
+            {
+                m_Records[area] -= 1f;
+
+                foreach (var t in area.Units)
+                {
+                    t.Key.AddBuff(Caster, (int)_C.BUFF.POISON, (int)Caster.ATT.ATK.GetBase());
+                }
+            }
+        }
+    }
+}
+#endregion
+
 
 
 #region 弓：冰冻陷阱
 //陷阱范围内的目标行动缓慢，持续#秒
 public class Skill_10220 : Skill
 {
-    private CDTimer m_Timer = new CDTimer(RandomUtility.Random(300, 600) / 100.0f);
+    private CDTimer m_Timer = new CDTimer(RandomUtility.Random(400, 700) / 100.0f);
     public override void CustomUpdate(float deltaTime)
     {
         m_Timer.Update(deltaTime);
@@ -592,7 +648,7 @@ public class Skill_10220 : Skill
 
         if (target == null) return;
 
-        m_Timer.Reset(6f);
+        m_Timer.Reset(RandomUtility.Random(600, 800) / 100.0f);
 
         //投掷陷阱
         Vector2 point = target.transform.localPosition;
@@ -619,7 +675,7 @@ public class Skill_10221 : Skill
             {
                 if (t.Value >= 0.5f) 
                 {
-                    t.Key.AddBuff((int)_C.BUFF.FROZEN, 1, 1.5f);
+                    t.Key.AddBuff(Caster, (int)_C.BUFF.FROZEN, 1, 1.5f);
                 }
             }
         }
@@ -644,7 +700,7 @@ public class Skill_10230 : Skill
 
         if (target == null) return;
 
-        m_Timer.Reset(6f);
+        m_Timer.Reset(RandomUtility.Random(500, 700) / 100.0f);
 
         var point = target.transform.localPosition;
 
@@ -680,7 +736,7 @@ public class Skill_10231 : Skill
                 {
                     m_Records[rope].Add(unit);
 
-                    Bomb bomb = new Bomb(Caster, o_pos, 1.5f, EFFECT.ROPE);
+                    Bomb bomb = new Bomb(Caster, o_pos, 1.5f, 2f, EFFECT.ROPE);
                     bomb.Do();
                 }
             }
@@ -766,12 +822,7 @@ public class Skill_10260 : Skill
 
         if (hit.Caster != Caster) return;
 
-        hit.Caster.AddBuff((int)_C.BUFF.FASTSPD, Value);
-        
-        // m_KillCount++;
-
-        // float value = Value / 100.0f;
-        // hit.Caster.CPS.PutAUL(this, value * m_KillCount);
+        hit.Caster.AddBuff(Caster, (int)_C.BUFF.FASTSPD, Value);
     }
 }
 #endregion
@@ -798,7 +849,7 @@ public class Skill_10270 : Skill
 
         if (hit.Caster != Caster) return;
         
-        hit.Caster.AddBuff((int)_C.BUFF.KILL, Value);
+        hit.Caster.AddBuff(Caster, (int)_C.BUFF.KILL, Value);
     }
 }
 #endregion
@@ -899,6 +950,7 @@ public class Skill
         //弓 价值
         {10210, () => new Skill_10210()},
         {10211, () => new Skill_10211()},
+        {10212, () => new Skill_10212()},
         {10220, () => new Skill_10220()},
         {10221, () => new Skill_10221()},
         {10230, () => new Skill_10230()},

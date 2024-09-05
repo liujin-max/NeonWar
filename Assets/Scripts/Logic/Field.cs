@@ -355,6 +355,8 @@ public class Field : MonoBehaviour
     {
         area.Dispose();
         m_Areas.Remove(area);
+
+        EventManager.SendEvent(new GameEvent(EVENT.ONREMOVEAREA, area));
     }
 
 
@@ -371,11 +373,11 @@ public class Field : MonoBehaviour
         float demage = Mathf.Ceil(hit.ATK.ToNumber(false) * hit.ATK_INC.ToNumber() * unit.ATT.VUN_INC.ToNumber());
 
         //护盾
-        if (unit.GetBuff((int)_C.BUFF.SHIELD) != null)
+        if (hit.Type == _C.HIT_TYPE.NORMAL && unit.GetBuff((int)_C.BUFF.SHIELD) != null)
         {
             demage = 0;
         }
-        else if (RandomUtility.IsHit((int)unit.ATT.DODGE.ToNumber(), 1000) == true) //闪避了
+        else if (hit.Type == _C.HIT_TYPE.NORMAL && RandomUtility.IsHit((int)unit.ATT.DODGE.ToNumber(), 1000) == true) //闪避了
         {
             //闪避特效
             GameFacade.Instance.EffectManager.Load(EFFECT.MISS, hit.Position, Land.ELEMENT_ROOT.gameObject);
@@ -454,8 +456,7 @@ public class Field : MonoBehaviour
         var hit = new Hit(enemy);
 
         //撞击伤害
-        int demage = enemy.TYPE == _C.ENEMY_TYPE.BOSS ? 3 : 1;
-        player.UpdateHP(-demage);
+        player.UpdateHP(-1);
 
         EventManager.SendEvent(new GameEvent(EVENT.ONHPUPDATE));
 

@@ -203,10 +203,14 @@ public class Player : Unit
         //             m_Skills.Add(sk);
         //         }
         //     });
-
-        //     //测试技能
-        //     // m_Skills.Add(Skill.Create(DataCenter.Instance.League.GetSkillData(10270), this, 2));
         // }
+
+        // 测试技能
+        // m_Skills.Add(Skill.Create(DataCenter.Instance.League.GetSkillData(10210), this, 1));
+        // m_Skills.Add(Skill.Create(DataCenter.Instance.League.GetSkillData(10230), this, 1));
+        // m_Skills.Add(Skill.Create(DataCenter.Instance.League.GetSkillData(10220), this, 1));
+        // m_Skills.Add(Skill.Create(DataCenter.Instance.League.GetSkillData(10221), this, 1));
+
 
         //同步宝珠
         {

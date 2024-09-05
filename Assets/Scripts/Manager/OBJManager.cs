@@ -87,7 +87,6 @@ public class OBJManager: MonoBehaviour
         string name = bullet.Name;
 
         if (m_BulletPools[name].Has(bullet)) {
-            Destroy(bullet.gameObject);
             return;
         }
 
@@ -115,7 +114,7 @@ public class OBJManager: MonoBehaviour
     public void RecycleEffect(Effect effect)
     {
         if (m_EffectPools[effect.ResPath].Has(effect)) {
-            Destroy(effect.gameObject);
+            // Destroy(effect.gameObject);
             return;
         }
 

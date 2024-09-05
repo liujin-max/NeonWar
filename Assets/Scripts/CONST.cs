@@ -86,6 +86,15 @@ public static class _C
         BOSS
     }
 
+
+    //伤害类型
+    public enum HIT_TYPE
+    {
+        NORMAL,
+        POISON
+    }
+
+
     public enum BUFF
     {
         STUN    = 50000,
@@ -95,6 +104,7 @@ public static class _C
         FASTSPD,    //疾速
         KILL,
         FROZEN,     //冰冻
+        POISON,     //中毒
 
 
 

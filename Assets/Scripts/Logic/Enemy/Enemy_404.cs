@@ -33,7 +33,7 @@ public class Enemy_404 : Enemy
             //缺少特效
             List<object> random_list = RandomUtility.Pick(2, obj_list);
             foreach (Enemy e in random_list) {
-                e.AddBuff((int)_C.BUFF.SHIELD, 2);
+                e.AddBuff(this, (int)_C.BUFF.SHIELD, 2);
             }
         }
 

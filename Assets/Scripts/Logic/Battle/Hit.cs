@@ -8,6 +8,8 @@ using UnityEngine;
 public class Hit
 {
     public Unit Caster;
+    public _C.HIT_TYPE Type = _C.HIT_TYPE.NORMAL;
+
     public AttributeValue ATK;
     public AttributeValue CP;
     public AttributeValue CT;

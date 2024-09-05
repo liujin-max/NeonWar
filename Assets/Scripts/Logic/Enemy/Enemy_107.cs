@@ -19,7 +19,7 @@ public class Enemy_107 : Enemy
 
             if (Vector2.Distance(transform.localPosition, Field.Instance.Player.transform.localPosition) <= 5.5f)
             {
-                Field.Instance.Player.AddBuff((int)_C.BUFF.CHAOS, 1, 3f);
+                Field.Instance.Player.AddBuff(this, (int)_C.BUFF.CHAOS, 1, 3f);
             }
         }
 

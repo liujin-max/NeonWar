@@ -48,7 +48,7 @@ public class Affected : MonoBehaviour
         m_IsHiting   = true;
         m_Value     = 1;
 
-        m_Mpb.SetColor(m_ColorID, m_Hit.HitColor);
+        m_Mpb.SetColor(m_ColorID, m_Hit.HitColor); 
     }
 
     //冻结

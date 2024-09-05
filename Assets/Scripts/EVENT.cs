@@ -45,7 +45,8 @@ public static class EVENT
     public static string ONDODGE            = "ONDODGE";
     //击杀怪物
     public static string ONKILLENEMY        = "ONKILLENEMY";
-    //放置陷阱
+    //放置区域
     public static string ONPUSHAREA         = "ONPUSHAREA";
-    
+    //移除区域
+    public static string ONREMOVEAREA       = "ONREMOVEAREA";
 }

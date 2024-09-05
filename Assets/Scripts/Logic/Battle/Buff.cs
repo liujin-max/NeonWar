@@ -17,18 +17,18 @@ public class Buff_Stun : Buff
 
     public override void Init()
     {
-        Caster.StunReference++;
-        Caster.Stop();
+        Belong.StunReference++;
+        Belong.Stop();
 
-        m_Effect = GameFacade.Instance.EffectManager.Load(EFFECT.STUN, Vector3.zero, Caster.HeadPivot.gameObject);
+        m_Effect = GameFacade.Instance.EffectManager.Load(EFFECT.STUN, Vector3.zero, Belong.HeadPivot.gameObject);
     }
 
     public override void Dispose()
     {
         base.Dispose();
 
-        Caster.StunReference--;
-        Caster.Resume();
+        Belong.StunReference--;
+        Belong.Resume();
     }
 }
 #endregion
@@ -46,16 +46,16 @@ public class Buff_YiShang : Buff
 
     public override void Init()
     {
-        Caster.ATT.VUN_INC.PutADD(this, Value / 100.0f);
+        Belong.ATT.VUN_INC.PutADD(this, Value / 100.0f);
 
-        m_Effect = GameFacade.Instance.EffectManager.Load(EFFECT.POJIA, Vector3.zero, Caster.HeadPivot.gameObject);
+        m_Effect = GameFacade.Instance.EffectManager.Load(EFFECT.POJIA, Vector3.zero, Belong.HeadPivot.gameObject);
     }
 
     public override void Dispose()
     {
         base.Dispose();
 
-        Caster.ATT.VUN_INC.Pop(this);
+        Belong.ATT.VUN_INC.Pop(this);
     }
 }
 #endregion
@@ -71,7 +71,7 @@ public class Buff_Shield : Buff
 
     public override void Init()
     {
-        m_Effect = GameFacade.Instance.EffectManager.Load(EFFECT.SHIELD, Vector3.zero, Caster.gameObject);
+        m_Effect = GameFacade.Instance.EffectManager.Load(EFFECT.SHIELD, Vector3.zero, Belong.gameObject);
         m_Effect.transform.GetComponent<Animation>().Play("Shield_Show");
     }
 
@@ -87,7 +87,7 @@ public class Buff_Shield : Buff
     private void OnBulletHit(GameEvent @event)
     {
         var target = @event.GetParam(1) as Unit;
-        if (target != Caster) return;
+        if (target != Belong) return;
 
         Value--;
         
@@ -95,7 +95,7 @@ public class Buff_Shield : Buff
         
         m_Effect.transform.GetComponent<Animation>().Play("Shield_Hit");
 
-        if (Value <= 0) Caster.RemoveBuff(this);
+        if (Value <= 0) Belong.RemoveBuff(this);
     }
 }
 #endregion
@@ -114,19 +114,19 @@ public class Buff_Chaos : Buff
 
     public override void Init()
     {
-        var player = Caster.GetComponent<Player>();
+        var player = Belong.GetComponent<Player>();
         if (player == null) return;
 
         player.MoveDirection = -1;
 
-        m_Effect = GameFacade.Instance.EffectManager.Load(EFFECT.CHAOS, Vector3.zero, Caster.HeadPivot.gameObject);
+        m_Effect = GameFacade.Instance.EffectManager.Load(EFFECT.CHAOS, Vector3.zero, Belong.HeadPivot.gameObject);
     }
 
     public override void Dispose()
     {
         base.Dispose();
 
-        var player = Caster.GetComponent<Player>();
+        var player = Belong.GetComponent<Player>();
         if (player == null) return;
 
         player.MoveDirection = 1;
@@ -145,12 +145,12 @@ public class Buff_FastSPD : Buff
 
     public override void Init()
     {
-        Caster.CPS.PutAUL(this, Value / 100.0f * Count);
+        Belong.CPS.PutAUL(this, Value / 100.0f * Count);
     }
 
     public override void Dispose()
     {
-        Caster.CPS.Pop(this);
+        Belong.CPS.Pop(this);
     }
 
     public override void Flush(float time)
@@ -159,7 +159,7 @@ public class Buff_FastSPD : Buff
 
         Count++;
 
-        Caster.CPS.PutAUL(this, Value / 100.0f * Count);
+        Belong.CPS.PutAUL(this, Value / 100.0f * Count);
     }
 }
 #endregion
@@ -176,12 +176,12 @@ public class Buff_Kill : Buff
 
     public override void Init()
     {
-        Caster.ATT.ATK.PutAUL(this, Value / 100.0f * Count);
+        Belong.ATT.ATK.PutAUL(this, Value / 100.0f * Count);
     }
 
     public override void Dispose()
     {
-        Caster.ATT.ATK.Pop(this);
+        Belong.ATT.ATK.Pop(this);
     }
 
     public override void Flush(float time)
@@ -190,7 +190,7 @@ public class Buff_Kill : Buff
 
         Count++;
 
-        Caster.ATT.ATK.PutAUL(this, Value / 100.0f * Count);
+        Belong.ATT.ATK.PutAUL(this, Value / 100.0f * Count);
     }
 }
 #endregion
@@ -206,26 +206,71 @@ public class Buff_Frozen : Buff
 
     public override void Init()
     {
-        Caster.StunReference++;
-        Caster.Stop();
+        Belong.StunReference++;
+        Belong.Stop();
 
-        Caster.AffectedEffect.Frozen(true);
+        Belong.AffectedEffect.Frozen(true);
     }
 
     public override void Dispose()
     {
         base.Dispose();
 
-        Caster.StunReference--;
-        Caster.Resume();
+        Belong.StunReference--;
+        Belong.Resume();
 
-        Caster.AffectedEffect.Frozen(false);
+        Belong.AffectedEffect.Frozen(false);
     }
 }
 #endregion
 
 
+#region 中毒
+public class Buff_Poison : Buff
+{
+    private CDTimer m_Timer = new CDTimer(0.5f);
+    public Buff_Poison()
+    {
+        Name    = "中毒";
+        TYPE    = _C.BUFF_TYPE.DE;
+    }
 
+    public override void Init()
+    {
+        m_Effect = GameFacade.Instance.EffectManager.Load(EFFECT.POISON, Vector3.zero, Belong.HeadPivot.gameObject);
+    }
+
+    public override void Flush(float time)
+    {
+        base.Flush(time);
+
+        Count++;
+    }
+
+    public override void CustomUpdate(float deltaTime)
+    {
+        m_Timer.Update(deltaTime);
+        if (!m_Timer.IsFinished()) return;
+        m_Timer.Reset();
+
+        var hit = new Hit(Caster);
+        hit.Type = _C.HIT_TYPE.POISON;
+        hit.HitColor = Color.green;
+        hit.ATK_INC.PutMUL(this, Count);
+        hit.CP.SetBase(0);
+
+        Field.Instance.SettleHit(hit, Belong);
+
+        Count--;
+    }
+
+    public override void Dispose()
+    {
+        base.Dispose();
+
+    }
+}
+#endregion
 
 
 
@@ -267,12 +312,12 @@ public class Buff_ATKUP : Buff
 
     public override void Init()
     {
-        Caster.ATT.ATK.PutMUL(this, 1.5f);
+        Belong.ATT.ATK.PutMUL(this, 1.5f);
     }
 
     public override void Dispose()
     {
-        Caster.ATT.ATK.Pop(this);
+        Belong.ATT.ATK.Pop(this);
     }
 }
 #endregion
@@ -290,12 +335,12 @@ public class Buff_ATKDOWN : Buff
 
     public override void Init()
     {
-        Caster.ATT.ATK.PutMUL(this, 0.5f);
+        Belong.ATT.ATK.PutMUL(this, 0.5f);
     }
 
     public override void Dispose()
     {
-        Caster.ATT.ATK.Pop(this);
+        Belong.ATT.ATK.Pop(this);
     }
 }
 #endregion
@@ -312,12 +357,12 @@ public class Buff_ASPUP : Buff
 
     public override void Init()
     {
-        Caster.CPS.PutMUL(this, 1.5f);
+        Belong.CPS.PutMUL(this, 1.5f);
     }
 
     public override void Dispose()
     {
-        Caster.CPS.Pop(this);
+        Belong.CPS.Pop(this);
     }
 }
 #endregion
@@ -335,12 +380,12 @@ public class Buff_ASPDOWN : Buff
 
     public override void Init()
     {
-        Caster.CPS.PutMUL(this, 0.5f);
+        Belong.CPS.PutMUL(this, 0.5f);
     }
 
     public override void Dispose()
     {
-        Caster.CPS.Pop(this);
+        Belong.CPS.Pop(this);
     }
 }
 #endregion
@@ -357,12 +402,12 @@ public class Buff_SPEEDUP : Buff
 
     public override void Init()
     {
-        Caster.ATT.SPEED.PutMUL(this, 1.3f);
+        Belong.ATT.SPEED.PutMUL(this, 1.3f);
     }
 
     public override void Dispose()
     {
-        Caster.ATT.SPEED.Pop(this);
+        Belong.ATT.SPEED.Pop(this);
     }
 }
 #endregion
@@ -380,12 +425,12 @@ public class Buff_SPEEDDOWN : Buff
 
     public override void Init()
     {
-        Caster.ATT.SPEED.PutMUL(this, 0.7f);
+        Belong.ATT.SPEED.PutMUL(this, 0.7f);
     }
 
     public override void Dispose()
     {
-        Caster.ATT.SPEED.Pop(this);
+        Belong.ATT.SPEED.Pop(this);
     }
 }
 #endregion
@@ -402,12 +447,12 @@ public class Buff_CP : Buff
 
     public override void Init()
     {
-        Caster.ATT.CP.PutADD(this, 500);
+        Belong.ATT.CP.PutADD(this, 500);
     }
 
     public override void Dispose()
     {
-        Caster.ATT.CP.Pop(this);
+        Belong.ATT.CP.Pop(this);
     }
 }
 #endregion
@@ -424,12 +469,12 @@ public class Buff_DODGEUP : Buff
 
     public override void Init()
     {
-        Caster.ATT.DODGE.PutADD(this, 800);
+        Belong.ATT.DODGE.PutADD(this, 800);
     }
 
     public override void Dispose()
     {
-        Caster.ATT.DODGE.Pop(this);
+        Belong.ATT.DODGE.Pop(this);
     }
 }
 #endregion
@@ -449,9 +494,9 @@ public class Buff_SPDMUL : Buff
 
     }
 
-    public override void Update(float deltaTime)
+    public override void CustomUpdate(float deltaTime)
     {
-        base.Update(deltaTime);
+        base.CustomUpdate(deltaTime);
 
         foreach (var e in Field.Instance.Spawn.Enemys)
         {
@@ -491,7 +536,8 @@ public class Buff_SPDMUL : Buff
 
 public class Buff
 {
-    public Unit Caster;
+    public Unit Caster; //Buff释放者
+    public Unit Belong; //Buff拥有者
 
     public int ID;
     public int Value = 0;   //参数
@@ -512,7 +558,7 @@ public class Buff
         {(int)_C.BUFF.FASTSPD,  () => new Buff_FastSPD()},
         {(int)_C.BUFF.KILL,     () => new Buff_Kill()},
         {(int)_C.BUFF.FROZEN,   () => new Buff_Frozen()},
-
+        {(int)_C.BUFF.POISON,   () => new Buff_Poison()},
 
         //场上Buff
         {(int)_C.BUFF.ATK_UP,   () => new Buff_ATKUP()},
@@ -527,7 +573,7 @@ public class Buff
     };
 
 
-    public static Buff Create(int buff_id, int value, Unit caster, float time = 0)
+    public static Buff Create(int buff_id, int value, Unit caster, Unit belong, float time = 0)
     {
         Buff buff;
         if (m_classDictionary.ContainsKey(buff_id)) {
@@ -540,6 +586,7 @@ public class Buff
 
         buff.ID     = buff_id;
         buff.Caster = caster;
+        buff.Belong = belong;
         buff.Value  = value;
 
         if (time > 0) buff.Duration = new CDTimer(time);  //持续时间
@@ -550,7 +597,7 @@ public class Buff
 
     public virtual void Init() {}
 
-    public virtual void Update(float deltaTime) 
+    public virtual void CustomUpdate(float deltaTime) 
     {
         Duration.Update(deltaTime);
     }
@@ -563,7 +610,7 @@ public class Buff
 
     public bool IsEnd()
     {
-        return Duration.IsFinished();
+        return Duration.IsFinished() || Count <= 0;
     }
 
     public virtual void Dispose() 
