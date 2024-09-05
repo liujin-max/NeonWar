@@ -122,15 +122,4 @@ public class OBJManager: MonoBehaviour
         m_EffectPools[effect.ResPath].Recyle(effect);
     }
 
-
-    //加载血条
-    public CircleHP AllocateHP()
-    {
-        return m_HPPools.Get("Prefab/Element/CircleHP");
-    }
-
-    public void RecycleHP(CircleHP hp)
-    {
-        m_HPPools.Recyle(hp);
-    }
 }

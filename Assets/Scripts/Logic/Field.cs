@@ -420,6 +420,7 @@ public class Field : MonoBehaviour
 
         unit.UpdateHP(-(int)demage); 
 
+        EventManager.SendEvent(new GameEvent(EVENT.ONHIT, hit, unit));
         EventManager.SendEvent(new GameEvent(EVENT.ONHPUPDATE));
 
         //受击表现

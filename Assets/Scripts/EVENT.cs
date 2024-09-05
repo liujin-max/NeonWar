@@ -28,7 +28,8 @@ public static class EVENT
     public static string ONBATTLEEND        = "ONBATTLEEND";
     //进入下一波
     public static string ONNEXTWAVE         = "ONNEXTWAVE";
-    
+    //受击
+    public static string ONHIT              = "ONHIT";
     //玩家血量变化
     public static string ONHPUPDATE         = "ONHPUPDATE";
     //创建子弹

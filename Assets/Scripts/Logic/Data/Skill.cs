@@ -500,19 +500,19 @@ public class Skill_10170 : Skill
 {
     public Skill_10170()
     {
-        EventManager.AddHandler(EVENT.ONBULLETHIT,  OnBulletHit);
+        EventManager.AddHandler(EVENT.ONHIT,    OnHit);
     }
 
     public override void Dispose()
     {
-        EventManager.DelHandler(EVENT.ONBULLETHIT,  OnBulletHit);
+        EventManager.DelHandler(EVENT.ONHIT,    OnHit);
     }
 
-    //子弹击中目标
-    private void OnBulletHit(GameEvent @event)
+    //目标受击
+    private void OnHit(GameEvent @event)
     {
-        Bullet b = @event.GetParam(0) as Bullet;
-        if (b.Caster != Caster) return;
+        Hit h = @event.GetParam(0) as Hit;
+        if (h.Caster != Caster) return;
 
         Unit unit = @event.GetParam(1) as Unit;
 
