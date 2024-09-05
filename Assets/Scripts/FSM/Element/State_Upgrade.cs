@@ -32,12 +32,12 @@ public class State_Upgrade<T> : State<Field>
                 can_upgrade_skills.Add(skill.ID, skill.Data.Weight);
             }
             skills_pool.Remove(skill.ID);
-            Debug.Log("移除：" + skill.ID);
+            // Debug.Log("移除：" + skill.ID);
 
             //将互斥技能从技能池中移除
             foreach (var id in skill.Data.Excludes) {
                 skills_pool.Remove(id);
-                Debug.Log("移除互斥：" + id);
+                // Debug.Log("移除互斥：" + id);
             }
         }
 
@@ -72,7 +72,7 @@ public class State_Upgrade<T> : State<Field>
             if (!is_meet1 || !is_meet2) 
             {
                 skills_pool.Remove(key);
-                Debug.Log("当前技能的前置未解锁：" + key);
+                // Debug.Log("当前技能的前置未解锁：" + key);
             }
         }
         

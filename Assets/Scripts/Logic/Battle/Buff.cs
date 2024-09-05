@@ -35,18 +35,20 @@ public class Buff_Stun : Buff
 
 
 #region 易伤
-//5秒内受到的伤害提高#%
+//3秒内受到的伤害提高#%
 public class Buff_YiShang : Buff
 {
     public Buff_YiShang()
     {
         TYPE    = _C.BUFF_TYPE.DE;
-        Duration= new CDTimer(5f);
+        Duration= new CDTimer(3f);
     }
 
     public override void Init()
     {
         Caster.ATT.VUN_INC.PutADD(this, Value / 100.0f);
+
+        m_Effect = GameFacade.Instance.EffectManager.Load(EFFECT.POJIA, Vector3.zero, Caster.HeadPivot.gameObject);
     }
 
     public override void Dispose()

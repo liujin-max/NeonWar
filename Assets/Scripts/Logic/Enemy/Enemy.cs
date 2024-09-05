@@ -23,7 +23,6 @@ public class Enemy : Unit
     [HideInInspector] public bool IsSummon = false;
     private bool m_IsRepel = false;   //击退中
     private CDTimer m_RepelTimer = new CDTimer(0.8f);
-    private Vector2 m_RepelVelocity;
 
     private Vector2 m_LastVelocity;
     private float m_LastAngularVelocity;
@@ -85,7 +84,7 @@ public class Enemy : Unit
             m_RepelTimer.Update(deltaTime);
 
             // 逐渐恢复速度
-            m_Rigidbody.velocity = Vector3.Lerp(m_Rigidbody.velocity, m_RepelVelocity, m_RepelTimer.Progress);
+            m_Rigidbody.velocity = Vector3.Lerp(m_Rigidbody.velocity, ToolUtility.AngleToVector(m_Angle) * ATT.SPEED.ToNumber() / 100.0f, m_RepelTimer.Progress);
 
             if (m_RepelTimer.IsFinished() == true) {
                 m_IsRepel = false;
@@ -178,8 +177,6 @@ public class Enemy : Unit
         //免疫击退
         if (ATT.SPEED.GetBase() == 0) return;
 
-        if (!m_IsRepel) m_RepelVelocity = m_Rigidbody.velocity;
-
         m_IsRepel = true;
         m_RepelTimer.Reset();
 
@@ -224,6 +221,13 @@ public class Enemy : Unit
         {
             Field.Instance.Crash(this, collision.gameObject.GetComponent<Player>());
         }
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag != _C.COLLIDER_WALL) return;
+
+        m_Angle = ToolUtility.VectorToAngle(m_Rigidbody.velocity);
     }
     #endregion
 }

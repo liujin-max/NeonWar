@@ -241,6 +241,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\AllIn1SpriteShader\Resources\AllIn1SpriteShaderScrollView.shader" />
     <None Include="Assets\UIShaders\Shaders\Utils\Gradient.cginc" />
+    <None Include="Assets\Game\Shaders\ParticleAdditive_BrightnessRatio.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
@@ -256,6 +257,7 @@
     <None Include="Assets\AllIn1SpriteShader\Resources\AllIn1SpriteShaderLight.shader" />
     <None Include="Assets\DOTween\DOTween.dll" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\Game\Shaders\ParticleAlphaBlended_BrightnessRatio.shader" />
     <None Include="Assets\WX-WASM-SDK-V2\Runtime\Plugins\link.xml" />
     <None Include="Assets\UIShaders\Shaders\Utils\Circles.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />

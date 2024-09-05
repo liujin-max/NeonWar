@@ -17,6 +17,10 @@ public static class EFFECT
     public const string STUN        = "Prefab/Effect/fx_stun";
     public const string CHAOS       = "Prefab/Effect/fx_chaos";
     public const string CRITKILL    = "Prefab/Effect/fx_critKill";
+    public const string ROPE        = "Prefab/Effect/fx_rope";
+    public const string POJIA       = "Prefab/Effect/fx_pojia";
+    
+    
 
 
 

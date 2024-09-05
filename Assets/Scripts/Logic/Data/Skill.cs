@@ -660,7 +660,7 @@ public class Skill_10230 : Skill
 //每当目标被拖拽至引力陷阱中心时，产生一次爆炸伤害
 public class Skill_10231 : Skill
 {
-    private HashSet<Unit> m_Records = new HashSet<Unit>();
+    private Dictionary<Area, HashSet<Unit>> m_Records = new Dictionary<Area, HashSet<Unit>>();
 
     public override void CustomUpdate(float deltaTime)
     {
@@ -669,16 +669,18 @@ public class Skill_10231 : Skill
             Area_Rope rope = area as Area_Rope;
             if (rope == null) continue;
 
+            if (!m_Records.ContainsKey(rope)) m_Records[rope] = new HashSet<Unit>();
+
             Vector2 o_pos = rope.transform.localPosition;
             foreach (var t in rope.Units)
             {
                 var unit = t.Key;
-                if (m_Records.Contains(unit)) continue;
+                if (m_Records[rope].Contains(unit)) continue;
                 if (Vector2.Distance(unit.transform.localPosition, o_pos) <= 0.5f) 
                 {
-                    m_Records.Add(unit);
+                    m_Records[rope].Add(unit);
 
-                    Bomb bomb = new Bomb(Caster, o_pos, 1.5f, "");
+                    Bomb bomb = new Bomb(Caster, o_pos, 1.5f, EFFECT.ROPE);
                     bomb.Do();
                 }
             }

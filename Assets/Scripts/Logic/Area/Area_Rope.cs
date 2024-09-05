@@ -14,7 +14,7 @@ public class Area_Rope : Area
         foreach (var u in m_Units.Keys) {
             Enemy e = u.GetComponent<Enemy>();
             if (e != null) {
-                e.Repel((transform.localPosition - e.transform.localPosition) * 0.15f);
+                e.Repel((transform.localPosition - e.transform.localPosition) * 0.18f);
             }
         }
     }

@@ -218,7 +218,8 @@ MonoBehaviour:
   CPS:
     m_Base: 1
     m_Origin: 1
-  StunFlag: 0
+  StunReference: 0
+  FrozenReference: 0
   MoveDirection: 1
   GlassRate:
     m_Base: 1
