@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class State_Upgrade<T> : State<Field>
 {
+    private CDTimer m_DelayTimer;
+
     public State_Upgrade(_C.FSMSTATE id) : base(id) {}
 
     //生成3个技能供选择
@@ -78,7 +80,7 @@ public class State_Upgrade<T> : State<Field>
         
         //3个技能中有M个技能是从现有的技能中
         //剩下的N个技能从大池子中随机取
-        int m = Mathf.Min(RandomUtility.Random(0, can_upgrade_skills.Count), skill_max);
+        int m = RandomUtility.Random(0, Mathf.Min(can_upgrade_skills.Count, skill_max) + 1); 
         int n = Mathf.Max(0, skill_max - m);
 
         if (m > 0)
@@ -112,19 +114,24 @@ public class State_Upgrade<T> : State<Field>
 
     public override void Enter(params object[] values)
     { 
-        Debug.Log("进入升级阶段");
-        
+        m_DelayTimer = new CDTimer(1);
+    }
+
+    public override void Update()
+    {
+        if (m_DelayTimer == null) return;
+
+        m_DelayTimer.Update(Time.deltaTime);
+        if (!m_DelayTimer.IsFinished()) return;
+
+        m_DelayTimer = null;
+
         int[] skill_ids = GenerateSkillsPool();
 
         GameFacade.Instance.UIManager.LoadWindowAsync("SkillWindow", UIManager.BOARD, (obj)=>{
             var window = obj.GetComponent<SkillWindow>();
             window.Init(skill_ids);
         });
-    }
-
-    public override void Update()
-    {
-
     }
 
     public override void Exit()

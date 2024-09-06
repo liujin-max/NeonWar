@@ -27,7 +27,6 @@ public class State_Result<T> : State<Field>
     {
         m_DelayTimer.Update(Time.deltaTime);
         if (m_DelayTimer.IsFinished() == true) {
-            Debug.Log("结算");
             Field.Instance.STATE = _C.GAME_STATE.PAUSE;
 
             //胜利

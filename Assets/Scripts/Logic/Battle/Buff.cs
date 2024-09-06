@@ -212,6 +212,11 @@ public class Buff_Frozen : Buff
         Belong.AffectedEffect.Frozen(true);
     }
 
+    public override void Flush(float time)
+    {
+        // base.Flush(time);
+    }
+
     public override void Dispose()
     {
         base.Dispose();

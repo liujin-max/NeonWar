@@ -22,7 +22,6 @@ public class State_Play<T> : State<Field>
     {
         Field.Instance.CustomUpdate(Time.deltaTime);
 
-
         var result = Field.Instance.CheckResult();
         if (result != _C.RESULT.NONE) {
             if (result == _C.RESULT.UPGRADE) 
@@ -58,13 +57,7 @@ public class State_Play<T> : State<Field>
 
     private void OnJoyStickDouble(GameEvent @event)
     {
-        if (!Field.Instance.BlinkTimer.IsFinished()) {
-            EventManager.SendEvent(new GameEvent(EVENT.UI_BLINKSHAKE));
-            return;
-        }
-
-        Field.Instance.BlinkTimer.ForceReset();
-        Field.Instance.Player.Blink();
+        // Field.Instance.Player.Blink();
     }
     #endregion
 }

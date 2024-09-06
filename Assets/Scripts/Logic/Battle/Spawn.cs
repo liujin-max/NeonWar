@@ -24,7 +24,7 @@ public class Spawn
 
 
     //击杀进度
-    public float KillProgress {get {return m_WaveOrder / (float) m_Waves.Count;}}
+    public float KillProgress {get {return (m_WaveOrder + 1) / (float) m_Waves.Count;}}
     
 
     public void Init(LevelJSON level_json)

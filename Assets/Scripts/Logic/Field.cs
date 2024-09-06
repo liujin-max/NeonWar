@@ -35,13 +35,6 @@ public class Field : MonoBehaviour
     public List<Area> Areas {get {return m_Areas;}}
     private List<Area> m_AreaRemoves = new List<Area>();
     
-    //累计获得的碎片
-    private int m_Glass;
-
-    //闪现冷却
-    public CDTimer BlinkTimer = new CDTimer(0);
-
-
 
 
     void Awake()
@@ -84,9 +77,6 @@ public class Field : MonoBehaviour
     {
         STATE   = _C.GAME_STATE.PLAY;
 
-        BlinkTimer.Reset(_C.DEFAULT_BLINKCD);
-        BlinkTimer.Full();
-
 
         m_Level = DataCenter.Instance.Levels.GetLevel(level_id);
         m_Level.Init();
@@ -111,10 +101,6 @@ public class Field : MonoBehaviour
     public void End()
     {
         STATE   = _C.GAME_STATE.PAUSE;
-
-        m_Glass = 0;
-
-        BlinkTimer.Full();
 
         Land.Dispose();
         m_Spawn.Dispose();
@@ -236,17 +222,14 @@ public class Field : MonoBehaviour
     }
 
     #region 逻辑处理
-    public void UpdateGlass(int value)
-    {
-        m_Glass += value;
-    }
+
     
     //根据当前的击杀进度计算出可以获得多少碎片奖励
     public void GenerateGlassRewards(out int base_value, out int worth_value)
     {
         float kill_rate = m_Spawn.KillProgress;
 
-        base_value = Mathf.FloorToInt(m_Level.LevelJSON.Glass * kill_rate) + m_Glass;
+        base_value = Mathf.FloorToInt(m_Level.LevelJSON.Glass * kill_rate) ;
 
         //额外倍率
         worth_value = Mathf.CeilToInt(base_value * m_Player.GlassRate.ToNumber()) - base_value;

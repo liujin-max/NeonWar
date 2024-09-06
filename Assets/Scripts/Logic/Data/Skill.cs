@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
@@ -528,7 +529,13 @@ public class Skill_10170 : Skill
 //陷阱范围内的目标持续受到伤害，持续#秒
 public class Skill_10210 : Skill
 {
-    private CDTimer m_Timer = new CDTimer(RandomUtility.Random(300, 600) / 100.0f);
+    public override void Init(SkillData data, Player caster, int level)
+    {
+        base.Init(data, caster, level);
+
+        m_Timer.Reset(RandomUtility.Random(300, 600) / 100.0f);
+    }
+
     public override void CustomUpdate(float deltaTime)
     {
         m_Timer.Update(deltaTime);
@@ -637,7 +644,13 @@ public class Skill_10212 : Skill
 //陷阱范围内的目标行动缓慢，持续#秒
 public class Skill_10220 : Skill
 {
-    private CDTimer m_Timer = new CDTimer(RandomUtility.Random(400, 700) / 100.0f);
+    public override void Init(SkillData data, Player caster, int level)
+    {
+        base.Init(data, caster, level);
+
+        m_Timer.Reset(RandomUtility.Random(400, 700) / 100.0f);
+    }
+
     public override void CustomUpdate(float deltaTime)
     {
         m_Timer.Update(deltaTime);
@@ -690,7 +703,13 @@ public class Skill_10221 : Skill
 //将范围#内的目标向陷阱中心拖拽
 public class Skill_10230 : Skill
 {
-    private CDTimer m_Timer = new CDTimer(RandomUtility.Random(300, 600) / 100.0f);
+    public override void Init(SkillData data, Player caster, int level)
+    {
+        base.Init(data, caster, level);
+
+        m_Timer.Reset(RandomUtility.Random(300, 600) / 100.0f);
+    }
+
     public override void CustomUpdate(float deltaTime)
     {
         m_Timer.Update(deltaTime);
@@ -736,7 +755,7 @@ public class Skill_10231 : Skill
                 {
                     m_Records[rope].Add(unit);
 
-                    Bomb bomb = new Bomb(Caster, o_pos, 1.5f, 2f, EFFECT.ROPE);
+                    Bomb bomb = new Bomb(Caster, o_pos, 1.5f, 3f, EFFECT.ROPE);
                     bomb.Do();
                 }
             }
@@ -795,6 +814,52 @@ public class Skill_10250 : Skill
     }
 }
 #endregion
+
+
+#region 弓：快速投掷
+//投掷陷阱时有#%的概率立即刷新任意陷阱的冷却时间
+public class Skill_10251 : Skill
+{
+    public Skill_10251()
+    {
+        EventManager.AddHandler(EVENT.ONPUSHAREA,   OnPushArea);
+    }
+
+    public override void Dispose()
+    {
+        EventManager.DelHandler(EVENT.ONPUSHAREA,   OnPushArea);
+    }
+
+    private void OnPushArea(GameEvent @event)
+    {
+        Area area = @event.GetParam(0) as Area;
+
+        if (!RandomUtility.IsHit(Value)) return;
+
+        if (area.transform.GetComponent<Area_Poison>() != null 
+            || area.transform.GetComponent<Area_Ice>() != null 
+            || area.transform.GetComponent<Area_Rope>() != null)
+        {
+            int[] skill_ids = {10210, 10220, 10230};
+            List<Skill> skills = new List<Skill>();
+
+            foreach (var sk_id in skill_ids)
+            {
+                var skill = Caster.GetSkill(sk_id);
+                if (skill != null) skills.Add(skill);
+            }
+
+            if (skills.Count > 0)
+            {
+                var sk = skills[RandomUtility.Random(0, skills.Count)];
+                sk.FullCD();
+            }
+        }
+    }
+}
+#endregion
+
+
 
 
 
@@ -927,6 +992,8 @@ public class Skill
 
     public int Value {get {return Skill.ToValue(Data, Level);}}
 
+    protected CDTimer m_Timer = new CDTimer(0);
+
     private static Dictionary<int, Func<Skill>> m_classDictionary = new Dictionary<int, Func<Skill>> {
         //弓 攻击
         {10010, () => new Skill_10010()},
@@ -957,6 +1024,7 @@ public class Skill
         {10231, () => new Skill_10231()},
         {10240, () => new Skill_10240()},
         {10250, () => new Skill_10250()},
+        {10251, () => new Skill_10251()},
 
         {10260, () => new Skill_10260()},
         {10270, () => new Skill_10270()},
@@ -1024,7 +1092,7 @@ public class Skill
     }
 
 
-    public void Init(SkillData data, Player caster, int level)
+    public virtual void Init(SkillData data, Player caster, int level)
     {
         Data    = data;
         Caster  = caster;
@@ -1041,6 +1109,11 @@ public class Skill
     public virtual void Upgrade(int level)
     {
         Level   = level;
+    }
+
+    public void FullCD()
+    {
+        m_Timer.Full();
     }
 
     public bool IsLevelMax()
