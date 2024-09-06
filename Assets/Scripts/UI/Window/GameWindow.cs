@@ -18,9 +18,6 @@ public class GameWindow : MonoBehaviour
 
     [Header("按钮")]
     [SerializeField] Button m_BtnFight;
-    [SerializeField] LongPressButton m_BtnLeft;
-    [SerializeField] LongPressButton m_BtnRight;
-
 
 
 
@@ -43,20 +40,6 @@ public class GameWindow : MonoBehaviour
         m_BtnFight.onClick.AddListener(()=>{
             NavigationController.GotoBattle();
         });
-
-        //往左
-        // m_BtnLeft.SetCallback((eventData)=>{
-        //     EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS, -1f));
-        // }, 
-        // ()=>{}, 
-        // ()=>{});
-
-        // //往右
-        // m_BtnRight.SetCallback((eventData)=>{
-        //     EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS,  1f));
-        // }, 
-        // ()=>{}, 
-        // ()=>{});
     }
 
     void OnDestroy()
@@ -81,8 +64,6 @@ public class GameWindow : MonoBehaviour
         FlushUI();
 
         InitWeapon();
-
-        StartCoroutine(FingerAnim());
     }
 
     void InitWeapon()
@@ -104,41 +85,7 @@ public class GameWindow : MonoBehaviour
         if (m_WEAPONITEM != null) m_WEAPONITEM.FlushUI();
     }
 
-    void Update()
-    {
-        //监听电脑端的输入
-        // 检测方向键输入
 
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS, -1f));
-        }
-
-        if (Input.GetKey(KeyCode.RightArrow))
-        {
-            EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS,  1f));
-        }
-    }
-
-
-    #region 协程
-    IEnumerator FingerAnim()
-    {
-        var origin = m_FingerPivot.localPosition;
-        m_FingerPivot.localPosition = new Vector3(9999, 9999, 0);
-        
-        m_FingerPivot.Find("Left").gameObject.SetActive(true);
-        m_FingerPivot.Find("Right").gameObject.SetActive(false);
-
-        yield return new WaitForSeconds(0.4f);
-
-        m_FingerPivot.Find("Right").gameObject.SetActive(true);
-        m_FingerPivot.localPosition = origin;
-
-
-        yield return null;
-    }
-    #endregion
 
 
     #region 监听事件

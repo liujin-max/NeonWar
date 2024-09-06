@@ -11,14 +11,15 @@ public static class NavigationController
     //前往主界面
     public static void GotoGame()
     {
-        GameFacade.Instance.UIManager.LoadWindowAsync("GameWindow", UIManager.BOTTOM, (obj)=>{
-            obj.GetComponent<GameWindow>().Init();
-        });
-
-        GameFacade.Instance.UIManager.LoadWindowAsync("NavigationWindow", UIManager.MAJOR);
-
-
         GameFacade.Instance.ScenePool.LoadSceneAsync("Game", () => {
+            GameFacade.Instance.UIManager.LoadWindowAsync("GameWindow", UIManager.BOTTOM, (obj)=>{
+                obj.GetComponent<GameWindow>().Init();
+            });
+
+            GameFacade.Instance.UIManager.LoadWindowAsync("NavigationWindow", UIManager.MAJOR);
+
+
+
             Field.Instance.Enter();
         });
     }

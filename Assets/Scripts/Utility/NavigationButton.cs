@@ -16,6 +16,11 @@ public class NavigationButton : MonoBehaviour
     private Func<bool> m_RevokeCallback;
 
 
+    void Start()
+    {
+        if (m_Light != null) m_Light.SetActive(false);
+    }
+
     public void Init(Func<bool> execute, Func<bool> revoke, UnityAction click_action)
     {
         m_ExecuteCallback   = execute;

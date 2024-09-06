@@ -1,9 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class NavigationWindow : MonoBehaviour
 {
+    [SerializeField] Transform m_NavPivot;
+
+    [Header("按钮")]
     [SerializeField] NavigationButton m_BtnBackpack;
     [SerializeField] NavigationButton m_BtnLeague;
     [SerializeField] NavigationButton m_BtnBattle;
@@ -16,6 +20,10 @@ public class NavigationWindow : MonoBehaviour
 
     void Awake()
     {
+        EventManager.AddHandler(EVENT.ONBATTLESTART,    OnBattleStart);
+        EventManager.AddHandler(EVENT.ONBATTLEEND,      OnBattleEnd);
+
+
         //背包
         m_BtnBackpack.Init(
             ()=>{
@@ -53,12 +61,15 @@ public class NavigationWindow : MonoBehaviour
         m_BtnSetting.Init(
             ()=>{
                 Time.timeScale = 0;
-                GameFacade.Instance.UIManager.LoadWindowAsync("SettingWindow", UIManager.BOARD);
+                GameFacade.Instance.UIManager.LoadWindowAsync("SettingWindow", UIManager.BOARD, (obj)=>{
+                    obj.GetComponent<SettingWindow>().SetCallback(()=>{
+                        Time.timeScale = 1;
+                    });
+                });
 
                 return true;
             },
             ()=>{
-                Time.timeScale = 1;
                 GameFacade.Instance.UIManager.UnloadWindow("SettingWindow");
                 return true;
             },
@@ -69,6 +80,29 @@ public class NavigationWindow : MonoBehaviour
                 m_NAVBTN.Execute();
             }
         );
-
     }
+
+
+    void OnDestroy()
+    {
+        EventManager.DelHandler(EVENT.ONBATTLESTART,    OnBattleStart);
+        EventManager.DelHandler(EVENT.ONBATTLEEND,      OnBattleEnd);
+    }
+
+
+
+
+    #region 监听事件
+    //战斗开始
+    private void OnBattleStart(GameEvent @event)
+    {
+        m_NavPivot.DOLocalMoveY(-350, 0.5f).SetEase(Ease.OutCubic);
+    }
+
+    //战斗结束
+    private void OnBattleEnd(GameEvent @event)
+    {
+        m_NavPivot.DOLocalMoveY(0, 0.5f).SetEase(Ease.InCubic);
+    }
+    #endregion
 }

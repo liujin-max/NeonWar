@@ -12,6 +12,7 @@ public class BattleWindow : MonoBehaviour
     [SerializeField] Transform m_BuffPivot;
     [SerializeField] TextMeshProUGUI m_Progress;
     [SerializeField] BarTransition m_ProgressBar;
+    [SerializeField] Transform m_FingerPivot;
 
 
     [Header("按钮")]
@@ -39,6 +40,8 @@ public class BattleWindow : MonoBehaviour
 
         //往左
         m_BtnLeft.SetCallback((eventData)=>{
+            m_FingerPivot.gameObject.SetActive(false);
+
             EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS, -1f));
 
             m_BtnLeft.transform.Find("Wave").gameObject.SetActive(true);
@@ -49,6 +52,8 @@ public class BattleWindow : MonoBehaviour
 
         //往右
         m_BtnRight.SetCallback((eventData)=>{
+            m_FingerPivot.gameObject.SetActive(false);
+
             EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS,  1f));
 
             m_BtnRight.transform.Find("Wave").gameObject.SetActive(true);
@@ -87,6 +92,7 @@ public class BattleWindow : MonoBehaviour
         InitBuffPivot();
         InitProgress();
 
+        StartCoroutine(FingerAnim());
     }
 
     //玩家血条
@@ -123,6 +129,8 @@ public class BattleWindow : MonoBehaviour
         //监听电脑端的输入
         // 检测方向键输入
         if (Input.GetKeyDown(KeyCode.LeftArrow)) {
+            m_FingerPivot.gameObject.SetActive(false);
+
             m_BtnLeft.transform.Find("Wave").gameObject.SetActive(true);
         }
 
@@ -137,6 +145,8 @@ public class BattleWindow : MonoBehaviour
 
         //向右
         if (Input.GetKeyDown(KeyCode.RightArrow)) {
+            m_FingerPivot.gameObject.SetActive(false);
+            
             m_BtnRight.transform.Find("Wave").gameObject.SetActive(true);
         }
 
@@ -149,6 +159,25 @@ public class BattleWindow : MonoBehaviour
             m_BtnRight.transform.Find("Wave").gameObject.SetActive(false);
         }
     }
+
+    #region 协程
+    IEnumerator FingerAnim()
+    {
+        var origin = m_FingerPivot.localPosition;
+        m_FingerPivot.localPosition = new Vector3(9999, 9999, 0);
+        
+        m_FingerPivot.Find("Left").gameObject.SetActive(true);
+        m_FingerPivot.Find("Right").gameObject.SetActive(false);
+
+        yield return new WaitForSeconds(0.4f);
+
+        m_FingerPivot.Find("Right").gameObject.SetActive(true);
+        m_FingerPivot.localPosition = origin;
+
+
+        yield return null;
+    }
+    #endregion
 
 
     #region 监听事件
