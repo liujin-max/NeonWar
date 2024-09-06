@@ -13,12 +13,10 @@ public class GameWindow : MonoBehaviour
     [SerializeField] NumberTransition m_Glass;
 
     [SerializeField] Transform m_WeaponPivot;
-    [SerializeField] Transform m_FingerPivot;
 
 
     [Header("按钮")]
     [SerializeField] Button m_BtnFight;
-
 
 
     private WeaponItem m_WEAPONITEM = null;
@@ -93,8 +91,6 @@ public class GameWindow : MonoBehaviour
     {
         transform.GetComponent<CanvasGroup>().DOFade(0, 0.3f);
         transform.GetComponent<CanvasGroup>().blocksRaycasts = false;
-
-        m_FingerPivot.localPosition = new Vector3(9999, 9999, 0);
     }
 
     //战斗结束
@@ -104,8 +100,6 @@ public class GameWindow : MonoBehaviour
 
         transform.GetComponent<CanvasGroup>().DOFade(1, 0.15f);
         transform.GetComponent<CanvasGroup>().blocksRaycasts = true;
-
-        m_FingerPivot.localPosition = Vector3.zero;
     }
 
 

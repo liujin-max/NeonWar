@@ -68,7 +68,9 @@ SpriteAtlas:
     - d59b93b24c7a69a459d221709570e7e0: 78742582
     - d59b93b24c7a69a459d221709570e7e0: -1228232763
     - 20d45ab292f96384f8a35bfb10b7f7b6: 21300000
+    - f5acc714618f6c34493d0e22af8212df: 21300000
     - 38294754730b4fd4082f4d5216299236: 21300000
+    - a824b755e89e6f946a78968da9e99a5d: 21300000
     - 30fd8426b53c2624a898a444a0d7d7ea: 21300000
     - dd2cd62611369ff44857e8176d06a1ce: 21300000
     - a9c28a072831b144d859f186d3f80b0f: 21300000
@@ -120,7 +122,9 @@ SpriteAtlas:
   - {fileID: 78742582, guid: d59b93b24c7a69a459d221709570e7e0, type: 3}
   - {fileID: -1228232763, guid: d59b93b24c7a69a459d221709570e7e0, type: 3}
   - {fileID: 21300000, guid: 20d45ab292f96384f8a35bfb10b7f7b6, type: 3}
+  - {fileID: 21300000, guid: f5acc714618f6c34493d0e22af8212df, type: 3}
   - {fileID: 21300000, guid: 38294754730b4fd4082f4d5216299236, type: 3}
+  - {fileID: 21300000, guid: a824b755e89e6f946a78968da9e99a5d, type: 3}
   - {fileID: 21300000, guid: 30fd8426b53c2624a898a444a0d7d7ea, type: 3}
   - {fileID: 21300000, guid: dd2cd62611369ff44857e8176d06a1ce, type: 3}
   - {fileID: 21300000, guid: a9c28a072831b144d859f186d3f80b0f, type: 3}
@@ -171,7 +175,9 @@ SpriteAtlas:
   - Universal_icon_worth_atlas_0
   - Universal_icon_worth_atlas_1
   - Universal_glass
+  - Universal_shake_mask_circle
   - Universal_halo
+  - Universal_shake_mask
   - Universal_backpack_icon
   - Universal_icon_set
   - Universal_mask_white

@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 
 public class NavigationWindow : MonoBehaviour
 {
     [SerializeField] Transform m_NavPivot;
+    [SerializeField] TextMeshProUGUI m_Level;
 
     [Header("按钮")]
     [SerializeField] NavigationButton m_BtnBackpack;
@@ -128,6 +130,13 @@ public class NavigationWindow : MonoBehaviour
     {
         m_NAVBTN = m_BtnFight;
         m_NAVBTN.Execute(); 
+
+        FlushUI();
+    }
+
+    void FlushUI()
+    {
+        m_Level.text    = (DataCenter.Instance.User.Level + 1).ToString();
     }
 
 
@@ -142,6 +151,8 @@ public class NavigationWindow : MonoBehaviour
     private void OnBattleEnd(GameEvent @event)
     {
         m_NavPivot.DOLocalMoveY(0, 0.5f).SetEase(Ease.InCubic);
+
+        FlushUI();
     }
     #endregion
 }
