@@ -13,7 +13,7 @@ public static class _C
 
 
 
-    public static int PEAR_UNLOCK_LEVEL= 5;    //通过15关后开放宝珠系统
+    public static int PEAR_UNLOCK_LEVEL= 0;    //通过15关后开放宝珠系统
     public static float DEFAULT_RADIUS = 5.4f;  //圆弧半径
     public static float DEFAULT_BLINKCD= 1.5f;  //闪现冷却
 

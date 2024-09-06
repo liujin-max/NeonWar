@@ -482,7 +482,7 @@ MonoBehaviour:
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 1
+  m_fontStyle: 0
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -1282,7 +1282,6 @@ MonoBehaviour:
   m_Coin: {fileID: 392197034587789423}
   m_Glass: {fileID: 4551848800263374708}
   m_WeaponPivot: {fileID: 1864150395814612518}
-  m_FingerPivot: {fileID: 0}
   m_BtnFight: {fileID: 3876730407380534653}
 --- !u!114 &4182064572047059145
 MonoBehaviour:
