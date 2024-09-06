@@ -48,30 +48,7 @@ public class State_Upgrade<T> : State<Field>
         List<int> keys = new List<int>(skills_pool.Keys);
         foreach (int key in keys) {
             var skill_data = DataCenter.Instance.League.GetSkillData(key);
-
-            //满足其一即可
-            bool is_meet1 = true;
-            if (skill_data.Previous.Length > 0) 
-            {
-                is_meet1 = false;
-                foreach (var id in skill_data.Previous) {
-                if (Field.Instance.Player.GetSkill(id) != null) {
-                    is_meet1 = true;
-                    break;
-                }
-            }
-            }
-
-            //需要满足全部
-            bool is_meet2 = true;
-            foreach (var id in skill_data.PreviousAll) {
-                if (Field.Instance.Player.GetSkill(id) == null) {
-                    is_meet2 = false;
-                    break;
-                }
-            }
-
-            if (!is_meet1 || !is_meet2) 
+            if (skill_data.IsMeet() == false) 
             {
                 skills_pool.Remove(key);
                 // Debug.Log("当前技能的前置未解锁：" + key);

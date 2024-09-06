@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using UnityEngine;
 
@@ -14,12 +15,37 @@ public class SkillData
     public int Weight;
     public int LevelMax;
     public int[] Values;
+    public string ConString;
+    public List<Condition> Conditions = new List<Condition>();
     public int[] Previous;      //前置技能(满足其一即可)
     public int[] PreviousAll;   //前置技能(需要全部满足)
     public int[] Excludes;      //互斥技能
     public int Atlas;           //图集
     public int Icon;            
     public string Description;
+
+
+    //是否满足解锁条件
+    public bool IsMeet()
+    {
+        //解析条件
+        if (Conditions.Count == 0 && !string.IsNullOrEmpty(ConString))
+        {
+            string[] conditions = ConString.Split(';');
+            foreach (var single_condition_string in conditions)
+            {
+                Condition c = Condition.Create(single_condition_string);
+                Conditions.Add(c);
+            }
+        }
+
+        foreach (var c in Conditions)
+        {
+            if (c.Check() == false) return false;
+        }
+
+        return true;
+    }
 }
 
 
@@ -46,12 +72,13 @@ public class League
                 Type        = (_C.SKILL_TYPE)Convert.ToInt32(data[2]),
                 Weight      = Convert.ToInt32(data[3]),
                 Values      = data[4].Split('|').Where(s => !string.IsNullOrWhiteSpace(s)).Select(int.Parse).ToArray(),
-                Previous    = data[5].Split('|').Where(s => !string.IsNullOrWhiteSpace(s)).Select(int.Parse).ToArray(),
-                PreviousAll = data[6].Split('|').Where(s => !string.IsNullOrWhiteSpace(s)).Select(int.Parse).ToArray(),
-                Excludes    = data[7].Split('|').Where(s => !string.IsNullOrWhiteSpace(s)).Select(int.Parse).ToArray(),
-                Atlas       = Convert.ToInt32(data[8]),
-                Icon        = Convert.ToInt32(data[9]),
-                Description = data[10]
+                ConString   = data[5],
+                // Previous    = data[5].Split('|').Where(s => !string.IsNullOrWhiteSpace(s)).Select(int.Parse).ToArray(),
+                // PreviousAll = data[6].Split('|').Where(s => !string.IsNullOrWhiteSpace(s)).Select(int.Parse).ToArray(),
+                Excludes    = data[6].Split('|').Where(s => !string.IsNullOrWhiteSpace(s)).Select(int.Parse).ToArray(),
+                Atlas       = Convert.ToInt32(data[7]),
+                Icon        = Convert.ToInt32(data[8]),
+                Description = data[9]
             };
             skill.LevelMax  = skill.Values.Length;
 

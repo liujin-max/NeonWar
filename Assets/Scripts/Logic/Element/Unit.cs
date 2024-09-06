@@ -49,8 +49,10 @@ public class Unit : MonoBehaviour
         } 
     }
 
-
-
+    public bool IsHPFull()
+    {
+        return ATT.HP >= ATT.HPMAX;
+    }
 
     public virtual bool IsDead()
     {
