@@ -54,12 +54,6 @@ public class SettingWindow : MonoBehaviour
     {
         FlushUI();
     }
-    
-
-    public void SetCallback(Action callback)
-    {
-        m_Callback = callback;
-    }
 
     void FlushUI()
     {
@@ -69,5 +63,15 @@ public class SettingWindow : MonoBehaviour
         //
         m_Sound.Find("Open").gameObject.SetActive(GameFacade.Instance.SystemManager.SoundVolume > 0);
         m_Sound.Find("Close").gameObject.SetActive(GameFacade.Instance.SystemManager.SoundVolume == 0);
+    }
+
+    public void SetCallback(Action callback)
+    {
+        m_Callback = callback;
+    }
+
+    public void ShowClose(bool flag)
+    {
+        m_BtnClose.gameObject.SetActive(flag);
     }
 }

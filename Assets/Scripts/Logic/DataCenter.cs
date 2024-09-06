@@ -54,12 +54,9 @@ public class DataCenter
 
     public string GetLevelString()
     {
-        int level   = User.Level;
+        int level   = User.Level + 1;
 
-        int chapter = level / 20 + 1;
-        int stage   = level % 20 + 1;
-
-        return string.Format("{0}-{1}", chapter, stage);
+        return string.Format("第{0}关", level);
     }
 
     // 合成宝珠

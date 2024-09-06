@@ -421,7 +421,6 @@ public class Skill_10130 : Skill
         if (RandomUtility.IsHit(Value))
         {
             unit.Repel(b.Velocity.normalized * 8);
-
         }
         
     }

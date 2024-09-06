@@ -64,10 +64,6 @@ public class Field : MonoBehaviour
         Land    = new Land();
         m_Spawn = new Spawn();
 
-        GameFacade.Instance.UIManager.LoadWindowAsync("GameWindow", UIManager.BOTTOM, (obj)=>{
-            obj.GetComponent<GameWindow>().Init();
-        });
-
 
         m_FSM.Transist(_C.FSMSTATE.IDLE);
     }

@@ -12,13 +12,16 @@ public class GameWindow : MonoBehaviour
     [SerializeField] NumberTransition m_Coin;
     [SerializeField] NumberTransition m_Glass;
 
-
-    [SerializeField] LongPressButton m_BtnLeft;
-    [SerializeField] LongPressButton m_BtnRight;
     [SerializeField] Transform m_WeaponPivot;
     [SerializeField] Transform m_FingerPivot;
 
-    [SerializeField] Button m_BtnSetting;
+
+    [Header("按钮")]
+    [SerializeField] Button m_BtnFight;
+    [SerializeField] LongPressButton m_BtnLeft;
+    [SerializeField] LongPressButton m_BtnRight;
+
+
 
 
     private WeaponItem m_WEAPONITEM = null;
@@ -35,6 +38,25 @@ public class GameWindow : MonoBehaviour
 
         EventManager.AddHandler(EVENT.UI_PEARCHANGE,    OnPearChange);
         EventManager.AddHandler(EVENT.UI_BACKPACKOPEN,  OnBackpackOpen);
+
+
+        m_BtnFight.onClick.AddListener(()=>{
+            NavigationController.GotoBattle();
+        });
+
+        //往左
+        // m_BtnLeft.SetCallback((eventData)=>{
+        //     EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS, -1f));
+        // }, 
+        // ()=>{}, 
+        // ()=>{});
+
+        // //往右
+        // m_BtnRight.SetCallback((eventData)=>{
+        //     EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS,  1f));
+        // }, 
+        // ()=>{}, 
+        // ()=>{});
     }
 
     void OnDestroy()
@@ -50,35 +72,7 @@ public class GameWindow : MonoBehaviour
 
 
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        //往左
-        m_BtnLeft.SetCallback((eventData)=>{
-            EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS, -1f));
-        }, 
-        ()=>{}, 
-        ()=>{});
-
-        //往右
-        m_BtnRight.SetCallback((eventData)=>{
-            EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS,  1f));
-        }, 
-        ()=>{}, 
-        ()=>{});
-
-
-        //设置
-        m_BtnSetting.onClick.AddListener(()=>{
-            Time.timeScale = 0;
-            GameFacade.Instance.UIManager.LoadWindowAsync("SettingWindow", UIManager.BOARD, (obj)=>{
-                obj.GetComponent<SettingWindow>().SetCallback(()=>{
-                    Time.timeScale = 1;
-                });
-            });
-        });
-    }   
+ 
 
     public void Init()
     {

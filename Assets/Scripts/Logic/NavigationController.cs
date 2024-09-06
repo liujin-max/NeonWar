@@ -8,26 +8,57 @@ using UnityEngine;
 
 public static class NavigationController
 {
-    //前往关卡模式
+    //前往主界面
     public static void GotoGame()
     {
+        GameFacade.Instance.UIManager.LoadWindowAsync("GameWindow", UIManager.BOTTOM, (obj)=>{
+            obj.GetComponent<GameWindow>().Init();
+        });
+
+        GameFacade.Instance.UIManager.LoadWindowAsync("NavigationWindow", UIManager.MAJOR);
+
+
         GameFacade.Instance.ScenePool.LoadSceneAsync("Game", () => {
             Field.Instance.Enter();
         });
     }
 
+    //前往关卡
+    public static bool GotoBattle()
+    {
+        int level_id = DataCenter.Instance.User.Level + 1;
+
+        if (GameFacade.Instance.TestMode == true)
+        {
+            level_id    = GameFacade.Instance.TestStage;
+        }
+
+        //判断是不是通关了
+        if (DataCenter.Instance.Levels.LoadLevelJSON(level_id) == null) {
+            EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "未完待续..."));
+            return false;
+        }
+
+        
+        Field.Instance.Play(level_id);
+
+        return true;
+    }
+
     //打开背包
-    public static void GotoBackpack(Pear pear)
+    public static bool GotoBackpack(Pear pear)
     {
         if (!DataCenter.Instance.IsPearUnlock())
         {
             EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "通过关卡" + _C.PEAR_UNLOCK_LEVEL + "后解锁"));
-            return;
+            return false;
         }
 
         GameFacade.Instance.UIManager.LoadWindowAsync("BackpackWindow", UIManager.MAJOR, (obj)=>{
             obj.GetComponent<BackpackWindow>().Init(pear);
         });
+
+        return true;
     }
 }
 

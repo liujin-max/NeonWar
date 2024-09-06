@@ -39,7 +39,7 @@ public class UIManager : MonoBehaviour
     // }
 
     //异步加载UI
-    public void LoadWindowAsync(string path, Transform parent , Action<GameObject> callback)
+    public void LoadWindowAsync(string path, Transform parent , Action<GameObject> callback = null)
     {
         //如果存在这个界面
         if (WindowsHash.Contains(path)) {

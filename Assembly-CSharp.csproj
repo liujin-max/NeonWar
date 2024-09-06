@@ -74,6 +74,7 @@
     <Compile Include="Assets\Scripts\Manager\WXPlatform.cs" />
     <Compile Include="Assets\Scripts\UI\Item\WeaponItem.cs" />
     <Compile Include="Assets\Scripts\Configs\ATTConfig.cs" />
+    <Compile Include="Assets\Scripts\UI\Window\NavigationWindow.cs" />
     <Compile Include="Assets\Scripts\UI\Item\PearDetailItem.cs" />
     <Compile Include="Assets\Scripts\Display\DisplayEvent.cs" />
     <Compile Include="Assets\Scripts\Manager\Effect.cs" />
@@ -204,6 +205,7 @@
     <Compile Include="Assets\Scripts\Manager\SystemManager.cs" />
     <Compile Include="Assets\Scripts\Logic\Area\Area_Ice.cs" />
     <Compile Include="Assets\Scripts\Logic\Element\Projectile.cs" />
+    <Compile Include="Assets\Scripts\Utility\NavigationButton.cs" />
     <Compile Include="Assets\DOTween\Modules\DOTweenModuleEPOOutline.cs" />
     <Compile Include="Assets\Scripts\Logic\Battle\SpawnThread.cs" />
     <Compile Include="Assets\Scripts\UI\Window\MaskWindow.cs" />
