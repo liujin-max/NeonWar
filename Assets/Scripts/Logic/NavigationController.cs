@@ -16,7 +16,9 @@ public static class NavigationController
                 obj.GetComponent<GameWindow>().Init();
             });
 
-            GameFacade.Instance.UIManager.LoadWindowAsync("NavigationWindow", UIManager.MAJOR);
+            GameFacade.Instance.UIManager.LoadWindowAsync("NavigationWindow", UIManager.MAJOR, (obj)=>{
+                // obj.GetComponent<NavigationWindow>().Init();
+            });
 
 
 

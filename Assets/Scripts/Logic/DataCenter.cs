@@ -56,7 +56,7 @@ public class DataCenter
     {
         int level   = User.Level + 1;
 
-        return string.Format("第{0}关", level);
+        return string.Format("关卡 {0}", level);
     }
 
     // 合成宝珠

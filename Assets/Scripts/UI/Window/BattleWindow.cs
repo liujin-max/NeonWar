@@ -92,6 +92,8 @@ public class BattleWindow : MonoBehaviour
         InitBuffPivot();
         InitProgress();
 
+        FlushUI();
+
         StartCoroutine(FingerAnim());
     }
 
@@ -122,6 +124,11 @@ public class BattleWindow : MonoBehaviour
     {
         m_Progress.text = string.Format("第{0}波", Field.Instance.Spawn.Order);
         m_ProgressBar.Init(Field.Instance.Spawn.CurrentWave.KillCount, Field.Instance.Spawn.CurrentWave.Total);
+    }
+
+    void FlushUI()
+    {
+        m_Level.text    = DataCenter.Instance.GetLevelString();
     }
 
     void Update()
@@ -163,6 +170,8 @@ public class BattleWindow : MonoBehaviour
     #region 协程
     IEnumerator FingerAnim()
     {
+        m_FingerPivot.gameObject.SetActive(true);
+
         var origin = m_FingerPivot.localPosition;
         m_FingerPivot.localPosition = new Vector3(9999, 9999, 0);
         

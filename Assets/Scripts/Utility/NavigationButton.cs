@@ -9,19 +9,20 @@ public class NavigationButton : MonoBehaviour
 {
     public Button m_Button;
     public GameObject m_Light;
+    public Floating m_Floating;
 
 
 
     private Func<bool> m_ExecuteCallback;
-    private Func<bool> m_RevokeCallback;
+    private Action m_RevokeCallback;
 
 
-    void Start()
+    void Awake()
     {
-        if (m_Light != null) m_Light.SetActive(false);
+        ShowLight(false);
     }
 
-    public void Init(Func<bool> execute, Func<bool> revoke, UnityAction click_action)
+    public void Init(Func<bool> execute, Action revoke, UnityAction click_action)
     {
         m_ExecuteCallback   = execute;
         m_RevokeCallback    = revoke;
@@ -30,22 +31,40 @@ public class NavigationButton : MonoBehaviour
         m_Button.onClick.AddListener(click_action);
     }
 
+    void ShowLight(bool flag)
+    {
+        if (m_Light != null) 
+        {
+            m_Light.SetActive(flag);
+        }
+    }
+
+    void Floating(bool flag)
+    {
+        if (m_Floating == null) return;
+
+        if (flag) m_Floating.Play();
+        else m_Floating.Stop();
+    }
 
     //执行
-    public void Execute()
+    public bool Execute()
     {
         if (m_ExecuteCallback())
         {
-            if (m_Light != null) m_Light.SetActive(true);
+            Floating(true);
+            ShowLight(true);
+            return true;
         }
+        return false;
     }
 
     //撤销
     public void Revoke()
     {
-        if (m_RevokeCallback())
-        {
-            if (m_Light != null) m_Light.SetActive(false);
-        }
+        m_RevokeCallback();
+
+        Floating(false);
+        ShowLight(false);
     }
 }

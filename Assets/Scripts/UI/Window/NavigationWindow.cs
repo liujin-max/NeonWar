@@ -10,7 +10,7 @@ public class NavigationWindow : MonoBehaviour
     [Header("按钮")]
     [SerializeField] NavigationButton m_BtnBackpack;
     [SerializeField] NavigationButton m_BtnLeague;
-    [SerializeField] NavigationButton m_BtnBattle;
+    [SerializeField] NavigationButton m_BtnFight;
     [SerializeField] NavigationButton m_BtnSetting;
 
 
@@ -24,46 +24,77 @@ public class NavigationWindow : MonoBehaviour
         EventManager.AddHandler(EVENT.ONBATTLEEND,      OnBattleEnd);
 
 
-        //背包
+        #region 宝珠
         m_BtnBackpack.Init(
             ()=>{
                 return NavigationController.GotoBackpack(null);
             },
             ()=>{
                 GameFacade.Instance.UIManager.UnloadWindow("BackpackWindow");
-                return true;
             },
             ()=>{
-                if (m_NAVBTN != null) m_NAVBTN.Revoke();
-                
-                m_NAVBTN = m_BtnBackpack;
-                m_NAVBTN.Execute();
+                if (m_NAVBTN == m_BtnBackpack) return;
+                if (m_BtnBackpack.Execute())
+                {
+                    m_NAVBTN.Revoke();
+                    m_NAVBTN = m_BtnBackpack; 
+                }
             }
         );
+        #endregion
 
-        //武器
+
+
+        #region 武器
         m_BtnLeague.Init(
             ()=>{
                 return false;
             },
             ()=>{
-                return false;
+                
             },
             ()=>{
-                if (m_NAVBTN != null) m_NAVBTN.Revoke();
-                
-                m_NAVBTN = m_BtnLeague;
-                m_NAVBTN.Execute();
+                if (m_NAVBTN == m_BtnLeague) return;
+                if (m_BtnLeague.Execute())
+                {
+                    m_NAVBTN.Revoke();
+                    m_NAVBTN = m_BtnLeague; 
+                }
             }
         );
+        #endregion
 
-        //设置
+
+
+        #region 关卡
+        m_BtnFight.Init(
+            ()=>{
+                return true;
+            },
+            ()=>{
+
+            },
+            ()=>{
+                if (m_NAVBTN == m_BtnFight) return;
+                if (m_BtnFight.Execute())
+                {
+                    m_NAVBTN.Revoke();
+                    m_NAVBTN = m_BtnFight; 
+                }
+            }
+        );
+        #endregion
+
+
+
+        #region 设置
         m_BtnSetting.Init(
             ()=>{
-                Time.timeScale = 0;
-                GameFacade.Instance.UIManager.LoadWindowAsync("SettingWindow", UIManager.BOARD, (obj)=>{
-                    obj.GetComponent<SettingWindow>().SetCallback(()=>{
-                        Time.timeScale = 1;
+                GameFacade.Instance.UIManager.LoadWindowAsync("SettingWindow", UIManager.BOTTOM, (obj)=>{
+                    var window = obj.GetComponent<SettingWindow>();
+                    window.ShowClose(false);
+                    window.SetCallback(()=>{
+
                     });
                 });
 
@@ -71,15 +102,19 @@ public class NavigationWindow : MonoBehaviour
             },
             ()=>{
                 GameFacade.Instance.UIManager.UnloadWindow("SettingWindow");
-                return true;
             },
             ()=>{
-                if (m_NAVBTN != null) m_NAVBTN.Revoke();
-                
-                m_NAVBTN = m_BtnSetting;
-                m_NAVBTN.Execute();
+                if (m_NAVBTN == m_BtnSetting) return;
+                if (m_BtnSetting.Execute())
+                {
+                    m_NAVBTN.Revoke();
+                    m_NAVBTN = m_BtnSetting; 
+                }
             }
         );
+        #endregion
+
+
     }
 
 
@@ -89,7 +124,11 @@ public class NavigationWindow : MonoBehaviour
         EventManager.DelHandler(EVENT.ONBATTLEEND,      OnBattleEnd);
     }
 
-
+    void Start()
+    {
+        m_NAVBTN = m_BtnFight;
+        m_NAVBTN.Execute(); 
+    }
 
 
     #region 监听事件

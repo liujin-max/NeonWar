@@ -76,8 +76,7 @@ public class GameWindow : MonoBehaviour
 
     void FlushUI()
     {
-        var str         = DataCenter.Instance.GetLevelString();
-        m_Level.text    = str;
+        m_Level.text    = DataCenter.Instance.GetLevelString();
 
         m_Coin.SetValue(DataCenter.Instance.User.Coin);
         m_Glass.SetValue(DataCenter.Instance.User.Glass);
