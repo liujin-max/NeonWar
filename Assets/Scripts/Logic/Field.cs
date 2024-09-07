@@ -71,7 +71,8 @@ public class Field : MonoBehaviour
     //开始游玩
     public void Play(int level_id)
     {
-        STATE   = _C.GAME_STATE.PLAY;
+        //玩家开始触摸后，再转换状态
+        // STATE   = _C.GAME_STATE.PLAY;
 
 
         m_Level = DataCenter.Instance.Levels.GetLevel(level_id);

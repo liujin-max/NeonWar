@@ -29,15 +29,14 @@ public class UIManager : MonoBehaviour
         TIP     = GameObject.Find("Canvas/TIP").transform;
     }
 
-    // public GameObject LoadWindow(string path, Transform parent)
-    // {
-    //     path    = "Prefab/UI/Window/" + path;
+    public GameObject LoadWindow(string path, Transform parent)
+    {
+        GameObject obj = Instantiate<GameObject>(Resources.Load<GameObject>("Prefab/UI/Window/" + path), parent);
+        WindowCaches[path] = obj;
+        WindowsHash.Add(path);
 
-    //     GameObject obj = Instantiate<GameObject>(Resources.Load<GameObject>(path), parent);
-    //     WindowCaches[obj.name.Replace("(Clone)", "")] = obj;
-
-    //     return obj;
-    // }
+        return obj;
+    }
 
     //异步加载UI
     public void LoadWindowAsync(string path, Transform parent , Action<GameObject> callback = null)

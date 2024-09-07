@@ -59,13 +59,13 @@ public class Skill_10010 : Skill
                 {
                     var bullet = Field.Instance.CreateBullet(Caster);
                     bullet.transform.position = shoot_point + new Vector2(-dir.y, dir.x) * 0.35f;
-                    bullet.Shoot(Caster.GetAngle() + 180);
+                    bullet.Shoot(Caster.GetAngle() + 180 - 15);
                 }
 
                 {
                     var bullet = Field.Instance.CreateBullet(Caster);
                     bullet.transform.position = shoot_point + new Vector2( dir.y, -dir.x) * 0.35f;
-                    bullet.Shoot(Caster.GetAngle() + 180);
+                    bullet.Shoot(Caster.GetAngle() + 180 + 15);
                 }
             }
             break;

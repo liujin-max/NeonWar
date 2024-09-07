@@ -98,9 +98,6 @@ public class NavigationWindow : MonoBehaviour
                 GameFacade.Instance.UIManager.LoadWindowAsync("SettingWindow", UIManager.BOTTOM, (obj)=>{
                     var window = obj.GetComponent<SettingWindow>();
                     window.ShowClose(false);
-                    window.SetCallback(()=>{
-
-                    });
                 });
 
                 return true;

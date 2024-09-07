@@ -12,14 +12,11 @@ public class GameWindow : MonoBehaviour
     [SerializeField] NumberTransition m_Coin;
     [SerializeField] NumberTransition m_Glass;
 
-    [SerializeField] Transform m_WeaponPivot;
-
 
     [Header("按钮")]
     [SerializeField] Button m_BtnFight;
 
 
-    private WeaponItem m_WEAPONITEM = null;
 
 
 
@@ -53,17 +50,8 @@ public class GameWindow : MonoBehaviour
         m_Glass.ForceValue(DataCenter.Instance.User.Glass);
 
         FlushUI();
-
-        // InitWeapon();
     }
-
-    void InitWeapon()
-    {
-        if (m_WEAPONITEM != null) Destroy(m_WEAPONITEM.gameObject);
-
-        m_WEAPONITEM    = GameFacade.Instance.UIManager.LoadItem(DataCenter.Instance.User.CurrentPlayer.UI + "Item", m_WeaponPivot).GetComponent<WeaponItem>();
-        m_WEAPONITEM.Init();
-    } 
+ 
 
     void FlushUI()
     {
@@ -71,8 +59,6 @@ public class GameWindow : MonoBehaviour
 
         m_Coin.SetValue(DataCenter.Instance.User.Coin);
         m_Glass.SetValue(DataCenter.Instance.User.Glass);
-
-        if (m_WEAPONITEM != null) m_WEAPONITEM.FlushUI();
     }
 
 
@@ -100,7 +86,7 @@ public class GameWindow : MonoBehaviour
     {
         m_Glass.SetValue(DataCenter.Instance.User.Glass);
 
-        FlushUI();
+        // FlushUI();
     }
 
 
