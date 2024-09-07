@@ -205,7 +205,7 @@ public class Pear
         get {
             int base_order = Level;
 
-            if (DataCenter.Instance.User.IsPearEquiped(this.Class)) base_order += 10;
+            if (DataCenter.Instance.User.IsPearEquiped(this.ID)) base_order += 10;
 
             return base_order;
         }

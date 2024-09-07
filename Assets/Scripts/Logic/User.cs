@@ -371,6 +371,19 @@ public class User
     //穿脱宝珠
     public void EquipPear(Pear pear)
     {
+        //先判断有没有相同class的宝珠，如果有 则替换
+        for (int i = 0; i < CurrentPlayer.PearSlots.Count; i++)
+        {
+            var slot = CurrentPlayer.PearSlots[i];
+            if (slot.Class == pear.Class) {
+                m_userUpdate = true;
+                CurrentPlayer.PearSlots[i].ID = pear.ID;
+                CurrentPlayer.PearSlots[i].Class = pear.Class;
+                return;
+            }
+        } 
+
+
         for (int i = 0; i < CurrentPlayer.PearSlots.Count; i++)
         {
             var slot = CurrentPlayer.PearSlots[i];
@@ -397,10 +410,10 @@ public class User
         }
     }
 
-    public bool IsPearEquiped(int pear_class)
+    public bool IsPearEquiped(int pear_id)
     {
         foreach (var slot_msg in CurrentPlayer.PearSlots) {
-            if (slot_msg.Class == pear_class) return true;
+            if (slot_msg.ID == pear_id) return true;
         }
         return false;
     }

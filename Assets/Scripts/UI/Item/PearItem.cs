@@ -53,7 +53,7 @@ public class PearItem : MonoBehaviour
     {
         m_Count.text = m_Pear.Count > 1 ? m_Pear.Count.ToString() : "";
 
-        ShowTagEquip(DataCenter.Instance.User.IsPearEquiped(m_Pear.Class));
+        ShowTagEquip(DataCenter.Instance.User.IsPearEquiped(m_Pear.ID));
     }
 
     public void ShowTagEquip(bool flag)

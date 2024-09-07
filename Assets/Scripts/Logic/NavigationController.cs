@@ -67,7 +67,7 @@ public static class NavigationController
             return false;
         }
 
-        GameFacade.Instance.UIManager.LoadWindowAsync("BackpackWindow", UIManager.MAJOR, (obj)=>{
+        GameFacade.Instance.UIManager.LoadWindowAsync("BackpackWindow", UIManager.BOARD, (obj)=>{
             obj.GetComponent<BackpackWindow>().Init(pear);
         });
 
