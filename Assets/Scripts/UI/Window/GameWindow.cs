@@ -31,10 +31,6 @@ public class GameWindow : MonoBehaviour
         EventManager.AddHandler(EVENT.ONUPDATEGLASS,    OnUpdateGlass);
         
 
-        EventManager.AddHandler(EVENT.UI_PEARCHANGE,    OnPearChange);
-        EventManager.AddHandler(EVENT.UI_BACKPACKOPEN,  OnBackpackOpen);
-
-
         m_BtnFight.onClick.AddListener(()=>{
             NavigationController.GotoBattle();
         });
@@ -46,9 +42,6 @@ public class GameWindow : MonoBehaviour
         EventManager.DelHandler(EVENT.ONBATTLEEND,      OnBattleEnd);
         EventManager.DelHandler(EVENT.ONUPDATEGLASS,    OnUpdateGlass);
 
-
-        EventManager.DelHandler(EVENT.UI_PEARCHANGE,    OnPearChange);
-        EventManager.DelHandler(EVENT.UI_BACKPACKOPEN,  OnBackpackOpen);
     }
 
 
@@ -61,14 +54,14 @@ public class GameWindow : MonoBehaviour
 
         FlushUI();
 
-        InitWeapon();
+        // InitWeapon();
     }
 
     void InitWeapon()
     {
         if (m_WEAPONITEM != null) Destroy(m_WEAPONITEM.gameObject);
 
-        m_WEAPONITEM    = GameFacade.Instance.UIManager.LoadItem(DataCenter.Instance.User.CurrentPlayer.UI, m_WeaponPivot).GetComponent<WeaponItem>();
+        m_WEAPONITEM    = GameFacade.Instance.UIManager.LoadItem(DataCenter.Instance.User.CurrentPlayer.UI + "Item", m_WeaponPivot).GetComponent<WeaponItem>();
         m_WEAPONITEM.Init();
     } 
 
@@ -109,24 +102,7 @@ public class GameWindow : MonoBehaviour
 
         FlushUI();
     }
-    
-    private void OnPearChange(GameEvent @event)
-    {
-        if (m_WEAPONITEM == null) return;
 
-        m_WEAPONITEM.InitPears();
-    }
-
-    private void OnBackpackOpen(GameEvent @event)
-    {
-        bool flag = (bool)@event.GetParam(0);
-
-        // m_WEAPONITEM.OnBackpackOpen(flag);
-
-        if (flag) m_WEAPONITEM.ResetPearParent(@event.GetParam(1) as Transform);
-        else m_WEAPONITEM.ResetPearParent(m_WEAPONITEM.transform);
-
-    }
 
     #endregion
 }

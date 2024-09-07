@@ -81,6 +81,7 @@
     <Compile Include="Assets\Scripts\Logic\Battle\CircleHP.cs" />
     <Compile Include="Assets\Scripts\Utility\CameraUtility.cs" />
     <Compile Include="Assets\Scripts\Utility\ToolUtility.cs" />
+    <Compile Include="Assets\Scripts\UI\Window\WeaponWindow.cs" />
     <Compile Include="Assets\AllIn1SpriteShader\Scripts\RandomSeed.cs" />
     <Compile Include="Assets\Scripts\GameFacade.cs" />
     <Compile Include="Assets\DOTween\Modules\DOTweenModuleAudio.cs" />
@@ -209,6 +210,7 @@
     <Compile Include="Assets\DOTween\Modules\DOTweenModuleEPOOutline.cs" />
     <Compile Include="Assets\Scripts\Logic\Battle\SpawnThread.cs" />
     <Compile Include="Assets\Scripts\UI\Window\MaskWindow.cs" />
+    <Compile Include="Assets\Scripts\UI\Item\WeaponPearItem.cs" />
     <Compile Include="Assets\Scripts\UI\Window\GameWindow.cs" />
     <Compile Include="Assets\Scripts\Manager\OBJPool.cs" />
     <Compile Include="Assets\Scripts\Logic\Enemy\Enemy_106.cs" />

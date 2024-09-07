@@ -30,6 +30,10 @@ public class BackpackWindow : MonoBehaviour
     {
         EventManager.AddHandler(EVENT.UI_PEARCOMPOSE,   OnPearComposeStart);
         EventManager.AddHandler(EVENT.UI_COMPOSECHANGE, OnComposeChange);
+
+        m_Mask.onClick.AddListener(()=>{
+            StartCoroutine(ExitAnim());
+        });
     }
 
     void OnDestroy()
@@ -38,20 +42,20 @@ public class BackpackWindow : MonoBehaviour
         EventManager.DelHandler(EVENT.UI_COMPOSECHANGE, OnComposeChange);
     }
 
-    void Start()
-    {
-        m_Mask.onClick.AddListener(()=>{
-            StartCoroutine(ExitAnim());
-        });
-    }
-
     public void Init(Pear current_pear)
     {
+        InitPearSeats();
         InitPears(current_pear);
 
         if (!m_IsAwake) StartCoroutine(EnterAnim());
 
         m_IsAwake = true;
+    }
+
+    void InitPearSeats()
+    {
+        var item = GameFacade.Instance.UIManager.LoadItem(DataCenter.Instance.User.CurrentPlayer.UI + "PearItem", m_PearSeatPivot).GetComponent<WeaponPearItem>();
+        item.Init();
     }
 
     void InitPears(Pear current_pear)
@@ -199,7 +203,7 @@ public class BackpackWindow : MonoBehaviour
         yield return new WaitForSeconds(m_EnterTimer);
 
         EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPMASK, false));
-        EventManager.SendEvent(new GameEvent(EVENT.UI_BACKPACKOPEN, true, m_PearSeatPivot));
+        EventManager.SendEvent(new GameEvent(EVENT.UI_BACKPACKOPEN, true));
 
         yield return null;
     }

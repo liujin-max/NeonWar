@@ -16,7 +16,7 @@ public static class NavigationController
                 obj.GetComponent<GameWindow>().Init();
             });
 
-            GameFacade.Instance.UIManager.LoadWindowAsync("NavigationWindow", UIManager.MAJOR, (obj)=>{
+            GameFacade.Instance.UIManager.LoadWindowAsync("NavigationWindow", UIManager.NAV, (obj)=>{
                 // obj.GetComponent<NavigationWindow>().Init();
             });
 
@@ -44,6 +44,16 @@ public static class NavigationController
 
         
         Field.Instance.Play(level_id);
+
+        return true;
+    }
+
+    //打开武器
+    public static bool GotoWeapon()
+    {
+        GameFacade.Instance.UIManager.LoadWindowAsync("WeaponWindow", UIManager.MAJOR, (obj)=>{
+            obj.GetComponent<WeaponWindow>().Init();
+        });
 
         return true;
     }

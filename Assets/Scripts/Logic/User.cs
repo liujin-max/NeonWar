@@ -74,13 +74,14 @@ public class SkillSlotMsg
 public class PlayerMsg
 {
     public int ID;
-    public string UI;
     public bool UnlockFlag = false;
     public bool InUse;  //使用中
     public int ATK = 1;
     public int ASP = 1;
     public int WORTH = 1;
 
+
+    [NonSerialized] public string UI;
     //技能池
     [NonSerialized] public int[] SkillPools;
 
@@ -117,7 +118,7 @@ public class GameUserData
         new PlayerMsg() 
         {
             ID          = (int)_C.PLAYER.BOW, 
-            UI          = "BowItem",
+            UI          = "Bow",
             UnlockFlag  = true, 
             InUse       = true, 
             SkillPools  = new int[] 

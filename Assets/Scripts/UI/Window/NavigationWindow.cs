@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -25,6 +26,8 @@ public class NavigationWindow : MonoBehaviour
         EventManager.AddHandler(EVENT.ONBATTLESTART,    OnBattleStart);
         EventManager.AddHandler(EVENT.ONBATTLEEND,      OnBattleEnd);
 
+        EventManager.AddHandler(EVENT.UI_BACKPACKOPEN,  OnBackpackOpen);
+
 
         #region 宝珠
         m_BtnBackpack.Init(
@@ -50,10 +53,10 @@ public class NavigationWindow : MonoBehaviour
         #region 武器
         m_BtnLeague.Init(
             ()=>{
-                return false;
+                return NavigationController.GotoWeapon();
             },
             ()=>{
-                
+                GameFacade.Instance.UIManager.UnloadWindow("WeaponWindow");
             },
             ()=>{
                 if (m_NAVBTN == m_BtnLeague) return;
@@ -124,7 +127,10 @@ public class NavigationWindow : MonoBehaviour
     {
         EventManager.DelHandler(EVENT.ONBATTLESTART,    OnBattleStart);
         EventManager.DelHandler(EVENT.ONBATTLEEND,      OnBattleEnd);
+
+        EventManager.DelHandler(EVENT.UI_BACKPACKOPEN,  OnBackpackOpen);
     }
+
 
     void Start()
     {
@@ -153,6 +159,23 @@ public class NavigationWindow : MonoBehaviour
         m_NavPivot.DOLocalMoveY(0, 0.5f).SetEase(Ease.InCubic);
 
         FlushUI();
+    }
+
+    //关闭背包
+    private void OnBackpackOpen(GameEvent @event)
+    {
+        bool flag = (bool)@event.GetParam(0);
+
+        if (flag == false)
+        {
+            if (m_NAVBTN == m_BtnBackpack)
+            {
+                m_BtnFight.Execute();
+                
+                m_NAVBTN.Revoke();
+                m_NAVBTN = m_BtnFight; 
+            }
+        }
     }
     #endregion
 }

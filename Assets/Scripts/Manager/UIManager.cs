@@ -8,11 +8,11 @@ public class UIManager : MonoBehaviour
 {
     public static Transform BOTTOM;
     public static Transform MAJOR;
-    public static Transform TIP;
+    public static Transform NAV;
     public static Transform BOARD;
     public static Transform EFFECT;
     public static Transform GUIDE;
-
+    public static Transform TIP;
 
 
     private Dictionary<string, GameObject> WindowCaches = new Dictionary<string, GameObject>();
@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour
     {
         BOTTOM  = GameObject.Find("Canvas/BOTTOM").transform;
         MAJOR   = GameObject.Find("Canvas/MAJOR").transform;
+        NAV     = GameObject.Find("Canvas/NAV").transform;
         BOARD   = GameObject.Find("Canvas/BOARD").transform;
         EFFECT  = GameObject.Find("Canvas/EFFECT").transform;
         GUIDE   = GameObject.Find("Canvas/GUIDE").transform;
