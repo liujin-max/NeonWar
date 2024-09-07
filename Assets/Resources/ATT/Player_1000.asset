@@ -30,8 +30,8 @@ MonoBehaviour:
     m_Base: 0
     m_Origin: 0
   SPEED:
-    m_Base: 120
-    m_Origin: 120
+    m_Base: 135
+    m_Origin: 135
   VUN_INC:
     m_Base: 1
     m_Origin: 1
