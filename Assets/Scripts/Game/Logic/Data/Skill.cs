@@ -678,7 +678,7 @@ public class Skill_10221 : Skill
 {
     public override void CustomUpdate(float deltaTime)
     {
-        foreach (var area in Field.Instance.Areas)
+        foreach (var area in Field.Instance.Areas.List)
         {
             Area_Ice ice = area as Area_Ice;
             if (ice == null) continue;
@@ -738,7 +738,7 @@ public class Skill_10231 : Skill
 
     public override void CustomUpdate(float deltaTime)
     {
-        foreach (var area in Field.Instance.Areas)
+        foreach (var area in Field.Instance.Areas.List)
         {
             Area_Rope rope = area as Area_Rope;
             if (rope == null) continue;

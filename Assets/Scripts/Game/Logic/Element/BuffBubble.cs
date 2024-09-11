@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BuffBubble : MonoBehaviour
+public class BuffBubble : MonoBehaviour , IDisposable, ICustomUpdate, IFinished
 {
     private SpriteRenderer m_Sprite;
 
@@ -62,7 +63,8 @@ public class BuffBubble : MonoBehaviour
 
         //缺少特效
         collider.GetComponent<Unit>().AddBuff(Field.Instance.Player, m_BuffID, m_BuffValue);
-        Field.Instance.RemoveBuffBubble(this);
+
+        m_Timer.Full();
     }
 
     #endregion

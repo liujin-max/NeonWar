@@ -7,7 +7,7 @@ using UnityEngine;
 
 #region 晕眩
 //晕眩0.5秒，无法移动
-public class Buff_Stun : Buff
+public class Buff_Stun : Buff, IDisposable
 {
     public Buff_Stun()
     {

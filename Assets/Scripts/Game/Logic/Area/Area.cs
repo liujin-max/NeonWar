@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using UnityEngine;
 //区域有各种效果:
 //荆棘区域(减速上面的敌人)
 //燃烧区域(对上面的敌人持续扣血)
-public class Area : MonoBehaviour
+public class Area : MonoBehaviour, IDisposable, ICustomUpdate, IFinished
 {
     //区域的释放者
     [HideInInspector] public Unit Caster;
