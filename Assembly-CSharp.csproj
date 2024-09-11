@@ -86,6 +86,7 @@
     <Compile Include="Assets\Scripts\GameFacade.cs" />
     <Compile Include="Assets\DOTween\Modules\DOTweenModuleAudio.cs" />
     <Compile Include="Assets\Scripts\Logic\AnimationEvent\AttackEvent.cs" />
+    <Compile Include="Assets\Scripts\Network\SocketTest.cs" />
     <Compile Include="Assets\Scripts\Effect\Rotate.cs" />
     <Compile Include="Assets\Scripts\Effect\Crit.cs" />
     <Compile Include="Assets\Scripts\Utility\ImageFrameAnimation.cs" />

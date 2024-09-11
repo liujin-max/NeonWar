@@ -174,10 +174,10 @@ public class GameFacade : MonoBehaviour
         //进入游戏
         NavigationController.GotoGame();
 
- 
         
         yield return null; 
     }
+
 
 
     void Update()

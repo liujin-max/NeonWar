@@ -8,9 +8,11 @@ public class SkillWindow : MonoBehaviour
 {
     [SerializeField] Transform m_SkillPivot;
     [SerializeField] Button m_BtnReset;
+    [SerializeField] Button m_BtnClose;
 
 
-
+    private SkillSlotMsg m_SkillSlot;
+    private SkillData m_SkillData;
     private List<SkillItem> m_SkillItems = new List<SkillItem>();
 
     SkillItem new_skill_item(int order)
@@ -33,16 +35,6 @@ public class SkillWindow : MonoBehaviour
     void Awake()
     {
         EventManager.AddHandler(EVENT.UI_SKILLUPGRADE,  OnSkillUpgrade);
-
-
-        //刷新技能
-        m_BtnReset.onClick.AddListener(()=>{
-            Platform.Instance.REWARD_VIDEOAD("", ()=>{
-                int[] skill_ids = State_Upgrade<Field>.GenerateSkillsPool();
-
-                Init(skill_ids);
-            });
-        });
     }
 
     void OnDestroy()
@@ -50,38 +42,57 @@ public class SkillWindow : MonoBehaviour
         EventManager.DelHandler(EVENT.UI_SKILLUPGRADE,  OnSkillUpgrade);
     }
 
-
-
-    public void Init(int[] skill_ids)
+    void Start()
     {
-        SoundManager.Instance.Load(SOUND.SHINE);
-        
-        InitSkills(skill_ids);
+        m_BtnClose.onClick.AddListener(()=>{
+            GameFacade.Instance.UIManager.UnloadWindow(gameObject);
+        });
+
+        //重置技能
+        m_BtnReset.onClick.AddListener(()=>{
+            Platform.Instance.REWARD_VIDEOAD("", ()=>{
+                DataCenter.Instance.League.ResetSkill(m_SkillSlot);
+            });
+        });
     }
 
-    public void InitSkills(int[] skill_ids)
+
+    public void Init(SkillSlotMsg skill_slot, SkillData skill_data)
     {
+        m_SkillSlot = skill_slot;
+        m_SkillData = skill_data;
+
+        InitSkills();
+    }
+
+    public void InitSkills()
+    {
+        m_BtnReset.gameObject.SetActive(false);
+
         m_SkillItems.ForEach(item => {item.gameObject.SetActive(false); });
 
+        int[] skill_ids = m_SkillSlot.SkillPool;
 
         for (int i = 0; i < skill_ids.Length; i++)
         {
-            int sk_id   = skill_ids[i];
-            if (sk_id == 0) continue;
-            
-            var skill   = Field.Instance.Player.GetSkill(sk_id) ;
-            int level   = skill != null ? skill.Level : 0;
-
+            int sk_id = skill_ids[i];
             SkillData skill_data = DataCenter.Instance.League.GetSkillData(sk_id);
             var item = new_skill_item(i);
-            item.Init(skill_data, level, ()=>{
-                Field.Instance.Player.AddSkill(skill_data, level + 1);
-                Field.Instance.NextWave();
+            item.Init(m_SkillSlot, skill_data);
 
-                GameFacade.Instance.EffectManager.LoadUIEffect(EFFECT.SKILLUP, item.transform.position);
+            if (m_SkillData == null || skill_data == m_SkillData)
+            {
+                item.Focus(true);
+                item.ShowBtnUpgrade(m_SkillSlot.Level < skill_data.LevelMax);
 
-                GameFacade.Instance.UIManager.UnloadWindow(gameObject);
-            });
+                //重置技能
+                m_BtnReset.gameObject.SetActive(m_SkillData != null);
+            }
+            else
+            {
+                item.Focus(false);
+                item.ShowBtnUpgrade(false);
+            }
         }
     }
 
@@ -91,8 +102,8 @@ public class SkillWindow : MonoBehaviour
     #region 监听事件
     void OnSkillUpgrade(GameEvent @event)
     {
-        // var data = DataCenter.Instance.League.GetSkillData(m_SkillSlot.ID);
-        // this.Init(m_SkillSlot, data);
+        var data = DataCenter.Instance.League.GetSkillData(m_SkillSlot.ID);
+        this.Init(m_SkillSlot, data);
     }
     #endregion
 }

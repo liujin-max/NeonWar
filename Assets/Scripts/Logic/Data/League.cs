@@ -89,31 +89,30 @@ public class League
     public SkillData GetSkillData(int id)
     {
         var sk_data = m_SkillDic.TryGetValue(id, out var data) ? data : null;
-        if (sk_data == null) Debug.LogError("GetSkillData is nil : " + id);
         return sk_data;
     }
 
     //重置技能
-    // public void ResetSkill(SkillSlotMsg slot)
-    // {
-    //     if (slot.ID == -1) return;
+    public void ResetSkill(SkillSlotMsg slot)
+    {
+        if (slot.ID == -1) return;
 
-    //     SkillData skillData = DataCenter.Instance.League.GetSkillData(slot.ID);
+        SkillData skillData = DataCenter.Instance.League.GetSkillData(slot.ID);
 
-    //     int cost_total = 0;
+        int cost_total = 0;
 
-    //     for (int i = 0; i < slot.Level; i++)
-    //     {
-    //         cost_total += Skill.GetCost(skillData, i);
-    //     }
+        for (int i = 0; i < slot.Level; i++)
+        {
+            cost_total += Skill.GetCost(skillData, i);
+        }
 
-    //     //重置技能
-    //     DataCenter.Instance.User.ResetSkill(slot);
+        //重置技能
+        DataCenter.Instance.User.ResetSkill(slot);
 
-    //     //返还资源
-    //     DataCenter.Instance.User.UpdateGlass(cost_total);
+        //返还资源
+        DataCenter.Instance.User.UpdateGlass(cost_total);
 
-    //     EventManager.SendEvent(new GameEvent(EVENT.UI_SKILLUPGRADE));
-    //     EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS));
-    // }
+        EventManager.SendEvent(new GameEvent(EVENT.UI_SKILLUPGRADE));
+        EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS));
+    }
 }
