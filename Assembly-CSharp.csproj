@@ -65,8 +65,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\UI\Window\ResultWindow.cs" />
-    <Compile Include="Assets\Scripts\Game\Logic\Data\Level.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\Enemy\Enemy_401.cs" />
+    <Compile Include="Assets\Scripts\Game\Logic\Data\Level.cs" />
     <Compile Include="Assets\Scripts\Utility\BalatroFloating.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\Player\Player.cs" />
     <Compile Include="Assets\AllIn1SpriteShader\Demo\Scripts\DemoRandomColorSwap.cs" />
@@ -81,8 +81,8 @@
     <Compile Include="Assets\Scripts\Manager\Effect.cs" />
     <Compile Include="Assets\Scripts\Utility\CameraUtility.cs" />
     <Compile Include="Assets\Scripts\Utility\ToolUtility.cs" />
-    <Compile Include="Assets\Scripts\UI\Window\WeaponWindow.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\Element\Trace.cs" />
+    <Compile Include="Assets\Scripts\UI\Window\WeaponWindow.cs" />
     <Compile Include="Assets\AllIn1SpriteShader\Scripts\RandomSeed.cs" />
     <Compile Include="Assets\Scripts\GameFacade.cs" />
     <Compile Include="Assets\DOTween\Modules\DOTweenModuleAudio.cs" />
@@ -126,8 +126,8 @@
     <Compile Include="Assets\Scripts\Utility\MouseClickHandler.cs" />
     <Compile Include="Assets\Scripts\Manager\Platform.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\Enemy\Enemy_403.cs" />
-    <Compile Include="Assets\Scripts\Effect\Affected.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\Element\Projectile.cs" />
+    <Compile Include="Assets\Scripts\Effect\Affected.cs" />
     <Compile Include="Assets\Scripts\Utility\TextureImporterSettings.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\AREA.cs" />
     <Compile Include="Assets\Scripts\FSM\Element\State_Upgrade.cs" />
@@ -194,8 +194,8 @@
     <Compile Include="Assets\Scripts\Game\Logic\Enemy\Enemy_109.cs" />
     <Compile Include="Assets\Scripts\Utility\UrlImageUtility.cs" />
     <Compile Include="Assets\Scripts\Utility\Sound.cs" />
-    <Compile Include="Assets\Scripts\Game\Logic\Area\Area_Poison.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\Data\Skill.cs" />
+    <Compile Include="Assets\Scripts\Game\Logic\Area\Area_Poison.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\NumericalManager.cs" />
     <Compile Include="Assets\Scripts\Manager\EffectManager.cs" />
     <Compile Include="Assets\Scripts\Struct\CDTimer.cs" />

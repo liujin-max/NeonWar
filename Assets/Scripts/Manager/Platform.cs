@@ -21,6 +21,7 @@ public abstract class Platform
         }
     }
 
+
     public abstract void INIT(Action callback);
     public abstract void AUTH(Action callback);
     public abstract void SYNC();

@@ -9,14 +9,36 @@ using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.Networking;
 
+
+
 public class SocketTest : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
     {
-
         // Debug.Log("结果：" + Rotate(new int[][] {}));
-        Rotate(new int[][] {new int[]{1,2,3}, new int[]{4,5,6}, new int[]{7,8,9}  });
+        // Rotate(new int[][] {new int[]{1,2,3}, new int[]{4,5,6}, new int[]{7,8,9}  });
+
+
+        int[] arr = new int[] {3,1,45,6,4,0};
+
+        for (int i = 0; i < arr.Length - 1; i++)
+        {
+            for (int j = 0; j < arr.Length - 1 - i; j++)
+            {
+                if (arr[j] > arr[j + 1])
+                {
+                    int temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+            }
+        }
+
+        foreach (var item in arr)
+        {
+            Debug.Log(item);
+        }
     }
 
 

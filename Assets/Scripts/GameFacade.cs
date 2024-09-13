@@ -149,7 +149,6 @@ public class GameFacade : MonoBehaviour
         //加载数据类
         DataCenter.Instance.Init(); 
 
-        
 
         StartCoroutine("SYNC");
     }

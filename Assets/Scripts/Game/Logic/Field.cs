@@ -28,14 +28,8 @@ public class Field : MonoBehaviour
     private List<Bullet> m_Bullets = new List<Bullet>();
     public List<Bullet> Bullets {get {return m_Bullets;}}
 
-    // private List<BuffBubble> m_BuffBubbles = new List<BuffBubble>();
-    // private List<BuffBubble> m_BuffRemoves = new List<BuffBubble>();
 
     public CycleList<BuffBubble> BuffBubbles = new CycleList<BuffBubble>(null);
-
-    // private List<Area> m_Areas = new List<Area>();
-    // public List<Area> Areas {get {return m_Areas;}}
-    // private List<Area> m_AreaRemoves = new List<Area>();
     public CycleList<Area> Areas = new CycleList<Area>((a)=>{ EventManager.SendEvent(new GameEvent(EVENT.ONREMOVEAREA, a));});
     
 
@@ -105,12 +99,8 @@ public class Field : MonoBehaviour
         Land.Dispose();
         m_Spawn.Dispose();
 
-        // m_BuffBubbles.ForEach(b => b.Dispose());
-        // m_BuffBubbles.Clear();
-        BuffBubbles.Dispose();
 
-        // m_Areas.ForEach(a => a.Dispose());
-        // m_Areas.Clear();
+        BuffBubbles.Dispose();
         Areas.Dispose();
 
 
@@ -174,29 +164,8 @@ public class Field : MonoBehaviour
 
         //区域
         Areas.CustomUpdate(deltaTime);
-        // foreach (var a in m_Areas) {
-        //     a.CustomUpdate(deltaTime);
-
-        //     if (a.IsFinished()) m_AreaRemoves.Add(a);
-        // }
-
-        // if (m_AreaRemoves.Count > 0) {
-        //     foreach (var a in m_AreaRemoves) Field.Instance.RemoveArea(a);
-        //     m_AreaRemoves.Clear();
-        // }
-
         //Buff
         BuffBubbles.CustomUpdate(deltaTime);
-        // foreach (var b in m_BuffBubbles) {
-        //     b.CustomUpdate(deltaTime);
-
-        //     if (b.IsFinished()) m_BuffRemoves.Add(b);
-        // }
-
-        // if (m_BuffRemoves.Count > 0) {
-        //     foreach (var b in m_BuffRemoves) Field.Instance.RemoveBuffBubble(b);
-        //     m_BuffRemoves.Clear();
-        // }
     }
 
     //每波结束时 做一些战场清理的操作
@@ -210,11 +179,7 @@ public class Field : MonoBehaviour
         m_Bullets.Clear();
         //
         Areas.Clear();
-        // foreach (var a in m_Areas) a.Dispose();
-        // m_Areas.Clear();
         BuffBubbles.Clear();
-        // foreach (var b in m_BuffBubbles) b.Dispose();
-        // m_BuffBubbles.Clear();
     }
 
     public _C.RESULT CheckResult()
@@ -314,17 +279,9 @@ public class Field : MonoBehaviour
             var bubble = obj.GetComponent<BuffBubble>();
             bubble.Init(id, value);
 
-            // m_BuffBubbles.Add(bubble);
             BuffBubbles.Add(bubble);
         });
     }
-
-    // public void RemoveBuffBubble(BuffBubble b)
-    // {
-    //     b.Dispose();
-
-    //     m_BuffBubbles.Remove(b);
-    // }
 
     //在场地上生成区域
     public void PushArea(Unit caster, string area_path, Vector2 point, float time, float scale = 1.0f)

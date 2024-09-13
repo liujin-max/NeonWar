@@ -23,13 +23,6 @@ public class OBJPool<T> where T : MonoBehaviour
 
     public bool Has(T value)
     {
-        // for (int i = 0; i < m_Caches.Count; i++)
-        // {
-        //     var obj_entity = m_Caches[i];
-        //     if (obj_entity.Entity.Equals(value))
-        //         return true;
-        // }
-
         return m_CacheDic.Contains(value);
     }
 
