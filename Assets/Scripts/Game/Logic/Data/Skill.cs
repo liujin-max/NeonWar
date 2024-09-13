@@ -1081,8 +1081,7 @@ public class Skill
 
     public static int GetCost(SkillData skillData, int level)
     {
-        // return skillData.Glass[Mathf.Min(skillData.LevelMax - 1, level)];
-        return 0;
+        return skillData.Costs[Mathf.Min(skillData.LevelMax - 1, level)];
     }
 
     public virtual void Dispose()
