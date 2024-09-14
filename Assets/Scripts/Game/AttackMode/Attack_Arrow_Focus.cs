@@ -12,38 +12,37 @@ public class Attack_Arrow_Focus : AttackMode
     }
 
 
-    public bool Useable()
+    public List<Enemy> GetEnemies()
     {
-        foreach (var e in Field.Instance.Spawn.Enemys) {
-            if (e.IsValid) return true;
-        }
+        List<Enemy> enemys = new List<Enemy>();
+        Field.Instance.Spawn.Enemys.ForEach(e => {
+            if (e.IsValid) enemys.Add(e);
+        });
 
-        return false;
+        return enemys;
     }
 
     public override void Execute()
     {
-        if (!Useable()) return;
+        List<Enemy> enemys = GetEnemies();
 
-        List<GameObject> enemys = new List<GameObject>();
-        Field.Instance.Spawn.Enemys.ForEach(e => {
-            if (e.IsValid) enemys.Add(e.gameObject);
-        });
+        if (enemys.Count == 0) return;
 
-        GameObject[] EnemiesToSort = enemys.ToArray();
+
+        Enemy[] EnemiesToSort = enemys.ToArray();
 
         //获取自身的位置
         Vector3 o_pos = Belong.transform.localPosition;
         
         //使用 LINQ 根据距离进行排序
-        GameObject[] sortedObjects = EnemiesToSort.OrderBy(obj => Vector3.Distance(o_pos, obj.transform.localPosition)).ToArray();
+        Enemy[] sortedObjects = EnemiesToSort.OrderBy(obj => Vector3.Distance(o_pos, obj.transform.localPosition)).ToArray();
 
         
         for (int i = 0; i < Count; i++)
         {
             if (i >= sortedObjects.Length) break;
 
-            Enemy e = sortedObjects[i].GetComponent<Enemy>();
+            Enemy e = sortedObjects[i];
 
             //向目标发射子弹
             var bullet = Field.Instance.CreateBullet(Belong);
