@@ -13,174 +13,22 @@ using UnityEngine.SocialPlatforms;
 #region 弓：多重射击
 public class Skill_10010 : Skill
 {
-    public override bool OnShoot()
+    public override void Equip()
     {
-        int BulletCount = this.Value;
-
-        switch (BulletCount)
-        {
-            case 1:
-            {
-                var bullet = Field.Instance.CreateBullet(Caster);
-                bullet.Shoot(Caster.GetAngle() + 180);
-            }
-            break;
-
-            case 2:
-            {
-                var dir = ToolUtility.AngleToVector(Caster.GetAngle());
-                Vector2 shoot_point = Caster.ShootPivot.position;
-
-                {
-                    var bullet = Field.Instance.CreateBullet(Caster);
-                    bullet.transform.position = shoot_point + new Vector2(-dir.y, dir.x) * 0.25f;
-                    bullet.Shoot(Caster.GetAngle() + 180);
-                }
-
-                {
-                    var bullet = Field.Instance.CreateBullet(Caster);
-                    bullet.transform.position = shoot_point + new Vector2( dir.y, -dir.x) * 0.25f;
-                    bullet.Shoot(Caster.GetAngle() + 180);
-                }
-            }
-            break;
-
-            case 3:
-            {
-                var dir = ToolUtility.AngleToVector(Caster.GetAngle());
-                Vector2 shoot_point = Caster.ShootPivot.position;
-
-                {
-                    var bullet = Field.Instance.CreateBullet(Caster);
-                    bullet.transform.position = shoot_point;
-                    bullet.Shoot(Caster.GetAngle() + 180);
-                }
-
-                {
-                    var bullet = Field.Instance.CreateBullet(Caster);
-                    bullet.transform.position = shoot_point + new Vector2(-dir.y, dir.x) * 0.35f;
-                    bullet.Shoot(Caster.GetAngle() + 180 - 15);
-                }
-
-                {
-                    var bullet = Field.Instance.CreateBullet(Caster);
-                    bullet.transform.position = shoot_point + new Vector2( dir.y, -dir.x) * 0.35f;
-                    bullet.Shoot(Caster.GetAngle() + 180 + 15);
-                }
-            }
-            break;
-
-            case 4:
-            {
-                var dir = ToolUtility.AngleToVector(Caster.GetAngle());
-                Vector2 shoot_point = Caster.ShootPivot.position;
-                
-                {
-                    var bullet = Field.Instance.CreateBullet(Caster);
-                    bullet.transform.position = shoot_point + new Vector2(-dir.y, dir.x) * 0.25f;
-                    bullet.Shoot(Caster.GetAngle() + 180);
-                }
-
-                {
-                    var bullet = Field.Instance.CreateBullet(Caster);
-                    bullet.transform.position = shoot_point + new Vector2(-dir.y, dir.x) * 0.25f;
-                    bullet.Shoot(Caster.GetAngle() + 180 - 15);
-                }
-
-                {
-                    var bullet = Field.Instance.CreateBullet(Caster);
-                    bullet.transform.position = shoot_point + new Vector2( dir.y, -dir.x) * 0.25f;
-                    bullet.Shoot(Caster.GetAngle() + 180);
-                }
-
-                {
-                    var bullet = Field.Instance.CreateBullet(Caster);
-                    bullet.transform.position = shoot_point + new Vector2( dir.y, -dir.x) * 0.25f;
-                    bullet.Shoot(Caster.GetAngle() + 180 + 15);
-                }
-            }
-            break;
-
-            case 5:
-            {
-                var dir = ToolUtility.AngleToVector(Caster.GetAngle());
-                Vector2 shoot_point = Caster.ShootPivot.position;
-
-                {
-                    var bullet = Field.Instance.CreateBullet(Caster);
-                    bullet.transform.position = shoot_point;
-                    bullet.Shoot(Caster.GetAngle() + 180);
-                }
-
-                {
-                    var bullet = Field.Instance.CreateBullet(Caster);
-                    bullet.transform.position = shoot_point + new Vector2(-dir.y, dir.x) * 0.35f;
-                    bullet.Shoot(Caster.GetAngle() + 180);
-                }
-
-                {
-                    var bullet = Field.Instance.CreateBullet(Caster);
-                    bullet.transform.position = shoot_point + new Vector2( dir.y, -dir.x) * 0.35f;
-                    bullet.Shoot(Caster.GetAngle() + 180);
-                }
-
-
-                {
-                    var bullet = Field.Instance.CreateBullet(Caster);
-                    bullet.transform.position = shoot_point + new Vector2(-dir.y, dir.x) * 0.35f;
-                    bullet.Shoot(Caster.GetAngle() + 180 - 20);
-                }
-
-                {
-                    var bullet = Field.Instance.CreateBullet(Caster);
-                    bullet.transform.position = shoot_point + new Vector2( dir.y, -dir.x) * 0.35f;
-                    bullet.Shoot(Caster.GetAngle() + 180 + 20);
-                }
-            }
-            break;
-        }
-
-
-        return true;
+        Caster.SetAttackMode(new Attack_Arrow_Normal(Caster, this.Value));
     }
 }
 
 #endregion
 
+
 #region 弓：分裂箭矢
 //击中敌人后分裂出#枚箭矢
 public class Skill_10020 : Skill
 {
-    public Skill_10020()
+    public override void Equip()
     {
-        EventManager.AddHandler(EVENT.ONBULLETHIT,  OnBulletHit);
-    }
-
-    public override void Dispose()
-    {
-        EventManager.DelHandler(EVENT.ONBULLETHIT,  OnBulletHit);
-    }
-
-    //子弹击中目标
-    private void OnBulletHit(GameEvent @event)
-    {
-        Bullet b = @event.GetParam(0) as Bullet;
-        if (b.Caster != Caster) return;
-        if (b.IsSplit == true) return;   //分裂出的箭矢也能继续分裂？
-
-        Unit unit = @event.GetParam(1) as Unit;
-
-        for (int i = 0; i < this.Value; i++)
-        {
-            var bullet = Field.Instance.CreateBullet(Caster);
-            bullet.transform.position = b.transform.position;
-            bullet.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
-            bullet.IsSplit = true;
-            bullet.Hit.IgnoreUnits.Add(unit);
-
-            bullet.Shoot(RandomUtility.Random(0, 360));
-        }
-        
+        Caster.SetAttackMode(new Attack_Arrow_Split(Caster, this.Value));
     }
 }
 #endregion
@@ -229,44 +77,9 @@ public class Skill_10021 : Skill
 //箭矢最多可以追踪场上距离最近的#个敌人
 public class Skill_10030 : Skill
 {
-    public override bool Useable()
+    public override void Equip()
     {
-        foreach (var e in Field.Instance.Spawn.Enemys) {
-            if (e.IsValid) return true;
-        }
-
-        return false;
-    }
-
-    public override bool OnShoot()
-    {
-        List<GameObject> enemys = new List<GameObject>();
-        Field.Instance.Spawn.Enemys.ForEach(e => {
-            if (e.IsValid) enemys.Add(e.gameObject);
-        });
-
-        GameObject[] EnemiesToSort = enemys.ToArray();
-
-        //获取自身的位置
-        Vector3 o_pos = Caster.transform.localPosition;
-        
-        //使用 LINQ 根据距离进行排序
-        GameObject[] sortedObjects = EnemiesToSort.OrderBy(obj => Vector3.Distance(o_pos, obj.transform.localPosition)).ToArray();
-
-        
-        for (int i = 0; i < Value; i++)
-        {
-            if (i >= sortedObjects.Length) break;
-
-            Enemy e = sortedObjects[i].GetComponent<Enemy>();
-
-            //向目标发射子弹
-            var bullet = Field.Instance.CreateBullet(Caster);
-            bullet.Shoot(ToolUtility.VectorToAngle(e.transform.localPosition - Caster.transform.localPosition));
-        }
-
-
-        return true;
+        Caster.SetAttackMode(new Attack_Arrow_Focus(Caster, this.Value));
     }
 }
 #endregion
@@ -457,43 +270,6 @@ public class Skill_10160 : Skill
 #endregion
 
 
-#region 弓：吸血
-//触发必杀时恢复1点生命
-public class Skill_10161 : Skill
-{
-    public Skill_10161()
-    {
-        EventManager.AddHandler(EVENT.ONBULLETHIT,   OnBulletHit);
-    }
-
-    public override void Dispose()
-    {
-        EventManager.DelHandler(EVENT.ONBULLETHIT,   OnBulletHit);
-    }
-
-    //子弹击中目标
-    private void OnBulletHit(GameEvent @event)
-    {
-        Bullet b = @event.GetParam(0) as Bullet;
-        if (b.Caster != Caster) return;
-        if (b.IsSplit == true) return;
-
-        Unit unit = @event.GetParam(1) as Unit;
-
-        if (!unit.IsDead()) return;
-
-        if (!b.Hit.IsHitKill) return;
-
-
-        Caster.UpdateHP(1);
-
-        GameFacade.Instance.EffectManager.Load(EFFECT.HEAL, Vector3.zero, Caster.gameObject);
-
-        EventManager.SendEvent(new GameEvent(EVENT.ONHPUPDATE));
-    }
-}
-#endregion
-
 #region 弓：标记
 //被击中的敌人在5秒内受到的伤害提高#%
 public class Skill_10170 : Skill
@@ -552,31 +328,6 @@ public class Skill_10210 : Skill
         Caster.CreateProjectile(PROJECTILE.POISONWATER, _C.TRACE.PARABOLA, point, 0.4f, ()=>{
             Field.Instance.PushArea(Caster, AREA.POISON, point, Value);
         });
-    }
-}
-#endregion
-
-#region 弓：毒气暴击
-//毒气陷阱的伤害可以产生暴击
-public class Skill_10211 : Skill
-{
-    public Skill_10211()
-    {
-        EventManager.AddHandler(EVENT.ONPUSHAREA,   OnPushArea);
-    }
-
-    public override void Dispose()
-    {
-        EventManager.DelHandler(EVENT.ONPUSHAREA,   OnPushArea);
-    }
-
-    private void OnPushArea(GameEvent @event)
-    {
-        Area_Poison area = @event.GetParam(0) as Area_Poison;
-        
-        if (area == null) return;
-
-        area.transform.GetComponent<Area_Poison>().CritFlag = true;
     }
 }
 #endregion
@@ -933,34 +684,34 @@ public class Skill_10270 : Skill
 
 #region ====================== 通用技能 ======================
 
-#region 增强体质
-//提高1点生命上限
-public class Skill_99901 : Skill
-{
-    public override void Equip()
-    {
-        Caster.ATT.HPMAX++;
-        Caster.UpdateHP(1);
+// #region 增强体质
+// //提高1点生命上限
+// public class Skill_99901 : Skill
+// {
+//     public override void Equip()
+//     {
+//         Caster.ATT.HPMAX++;
+//         Caster.UpdateHP(1);
 
-        EventManager.SendEvent(new GameEvent(EVENT.ONHPUPDATE));
-    }
-}
-#endregion
+//         EventManager.SendEvent(new GameEvent(EVENT.ONHPUPDATE));
+//     }
+// }
+// #endregion
 
 
-#region 治疗
-//恢复50%的生命值
-public class Skill_99902 : Skill
-{
-    public override void Equip()
-    {
-        int value = Mathf.CeilToInt(Caster.ATT.HPMAX / 2.0f);
-        Caster.UpdateHP(value);
+// #region 治疗
+// //恢复50%的生命值
+// public class Skill_99902 : Skill
+// {
+//     public override void Equip()
+//     {
+//         int value = Mathf.CeilToInt(Caster.ATT.HPMAX / 2.0f);
+//         Caster.UpdateHP(value);
 
-        EventManager.SendEvent(new GameEvent(EVENT.ONHPUPDATE));
-    }
-}
-#endregion
+//         EventManager.SendEvent(new GameEvent(EVENT.ONHPUPDATE));
+//     }
+// }
+// #endregion
 
 #endregion
 
@@ -1010,12 +761,10 @@ public class Skill
         {10130, () => new Skill_10130()},
 
         {10160, () => new Skill_10160()},
-        {10161, () => new Skill_10161()},
         {10170, () => new Skill_10170()},
         
         //弓 价值
         {10210, () => new Skill_10210()},
-        {10211, () => new Skill_10211()},
         {10212, () => new Skill_10212()},
         {10220, () => new Skill_10220()},
         {10221, () => new Skill_10221()},
@@ -1033,8 +782,8 @@ public class Skill
 
 
         //通用
-        {99901, () => new Skill_99901()},
-        {99902, () => new Skill_99902()},
+        // {99901, () => new Skill_99901()},
+        // {99902, () => new Skill_99902()},
     };
 
 
@@ -1119,15 +868,15 @@ public class Skill
         return Level >= Data.LevelMax;
     }
 
-    public virtual bool Useable()
-    {
-        return true;
-    }
+    // public virtual bool Useable()
+    // {
+    //     return true;
+    // }
 
-    public virtual bool OnShoot()
-    {
-        return false;
-    }
+    // public virtual bool OnShoot()
+    // {
+    //     return false;
+    // }
 
     public virtual void CustomUpdate(float deltaTime)
     {

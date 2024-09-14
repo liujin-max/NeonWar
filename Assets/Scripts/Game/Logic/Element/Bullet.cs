@@ -14,10 +14,10 @@ public class Bullet : MonoBehaviour
     public Hit Hit;
 
 
-
+    [HideInInspector] public int SplitCount;            //分裂数量
     [HideInInspector] public bool IsSplit = false;      //是否是分裂出的
-    [HideInInspector] public int HitRemaining = 1;       //剩余可击中敌人次数(穿透逻辑)
-    [HideInInspector] public int ReboundTimes = 0;      //可反弹次数
+    [HideInInspector] public int HitRemaining = 1;      //剩余可击中敌人次数(穿透逻辑)
+    [HideInInspector] public int ReboundTimes;          //可反弹次数
     
 
     void Awake()
@@ -35,6 +35,7 @@ public class Bullet : MonoBehaviour
     {
         Speed.Clear();
 
+        SplitCount      = 0;
         IsSplit         = false;
         HitRemaining    = 1;
         ReboundTimes    = 0;
@@ -75,6 +76,22 @@ public class Bullet : MonoBehaviour
         angle += 180 + RandomUtility.Random(-45, 45);
 
         Turn(angle);
+    }
+
+    void Split(Bullet origin, Unit target)
+    {
+        if (SplitCount == 0) return;
+
+        for (int i = 0; i < SplitCount; i++)
+        {
+            var bullet = Field.Instance.CreateBullet(Caster);
+            bullet.transform.position = origin.transform.position;
+            bullet.transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+            bullet.IsSplit = true;
+            bullet.Hit.IgnoreUnits.Add(target);
+
+            bullet.Shoot(RandomUtility.Random(0, 360));
+        }
     }
 
     public void Dispose()
@@ -120,6 +137,9 @@ public class Bullet : MonoBehaviour
 
         if (Field.Instance.SettleHit(Hit, unit) == true) {
             EventManager.SendEvent(new GameEvent(EVENT.ONBULLETHIT, this, unit));
+
+            //分裂检测
+            Split(this, unit);
 
             HitRemaining--;
 

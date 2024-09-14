@@ -12,6 +12,7 @@ public class Player : Unit
     public CDTimer InvincibleTimer = new CDTimer(1f);   //无敌时间
     [HideInInspector] public int MoveDirection = 1;
 
+    protected AttackMode m_AttackMode;
     protected List<Skill> m_Skills = new List<Skill>();
     public List<Skill> Skills {get {return m_Skills;}}
     protected Dictionary<int, Skill> m_SkillDic = new Dictionary<int, Skill>();
@@ -31,7 +32,7 @@ public class Player : Unit
         HeadPivot   = transform.Find("Head");
     }
 
-    public void Init(int id, float angle)
+    public virtual void Init(int id, float angle)
     {
         ID      = id;
         Side    = _C.SIDE.PLAYER;
@@ -45,6 +46,11 @@ public class Player : Unit
         InvincibleTimer.Full();
 
         this.SetPosition(ToolUtility.FindPointOnCircle(Vector2.zero, _C.DEFAULT_RADIUS, angle));
+    }
+
+    public void SetAttackMode(AttackMode attackMode)
+    {
+        m_AttackMode = attackMode;
     }
 
     public void SetPosition(Vector2 pos)
@@ -62,9 +68,9 @@ public class Player : Unit
     {
         if (!base.CanAttack()) return false;
 
-        foreach (var sk in m_Skills) {
-            if (!sk.Useable()) return false;
-        }
+        // foreach (var sk in m_Skills) {
+        //     if (!sk.Useable()) return false;
+        // }
 
         return true;
     }
@@ -142,6 +148,14 @@ public class Player : Unit
         this.SetPosition(ToolUtility.FindPointOnCircle(Vector2.zero, _C.DEFAULT_RADIUS, m_Angle));
     }
 
+    public override void DoAttack()
+    {
+        if (m_AttackMode != null)
+        {
+            m_AttackMode.Execute();
+        }
+    }
+
     //对角线闪现
     public void Blink()
     {
@@ -200,6 +214,7 @@ public class Player : Unit
             DataCenter.Instance.User.CurrentPlayer.SkillSlots.ForEach(skill_msg => {
                 if (skill_msg.ID > 0) {
                     Skill sk = Skill.Create(DataCenter.Instance.League.GetSkillData(skill_msg.ID), this, skill_msg.Level);
+                    sk.Equip();
                     m_Skills.Add(sk);
                 }
             });
