@@ -4,7 +4,6 @@
     "Waves": 
     [
         {
-            "Order": 2,
             "Monsters":
             [
                 {"Time":    0, "ID": 100, "HP": 4},

@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//攻击模式
 public abstract class AttackMode
 {
     public Player Belong;
@@ -12,6 +14,11 @@ public abstract class AttackMode
     {
         Belong  = player;
         Count   = count;
+    }
+
+    public virtual bool Useable()
+    {
+        return true;
     }
 
     public abstract void Execute();

@@ -49,4 +49,6 @@ public static class EVENT
     public static string ONPUSHAREA         = "ONPUSHAREA";
     //移除区域
     public static string ONREMOVEAREA       = "ONREMOVEAREA";
+    //投掷陷阱
+    public static string ONPLAYTRAP         = "ONPLAYTRAP";
 }

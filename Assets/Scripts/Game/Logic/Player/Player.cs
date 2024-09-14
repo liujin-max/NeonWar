@@ -68,9 +68,7 @@ public class Player : Unit
     {
         if (!base.CanAttack()) return false;
 
-        // foreach (var sk in m_Skills) {
-        //     if (!sk.Useable()) return false;
-        // }
+        if (!m_AttackMode.Useable()) return false;
 
         return true;
     }
@@ -82,6 +80,10 @@ public class Player : Unit
 
         foreach (var skill in m_Skills) {
             skill.CustomUpdate(deltaTime);
+        }
+
+        foreach (var pear in m_Pears) {
+            pear.CustomUpdate(deltaTime);
         }
 
         InvincibleTimer.Update(deltaTime);
@@ -169,27 +171,6 @@ public class Player : Unit
         return m_SkillDic.TryGetValue(skill_id, out var skill) ? skill : null;
     }
 
-    public Skill AddSkill(SkillData skillData, int level)
-    {
-        Skill sk = GetSkill(skillData.ID);
-        if (sk == null) 
-        {
-            sk = Skill.Create(skillData, this, level);
-            sk.Equip();
-
-            if (skillData.Type != _C.SKILL_TYPE.ONEOFF)
-            {
-                m_Skills.Add(sk);
-                m_SkillDic[skillData.ID] = sk;
-            }
-        }
-        else
-        {
-            sk.Upgrade(level);
-        }
-        
-        return sk;
-    }
 
     //同步最新的加成等级
     public void Sync()

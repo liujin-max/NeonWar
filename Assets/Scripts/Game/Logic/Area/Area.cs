@@ -12,7 +12,7 @@ using UnityEngine;
 public class Area : MonoBehaviour, IDisposable, ICustomUpdate, IFinished
 {
     //区域的释放者
-    [HideInInspector] public Unit Caster;
+    [HideInInspector] public Unit Belong;
 
     //处于区域内的单位
     protected Dictionary<Unit, float> m_Units = new Dictionary<Unit, float>();
@@ -23,9 +23,9 @@ public class Area : MonoBehaviour, IDisposable, ICustomUpdate, IFinished
 
 
 
-    public virtual void Init(Unit caster, float time)
+    public virtual void Init(Unit belong, float time)
     {
-        Caster = caster;
+        Belong = belong;
 
         m_Timer.Reset(time);
     }
@@ -73,7 +73,7 @@ public class Area : MonoBehaviour, IDisposable, ICustomUpdate, IFinished
 
         //通常是对敌人生效
         //也不排除后续会对友方生效，例如在地上铺一个治疗区域
-        if (unit.Side == Caster.Side) return;
+        if (unit.Side == Belong.Side) return;
         if (m_Units.ContainsKey(unit)) return;
 
         Enter(unit);

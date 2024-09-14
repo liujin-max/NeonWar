@@ -22,6 +22,16 @@ public class Attack_Arrow_Focus : AttackMode
         return enemys;
     }
 
+    public override bool Useable()
+    {
+        foreach (var e in Field.Instance.Spawn.Enemys)
+        {
+            if (e.IsValid) return true;
+        }
+
+        return false;
+    }
+
     public override void Execute()
     {
         List<Enemy> enemys = GetEnemies();

@@ -12,12 +12,12 @@ public class Pear_Crit : Pear
     {
         base.Equip(player);
 
-        Caster.ATT.CP.PutADD(this, m_Data.Value * 10);
+        Belong.ATT.CP.PutADD(this, m_Data.Value * 10);
     }
 
     public override void UnEquip()
     {
-        Caster.ATT.CP.Pop(this);
+        Belong.ATT.CP.Pop(this);
 
         base.UnEquip();
     }
@@ -32,12 +32,12 @@ public class Pear_CritDemage : Pear
     {
         base.Equip(player);
 
-        Caster.ATT.CT.PutADD(this, m_Data.Value * 10);
+        Belong.ATT.CT.PutADD(this, m_Data.Value * 10);
     }
 
     public override void UnEquip()
     {
-        Caster.ATT.CT.Pop(this);
+        Belong.ATT.CT.Pop(this);
 
         base.UnEquip();
     }
@@ -52,12 +52,12 @@ public class Pear_Speed : Pear
     {
         base.Equip(player);
 
-        Caster.ATT.SPEED.PutADD(this, m_Data.Value);
+        Belong.ATT.SPEED.PutADD(this, m_Data.Value);
     }
 
     public override void UnEquip()
     {
-        Caster.ATT.SPEED.Pop(this);
+        Belong.ATT.SPEED.Pop(this);
 
         base.UnEquip();
     }
@@ -72,14 +72,14 @@ public class Pear_HP : Pear
     {
         base.Equip(player);
 
-        Caster.ATT.HPMAX += m_Data.Value;
-        Caster.ATT.HP += m_Data.Value;
+        Belong.ATT.HPMAX += m_Data.Value;
+        Belong.ATT.HP += m_Data.Value;
     }
 
     public override void UnEquip()
     {
-        Caster.ATT.HPMAX -= m_Data.Value;
-        Caster.ATT.HP -= m_Data.Value;
+        Belong.ATT.HPMAX -= m_Data.Value;
+        Belong.ATT.HP -= m_Data.Value;
 
         base.UnEquip();
     }
@@ -125,12 +125,12 @@ public class Pear_Dodge : Pear
     {
         base.Equip(player);
 
-        Caster.ATT.DODGE.PutADD(this, m_Data.Value);
+        Belong.ATT.DODGE.PutADD(this, m_Data.Value);
     }
 
     public override void UnEquip()
     {
-        Caster.ATT.DODGE.Pop(this);
+        Belong.ATT.DODGE.Pop(this);
 
         base.UnEquip();
     }
@@ -146,12 +146,12 @@ public class Pear_Boss : Pear
     {
         base.Equip(player);
         
-        Caster.ATT.BOSS_INC.PutAUL(this, m_Data.Value / 100.0f);
+        Belong.ATT.BOSS_INC.PutAUL(this, m_Data.Value / 100.0f);
     }
 
     public override void UnEquip()
     {
-        Caster.ATT.BOSS_INC.Pop(this);
+        Belong.ATT.BOSS_INC.Pop(this);
         
         base.UnEquip();
     }
@@ -190,6 +190,96 @@ public class Pear_Arrow : Pear
 #endregion
 
 
+#region 陷阱的范围增加#
+public class Pear_AreaRange : Pear
+{
+    public override void Equip(Player player)
+    {
+        base.Equip(player);
+        
+        EventManager.AddHandler(EVENT.ONPUSHAREA,   OnPushArea);
+    }
+
+    public override void UnEquip()
+    {
+        EventManager.DelHandler(EVENT.ONPUSHAREA,   OnPushArea);
+        
+        base.UnEquip();
+    }
+
+    private void OnPushArea(GameEvent @event)
+    {
+        Area area = @event.GetParam(0) as Area;
+
+        if (area.Belong != Belong) return;
+
+        // if (area.transform.GetComponent<Area_Poison>() != null 
+        //     || area.transform.GetComponent<Area_Ice>() != null 
+        //     || area.transform.GetComponent<Area_Rope>() != null)
+        // {
+        float radius    = 1 + m_Data.Value / 100.0f;
+        area.transform.localScale = new Vector3(radius, radius, 1);
+        // }
+    }
+}
+
+#endregion 
+
+
+#region 陷阱的冷却速度提高#%
+public class Pear_AreaASP : Pear
+{
+    public override void CustomUpdate(float deltaTime)
+    {
+        foreach (var sk in Belong.Skills)
+        {
+            if (sk.ID == 10210 || sk.ID == 10220 || sk.ID == 10230)
+            {
+                sk.CustomUpdate(deltaTime * m_Data.Value / 100.0f);
+            }
+        }
+    }
+}
+#endregion
+
+#region 投掷陷阱时有#%的概率立即刷新冷却时间
+public class Pear_AreaReset : Pear
+{
+    public override void Equip(Player player)
+    {
+        base.Equip(player);
+        
+        EventManager.AddHandler(EVENT.ONPLAYTRAP,   OnPlayTrap);
+    }
+
+    public override void UnEquip()
+    {
+        EventManager.DelHandler(EVENT.ONPLAYTRAP,   OnPlayTrap);
+        
+        base.UnEquip();
+    }
+
+    private void OnPlayTrap(GameEvent @event)
+    {
+        Skill sk = @event.GetParam(0) as Skill;
+
+        if (sk.Caster != Belong) return;
+
+        if (!RandomUtility.IsHit(m_Data.Value)) return;
+
+        sk.FullCD();
+    }
+}
+#endregion
+
+
+
+
+
+
+
+
+
 //宝珠
 public class Pear
 {
@@ -213,7 +303,7 @@ public class Pear
     }
 
     public int Count;
-    public Player Caster;
+    public Player Belong;
 
 
 
@@ -269,19 +359,23 @@ public class Pear
 
     public virtual void Equip(Player player)
     {
-        Caster = player;
+        Belong = player;
     }
 
     public virtual void UnEquip()
     {
-        Caster = null;
+        Belong = null;
+    }
+
+    public virtual void CustomUpdate(float deltaTime)
+    {
+
     }
 
     public string GetDescription()
     {
         var data = DataCenter.Instance.Backpack.GetPearData(m_Data.Class);
         string text = data.Description.Replace("#", _C.COLOR_GREEN2 + m_Data.Value.ToString() + "</color>");
-
 
         return text;
     }

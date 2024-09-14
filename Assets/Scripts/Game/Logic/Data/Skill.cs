@@ -325,6 +325,8 @@ public class Skill_10210 : Skill
         
         Vector2 point = target.transform.localPosition;
 
+        EventManager.SendEvent(new GameEvent(EVENT.ONPLAYTRAP, this));
+
         Caster.CreateProjectile(PROJECTILE.POISONWATER, _C.TRACE.PARABOLA, point, 0.4f, ()=>{
             Field.Instance.PushArea(Caster, AREA.POISON, point, Value);
         });
@@ -416,6 +418,8 @@ public class Skill_10220 : Skill
         //投掷陷阱
         Vector2 point = target.transform.localPosition;
 
+        EventManager.SendEvent(new GameEvent(EVENT.ONPLAYTRAP, this));
+
         Caster.CreateProjectile(PROJECTILE.ICEWATER, _C.TRACE.PARABOLA, point, 0.4f, ()=>{
             Field.Instance.PushArea(Caster, AREA.ICE, point, Value);
         });
@@ -473,6 +477,8 @@ public class Skill_10230 : Skill
 
         var point = target.transform.localPosition;
 
+        EventManager.SendEvent(new GameEvent(EVENT.ONPLAYTRAP, this));
+
         Caster.CreateProjectile(PROJECTILE.ROPE, _C.TRACE.PARABOLA, point, 0.4f, ()=>{
             Field.Instance.PushArea(Caster, AREA.ROPE, point, Value);
         });
@@ -513,106 +519,6 @@ public class Skill_10231 : Skill
     }
 }
 #endregion
-
-
-
-
-#region 弓：扩大陷阱
-//陷阱的范围增加至#
-public class Skill_10240 : Skill
-{
-    public Skill_10240()
-    {
-        EventManager.AddHandler(EVENT.ONPUSHAREA,   OnPushArea);
-    }
-
-    public override void Dispose()
-    {
-        EventManager.DelHandler(EVENT.ONPUSHAREA,   OnPushArea);
-    }
-
-    private void OnPushArea(GameEvent @event)
-    {
-        Area area = @event.GetParam(0) as Area;
-
-        if (area.transform.GetComponent<Area_Poison>() != null 
-            || area.transform.GetComponent<Area_Ice>() != null 
-            || area.transform.GetComponent<Area_Rope>() != null)
-        {
-            float radius    = Value / 100.0f;
-            area.transform.localScale = new Vector3(radius, radius, 1);
-        }
-    }
-}
-#endregion
-
-
-#region 弓：急速陷阱
-//陷阱的冷却速度提高#%
-public class Skill_10250 : Skill
-{
-
-    public override void CustomUpdate(float deltaTime)
-    {
-        foreach (var sk in Caster.Skills)
-        {
-            if (sk.ID == 10210 || sk.ID == 10220 || sk.ID == 10230)
-            {
-                sk.CustomUpdate(deltaTime * Value / 100.0f);
-            }
-        }
-    }
-}
-#endregion
-
-
-#region 弓：快速投掷
-//投掷陷阱时有#%的概率立即刷新任意陷阱的冷却时间
-public class Skill_10251 : Skill
-{
-    public Skill_10251()
-    {
-        EventManager.AddHandler(EVENT.ONPUSHAREA,   OnPushArea);
-    }
-
-    public override void Dispose()
-    {
-        EventManager.DelHandler(EVENT.ONPUSHAREA,   OnPushArea);
-    }
-
-    private void OnPushArea(GameEvent @event)
-    {
-        Area area = @event.GetParam(0) as Area;
-
-        if (!RandomUtility.IsHit(Value)) return;
-
-        if (area.transform.GetComponent<Area_Poison>() != null 
-            || area.transform.GetComponent<Area_Ice>() != null 
-            || area.transform.GetComponent<Area_Rope>() != null)
-        {
-            int[] skill_ids = {10210, 10220, 10230};
-            List<Skill> skills = new List<Skill>();
-
-            foreach (var sk_id in skill_ids)
-            {
-                var skill = Caster.GetSkill(sk_id);
-                if (skill != null) skills.Add(skill);
-            }
-
-            if (skills.Count > 0)
-            {
-                var sk = skills[RandomUtility.Random(0, skills.Count)];
-                sk.FullCD();
-            }
-        }
-    }
-}
-#endregion
-
-
-
-
-
 
 
 
@@ -770,9 +676,9 @@ public class Skill
         {10221, () => new Skill_10221()},
         {10230, () => new Skill_10230()},
         {10231, () => new Skill_10231()},
-        {10240, () => new Skill_10240()},
-        {10250, () => new Skill_10250()},
-        {10251, () => new Skill_10251()},
+        // {10240, () => new Skill_10240()},
+        // {10250, () => new Skill_10250()},
+        // {10251, () => new Skill_10251()},
 
         {10260, () => new Skill_10260()},
         {10270, () => new Skill_10270()},
@@ -867,16 +773,6 @@ public class Skill
     {
         return Level >= Data.LevelMax;
     }
-
-    // public virtual bool Useable()
-    // {
-    //     return true;
-    // }
-
-    // public virtual bool OnShoot()
-    // {
-    //     return false;
-    // }
 
     public virtual void CustomUpdate(float deltaTime)
     {

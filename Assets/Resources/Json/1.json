@@ -3,7 +3,6 @@
     "Waves": 
     [
         {
-            "Order": 1,
             "Monsters":
             [
                 {"Time":    0, "ID": 100, "HP": 2},

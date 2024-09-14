@@ -10,7 +10,6 @@ public class BattleWindow : MonoBehaviour
     [SerializeField] TextMeshProUGUI m_Level;
     [SerializeField] Transform m_HPPivot;
     [SerializeField] Transform m_BuffPivot;
-    [SerializeField] TextMeshProUGUI m_Progress;
     [SerializeField] BarTransition m_ProgressBar;
     [SerializeField] Transform m_FingerPivot;
 
@@ -122,7 +121,6 @@ public class BattleWindow : MonoBehaviour
 
     void InitProgress()
     {
-        m_Progress.text = string.Format("第{0}波", Field.Instance.Spawn.Order);
         m_ProgressBar.Init(Field.Instance.Spawn.CurrentWave.KillCount, Field.Instance.Spawn.CurrentWave.Total);
     }
 
