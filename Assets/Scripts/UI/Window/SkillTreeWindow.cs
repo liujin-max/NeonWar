@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponWindow : MonoBehaviour
+public class SkillTreeWindow : MonoBehaviour
 {
-    [SerializeField] Transform m_WeaponPivot;
+    [SerializeField] Transform m_Pivot;
 
 
-
-    private WeaponItem m_WEAPONITEM = null;
+    private SkillTreeItem m_SkillTree = null;
 
 
     void Awake()
@@ -28,15 +27,15 @@ public class WeaponWindow : MonoBehaviour
 
     void InitWeapon()
     {
-        if (m_WEAPONITEM != null) Destroy(m_WEAPONITEM.gameObject);
+        if (m_SkillTree != null) Destroy(m_SkillTree.gameObject);
 
-        m_WEAPONITEM    = GameFacade.Instance.UIManager.LoadItem(DataCenter.Instance.User.CurrentPlayer.UI + "Item", m_WeaponPivot).GetComponent<WeaponItem>();
-        m_WEAPONITEM.Init();
+        m_SkillTree    = GameFacade.Instance.UIManager.LoadItem("SkillTreeItem", m_Pivot).GetComponent<SkillTreeItem>();
+        m_SkillTree.Init();
     }
 
     void FlushUI()
     {
-        if (m_WEAPONITEM != null) m_WEAPONITEM.FlushUI();
+        if (m_SkillTree != null) m_SkillTree.FlushUI();
     }
 
 

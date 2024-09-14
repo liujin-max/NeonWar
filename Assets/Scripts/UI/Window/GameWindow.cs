@@ -13,12 +13,13 @@ public class GameWindow : MonoBehaviour
     [SerializeField] NumberTransition m_Glass;
 
 
+    [SerializeField] Transform m_WeaponPivot;
     [Header("按钮")]
     [SerializeField] Button m_BtnFight;
 
 
 
-
+    private WeaponItem m_WeaponItem = null;
 
 
     void Awake()
@@ -49,7 +50,14 @@ public class GameWindow : MonoBehaviour
     {
         m_Glass.ForceValue(DataCenter.Instance.User.Glass);
 
+        InitWeapon();
         FlushUI();
+    }
+
+    void InitWeapon()
+    {
+        m_WeaponItem = GameFacade.Instance.UIManager.LoadItem(DataCenter.Instance.User.CurrentPlayer.UI + "Item", m_WeaponPivot).GetComponent<WeaponItem>();
+        m_WeaponItem.Init();
     }
  
 

@@ -48,11 +48,11 @@ public static class NavigationController
         return true;
     }
 
-    //打开武器
-    public static bool GotoWeapon()
+    //打开技能树
+    public static bool GotoSkillTree()
     {
-        GameFacade.Instance.UIManager.LoadWindowAsync("WeaponWindow", UIManager.MAJOR, (obj)=>{
-            obj.GetComponent<WeaponWindow>().Init();
+        GameFacade.Instance.UIManager.LoadWindowAsync("SkillTreeWindow", UIManager.MAJOR, (obj)=>{
+            obj.GetComponent<SkillTreeWindow>().Init();
         });
 
         return true;

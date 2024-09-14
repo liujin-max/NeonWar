@@ -53,10 +53,10 @@ public class NavigationWindow : MonoBehaviour
         #region 武器
         m_BtnLeague.Init(
             ()=>{
-                return NavigationController.GotoWeapon();
+                return NavigationController.GotoSkillTree();
             },
             ()=>{
-                GameFacade.Instance.UIManager.UnloadWindow("WeaponWindow");
+                GameFacade.Instance.UIManager.UnloadWindow("SkillTreeWindow");
             },
             ()=>{
                 if (m_NAVBTN == m_BtnLeague) return;

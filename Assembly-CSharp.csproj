@@ -82,7 +82,6 @@
     <Compile Include="Assets\Scripts\Utility\CameraUtility.cs" />
     <Compile Include="Assets\Scripts\Utility\ToolUtility.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\Element\Trace.cs" />
-    <Compile Include="Assets\Scripts\UI\Window\WeaponWindow.cs" />
     <Compile Include="Assets\AllIn1SpriteShader\Scripts\RandomSeed.cs" />
     <Compile Include="Assets\Scripts\GameFacade.cs" />
     <Compile Include="Assets\DOTween\Modules\DOTweenModuleAudio.cs" />
@@ -232,6 +231,7 @@
     <Compile Include="Assets\Scripts\Effect\ButtonScale.cs" />
     <Compile Include="Assets\Scripts\Game\AttackMode\Attack_Arrow_Split.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\Area\Area_Ice.cs" />
+    <Compile Include="Assets\Scripts\UI\Window\SkillTreeWindow.cs" />
     <Compile Include="Assets\Scripts\Effect\FlyCoin.cs" />
     <Compile Include="Assets\Scripts\UI\Item\PearItem.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\Enemy\Enemy.cs" />
