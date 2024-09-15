@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BackpackWindow : MonoBehaviour
+public class BackpackWindow : BaseWindow
 {
     [SerializeField] private Button m_Mask;
     [SerializeField] private SuperScrollView m_PearView;

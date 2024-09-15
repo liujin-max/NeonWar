@@ -12,12 +12,10 @@ public static class NavigationController
     public static void GotoGame()
     {
         GameFacade.Instance.ScenePool.LoadSceneAsync("Game", () => {
-            GameFacade.Instance.UIManager.LoadWindowAsync(UI.GAMEWINDOW, UIManager.BOTTOM, (obj)=>{
-                obj.GetComponent<GameWindow>().Init();
-            });
+            UIController_GameWindow.Instance.Enter();
 
             GameFacade.Instance.UIManager.LoadWindowAsync(UI.NAVWINDOW, UIManager.NAV, (obj)=>{
-                // obj.GetComponent<NavigationWindow>().Init();
+                
             });
 
 

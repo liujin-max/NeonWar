@@ -5,7 +5,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
-public class NavigationWindow : MonoBehaviour
+public class NavigationWindow : BaseWindow
 {
     [SerializeField] Transform m_NavPivot;
     [SerializeField] TextMeshProUGUI m_Level;

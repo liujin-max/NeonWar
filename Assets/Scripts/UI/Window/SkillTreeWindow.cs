@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillTreeWindow : MonoBehaviour
+public class SkillTreeWindow : BaseWindow
 {
     [SerializeField] Transform m_Pivot;
 

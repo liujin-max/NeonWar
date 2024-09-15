@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SettingWindow : MonoBehaviour
+public class SettingWindow : BaseWindow
 {
     [SerializeField] Button m_BtnClose;
 

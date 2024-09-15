@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MaskWindow : MonoBehaviour
+public class MaskWindow : BaseWindow
 {
     [SerializeField] private GameObject m_Mask;
 

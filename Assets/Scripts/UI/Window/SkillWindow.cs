@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class SkillWindow : MonoBehaviour
+public class SkillWindow : BaseWindow
 {
     [SerializeField] Transform m_SkillPivot;
     [SerializeField] Button m_BtnReset;

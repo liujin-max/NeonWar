@@ -5,7 +5,7 @@ using DG.Tweening;
 using TMPro;
 using UnityEngine;
 
-public class TipWindow : MonoBehaviour
+public class TipWindow : BaseWindow
 {
     [SerializeField] private GameObject m_TipPivot;
 

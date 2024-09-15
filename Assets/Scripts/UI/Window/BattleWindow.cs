@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BattleWindow : MonoBehaviour
+public class BattleWindow : BaseWindow
 {
     [SerializeField] TextMeshProUGUI m_Level;
     [SerializeField] Transform m_HPPivot;

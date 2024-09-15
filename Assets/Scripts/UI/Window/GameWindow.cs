@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameWindow : MonoBehaviour
+public class GameWindow : BaseWindow
 {
     [SerializeField] TextMeshProUGUI m_Level;
     [SerializeField] NumberTransition m_Coin;
@@ -24,23 +24,10 @@ public class GameWindow : MonoBehaviour
 
     void Awake()
     {
-        EventManager.AddHandler(EVENT.ONBATTLESTART,    OnBattleStart);
-        EventManager.AddHandler(EVENT.ONBATTLEEND,      OnBattleEnd);
-        EventManager.AddHandler(EVENT.ONUPDATEGLASS,    OnUpdateGlass);
-        
-
         m_BtnFight.onClick.AddListener(()=>{
             NavigationController.GotoBattle();
         });
     }
-
-    void OnDestroy()
-    {
-        EventManager.DelHandler(EVENT.ONBATTLESTART,    OnBattleStart);
-        EventManager.DelHandler(EVENT.ONBATTLEEND,      OnBattleEnd);
-        EventManager.DelHandler(EVENT.ONUPDATEGLASS,    OnUpdateGlass);
-    }
-
 
 
  
@@ -69,18 +56,15 @@ public class GameWindow : MonoBehaviour
     }
 
 
-
-
-    #region 监听事件
     //战斗开始
-    private void OnBattleStart(GameEvent @event)
+    public void OnBattleStart()
     {
         transform.GetComponent<CanvasGroup>().DOFade(0, 0.3f);
         transform.GetComponent<CanvasGroup>().blocksRaycasts = false;
     }
 
     //战斗结束
-    private void OnBattleEnd(GameEvent @event)
+    public void OnBattleEnd()
     {
         FlushUI();
 
@@ -88,14 +72,8 @@ public class GameWindow : MonoBehaviour
         transform.GetComponent<CanvasGroup>().blocksRaycasts = true;
     }
 
-
-    private void OnUpdateGlass(GameEvent @event)
+    public void OnUpdateGlass()
     {
         m_Glass.SetValue(DataCenter.Instance.User.Glass);
-
-        // FlushUI();
     }
-
-
-    #endregion
 }

@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ResultWindow : MonoBehaviour
+public class ResultWindow : BaseWindow
 {
     [SerializeField] TextMeshProUGUI m_Glass;
     [SerializeField] GameObject m_WorthPivot;

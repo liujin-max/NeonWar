@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PearRewardWindow : MonoBehaviour
+public class PearRewardWindow : BaseWindow
 {
     [SerializeField] private Button m_Mask;
     [SerializeField] private Transform m_PearPivot;
