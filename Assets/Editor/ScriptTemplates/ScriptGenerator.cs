@@ -16,9 +16,13 @@ public class ScriptGenerator : EditorWindow
 
     private void OnGUI()
     {
+        GUILayout.Space(10);
         GUILayout.Label("创建MVC脚本", EditorStyles.boldLabel);
 
+        GUILayout.Space(10);
         className = EditorGUILayout.TextField("Window名称", className);
+
+        GUILayout.Space(20);
 
         if (GUILayout.Button("生成"))
         {
