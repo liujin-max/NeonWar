@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIController_ResultWindow : UIController<UIController_ResultWindow, ResultWindow>
+public class UICtrl_ResultWindow : UICtrl<UICtrl_ResultWindow, ResultWindow>
 {
     protected override void AddHandlers()
     {

@@ -57,7 +57,7 @@ public class State_Result<T> : State<Field>
                 }
             }
             
-            UIController_ResultWindow.Instance.Enter((window)=>{
+            UICtrl_ResultWindow.Instance.Enter((window)=>{
                 window.Init(m_Result, base_glass, worth_glass, (rate)=>{
                     DataCenter.Instance.User.UpdateGlass(glass_total * rate);
 
@@ -70,6 +70,6 @@ public class State_Result<T> : State<Field>
 
     public override void Exit()
     {
-        UIController_ResultWindow.Instance.Exit();
+        UICtrl_ResultWindow.Instance.Exit();
     }
 }

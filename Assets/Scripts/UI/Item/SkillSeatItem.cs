@@ -40,7 +40,7 @@ public class SkillSeatItem : MonoBehaviour
                 return;
             }
 
-            UIController_SkillWindow.Instance.Enter((window)=>{
+            UICtrl_SkillWindow.Instance.Enter((window)=>{
                 window.Init(m_SkillSlot, m_SkillData);
             });
         });

@@ -12,8 +12,8 @@ public static class NavigationController
     public static void GotoGame()
     {
         GameFacade.Instance.ScenePool.LoadSceneAsync("Game", () => {
-            UIController_GameWindow.Instance.Enter();
-            UIController_NavWindow.Instance.Enter();
+            UICtrl_GameWindow.Instance.Enter();
+            UICtrl_NavWindow.Instance.Enter();
 
             Field.Instance.Enter();
         });
@@ -44,7 +44,7 @@ public static class NavigationController
     //打开技能树
     public static bool GotoSkillTree()
     {
-        UIController_SkillTreeWindow.Instance.Enter();
+        UICtrl_SkillTreeWindow.Instance.Enter();
 
         return true;
     }
@@ -58,7 +58,7 @@ public static class NavigationController
             return false;
         }
 
-        UIController_BackpackWindow.Instance.Enter();
+        UICtrl_BackpackWindow.Instance.Enter();
 
         return true;
     }

@@ -4,7 +4,10 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public abstract class UIController<T, U> where T : UIController<T, U>, new() where U : BaseWindow
+
+//MVC模式
+//UI控制器 基类
+public abstract class UICtrl<T, U> where T : UICtrl<T, U>, new() where U : BaseWindow
 {
     protected U m_Window;
 

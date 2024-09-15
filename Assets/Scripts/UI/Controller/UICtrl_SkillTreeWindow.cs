@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIController_SkillTreeWindow : UIController<UIController_SkillTreeWindow, SkillTreeWindow>
+public class UICtrl_SkillTreeWindow : UICtrl<UICtrl_SkillTreeWindow, SkillTreeWindow>
 {
     protected override void AddHandlers()
     {

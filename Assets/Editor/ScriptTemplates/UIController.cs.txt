@@ -1,0 +1,27 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class UICtrl_#SCRIPTNAME# : UICtrl<UICtrl_#SCRIPTNAME#, #SCRIPTNAME#>
+{
+    protected override void AddHandlers()
+    {
+
+    }
+
+    protected override void DelHandlers()
+    {
+
+    }
+    
+    protected override void OpenWindow(Action<#SCRIPTNAME#> action)
+    {
+
+    }
+
+
+    #region 监听事件
+
+    #endregion
+}

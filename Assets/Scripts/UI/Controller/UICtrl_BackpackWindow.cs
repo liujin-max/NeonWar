@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIController_BackpackWindow : UIController<UIController_BackpackWindow, BackpackWindow>
+public class UICtrl_BackpackWindow : UICtrl<UICtrl_BackpackWindow, BackpackWindow>
 {
     protected override void AddHandlers()
     {

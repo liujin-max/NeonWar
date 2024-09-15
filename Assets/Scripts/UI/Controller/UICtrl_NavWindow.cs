@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIController_NavWindow : UIController<UIController_NavWindow, NavigationWindow>
+public class UICtrl_NavWindow : UICtrl<UICtrl_NavWindow, NavigationWindow>
 {
     protected override void AddHandlers()
     {

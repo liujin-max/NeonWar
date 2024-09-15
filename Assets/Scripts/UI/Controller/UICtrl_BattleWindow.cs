@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIController_BattleWindow : UIController<UIController_BattleWindow, BattleWindow>
+public class UICtrl_BattleWindow : UICtrl<UICtrl_BattleWindow, BattleWindow>
 {
     protected override void AddHandlers()
     {

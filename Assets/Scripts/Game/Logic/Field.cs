@@ -84,7 +84,7 @@ public class Field : MonoBehaviour
         m_FSM.Transist(CONST.FSMSTATE.PLAY);
 
 
-        UIController_BattleWindow.Instance.Enter();
+        UICtrl_BattleWindow.Instance.Enter();
 
         EventManager.SendEvent(new GameEvent(EVENT.ONBATTLESTART));
     }
@@ -104,7 +104,7 @@ public class Field : MonoBehaviour
 
         RemovePlayer();
 
-        GameFacade.Instance.UIManager.UnloadWindow("BattleWindow");
+        UICtrl_BattleWindow.Instance.Exit();
 
         EventManager.SendEvent(new GameEvent(EVENT.ONBATTLEEND));
     }

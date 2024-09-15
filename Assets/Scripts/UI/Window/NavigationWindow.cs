@@ -29,7 +29,7 @@ public class NavigationWindow : BaseWindow
                 return NavigationController.GotoBackpack();
             },
             ()=>{
-                UIController_BackpackWindow.Instance.Exit();
+                UICtrl_BackpackWindow.Instance.Exit();
             },
             ()=>{
                 if (m_NAVBTN == m_BtnBackpack) return;
@@ -50,7 +50,7 @@ public class NavigationWindow : BaseWindow
                 return NavigationController.GotoSkillTree();
             },
             ()=>{
-                UIController_SkillTreeWindow.Instance.Exit();
+                UICtrl_SkillTreeWindow.Instance.Exit();
             },
             ()=>{
                 if (m_NAVBTN == m_BtnLeague) return;
@@ -89,14 +89,14 @@ public class NavigationWindow : BaseWindow
         #region 设置
         m_BtnSetting.Init(
             ()=>{
-                UIController_SettingWindow.Instance.Enter((window)=>{
+                UICtrl_SettingWindow.Instance.Enter((window)=>{
                     window.ShowClose(false);
                 });
 
                 return true;
             },
             ()=>{
-                UIController_SettingWindow.Instance.Exit();
+                UICtrl_SettingWindow.Instance.Exit();
             },
             ()=>{
                 if (m_NAVBTN == m_BtnSetting) return;

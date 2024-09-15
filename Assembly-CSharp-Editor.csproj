@@ -70,12 +70,15 @@
     <Compile Include="Assets\Editor\BitmapFontExporter.cs" />
     <Compile Include="Assets\Editor\ExtractTexture.cs" />
     <Compile Include="Assets\Editor\Tool\FindReferences.cs" />
+    <Compile Include="Assets\Editor\ScriptTemplates\ScriptGenerator.cs" />
     <Compile Include="Assets\Editor\CustomFont.cs" />
     <Compile Include="Assets\AllIn1SpriteShader\Editor\AllIn1SpriteShader.cs" />
     <Compile Include="Assets\Editor\AudioPostProcessor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\DOTween\Editor\DOTweenEditor.dll" />
+    <None Include="Assets\Editor\ScriptTemplates\UIWindow.cs.txt" />
+    <None Include="Assets\Editor\ScriptTemplates\UIController.cs.txt" />
     <None Include="Assets\DOTween\Editor\DOTweenEditor.XML" />
   </ItemGroup>
   <ItemGroup>

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIController_SettingWindow : UIController<UIController_SettingWindow, SettingWindow>
+public class UICtrl_SettingWindow : UICtrl<UICtrl_SettingWindow, SettingWindow>
 {
     protected override void AddHandlers()
     {

@@ -214,7 +214,7 @@ public class BackpackWindow : BaseWindow
         EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPMASK, false));
         EventManager.SendEvent(new GameEvent(EVENT.UI_BACKPACKOPEN, false));
 
-        GameFacade.Instance.UIManager.UnloadWindow(gameObject);
+        UICtrl_BackpackWindow.Instance.Exit();
 
         yield return null;
     }

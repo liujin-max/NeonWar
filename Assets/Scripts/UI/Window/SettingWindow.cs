@@ -21,7 +21,7 @@ public class SettingWindow : BaseWindow
         m_BtnClose.onClick.AddListener(()=>{
             if (m_Callback != null) m_Callback();
             
-            GameFacade.Instance.UIManager.UnloadWindow(gameObject);
+            UICtrl_SettingWindow.Instance.Exit();
         });
 
         m_Music.Find("Open").GetComponent<Button>().onClick.AddListener(()=>{

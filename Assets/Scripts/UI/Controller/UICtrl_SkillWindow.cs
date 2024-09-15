@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIController_SkillWindow : UIController<UIController_SkillWindow, SkillWindow>
+public class UICtrl_SkillWindow : UICtrl<UICtrl_SkillWindow, SkillWindow>
 {
     protected override void AddHandlers()
     {

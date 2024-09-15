@@ -32,20 +32,11 @@ public class SkillWindow : BaseWindow
         return skill_item;
     }
 
-    // void Awake()
-    // {
-    //     EventManager.AddHandler(EVENT.UI_SKILLUPGRADE,  OnSkillUpgrade);
-    // }
-
-    // void OnDestroy()
-    // {
-    //     EventManager.DelHandler(EVENT.UI_SKILLUPGRADE,  OnSkillUpgrade);
-    // }
 
     void Start()
     {
         m_BtnClose.onClick.AddListener(()=>{
-            GameFacade.Instance.UIManager.UnloadWindow(gameObject);
+            UICtrl_SkillWindow.Instance.Exit();
         });
 
         //重置技能

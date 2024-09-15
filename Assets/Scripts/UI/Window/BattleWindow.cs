@@ -59,7 +59,7 @@ public class BattleWindow : BaseWindow
         m_BtnSetting.onClick.AddListener(()=>{
             Time.timeScale = 0;
 
-            UIController_SettingWindow.Instance.Enter((window)=>{
+            UICtrl_SettingWindow.Instance.Enter((window)=>{
                 window.SetCallback(()=>{
                     Time.timeScale = 1;
                 });
