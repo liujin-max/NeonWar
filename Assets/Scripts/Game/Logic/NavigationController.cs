@@ -13,12 +13,7 @@ public static class NavigationController
     {
         GameFacade.Instance.ScenePool.LoadSceneAsync("Game", () => {
             UIController_GameWindow.Instance.Enter();
-
-            GameFacade.Instance.UIManager.LoadWindowAsync(UI.NAVWINDOW, UIManager.NAV, (obj)=>{
-                
-            });
-
-
+            UIController_NavWindow.Instance.Enter();
 
             Field.Instance.Enter();
         });
@@ -49,15 +44,13 @@ public static class NavigationController
     //打开技能树
     public static bool GotoSkillTree()
     {
-        GameFacade.Instance.UIManager.LoadWindowAsync(UI.SKILLTREEWINDOW, UIManager.MAJOR, (obj)=>{
-            obj.GetComponent<SkillTreeWindow>().Init();
-        });
+        UIController_SkillTreeWindow.Instance.Enter();
 
         return true;
     }
 
     //打开背包
-    public static bool GotoBackpack(Pear pear)
+    public static bool GotoBackpack()
     {
         if (!DataCenter.Instance.IsPearUnlock())
         {
@@ -65,9 +58,7 @@ public static class NavigationController
             return false;
         }
 
-        GameFacade.Instance.UIManager.LoadWindowAsync(UI.BACKPACKWINDOW, UIManager.BOARD, (obj)=>{
-            obj.GetComponent<BackpackWindow>().Init(pear);
-        });
+        UIController_BackpackWindow.Instance.Enter();
 
         return true;
     }

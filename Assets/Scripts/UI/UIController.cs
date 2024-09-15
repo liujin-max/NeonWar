@@ -1,9 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class UIController<T, U> where T : UIController<T, U>, new() where U : BaseWindow
+public abstract class UIController<T, U> where T : UIController<T, U>, new() where U : BaseWindow
 {
     protected U m_Window;
 
@@ -16,9 +17,9 @@ public class UIController<T, U> where T : UIController<T, U>, new() where U : Ba
         }
     }
 
-    public void Enter()
+    public void Enter(Action<U> action = null)
     {
-        OpenWindow();
+        OpenWindow(action);
         AddHandlers();
     }
 
@@ -30,10 +31,7 @@ public class UIController<T, U> where T : UIController<T, U>, new() where U : Ba
     
 
     //打开Window
-    protected virtual void OpenWindow()
-    {
-        
-    }
+    protected abstract void OpenWindow(Action<U> action = null);
 
     //关闭Window
     protected virtual void CloseWindow()
@@ -42,14 +40,7 @@ public class UIController<T, U> where T : UIController<T, U>, new() where U : Ba
     }
 
     //注册事件监听
-    protected virtual void AddHandlers()
-    {
-
-    }
-
+    protected abstract void AddHandlers();
     //移除事件监听
-    protected virtual void DelHandlers()
-    {
-
-    }
+    protected abstract void DelHandlers();
 }

@@ -28,18 +28,9 @@ public class BackpackWindow : BaseWindow
 
     void Awake()
     {
-        EventManager.AddHandler(EVENT.UI_PEARCOMPOSE,   OnPearComposeStart);
-        EventManager.AddHandler(EVENT.UI_COMPOSECHANGE, OnComposeChange);
-
         m_Mask.onClick.AddListener(()=>{
             StartCoroutine(ExitAnim());
         });
-    }
-
-    void OnDestroy()
-    {
-        EventManager.DelHandler(EVENT.UI_PEARCOMPOSE,   OnPearComposeStart);
-        EventManager.DelHandler(EVENT.UI_COMPOSECHANGE, OnComposeChange);
     }
 
     public void Init(Pear current_pear)
@@ -231,20 +222,15 @@ public class BackpackWindow : BaseWindow
 
 
 
-    #region 监听事件
-    void OnPearComposeStart(GameEvent @event)
-    {
-        Pear pear = @event.GetParam(0) as Pear;
 
+    public void OnPearComposeStart(Pear pear)
+    {
         ShowCompose(pear);
         ShowComposeList(pear);
     }
 
-    void OnComposeChange(GameEvent @event)
+    public void OnComposeChange(bool flag, Pear pear)
     {
-        bool flag = (bool)@event.GetParam(0);
-        Pear pear = @event.GetParam(1) as Pear;
-
         if (flag == true)
         {
             foreach (var item in m_PearItems)
@@ -264,7 +250,6 @@ public class BackpackWindow : BaseWindow
                 m_ComposeSeats.Remove(pear);
             }
         }
-
     }
-    #endregion
+
 }

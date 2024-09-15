@@ -27,13 +27,6 @@ public class BattleWindow : BaseWindow
 
     void Awake()
     {
-        EventManager.AddHandler(EVENT.ONHPUPDATE,       OnUpdateHP);
-        EventManager.AddHandler(EVENT.ONNEXTWAVE,       OnNextWave);
-        
-        EventManager.AddHandler(EVENT.UI_ENEMYDEAD,     OnEnemyDead);
-
-
-
         m_BtnLeft.transform.Find("Wave").gameObject.SetActive(false);
         m_BtnRight.transform.Find("Wave").gameObject.SetActive(false);
 
@@ -65,8 +58,9 @@ public class BattleWindow : BaseWindow
         //设置
         m_BtnSetting.onClick.AddListener(()=>{
             Time.timeScale = 0;
-            GameFacade.Instance.UIManager.LoadWindowAsync(UI.SETTINGWINDOW, UIManager.BOARD, (obj)=>{
-                obj.GetComponent<SettingWindow>().SetCallback(()=>{
+
+            UIController_SettingWindow.Instance.Enter((window)=>{
+                window.SetCallback(()=>{
                     Time.timeScale = 1;
                 });
             });
@@ -77,13 +71,6 @@ public class BattleWindow : BaseWindow
         
     }
 
-    void OnDestroy()
-    {
-        EventManager.DelHandler(EVENT.ONHPUPDATE,       OnUpdateHP);
-        EventManager.DelHandler(EVENT.ONNEXTWAVE,       OnNextWave);
-
-        EventManager.DelHandler(EVENT.UI_ENEMYDEAD,     OnEnemyDead);
-    }
 
     public void Init()
     {
@@ -187,25 +174,23 @@ public class BattleWindow : BaseWindow
     #endregion
 
 
-    #region 监听事件
-    private void OnUpdateHP(GameEvent @event)
+    // #region 监听事件
+    public void OnUpdateHP()
     {
         if (m_HPITEM == null) return;
 
         m_HPITEM.FlushHP();
     }
 
-    private void OnNextWave(GameEvent @event)
+    public void OnNextWave()
     {
         InitProgress();
     }
 
-    private void OnEnemyDead(GameEvent @event)
+    public void OnEnemyDead(int count)
     {
-        int count = (int)@event.GetParam(0);
-
         m_ProgressBar.SetValue(count);
     }
 
-    #endregion
+    // #endregion
 }

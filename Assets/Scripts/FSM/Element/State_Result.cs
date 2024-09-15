@@ -10,7 +10,6 @@ public class State_Result<T> : State<Field>
     private CONST.RESULT m_Result;
     private CDTimer m_DelayTimer = new CDTimer(1);
 
-    private ResultWindow m_ResultWindow;
 
 
     public State_Result(CONST.FSMSTATE id) : base(id){}
@@ -58,25 +57,19 @@ public class State_Result<T> : State<Field>
                 }
             }
             
-
-            GameFacade.Instance.UIManager.LoadWindowAsync(UI.RESULTWINDOW, UIManager.BOARD, (obj)=>{
-                m_ResultWindow = obj.GetComponent<ResultWindow>();
-                m_ResultWindow.Init(m_Result, base_glass, worth_glass, (rate)=>{
+            UIController_ResultWindow.Instance.Enter((window)=>{
+                window.Init(m_Result, base_glass, worth_glass, (rate)=>{
                     DataCenter.Instance.User.UpdateGlass(glass_total * rate);
 
                     EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS));
                 });
-                m_ResultWindow.InitPears(pear_dic);
+                window.InitPears(pear_dic);
             });
-
-            
-            
-            // Field.Instance.End();
         }
     }
 
     public override void Exit()
     {
-        GameFacade.Instance.UIManager.UnloadWindow(m_ResultWindow.gameObject);
+        UIController_ResultWindow.Instance.Exit();
     }
 }

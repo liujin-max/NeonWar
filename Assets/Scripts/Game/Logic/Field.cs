@@ -84,9 +84,7 @@ public class Field : MonoBehaviour
         m_FSM.Transist(CONST.FSMSTATE.PLAY);
 
 
-        GameFacade.Instance.UIManager.LoadWindowAsync(UI.BATTLEWINDOW, UIManager.BOTTOM, (obj)=>{
-            obj.GetComponent<BattleWindow>().Init();
-        });
+        UIController_BattleWindow.Instance.Enter();
 
         EventManager.SendEvent(new GameEvent(EVENT.ONBATTLESTART));
     }

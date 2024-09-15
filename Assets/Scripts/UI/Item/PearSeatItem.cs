@@ -24,7 +24,7 @@ public class PearSeatItem : MonoBehaviour
     void Awake()
     {
         m_Touch.onClick.AddListener(()=>{
-            NavigationController.GotoBackpack(m_Pear);
+            NavigationController.GotoBackpack();
         });
     }
 

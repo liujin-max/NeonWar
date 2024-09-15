@@ -23,19 +23,13 @@ public class NavigationWindow : BaseWindow
 
     void Awake()
     {
-        EventManager.AddHandler(EVENT.ONBATTLESTART,    OnBattleStart);
-        EventManager.AddHandler(EVENT.ONBATTLEEND,      OnBattleEnd);
-
-        EventManager.AddHandler(EVENT.UI_BACKPACKOPEN,  OnBackpackOpen);
-
-
         #region 宝珠
         m_BtnBackpack.Init(
             ()=>{
-                return NavigationController.GotoBackpack(null);
+                return NavigationController.GotoBackpack();
             },
             ()=>{
-                GameFacade.Instance.UIManager.UnloadWindow(UI.BACKPACKWINDOW);
+                UIController_BackpackWindow.Instance.Exit();
             },
             ()=>{
                 if (m_NAVBTN == m_BtnBackpack) return;
@@ -56,7 +50,7 @@ public class NavigationWindow : BaseWindow
                 return NavigationController.GotoSkillTree();
             },
             ()=>{
-                GameFacade.Instance.UIManager.UnloadWindow(UI.SKILLTREEWINDOW);
+                UIController_SkillTreeWindow.Instance.Exit();
             },
             ()=>{
                 if (m_NAVBTN == m_BtnLeague) return;
@@ -95,15 +89,14 @@ public class NavigationWindow : BaseWindow
         #region 设置
         m_BtnSetting.Init(
             ()=>{
-                GameFacade.Instance.UIManager.LoadWindowAsync(UI.SETTINGWINDOW, UIManager.BOTTOM, (obj)=>{
-                    var window = obj.GetComponent<SettingWindow>();
+                UIController_SettingWindow.Instance.Enter((window)=>{
                     window.ShowClose(false);
                 });
 
                 return true;
             },
             ()=>{
-                GameFacade.Instance.UIManager.UnloadWindow(UI.SETTINGWINDOW);
+                UIController_SettingWindow.Instance.Exit();
             },
             ()=>{
                 if (m_NAVBTN == m_BtnSetting) return;
@@ -117,15 +110,6 @@ public class NavigationWindow : BaseWindow
         #endregion
 
 
-    }
-
-
-    void OnDestroy()
-    {
-        EventManager.DelHandler(EVENT.ONBATTLESTART,    OnBattleStart);
-        EventManager.DelHandler(EVENT.ONBATTLEEND,      OnBattleEnd);
-
-        EventManager.DelHandler(EVENT.UI_BACKPACKOPEN,  OnBackpackOpen);
     }
 
 
@@ -143,15 +127,15 @@ public class NavigationWindow : BaseWindow
     }
 
 
-    #region 监听事件
+
     //战斗开始
-    private void OnBattleStart(GameEvent @event)
+    public void OnBattleStart()
     {
         m_NavPivot.DOLocalMoveY(-350, 0.5f).SetEase(Ease.OutCubic);
     }
 
     //战斗结束
-    private void OnBattleEnd(GameEvent @event)
+    public void OnBattleEnd()
     {
         m_NavPivot.DOLocalMoveY(0, 0.5f).SetEase(Ease.InCubic);
 
@@ -159,10 +143,8 @@ public class NavigationWindow : BaseWindow
     }
 
     //关闭背包
-    private void OnBackpackOpen(GameEvent @event)
+    public void OnBackpackOpen(bool flag)
     {
-        bool flag = (bool)@event.GetParam(0);
-
         if (flag == false)
         {
             if (m_NAVBTN == m_BtnBackpack)
@@ -174,5 +156,4 @@ public class NavigationWindow : BaseWindow
             }
         }
     }
-    #endregion
 }

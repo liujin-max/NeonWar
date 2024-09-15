@@ -134,6 +134,7 @@
     <Compile Include="Assets\Scripts\Struct\AttributeValue.cs" />
     <Compile Include="Assets\AllIn1SpriteShader\Demo\Scripts\DemoItem.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\Enemy\Enemy_404.cs" />
+    <Compile Include="Assets\Scripts\UI\Controller\UIController_SkillWindow.cs" />
     <Compile Include="Assets\AllIn1SpriteShader\Scripts\AllIn1ShaderWindow.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\Element\BuffBubble.cs" />
     <Compile Include="Assets\Scripts\Game\Interface\ICustomUpdate.cs" />
@@ -151,6 +152,7 @@
     <Compile Include="Assets\Scripts\Manager\SoundManager.cs" />
     <Compile Include="Assets\Scripts\Utility\ScaleUtility.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\Player\Player_10000.cs" />
+    <Compile Include="Assets\Scripts\UI\Controller\UIController_BackpackWindow.cs" />
     <Compile Include="Assets\AllIn1SpriteShader\Scripts\SetAtlasUvs.cs" />
     <Compile Include="Assets\Scripts\Display\Land.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\Battle\Wave.cs" />
@@ -159,6 +161,7 @@
     <Compile Include="Assets\Scripts\Effect\PixelBroken.cs" />
     <Compile Include="Assets\Scripts\CONST.cs" />
     <Compile Include="Assets\Scripts\Game\Configs\ATTConfig.cs" />
+    <Compile Include="Assets\Scripts\UI\Controller\UIController_NavWindow.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\Enemy\Enemy_102.cs" />
     <Compile Include="Assets\AllIn1SpriteShader\Demo\Scripts\Demo2AutoScroll.cs" />
     <Compile Include="Assets\Scripts\Utility\BarTransition.cs" />
@@ -191,6 +194,7 @@
     <Compile Include="Assets\Scripts\Effect\Miss.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\Battle\SpawnThread.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\Enemy\Enemy_107.cs" />
+    <Compile Include="Assets\Scripts\UI\Controller\UIController_ResultWindow.cs" />
     <Compile Include="Assets\Scripts\FSM\Element\State_Result.cs" />
     <Compile Include="Assets\Scripts\FSM\FSM.cs" />
     <Compile Include="Assets\Scripts\Effect\Floating.cs" />
@@ -210,10 +214,12 @@
     <Compile Include="Assets\Scripts\UI\Item\PlayerHPPointItem.cs" />
     <Compile Include="Assets\Scripts\UI\Window\TipWindow.cs" />
     <Compile Include="Assets\Scripts\Game\Interface\IFinished.cs" />
+    <Compile Include="Assets\Scripts\UI\Controller\UIController_BattleWindow.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\User.cs" />
     <Compile Include="Assets\Scripts\Utility\RandomUtility.cs" />
     <Compile Include="Assets\Scripts\Effect\Fly.cs" />
     <Compile Include="Assets\Scripts\UI\Window\BattleWindow.cs" />
+    <Compile Include="Assets\Scripts\UI\Controller\UIController_SettingWindow.cs" />
     <Compile Include="Assets\Scripts\UI\Item\SkillSeatItem.cs" />
     <Compile Include="Assets\Scripts\Manager\SystemManager.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\Data\Pear.cs" />
@@ -222,6 +228,7 @@
     <Compile Include="Assets\DOTween\Modules\DOTweenModuleEPOOutline.cs" />
     <Compile Include="Assets\Scripts\UI\Window\MaskWindow.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\Battle\Hit.cs" />
+    <Compile Include="Assets\Scripts\UI\Controller\UIController_SkillTreeWindow.cs" />
     <Compile Include="Assets\Scripts\UI\Item\WeaponPearItem.cs" />
     <Compile Include="Assets\Scripts\UI\Window\GameWindow.cs" />
     <Compile Include="Assets\Scripts\Manager\OBJPool.cs" />

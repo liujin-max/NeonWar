@@ -32,15 +32,15 @@ public class SkillWindow : BaseWindow
         return skill_item;
     }
 
-    void Awake()
-    {
-        EventManager.AddHandler(EVENT.UI_SKILLUPGRADE,  OnSkillUpgrade);
-    }
+    // void Awake()
+    // {
+    //     EventManager.AddHandler(EVENT.UI_SKILLUPGRADE,  OnSkillUpgrade);
+    // }
 
-    void OnDestroy()
-    {
-        EventManager.DelHandler(EVENT.UI_SKILLUPGRADE,  OnSkillUpgrade);
-    }
+    // void OnDestroy()
+    // {
+    //     EventManager.DelHandler(EVENT.UI_SKILLUPGRADE,  OnSkillUpgrade);
+    // }
 
     void Start()
     {
@@ -97,13 +97,10 @@ public class SkillWindow : BaseWindow
     }
 
     
-
-
-    #region 监听事件
-    void OnSkillUpgrade(GameEvent @event)
+    public void OnSkillUpgrade()
     {
         var data = DataCenter.Instance.League.GetSkillData(m_SkillSlot.ID);
         this.Init(m_SkillSlot, data);
     }
-    #endregion
+
 }
