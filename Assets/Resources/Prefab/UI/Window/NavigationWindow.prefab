@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AutoStart: 0
-  Height: 0.2
+  Height: 20
   Time: 0.3
 --- !u!1 &354192095024169837
 GameObject:
@@ -1263,7 +1263,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AutoStart: 0
-  Height: 0.1
+  Height: 10
   Time: 0.3
 --- !u!1 &3860106731418166636
 GameObject:
@@ -1471,7 +1471,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AutoStart: 0
-  Height: 0.2
+  Height: 20
   Time: 0.3
 --- !u!1 &4683004551320414787
 GameObject:
@@ -2059,7 +2059,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AutoStart: 0
-  Height: 0.3
+  Height: 20
   Time: 0.3
 --- !u!1 &5732106055166877636
 GameObject:
@@ -2977,7 +2977,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AutoStart: 0
-  Height: 0.2
+  Height: 20
   Time: 0.3
 --- !u!1 &9007467925242457136
 GameObject:

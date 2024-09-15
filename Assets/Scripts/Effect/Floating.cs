@@ -15,7 +15,7 @@ public class Floating : MonoBehaviour
 
     void Awake()
     {
-        m_Origin = transform.position;
+        m_Origin = transform.localPosition;
     }
 
     // Start is called before the first frame update
@@ -28,11 +28,9 @@ public class Floating : MonoBehaviour
     {
         if (m_Tweener == null)
         {
-            // 计算从startTime开始时的进度
-            float progress = 0; //RandomUtility.Random(0, 100) / 100.0f;
             // 创建浮动动画
-            m_Tweener = transform.DOMoveY(m_Origin.y + Height, Time);
-            m_Tweener.SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine).Goto(progress, true);
+            m_Tweener = transform.DOLocalMoveY(m_Origin.y + Height, Time);
+            m_Tweener.SetLoops(-1, LoopType.Yoyo).SetEase(Ease.InOutSine);
         }
         
         m_Tweener.Play();
@@ -41,6 +39,6 @@ public class Floating : MonoBehaviour
     public void Stop()
     {
         if (m_Tweener != null) m_Tweener.Pause();
-        transform.position = m_Origin;
+        transform.localPosition = m_Origin;
     }
 }
