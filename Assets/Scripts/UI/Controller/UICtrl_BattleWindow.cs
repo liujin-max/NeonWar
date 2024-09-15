@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class UICtrl_BattleWindow : UICtrl<UICtrl_BattleWindow, BattleWindow>
 {
-    protected override void AddHandlers()
+    protected override void RegisterHandlers()
     {
         EventManager.AddHandler(EVENT.ONHPUPDATE,       OnUpdateHP);
         EventManager.AddHandler(EVENT.ONNEXTWAVE,       OnNextWave);
@@ -13,7 +13,7 @@ public class UICtrl_BattleWindow : UICtrl<UICtrl_BattleWindow, BattleWindow>
         EventManager.AddHandler(EVENT.UI_ENEMYDEAD,     OnEnemyDead);
     }
 
-    protected override void DelHandlers()
+    protected override void RemoveHandlers()
     {
         EventManager.DelHandler(EVENT.ONHPUPDATE,       OnUpdateHP);
         EventManager.DelHandler(EVENT.ONNEXTWAVE,       OnNextWave);

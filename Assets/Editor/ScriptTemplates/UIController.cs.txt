@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class UICtrl_#SCRIPTNAME# : UICtrl<UICtrl_#SCRIPTNAME#, #SCRIPTNAME#>
 {
-    protected override void AddHandlers()
+    protected override void RegisterHandlers()
     {
 
     }
 
-    protected override void DelHandlers()
+    protected override void RemoveHandlers()
     {
 
     }

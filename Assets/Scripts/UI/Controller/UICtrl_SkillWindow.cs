@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class UICtrl_SkillWindow : UICtrl<UICtrl_SkillWindow, SkillWindow>
 {
-    protected override void AddHandlers()
+    protected override void RegisterHandlers()
     {
         EventManager.AddHandler(EVENT.UI_SKILLUPGRADE,  OnSkillUpgrade);
     }
 
-    protected override void DelHandlers()
+    protected override void RemoveHandlers()
     {
         EventManager.DelHandler(EVENT.UI_SKILLUPGRADE,  OnSkillUpgrade);
     }

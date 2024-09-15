@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class UICtrl_ResultWindow : UICtrl<UICtrl_ResultWindow, ResultWindow>
 {
-    protected override void AddHandlers()
+    protected override void RegisterHandlers()
     {
         
     }
 
-    protected override void DelHandlers()
+    protected override void RemoveHandlers()
     {
         
     }

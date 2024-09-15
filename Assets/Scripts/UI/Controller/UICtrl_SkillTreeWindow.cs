@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class UICtrl_SkillTreeWindow : UICtrl<UICtrl_SkillTreeWindow, SkillTreeWindow>
 {
-    protected override void AddHandlers()
+    protected override void RegisterHandlers()
     {
         EventManager.AddHandler(EVENT.ONUPDATEGLASS,    OnUpdateGlass);
     }
 
-    protected override void DelHandlers()
+    protected override void RemoveHandlers()
     {
         EventManager.DelHandler(EVENT.ONUPDATEGLASS,    OnUpdateGlass);
     }

@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class UICtrl_SettingWindow : UICtrl<UICtrl_SettingWindow, SettingWindow>
 {
-    protected override void AddHandlers()
+    protected override void RegisterHandlers()
     {
         
     }
 
-    protected override void DelHandlers()
+    protected override void RemoveHandlers()
     {
         
     }

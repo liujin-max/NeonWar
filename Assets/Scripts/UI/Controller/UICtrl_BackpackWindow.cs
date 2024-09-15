@@ -5,13 +5,13 @@ using UnityEngine;
 
 public class UICtrl_BackpackWindow : UICtrl<UICtrl_BackpackWindow, BackpackWindow>
 {
-    protected override void AddHandlers()
+    protected override void RegisterHandlers()
     {
         EventManager.AddHandler(EVENT.UI_PEARCOMPOSE,   OnPearComposeStart);
         EventManager.AddHandler(EVENT.UI_COMPOSECHANGE, OnComposeChange);
     }
 
-    protected override void DelHandlers()
+    protected override void RemoveHandlers()
     {
         EventManager.DelHandler(EVENT.UI_PEARCOMPOSE,   OnPearComposeStart);
         EventManager.DelHandler(EVENT.UI_COMPOSECHANGE, OnComposeChange);

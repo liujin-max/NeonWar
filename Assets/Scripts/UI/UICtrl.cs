@@ -23,13 +23,13 @@ public abstract class UICtrl<T, U> where T : UICtrl<T, U>, new() where U : BaseW
     public void Enter(Action<U> action = null)
     {
         OpenWindow(action);
-        AddHandlers();
+        RegisterHandlers();
     }
 
     public void Exit()
     {
         CloseWindow();
-        DelHandlers();
+        RemoveHandlers();
     }
     
 
@@ -43,7 +43,7 @@ public abstract class UICtrl<T, U> where T : UICtrl<T, U>, new() where U : BaseW
     }
 
     //注册事件监听
-    protected abstract void AddHandlers();
+    protected abstract void RegisterHandlers();
     //移除事件监听
-    protected abstract void DelHandlers();
+    protected abstract void RemoveHandlers();
 }

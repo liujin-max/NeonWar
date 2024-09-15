@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class UICtrl_NavWindow : UICtrl<UICtrl_NavWindow, NavigationWindow>
 {
-    protected override void AddHandlers()
+    protected override void RegisterHandlers()
     {
         EventManager.AddHandler(EVENT.ONBATTLESTART,    OnBattleStart);
         EventManager.AddHandler(EVENT.ONBATTLEEND,      OnBattleEnd);
@@ -13,7 +13,7 @@ public class UICtrl_NavWindow : UICtrl<UICtrl_NavWindow, NavigationWindow>
         EventManager.AddHandler(EVENT.UI_BACKPACKOPEN,  OnBackpackOpen);
     }
 
-    protected override void DelHandlers()
+    protected override void RemoveHandlers()
     {
         EventManager.DelHandler(EVENT.ONBATTLESTART,    OnBattleStart);
         EventManager.DelHandler(EVENT.ONBATTLEEND,      OnBattleEnd);

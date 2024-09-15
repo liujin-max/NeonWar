@@ -5,14 +5,14 @@ using UnityEngine;
 
 public class UICtrl_GameWindow : UICtrl<UICtrl_GameWindow, GameWindow>
 {
-    protected override void AddHandlers()
+    protected override void RegisterHandlers()
     {
         EventManager.AddHandler(EVENT.ONBATTLESTART,    OnBattleStart);
         EventManager.AddHandler(EVENT.ONBATTLEEND,      OnBattleEnd);
         EventManager.AddHandler(EVENT.ONUPDATEGLASS,    OnUpdateGlass);
     }
 
-    protected override void DelHandlers()
+    protected override void RemoveHandlers()
     {
         EventManager.DelHandler(EVENT.ONBATTLESTART,    OnBattleStart);
         EventManager.DelHandler(EVENT.ONBATTLEEND,      OnBattleEnd);

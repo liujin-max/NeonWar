@@ -34,7 +34,7 @@ public class PearRewardWindow : BaseWindow
     {
         yield return new WaitForSeconds(0.6f);
 
-        m_Mask.onClick.AddListener(()=>{GameFacade.Instance.UIManager.UnloadWindow(gameObject);});
+        m_Mask.onClick.AddListener(()=>{ UICtrl_PearRewardWindow.Instance.Exit();});
 
         yield return null;
     }
