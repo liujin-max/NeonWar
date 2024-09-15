@@ -65,7 +65,7 @@ public class BattleWindow : MonoBehaviour
         //设置
         m_BtnSetting.onClick.AddListener(()=>{
             Time.timeScale = 0;
-            GameFacade.Instance.UIManager.LoadWindowAsync("SettingWindow", UIManager.BOARD, (obj)=>{
+            GameFacade.Instance.UIManager.LoadWindowAsync(UI.SETTINGWINDOW, UIManager.BOARD, (obj)=>{
                 obj.GetComponent<SettingWindow>().SetCallback(()=>{
                     Time.timeScale = 1;
                 });

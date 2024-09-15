@@ -102,5 +102,6 @@ public class Spawn
     public void Dispose()
     {
         foreach (var wave in m_Waves) wave.Dispose();
+        m_Waves.Clear();
     }
 }

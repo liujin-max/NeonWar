@@ -44,7 +44,7 @@ public class PearComposeItem : MonoBehaviour
                 List<Pear> rewards = new List<Pear>();
                 rewards.Add(final);
 
-                GameFacade.Instance.UIManager.LoadWindowAsync("PearRewardWindow", UIManager.BOARD, (obj)=>{
+                GameFacade.Instance.UIManager.LoadWindowAsync(UI.PEARREWARDWINDOW, UIManager.BOARD, (obj)=>{
                     obj.GetComponent<PearRewardWindow>().Init(rewards);
                 });
 
@@ -85,7 +85,7 @@ public class PearComposeItem : MonoBehaviour
         foreach (var item in m_ComposeSeats.Values) Destroy(item.gameObject);
         m_ComposeSeats.Clear();
 
-        for (int i = 0; i < _C.COMPOSE_COUNTMAX; i++)
+        for (int i = 0; i < CONST.COMPOSE_COUNTMAX; i++)
         {
             var item = GameFacade.Instance.UIManager.LoadItem("PearSeatItem", m_PearPivot.Find(i.ToString())).GetComponent<PearSeatItem>();
             item.Init(null);
@@ -102,9 +102,9 @@ public class PearComposeItem : MonoBehaviour
     void FlushUI()
     {
         int rate = Mathf.Max(0, (ComposeFillCount() - 1) * 50);
-        string color = _C.COLOR_GREEN;
-        if (rate <= 30) color = _C.COLOR_RED;
-        else if (rate <= 60) color = _C.COLOR_ORANGE;
+        string color = CONST.COLOR_GREEN;
+        if (rate <= 30) color = CONST.COLOR_RED;
+        else if (rate <= 60) color = CONST.COLOR_ORANGE;
 
         m_Rate.text = color + rate + "%";
 
@@ -154,9 +154,9 @@ public class PearComposeItem : MonoBehaviour
 
     void PushComposeItems(Pear pear)
     {
-        if (ComposeFillCount() >= _C.COMPOSE_COUNTMAX) return;
+        if (ComposeFillCount() >= CONST.COMPOSE_COUNTMAX) return;
 
-        for (int i = 0; i < _C.COMPOSE_COUNTMAX; i++)
+        for (int i = 0; i < CONST.COMPOSE_COUNTMAX; i++)
         {
             var item = m_ComposeSeats[i];
 

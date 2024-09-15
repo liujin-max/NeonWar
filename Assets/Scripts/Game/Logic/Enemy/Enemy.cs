@@ -18,7 +18,7 @@ public class Enemy : Unit
 
 
     private MonsterJSON m_Data;
-    public _C.ENEMY_TYPE TYPE {get {return m_Data.Type;}}
+    public CONST.ENEMY_TYPE TYPE {get {return m_Data.Type;}}
 
     [HideInInspector] public bool IsSummon = false;
     private bool m_IsRepel = false;   //击退中
@@ -50,7 +50,7 @@ public class Enemy : Unit
     public virtual void Init(MonsterJSON monster_data)
     {
         m_Data  = monster_data;
-        Side    = _C.SIDE.ENEMY;
+        Side    = CONST.SIDE.ENEMY;
         ID      = monster_data.ID;
 
         //不希望ScriptableObject的对象在相同的怪物之间共享,且避免修改到源文件
@@ -224,7 +224,7 @@ public class Enemy : Unit
     #region 碰撞检测
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.tag == _C.COLLIDER_PLAYER)
+        if (collision.gameObject.tag == CONST.COLLIDER_PLAYER)
         {
             Field.Instance.Crash(this, collision.gameObject.GetComponent<Player>());
         }
@@ -232,7 +232,7 @@ public class Enemy : Unit
 
     void OnCollisionExit2D(Collision2D collision)
     {
-        if (collision.gameObject.tag != _C.COLLIDER_WALL) return;
+        if (collision.gameObject.tag != CONST.COLLIDER_WALL) return;
 
         m_Angle = ToolUtility.VectorToAngle(m_Rigidbody.velocity);
     }

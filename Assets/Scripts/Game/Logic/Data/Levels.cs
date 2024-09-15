@@ -26,7 +26,7 @@ public class MonsterJSON
 {
     public float Time;
     public int ID;
-    public _C.ENEMY_TYPE Type = _C.ENEMY_TYPE.NORMAL;
+    public CONST.ENEMY_TYPE Type = CONST.ENEMY_TYPE.NORMAL;
     public int HP;
     //和圆点的角度
     public int Angle = -1;

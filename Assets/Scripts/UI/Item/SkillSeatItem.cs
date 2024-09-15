@@ -40,7 +40,7 @@ public class SkillSeatItem : MonoBehaviour
                 return;
             }
 
-            GameFacade.Instance.UIManager.LoadWindowAsync("SkillWindow", UIManager.BOARD, (obj)=>{
+            GameFacade.Instance.UIManager.LoadWindowAsync(UI.SKILLWINDOW, UIManager.BOARD, (obj)=>{
                 var window = obj.GetComponent<SkillWindow>();
                 window.Init(m_SkillSlot, m_SkillData);
             });
@@ -87,7 +87,7 @@ public class SkillSeatItem : MonoBehaviour
             else
             {
                 m_Frame.color   = Color.green;
-                m_Text.text     = _C.COLOR_GREEN + "可使用";
+                m_Text.text     = CONST.COLOR_GREEN + "可使用";
             }
         }
     }

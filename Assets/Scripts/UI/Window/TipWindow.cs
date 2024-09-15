@@ -26,7 +26,7 @@ public class TipWindow : MonoBehaviour
 
     private void OnTip(GameEvent @event)
     {
-        Platform.Instance.VIBRATE(_C.VIBRATELEVEL.MEDIUM);
+        Platform.Instance.VIBRATE(CONST.VIBRATELEVEL.MEDIUM);
         SoundManager.Instance.Load(SOUND.TIP);
  
         var text        = (string)@event.GetParam(0);

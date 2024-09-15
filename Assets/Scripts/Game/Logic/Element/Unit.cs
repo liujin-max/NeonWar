@@ -17,7 +17,7 @@ public class Unit : MonoBehaviour
     
 
     [HideInInspector] public int ID;
-    [HideInInspector] public _C.SIDE Side = _C.SIDE.PLAYER;
+    [HideInInspector] public CONST.SIDE Side = CONST.SIDE.PLAYER;
     public ATTConfig ATT;
     public CDTimer ASP = new CDTimer(0f);
     [HideInInspector] public AttributeValue CPS = new AttributeValue(1f, false);  //冷却值的恢复倍率
@@ -152,7 +152,7 @@ public class Unit : MonoBehaviour
         ATT.HP = Mathf.Clamp(ATT.HP + value, 0, ATT.HPMAX);
     }
 
-    public virtual Projectile CreateProjectile(string projectile ,_C.TRACE trace_type, Vector2 to_pos, float time, Action callback)
+    public virtual Projectile CreateProjectile(string projectile ,CONST.TRACE trace_type, Vector2 to_pos, float time, Action callback)
     {
         var project = GameFacade.Instance.AssetManager.LoadPrefab(projectile, Vector3.zero, Field.Instance.Land.ELEMENT_ROOT).GetComponent<Projectile>();
         project.transform.position = ShootPivot.position;

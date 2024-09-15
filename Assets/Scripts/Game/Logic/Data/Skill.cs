@@ -198,7 +198,7 @@ public class Skill_10120 : Skill
 
         if (RandomUtility.IsHit(Value))
         {
-            unit.AddBuff(Caster, (int)_C.BUFF.STUN, 1);
+            unit.AddBuff(Caster, (int)CONST.BUFF.STUN, 1);
         }
         
     }
@@ -292,7 +292,7 @@ public class Skill_10170 : Skill
 
         Unit unit = @event.GetParam(1) as Unit;
 
-        unit.AddBuff(Caster, (int)_C.BUFF.YISHANG, Value);
+        unit.AddBuff(Caster, (int)CONST.BUFF.YISHANG, Value);
     }
 }
 
@@ -327,7 +327,7 @@ public class Skill_10210 : Skill
 
         EventManager.SendEvent(new GameEvent(EVENT.ONPLAYTRAP, this));
 
-        Caster.CreateProjectile(PROJECTILE.POISONWATER, _C.TRACE.PARABOLA, point, 0.4f, ()=>{
+        Caster.CreateProjectile(PROJECTILE.POISONWATER, CONST.TRACE.PARABOLA, point, 0.4f, ()=>{
             Field.Instance.PushArea(Caster, AREA.POISON, point, Value);
         });
     }
@@ -382,7 +382,7 @@ public class Skill_10212 : Skill
 
                 foreach (var t in area.Units)
                 {
-                    t.Key.AddBuff(Caster, (int)_C.BUFF.POISON, (int)Caster.ATT.ATK.GetBase());
+                    t.Key.AddBuff(Caster, (int)CONST.BUFF.POISON, (int)Caster.ATT.ATK.GetBase());
                 }
             }
         }
@@ -420,7 +420,7 @@ public class Skill_10220 : Skill
 
         EventManager.SendEvent(new GameEvent(EVENT.ONPLAYTRAP, this));
 
-        Caster.CreateProjectile(PROJECTILE.ICEWATER, _C.TRACE.PARABOLA, point, 0.4f, ()=>{
+        Caster.CreateProjectile(PROJECTILE.ICEWATER, CONST.TRACE.PARABOLA, point, 0.4f, ()=>{
             Field.Instance.PushArea(Caster, AREA.ICE, point, Value);
         });
     }
@@ -442,7 +442,7 @@ public class Skill_10221 : Skill
             {
                 if (t.Value >= 0.5f) 
                 {
-                    t.Key.AddBuff(Caster, (int)_C.BUFF.FROZEN, 1, 1.5f);
+                    t.Key.AddBuff(Caster, (int)CONST.BUFF.FROZEN, 1, 1.5f);
                 }
             }
         }
@@ -479,7 +479,7 @@ public class Skill_10230 : Skill
 
         EventManager.SendEvent(new GameEvent(EVENT.ONPLAYTRAP, this));
 
-        Caster.CreateProjectile(PROJECTILE.ROPE, _C.TRACE.PARABOLA, point, 0.4f, ()=>{
+        Caster.CreateProjectile(PROJECTILE.ROPE, CONST.TRACE.PARABOLA, point, 0.4f, ()=>{
             Field.Instance.PushArea(Caster, AREA.ROPE, point, Value);
         });
     }
@@ -543,7 +543,7 @@ public class Skill_10260 : Skill
 
         if (hit.Caster != Caster) return;
 
-        hit.Caster.AddBuff(Caster, (int)_C.BUFF.FASTSPD, Value);
+        hit.Caster.AddBuff(Caster, (int)CONST.BUFF.FASTSPD, Value);
     }
 }
 #endregion
@@ -570,7 +570,7 @@ public class Skill_10270 : Skill
 
         if (hit.Caster != Caster) return;
         
-        hit.Caster.AddBuff(Caster, (int)_C.BUFF.KILL, Value);
+        hit.Caster.AddBuff(Caster, (int)CONST.BUFF.KILL, Value);
     }
 }
 #endregion
@@ -723,13 +723,13 @@ public class Skill
 
     public static string CompareDescription(SkillData skillData, int o_level, int t_level)
     {
-        if (o_level == 0) return GetDescription(skillData, t_level, _C.COLOR_GREEN);
-        if (o_level == skillData.LevelMax) return GetDescription(skillData, o_level, _C.COLOR_GREEN);
+        if (o_level == 0) return GetDescription(skillData, t_level, CONST.COLOR_GREEN);
+        if (o_level == skillData.LevelMax) return GetDescription(skillData, o_level, CONST.COLOR_GREEN);
 
         int o_value = Skill.ToValue(skillData, Mathf.Min(skillData.LevelMax, o_level));
         int t_value = Skill.ToValue(skillData, Mathf.Min(skillData.LevelMax, t_level));
 
-        string str = _C.COLOR_GREEN + o_value + "</color>->" + _C.COLOR_GREEN + t_value + "</color>";
+        string str = CONST.COLOR_GREEN + o_value + "</color>->" + CONST.COLOR_GREEN + t_value + "</color>";
 
         return skillData.Description.Replace("#", str);
     }

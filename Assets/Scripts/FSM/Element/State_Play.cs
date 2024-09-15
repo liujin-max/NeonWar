@@ -7,7 +7,7 @@ using UnityEngine;
 //游戏进行中
 public class State_Play<T> : State<Field>
 {
-    public State_Play(_C.FSMSTATE id) : base(id){}
+    public State_Play(CONST.FSMSTATE id) : base(id){}
 
     public override void Enter(params object[] values)
     {
@@ -23,14 +23,14 @@ public class State_Play<T> : State<Field>
         Field.Instance.CustomUpdate(Time.deltaTime);
 
         var result = Field.Instance.CheckResult();
-        if (result != _C.RESULT.NONE) {
-            if (result == _C.RESULT.UPGRADE) 
+        if (result != CONST.RESULT.NONE) {
+            if (result == CONST.RESULT.UPGRADE) 
             {
-                m_FSM.Transist(_C.FSMSTATE.UPGRADE);
+                m_FSM.Transist(CONST.FSMSTATE.UPGRADE);
             }
             else
             {
-                m_FSM.Transist(_C.FSMSTATE.RESULT, result);
+                m_FSM.Transist(CONST.FSMSTATE.RESULT, result);
             }
         }
     }
@@ -52,7 +52,7 @@ public class State_Play<T> : State<Field>
     {
         float direction = (float)@event.GetParam(0);
 
-        Field.Instance.STATE   = _C.GAME_STATE.PLAY;
+        Field.Instance.STATE   = CONST.GAME_STATE.PLAY;
 
         Field.Instance.Player.Move(direction);
     }

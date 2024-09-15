@@ -108,7 +108,7 @@ public class Pear_Buff : Pear
     {
         Buff buff = @event.GetParam(0) as Buff;
 
-        if (buff.TYPE == _C.BUFF_TYPE.GAIN)
+        if (buff.TYPE == CONST.BUFF_TYPE.GAIN)
         {
             buff.Duration.SetDuration(buff.Duration.Duration * (1 + m_Data.Value / 100.0f));
         }
@@ -181,7 +181,7 @@ public class Pear_Arrow : Pear
     {
         Bullet bullet = @event.GetParam(0) as Bullet;
 
-        if (bullet.Caster.ID == (int)_C.PLAYER.BOW)
+        if (bullet.Caster.ID == (int)CONST.PLAYER.BOW)
         {
             bullet.Hit.ATK_INC.PutAUL(this, m_Data.Value / 100.0f);
         }
@@ -375,7 +375,7 @@ public class Pear
     public string GetDescription()
     {
         var data = DataCenter.Instance.Backpack.GetPearData(m_Data.Class);
-        string text = data.Description.Replace("#", _C.COLOR_GREEN2 + m_Data.Value.ToString() + "</color>");
+        string text = data.Description.Replace("#", CONST.COLOR_GREEN2 + m_Data.Value.ToString() + "</color>");
 
         return text;
     }

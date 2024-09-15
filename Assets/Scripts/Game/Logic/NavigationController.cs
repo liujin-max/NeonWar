@@ -12,11 +12,11 @@ public static class NavigationController
     public static void GotoGame()
     {
         GameFacade.Instance.ScenePool.LoadSceneAsync("Game", () => {
-            GameFacade.Instance.UIManager.LoadWindowAsync("GameWindow", UIManager.BOTTOM, (obj)=>{
+            GameFacade.Instance.UIManager.LoadWindowAsync(UI.GAMEWINDOW, UIManager.BOTTOM, (obj)=>{
                 obj.GetComponent<GameWindow>().Init();
             });
 
-            GameFacade.Instance.UIManager.LoadWindowAsync("NavigationWindow", UIManager.NAV, (obj)=>{
+            GameFacade.Instance.UIManager.LoadWindowAsync(UI.NAVWINDOW, UIManager.NAV, (obj)=>{
                 // obj.GetComponent<NavigationWindow>().Init();
             });
 
@@ -51,7 +51,7 @@ public static class NavigationController
     //打开技能树
     public static bool GotoSkillTree()
     {
-        GameFacade.Instance.UIManager.LoadWindowAsync("SkillTreeWindow", UIManager.MAJOR, (obj)=>{
+        GameFacade.Instance.UIManager.LoadWindowAsync(UI.SKILLTREEWINDOW, UIManager.MAJOR, (obj)=>{
             obj.GetComponent<SkillTreeWindow>().Init();
         });
 
@@ -63,11 +63,11 @@ public static class NavigationController
     {
         if (!DataCenter.Instance.IsPearUnlock())
         {
-            EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "通过关卡" + _C.PEAR_UNLOCK_LEVEL + "后解锁"));
+            EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "通过关卡" + CONST.PEAR_UNLOCK_LEVEL + "后解锁"));
             return false;
         }
 
-        GameFacade.Instance.UIManager.LoadWindowAsync("BackpackWindow", UIManager.BOARD, (obj)=>{
+        GameFacade.Instance.UIManager.LoadWindowAsync(UI.BACKPACKWINDOW, UIManager.BOARD, (obj)=>{
             obj.GetComponent<BackpackWindow>().Init(pear);
         });
 

@@ -12,7 +12,7 @@ public class Projectile : MonoBehaviour
     private Action m_Callback;
     
     
-    public void Init(_C.TRACE trace_type, Unit caster, Action callback)
+    public void Init(CONST.TRACE trace_type, Unit caster, Action callback)
     {
         Caster  = caster;
         m_Trace = Trace.Create(trace_type, transform);

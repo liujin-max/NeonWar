@@ -37,7 +37,7 @@ public class SpawnThread
             m_Enemy.SetValid(false);
             enemies.Add(m_Enemy);
 
-            if (monsterJSON.Type == _C.ENEMY_TYPE.BOSS) m_Enemy.transform.localScale = new Vector3(1.25f, 1.25f, 1.25f);
+            if (monsterJSON.Type == CONST.ENEMY_TYPE.BOSS) m_Enemy.transform.localScale = new Vector3(1.25f, 1.25f, 1.25f);
         });
     }
 

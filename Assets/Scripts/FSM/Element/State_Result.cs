@@ -7,17 +7,17 @@ using UnityEngine;
 //结算
 public class State_Result<T> : State<Field>
 {
-    private _C.RESULT m_Result;
+    private CONST.RESULT m_Result;
     private CDTimer m_DelayTimer = new CDTimer(1);
 
     private ResultWindow m_ResultWindow;
 
 
-    public State_Result(_C.FSMSTATE id) : base(id){}
+    public State_Result(CONST.FSMSTATE id) : base(id){}
 
     public override void Enter(params object[] values)
     {
-        m_Result = (_C.RESULT) values[0];
+        m_Result = (CONST.RESULT) values[0];
         m_DelayTimer.ForceReset();
 
         GameFacade.Instance.TimeManager.BulletTime();
@@ -27,10 +27,10 @@ public class State_Result<T> : State<Field>
     {
         m_DelayTimer.Update(Time.deltaTime);
         if (m_DelayTimer.IsFinished() == true) {
-            Field.Instance.STATE = _C.GAME_STATE.PAUSE;
+            Field.Instance.STATE = CONST.GAME_STATE.PAUSE;
 
             //胜利
-            if (m_Result == _C.RESULT.VICTORY)
+            if (m_Result == CONST.RESULT.VICTORY)
             {   
                 //记录通关
                 DataCenter.Instance.User.SetLevel(Field.Instance.Level.ID);
@@ -47,7 +47,7 @@ public class State_Result<T> : State<Field>
             //计算宝珠奖励
             Dictionary<int, int> pear_dic = new Dictionary<int, int>();
             
-            if (m_Result == _C.RESULT.VICTORY)
+            if (m_Result == CONST.RESULT.VICTORY)
             {
                 Field.Instance.GeneratePearRewards(out pear_dic);
 
@@ -59,7 +59,7 @@ public class State_Result<T> : State<Field>
             }
             
 
-            GameFacade.Instance.UIManager.LoadWindowAsync("ResultWindow", UIManager.BOARD, (obj)=>{
+            GameFacade.Instance.UIManager.LoadWindowAsync(UI.RESULTWINDOW, UIManager.BOARD, (obj)=>{
                 m_ResultWindow = obj.GetComponent<ResultWindow>();
                 m_ResultWindow.Init(m_Result, base_glass, worth_glass, (rate)=>{
                     DataCenter.Instance.User.UpdateGlass(glass_total * rate);

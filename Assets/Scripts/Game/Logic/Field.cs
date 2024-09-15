@@ -13,7 +13,7 @@ public class Field : MonoBehaviour
     public static Field Instance{ get { return m_Instance;}}
 
     private FSM<Field> m_FSM;
-    public _C.GAME_STATE STATE = _C.GAME_STATE.PAUSE;
+    public CONST.GAME_STATE STATE = CONST.GAME_STATE.PAUSE;
 
     [HideInInspector] public Land Land;
     private Spawn m_Spawn; //怪物工厂
@@ -47,29 +47,29 @@ public class Field : MonoBehaviour
     void Start()
     {
         m_FSM = new FSM<Field>(this,  new State<Field>[] {
-            new State_Idle<Field>(_C.FSMSTATE.IDLE),
-            new State_Play<Field>(_C.FSMSTATE.PLAY),
-            new State_Upgrade<Field>(_C.FSMSTATE.UPGRADE),
-            new State_Result<Field>(_C.FSMSTATE.RESULT),
+            new State_Idle<Field>(CONST.FSMSTATE.IDLE),
+            new State_Play<Field>(CONST.FSMSTATE.PLAY),
+            new State_Upgrade<Field>(CONST.FSMSTATE.UPGRADE),
+            new State_Result<Field>(CONST.FSMSTATE.RESULT),
         });
     }
 
     public void Enter()
     {
-        STATE   = _C.GAME_STATE.PAUSE;
+        STATE   = CONST.GAME_STATE.PAUSE;
 
         Land    = new Land();
         m_Spawn = new Spawn();
 
 
-        m_FSM.Transist(_C.FSMSTATE.IDLE);
+        m_FSM.Transist(CONST.FSMSTATE.IDLE);
     }
 
     //开始游玩
     public void Play(int level_id)
     {
         //玩家开始触摸后，再转换状态
-        // STATE   = _C.GAME_STATE.PLAY;
+        // STATE   = CONST.GAME_STATE.PLAY;
 
 
         m_Level = DataCenter.Instance.Levels.GetLevel(level_id);
@@ -81,10 +81,10 @@ public class Field : MonoBehaviour
         //将最新的加成等级应用到Player身上
         InitPlayer();
 
-        m_FSM.Transist(_C.FSMSTATE.PLAY);
+        m_FSM.Transist(CONST.FSMSTATE.PLAY);
 
 
-        GameFacade.Instance.UIManager.LoadWindowAsync("BattleWindow", UIManager.BOTTOM, (obj)=>{
+        GameFacade.Instance.UIManager.LoadWindowAsync(UI.BATTLEWINDOW, UIManager.BOTTOM, (obj)=>{
             obj.GetComponent<BattleWindow>().Init();
         });
 
@@ -94,7 +94,7 @@ public class Field : MonoBehaviour
     //结束游玩
     public void End()
     {
-        STATE   = _C.GAME_STATE.PAUSE;
+        STATE   = CONST.GAME_STATE.PAUSE;
 
         Land.Dispose();
         m_Spawn.Dispose();
@@ -114,26 +114,26 @@ public class Field : MonoBehaviour
 
     public void Pause()
     {
-        STATE   = _C.GAME_STATE.PAUSE;
+        STATE   = CONST.GAME_STATE.PAUSE;
 
         m_Spawn.Pause();
     }
 
     public void Resume()
     {
-        STATE   = _C.GAME_STATE.PLAY;
+        STATE   = CONST.GAME_STATE.PLAY;
 
         m_Spawn.Resume();
     }
 
-    public void Transist(_C.FSMSTATE state, params object[] values)
+    public void Transist(CONST.FSMSTATE state, params object[] values)
     {
         m_FSM.Transist(state, values);
     }
 
-    public _C.FSMSTATE GetCurrentFSMState()
+    public CONST.FSMSTATE GetCurrentFSMState()
     {
-        if (m_FSM == null || m_FSM.CurrentState == null) return _C.FSMSTATE.IDLE;
+        if (m_FSM == null || m_FSM.CurrentState == null) return CONST.FSMSTATE.IDLE;
 
         return m_FSM.CurrentState.ID;
     }
@@ -144,13 +144,13 @@ public class Field : MonoBehaviour
 
         EventManager.SendEvent(new GameEvent(EVENT.ONNEXTWAVE));
 
-        m_FSM.Transist(_C.FSMSTATE.PLAY);
+        m_FSM.Transist(CONST.FSMSTATE.PLAY);
     }
 
 
     void Update()
     {
-        if (this.STATE != _C.GAME_STATE.PLAY) return;
+        if (this.STATE != CONST.GAME_STATE.PLAY) return;
 
         if (m_FSM != null) m_FSM.Update();
     }
@@ -182,13 +182,13 @@ public class Field : MonoBehaviour
         BuffBubbles.Clear();
     }
 
-    public _C.RESULT CheckResult()
+    public CONST.RESULT CheckResult()
     {
-        if (m_Spawn.IsClear() == true) return _C.RESULT.VICTORY;
-        if (m_Player.IsDead() == true) return _C.RESULT.LOSE;
-        if (m_Spawn.IsCurrentClear() == true) return _C.RESULT.UPGRADE;
+        if (m_Spawn.IsClear() == true) return CONST.RESULT.VICTORY;
+        if (m_Player.IsDead() == true) return CONST.RESULT.LOSE;
+        if (m_Spawn.IsCurrentClear() == true) return CONST.RESULT.UPGRADE;
 
-        return _C.RESULT.NONE;
+        return CONST.RESULT.NONE;
     }
 
     #region 逻辑处理
@@ -273,7 +273,7 @@ public class Field : MonoBehaviour
     //在场地上生成可拾取的Buff
     public void PushBuffBubble(int id, int value)
     {
-        var point   = ToolUtility.FindPointOnCircle(Vector2.zero, _C.DEFAULT_RADIUS, RandomUtility.Random(0, 360));
+        var point   = ToolUtility.FindPointOnCircle(Vector2.zero, CONST.DEFAULT_RADIUS, RandomUtility.Random(0, 360));
 
         GameFacade.Instance.AssetManager.AsyncLoadPrefab("Prefab/Element/BuffBubble", point, Land.ELEMENT_ROOT, (obj)=>{
             var bubble = obj.GetComponent<BuffBubble>();
@@ -310,7 +310,7 @@ public class Field : MonoBehaviour
     //击中目标
     public bool SettleHit(Hit hit, Unit unit)
     {
-        if (this.STATE != _C.GAME_STATE.PLAY) return false;
+        if (this.STATE != CONST.GAME_STATE.PLAY) return false;
         //无敌了
         if (unit.IsInvincible() == true) return false;
         if (unit.IsDead()) return false;
@@ -320,11 +320,11 @@ public class Field : MonoBehaviour
         float demage = Mathf.Ceil(hit.ATK.ToNumber(false) * hit.ATK_INC.ToNumber() * unit.ATT.VUN_INC.ToNumber());
 
         //护盾
-        if (hit.Type == _C.HIT_TYPE.NORMAL && unit.GetBuff((int)_C.BUFF.SHIELD) != null)
+        if (hit.Type == CONST.HIT_TYPE.NORMAL && unit.GetBuff((int)CONST.BUFF.SHIELD) != null)
         {
             demage = 0;
         }
-        else if (hit.Type == _C.HIT_TYPE.NORMAL && RandomUtility.IsHit((int)unit.ATT.DODGE.ToNumber(), 1000) == true) //闪避了
+        else if (hit.Type == CONST.HIT_TYPE.NORMAL && RandomUtility.IsHit((int)unit.ATT.DODGE.ToNumber(), 1000) == true) //闪避了
         {
             //闪避特效
             GameFacade.Instance.EffectManager.Load(EFFECT.MISS, hit.Position, Land.ELEMENT_ROOT.gameObject);
@@ -335,7 +335,7 @@ public class Field : MonoBehaviour
         }
         else
         {
-            if (RandomUtility.IsHit(hit.KillRate) == true && (unit.Side == _C.SIDE.ENEMY && unit.GetComponent<Enemy>().TYPE != _C.ENEMY_TYPE.BOSS))   //一击必杀
+            if (RandomUtility.IsHit(hit.KillRate) == true && (unit.Side == CONST.SIDE.ENEMY && unit.GetComponent<Enemy>().TYPE != CONST.ENEMY_TYPE.BOSS))   //一击必杀
             {
                 demage = unit.ATT.HPMAX;
 
@@ -345,9 +345,9 @@ public class Field : MonoBehaviour
             }
             else
             {
-                if (unit.Side == _C.SIDE.ENEMY)
+                if (unit.Side == CONST.SIDE.ENEMY)
                 {
-                    if (unit.GetComponent<Enemy>().TYPE == _C.ENEMY_TYPE.BOSS)
+                    if (unit.GetComponent<Enemy>().TYPE == CONST.ENEMY_TYPE.BOSS)
                     {
                         demage *= hit.BOSS_INC.ToNumber();
                     }

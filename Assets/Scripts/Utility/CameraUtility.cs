@@ -67,7 +67,7 @@ public class CameraUtility : MonoBehaviour
 
     public void DoShake()
     {
-        Platform.Instance.VIBRATE(_C.VIBRATELEVEL.HEAVY);
+        Platform.Instance.VIBRATE(CONST.VIBRATELEVEL.HEAVY);
 
         if (m_ShakeTweener != null) {
             transform.localPosition = new Vector3(0, 0, -10);
@@ -80,7 +80,7 @@ public class CameraUtility : MonoBehaviour
 
     public void DoSmallShake()
     {
-        Platform.Instance.VIBRATE(_C.VIBRATELEVEL.HEAVY);
+        Platform.Instance.VIBRATE(CONST.VIBRATELEVEL.HEAVY);
 
         if (m_SmallShakeTweener != null) {
             transform.localPosition = new Vector3(0, 0, -10);

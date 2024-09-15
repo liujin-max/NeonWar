@@ -8,7 +8,7 @@ using UnityEngine;
 /// </summary>
 public class FSM<T> where T : class
 {
-    public Dictionary<_C.FSMSTATE, State<T>> States = new Dictionary<_C.FSMSTATE, State<T>>();
+    public Dictionary<CONST.FSMSTATE, State<T>> States = new Dictionary<CONST.FSMSTATE, State<T>>();
 
     public State<T> CurrentState;//当前状态
     public T Owner;
@@ -24,12 +24,12 @@ public class FSM<T> where T : class
         }
     }
 
-    public State<T> GetState(_C.FSMSTATE id)
+    public State<T> GetState(CONST.FSMSTATE id)
     {
         return States[id];
     }
 
-    public void Transist(_C.FSMSTATE id, params object[] values)
+    public void Transist(CONST.FSMSTATE id, params object[] values)
     {
         if (CurrentState != null)
         {

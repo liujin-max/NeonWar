@@ -18,6 +18,7 @@ public class UIManager : MonoBehaviour
     private Dictionary<string, GameObject> WindowCaches = new Dictionary<string, GameObject>();
     private HashSet<string> WindowsHash = new HashSet<string>();
 
+
     void Awake()
     {
         BOTTOM  = GameObject.Find("Canvas/BOTTOM").transform;
@@ -29,14 +30,14 @@ public class UIManager : MonoBehaviour
         TIP     = GameObject.Find("Canvas/TIP").transform;
     }
 
-    public GameObject LoadWindow(string path, Transform parent)
-    {
-        GameObject obj = Instantiate<GameObject>(Resources.Load<GameObject>("Prefab/UI/Window/" + path), parent);
-        WindowCaches[path] = obj;
-        WindowsHash.Add(path);
+    // public GameObject LoadWindow(string path, Transform parent)
+    // {
+    //     GameObject obj = Instantiate<GameObject>(Resources.Load<GameObject>("Prefab/UI/Window/" + path), parent);
+    //     WindowCaches[path] = obj;
+    //     WindowsHash.Add(path);
 
-        return obj;
-    }
+    //     return obj;
+    // }
 
     //异步加载UI
     public void LoadWindowAsync(string path, Transform parent , Action<GameObject> callback = null)

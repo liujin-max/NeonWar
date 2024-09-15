@@ -8,7 +8,7 @@ public class State_Upgrade<T> : State<Field>
 {
     private CDTimer m_DelayTimer;
 
-    public State_Upgrade(_C.FSMSTATE id) : base(id) {}
+    public State_Upgrade(CONST.FSMSTATE id) : base(id) {}
 
     //生成3个技能供选择
     public static int[] GenerateSkillsPool()

@@ -12,7 +12,7 @@ public class Enemy_403 : Enemy
     {
         base.Init(monster_data);
 
-        this.AddBuff(this, (int)_C.BUFF.SHIELD, m_BuffValue);
+        this.AddBuff(this, (int)CONST.BUFF.SHIELD, m_BuffValue);
     }
 
     public override bool CustomUpdate(float deltaTime)
@@ -23,8 +23,8 @@ public class Enemy_403 : Enemy
         if (m_Timer.IsFinished() == true) {
             m_Timer.Reset();
 
-            if (this.GetBuff((int)_C.BUFF.SHIELD) == null)
-                this.AddBuff(this, (int)_C.BUFF.SHIELD, m_BuffValue);
+            if (this.GetBuff((int)CONST.BUFF.SHIELD) == null)
+                this.AddBuff(this, (int)CONST.BUFF.SHIELD, m_BuffValue);
         }
 
         return true;

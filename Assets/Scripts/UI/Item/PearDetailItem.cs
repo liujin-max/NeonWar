@@ -59,7 +59,7 @@ public class PearDetailItem : MonoBehaviour
     {
         m_Pear = pear;
 
-        m_Title.text = _C.LEVELCOLOR_PAIRS[pear.Level] + pear.Name;
+        m_Title.text = CONST.LEVELCOLOR_PAIRS[pear.Level] + pear.Name;
         m_Description.text  = pear.GetDescription();
 
         m_Icon.sprite = GameFacade.Instance.AssetManager.LoadSprite("Pear" , m_Pear.Class.ToString());

@@ -35,7 +35,7 @@ public class NavigationWindow : MonoBehaviour
                 return NavigationController.GotoBackpack(null);
             },
             ()=>{
-                GameFacade.Instance.UIManager.UnloadWindow("BackpackWindow");
+                GameFacade.Instance.UIManager.UnloadWindow(UI.BACKPACKWINDOW);
             },
             ()=>{
                 if (m_NAVBTN == m_BtnBackpack) return;
@@ -56,7 +56,7 @@ public class NavigationWindow : MonoBehaviour
                 return NavigationController.GotoSkillTree();
             },
             ()=>{
-                GameFacade.Instance.UIManager.UnloadWindow("SkillTreeWindow");
+                GameFacade.Instance.UIManager.UnloadWindow(UI.SKILLTREEWINDOW);
             },
             ()=>{
                 if (m_NAVBTN == m_BtnLeague) return;
@@ -95,7 +95,7 @@ public class NavigationWindow : MonoBehaviour
         #region 设置
         m_BtnSetting.Init(
             ()=>{
-                GameFacade.Instance.UIManager.LoadWindowAsync("SettingWindow", UIManager.BOTTOM, (obj)=>{
+                GameFacade.Instance.UIManager.LoadWindowAsync(UI.SETTINGWINDOW, UIManager.BOTTOM, (obj)=>{
                     var window = obj.GetComponent<SettingWindow>();
                     window.ShowClose(false);
                 });
@@ -103,7 +103,7 @@ public class NavigationWindow : MonoBehaviour
                 return true;
             },
             ()=>{
-                GameFacade.Instance.UIManager.UnloadWindow("SettingWindow");
+                GameFacade.Instance.UIManager.UnloadWindow(UI.SETTINGWINDOW);
             },
             ()=>{
                 if (m_NAVBTN == m_BtnSetting) return;

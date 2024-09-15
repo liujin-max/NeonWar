@@ -117,7 +117,7 @@ public class GameUserData
         //弓
         new PlayerMsg() 
         {
-            ID          = (int)_C.PLAYER.BOW, 
+            ID          = (int)CONST.PLAYER.BOW, 
             UI          = "Bow",
             UnlockFlag  = true, 
             InUse       = true, 
@@ -233,7 +233,7 @@ public class User
 
 
         //任务：每日登录
-        // DataCenter.Instance.Daily.FinishTask((int)_C.TASK.LOGIN);
+        // DataCenter.Instance.Daily.FinishTask((int)CONST.TASK.LOGIN);
 
 
         //未注册|新的一年重新开始
@@ -301,37 +301,37 @@ public class User
         m_userUpdate = true;
     }
 
-    public void UpdateProperty(_C.PROPERTY property, int value)
+    public void UpdateProperty(CONST.PROPERTY property, int value)
     {
         switch (property)
         {
-            case _C.PROPERTY.ATK: CurrentPlayer.ATK += value; break;
-            case _C.PROPERTY.ASP: CurrentPlayer.ASP += value; break;
-            case _C.PROPERTY.WORTH: CurrentPlayer.WORTH += value; break;
+            case CONST.PROPERTY.ATK: CurrentPlayer.ATK += value; break;
+            case CONST.PROPERTY.ASP: CurrentPlayer.ASP += value; break;
+            case CONST.PROPERTY.WORTH: CurrentPlayer.WORTH += value; break;
         }
 
         m_userUpdate = true;
     }
 
-    public int GetPropertyCost(_C.PROPERTY property)
+    public int GetPropertyCost(CONST.PROPERTY property)
     {
         switch (property)
         {
-            case _C.PROPERTY.ATK: return NumericalManager.FML_ATKCost(CurrentPlayer.ATK);
-            case _C.PROPERTY.ASP: return NumericalManager.FML_ASPCost(CurrentPlayer.ASP);
-            case _C.PROPERTY.WORTH: return NumericalManager.FML_WORTHCost(CurrentPlayer.WORTH);
+            case CONST.PROPERTY.ATK: return NumericalManager.FML_ATKCost(CurrentPlayer.ATK);
+            case CONST.PROPERTY.ASP: return NumericalManager.FML_ASPCost(CurrentPlayer.ASP);
+            case CONST.PROPERTY.WORTH: return NumericalManager.FML_WORTHCost(CurrentPlayer.WORTH);
         }
 
         return 1;
     }
 
-    public int GetPropertyLevel(_C.PROPERTY property)
+    public int GetPropertyLevel(CONST.PROPERTY property)
     {
         switch (property)
         {
-            case _C.PROPERTY.ATK: return CurrentPlayer.ATK;
-            case _C.PROPERTY.ASP: return CurrentPlayer.ASP;
-            case _C.PROPERTY.WORTH: return CurrentPlayer.WORTH;
+            case CONST.PROPERTY.ATK: return CurrentPlayer.ATK;
+            case CONST.PROPERTY.ASP: return CurrentPlayer.ASP;
+            case CONST.PROPERTY.WORTH: return CurrentPlayer.WORTH;
         }
 
         return 1;

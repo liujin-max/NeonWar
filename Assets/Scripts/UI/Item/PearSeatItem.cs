@@ -47,7 +47,7 @@ public class PearSeatItem : MonoBehaviour
 
         if (m_Pear != null)
         {
-            string color_string = _C.LEVELCOLOR_PAIRS[m_Pear.Level].Trim('<', '>');
+            string color_string = CONST.LEVELCOLOR_PAIRS[m_Pear.Level].Trim('<', '>');
             if (ColorUtility.TryParseHtmlString(color_string, out Color color)) {
                 m_Frame.color  = color;
             }
@@ -56,7 +56,7 @@ public class PearSeatItem : MonoBehaviour
             m_Icon.sprite = GameFacade.Instance.AssetManager.LoadSprite("Pear" , m_Pear.Class.ToString());
             m_Icon.SetNativeSize();
 
-            m_Text.text = _C.LEVELCOLOR_PAIRS[m_Pear.Level] + m_Pear.Name;
+            m_Text.text = CONST.LEVELCOLOR_PAIRS[m_Pear.Level] + m_Pear.Name;
         }
         else
         {

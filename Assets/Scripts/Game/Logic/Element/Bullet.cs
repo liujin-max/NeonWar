@@ -109,14 +109,14 @@ public class Bullet : MonoBehaviour
     void OnTriggerEnter2D(Collider2D collider)
     {
         //子弹撞到边界 则销毁
-        if (collider.gameObject.tag == _C.COLLIDER_BOARD)
+        if (collider.gameObject.tag == CONST.COLLIDER_BOARD)
         {
             Dispose();
             return;
         }
 
         //子弹撞墙 判断是否反弹
-        if (collider.gameObject.tag == _C.COLLIDER_WALL)
+        if (collider.gameObject.tag == CONST.COLLIDER_WALL)
         {
             Hit.IgnoreUnits.Clear();
 

@@ -11,7 +11,7 @@ public class Buff_Stun : Buff, IDisposable
 {
     public Buff_Stun()
     {
-        TYPE    = _C.BUFF_TYPE.DE;
+        TYPE    = CONST.BUFF_TYPE.DE;
         Duration= new CDTimer(0.8f);
     }
 
@@ -40,7 +40,7 @@ public class Buff_YiShang : Buff
 {
     public Buff_YiShang()
     {
-        TYPE    = _C.BUFF_TYPE.DE;
+        TYPE    = CONST.BUFF_TYPE.DE;
         Duration= new CDTimer(3f);
     }
 
@@ -108,7 +108,7 @@ public class Buff_Chaos : Buff
     public Buff_Chaos()
     {
         Name    = "混乱";
-        TYPE    = _C.BUFF_TYPE.DE;
+        TYPE    = CONST.BUFF_TYPE.DE;
         Duration= new CDTimer(5);
     }
 
@@ -201,7 +201,7 @@ public class Buff_Frozen : Buff
     public Buff_Frozen()
     {
         Name    = "冰冻";
-        TYPE    = _C.BUFF_TYPE.DE;
+        TYPE    = CONST.BUFF_TYPE.DE;
     }
 
     public override void Init()
@@ -237,7 +237,7 @@ public class Buff_Poison : Buff
     public Buff_Poison()
     {
         Name    = "中毒";
-        TYPE    = _C.BUFF_TYPE.DE;
+        TYPE    = CONST.BUFF_TYPE.DE;
     }
 
     public override void Init()
@@ -259,7 +259,7 @@ public class Buff_Poison : Buff
         m_Timer.Reset();
 
         var hit = new Hit(Caster);
-        hit.Type = _C.HIT_TYPE.POISON;
+        hit.Type = CONST.HIT_TYPE.POISON;
         hit.HitColor = Color.green;
         hit.ATK_INC.PutMUL(this, Count);
         hit.CP.SetBase(0);
@@ -334,7 +334,7 @@ public class Buff_ATKDOWN : Buff
     public Buff_ATKDOWN()
     {
         Name    = "攻击削弱";
-        TYPE    = _C.BUFF_TYPE.DE;
+        TYPE    = CONST.BUFF_TYPE.DE;
         Duration= new CDTimer(5f);
     }
 
@@ -379,7 +379,7 @@ public class Buff_ASPDOWN : Buff
     public Buff_ASPDOWN()
     {
         Name    = "攻速降低";
-        TYPE    = _C.BUFF_TYPE.DE;
+        TYPE    = CONST.BUFF_TYPE.DE;
         Duration= new CDTimer(5f);
     }
 
@@ -424,7 +424,7 @@ public class Buff_SPEEDDOWN : Buff
     public Buff_SPEEDDOWN()
     {
         Name    = "移速降低";
-        TYPE    = _C.BUFF_TYPE.DE;
+        TYPE    = CONST.BUFF_TYPE.DE;
         Duration= new CDTimer(5f);
     }
 
@@ -547,7 +547,7 @@ public class Buff
     public int ID;
     public int Value = 0;   //参数
     public int Count = 1;   //层数
-    public _C.BUFF_TYPE TYPE = _C.BUFF_TYPE.GAIN;
+    public CONST.BUFF_TYPE TYPE = CONST.BUFF_TYPE.GAIN;
     public string Name = "未知";
     public CDTimer Duration = new CDTimer(999999);  //持续时间
     
@@ -556,25 +556,25 @@ public class Buff
 
 
     private static Dictionary<int, Func<Buff>> m_classDictionary = new Dictionary<int, Func<Buff>> {
-        {(int)_C.BUFF.STUN,     () => new Buff_Stun()},
-        {(int)_C.BUFF.YISHANG,  () => new Buff_YiShang()},
-        {(int)_C.BUFF.SHIELD,   () => new Buff_Shield()},
-        {(int)_C.BUFF.CHAOS,    () => new Buff_Chaos()},
-        {(int)_C.BUFF.FASTSPD,  () => new Buff_FastSPD()},
-        {(int)_C.BUFF.KILL,     () => new Buff_Kill()},
-        {(int)_C.BUFF.FROZEN,   () => new Buff_Frozen()},
-        {(int)_C.BUFF.POISON,   () => new Buff_Poison()},
+        {(int)CONST.BUFF.STUN,     () => new Buff_Stun()},
+        {(int)CONST.BUFF.YISHANG,  () => new Buff_YiShang()},
+        {(int)CONST.BUFF.SHIELD,   () => new Buff_Shield()},
+        {(int)CONST.BUFF.CHAOS,    () => new Buff_Chaos()},
+        {(int)CONST.BUFF.FASTSPD,  () => new Buff_FastSPD()},
+        {(int)CONST.BUFF.KILL,     () => new Buff_Kill()},
+        {(int)CONST.BUFF.FROZEN,   () => new Buff_Frozen()},
+        {(int)CONST.BUFF.POISON,   () => new Buff_Poison()},
 
         //场上Buff
-        {(int)_C.BUFF.ATK_UP,   () => new Buff_ATKUP()},
-        {(int)_C.BUFF.ATK_DOWN, () => new Buff_ATKDOWN()},
-        {(int)_C.BUFF.ASP_UP,   () => new Buff_ASPUP()},
-        {(int)_C.BUFF.ASP_DOWN, () => new Buff_ASPDOWN()},
-        {(int)_C.BUFF.SPEED_UP, () => new Buff_SPEEDUP()},
-        {(int)_C.BUFF.SPEED_DOWN,   () => new Buff_SPEEDDOWN()},
-        {(int)_C.BUFF.CP,       () => new Buff_CP()},
-        {(int)_C.BUFF.DODGE_UP, () => new Buff_DODGEUP()},
-        {(int)_C.BUFF.SPD_MUL,  () => new Buff_SPDMUL()},
+        {(int)CONST.BUFF.ATK_UP,   () => new Buff_ATKUP()},
+        {(int)CONST.BUFF.ATK_DOWN, () => new Buff_ATKDOWN()},
+        {(int)CONST.BUFF.ASP_UP,   () => new Buff_ASPUP()},
+        {(int)CONST.BUFF.ASP_DOWN, () => new Buff_ASPDOWN()},
+        {(int)CONST.BUFF.SPEED_UP, () => new Buff_SPEEDUP()},
+        {(int)CONST.BUFF.SPEED_DOWN,   () => new Buff_SPEEDDOWN()},
+        {(int)CONST.BUFF.CP,       () => new Buff_CP()},
+        {(int)CONST.BUFF.DODGE_UP, () => new Buff_DODGEUP()},
+        {(int)CONST.BUFF.SPD_MUL,  () => new Buff_SPDMUL()},
     };
 
 

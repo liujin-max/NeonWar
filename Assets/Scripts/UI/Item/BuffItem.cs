@@ -21,7 +21,7 @@ public class BuffItem : MonoBehaviour
         m_Icon.sprite = GameFacade.Instance.AssetManager.LoadSprite("Buff" , buff.ID.ToString());
         m_Icon.SetNativeSize();
 
-        string col  = buff.TYPE == _C.BUFF_TYPE.DE ? _C.COLOR_RED : _C.COLOR_GREEN;
+        string col  = buff.TYPE == CONST.BUFF_TYPE.DE ? CONST.COLOR_RED : CONST.COLOR_GREEN;
         m_Text.text = col + Buff.Name;
 
         FlushUI();

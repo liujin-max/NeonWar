@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class _C
+public static class CONST
 {
     public static int DEFAULT_FRAME = 30;   //默认帧数
 

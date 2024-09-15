@@ -35,7 +35,7 @@ public class Player : Unit
     public virtual void Init(int id, float angle)
     {
         ID      = id;
-        Side    = _C.SIDE.PLAYER;
+        Side    = CONST.SIDE.PLAYER;
         m_Angle = angle;
 
         //修改到源文件
@@ -45,7 +45,7 @@ public class Player : Unit
 
         InvincibleTimer.Full();
 
-        this.SetPosition(ToolUtility.FindPointOnCircle(Vector2.zero, _C.DEFAULT_RADIUS, angle));
+        this.SetPosition(ToolUtility.FindPointOnCircle(Vector2.zero, CONST.DEFAULT_RADIUS, angle));
     }
 
     public void SetAttackMode(AttackMode attackMode)
@@ -147,7 +147,7 @@ public class Player : Unit
         float t = Mathf.Clamp01(Time.deltaTime / 0.01f);
         m_Angle = Mathf.LerpAngle(m_Angle, m_Angle + (direction * MoveDirection) * speed, t);
 
-        this.SetPosition(ToolUtility.FindPointOnCircle(Vector2.zero, _C.DEFAULT_RADIUS, m_Angle));
+        this.SetPosition(ToolUtility.FindPointOnCircle(Vector2.zero, CONST.DEFAULT_RADIUS, m_Angle));
     }
 
     public override void DoAttack()
@@ -163,7 +163,7 @@ public class Player : Unit
     {
         m_Angle += 180;
 
-        this.SetPosition(ToolUtility.FindPointOnCircle(Vector2.zero, _C.DEFAULT_RADIUS, m_Angle));
+        this.SetPosition(ToolUtility.FindPointOnCircle(Vector2.zero, CONST.DEFAULT_RADIUS, m_Angle));
     }
 
     public Skill GetSkill(int skill_id)
@@ -235,7 +235,7 @@ public class Player : Unit
     #region 碰撞检测
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.gameObject.tag == _C.COLLIDER_ENEMY)
+        if (collider.gameObject.tag == CONST.COLLIDER_ENEMY)
         {
             Field.Instance.Crash(collider.gameObject.GetComponent<Enemy>(), this);
         }

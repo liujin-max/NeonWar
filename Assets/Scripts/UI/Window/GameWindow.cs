@@ -39,7 +39,6 @@ public class GameWindow : MonoBehaviour
         EventManager.DelHandler(EVENT.ONBATTLESTART,    OnBattleStart);
         EventManager.DelHandler(EVENT.ONBATTLEEND,      OnBattleEnd);
         EventManager.DelHandler(EVENT.ONUPDATEGLASS,    OnUpdateGlass);
-
     }
 
 

@@ -20,11 +20,11 @@ public class WXPlatform : Platform
 
         WX.InitSDK((code) => {
             //设置帧率
-            WX.SetPreferredFramesPerSecond(_C.DEFAULT_FRAME);
+            WX.SetPreferredFramesPerSecond(CONST.DEFAULT_FRAME);
 
             //初始化云开发
             // CallFunctionInitParam param = new CallFunctionInitParam();
-            // param.env = _C.CLOUD_ENV;
+            // param.env = CONST.CLOUD_ENV;
             // WX.cloud.Init(param);
 
             //上报启动
@@ -168,7 +168,7 @@ public class WXPlatform : Platform
     public override void SHARE(string text, bool show_image)
     {
         //任务：每日分享
-        // DataCenter.Instance.Daily.FinishTask((int)_C.TASK.SHARE);
+        // DataCenter.Instance.Daily.FinishTask((int)CONST.TASK.SHARE);
 
         if (show_image == true)
         {

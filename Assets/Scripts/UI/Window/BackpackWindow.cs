@@ -175,7 +175,7 @@ public class BackpackWindow : MonoBehaviour
                 }
                 else    //
                 {
-                    if (m_ComposeSeats.Count >= _C.COMPOSE_COUNTMAX) return;
+                    if (m_ComposeSeats.Count >= CONST.COMPOSE_COUNTMAX) return;
 
                     EventManager.SendEvent(new GameEvent(EVENT.UI_COMPOSECHANGE, true, p));
                 }

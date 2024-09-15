@@ -42,11 +42,11 @@ public class Trace
     protected CDTimer m_Timer;
 
 
-    private static Dictionary<_C.TRACE, Func<Trace>> m_classDictionary = new Dictionary<_C.TRACE, Func<Trace>> {
-        {_C.TRACE.PARABOLA,     () => new Trace_Parabola()},
+    private static Dictionary<CONST.TRACE, Func<Trace>> m_classDictionary = new Dictionary<CONST.TRACE, Func<Trace>> {
+        {CONST.TRACE.PARABOLA,     () => new Trace_Parabola()},
     };
 
-    public static Trace Create(_C.TRACE trace_type, Transform transform)
+    public static Trace Create(CONST.TRACE trace_type, Transform transform)
     {
         Trace trace;
         if (m_classDictionary.ContainsKey(trace_type)) {

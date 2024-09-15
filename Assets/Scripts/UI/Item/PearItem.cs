@@ -33,7 +33,7 @@ public class PearItem : MonoBehaviour
     {
         m_Pear = pear;
 
-        string color_string = _C.LEVELCOLOR_PAIRS[m_Pear.Level].Trim('<', '>');
+        string color_string = CONST.LEVELCOLOR_PAIRS[m_Pear.Level].Trim('<', '>');
         if (ColorUtility.TryParseHtmlString(color_string, out Color color)) {
             m_Frame.color  = color;
         }
@@ -42,7 +42,7 @@ public class PearItem : MonoBehaviour
         m_Icon.sprite   = GameFacade.Instance.AssetManager.LoadSprite("Pear" , pear.Class.ToString());
         m_Icon.SetNativeSize();
 
-        m_Text.text = _C.LEVELCOLOR_PAIRS[m_Pear.Level] + m_Pear.Name;
+        m_Text.text = CONST.LEVELCOLOR_PAIRS[m_Pear.Level] + m_Pear.Name;
 
         Select(false);
 

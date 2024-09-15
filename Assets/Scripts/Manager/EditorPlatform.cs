@@ -7,7 +7,7 @@ public class EditorPlatform : Platform
 {
     public override void INIT(Action callback)
     {
-        Application.targetFrameRate = _C.DEFAULT_FRAME;
+        Application.targetFrameRate = CONST.DEFAULT_FRAME;
 
         if (callback != null) {
             callback.Invoke();
@@ -51,7 +51,7 @@ public class EditorPlatform : Platform
     public override void SHARE(string text, bool show_image)
     {
         //任务：每日分享
-        // DataCenter.Instance.Daily.FinishTask((int)_C.TASK.SHARE);
+        // DataCenter.Instance.Daily.FinishTask((int)CONST.TASK.SHARE);
     }
 
     //激励广告
