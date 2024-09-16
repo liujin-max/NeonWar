@@ -9,13 +9,10 @@ using UnityEngine.UI;
 public class PearSeatItem : MonoBehaviour
 {
     [SerializeField] Button m_Touch;
-    [SerializeField] Image m_Frame;
     [SerializeField] Image m_Icon;
     [SerializeField] TextMeshProUGUI m_Text;
     [SerializeField] GameObject m_LockTag;
     
-
-
 
     private Pear m_Pear;
     public Pear Pear {get { return m_Pear;}}
@@ -23,9 +20,7 @@ public class PearSeatItem : MonoBehaviour
 
     void Awake()
     {
-        m_Touch.onClick.AddListener(()=>{
-            NavigationController.GotoBackpack();
-        });
+        m_Touch.onClick.AddListener(OnClick);
     }
 
     public void Init(Pear pear)
@@ -48,13 +43,12 @@ public class PearSeatItem : MonoBehaviour
         if (m_Pear != null)
         {
             string color_string = CONST.LEVELCOLOR_PAIRS[m_Pear.Level].Trim('<', '>');
-            if (ColorUtility.TryParseHtmlString(color_string, out Color color)) {
-                m_Frame.color  = color;
-            }
 
             m_Icon.gameObject.SetActive(true);
             m_Icon.sprite = GameFacade.Instance.AssetManager.LoadSprite("Pear" , m_Pear.Class.ToString());
             m_Icon.SetNativeSize();
+
+            m_Icon.GetComponent<ImageOutline>().SetColor(color_string);
 
             m_Text.text = CONST.LEVELCOLOR_PAIRS[m_Pear.Level] + m_Pear.Name;
         }
@@ -62,12 +56,18 @@ public class PearSeatItem : MonoBehaviour
         {
             m_Icon.gameObject.SetActive(false);
 
-            m_Frame.color  = Color.white;
-
             m_Text.text = "";
 
             m_LockTag.SetActive(!DataCenter.Instance.IsPearUnlock());
         }
         
+    }
+
+
+    void OnClick()
+    {
+        if (m_Pear == null) return;
+        
+        EventManager.SendEvent(new GameEvent(EVENT.UI_SELECTPEAR, m_Pear));
     }
 }

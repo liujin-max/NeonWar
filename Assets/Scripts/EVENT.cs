@@ -13,6 +13,7 @@ public static class EVENT
     public static string UI_BACKPACKOPEN    = "UI_BACKPACKOPEN";
     public static string UI_PEARCOMPOSE     = "UI_PEARCOMPOSE";
     public static string UI_COMPOSECHANGE   = "UI_COMPOSECHANGE";
+    public static string UI_SELECTPEAR      = "UI_SELECTPEAR";
     public static string UI_ENEMYDEAD       = "UI_ENEMYDEAD";
 
 

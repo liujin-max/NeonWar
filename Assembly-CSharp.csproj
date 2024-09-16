@@ -81,6 +81,7 @@
     <Compile Include="Assets\Scripts\Manager\Effect.cs" />
     <Compile Include="Assets\Scripts\Utility\CameraUtility.cs" />
     <Compile Include="Assets\Scripts\Utility\ToolUtility.cs" />
+    <Compile Include="Assets\Scripts\Effect\ImageOutline.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\Element\Trace.cs" />
     <Compile Include="Assets\AllIn1SpriteShader\Scripts\RandomSeed.cs" />
     <Compile Include="Assets\Scripts\GameFacade.cs" />

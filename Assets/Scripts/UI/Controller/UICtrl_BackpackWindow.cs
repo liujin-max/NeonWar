@@ -9,13 +9,17 @@ public class UICtrl_BackpackWindow : UICtrl<UICtrl_BackpackWindow, BackpackWindo
     {
         EventManager.AddHandler(EVENT.UI_PEARCOMPOSE,   OnPearComposeStart);
         EventManager.AddHandler(EVENT.UI_COMPOSECHANGE, OnComposeChange);
+        EventManager.AddHandler(EVENT.UI_SELECTPEAR,    OnSelectPear);
+        
     }
 
     protected override void RemoveHandlers()
     {
         EventManager.DelHandler(EVENT.UI_PEARCOMPOSE,   OnPearComposeStart);
         EventManager.DelHandler(EVENT.UI_COMPOSECHANGE, OnComposeChange);
+        EventManager.DelHandler(EVENT.UI_SELECTPEAR,    OnSelectPear);
     }
+
 
     protected override void OpenWindow(Action<BackpackWindow> action = null)
     {
@@ -42,5 +46,13 @@ public class UICtrl_BackpackWindow : UICtrl<UICtrl_BackpackWindow, BackpackWindo
 
         m_Window?.OnComposeChange(flag, pear);
     }
+
+    void OnSelectPear(GameEvent @event)
+    {
+        Pear pear = @event.GetParam(0) as Pear;
+
+        m_Window?.ShowDetail(pear);
+    }
+
     #endregion
 }

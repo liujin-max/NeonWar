@@ -722,7 +722,6 @@ public class Skill
     }
 
     //穿戴技能
-    //某些通用逻辑也用技能来实现了，但是这类逻辑通常只在穿戴的时候生效
     public virtual void Equip()
     {
 

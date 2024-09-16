@@ -59,11 +59,15 @@ public class PearDetailItem : MonoBehaviour
     {
         m_Pear = pear;
 
-        m_Title.text = CONST.LEVELCOLOR_PAIRS[pear.Level] + pear.Name;
+        string color_string = CONST.LEVELCOLOR_PAIRS[pear.Level];
+
+        m_Title.text = color_string + pear.Name;
         m_Description.text  = pear.GetDescription();
 
         m_Icon.sprite = GameFacade.Instance.AssetManager.LoadSprite("Pear" , m_Pear.Class.ToString());
         m_Icon.SetNativeSize();
+
+        m_Icon.GetComponent<ImageOutline>().SetColor(color_string.Trim('<', '>'));
 
         FlushUI();
     }

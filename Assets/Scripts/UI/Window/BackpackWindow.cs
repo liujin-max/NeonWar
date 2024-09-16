@@ -45,6 +45,7 @@ public class BackpackWindow : BaseWindow
 
     void InitPearSeats()
     {
+        Debug.Log("InitPearSeats");
         var item = GameFacade.Instance.UIManager.LoadItem(DataCenter.Instance.User.CurrentPlayer.UI + "PearItem", m_PearSeatPivot).GetComponent<WeaponPearItem>();
         item.Init();
     }
@@ -75,6 +76,7 @@ public class BackpackWindow : BaseWindow
             item.Init(pear);
             item.Select(false);
             m_PearItems.Add(item);
+            Debug.Log("数量：" + m_PearItems.Count);
             
 
             item.Touch.onClick.RemoveAllListeners();
@@ -186,10 +188,9 @@ public class BackpackWindow : BaseWindow
         EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPMASK, true));
 
 
-        float origin_y = -960;
-        m_PearView.transform.localPosition = new Vector3(0, -1500, 0);
+        m_PearView.transform.localPosition = new Vector3(0, 1500, 0);
 
-        m_PearView.transform.DOLocalMoveY(origin_y, m_EnterTimer).SetEase(Ease.OutCubic);
+        m_PearView.transform.DOLocalMoveY(750, m_EnterTimer).SetEase(Ease.OutCubic);
 
         yield return new WaitForSeconds(m_EnterTimer);
 
@@ -207,7 +208,7 @@ public class BackpackWindow : BaseWindow
         m_ComposePivot.GetComponent<CanvasGroup>().DOFade(0, m_ExitTimer);
 
 
-        m_PearView.transform.DOLocalMoveY(-1500f, m_ExitTimer).SetEase(Ease.InCubic);
+        m_PearView.transform.DOLocalMoveY(1500f, m_ExitTimer).SetEase(Ease.InCubic);
 
         yield return new WaitForSeconds(m_ExitTimer);
 
@@ -219,6 +220,7 @@ public class BackpackWindow : BaseWindow
         yield return null;
     }
     #endregion
+
 
 
 

@@ -1,5 +1,7 @@
 {
-    "Glass" : 30,
+    "Glass" : 3000,
+    "PearPool" : 1,
+    "PearCount" : "8-8",
     "Waves": 
     [
         {

@@ -9,7 +9,6 @@ public class PearItem : MonoBehaviour
     public Button Touch;
 
     [SerializeField] private GameObject m_Light;
-    [SerializeField] private Image m_Frame;
     [SerializeField] private Image m_Icon;
     [SerializeField] private TextMeshProUGUI m_Count;
     [SerializeField] private GameObject m_TagEquiped;
@@ -34,13 +33,11 @@ public class PearItem : MonoBehaviour
         m_Pear = pear;
 
         string color_string = CONST.LEVELCOLOR_PAIRS[m_Pear.Level].Trim('<', '>');
-        if (ColorUtility.TryParseHtmlString(color_string, out Color color)) {
-            m_Frame.color  = color;
-        }
-
 
         m_Icon.sprite   = GameFacade.Instance.AssetManager.LoadSprite("Pear" , pear.Class.ToString());
         m_Icon.SetNativeSize();
+
+        m_Icon.GetComponent<ImageOutline>().SetColor(color_string);
 
         m_Text.text = CONST.LEVELCOLOR_PAIRS[m_Pear.Level] + m_Pear.Name;
 
