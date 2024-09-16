@@ -164,12 +164,10 @@ public static class CONST
         RECEIVED
     }
 
-    public enum RANK
-    {
-        STAGE
-    }
 
 
+
+    
     public class VIBRATELEVEL
     {
         public static string HEAVY  = "heavy";

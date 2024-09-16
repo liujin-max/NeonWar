@@ -39,7 +39,7 @@ public class ScriptGenerator : EditorWindow
         if (!File.Exists(templatePath))
         {
             Debug.LogError("未找到模板文件：" + templatePath);
-            return;
+            return; 
         }
 
         // 读取模版文件内容

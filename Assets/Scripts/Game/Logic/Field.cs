@@ -169,7 +169,7 @@ public class Field : MonoBehaviour
     //每波结束时 做一些战场清理的操作
     public void ClearFieldWhenWaveFinished()
     {
-        //释放Buff等
+        //清理Buff等
         m_Player.ClearBuffs();
 
         //

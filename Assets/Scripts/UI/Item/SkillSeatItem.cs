@@ -100,7 +100,8 @@ public class SkillSeatItem : MonoBehaviour
 
             if (!m_SkillSlot.IsLevelMax()) 
             {
-                if (DataCenter.Instance.User.Glass >= Skill.GetCost(m_SkillData, m_SkillSlot.Level))
+                // if (DataCenter.Instance.User.Glass >= Skill.GetCost(m_SkillData, m_SkillSlot.Level))
+                if (DataCenter.Instance.User.Glass >= m_SkillData.GetCost(m_SkillSlot.Level))
                 {
                     m_RedPoint.SetActive(true);
                 }

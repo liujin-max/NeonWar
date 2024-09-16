@@ -7,7 +7,6 @@ public static class UI
     public static string TIPWINDOW      = "TipWindow";
     public static string MASKWINDOW     = "MaskWindow";
     
-
     public static string GAMEWINDOW     = "GameWindow";
     public static string BATTLEWINDOW   = "BattleWindow";
     public static string RESULTWINDOW   = "ResultWindow";

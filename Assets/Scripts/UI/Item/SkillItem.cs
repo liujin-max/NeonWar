@@ -23,7 +23,7 @@ public class SkillItem : MonoBehaviour
     void Start()
     {
         m_BtnUpgrade.onClick.AddListener(()=>{
-            int cost = Skill.GetCost(m_SkillData, m_SkillSlot.Level);
+            int cost = m_SkillData.GetCost(m_SkillSlot.Level); //Skill.GetCost(m_SkillData, m_SkillSlot.Level);
 
             if (DataCenter.Instance.User.Glass < cost)
             {
@@ -56,9 +56,9 @@ public class SkillItem : MonoBehaviour
         m_Icon.sprite   = GameFacade.Instance.AssetManager.LoadSprite("Skills/" + DataCenter.Instance.User.CurrentPlayer.ID, m_SkillData.ID.ToString()); 
         m_Icon.SetNativeSize();
 
-        m_Description.text = Skill.CompareDescription(m_SkillData, m_SkillSlot.Level, m_SkillSlot.Level + 1);
+        m_Description.text = m_SkillData.CompareDescription(m_SkillSlot.Level, m_SkillSlot.Level + 1);
 
-        int cost    = Skill.GetCost(m_SkillData, m_SkillSlot.Level);
+        int cost    = m_SkillData.GetCost(m_SkillSlot.Level); //Skill.GetCost(m_SkillData, m_SkillSlot.Level);
 
         if (DataCenter.Instance.User.Glass >= cost) m_Cost.text = "<sprite=1>" + ToolUtility.FormatNumber(cost);
         else m_Cost.text = CONST.COLOR_RED + "<sprite=1>" + ToolUtility.FormatNumber(cost);

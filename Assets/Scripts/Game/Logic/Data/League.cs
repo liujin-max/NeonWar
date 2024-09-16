@@ -15,33 +15,39 @@ public class SkillData
     public int LevelMax;
     public int[] Values;
     public int[] Costs;
-    // public string ConString;
-    // public List<Condition> Conditions = new List<Condition>();
     public int Atlas;           //图集
     public int Icon;            
     public string Description;
 
-
-    //是否满足解锁条件
-    public bool IsMeet()
+    public int GetValue(int level)
     {
-        //解析条件
-        // if (Conditions.Count == 0 && !string.IsNullOrEmpty(ConString))
-        // {
-        //     string[] conditions = ConString.Split(';');
-        //     foreach (var single_condition_string in conditions)
-        //     {
-        //         Condition c = Condition.Create(single_condition_string);
-        //         Conditions.Add(c);
-        //     }
-        // }
+        return Values[Mathf.Min(LevelMax - 1, level - 1)];
+    } 
 
-        // foreach (var c in Conditions)
-        // {
-        //     if (c.Check() == false) return false;
-        // }
+    public int GetCost(int level)
+    {
+        int order = Mathf.Min(LevelMax - 1, level);
+        return Costs[order];
+    }
 
-        return true;
+    public string GetDescription(int level, string color = "<#FFFFFF>")
+    {
+        int value = GetValue(level);
+
+        return Description.Replace("#", (color + value + "</color>"));
+    }
+
+    public string CompareDescription(int o_level, int t_level)
+    {
+        if (o_level == 0) return this.GetDescription(t_level, CONST.COLOR_GREEN);
+        if (o_level == this.LevelMax) return this.GetDescription(o_level, CONST.COLOR_GREEN);
+
+        int o_value = this.GetValue(o_level);
+        int t_value = this.GetValue(t_level);
+
+        string str = CONST.COLOR_GREEN + o_value + "</color>->" + CONST.COLOR_GREEN + t_value + "</color>";
+
+        return this.Description.Replace("#", str);
     }
 }
 
@@ -96,7 +102,7 @@ public class League
 
         for (int i = 0; i < slot.Level; i++)
         {
-            cost_total += Skill.GetCost(skillData, i);
+            cost_total += skillData.GetCost(i); //Skill.GetCost(skillData, i);
         }
 
         //重置技能

@@ -7,7 +7,7 @@ using UnityEngine;
 
 //MVC模式
 //UI控制器 基类
-public abstract class UICtrl<T, U> where T : UICtrl<T, U>, new() where U : BaseWindow
+public abstract class UICtrl<T, U> where T : new() where U : BaseWindow
 {
     protected U m_Window;
 
@@ -28,8 +28,8 @@ public abstract class UICtrl<T, U> where T : UICtrl<T, U>, new() where U : BaseW
 
     public void Exit()
     {
-        CloseWindow();
         RemoveHandlers();
+        CloseWindow();
     }
     
 

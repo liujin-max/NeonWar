@@ -107,8 +107,8 @@
     <Compile Include="Assets\Scripts\Effect\ShakeText.cs" />
     <Compile Include="Assets\Scripts\Utility\BoxColliderUtility.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\PROJECTILE.cs" />
-    <Compile Include="Assets\Scripts\Utility\TextSpacing.cs" />
     <Compile Include="Assets\Scripts\UI\Controller\UICtrl_BattleWindow.cs" />
+    <Compile Include="Assets\Scripts\Utility\TextSpacing.cs" />
     <Compile Include="Assets\Scripts\UI\Controller\UICtrl_BackpackWindow.cs" />
     <Compile Include="Assets\Scripts\SOUND.cs" />
     <Compile Include="Assets\Scripts\Utility\SlideScrollView.cs" />
@@ -152,8 +152,8 @@
     <Compile Include="Assets\AllIn1SpriteShader\Demo\Scripts\All1ShaderDemoController.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\Battle\HollowCircle.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\Data\Backpack.cs" />
-    <Compile Include="Assets\Scripts\Game\Logic\Element\Unit.cs" />
     <Compile Include="Assets\Scripts\UI\Controller\UICtrl_GameWindow.cs" />
+    <Compile Include="Assets\Scripts\Game\Logic\Element\Unit.cs" />
     <Compile Include="Assets\Scripts\Manager\SoundManager.cs" />
     <Compile Include="Assets\Scripts\Utility\ScaleUtility.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\Player\Player_10000.cs" />

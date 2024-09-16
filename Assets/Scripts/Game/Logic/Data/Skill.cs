@@ -646,7 +646,7 @@ public class Skill
     public int Level;
     public Player Caster;
 
-    public int Value {get {return Skill.ToValue(Data, Level);}}
+    public int Value {get {return Data.GetValue(Level);}}
 
     protected CDTimer m_Timer = new CDTimer(0);
 
@@ -706,37 +706,6 @@ public class Skill
         skill.Init(data, caster, level);
 
         return skill;
-    }
-
-    //参数
-    public static int ToValue(SkillData skillData, int level)
-    {
-        return skillData.Values[Mathf.Min(skillData.LevelMax - 1, level - 1)];
-    }
-
-    public static string GetDescription(SkillData skillData, int level, string color = "<#FFFFFF>")
-    {
-        int value = Skill.ToValue(skillData, Mathf.Min(skillData.LevelMax, level));
-
-        return skillData.Description.Replace("#", (color + value + "</color>"));
-    }
-
-    public static string CompareDescription(SkillData skillData, int o_level, int t_level)
-    {
-        if (o_level == 0) return GetDescription(skillData, t_level, CONST.COLOR_GREEN);
-        if (o_level == skillData.LevelMax) return GetDescription(skillData, o_level, CONST.COLOR_GREEN);
-
-        int o_value = Skill.ToValue(skillData, Mathf.Min(skillData.LevelMax, o_level));
-        int t_value = Skill.ToValue(skillData, Mathf.Min(skillData.LevelMax, t_level));
-
-        string str = CONST.COLOR_GREEN + o_value + "</color>->" + CONST.COLOR_GREEN + t_value + "</color>";
-
-        return skillData.Description.Replace("#", str);
-    }
-
-    public static int GetCost(SkillData skillData, int level)
-    {
-        return skillData.Costs[Mathf.Min(skillData.LevelMax - 1, level)];
     }
 
     public virtual void Dispose()
