@@ -39,7 +39,7 @@ public class PearItem : MonoBehaviour
 
         m_Icon.GetComponent<ImageOutline>().SetColor(color_string);
 
-        m_Text.text = CONST.LEVELCOLOR_PAIRS[m_Pear.Level] + m_Pear.Name;
+        m_Text.text = CONST.LEVELCOLOR_PAIRS[m_Pear.Level] + m_Pear.GetName();
 
         Select(false);
 

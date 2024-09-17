@@ -287,7 +287,6 @@ public class Pear
     public PearData Data { get => m_Data;}
 
     public int ID { get => m_Data.ID;}
-    public string Name { get => m_Data.Name;}
     public int Level { get => m_Data.Level;}
     public int Class { get => m_Data.Class;}
     
@@ -372,6 +371,12 @@ public class Pear
 
     }
 
+    public string GetName()
+    {
+        var data = DataCenter.Instance.Backpack.GetPearData(m_Data.Class);
+        return data.Name;
+    }
+
     public string GetDescription()
     {
         var data = DataCenter.Instance.Backpack.GetPearData(m_Data.Class);
@@ -379,4 +384,5 @@ public class Pear
 
         return text;
     }
+    
 }

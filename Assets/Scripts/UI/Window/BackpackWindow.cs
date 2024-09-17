@@ -45,7 +45,6 @@ public class BackpackWindow : BaseWindow
 
     void InitPearSeats()
     {
-        Debug.Log("InitPearSeats");
         var item = GameFacade.Instance.UIManager.LoadItem(DataCenter.Instance.User.CurrentPlayer.UI + "PearItem", m_PearSeatPivot).GetComponent<WeaponPearItem>();
         item.Init();
     }
@@ -76,7 +75,7 @@ public class BackpackWindow : BaseWindow
             item.Init(pear);
             item.Select(false);
             m_PearItems.Add(item);
-            Debug.Log("数量：" + m_PearItems.Count);
+            // Debug.Log("数量：" + m_PearItems.Count);
             
 
             item.Touch.onClick.RemoveAllListeners();
