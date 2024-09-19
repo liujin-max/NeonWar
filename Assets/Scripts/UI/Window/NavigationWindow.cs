@@ -23,7 +23,7 @@ public class NavigationWindow : BaseWindow
 
     void Awake()
     {
-        #region 宝珠
+        #region 道具
         m_BtnBackpack.Init(
             ()=>{
                 return NavigationController.GotoBackpack();
@@ -91,6 +91,7 @@ public class NavigationWindow : BaseWindow
             ()=>{
                 UICtrl_SettingWindow.Instance.Enter((window)=>{
                     window.ShowClose(false);
+                    window.ShowMask(false);
                 });
 
                 return true;
@@ -140,20 +141,5 @@ public class NavigationWindow : BaseWindow
         m_NavPivot.DOLocalMoveY(0, 0.5f).SetEase(Ease.InCubic);
 
         FlushUI();
-    }
-
-    //关闭背包
-    public void OnBackpackOpen(bool flag)
-    {
-        if (flag == false)
-        {
-            if (m_NAVBTN == m_BtnBackpack)
-            {
-                m_BtnFight.Execute();
-                
-                m_NAVBTN.Revoke();
-                m_NAVBTN = m_BtnFight; 
-            }
-        }
     }
 }

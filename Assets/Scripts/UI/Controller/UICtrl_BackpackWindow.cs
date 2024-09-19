@@ -23,10 +23,15 @@ public class UICtrl_BackpackWindow : UICtrl<UICtrl_BackpackWindow, BackpackWindo
 
     protected override void OpenWindow(Action<BackpackWindow> action = null)
     {
-        GameFacade.Instance.UIManager.LoadWindowAsync(UI.BACKPACKWINDOW, UIManager.BOARD, (obj)=>{
+        GameFacade.Instance.UIManager.LoadWindowAsync(UI.BACKPACKWINDOW, UIManager.MAJOR, (obj)=>{
             m_Window = obj.GetComponent<BackpackWindow>();
             m_Window.Init(null);
         });
+    }
+
+    protected override void CloseWindow()
+    {
+        m_Window?.OnExit();
     }
 
 

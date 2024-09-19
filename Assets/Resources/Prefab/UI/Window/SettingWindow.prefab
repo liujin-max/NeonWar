@@ -37,7 +37,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -80}
+  m_AnchoredPosition: {x: 0, y: -110}
   m_SizeDelta: {x: 450, y: 126}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &598792624407827788
@@ -941,6 +941,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BtnClose: {fileID: 934751739789678557}
+  m_Mask: {fileID: 5604876820343941524}
   m_Music: {fileID: 7319416912831626081}
   m_Sound: {fileID: 9071507785832489603}
 --- !u!1 &7140901645278298472

@@ -34,7 +34,7 @@ public class PearDetailItem : MonoBehaviour
     {
         m_BtnEquip.onClick.AddListener(()=>{
             if (DataCenter.Instance.User.IsPearSeatsFull() == true) {
-                EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "宝珠槽已满"));
+                EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "道具槽已满"));
                 return;
             }
 

@@ -47,7 +47,7 @@ public class UICtrl_NavWindow : UICtrl<UICtrl_NavWindow, NavigationWindow>
     {
         bool flag = (bool)@event.GetParam(0);
 
-        m_Window?.OnBackpackOpen(flag);
+        // m_Window?.OnBackpackOpen(flag);
     }
     #endregion
 }

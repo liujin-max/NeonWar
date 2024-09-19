@@ -43,7 +43,7 @@ public class State_Result<T> : State<Field>
             DataCenter.Instance.User.UpdateGlass(glass_total);
             EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS));
 
-            //计算宝珠奖励
+            //计算道具奖励
             Dictionary<int, int> pear_dic = new Dictionary<int, int>();
             
             if (m_Result == CONST.RESULT.VICTORY)

@@ -10,6 +10,7 @@ public class SettingWindow : BaseWindow
 {
     [SerializeField] Button m_BtnClose;
 
+    [SerializeField] GameObject m_Mask;
     [SerializeField] Transform m_Music;
     [SerializeField] Transform m_Sound;
 
@@ -73,5 +74,10 @@ public class SettingWindow : BaseWindow
     public void ShowClose(bool flag)
     {
         m_BtnClose.gameObject.SetActive(flag);
+    }
+
+    public void ShowMask(bool flag)
+    {
+        m_Mask.SetActive(flag);
     }
 }

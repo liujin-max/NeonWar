@@ -14,20 +14,27 @@ public class UIManager : MonoBehaviour
     public static Transform GUIDE;
     public static Transform TIP;
 
+    public static CanvasGroup MASK;
+
 
     private Dictionary<string, GameObject> WindowCaches = new Dictionary<string, GameObject>();
     private HashSet<string> WindowsHash = new HashSet<string>();
 
 
+    private int m_MajorCount = 0;
+
     void Awake()
     {
         BOTTOM  = GameObject.Find("Canvas/BOTTOM").transform;
+        MASK    = GameObject.Find("Canvas/MASK").GetComponent<CanvasGroup>();
         MAJOR   = GameObject.Find("Canvas/MAJOR").transform;
         NAV     = GameObject.Find("Canvas/NAV").transform;
         BOARD   = GameObject.Find("Canvas/BOARD").transform;
         EFFECT  = GameObject.Find("Canvas/EFFECT").transform;
         GUIDE   = GameObject.Find("Canvas/GUIDE").transform;
         TIP     = GameObject.Find("Canvas/TIP").transform;
+
+        MASK.alpha = 0;
     }
 
     // public GameObject LoadWindow(string path, Transform parent)
@@ -50,6 +57,11 @@ public class UIManager : MonoBehaviour
             return;
         }
 
+        if (parent == MAJOR)
+        {
+            m_MajorCount++;
+            UpdateMaskVisible();
+        } 
 
         WindowsHash.Add(path);
 
@@ -60,32 +72,18 @@ public class UIManager : MonoBehaviour
         });
     }
 
-    public void ShowWindow(string name)
-    {
-        var window = GetWindow(name);
-        if (window == null) {
-            return;
-        }
-
-        window.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
-    }
-
-    public void HideWindow(string name)
-    {
-        var window = GetWindow(name);
-        if (window == null) {
-            return;
-        }
-
-        window.GetComponent<RectTransform>().anchoredPosition = new Vector2(9999, 9999);
-    }
-
     public void UnloadWindow(GameObject window)
     {
         WindowCaches.Remove(window.name);
         WindowsHash.Remove(window.name);
 
-        Destroy(window);
+        if (window.transform.parent == MAJOR)
+        {
+            m_MajorCount--;
+            UpdateMaskVisible();
+        } 
+
+        DestroyImmediate(window);
     }
 
     public void UnloadWindow(string name)
@@ -104,6 +102,11 @@ public class UIManager : MonoBehaviour
         return WindowCaches.TryGetValue(name, out var window) ? window : null;
     }
 
+    void UpdateMaskVisible()
+    {
+        MASK.alpha = m_MajorCount > 0 ? 1 : 0;
+    }
+
     public GameObject LoadItem(string path, Transform parent)
     {
         path    = "Prefab/UI/Item/" + path;
@@ -113,4 +116,6 @@ public class UIManager : MonoBehaviour
 
         return obj;
     }
+
+
 }

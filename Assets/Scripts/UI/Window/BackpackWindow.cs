@@ -7,7 +7,6 @@ using UnityEngine.UI;
 
 public class BackpackWindow : BaseWindow
 {
-    [SerializeField] private Button m_Mask;
     [SerializeField] private SuperScrollView m_PearView;
     [SerializeField] private Transform m_PearSeatPivot;
     [SerializeField] private Transform m_DetailPivot;
@@ -26,12 +25,7 @@ public class BackpackWindow : BaseWindow
     private bool m_IsAwake = false;
 
 
-    void Awake()
-    {
-        m_Mask.onClick.AddListener(()=>{
-            StartCoroutine(ExitAnim());
-        });
-    }
+
 
     public void Init(Pear current_pear)
     {
@@ -181,6 +175,7 @@ public class BackpackWindow : BaseWindow
     }
 
 
+
     #region 协程
     IEnumerator EnterAnim()
     {
@@ -203,8 +198,10 @@ public class BackpackWindow : BaseWindow
     {
         EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPMASK, true));
 
-        m_DetailPivot.GetComponent<CanvasGroup>().DOFade(0, m_ExitTimer);
-        m_ComposePivot.GetComponent<CanvasGroup>().DOFade(0, m_ExitTimer);
+  
+        m_DetailPivot.gameObject.SetActive(false);
+        m_ComposePivot.gameObject.SetActive(false);
+        m_PearSeatPivot.gameObject.SetActive(false);
 
 
         m_PearView.transform.DOLocalMoveY(1500f, m_ExitTimer).SetEase(Ease.InCubic);
@@ -214,7 +211,7 @@ public class BackpackWindow : BaseWindow
         EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPMASK, false));
         EventManager.SendEvent(new GameEvent(EVENT.UI_BACKPACKOPEN, false));
 
-        UICtrl_BackpackWindow.Instance.Exit();
+        GameFacade.Instance.UIManager.UnloadWindow(gameObject);
 
         yield return null;
     }
@@ -222,7 +219,10 @@ public class BackpackWindow : BaseWindow
 
 
 
-
+    public void OnExit()
+    {
+        StartCoroutine(ExitAnim());
+    }
 
     public void OnPearComposeStart(Pear pear)
     {
