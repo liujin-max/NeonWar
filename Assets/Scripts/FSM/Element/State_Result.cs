@@ -52,7 +52,7 @@ public class State_Result<T> : State<Field>
 
                 if (pear_dic.Count > 0) {
                     foreach (var pear_keypairs in pear_dic) {
-                        DataCenter.Instance.Backpack.PushPear(pear_keypairs.Key, pear_keypairs.Value);
+                        // DataCenter.Instance.Backpack.PushPear(pear_keypairs.Key, pear_keypairs.Value);
                     }
                 }
             }

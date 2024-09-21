@@ -69,22 +69,12 @@ public class DataCenter
 
         int success_rate = (pears.Count - 1) * 50;
 
-        // //判断合成手续费是否足够
-        // int cost_coin   = 50;
-
-        // if (DataCenter.Instance.User.Coin < cost_coin) {
-        //     EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "<sprite=0>不足"));
-        //     return null;
-        // }
-
-        //扣除消耗
-        // DataCenter.Instance.User.UpdateCoin(-cost_coin);
 
         User.IsDirty = true;
 
         //消耗宝珠
         pears.ForEach(pear => {
-            Backpack.RemovePear(pear.ID, 1);
+            // Backpack.RemovePear(pear.ID, 1);
         });
 
 
@@ -118,9 +108,10 @@ public class DataCenter
             next_id = pear_datas[rand].ID;
         }
 
-        Pear pear = Backpack.PushPear(next_id);
+        // Pear pear = Backpack.PushPear(next_id);
 
-        return pear;
+        // return pear;
+        return null;
     }
 }
 

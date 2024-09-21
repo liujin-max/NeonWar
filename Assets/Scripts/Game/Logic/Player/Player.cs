@@ -202,22 +202,22 @@ public class Player : Unit
         }
 
         // 测试技能
-        // m_Skills.Add(Skill.Create(DataCenter.Instance.League.GetSkillData(10210), this, 1));
+        // m_Skills.Add(Skill.Create(DataCenter.Instance.League.GetSkillData(10280), this, 2));
         // m_Skills.Add(Skill.Create(DataCenter.Instance.League.GetSkillData(10230), this, 1));
         // m_Skills.Add(Skill.Create(DataCenter.Instance.League.GetSkillData(10220), this, 1));
         // m_Skills.Add(Skill.Create(DataCenter.Instance.League.GetSkillData(10221), this, 1));
 
 
-        //同步宝珠
+        //同步道具
         {
             m_Pears.ForEach(pear => pear.UnEquip());
             m_Pears.Clear();
             DataCenter.Instance.User.CurrentPlayer.PearSlots.ForEach(pear_msg => {
                 if (pear_msg.ID > 0)
                 {
-                    Pear pear = Pear.Create(pear_msg.ID);
-                    pear.Equip(this);
-                    m_Pears.Add(pear);
+                    // Pear pear = Pear.Create(pear_msg.ID);
+                    // pear.Equip(this);
+                    // m_Pears.Add(pear);
                 }
             });
 

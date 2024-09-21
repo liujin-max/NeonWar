@@ -33,44 +33,6 @@ public class Skill_10020 : Skill
 }
 #endregion
 
-#region 弓：精准分裂
-//分裂出的箭矢会自动瞄准附近的敌人
-public class Skill_10021 : Skill
-{
-    public Skill_10021()
-    {
-        EventManager.AddHandler(EVENT.ONBULLETSHOOT,  OnBulletShoot);
-    }
-
-    public override void Dispose()
-    {
-        EventManager.DelHandler(EVENT.ONBULLETSHOOT,  OnBulletShoot);
-    }
-
-    //子弹击中目标
-    private void OnBulletShoot(GameEvent @event)
-    {
-        Bullet b = @event.GetParam(0) as Bullet;
-        if (b.Caster != Caster) return;
-        if (b.IsSplit == false) return;   //只影响分裂出的箭矢
-
-
-        if (Field.Instance.Spawn.Enemys.Count == 0) return;
-
-        List<Enemy> enemys = new List<Enemy>(Field.Instance.Spawn.Enemys);
-        foreach (var unit in b.Hit.IgnoreUnits) {
-            enemys.Remove(unit as Enemy);
-        }
-    
-
-        int rand= RandomUtility.Random(0, Field.Instance.Spawn.Enemys.Count);
-        Enemy e = Field.Instance.Spawn.Enemys[rand];
-
-        //分裂箭射向其他目标
-        b.Turn(ToolUtility.VectorToAngle(e.transform.localPosition - b.transform.localPosition)); 
-    }
-}
-#endregion
 
 
 #region 弓：瞄准射击
@@ -334,63 +296,6 @@ public class Skill_10210 : Skill
 }
 #endregion
 
-#region 弓：毒气蔓延
-//毒气陷阱周期性的为范围内的目标附加中毒效果
-public class Skill_10212 : Skill
-{
-    private Dictionary<Area_Poison, float> m_Records = new Dictionary<Area_Poison, float>();
-    
-    public Skill_10212()
-    {
-        EventManager.AddHandler(EVENT.ONPUSHAREA,   OnPushArea);
-        EventManager.AddHandler(EVENT.ONREMOVEAREA, OnRemoveArea);
-    }
-
-    public override void Dispose()
-    {
-        EventManager.DelHandler(EVENT.ONPUSHAREA,   OnPushArea);
-        EventManager.DelHandler(EVENT.ONREMOVEAREA, OnRemoveArea);
-    }
-
-    private void OnPushArea(GameEvent @event)
-    {
-        Area_Poison area = @event.GetParam(0) as Area_Poison;
-        
-        if (area == null) return;
-
-        m_Records.Add(area, 0);
-    }
-
-    private void OnRemoveArea(GameEvent @event)
-    {
-        Area_Poison area = @event.GetParam(0) as Area_Poison;
-        
-        if (area == null) return;
-
-        m_Records.Remove(area);
-    }
-
-    public override void CustomUpdate(float deltaTime)
-    {
-        foreach (var area in m_Records.Keys.ToList())
-        {
-            m_Records[area] += deltaTime;
-
-            if (m_Records[area] >= 1f)
-            {
-                m_Records[area] -= 1f;
-
-                foreach (var t in area.Units)
-                {
-                    t.Key.AddBuff(Caster, (int)CONST.BUFF.POISON, (int)Caster.ATT.ATK.GetBase());
-                }
-            }
-        }
-    }
-}
-#endregion
-
-
 
 #region 弓：冰冻陷阱
 //陷阱范围内的目标行动缓慢，持续#秒
@@ -427,31 +332,6 @@ public class Skill_10220 : Skill
 }
 #endregion
 
-#region 弓：低温冰冻
-//在低温陷阱内停留超过3秒将被冻结
-public class Skill_10221 : Skill
-{
-    public override void CustomUpdate(float deltaTime)
-    {
-        foreach (var area in Field.Instance.Areas.List)
-        {
-            Area_Ice ice = area as Area_Ice;
-            if (ice == null) continue;
-
-            foreach (var t in ice.Units)
-            {
-                if (t.Value >= 0.5f) 
-                {
-                    t.Key.AddBuff(Caster, (int)CONST.BUFF.FROZEN, 1, 1.5f);
-                }
-            }
-        }
-    }
-}
-#endregion
-
-
-
 
 #region 弓：引力陷阱
 //将范围#内的目标向陷阱中心拖拽
@@ -486,39 +366,6 @@ public class Skill_10230 : Skill
 }
 #endregion
 
-
-#region 弓：引力爆破
-//每当目标被拖拽至引力陷阱中心时，产生一次爆炸伤害
-public class Skill_10231 : Skill
-{
-    private Dictionary<Area, HashSet<Unit>> m_Records = new Dictionary<Area, HashSet<Unit>>();
-
-    public override void CustomUpdate(float deltaTime)
-    {
-        foreach (var area in Field.Instance.Areas.List)
-        {
-            Area_Rope rope = area as Area_Rope;
-            if (rope == null) continue;
-
-            if (!m_Records.ContainsKey(rope)) m_Records[rope] = new HashSet<Unit>();
-
-            Vector2 o_pos = rope.transform.localPosition;
-            foreach (var t in rope.Units)
-            {
-                var unit = t.Key;
-                if (m_Records[rope].Contains(unit)) continue;
-                if (Vector2.Distance(unit.transform.localPosition, o_pos) <= 0.5f) 
-                {
-                    m_Records[rope].Add(unit);
-
-                    Bomb bomb = new Bomb(Caster, o_pos, 1.5f, 3f, EFFECT.ROPE);
-                    bomb.Do();
-                }
-            }
-        }
-    }
-}
-#endregion
 
 
 
@@ -575,7 +422,31 @@ public class Skill_10270 : Skill
 }
 #endregion
 
+#region 弓：会心
+//每击杀一个目标，暴击率提高#%
+public class Skill_10280 : Skill
+{
+    public Skill_10280()
+    {
+        EventManager.AddHandler(EVENT.ONKILLENEMY,  OnKillEnemy);
+    }
 
+    public override void Dispose()
+    {
+        EventManager.DelHandler(EVENT.ONKILLENEMY,  OnKillEnemy);
+    }
+
+    //创建子弹
+    void OnKillEnemy(GameEvent @event)
+    {
+        Hit hit = (Hit)@event.GetParam(1);
+
+        if (hit.Caster != Caster) return;
+        
+        hit.Caster.AddBuff(Caster, (int)CONST.BUFF.CRIT, Value);
+    }
+}
+#endregion
 
 
 
@@ -654,7 +525,6 @@ public class Skill
         //弓 攻击
         {10010, () => new Skill_10010()},
         {10020, () => new Skill_10020()},
-        {10021, () => new Skill_10021()},
         {10030, () => new Skill_10030()},
 
         {10060, () => new Skill_10060()},
@@ -671,18 +541,13 @@ public class Skill
         
         //弓 价值
         {10210, () => new Skill_10210()},
-        {10212, () => new Skill_10212()},
         {10220, () => new Skill_10220()},
-        {10221, () => new Skill_10221()},
         {10230, () => new Skill_10230()},
-        {10231, () => new Skill_10231()},
-        // {10240, () => new Skill_10240()},
-        // {10250, () => new Skill_10250()},
-        // {10251, () => new Skill_10251()},
+
 
         {10260, () => new Skill_10260()},
         {10270, () => new Skill_10270()},
-
+        {10280, () => new Skill_10280()},
 
 
 

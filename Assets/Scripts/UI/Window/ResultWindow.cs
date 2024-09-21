@@ -60,14 +60,14 @@ public class ResultWindow : BaseWindow
     {
         m_PearPivot.SetActive(pear_dic.Count > 0);
 
-        foreach (var pear_keyparis in pear_dic)
-        {
-            var item = GameFacade.Instance.UIManager.LoadItem("PearItem", m_PearContent).GetComponent<PearItem>();
+        // foreach (var pear_keyparis in pear_dic)
+        // {
+        //     var item = GameFacade.Instance.UIManager.LoadItem("PearItem", m_PearContent).GetComponent<PearItem>();
 
-            Pear pear= Pear.Create(pear_keyparis.Key, pear_keyparis.Value);
-            item.Init(pear);
-            item.ShowTagEquip(false);
-        }
+        //     Pear pear= Pear.Create(pear_keyparis.Key, pear_keyparis.Value);
+        //     item.Init(pear);
+        //     item.ShowTagEquip(false);
+        // }
     }
 
     void Update()

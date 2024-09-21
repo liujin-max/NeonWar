@@ -10,7 +10,6 @@ public class PearItem : MonoBehaviour
 
     [SerializeField] private GameObject m_Light;
     [SerializeField] private Image m_Icon;
-    [SerializeField] private TextMeshProUGUI m_Count;
     [SerializeField] private GameObject m_TagEquiped;
     [SerializeField] TextMeshProUGUI m_Text;
 
@@ -48,15 +47,12 @@ public class PearItem : MonoBehaviour
 
     void FlushUI()
     {
-        m_Count.text = m_Pear.Count > 1 ? m_Pear.Count.ToString() : "";
-
         ShowTagEquip(DataCenter.Instance.User.IsPearEquiped(m_Pear.ID));
     }
 
     public void ShowTagEquip(bool flag)
     {
         m_TagEquiped.SetActive(flag);
-        m_Count.gameObject.SetActive(!flag);
     }
 
     public void ShowName(bool flag)

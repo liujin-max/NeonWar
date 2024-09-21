@@ -291,6 +291,7 @@ MonoBehaviour:
   - {fileID: -1815562022, guid: d59b93b24c7a69a459d221709570e7e0, type: 3}
   - {fileID: 1261152707, guid: d59b93b24c7a69a459d221709570e7e0, type: 3}
   m_FrameRate: 0.3
+  m_Interval: 0
   m_InitFrame: 0
 --- !u!1 &1138193364113527151
 GameObject:
@@ -1899,6 +1900,7 @@ MonoBehaviour:
   - {fileID: 1825188233, guid: 16bed47f8a88da94485b4a41da26f1ff, type: 3}
   - {fileID: 1623555677, guid: 16bed47f8a88da94485b4a41da26f1ff, type: 3}
   m_FrameRate: 0.3
+  m_Interval: 0
   m_InitFrame: 0
 --- !u!1 &5281014613176623124
 GameObject:
@@ -3955,6 +3957,7 @@ MonoBehaviour:
   - {fileID: 1287896078, guid: 07a4ce2a8488af04da74ad16a1dd6d36, type: 3}
   - {fileID: -127254148, guid: 07a4ce2a8488af04da74ad16a1dd6d36, type: 3}
   m_FrameRate: 0.3
+  m_Interval: 0
   m_InitFrame: 0
 --- !u!1 &8884731958530620932
 GameObject:

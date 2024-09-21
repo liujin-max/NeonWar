@@ -137,10 +137,10 @@ public class BackpackWindow : BaseWindow
         var list    = new List<Pear>();
         DataCenter.Instance.Backpack.Pears.ForEach(p => {
             if (p.Level == pear.Level && !DataCenter.Instance.User.IsPearEquiped(p.ID)) {
-                for (int i = 0; i < p.Count; i++) {
-                    var new_pear = Pear.Create(p.ID, 1);
-                    list.Add(new_pear);
-                }
+                // for (int i = 0; i < p.Count; i++) {
+                //     var new_pear = Pear.Create(p.ID, 1);
+                //     list.Add(new_pear);
+                // }
             }
         });
         

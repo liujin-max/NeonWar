@@ -5,13 +5,15 @@ using System.Data;
 using System.Linq;
 using UnityEngine;
 
+
+
+
 //技能配置
 [System.Serializable]
 public class SkillData
 {
     public int ID;
     public string Name;
-    public CONST.SKILL_TYPE Type;
     public int LevelMax;
     public int[] Values;
     public int[] Costs;
@@ -72,12 +74,11 @@ public class League
             {
                 ID          = Convert.ToInt32(data[0]),
                 Name        = data[1],
-                Type        = (CONST.SKILL_TYPE)Convert.ToInt32(data[2]),
-                Values      = data[3].Split('|').Where(s => !string.IsNullOrWhiteSpace(s)).Select(int.Parse).ToArray(),
-                Costs       = data[4].Split('|').Where(s => !string.IsNullOrWhiteSpace(s)).Select(int.Parse).ToArray(),
-                Atlas       = Convert.ToInt32(data[5]),
-                Icon        = Convert.ToInt32(data[6]),
-                Description = data[7]
+                Values      = data[2].Split('|').Where(s => !string.IsNullOrWhiteSpace(s)).Select(int.Parse).ToArray(),
+                Costs       = data[3].Split('|').Where(s => !string.IsNullOrWhiteSpace(s)).Select(int.Parse).ToArray(),
+                Atlas       = Convert.ToInt32(data[4]),
+                Icon        = Convert.ToInt32(data[5]),
+                Description = data[6]
             };
             skill.LevelMax  = skill.Values.Length;
 

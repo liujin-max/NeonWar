@@ -105,6 +105,7 @@ public static class CONST
         KILL,
         FROZEN,     //冰冻
         POISON,     //中毒
+        CRIT,       //会心
 
 
 
@@ -139,13 +140,6 @@ public static class CONST
         UPGRADE,
         NONE
     }
-
-    public enum SKILL_TYPE
-    {
-        NORMAL,     //普通技能
-        ONEOFF,     //一次性技能
-    }
-
 
 
     //动画节点的状态

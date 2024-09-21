@@ -97,7 +97,9 @@ public class PlayerMsg
 public class PearMsg
 {
     public int ID;
-    public int Count;
+    public int UUID;
+    public string[] Properties;
+    public int SpecialProperty;
 }
 
 
@@ -133,7 +135,7 @@ public class GameUserData
 
                 //价值分支
                 new SkillSlotMsg() {WOR = 8, POS = "21", SkillPool = new int[] {10210, 10220, 10230}},
-                new SkillSlotMsg() {WOR =25, POS = "22", SkillPool = new int[] {10260, 10270}},
+                new SkillSlotMsg() {WOR =25, POS = "22", SkillPool = new int[] {10260, 10270, 10280}},
             },
 
             PearSlots   = new List<PearSlotMsg>()   //2个宝珠槽
@@ -144,8 +146,10 @@ public class GameUserData
         }
     };
 
-    //宝珠数据
+    //道具数据
     public List<PearMsg> Pears = new List<PearMsg>();
+
+    public int GlobalUUID;
 
     public long RecoveryTimestamp;    //上次体力的恢复时间
     public int RegisterDay;     //注册时间(一年中的第几天)
@@ -269,6 +273,15 @@ public class User
 
         //重置标记
         m_userUpdate    = false;
+    }
+
+    public int CreateUUID()
+    {
+        m_Data.GlobalUUID++;
+
+        m_userUpdate = true;
+
+        return m_Data.GlobalUUID;
     }
 
     public void SetLevel(int value)
@@ -431,8 +444,8 @@ public class User
 
         DataCenter.Instance.Backpack.Pears.ForEach(pear =>{
             m_Data.Pears.Add(new PearMsg() {
-                ID      = pear.ID,
-                Count   = pear.Count
+                ID  = pear.ID,
+                UUID= pear.UUID
             });
         });
     }

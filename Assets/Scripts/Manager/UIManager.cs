@@ -7,6 +7,7 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     public static Transform BOTTOM;
+    public static GameObject MASK;
     public static Transform MAJOR;
     public static Transform NAV;
     public static Transform BOARD;
@@ -14,7 +15,7 @@ public class UIManager : MonoBehaviour
     public static Transform GUIDE;
     public static Transform TIP;
 
-    public static CanvasGroup MASK;
+    
 
 
     private Dictionary<string, GameObject> WindowCaches = new Dictionary<string, GameObject>();
@@ -26,7 +27,7 @@ public class UIManager : MonoBehaviour
     void Awake()
     {
         BOTTOM  = GameObject.Find("Canvas/BOTTOM").transform;
-        MASK    = GameObject.Find("Canvas/MASK").GetComponent<CanvasGroup>();
+        MASK    = GameObject.Find("Canvas/MASK");
         MAJOR   = GameObject.Find("Canvas/MAJOR").transform;
         NAV     = GameObject.Find("Canvas/NAV").transform;
         BOARD   = GameObject.Find("Canvas/BOARD").transform;
@@ -34,7 +35,7 @@ public class UIManager : MonoBehaviour
         GUIDE   = GameObject.Find("Canvas/GUIDE").transform;
         TIP     = GameObject.Find("Canvas/TIP").transform;
 
-        MASK.alpha = 0;
+        MASK.SetActive(false);
     }
 
     // public GameObject LoadWindow(string path, Transform parent)
@@ -57,11 +58,7 @@ public class UIManager : MonoBehaviour
             return;
         }
 
-        if (parent == MAJOR)
-        {
-            m_MajorCount++;
-            UpdateMaskVisible();
-        } 
+        if (parent == MAJOR) UpdateMaskVisible(1);
 
         WindowsHash.Add(path);
 
@@ -77,11 +74,7 @@ public class UIManager : MonoBehaviour
         WindowCaches.Remove(window.name);
         WindowsHash.Remove(window.name);
 
-        if (window.transform.parent == MAJOR)
-        {
-            m_MajorCount--;
-            UpdateMaskVisible();
-        } 
+        if (window.transform.parent == MAJOR) UpdateMaskVisible(-1);
 
         DestroyImmediate(window);
     }
@@ -102,9 +95,10 @@ public class UIManager : MonoBehaviour
         return WindowCaches.TryGetValue(name, out var window) ? window : null;
     }
 
-    void UpdateMaskVisible()
+    void UpdateMaskVisible(int value)
     {
-        MASK.alpha = m_MajorCount > 0 ? 1 : 0;
+        m_MajorCount += value;
+        MASK.SetActive(m_MajorCount > 0);
     }
 
     public GameObject LoadItem(string path, Transform parent)

@@ -11,7 +11,7 @@ public class PearData
     public string Name;
     public int Class;
     public int Level;
-    public int Value;
+    public int Point;
     public int Weight;
     public string Description;
 }
@@ -58,7 +58,7 @@ public class Backpack
                 Name        = data[1],
                 Class       = Convert.ToInt32(data[2]),
                 Level       = Convert.ToInt32(data[3]),
-                Value       = Convert.ToInt32(data[4]),
+                Point       = Convert.ToInt32(data[4]),
                 Weight      = Convert.ToInt32(data[5]),
                 Description = data[6]
             };
@@ -79,13 +79,14 @@ public class Backpack
         return m_PearDataDic.TryGetValue(id, out PearData value) ? value : default;
     }
 
-    Pear AddPear(int id, int count)
+    Pear AddPear(int id, int uuid, string[] properties, int special_property)
     {
-        Pear pear = Pear.Create(id, count);
-        m_Pears.Add(pear);
-        m_PearsDic[pear.ID] = pear;
+        // Pear pear = Pear.Create(id, count);
+        // m_Pears.Add(pear);
+        // m_PearsDic[pear.ID] = pear;
 
-        return pear;
+        // return pear;
+        return null;
     }
 
     public Pear GetPear(int id)
@@ -103,7 +104,7 @@ public class Backpack
         m_Pears.Clear();
 
         pear_msgs.ForEach(pear_msg => {
-            AddPear(pear_msg.ID, pear_msg.Count);
+            AddPear(pear_msg.ID, pear_msg.UUID, pear_msg.Properties, pear_msg.SpecialProperty);
         });
 
 
@@ -112,33 +113,20 @@ public class Backpack
         //
     }
 
-    public Pear PushPear(int id, int count = 1)
-    {
-        if (m_PearsDic.ContainsKey(id) == true)
-        {
-            Pear pear = m_PearsDic[id];
-            pear.UpdateCount(count);
+    public Pear PushPear(int id, string[] properties, int special_property)
+    {   
+        int uuid = DataCenter.Instance.User.CreateUUID();
 
-            return pear;
-        }
-        
-        return AddPear(id, count);
+        return AddPear(id, uuid, properties, special_property);
     }
 
-    public void RemovePear(int id, int count)
+    public void RemovePear(int uuid)
     {
-        if (!m_PearsDic.ContainsKey(id)) return;
+        if (!m_PearsDic.ContainsKey(uuid)) return;
 
-        var pear = m_PearsDic[id];
+        var pear = m_PearsDic[uuid];
 
-        pear.UpdateCount(-count);
-
-        if (pear.Count <= 0)
-        {
-            m_PearsDic[id] = null;
-            m_Pears.Remove(pear);
-        }
+        m_PearsDic[uuid] = null;
+        m_Pears.Remove(pear);
     }
-
-
 }

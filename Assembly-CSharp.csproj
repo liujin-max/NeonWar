@@ -86,6 +86,7 @@
     <Compile Include="Assets\AllIn1SpriteShader\Scripts\RandomSeed.cs" />
     <Compile Include="Assets\Scripts\GameFacade.cs" />
     <Compile Include="Assets\DOTween\Modules\DOTweenModuleAudio.cs" />
+    <Compile Include="Assets\Scripts\Game\Logic\Data\Property.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\Enemy\Enemy_205.cs" />
     <Compile Include="Assets\Scripts\Network\SocketTest.cs" />
     <Compile Include="Assets\Scripts\Effect\Rotate.cs" />

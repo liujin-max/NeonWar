@@ -278,7 +278,35 @@ public class Buff_Poison : Buff
 #endregion
 
 
+#region 会心
+public class Buff_Crit : Buff
+{
+    public Buff_Crit()
+    {
+        Name    = "会心";
+        Duration= new CDTimer(9999999);
+    }
 
+    public override void Init()
+    {
+        Belong.ATT.CP.PutADD(this, Value * 10 * Count);
+    }
+
+    public override void Dispose()
+    {
+        Belong.ATT.CP.Pop(this);
+    }
+
+    public override void Flush(float time)
+    {
+        base.Flush(time);
+
+        Count++;
+
+        Belong.ATT.CP.PutADD(this, Value * 10 * Count);
+    }
+}
+#endregion
 
 
 
@@ -556,14 +584,15 @@ public class Buff
 
 
     private static Dictionary<int, Func<Buff>> m_classDictionary = new Dictionary<int, Func<Buff>> {
-        {(int)CONST.BUFF.STUN,     () => new Buff_Stun()},
-        {(int)CONST.BUFF.YISHANG,  () => new Buff_YiShang()},
-        {(int)CONST.BUFF.SHIELD,   () => new Buff_Shield()},
-        {(int)CONST.BUFF.CHAOS,    () => new Buff_Chaos()},
-        {(int)CONST.BUFF.FASTSPD,  () => new Buff_FastSPD()},
-        {(int)CONST.BUFF.KILL,     () => new Buff_Kill()},
-        {(int)CONST.BUFF.FROZEN,   () => new Buff_Frozen()},
-        {(int)CONST.BUFF.POISON,   () => new Buff_Poison()},
+        {(int)CONST.BUFF.STUN,      () => new Buff_Stun()},
+        {(int)CONST.BUFF.YISHANG,   () => new Buff_YiShang()},
+        {(int)CONST.BUFF.SHIELD,    () => new Buff_Shield()},
+        {(int)CONST.BUFF.CHAOS,     () => new Buff_Chaos()},
+        {(int)CONST.BUFF.FASTSPD,   () => new Buff_FastSPD()},
+        {(int)CONST.BUFF.KILL,      () => new Buff_Kill()},
+        {(int)CONST.BUFF.FROZEN,    () => new Buff_Frozen()},
+        {(int)CONST.BUFF.POISON,    () => new Buff_Poison()},
+        {(int)CONST.BUFF.CRIT,      () => new Buff_Crit()},
 
         //场上Buff
         {(int)CONST.BUFF.ATK_UP,   () => new Buff_ATKUP()},

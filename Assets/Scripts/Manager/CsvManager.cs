@@ -11,6 +11,7 @@ public class CsvManager: MonoBehaviour
     //表名
     public const string TableKey_Skill  = "Skill";
     public const string TableKey_Pear   = "Pear";
+    public const string TableKey_Property   = "Property";
 
 
     //表名与表结构
@@ -23,6 +24,7 @@ public class CsvManager: MonoBehaviour
     {
         this.ReadCsv(CsvManager.TableKey_Skill,         "CSV/Skill");
         this.ReadCsv(CsvManager.TableKey_Pear,          "CSV/Pear");
+        this.ReadCsv(CsvManager.TableKey_Property,      "CSV/Property");
     }
 
     public string[] GetStringArray(string excel_name, int id)

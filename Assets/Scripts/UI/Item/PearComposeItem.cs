@@ -135,14 +135,14 @@ public class PearComposeItem : MonoBehaviour
         {
             m_Halo.SetActive(false);
 
-            if (m_ComposeItem == null) {
-                m_ComposeItem = GameFacade.Instance.UIManager.LoadItem("PearItem", m_ComposePivot).GetComponent<PearItem>();
-            }
-            m_ComposeItem.Init(Pear.Create(last_id + 1, 1));
-            m_ComposeItem.ShowTagEquip(false);
-            m_ComposeItem.ShowName(false);
+            // if (m_ComposeItem == null) {
+            //     m_ComposeItem = GameFacade.Instance.UIManager.LoadItem("PearItem", m_ComposePivot).GetComponent<PearItem>();
+            // }
+            // m_ComposeItem.Init(Pear.Create(last_id + 1, 1));
+            // m_ComposeItem.ShowTagEquip(false);
+            // m_ComposeItem.ShowName(false);
 
-            m_ComposeItem.gameObject.SetActive(true);
+            // m_ComposeItem.gameObject.SetActive(true);
         }
         else
         {
