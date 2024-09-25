@@ -210,14 +210,12 @@ public class Player : Unit
 
         //同步道具
         {
-            m_Pears.ForEach(pear => pear.UnEquip());
-            m_Pears.Clear();
             DataCenter.Instance.User.CurrentPlayer.PearSlots.ForEach(pear_msg => {
-                if (pear_msg.ID > 0)
+                if (pear_msg.UUID > 0)
                 {
-                    // Pear pear = Pear.Create(pear_msg.ID);
-                    // pear.Equip(this);
-                    // m_Pears.Add(pear);
+                    Pear pear = DataCenter.Instance.Backpack.GetPearByUUID(pear_msg.UUID);
+                    pear.Equip(this);
+                    m_Pears.Add(pear);
                 }
             });
 

@@ -487,7 +487,7 @@ public class Property
 
 
 
-    public static Property Create(int id, int value = 0)
+    public static Property Create(Pear pear,  int id, int value = 0)
     {
         PropertyData property_data = DataCenter.Instance.GetPropertyData(id);
         if (property_data == null) return null;
@@ -501,22 +501,19 @@ public class Property
             Debug.LogError("未实现的Property：" + id);
         }
 
-        property.Init(property_data, value);
+        property.Init(property_data, pear, value);
 
         return property;
     }
 
 
-    void Init(PropertyData config, int value)
+    void Init(PropertyData config, Pear pear, int value)
     {
         Model   = config;
+        Pear    = pear;
         Value   = value;
     }
 
-    public void SetBelong(Pear pear)
-    {
-        Pear    = pear;
-    }
 
     public virtual void Equip()
     {

@@ -437,6 +437,13 @@ public class User
         return false;
     }
 
+    public bool HasSamePear(Pear pear)
+    {
+        foreach (var slot_msg in CurrentPlayer.PearSlots) {
+            if (slot_msg.ID == pear.ID) return true;
+        }
+        return false;
+    }
 
 
 

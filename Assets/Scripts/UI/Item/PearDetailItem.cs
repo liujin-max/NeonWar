@@ -49,7 +49,7 @@ public class PearDetailItem : MonoBehaviour
     void Start()
     {
         m_BtnEquip.onClick.AddListener(()=>{
-            if (DataCenter.Instance.User.IsPearSeatsFull() == true) {
+            if (!DataCenter.Instance.User.HasSamePear(m_Pear) && DataCenter.Instance.User.IsPearSeatsFull() == true) {
                 EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "道具槽已满"));
                 return;
             }

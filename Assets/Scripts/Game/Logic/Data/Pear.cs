@@ -69,7 +69,7 @@ public class Pear
             int id = Convert.ToInt32(splits[0]);
             int value = Convert.ToInt32(splits[1]);
 
-            var property = Property.Create(id, value);
+            var property = Property.Create(this, id, value);
 
             if (property.Type == CONST.PROPERTY.SPECIAL) SpecialProperty = property;
             else
