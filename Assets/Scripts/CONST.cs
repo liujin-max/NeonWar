@@ -7,8 +7,6 @@ public static class CONST
 {
     public static int DEFAULT_FRAME = 30;   //默认帧数
 
-    public static string CLOUD_ENV = "fingerblock-3gqj06sx5ebc6035";    //云开发环境ID
-
 
 
 
@@ -32,9 +30,10 @@ public static class CONST
     public static string COLOR_ORANGE   = "<#FF9704>";
     public static string COLOR_GREEN    = "<#33FF07>";
     public static string COLOR_GREEN2   = "<#1D9F00>";
+    public static string COLOR_BROWN    = "<#574040>";
 
     //品质对应的名字颜色
-    public static Dictionary<int, string> LEVELCOLOR_PAIRS = new Dictionary<int, string>()
+    public static Dictionary<int, string> LEVEL_COLOR_PAIRS = new Dictionary<int, string>()
     {
         [1] = "<#FFFFFF>",
         [2] = "<#33FF07>",
@@ -43,12 +42,40 @@ public static class CONST
         [5] = "<#B21F17>",
     };
 
+    //品质对应的属性词条数量
+    public static Dictionary<int, int> LEVEL_PROPERTY_PAIRS = new Dictionary<int, int>()
+    {
+        [1] = 1,
+        [2] = 2,
+        [3] = 3,
+        [4] = 4,
+        [5] = 4,
+    };
 
-    public enum PROPERTY
+    //品质对应的属性点
+    public static Dictionary<int, int> LEVEL_POINT_PAIRS = new Dictionary<int, int>()
+    {
+        [1] = 100,
+        [2] = 250,
+        [3] = 500,
+        [4] = 1000,
+        [5] = 1500,
+    };
+
+
+
+
+    public enum ATT
     {
         ATK,
         ASP,
         WORTH
+    }
+
+    public enum PROPERTY
+    {
+        NORMAL = 1,
+        SPECIAL
     }
  
     //状态机的状态列表

@@ -23,7 +23,11 @@ public class Bomb
 
     public void Do()
     {
-        if (!string.IsNullOrEmpty(m_EffectRes)) GameFacade.Instance.EffectManager.Load(m_EffectRes, m_Center, Field.Instance.Land.ELEMENT_ROOT.gameObject);
+        if (!string.IsNullOrEmpty(m_EffectRes))
+        {
+            var e = GameFacade.Instance.EffectManager.Load(m_EffectRes, m_Center, Field.Instance.Land.ELEMENT_ROOT.gameObject);
+            e.transform.localScale = new Vector3(m_Radius, m_Radius, 1);
+        }
         
         foreach (var e in Field.Instance.Spawn.Enemys)
         {

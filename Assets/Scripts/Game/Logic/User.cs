@@ -34,7 +34,7 @@ public class TaskMsg
 public class PearSlotMsg
 {
     public int ID;
-    public int Class;
+    public int UUID;
 }
 
 //技能槽数据
@@ -98,8 +98,8 @@ public class PearMsg
 {
     public int ID;
     public int UUID;
+    public int Level;
     public string[] Properties;
-    public int SpecialProperty;
 }
 
 
@@ -267,7 +267,7 @@ public class User
     {
         if (!m_userUpdate) return;
 
-        ExportPears();
+        m_Data.Pears = DataCenter.Instance.Backpack.ExportPears();
 
         Platform.Instance.UPLOAD(m_Data);
 
@@ -314,37 +314,37 @@ public class User
         m_userUpdate = true;
     }
 
-    public void UpdateProperty(CONST.PROPERTY property, int value)
+    public void UpdateProperty(CONST.ATT property, int value)
     {
         switch (property)
         {
-            case CONST.PROPERTY.ATK: CurrentPlayer.ATK += value; break;
-            case CONST.PROPERTY.ASP: CurrentPlayer.ASP += value; break;
-            case CONST.PROPERTY.WORTH: CurrentPlayer.WORTH += value; break;
+            case CONST.ATT.ATK: CurrentPlayer.ATK += value; break;
+            case CONST.ATT.ASP: CurrentPlayer.ASP += value; break;
+            case CONST.ATT.WORTH: CurrentPlayer.WORTH += value; break;
         }
 
         m_userUpdate = true;
     }
 
-    public int GetPropertyCost(CONST.PROPERTY property)
+    public int GetPropertyCost(CONST.ATT property)
     {
         switch (property)
         {
-            case CONST.PROPERTY.ATK: return NumericalManager.FML_ATKCost(CurrentPlayer.ATK);
-            case CONST.PROPERTY.ASP: return NumericalManager.FML_ASPCost(CurrentPlayer.ASP);
-            case CONST.PROPERTY.WORTH: return NumericalManager.FML_WORTHCost(CurrentPlayer.WORTH);
+            case CONST.ATT.ATK: return NumericalManager.FML_ATKCost(CurrentPlayer.ATK);
+            case CONST.ATT.ASP: return NumericalManager.FML_ASPCost(CurrentPlayer.ASP);
+            case CONST.ATT.WORTH: return NumericalManager.FML_WORTHCost(CurrentPlayer.WORTH);
         }
 
         return 1;
     }
 
-    public int GetPropertyLevel(CONST.PROPERTY property)
+    public int GetPropertyLevel(CONST.ATT property)
     {
         switch (property)
         {
-            case CONST.PROPERTY.ATK: return CurrentPlayer.ATK;
-            case CONST.PROPERTY.ASP: return CurrentPlayer.ASP;
-            case CONST.PROPERTY.WORTH: return CurrentPlayer.WORTH;
+            case CONST.ATT.ATK: return CurrentPlayer.ATK;
+            case CONST.ATT.ASP: return CurrentPlayer.ASP;
+            case CONST.ATT.WORTH: return CurrentPlayer.WORTH;
         }
 
         return 1;
@@ -390,14 +390,14 @@ public class User
     //穿脱宝珠
     public void EquipPear(Pear pear)
     {
-        //先判断有没有相同class的宝珠，如果有 则替换
+        //先判断有没有相同id的宝珠，如果有 则替换
         for (int i = 0; i < CurrentPlayer.PearSlots.Count; i++)
         {
             var slot = CurrentPlayer.PearSlots[i];
-            if (slot.Class == pear.Class) {
+            if (slot.ID == pear.ID) {
                 m_userUpdate = true;
-                CurrentPlayer.PearSlots[i].ID = pear.ID;
-                CurrentPlayer.PearSlots[i].Class = pear.Class;
+                CurrentPlayer.PearSlots[i].ID   = pear.ID;
+                CurrentPlayer.PearSlots[i].UUID = pear.UUID;
                 return;
             }
         } 
@@ -408,47 +408,37 @@ public class User
             var slot = CurrentPlayer.PearSlots[i];
             if (slot.ID == -1) {
                 m_userUpdate = true;
-                CurrentPlayer.PearSlots[i].ID = pear.ID;
-                CurrentPlayer.PearSlots[i].Class = pear.Class;
+                CurrentPlayer.PearSlots[i].ID   = pear.ID;
+                CurrentPlayer.PearSlots[i].UUID = pear.UUID;
                 break;
             }
         } 
     }
 
-    public void UnloadPear(int pear_id)
+    public void UnloadPear(int pear_uuid)
     {
         for (int i = 0; i < CurrentPlayer.PearSlots.Count; i++)
         {
             var slot = CurrentPlayer.PearSlots[i];
-            if (slot.ID == pear_id) {
+            if (slot.UUID == pear_uuid) {
                 m_userUpdate = true;
-                CurrentPlayer.PearSlots[i].ID = -1;
-                CurrentPlayer.PearSlots[i].Class = -1;
+                CurrentPlayer.PearSlots[i].ID   = -1;
+                CurrentPlayer.PearSlots[i].UUID = -1;
                 break;
             }
         }
     }
 
-    public bool IsPearEquiped(int pear_id)
+    public bool IsPearEquiped(Pear pear)
     {
         foreach (var slot_msg in CurrentPlayer.PearSlots) {
-            if (slot_msg.ID == pear_id) return true;
+            if (slot_msg.UUID == pear.UUID) return true;
         }
         return false;
     }
 
-    //同步宝珠背包数据
-    public void ExportPears()
-    {
-        m_Data.Pears.Clear();
 
-        DataCenter.Instance.Backpack.Pears.ForEach(pear =>{
-            m_Data.Pears.Add(new PearMsg() {
-                ID  = pear.ID,
-                UUID= pear.UUID
-            });
-        });
-    }
+
 
     public void SetRecoveryTimestamp(long value)
     {

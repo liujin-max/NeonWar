@@ -31,14 +31,14 @@ public class PearItem : MonoBehaviour
     {
         m_Pear = pear;
 
-        string color_string = CONST.LEVELCOLOR_PAIRS[m_Pear.Level].Trim('<', '>');
+        string color_string = CONST.LEVEL_COLOR_PAIRS[m_Pear.Level].Trim('<', '>');
 
-        m_Icon.sprite   = GameFacade.Instance.AssetManager.LoadSprite("Pear" , pear.Class.ToString());
+        m_Icon.sprite   = GameFacade.Instance.AssetManager.LoadSprite("Pear" , pear.ID.ToString());
         m_Icon.SetNativeSize();
 
         m_Icon.GetComponent<ImageOutline>().SetColor(color_string);
 
-        m_Text.text = CONST.LEVELCOLOR_PAIRS[m_Pear.Level] + m_Pear.GetName();
+        m_Text.text = CONST.LEVEL_COLOR_PAIRS[m_Pear.Level] + m_Pear.Name;
 
         Select(false);
 
@@ -47,7 +47,7 @@ public class PearItem : MonoBehaviour
 
     void FlushUI()
     {
-        ShowTagEquip(DataCenter.Instance.User.IsPearEquiped(m_Pear.ID));
+        ShowTagEquip(DataCenter.Instance.User.IsPearEquiped(m_Pear));
     }
 
     public void ShowTagEquip(bool flag)

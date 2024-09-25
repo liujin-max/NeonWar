@@ -39,11 +39,6 @@ public class Field : MonoBehaviour
         m_Instance = this;
     }
 
-    void OnDestroy()
-    {
-        
-    }
-
     void Start()
     {
         m_FSM = new FSM<Field>(this,  new State<Field>[] {
@@ -203,7 +198,7 @@ public class Field : MonoBehaviour
         worth_value = Mathf.CeilToInt(base_value * m_Player.GlassRate.ToNumber()) - base_value;
     }
 
-    //计算宝珠奖励
+    //计算道具奖励
     public void GeneratePearRewards(out Dictionary<int , int> pear_dic)
     {
         pear_dic  = new Dictionary<int, int>();
@@ -289,20 +284,11 @@ public class Field : MonoBehaviour
             area.Init(caster, time);
             area.transform.localScale = new Vector3(scale, scale, 1);
 
-            // m_Areas.Add(area);
             Areas.Add(area);
 
             EventManager.SendEvent(new GameEvent(EVENT.ONPUSHAREA, area));
         });
     }
-
-    // public void RemoveArea(Area area)
-    // {
-    //     area.Dispose();
-    //     m_Areas.Remove(area);
-
-    //     EventManager.SendEvent(new GameEvent(EVENT.ONREMOVEAREA, area));
-    // }
 
 
     //击中目标

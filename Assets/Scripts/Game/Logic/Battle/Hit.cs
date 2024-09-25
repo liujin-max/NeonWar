@@ -40,7 +40,7 @@ public class Hit
         CP  = new AttributeValue(caster.ATT.CP.ToNumber());
         CT  = new AttributeValue(caster.ATT.CT.ToNumber());
 
-        ATK_INC     = new AttributeValue(1, false);
+        ATK_INC     = new AttributeValue(caster.ATT.ATK_INC.ToNumber(), false);
         BOSS_INC    = new AttributeValue(caster.ATT.BOSS_INC.ToNumber(), false);
     }
 }

@@ -4,17 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-#region 攻击百分比
+#region 伤害加成
 public class Property_ATK : Property
 {
     public override void Equip()
     {
-        Pear.Belong.ATT.ATK.PutAUL(this, Value / 100f);
+        Pear.Belong.ATT.ATK_INC.PutADD(this, Value / 100f);
     }
 
     public override void UnEquip()
     {
-        Pear.Belong.ATT.CP.Pop(this);
+        Pear.Belong.ATT.ATK_INC.Pop(this);
     }
 }
 #endregion
@@ -308,7 +308,7 @@ public class Property_SplitFocus : Property
 #endregion
 
 
-#region 毒气陷阱周期性的为范围内的目标附加中毒效果
+#region 毒气陷阱内的目标将周期性受到#层中毒效果
 public class Property_AreaPoison : Property
 {
     private Dictionary<Area_Poison, float> m_Records = new Dictionary<Area_Poison, float>();
@@ -361,7 +361,7 @@ public class Property_AreaPoison : Property
 
                 foreach (var t in area.Units)
                 {
-                    t.Key.AddBuff(caster, (int)CONST.BUFF.POISON, (int)caster.ATT.ATK.GetBase());
+                    t.Key.AddBuff(caster, (int)CONST.BUFF.POISON, (int)caster.ATT.ATK.GetBase(), 0, Value);
                 }
             }
         }
@@ -374,8 +374,16 @@ public class Property_AreaPoison : Property
 #region 在低温陷阱内停留超过3秒将被冻结
 public class Property_AreaIceFrozen : Property
 {
+    float ToValue()
+    {
+        float time = (300 - Value) / 100.0f;
+        return time;
+    }
+
     public override void CustomUpdate(float deltaTime)
     {
+        float time = ToValue();
+
         foreach (var area in Field.Instance.Areas.List)
         {
             Area_Ice ice = area as Area_Ice;
@@ -383,18 +391,23 @@ public class Property_AreaIceFrozen : Property
 
             foreach (var t in ice.Units)
             {
-                if (t.Value >= 0.5f) 
+                if (t.Value >= time) 
                 {
                     t.Key.AddBuff(Pear.Belong, (int)CONST.BUFF.FROZEN, 1, 1.5f);
                 }
             }
         }
     }
+
+    public override string GetDescription()
+    {
+        return Model.Description.Replace("#", ToValue().ToString("F1"));
+    }
 }
 #endregion
 
 
-#region 每当目标被拖拽至引力陷阱中心时，产生一次爆炸伤害
+#region 目标被拖拽至引力陷阱中心时产生#码范围的爆炸伤害
 public class Property_AreaBomb : Property
 {
     private Dictionary<Area, HashSet<Unit>> m_Records = new Dictionary<Area, HashSet<Unit>>();
@@ -417,11 +430,16 @@ public class Property_AreaBomb : Property
                 {
                     m_Records[rope].Add(unit);
 
-                    Bomb bomb = new Bomb(Pear.Belong, o_pos, 1.5f, 3f, EFFECT.ROPE);
+                    Bomb bomb = new Bomb(Pear.Belong, o_pos, 1 + Value / 100.0f, 2f, EFFECT.ROPE);
                     bomb.Do();
                 }
             }
         }
+    }
+
+    public override string GetDescription()
+    {
+        return Model.Description.Replace("#", (100 + Value).ToString());
     }
 }
 #endregion
@@ -459,17 +477,20 @@ public class Property
     };
     #endregion
 
-
+    public PropertyData Model;
     public Pear Pear = null;
 
-    public int ID;
+    public int ID {get {return Model.ID;}}
     public int Value;
+    public string Name {get {return Model.Name;}}
+    public CONST.PROPERTY Type {get {return Model.Type;}}
 
 
-    public static Property Create(Pear pear, int id, int value = 0)
+
+    public static Property Create(int id, int value = 0)
     {
-        string[] property_config = GameFacade.Instance.CsvManager.GetStringArray(CsvManager.TableKey_Property, id);
-        if (property_config == null) return null;
+        PropertyData property_data = DataCenter.Instance.GetPropertyData(id);
+        if (property_data == null) return null;
 
         Property property;
         if (m_classDictionary.ContainsKey(id)) property = m_classDictionary[id]();
@@ -480,17 +501,21 @@ public class Property
             Debug.LogError("未实现的Property：" + id);
         }
 
-        property.Init(pear, id, value);
+        property.Init(property_data, value);
 
         return property;
     }
 
 
-    public void Init(Pear pear, int id, int value)
+    void Init(PropertyData config, int value)
+    {
+        Model   = config;
+        Value   = value;
+    }
+
+    public void SetBelong(Pear pear)
     {
         Pear    = pear;
-        ID      = id;
-        Value   = value;
     }
 
     public virtual void Equip()
@@ -506,5 +531,10 @@ public class Property
     public virtual void CustomUpdate(float deltaTime)
     {
 
+    }
+
+    public virtual string GetDescription()
+    {
+        return Model.Description.Replace("#", Value.ToString());
     }
 }

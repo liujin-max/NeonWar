@@ -1,20 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-
-[System.Serializable]
-public class PearData
-{
-    public int ID;
-    public string Name;
-    public int Class;
-    public int Level;
-    public int Point;
-    public int Weight;
-    public string Description;
-}
 
 //背包系统
 public class Backpack
@@ -26,7 +15,6 @@ public class Backpack
 
     //
     private Dictionary<int, PearData> m_PearDataDic = new Dictionary<int, PearData>();
-    private Dictionary<int, List<PearData>> m_PearLevelPairs = new Dictionary<int, List<PearData>>();
 
 
     public Dictionary<int, int[]> PearPools = new Dictionary<int, int[]>()
@@ -41,12 +29,55 @@ public class Backpack
     };
 
 
+
+    #region 同步数据
+    public void SyncPears(List<PearMsg> pear_msgs)
+    {
+        m_Pears.Clear();
+
+        pear_msgs.ForEach(pear_msg => {
+            AddPear(pear_msg.ID, pear_msg.UUID, pear_msg.Level, pear_msg.Properties);
+        });
+
+
+        //测试代码
+        // PushPear(20022);
+        //
+    }
+    #endregion
+
+
+
+    #region 导出数据
+    //同步道具数据
+    public List<PearMsg> ExportPears()
+    {
+        List<PearMsg> msgs = new List<PearMsg>();
+
+        foreach (var pear in m_Pears)
+        {
+            var msg = new PearMsg() 
+            {
+                ID      = pear.ID,
+                UUID    = pear.UUID,
+                Level   = pear.Level,
+                Properties = pear.ExportPropertiesMsg()
+            };
+
+            msgs.Add(msg);
+        }
+
+        return msgs;
+    }
+    #endregion
+
+
     public void Init()
     {
         InitPearDatas();
     }
 
-    //宝珠数据
+    //道具数据
     void InitPearDatas()
     {
         List<string[]> list = GameFacade.Instance.CsvManager.GetStringArrays(CsvManager.TableKey_Pear);
@@ -56,21 +87,11 @@ public class Backpack
             {
                 ID          = Convert.ToInt32(data[0]),
                 Name        = data[1],
-                Class       = Convert.ToInt32(data[2]),
-                Level       = Convert.ToInt32(data[3]),
-                Point       = Convert.ToInt32(data[4]),
-                Weight      = Convert.ToInt32(data[5]),
-                Description = data[6]
+                Weight      = Convert.ToInt32(data[2]),
+                Properties  = data[3].Split(';').Select(int.Parse).ToArray()
             };
 
             m_PearDataDic[pear.ID]  = pear;
-
-            if (!m_PearLevelPairs.ContainsKey(pear.Level))
-            {
-                m_PearLevelPairs[pear.Level] = new List<PearData>();
-            }
-
-            m_PearLevelPairs[pear.Level].Add(pear);
         }
     }
 
@@ -79,45 +100,27 @@ public class Backpack
         return m_PearDataDic.TryGetValue(id, out PearData value) ? value : default;
     }
 
-    Pear AddPear(int id, int uuid, string[] properties, int special_property)
+    Pear AddPear(int id, int uuid, int level, string[] properties)
     {
-        // Pear pear = Pear.Create(id, count);
-        // m_Pears.Add(pear);
-        // m_PearsDic[pear.ID] = pear;
+        Pear pear = new Pear(id, uuid, level, properties);
+        m_Pears.Add(pear);
+        m_PearsDic[uuid] = pear;
 
-        // return pear;
-        return null;
+        return pear;
     }
 
-    public Pear GetPear(int id)
+    public Pear GetPearByUUID(int uuid)
     {
-        return m_PearsDic.TryGetValue(id, out Pear value) ? value : default;
+        return m_PearsDic.TryGetValue(uuid, out Pear value) ? value : default;
     }
 
-    public List<PearData> GetPearDatasByLevel(int level)
-    {
-        return m_PearLevelPairs[level];
-    }
-
-    public void SyncPears(List<PearMsg> pear_msgs)
-    {
-        m_Pears.Clear();
-
-        pear_msgs.ForEach(pear_msg => {
-            AddPear(pear_msg.ID, pear_msg.UUID, pear_msg.Properties, pear_msg.SpecialProperty);
-        });
-
-
-        //测试代码
-        // PushPear(20022);
-        //
-    }
-
-    public Pear PushPear(int id, string[] properties, int special_property)
+    public Pear PushPear(int id, int level)
     {   
         int uuid = DataCenter.Instance.User.CreateUUID();
 
-        return AddPear(id, uuid, properties, special_property);
+        string[] properties = DataCenter.Instance.GeneratePearProperties(id, level);
+
+        return AddPear(id, uuid, level, properties);
     }
 
     public void RemovePear(int uuid)

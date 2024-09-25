@@ -173,6 +173,8 @@ public class GameFacade : MonoBehaviour
         //进入游戏
         NavigationController.GotoGame();
 
+        // DataCenter.Instance.Backpack.PushPear(20050, 1);
+
         
         yield return null; 
     }

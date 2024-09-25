@@ -17,6 +17,8 @@ public class ATTConfig : ScriptableObject
     
     //易伤倍率
     [HideInInspector] public AttributeValue VUN_INC     = new AttributeValue(1f, false);
+    //伤害倍率
+    [HideInInspector] public AttributeValue ATK_INC     = new AttributeValue(1f, false);
     //对头目伤害加成
     [HideInInspector] public AttributeValue BOSS_INC    = new AttributeValue(1f, false);
 }

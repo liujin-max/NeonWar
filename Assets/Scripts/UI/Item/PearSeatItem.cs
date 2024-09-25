@@ -42,15 +42,15 @@ public class PearSeatItem : MonoBehaviour
 
         if (m_Pear != null)
         {
-            string color_string = CONST.LEVELCOLOR_PAIRS[m_Pear.Level].Trim('<', '>');
+            string color_string = CONST.LEVEL_COLOR_PAIRS[m_Pear.Level].Trim('<', '>');
 
             m_Icon.gameObject.SetActive(true);
-            m_Icon.sprite = GameFacade.Instance.AssetManager.LoadSprite("Pear" , m_Pear.Class.ToString());
+            m_Icon.sprite = GameFacade.Instance.AssetManager.LoadSprite("Pear" , m_Pear.ID.ToString());
             m_Icon.SetNativeSize();
 
             m_Icon.GetComponent<ImageOutline>().SetColor(color_string);
 
-            m_Text.text = CONST.LEVELCOLOR_PAIRS[m_Pear.Level] + m_Pear.GetName();
+            m_Text.text = CONST.LEVEL_COLOR_PAIRS[m_Pear.Level] + m_Pear.Name;
         }
         else
         {

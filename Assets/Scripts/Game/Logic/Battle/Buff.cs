@@ -153,11 +153,11 @@ public class Buff_FastSPD : Buff
         Belong.CPS.Pop(this);
     }
 
-    public override void Flush(float time)
+    public override void Flush(float time, int count)
     {
-        base.Flush(time);
+        base.Flush(time, count);
 
-        Count++;
+        Count += count;
 
         Belong.CPS.PutAUL(this, Value / 100.0f * Count);
     }
@@ -184,11 +184,11 @@ public class Buff_Kill : Buff
         Belong.ATT.ATK.Pop(this);
     }
 
-    public override void Flush(float time)
+    public override void Flush(float time, int count)
     {
-        base.Flush(time);
+        base.Flush(time, count);
 
-        Count++;
+        Count += count;
 
         Belong.ATT.ATK.PutAUL(this, Value / 100.0f * Count);
     }
@@ -210,11 +210,6 @@ public class Buff_Frozen : Buff
         Belong.Stop();
 
         Belong.AffectedEffect.Frozen(true);
-    }
-
-    public override void Flush(float time)
-    {
-        // base.Flush(time);
     }
 
     public override void Dispose()
@@ -245,11 +240,11 @@ public class Buff_Poison : Buff
         m_Effect = GameFacade.Instance.EffectManager.Load(EFFECT.POISON, Vector3.zero, Belong.HeadPivot.gameObject);
     }
 
-    public override void Flush(float time)
+    public override void Flush(float time, int count)
     {
-        base.Flush(time);
+        base.Flush(time, count);
 
-        Count++;
+        Count += count;
     }
 
     public override void CustomUpdate(float deltaTime)
@@ -297,11 +292,11 @@ public class Buff_Crit : Buff
         Belong.ATT.CP.Pop(this);
     }
 
-    public override void Flush(float time)
+    public override void Flush(float time, int count)
     {
-        base.Flush(time);
+        base.Flush(time, count);
 
-        Count++;
+        Count += count;
 
         Belong.ATT.CP.PutADD(this, Value * 10 * Count);
     }
@@ -636,7 +631,7 @@ public class Buff
         Duration.Update(deltaTime);
     }
 
-    public virtual void Flush(float time)
+    public virtual void Flush(float time, int count)
     {
         if (time != 0) Duration.Reset(time);
         else Duration.ForceReset();

@@ -186,6 +186,7 @@
     <Compile Include="Assets\Scripts\Manager\CsvManager.cs" />
     <Compile Include="Assets\Scripts\Utility\DIYScrollView.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\DataCenter.cs" />
+    <Compile Include="Assets\Scripts\UI\Item\PropertyItem.cs" />
     <Compile Include="Assets\Scripts\Utility\ImageGray.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\Battle\CircleHP.cs" />
     <Compile Include="Assets\DOTween\Modules\DOTweenModuleUI.cs" />

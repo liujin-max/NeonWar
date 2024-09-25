@@ -8,6 +8,7 @@ public class PearDetailItem : MonoBehaviour
 {
     [SerializeField] Image m_Icon;
     [SerializeField] TextMeshProUGUI m_Title;
+    [SerializeField] Transform m_PropertyPivot;
     [SerializeField] TextMeshProUGUI m_Description;
 
     [Header("按钮")]
@@ -18,7 +19,22 @@ public class PearDetailItem : MonoBehaviour
 
 
     private Pear m_Pear;
+    private List<PropertyItem> m_PropertyItems = new List<PropertyItem>();
 
+    PropertyItem new_property_item(int order)
+    {
+        PropertyItem item = null;
+        if (m_PropertyItems.Count > order) {
+            item = m_PropertyItems[order];
+        }
+        else {
+            item = GameFacade.Instance.UIManager.LoadItem("PropertyItem", m_PropertyPivot).GetComponent<PropertyItem>();
+            m_PropertyItems.Add(item);
+        }
+        item.gameObject.SetActive(true);
+
+        return item;
+    }
 
     void Awake()
     {
@@ -44,7 +60,7 @@ public class PearDetailItem : MonoBehaviour
         });
 
         m_BtnUnEquip.onClick.AddListener(()=>{
-            DataCenter.Instance.User.UnloadPear(m_Pear.ID);
+            DataCenter.Instance.User.UnloadPear(m_Pear.UUID);
 
             EventManager.SendEvent(new GameEvent(EVENT.UI_PEARCHANGE));
         });
@@ -59,22 +75,48 @@ public class PearDetailItem : MonoBehaviour
     {
         m_Pear = pear;
 
-        string color_string = CONST.LEVELCOLOR_PAIRS[pear.Level];
+        string color_string = CONST.LEVEL_COLOR_PAIRS[pear.Level];
 
-        m_Title.text = color_string + pear.GetName();
-        // m_Description.text  = pear.GetDescription();
+        m_Title.text = color_string + pear.Name;
 
-        m_Icon.sprite = GameFacade.Instance.AssetManager.LoadSprite("Pear" , m_Pear.Class.ToString());
+        m_Icon.sprite = GameFacade.Instance.AssetManager.LoadSprite("Pear" , m_Pear.ID.ToString());
         m_Icon.SetNativeSize();
 
         m_Icon.GetComponent<ImageOutline>().SetColor(color_string.Trim('<', '>'));
 
+
+        InitProperties(pear);
+        InitSpecialProperty(pear);
         FlushUI();
+    }
+
+    void InitProperties(Pear pear)
+    {
+        foreach (var item in m_PropertyItems) item.gameObject.SetActive(false);
+
+        for (int i = 0; i < pear.Properties.Count; i++)
+        {
+            var property = pear.Properties[i];
+            var item = new_property_item(i);
+            item.Init(property);
+        }
+        
+    }
+
+    void InitSpecialProperty(Pear pear)
+    {
+        if (pear.SpecialProperty == null)
+        {
+            m_Description.text = "";
+            return;
+        }
+
+        m_Description.text = pear.SpecialProperty.GetDescription();
     }
 
     void FlushUI()
     {
-        bool is_equip = DataCenter.Instance.User.IsPearEquiped(m_Pear.ID);
+        bool is_equip = DataCenter.Instance.User.IsPearEquiped(m_Pear);
 
         m_BtnEquip.gameObject.SetActive(!is_equip);
         m_BtnUnEquip.gameObject.SetActive(is_equip);

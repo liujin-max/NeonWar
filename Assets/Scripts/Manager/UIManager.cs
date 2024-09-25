@@ -7,7 +7,7 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     public static Transform BOTTOM;
-    public static GameObject MASK;
+    public static Transform MASK;
     public static Transform MAJOR;
     public static Transform NAV;
     public static Transform BOARD;
@@ -27,7 +27,7 @@ public class UIManager : MonoBehaviour
     void Awake()
     {
         BOTTOM  = GameObject.Find("Canvas/BOTTOM").transform;
-        MASK    = GameObject.Find("Canvas/MASK");
+        MASK    = GameObject.Find("Canvas/MASK").transform;
         MAJOR   = GameObject.Find("Canvas/MAJOR").transform;
         NAV     = GameObject.Find("Canvas/NAV").transform;
         BOARD   = GameObject.Find("Canvas/BOARD").transform;
@@ -35,7 +35,7 @@ public class UIManager : MonoBehaviour
         GUIDE   = GameObject.Find("Canvas/GUIDE").transform;
         TIP     = GameObject.Find("Canvas/TIP").transform;
 
-        MASK.SetActive(false);
+        MASK.localPosition = new Vector3(9999, 9999, 0);
     }
 
     // public GameObject LoadWindow(string path, Transform parent)
@@ -98,7 +98,8 @@ public class UIManager : MonoBehaviour
     void UpdateMaskVisible(int value)
     {
         m_MajorCount += value;
-        MASK.SetActive(m_MajorCount > 0);
+        if (m_MajorCount > 0) MASK.localPosition = Vector3.zero;
+        else MASK.localPosition = new Vector3(9999, 9999, 0);
     }
 
     public GameObject LoadItem(string path, Transform parent)

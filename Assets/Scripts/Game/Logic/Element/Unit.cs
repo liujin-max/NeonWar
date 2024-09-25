@@ -174,7 +174,7 @@ public class Unit : MonoBehaviour
     }
 
 
-    public Buff AddBuff(Unit caster, int buff_id, int value, float time = 0f)
+    public Buff AddBuff(Unit caster, int buff_id, int value, float time = 0f, int count = 1)
     {
         Buff b;
 
@@ -183,12 +183,13 @@ public class Unit : MonoBehaviour
         {
             b = m_BuffDic[buff_id];
             b.Value = value;
-            b.Flush(time);  //刷新CD
+            b.Flush(time, count);  //刷新CD
         }
         else
         {
             b = Buff.Create(buff_id, value, caster, this, time);
             b.Init();
+            b.Count = count;
 
             m_BuffDic[buff_id] = b;
 

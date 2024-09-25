@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+//负责管理某个列表的生命周期
 public class CycleList<T> where T : IDisposable, ICustomUpdate, IFinished
 {
     public List<T> List {get {return m_List;}}
@@ -24,7 +26,6 @@ public class CycleList<T> where T : IDisposable, ICustomUpdate, IFinished
 
     public void CustomUpdate(float deltaTime)
     {
-
         foreach (var a in m_List) {
             a.CustomUpdate(deltaTime);
 

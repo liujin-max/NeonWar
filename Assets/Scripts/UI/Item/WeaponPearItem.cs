@@ -45,7 +45,7 @@ public class WeaponPearItem : MonoBehaviour
         for (int i = 0; i < DataCenter.Instance.User.CurrentPlayer.PearSlots.Count; i++)
         {
             PearSlotMsg slotMsg = DataCenter.Instance.User.CurrentPlayer.PearSlots[i];
-            Pear pear = DataCenter.Instance.Backpack.GetPear(slotMsg.ID);
+            Pear pear = DataCenter.Instance.Backpack.GetPearByUUID(slotMsg.UUID);
 
             var item = new_pear_seat_item(i);
             item.Init(pear);

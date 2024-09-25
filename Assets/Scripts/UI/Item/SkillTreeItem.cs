@@ -15,11 +15,11 @@ public class SkillTreeItem : MonoBehaviour
     [SerializeField] Button m_BtnWORTH;
 
 
-    Dictionary<CONST.PROPERTY, List<BarTransition>> m_Bars = new Dictionary<CONST.PROPERTY, List<BarTransition>>()
+    Dictionary<CONST.ATT, List<BarTransition>> m_Bars = new Dictionary<CONST.ATT, List<BarTransition>>()
     {
-        [CONST.PROPERTY.ATK]   = new List<BarTransition>(),
-        [CONST.PROPERTY.ASP]   = new List<BarTransition>(),
-        [CONST.PROPERTY.WORTH] = new List<BarTransition>()
+        [CONST.ATT.ATK]   = new List<BarTransition>(),
+        [CONST.ATT.ASP]   = new List<BarTransition>(),
+        [CONST.ATT.WORTH] = new List<BarTransition>()
     };
 
     List<SkillSeatItem> m_SkillSeatItems = new List<SkillSeatItem>();
@@ -43,22 +43,22 @@ public class SkillTreeItem : MonoBehaviour
     {
         //升级攻击力
         m_BtnATK.onClick.AddListener(()=>{
-            if (UpgradeProperty(CONST.PROPERTY.ATK)) GameFacade.Instance.EffectManager.LoadUIEffect(EFFECT.ATKUP, m_BtnATK.transform.position);
+            if (UpgradeProperty(CONST.ATT.ATK)) GameFacade.Instance.EffectManager.LoadUIEffect(EFFECT.ATKUP, m_BtnATK.transform.position);
         });
 
         //升级攻速
         m_BtnASP.onClick.AddListener(()=>{
-            if (UpgradeProperty(CONST.PROPERTY.ASP)) GameFacade.Instance.EffectManager.LoadUIEffect(EFFECT.ASPUP, m_BtnASP.transform.position);
+            if (UpgradeProperty(CONST.ATT.ASP)) GameFacade.Instance.EffectManager.LoadUIEffect(EFFECT.ASPUP, m_BtnASP.transform.position);
 
         });
 
         //升级价值
         m_BtnWORTH.onClick.AddListener(()=>{
-            if (UpgradeProperty(CONST.PROPERTY.WORTH)) GameFacade.Instance.EffectManager.LoadUIEffect(EFFECT.WORUP, m_BtnWORTH.transform.position);
+            if (UpgradeProperty(CONST.ATT.WORTH)) GameFacade.Instance.EffectManager.LoadUIEffect(EFFECT.WORUP, m_BtnWORTH.transform.position);
         });
     }
 
-    bool UpgradeProperty(CONST.PROPERTY property)
+    bool UpgradeProperty(CONST.ATT property)
     {
         int cost = DataCenter.Instance.User.GetPropertyCost(property);
         if (DataCenter.Instance.User.Glass < cost) {
@@ -90,9 +90,9 @@ public class SkillTreeItem : MonoBehaviour
         int asp_level   = DataCenter.Instance.User.CurrentPlayer.ASP;
         int wor_level   = DataCenter.Instance.User.CurrentPlayer.WORTH;
 
-        int atk_cost    = DataCenter.Instance.User.GetPropertyCost(CONST.PROPERTY.ATK);
-        int asp_cost    = DataCenter.Instance.User.GetPropertyCost(CONST.PROPERTY.ASP);
-        int wor_cost    = DataCenter.Instance.User.GetPropertyCost(CONST.PROPERTY.WORTH);
+        int atk_cost    = DataCenter.Instance.User.GetPropertyCost(CONST.ATT.ATK);
+        int asp_cost    = DataCenter.Instance.User.GetPropertyCost(CONST.ATT.ASP);
+        int wor_cost    = DataCenter.Instance.User.GetPropertyCost(CONST.ATT.WORTH);
 
         string atk_color= DataCenter.Instance.User.Glass >= atk_cost ? CONST.COLOR_GREEN : CONST.COLOR_RED;
         string asp_color= DataCenter.Instance.User.Glass >= asp_cost ? CONST.COLOR_GREEN : CONST.COLOR_RED;
@@ -140,13 +140,13 @@ public class SkillTreeItem : MonoBehaviour
 
             var bar1 = m_LinePivot.Find("ATK1/Bar").GetComponent<BarTransition>();
             bar1.Init(player.ATK, player.SkillSlots[0].ATK, last_value);
-            m_Bars[CONST.PROPERTY.ATK].Add(bar1);
+            m_Bars[CONST.ATT.ATK].Add(bar1);
 
             last_value = player.SkillSlots[0].ATK;
 
             var bar2 = m_LinePivot.Find("ATK2/Bar").GetComponent<BarTransition>();
             bar2.Init(player.ATK , player.SkillSlots[1].ATK , last_value);
-            m_Bars[CONST.PROPERTY.ATK].Add(bar2);
+            m_Bars[CONST.ATT.ATK].Add(bar2);
         }
 
         //攻速
@@ -155,13 +155,13 @@ public class SkillTreeItem : MonoBehaviour
 
             var bar1 = m_LinePivot.Find("ASP1/Bar").GetComponent<BarTransition>();
             bar1.Init(player.ASP, player.SkillSlots[2].ASP, last_value);
-            m_Bars[CONST.PROPERTY.ASP].Add(bar1);
+            m_Bars[CONST.ATT.ASP].Add(bar1);
 
             last_value = player.SkillSlots[2].ASP;
 
             var bar2 = m_LinePivot.Find("ASP2/Bar").GetComponent<BarTransition>();
             bar2.Init(player.ASP, player.SkillSlots[3].ASP, last_value);
-            m_Bars[CONST.PROPERTY.ASP].Add(bar2);
+            m_Bars[CONST.ATT.ASP].Add(bar2);
         }
 
         //价值
@@ -170,13 +170,13 @@ public class SkillTreeItem : MonoBehaviour
 
             var bar1 = m_LinePivot.Find("WOR1/Bar").GetComponent<BarTransition>();
             bar1.Init(player.WORTH, player.SkillSlots[4].WOR, last_value);
-            m_Bars[CONST.PROPERTY.WORTH].Add(bar1);
+            m_Bars[CONST.ATT.WORTH].Add(bar1);
 
             last_value = player.SkillSlots[4].WOR;
 
             var bar2 = m_LinePivot.Find("WOR2/Bar").GetComponent<BarTransition>();
             bar2.Init(player.WORTH, player.SkillSlots[5].WOR, last_value);
-            m_Bars[CONST.PROPERTY.WORTH].Add(bar2);
+            m_Bars[CONST.ATT.WORTH].Add(bar2);
         }
     }
 
@@ -186,7 +186,7 @@ public class SkillTreeItem : MonoBehaviour
         InitSkills();
     }
 
-    void FlushBars(CONST.PROPERTY property)
+    void FlushBars(CONST.ATT property)
     {
         if (m_Bars.ContainsKey(property))
         {

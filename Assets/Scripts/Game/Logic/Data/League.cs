@@ -8,52 +8,6 @@ using UnityEngine;
 
 
 
-//技能配置
-[System.Serializable]
-public class SkillData
-{
-    public int ID;
-    public string Name;
-    public int LevelMax;
-    public int[] Values;
-    public int[] Costs;
-    public int Atlas;           //图集
-    public int Icon;            
-    public string Description;
-
-    public int GetValue(int level)
-    {
-        return Values[Mathf.Min(LevelMax - 1, level - 1)];
-    } 
-
-    public int GetCost(int level)
-    {
-        int order = Mathf.Min(LevelMax - 1, level);
-        return Costs[order];
-    }
-
-    public string GetDescription(int level, string color = "<#FFFFFF>")
-    {
-        int value = GetValue(level);
-
-        return Description.Replace("#", (color + value + "</color>"));
-    }
-
-    public string CompareDescription(int o_level, int t_level)
-    {
-        if (o_level == 0) return this.GetDescription(t_level, CONST.COLOR_GREEN);
-        if (o_level == this.LevelMax) return this.GetDescription(o_level, CONST.COLOR_GREEN);
-
-        int o_value = this.GetValue(o_level);
-        int t_value = this.GetValue(t_level);
-
-        string str = CONST.COLOR_GREEN + o_value + "</color>->" + CONST.COLOR_GREEN + t_value + "</color>";
-
-        return this.Description.Replace("#", str);
-    }
-}
-
-
 //负责管理武器和技能的数据
 public class League
 {
