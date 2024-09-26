@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 
@@ -209,8 +210,10 @@ public class Player : Unit
 
 
         //同步道具
+        //携带相同的特殊词条时，筛选出属性更好的那个
         {
-            DataCenter.Instance.User.CurrentPlayer.PearSlots.ForEach(pear_msg => {
+            DataCenter.Instance.User.CurrentPlayer.PearSlots.ForEach(pear_msg => 
+            {
                 if (pear_msg.UUID > 0)
                 {
                     Pear pear = DataCenter.Instance.Backpack.GetPearByUUID(pear_msg.UUID);
@@ -218,11 +221,6 @@ public class Player : Unit
                     m_Pears.Add(pear);
                 }
             });
-
-            //测试宝珠
-            // Pear pear = Pear.Create(DataCenter.Instance.Backpack.GetPearData(20052));
-            // pear.Equip(this);
-            // m_Pears.Add(pear);
         }
         
     }

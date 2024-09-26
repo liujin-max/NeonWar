@@ -196,7 +196,7 @@ public class DataCenter
         }
 
 
-        Debug.Log("生成道具：" + pear_data.Name);
+        // Debug.Log("生成道具：" + pear_data.Name);
         //开始随机词条
         List<string> propertys  = new List<string>();
         for (int i = 0; i < property_count; i++)
@@ -207,14 +207,17 @@ public class DataCenter
 
             propertys.Add(string.Format("{0}:{1}", property_data.ID, value));
 
-            Debug.Log(property_data.Name + ":" + value);
+            // Debug.Log(property_data.Name + ":" + value);
         }
 
         //特殊词条
         int sp_rate = (level - 1) * 35;
         if (RandomUtility.IsHit(sp_rate) == true)
         {
-            PropertyData property_data = RandomUtility.PickByWeight(m_SpecialPropertyWeights);
+            // PropertyData property_data = RandomUtility.PickByWeight(m_SpecialPropertyWeights);
+            //测试代码
+            PropertyData property_data = this.GetPropertyData(104);
+            //
             int real_point  = RandomUtility.Random((int)(base_point * 0.8f), (int)(base_point * 1.2f));
             int value       = Mathf.Max(real_point / property_data.Point, 1);
 

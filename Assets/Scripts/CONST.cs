@@ -35,7 +35,7 @@ public static class CONST
     //品质对应的名字颜色
     public static Dictionary<int, string> LEVEL_COLOR_PAIRS = new Dictionary<int, string>()
     {
-        [1] = "<#FFFFFF>",
+        [1] = "<#9C9C9C>",
         [2] = "<#33FF07>",
         [3] = "<#1790B2>",
         [4] = "<#9717B2>",
@@ -61,6 +61,7 @@ public static class CONST
         [4] = 1000,
         [5] = 1500,
     };
+
 
 
 

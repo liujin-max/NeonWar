@@ -228,7 +228,7 @@ public class Buff_Frozen : Buff
 #region 中毒
 public class Buff_Poison : Buff
 {
-    private CDTimer m_Timer = new CDTimer(0.5f);
+    private CDTimer m_Timer = new CDTimer(1f);
     public Buff_Poison()
     {
         Name    = "中毒";
@@ -256,6 +256,8 @@ public class Buff_Poison : Buff
         var hit = new Hit(Caster);
         hit.Type = CONST.HIT_TYPE.POISON;
         hit.HitColor = Color.green;
+        hit.ATK.SetBase(Value);
+        hit.ATK_INC.SetBase(1);
         hit.ATK_INC.PutMUL(this, Count);
         hit.CP.SetBase(0);
 

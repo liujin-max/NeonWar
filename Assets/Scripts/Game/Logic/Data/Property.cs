@@ -474,6 +474,10 @@ public class Property
         {100,   () => new Property_AreaRange()},
         {101,   () => new Property_AreaASP()},
         {102,   () => new Property_AreaReset()},
+        {103,   () => new Property_SplitFocus()},
+        {104,   () => new Property_AreaPoison()},
+        {105,   () => new Property_AreaIceFrozen()},
+        {106,   () => new Property_AreaBomb()},
     };
     #endregion
 
@@ -485,7 +489,8 @@ public class Property
     public string Name {get {return Model.Name;}}
     public CONST.PROPERTY Type {get {return Model.Type;}}
 
-
+    //是否生效(当携带相同的特殊词条时，只有属性更好的那个会生效)
+    public bool IsValid = true;
 
     public static Property Create(Pear pear,  int id, int value = 0)
     {

@@ -33,8 +33,15 @@ public class TaskMsg
 [System.Serializable]
 public class PearSlotMsg
 {
-    public int ID;
     public int UUID;
+
+    [NonSerialized] public Pear Pear;
+
+    public void UpdateUUID(int uuid)
+    {
+        UUID = uuid;
+        Pear = DataCenter.Instance.Backpack.GetPearByUUID(uuid);
+    }
 }
 
 //技能槽数据
@@ -107,8 +114,6 @@ public class PearMsg
 [System.Serializable]
 public class GameUserData
 {
-    public string Name = "未知";
-    public string HeadUrl;
     public int Level;       //通关记录
     public int Coin;        //金币
     public int Glass;       //碎片
@@ -140,8 +145,8 @@ public class GameUserData
 
             PearSlots   = new List<PearSlotMsg>()   //2个宝珠槽
             {
-                new PearSlotMsg() {ID = -1},
-                new PearSlotMsg() {ID = -1},
+                new PearSlotMsg() {UUID = -1},
+                new PearSlotMsg() {UUID = -1},
             },
         }
     };
@@ -178,8 +183,6 @@ public class User
     }
 
     public string OpenID { get{ return m_Base.openId;}}
-    public string Name { get{ return m_Data.Name;}}
-    public string HeadURL { get{ return m_Data.HeadUrl;}}
     public int Level { get{ return m_Data.Level;}}
     public int Coin { get{ return m_Data.Coin;}}
     public int Glass { get{ return m_Data.Glass;}}
@@ -222,6 +225,9 @@ public class User
         //同步宝珠数据
         DataCenter.Instance.Backpack.SyncPears(m_Data.Pears);
 
+        //刷新道具槽数据
+        foreach (var pearSlotMsg in CurrentPlayer.PearSlots) pearSlotMsg.UpdateUUID(pearSlotMsg.UUID);
+        UpdateSpecialPropertyValid();
 
 
         //同步任务信息
@@ -379,7 +385,7 @@ public class User
         for (int i = 0; i < CurrentPlayer.PearSlots.Count; i++)
         {
             var slot = CurrentPlayer.PearSlots[i];
-            if (slot.ID == -1) {
+            if (slot.UUID == -1) {
                 return false;
             }
         }
@@ -394,10 +400,10 @@ public class User
         for (int i = 0; i < CurrentPlayer.PearSlots.Count; i++)
         {
             var slot = CurrentPlayer.PearSlots[i];
-            if (slot.ID == pear.ID) {
+            if (slot.Pear != null && slot.Pear.ID == pear.ID) {
                 m_userUpdate = true;
-                CurrentPlayer.PearSlots[i].ID   = pear.ID;
-                CurrentPlayer.PearSlots[i].UUID = pear.UUID;
+                slot.UpdateUUID(pear.UUID);
+                UpdateSpecialPropertyValid();
                 return;
             }
         } 
@@ -406,25 +412,60 @@ public class User
         for (int i = 0; i < CurrentPlayer.PearSlots.Count; i++)
         {
             var slot = CurrentPlayer.PearSlots[i];
-            if (slot.ID == -1) {
+            if (slot.UUID == -1) {
                 m_userUpdate = true;
-                CurrentPlayer.PearSlots[i].ID   = pear.ID;
-                CurrentPlayer.PearSlots[i].UUID = pear.UUID;
+                slot.UpdateUUID(pear.UUID);
+                UpdateSpecialPropertyValid();
                 break;
             }
         } 
     }
 
-    public void UnloadPear(int pear_uuid)
+    public void UnloadPear(Pear pear)
     {
+        if (pear.SpecialProperty != null) pear.SpecialProperty.IsValid = true;
+
         for (int i = 0; i < CurrentPlayer.PearSlots.Count; i++)
         {
             var slot = CurrentPlayer.PearSlots[i];
-            if (slot.UUID == pear_uuid) {
+            if (slot.Pear == pear) {
                 m_userUpdate = true;
-                CurrentPlayer.PearSlots[i].ID   = -1;
-                CurrentPlayer.PearSlots[i].UUID = -1;
+                slot.UpdateUUID(-1);
+                UpdateSpecialPropertyValid();
                 break;
+            }
+        }
+    }
+
+    //穿脱道具时，对道具的词条做[去重]判断
+    //携带相同的特殊词条时，只有属性更好的那个会生效
+    void UpdateSpecialPropertyValid()
+    {
+        Dictionary<int, List<Property>> sp_records = new Dictionary<int, List<Property>>();
+
+        foreach (var pear_slot_msg in CurrentPlayer.PearSlots)
+        {
+            if (pear_slot_msg.Pear == null) continue;
+            if (pear_slot_msg.Pear.SpecialProperty == null) continue;
+
+            var sp = pear_slot_msg.Pear.SpecialProperty;
+            if (!sp_records.ContainsKey(sp.ID))
+                sp_records.Add(sp.ID, new List<Property>());
+
+            sp_records[sp.ID].Add(sp);
+        }
+
+        //参数从大到小排序
+        foreach (var config in sp_records)
+        {
+            config.Value.Sort((a1, b1)=>{
+                return b1.Value.CompareTo(a1.Value);
+            });
+
+            for (int i = 0; i < config.Value.Count; i++)
+            {
+                if (i == 0) config.Value[i].IsValid = true;
+                else config.Value[i].IsValid = false;
             }
         }
     }
@@ -440,7 +481,7 @@ public class User
     public bool HasSamePear(Pear pear)
     {
         foreach (var slot_msg in CurrentPlayer.PearSlots) {
-            if (slot_msg.ID == pear.ID) return true;
+            if (slot_msg.Pear != null && slot_msg.Pear.ID == pear.ID) return true;
         }
         return false;
     }

@@ -39,48 +39,7 @@ public class WXPlatform : Platform
 
     public override void AUTH(Action callback)
     {
-        GetSettingOption info = new GetSettingOption();
-        info.complete = (aa) => { /*获取完成*/ };
-        info.fail = (aa) => { Debug.Log("获取失败"); };
-        info.success = (aa) =>
-        {
-            if (!aa.authSetting.ContainsKey("scope.userInfo") || !aa.authSetting["scope.userInfo"])
-            {
-                //《三、调起授权》
-                //调用请求获取用户信息
-                WXUserInfoButton btn = WX.CreateUserInfoButton(0, 0, Screen.width, Screen.height, "zh_CN", true);
-                btn.OnTap((res) => {
-                    Debug.Log("点击授权按钮");
-                    if (res.errCode == 0) {
-                        //用户已允许获取个人信息，返回的data即为用户信息
-                        DataCenter.Instance.User.Data.Name       = res.userInfo.nickName;
-                        DataCenter.Instance.User.Data.HeadUrl    = res.userInfo.avatarUrl;
 
-                        DataCenter.Instance.User.Upload();
-
-                    } else {
-                        Debug.Log("用户未允许获取个人信息");
-                    }
-                    btn.Hide();
-                });
-            }
-            else
-            {
-                //《四、获取用户信息》
-                GetUserInfoOption userInfo = new GetUserInfoOption()
-                {
-                    withCredentials = true,
-                    lang = "zh_CN",
-                    success = (data) => {
-                        // //用户已允许获取个人信息，返回的data即为用户信息
-                        DataCenter.Instance.User.Data.Name       = data.userInfo.nickName;
-                        DataCenter.Instance.User.Data.HeadUrl    = data.userInfo.avatarUrl;
-                    }
-                };
-                WX.GetUserInfo(userInfo);
-            }
-        };
-        WX.GetSetting(info);
     }
 
     //启动同步账号数据

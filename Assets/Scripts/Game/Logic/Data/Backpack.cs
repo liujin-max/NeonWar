@@ -111,7 +111,7 @@ public class Backpack
 
     public Pear GetPearByUUID(int uuid)
     {
-        return m_PearsDic.TryGetValue(uuid, out Pear value) ? value : default;
+        return m_PearsDic.TryGetValue(uuid, out Pear value) ? value : null;
     }
 
     public Pear PushPear(int id, int level)

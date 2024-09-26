@@ -89,15 +89,21 @@ public class Pear
         Belong = player;
 
         foreach (var p in Properties) p.Equip();
-
-        SpecialProperty?.Equip();
+        
+        if (SpecialProperty != null && SpecialProperty.IsValid)
+        {
+            SpecialProperty.Equip();
+        }
     }
 
     public void UnEquip()
     {
         foreach (var p in Properties) p.UnEquip();
 
-        SpecialProperty?.UnEquip();
+        if (SpecialProperty != null && SpecialProperty.IsValid)
+        {
+            SpecialProperty.UnEquip();
+        }
 
         Belong = null;
     }
@@ -106,7 +112,10 @@ public class Pear
     {
         foreach (var p in Properties) p.CustomUpdate(deltaTime);
 
-        SpecialProperty?.CustomUpdate(deltaTime);
+        if (SpecialProperty != null && SpecialProperty.IsValid)
+        {
+            SpecialProperty.CustomUpdate(deltaTime);
+        }
     }
 
 }

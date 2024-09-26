@@ -60,7 +60,7 @@ public class PearDetailItem : MonoBehaviour
         });
 
         m_BtnUnEquip.onClick.AddListener(()=>{
-            DataCenter.Instance.User.UnloadPear(m_Pear.UUID);
+            DataCenter.Instance.User.UnloadPear(m_Pear);
 
             EventManager.SendEvent(new GameEvent(EVENT.UI_PEARCHANGE));
         });
@@ -111,7 +111,9 @@ public class PearDetailItem : MonoBehaviour
             return;
         }
 
-        m_Description.text = pear.SpecialProperty.GetDescription();
+        string text_color = pear.SpecialProperty.IsValid ? "<#F18423>" : "<#9C9C9C>";
+
+        m_Description.text = string.Format("{0}{1}:{2}", text_color , pear.SpecialProperty.Name, pear.SpecialProperty.GetDescription());
     }
 
     void FlushUI()
@@ -130,6 +132,8 @@ public class PearDetailItem : MonoBehaviour
     private void OnPearChange(GameEvent @event)
     {
         FlushUI();
+
+        InitSpecialProperty(m_Pear);
     }
     #endregion
 }

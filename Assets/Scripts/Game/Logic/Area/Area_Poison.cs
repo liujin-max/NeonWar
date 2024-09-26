@@ -46,7 +46,7 @@ public class Area_Poison : Area
         foreach (var u in m_Units.Keys)
         {
             var hit = new Hit(Belong);
-            hit.ATK_INC.PutMUL(this, 0.5f);
+            hit.ATK_INC.PutMUL(this, 0.3f);
             hit.HitColor = Color.green;
 
             //毒气伤害无法暴击

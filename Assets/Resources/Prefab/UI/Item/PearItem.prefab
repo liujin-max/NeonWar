@@ -161,7 +161,7 @@ MonoBehaviour:
   m_text: "\u9510\u5FC3\u73E0"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8d56633f6aa035949848b6f4f14a6ebd, type: 2}
-  m_sharedMaterial: {fileID: 2100000, guid: 156a3c5e3ed29d94389ed3dc7f72be7c, type: 2}
+  m_sharedMaterial: {fileID: 2136087169309321419, guid: 8d56633f6aa035949848b6f4f14a6ebd, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

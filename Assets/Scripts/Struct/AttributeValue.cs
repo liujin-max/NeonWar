@@ -9,7 +9,6 @@ using static System.Collections.Generic.Dictionary<object, float>;
 public class AttributeValue
 {
     [SerializeField] private float m_Base;
-    [SerializeField] private float m_Origin;
     private bool m_IsInt;
 
     Dictionary<object, float> ADDDic;
@@ -24,16 +23,8 @@ public class AttributeValue
     public AttributeValue(float value, bool int_flag = true)
     {
         m_Base  = value;
-        m_Origin= value;
+
         m_IsInt = int_flag;
-
-        // ADDDic = new Dictionary<object, float>();
-        // AULDic = new Dictionary<object, float>();
-        // MULDic = new Dictionary<object, float>();
-
-        // ADDValues   = ADDDic.Values;
-        // AULValues   = AULDic.Values;
-        // MULValues   = MULDic.Values;
     }
 
     public void SetBase(float value)
@@ -46,10 +37,7 @@ public class AttributeValue
         return m_Base;
     }
 
-    public float GetOrigin()
-    {
-        return m_Origin;
-    }
+
 
     public void PutADD(object obj, float value)
     {
