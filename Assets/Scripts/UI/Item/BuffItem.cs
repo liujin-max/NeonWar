@@ -26,14 +26,15 @@ public class BuffItem : MonoBehaviour
 
         FlushUI();
 
-        m_BuffCount = buff.Count;
+        m_BuffCount = buff.ShowValue();
     }
 
     void FlushUI()
     {
         m_Mask.fillAmount = Buff.Duration.Progress;
 
-        if (m_BuffCount != Buff.Count) m_Count.text = Buff.Count > 1 ? Buff.Count.ToString() : "";
+        int show_value = Buff.ShowValue();
+        if (m_BuffCount != show_value) m_Count.text = show_value > 1 ? show_value.ToString() : "";
     }
 
     void Update()

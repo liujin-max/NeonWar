@@ -445,6 +445,62 @@ public class Property_AreaBomb : Property
 #endregion
 
 
+#region 触发暴击时提高#%暴击伤害
+public class Property_CritPoint : Property
+{
+    public override void Equip()
+    {
+        EventManager.AddHandler(EVENT.ONHIT,   OnHit);
+    }
+
+    public override void UnEquip()
+    {
+        EventManager.DelHandler(EVENT.ONHIT,   OnHit);
+    }
+
+    //目标受击
+    private void OnHit(GameEvent @event)
+    {
+        Hit h = @event.GetParam(0) as Hit;
+        if (h.Caster != Pear.Belong) return;
+
+        if (h.IsCrit == true)
+        {
+            var caster = Pear.Belong;
+            caster.AddBuff(caster, (int)CONST.BUFF.CRITDEMAGE, Value);
+        }
+    }
+}
+#endregion
+
+
+#region 触发闪避时有#%的概率恢复1点生命
+public class Property_DodgeHeal : Property
+{
+    public override void Equip()
+    {
+        EventManager.AddHandler(EVENT.ONDODGE,  OnDodge);
+    }
+
+    public override void UnEquip()
+    {
+        EventManager.DelHandler(EVENT.ONDODGE,  OnDodge);
+    }
+
+    //目标受击
+    private void OnDodge(GameEvent @event)
+    {
+        Unit u = @event.GetParam(0) as Unit;
+        if (u != Pear.Belong) return;
+
+        if (RandomUtility.IsHit(Value) == true)
+        {
+            Field.Instance.Heal(u, 1);
+        }
+    }
+}
+#endregion
+
 
 
 
@@ -478,6 +534,9 @@ public class Property
         {104,   () => new Property_AreaPoison()},
         {105,   () => new Property_AreaIceFrozen()},
         {106,   () => new Property_AreaBomb()},
+
+        {108,   () => new Property_CritPoint()},
+        {109,   () => new Property_DodgeHeal()},
     };
     #endregion
 

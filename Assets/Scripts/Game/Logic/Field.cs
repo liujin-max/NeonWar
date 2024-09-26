@@ -185,8 +185,16 @@ public class Field : MonoBehaviour
     }
 
     #region 逻辑处理
+    //
+    public void Heal(Unit unit, int value)
+    {
+        unit.UpdateHP(value);
 
-    
+        GameFacade.Instance.EffectManager.Load(EFFECT.HEAL, Vector3.zero, unit.gameObject);
+
+        EventManager.SendEvent(new GameEvent(EVENT.ONHPUPDATE));
+    }
+
     //根据当前的击杀进度计算出可以获得多少碎片奖励
     public void GenerateGlassRewards(out int base_value, out int worth_value)
     {
@@ -311,11 +319,12 @@ public class Field : MonoBehaviour
         else if (hit.Type == CONST.HIT_TYPE.NORMAL && RandomUtility.IsHit((int)unit.ATT.DODGE.ToNumber(), 1000) == true) //闪避了
         {
             //闪避特效
-            GameFacade.Instance.EffectManager.Load(EFFECT.MISS, hit.Position, Land.ELEMENT_ROOT.gameObject);
+            if (unit == m_Player) GameFacade.Instance.EffectManager.Load(EFFECT.DODGE, hit.Position, Land.ELEMENT_ROOT.gameObject);
+            else  GameFacade.Instance.EffectManager.Load(EFFECT.MISS, hit.Position, Land.ELEMENT_ROOT.gameObject);
 
             demage = 0;
 
-            EventManager.SendEvent(new GameEvent(EVENT.ONDODGE, hit, unit));
+            EventManager.SendEvent(new GameEvent(EVENT.ONDODGE, unit));
         }
         else
         {
@@ -340,6 +349,8 @@ public class Field : MonoBehaviour
                 //是否暴击
                 if (RandomUtility.IsHit((int)hit.CP.ToNumber(), 1000) == true)
                 {
+                    hit.IsCrit = true;
+
                     demage  = demage * hit.CT.ToNumber() / 1000.0f;
 
                     //暴击特效
@@ -380,7 +391,8 @@ public class Field : MonoBehaviour
 
         //闪避了
         if (RandomUtility.IsHit((int)player.ATT.DODGE.ToNumber(), 1000) == true) {
-            //闪避特效
+            EventManager.SendEvent(new GameEvent(EVENT.ONDODGE, player));
+            GameFacade.Instance.EffectManager.Load(EFFECT.DODGE, player.transform.localPosition, Land.ELEMENT_ROOT.gameObject);
             return;
         }
 

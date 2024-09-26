@@ -306,7 +306,40 @@ public class Buff_Crit : Buff
 #endregion
 
 
+#region 爆伤
+public class Buff_CritDemage : Buff
+{
+    public Buff_CritDemage()
+    {
+        Name    = "爆伤";
+        Duration= new CDTimer(9999999);
+    }
 
+    public override void Init()
+    {
+        Belong.ATT.CT.PutADD(this, Value * 10 * Count);
+    }
+
+    public override void Dispose()
+    {
+        Belong.ATT.CT.Pop(this);
+    }
+
+    public override void Flush(float time, int count)
+    {
+        base.Flush(time, count);
+
+        Count += count;
+
+        Belong.ATT.CT.PutADD(this, Value * 10 * Count);
+    }
+
+    public override int ShowValue()
+    {
+        return Value * Count;
+    }
+}
+#endregion
 
 
 
@@ -590,6 +623,9 @@ public class Buff
         {(int)CONST.BUFF.FROZEN,    () => new Buff_Frozen()},
         {(int)CONST.BUFF.POISON,    () => new Buff_Poison()},
         {(int)CONST.BUFF.CRIT,      () => new Buff_Crit()},
+        {(int)CONST.BUFF.CRITDEMAGE,() => new Buff_CritDemage()},
+
+
 
         //场上Buff
         {(int)CONST.BUFF.ATK_UP,   () => new Buff_ATKUP()},
@@ -642,6 +678,11 @@ public class Buff
     public bool IsEnd()
     {
         return Duration.IsFinished() || Count <= 0;
+    }
+
+    public virtual int ShowValue()
+    {
+        return Count;
     }
 
     public virtual void Dispose() 

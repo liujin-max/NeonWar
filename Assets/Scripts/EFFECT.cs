@@ -11,6 +11,7 @@ public static class EFFECT
     public const string SHIELD_BROKEN   = "Prefab/Effect/fx_shield_boom";
     public const string CRIT        = "Prefab/Effect/fx_crit";
     public const string MISS        = "Prefab/Effect/fx_miss";
+    public const string DODGE       = "Prefab/Effect/fx_dodge";
     public const string WAVE        = "Prefab/Effect/fx_wave";
     public const string BLACKHOLE   = "Prefab/Effect/fx_blackhole";
     public const string CRASH       = "Prefab/Effect/fx_crash";

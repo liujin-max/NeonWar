@@ -41,7 +41,7 @@ public class Enemy_109 : Enemy
     #region 监听事件
     private void OnDodge(GameEvent @event)
     {
-        var unit = @event.GetParam(1) as Unit;
+        var unit = @event.GetParam(0) as Unit;
 
         if (unit != this) return;
 
