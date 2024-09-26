@@ -214,9 +214,9 @@ public class DataCenter
         int sp_rate = (level - 1) * 35;
         if (RandomUtility.IsHit(sp_rate) == true)
         {
-            PropertyData property_data = RandomUtility.PickByWeight(m_SpecialPropertyWeights);
+            // PropertyData property_data = RandomUtility.PickByWeight(m_SpecialPropertyWeights);
             //测试代码
-            // PropertyData property_data = this.GetPropertyData(109);
+            PropertyData property_data = this.GetPropertyData(903);
             //
             int real_point  = RandomUtility.Random((int)(base_point * 0.8f), (int)(base_point * 1.2f));
             int value       = Mathf.Max(real_point / property_data.Point, 1);

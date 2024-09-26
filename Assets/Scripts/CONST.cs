@@ -134,7 +134,8 @@ public static class CONST
         FROZEN,     //冰冻
         POISON,     //中毒
         CRIT,       //会心
-        CRITDEMAGE,  //爆伤
+        CRITDEMAGE, //爆伤
+        SLOW,       //减速
 
 
 

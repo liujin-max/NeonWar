@@ -306,7 +306,7 @@ public class Buff_Crit : Buff
 #endregion
 
 
-#region 爆伤
+#region 爆伤（特殊词条）
 public class Buff_CritDemage : Buff
 {
     public Buff_CritDemage()
@@ -342,7 +342,28 @@ public class Buff_CritDemage : Buff
 #endregion
 
 
+#region 减速
+public class Buff_Slow : Buff
+{
+    public Buff_Slow()
+    {
+        Name    = "减速";
+        TYPE    = CONST.BUFF_TYPE.DE;
+    }
 
+    public override void Init()
+    {
+        Belong.ATT.SPEED.PutMUL(this, Value / 100.0f);
+        Belong.SyncSpeed();
+    }
+
+    public override void Dispose()
+    {
+        Belong.ATT.SPEED.Pop(this);
+        Belong.SyncSpeed();
+    }
+}
+#endregion
 
 
 
@@ -624,7 +645,7 @@ public class Buff
         {(int)CONST.BUFF.POISON,    () => new Buff_Poison()},
         {(int)CONST.BUFF.CRIT,      () => new Buff_Crit()},
         {(int)CONST.BUFF.CRITDEMAGE,() => new Buff_CritDemage()},
-
+        {(int)CONST.BUFF.SLOW,      () => new Buff_Slow()},
 
 
         //场上Buff

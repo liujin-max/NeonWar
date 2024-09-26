@@ -445,7 +445,15 @@ public class Property_AreaBomb : Property
 #endregion
 
 
-#region 触发暴击时提高#%暴击伤害
+
+
+
+
+
+
+
+
+#region [通用]触发暴击时提高#%暴击伤害
 public class Property_CritPoint : Property
 {
     public override void Equip()
@@ -474,7 +482,7 @@ public class Property_CritPoint : Property
 #endregion
 
 
-#region 触发闪避时有#%的概率恢复1点生命
+#region [通用]触发闪避时有#%的概率恢复1点生命
 public class Property_DodgeHeal : Property
 {
     public override void Equip()
@@ -502,7 +510,30 @@ public class Property_DodgeHeal : Property
 #endregion
 
 
+#region [通用]攻击附带减速效果
+public class Property_AttackSlow : Property
+{
+    public override void Equip()
+    {
+        EventManager.AddHandler(EVENT.ONHIT,   OnHit);
+    }
 
+    public override void UnEquip()
+    {
+        EventManager.DelHandler(EVENT.ONHIT,   OnHit);
+    }
+
+    //目标受击
+    private void OnHit(GameEvent @event)
+    {
+        Hit h = @event.GetParam(0) as Hit;
+        if (h.Caster != Pear.Belong) return;
+
+        var u = @event.GetParam(1) as Unit;
+        u.AddBuff(Pear.Belong, (int)CONST.BUFF.SLOW, 60, 2.5f);
+    }
+}
+#endregion
 
 
 
@@ -535,8 +566,9 @@ public class Property
         {105,   () => new Property_AreaIceFrozen()},
         {106,   () => new Property_AreaBomb()},
 
-        {108,   () => new Property_CritPoint()},
-        {109,   () => new Property_DodgeHeal()},
+        {901,   () => new Property_CritPoint()},
+        {902,   () => new Property_DodgeHeal()},
+        {903,   () => new Property_AttackSlow()},
     };
     #endregion
 
