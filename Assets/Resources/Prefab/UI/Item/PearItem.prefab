@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abbe24c49c67f0a43b25a997801a809a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MatTemplate: {fileID: 2100000, guid: 80106ca3581ccaf4cbed003f3c4ee496, type: 2}
+  m_MatTemplate: {fileID: 2100000, guid: a4e392cb362310c4387e6931dc64d68f, type: 2}
 --- !u!1 &1375906757241816777
 GameObject:
   m_ObjectHideFlags: 0

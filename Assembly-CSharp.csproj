@@ -252,7 +252,6 @@
     <Compile Include="Assets\Scripts\Game\Logic\Enemy\Enemy.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Shader\SpriteOuterOutline.shader" />
     <None Include="Assets\Shader\SpriteGray.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
