@@ -116,7 +116,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 40, y: -30}
-  m_SizeDelta: {x: -80, y: -52}
+  m_SizeDelta: {x: -80, y: -60}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &4527702258546595528
 CanvasRenderer:
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding: {x: 0, y: 0, z: 0, w: 0}
-  m_Softness: {x: 0, y: 0}
+  m_Softness: {x: 0, y: 20}
 --- !u!1 &3627915855874693012
 GameObject:
   m_ObjectHideFlags: 0
@@ -548,7 +548,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   smooting: 4
-  isAdsorb: 0
+  isAdsorb: 1
   itemPrefab: {fileID: 5000082842379748694, guid: 32f17ff99cb025e4894f8cfc93460a25, type: 3}
   itemHeight: 180
   ItemWidth: 140

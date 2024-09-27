@@ -58,7 +58,7 @@ public class SuperScrollView : MonoBehaviour, IBeginDragHandler, IEndDragHandler
 
 
         mScrollRect = transform.GetComponent<ScrollRect>();
-        mContentRect = mScrollRect.content;//.transform.GetComponent<RectTransform>();
+        mContentRect= mScrollRect.content;//.transform.GetComponent<RectTransform>();
         mScrollRect.onValueChanged.AddListener((Vector2 vec) => OnScrollMove(vec));
 
         InitScroll();
