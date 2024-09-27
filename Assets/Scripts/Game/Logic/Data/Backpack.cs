@@ -88,7 +88,8 @@ public class Backpack
                 ID          = Convert.ToInt32(data[0]),
                 Name        = data[1],
                 Weight      = Convert.ToInt32(data[2]),
-                Properties  = data[3].Split(';').Select(int.Parse).ToArray()
+                Properties  = data[3].Split(';').Select(int.Parse).ToArray(),
+                Specials    = data[4].Split(';').Where(s => !string.IsNullOrWhiteSpace(s)).Select(int.Parse).ToArray(),
             };
 
             m_PearDataDic[pear.ID]  = pear;

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1638632935959973181}
   - component: {fileID: 1868061377103909261}
   - component: {fileID: 3071338636706540028}
-  - component: {fileID: 9002422562510692104}
+  - component: {fileID: 9188639497398516107}
   m_Layer: 5
   m_HasEditorInfo: 1
   m_Name: Icon
@@ -78,7 +78,7 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &9002422562510692104
+--- !u!114 &9188639497398516107
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -90,7 +90,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abbe24c49c67f0a43b25a997801a809a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_MatTemplate: {fileID: 2100000, guid: a4e392cb362310c4387e6931dc64d68f, type: 2}
+  m_MatTemplate: {fileID: 2100000, guid: 80106ca3581ccaf4cbed003f3c4ee496, type: 2}
 --- !u!1 &1375906757241816777
 GameObject:
   m_ObjectHideFlags: 0

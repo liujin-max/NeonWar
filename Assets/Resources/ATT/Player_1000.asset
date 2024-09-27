@@ -16,25 +16,19 @@ MonoBehaviour:
   HP: 3
   ATK:
     m_Base: 41
-    m_Origin: 1
   ASP:
     m_Base: 450
-    m_Origin: 450
   CP:
-    m_Base: 50
-    m_Origin: 50
+    m_Base: 0
   CT:
     m_Base: 1500
-    m_Origin: 1500
   DODGE:
     m_Base: 0
-    m_Origin: 0
   SPEED:
     m_Base: 135
-    m_Origin: 135
   VUN_INC:
     m_Base: 1
-    m_Origin: 1
+  ATK_INC:
+    m_Base: 1
   BOSS_INC:
     m_Base: 1
-    m_Origin: 1

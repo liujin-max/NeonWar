@@ -60,6 +60,7 @@ public class PearData
     public string Name;
     public int Weight;
     public int[] Properties;
+    public int[] Specials;
 }
 #endregion
 
@@ -214,9 +215,22 @@ public class DataCenter
         int sp_rate = (level - 1) * 35;
         if (RandomUtility.IsHit(sp_rate) == true)
         {
-            // PropertyData property_data = RandomUtility.PickByWeight(m_SpecialPropertyWeights);
+            Dictionary<PropertyData, int> keyValuePairs;
+            if (pear_data.Specials.Length > 0)
+            {
+                keyValuePairs = new Dictionary<PropertyData,int>();
+
+                foreach (var proerty_id in pear_data.Specials)
+                {
+                    var data = this.GetPropertyData(proerty_id);
+                    keyValuePairs.Add(data, data.Weight);
+                }
+            }
+            else keyValuePairs = m_SpecialPropertyWeights;
+
+            PropertyData property_data = RandomUtility.PickByWeight(keyValuePairs);
             //测试代码
-            PropertyData property_data = this.GetPropertyData(903);
+            // PropertyData property_data = this.GetPropertyData(903);
             //
             int real_point  = RandomUtility.Random((int)(base_point * 0.8f), (int)(base_point * 1.2f));
             int value       = Mathf.Max(real_point / property_data.Point, 1);
