@@ -189,11 +189,11 @@ public class DataCenter
         int avg_point       = base_point / property_count;
 
         //根据权重获取属性词条
-        var property_weight = new Dictionary<PropertyData, int>();
+        var property_weights= new Dictionary<PropertyData, int>();
         foreach (var id in pear_data.Properties)
         {
             var property_data = this.GetPropertyData(id);
-            property_weight.Add(property_data, property_data.Weight);
+            property_weights.Add(property_data, property_data.Weight);
         }
 
 
@@ -202,13 +202,13 @@ public class DataCenter
         List<string> propertys  = new List<string>();
         for (int i = 0; i < property_count; i++)
         {
-            PropertyData property_data = RandomUtility.PickByWeight(property_weight);
+            PropertyData property_data = RandomUtility.PickByWeight(property_weights);
             int real_point  = RandomUtility.Random((int)(avg_point * 0.8f), (int)(avg_point * 1.2f));
             int value       = Mathf.Max(real_point / property_data.Point, 1);
 
             propertys.Add(string.Format("{0}:{1}", property_data.ID, value));
 
-            // Debug.Log(property_data.Name + ":" + value);
+            property_weights.Remove(property_data);
         }
 
         //特殊词条

@@ -121,20 +121,13 @@ public class Enemy : Unit
     {
         SoundManager.Instance.Load(SOUND.DEAD);
 
-        //掉落Buff逻辑
-        if (m_Data.Buffs.Length > 0)
-        {
-            int rand    = RandomUtility.Random(0, m_Data.Buffs.Length);
-            int buff_id = m_Data.Buffs[rand];
-            Field.Instance.PushBuffBubble(buff_id, 1);
-        }
-
-        Field.Instance.Land.DoSmallShake();
+        Field.Instance.OnBuffFall(hit, this);
 
         var e = GameFacade.Instance.EffectManager.Load(EFFECT.BROKEN, transform.localPosition, Field.Instance.Land.ELEMENT_ROOT.gameObject).GetComponent<PixelBroken>();
         e.transform.right = hit.Velocity;
         e.Init(m_Color);
 
+        Field.Instance.Land.DoSmallShake();
 
         EventManager.SendEvent(new GameEvent(EVENT.ONKILLENEMY, this, hit));
     }

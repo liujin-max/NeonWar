@@ -26,6 +26,10 @@ MonoBehaviour:
     m_Base: 0
   SPEED:
     m_Base: 135
+  BLESS:
+    m_Base: 150
+  LUCKY:
+    m_Base: 0
   VUN_INC:
     m_Base: 1
   ATK_INC:

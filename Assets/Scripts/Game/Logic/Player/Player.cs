@@ -23,6 +23,8 @@ public class Player : Unit
 
     //碎片奖励
     [HideInInspector] public AttributeValue GlassRate = new AttributeValue(1, false);
+    //动态祝福值(千分制)
+    [HideInInspector] public int BlessRate;
 
 
     void Awake()

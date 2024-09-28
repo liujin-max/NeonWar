@@ -11,6 +11,6 @@ public class PropertyItem : MonoBehaviour
 
     public void Init(Property property)
     {
-        m_Text.text = "<#9C9C9C>" + "· " + CONST.COLOR_BROWN + property.Name + ":" + property.GetDescription();
+        m_Text.text = "<#9C9C9C>" + "· " + CONST.COLOR_BROWN + "+" + property.GetDescription() + " " + property.Name;
     }
 }

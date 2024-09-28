@@ -31,7 +31,6 @@ public class MonsterJSON
     //和圆点的角度
     public int Angle = -1;
     public int Radius;
-    public int[] Buffs = {};
 }
 
 

@@ -68,10 +68,11 @@ public class NavigationWindow : BaseWindow
         #region 关卡
         m_BtnFight.Init(
             ()=>{
+                EventManager.SendEvent(new GameEvent(EVENT.UI_SHOWFIGHT, true));
                 return true;
             },
             ()=>{
-
+                EventManager.SendEvent(new GameEvent(EVENT.UI_SHOWFIGHT, false));
             },
             ()=>{
                 if (m_NAVBTN == m_BtnFight) return;

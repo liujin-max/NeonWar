@@ -414,5 +414,39 @@ public class Field : MonoBehaviour
         }
     }
 
+    //掉落Buff
+    public void OnBuffFall(Hit hit, Enemy enemy)
+    {
+        //概率动态变化，未触发则+5%概率
+        if (!RandomUtility.IsHit((int)m_Player.BlessRate, 1000))
+        {
+            m_Player.BlessRate = Mathf.Min(m_Player.BlessRate + 50, (int)m_Player.ATT.BLESS.ToNumber());
+            return;
+        }
+
+        m_Player.BlessRate = 0;
+
+        //掉落Buff逻辑
+        List<CONST.BUFF> buffs = new List<CONST.BUFF>()
+        {
+            CONST.BUFF.ATK_UP, CONST.BUFF.ATK_DOWN,
+            CONST.BUFF.ASP_UP, CONST.BUFF.ASP_DOWN, 
+            CONST.BUFF.SPEED_UP, CONST.BUFF.SPEED_DOWN,
+            CONST.BUFF.CP, CONST.BUFF.DODGE_UP, CONST.BUFF.SPD_MUL
+        };
+
+        if (RandomUtility.IsHit((int)Field.Instance.Player.ATT.LUCKY.ToNumber(), 1000) == true)
+        {
+            buffs.Remove(CONST.BUFF.ATK_DOWN);
+            buffs.Remove(CONST.BUFF.ASP_DOWN);
+            buffs.Remove(CONST.BUFF.SPEED_DOWN);
+        }
+        
+
+        int rand    = RandomUtility.Random(0, buffs.Count);
+        int buff_id = (int)buffs[rand];
+        Field.Instance.PushBuffBubble(buff_id, 1);
+    }
+
     #endregion
 }

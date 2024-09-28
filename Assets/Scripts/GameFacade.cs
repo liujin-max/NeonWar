@@ -173,14 +173,12 @@ public class GameFacade : MonoBehaviour
         //进入游戏
         NavigationController.GotoGame();
 
-        // DataCenter.Instance.Backpack.PushPear(20050, 5);
-        // DataCenter.Instance.Backpack.PushPear(20050, 3);
-        // DataCenter.Instance.Backpack.PushPear(20010, 1);
-        // DataCenter.Instance.Backpack.PushPear(20010, 4);
 
-        // for (int i = 0; i < 30; i++)
+        // for (int i = 0; i < 5; i++)
         // {
-        //     DataCenter.Instance.Backpack.PushPear(20100, RandomUtility.Random(1, 6));
+        //     DataCenter.Instance.Backpack.PushPear(20050, RandomUtility.Random(1, 6));
+        //     DataCenter.Instance.Backpack.PushPear(20010, RandomUtility.Random(1, 6));
+        //     DataCenter.Instance.Backpack.PushPear(20000, RandomUtility.Random(1, 6));
         // }
 
         // DataCenter.Instance.User.UpdateGlass(30000);

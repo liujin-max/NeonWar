@@ -76,4 +76,9 @@ public class GameWindow : BaseWindow
     {
         m_Glass.SetValue(DataCenter.Instance.User.Glass);
     }
+
+    public void OnShowFight(bool flag)
+    {
+        m_BtnFight.gameObject.SetActive(flag);
+    }
 }

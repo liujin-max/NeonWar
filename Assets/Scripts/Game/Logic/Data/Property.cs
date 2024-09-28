@@ -189,12 +189,82 @@ public class Property_Boss : Property
 }
 #endregion
 
+#region 幸运
+// 掉落Buff时，Buff是增益Buff的概率
+public class Property_Lucky : Property
+{
+    public override void Equip()
+    {
+        Pear.Belong.ATT.LUCKY.PutADD(this, Value * 10);
+    }
+
+    public override void UnEquip()
+    {
+        Pear.Belong.ATT.LUCKY.Pop(this);
+    }
+}
+
+#endregion
+
+
+#region 祝福
+// 击败怪物时 掉落Buff的概率
+public class Property_Bless : Property
+{
+    public override void Equip()
+    {
+        Pear.Belong.ATT.BLESS.PutADD(this, Value * 10);
+    }
+
+    public override void UnEquip()
+    {
+        Pear.Belong.ATT.BLESS.Pop(this);
+    }
+}
+
+#endregion
 
 
 
 
 
-#region 陷阱的范围增加#
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#region [弓]陷阱的范围增加#
 public class Property_AreaRange : Property
 {
     public override void Equip()
@@ -224,7 +294,7 @@ public class Property_AreaRange : Property
 #endregion 
 
 
-#region 陷阱的冷却速度提高#%
+#region [弓]陷阱的冷却速度提高#%
 public class Property_AreaASP : Property
 {
     public override void CustomUpdate(float deltaTime)
@@ -241,7 +311,7 @@ public class Property_AreaASP : Property
 #endregion
 
 
-#region 投掷陷阱时有#%的概率立即刷新冷却时间
+#region [弓]投掷陷阱时有#%的概率立即刷新冷却时间
 public class Property_AreaReset : Property
 {
     public override void Equip()
@@ -268,7 +338,7 @@ public class Property_AreaReset : Property
 #endregion
 
 
-#region 分裂后的小箭矢会自动锁定附近敌人
+#region [弓]分裂后的小箭矢会自动锁定附近敌人
 public class Property_SplitFocus : Property
 {
     public override void Equip()
@@ -308,7 +378,7 @@ public class Property_SplitFocus : Property
 #endregion
 
 
-#region 毒气陷阱内的目标将周期性受到#层中毒效果
+#region [弓]毒气陷阱内的目标将周期性受到#层中毒效果
 public class Property_AreaPoison : Property
 {
     private Dictionary<Area_Poison, float> m_Records = new Dictionary<Area_Poison, float>();
@@ -371,7 +441,7 @@ public class Property_AreaPoison : Property
 
 
 
-#region 在低温陷阱内停留超过3秒将被冻结
+#region [弓]在低温陷阱内停留超过3秒将被冻结
 public class Property_AreaIceFrozen : Property
 {
     float ToValue()
@@ -407,7 +477,7 @@ public class Property_AreaIceFrozen : Property
 #endregion
 
 
-#region 目标被拖拽至引力陷阱中心时产生#码范围的爆炸伤害
+#region [弓]目标被拖拽至引力陷阱中心时产生#码范围的爆炸伤害
 public class Property_AreaBomb : Property
 {
     private Dictionary<Area, HashSet<Unit>> m_Records = new Dictionary<Area, HashSet<Unit>>();
@@ -556,7 +626,8 @@ public class Property
         { 8,    () => new Property_Arrow()},
         { 9,    () => new Property_Buff()},
         {10,    () => new Property_Boss()},
-
+        {11,    () => new Property_Lucky()},
+        {12,    () => new Property_Bless()},
 
         {100,   () => new Property_AreaRange()},
         {101,   () => new Property_AreaASP()},
