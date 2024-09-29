@@ -33,7 +33,7 @@ public class PearComposeItem : MonoBehaviour
             }
 
             if (pears.Count <= 1) {
-                EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "请放入道具"));
+                EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "请放入装备"));
                 return;
             }
 

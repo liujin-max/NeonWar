@@ -14,6 +14,7 @@ public class NavigationWindow : BaseWindow
     [SerializeField] NavigationButton m_BtnBackpack;
     [SerializeField] NavigationButton m_BtnLeague;
     [SerializeField] NavigationButton m_BtnFight;
+    [SerializeField] NavigationButton m_BtnHalo;
     [SerializeField] NavigationButton m_BtnSetting;
 
 
@@ -23,7 +24,7 @@ public class NavigationWindow : BaseWindow
 
     void Awake()
     {
-        #region 道具
+        #region 装备
         m_BtnBackpack.Init(
             ()=>{
                 return NavigationController.GotoBackpack();
@@ -38,7 +39,8 @@ public class NavigationWindow : BaseWindow
                     m_NAVBTN.Revoke();
                     m_NAVBTN = m_BtnBackpack; 
                 }
-            }
+            },
+            ()=>{return DataCenter.Instance.IsPearUnlock();}
         );
         #endregion
 
@@ -59,7 +61,8 @@ public class NavigationWindow : BaseWindow
                     m_NAVBTN.Revoke();
                     m_NAVBTN = m_BtnLeague; 
                 }
-            }
+            },
+            ()=>{return true;}
         );
         #endregion
 
@@ -81,11 +84,30 @@ public class NavigationWindow : BaseWindow
                     m_NAVBTN.Revoke();
                     m_NAVBTN = m_BtnFight; 
                 }
-            }
+            },
+            ()=>{return true;}
         );
         #endregion
 
-
+        #region 未开放
+        m_BtnHalo.Init(
+            ()=>{
+                return false;
+            },
+            ()=>{
+                
+            },
+            ()=>{
+                if (m_NAVBTN == m_BtnHalo) return;
+                if (m_BtnHalo.Execute())
+                {
+                    m_NAVBTN.Revoke();
+                    m_NAVBTN = m_BtnHalo; 
+                }
+            },
+            ()=>{return false;}
+        );
+        #endregion
 
         #region 设置
         m_BtnSetting.Init(
@@ -107,7 +129,8 @@ public class NavigationWindow : BaseWindow
                     m_NAVBTN.Revoke();
                     m_NAVBTN = m_BtnSetting; 
                 }
-            }
+            },
+            ()=>{return true;}
         );
         #endregion
 
@@ -126,6 +149,8 @@ public class NavigationWindow : BaseWindow
     void FlushUI()
     {
         m_Level.text    = (DataCenter.Instance.User.Level + 1).ToString();
+
+        m_BtnBackpack.FlushLock();
     }
 
 

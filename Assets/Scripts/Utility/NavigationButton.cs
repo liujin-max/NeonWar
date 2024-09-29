@@ -8,6 +8,8 @@ using UnityEngine.UI;
 public class NavigationButton : MonoBehaviour
 {
     public Button m_Button;
+    public GameObject m_UnlockPivot;
+    public GameObject m_LockPivot;
     public GameObject m_Light;
     public IconAnim m_Anim;
 
@@ -15,6 +17,7 @@ public class NavigationButton : MonoBehaviour
 
     private Func<bool> m_ExecuteCallback;
     private Action m_RevokeCallback;
+    private Func<bool> m_UnlockCallback;
 
 
     void Awake()
@@ -22,13 +25,23 @@ public class NavigationButton : MonoBehaviour
         ShowLight(false);
     }
 
-    public void Init(Func<bool> execute, Action revoke, UnityAction click_action)
+    public void Init(Func<bool> execute, Action revoke, UnityAction click_action, Func<bool> unlock_action)
     {
         m_ExecuteCallback   = execute;
         m_RevokeCallback    = revoke;
+        m_UnlockCallback    = unlock_action;
 
         m_Button.onClick.RemoveAllListeners();
         m_Button.onClick.AddListener(click_action);
+
+        FlushLock();
+    }
+
+    public void FlushLock()
+    {
+        bool flag = m_UnlockCallback();
+        m_UnlockPivot.SetActive(flag);
+        m_LockPivot.SetActive(!flag);
     }
 
     void ShowLight(bool flag)
