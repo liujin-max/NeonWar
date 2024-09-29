@@ -20,6 +20,7 @@ public class PearDetailItem : MonoBehaviour
 
     private Pear m_Pear;
     private List<PropertyItem> m_PropertyItems = new List<PropertyItem>();
+    private bool IsComposeState = false;
 
     PropertyItem new_property_item(int order)
     {
@@ -71,9 +72,10 @@ public class PearDetailItem : MonoBehaviour
         });
     }
 
-    public void Init(Pear pear)
+    public void Init(Pear pear, bool is_compose_state = false)
     {
         m_Pear = pear;
+        IsComposeState = is_compose_state;
 
         string color_string = CONST.LEVEL_COLOR_PAIRS[pear.Level];
 
@@ -120,11 +122,11 @@ public class PearDetailItem : MonoBehaviour
     {
         bool is_equip = DataCenter.Instance.User.IsPearEquiped(m_Pear);
 
-        m_BtnEquip.gameObject.SetActive(!is_equip);
-        m_BtnUnEquip.gameObject.SetActive(is_equip);
+        m_BtnEquip.gameObject.SetActive(!IsComposeState && !is_equip);
+        m_BtnUnEquip.gameObject.SetActive(!IsComposeState && is_equip);
 
         //装备着的宝珠无法合成
-        BtnSynthesis.gameObject.SetActive(!m_Pear.IsLevelMax() && !is_equip);
+        BtnSynthesis.gameObject.SetActive(!IsComposeState && !m_Pear.IsLevelMax() && !is_equip);
     }
 
 

@@ -15,6 +15,7 @@ public class Backpack
 
     //
     private Dictionary<int, PearData> m_PearDataDic = new Dictionary<int, PearData>();
+    private Dictionary<PearData, int> m_PearDataWeights = new Dictionary<PearData, int>();
 
 
     public Dictionary<int, int[]> PearPools = new Dictionary<int, int[]>()
@@ -38,11 +39,6 @@ public class Backpack
         pear_msgs.ForEach(pear_msg => {
             AddPear(pear_msg.ID, pear_msg.UUID, pear_msg.Level, pear_msg.Properties);
         });
-
-
-        //测试代码
-        // PushPear(20022);
-        //
     }
     #endregion
 
@@ -92,13 +88,19 @@ public class Backpack
                 Specials    = data[4].Split(';').Where(s => !string.IsNullOrWhiteSpace(s)).Select(int.Parse).ToArray(),
             };
 
-            m_PearDataDic[pear.ID]  = pear;
+            m_PearDataDic.Add(pear.ID, pear);
+            m_PearDataWeights.Add(pear, pear.Weight);
         }
     }
 
     public PearData GetPearData(int id)
     {
         return m_PearDataDic.TryGetValue(id, out PearData value) ? value : default;
+    }
+
+    public PearData PickPearData()
+    {
+        return RandomUtility.PickByWeight(m_PearDataWeights);
     }
 
     Pear AddPear(int id, int uuid, int level, string[] properties)

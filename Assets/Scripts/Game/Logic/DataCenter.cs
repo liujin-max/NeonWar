@@ -251,14 +251,16 @@ public class DataCenter
     {
         if (pears.Count <= 1) return null;
 
-        int success_rate = (pears.Count - 1) * 50;
+        int origin_id   = pears[0].ID;
+        int origin_level= pears[0].Level;
+        int success_rate= (pears.Count - 1) * 50;
 
 
         User.IsDirty = true;
 
-        //消耗宝珠
+        //消耗道具
         pears.ForEach(pear => {
-            // Backpack.RemovePear(pear.ID, 1);
+            Backpack.RemovePear(pear.UUID);
         });
 
 
@@ -279,23 +281,14 @@ public class DataCenter
         }
 
 
-        int next_id;
-        if (is_same == true)
+        if (!is_same)
         {
-            next_id = pears[0].ID + 1;
-        }
-        else
-        {
-            // List<PearData> pear_datas = Backpack.GetPearDatasByLevel(pears[0].Level + 1);
-            // int rand = RandomUtility.Random(0, pear_datas.Count);
-            
-            // next_id = pear_datas[rand].ID;
+            origin_id = Backpack.PickPearData().ID;
         }
 
-        // Pear pear = Backpack.PushPear(next_id);
+        Pear pear = Backpack.PushPear(origin_id, origin_level + 1);
 
-        // return pear;
-        return null;
+        return pear;
     }
 }
 

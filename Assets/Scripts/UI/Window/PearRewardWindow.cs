@@ -6,28 +6,34 @@ using UnityEngine.UI;
 public class PearRewardWindow : BaseWindow
 {
     [SerializeField] private Button m_Mask;
-    [SerializeField] private Transform m_PearPivot;
-
+    [SerializeField] private Image m_Icon;
+    [SerializeField] private Transform m_DetailPivot;
 
     void Awake()
     {
         StartCoroutine(UIOpen());
     }
 
-    public void Init(List<Pear> pears)
+    public void Init(Pear pear)
     {
-        InitPears(pears);
+        InitPear(pear);
+        InitDetail(pear);
     }
 
-    void InitPears(List<Pear> pears)
+    void InitPear(Pear pear)
     {
-        foreach (var pear in pears)
-        {
-            var item = GameFacade.Instance.UIManager.LoadItem("PearItem", m_PearPivot).GetComponent<PearItem>();
-            item.transform.localScale = new Vector3(1.6f, 1.6f, 1);
-            item.Init(pear);
-            item.ShowTagEquip(false);
-        }
+        string color_string = CONST.LEVEL_COLOR_PAIRS[pear.Level].Trim('<', '>');
+
+        m_Icon.sprite = GameFacade.Instance.AssetManager.LoadSprite("Pear" , pear.ID.ToString());
+        m_Icon.SetNativeSize();
+
+        m_Icon.GetComponent<ImageOutline>().SetColor(color_string);
+    }
+
+    void InitDetail(Pear pear)
+    {
+        var item = GameFacade.Instance.UIManager.LoadItem("PearDetailItem", m_DetailPivot).GetComponent<PearDetailItem>();
+        item.Init(pear, true);
     }
 
     IEnumerator UIOpen()

@@ -92,10 +92,10 @@ public class BackpackWindow : BaseWindow
         });
     }
 
-    public void ShowDetail(Pear pear)
+    public void ShowDetail(Pear pear, bool is_compose_state = false)
     {
         m_DetailPivot.gameObject.SetActive(true);
-        m_ComposePivot.gameObject.SetActive(false);
+        // m_ComposePivot.gameObject.SetActive(false);
 
         if (m_DetailItem == null) {
             m_DetailItem = GameFacade.Instance.UIManager.LoadItem("PearDetailItem", m_DetailPivot).GetComponent<PearDetailItem>();
@@ -104,12 +104,12 @@ public class BackpackWindow : BaseWindow
             m_DetailPivot.GetComponent<CanvasGroup>().DOFade(1, m_EnterTimer);
         }
 
-        m_DetailItem.Init(pear);
+        m_DetailItem.Init(pear, is_compose_state);
     }
 
     void ShowCompose(Pear pear)
     {
-        m_DetailPivot.gameObject.SetActive(false);
+        // m_DetailPivot.gameObject.SetActive(false);
         m_ComposePivot.gameObject.SetActive(true);
 
         if (m_ComposeItem == null) {
@@ -120,10 +120,11 @@ public class BackpackWindow : BaseWindow
         }
 
         m_ComposeItem.Init((return_pear)=>{
-            m_DetailPivot.gameObject.SetActive(true);
+            m_DetailPivot.gameObject.SetActive(false);
             m_ComposePivot.gameObject.SetActive(false);
 
-            InitPears(return_pear != null ? return_pear : pear);
+            // InitPears(return_pear != null ? return_pear : pear);
+            InitPears(null);
         });
 
     }
@@ -137,13 +138,11 @@ public class BackpackWindow : BaseWindow
         var list    = new List<Pear>();
         DataCenter.Instance.Backpack.Pears.ForEach(p => {
             if (p.Level == pear.Level && !DataCenter.Instance.User.IsPearEquiped(p)) {
-                // for (int i = 0; i < p.Count; i++) {
-                //     var new_pear = Pear.Create(p.ID, 1);
-                //     list.Add(new_pear);
-                // }
+                list.Add(p);
             }
         });
         
+        ShowDetail(pear, true);
 
         m_PearView.Init(list.Count, (obj, index, is_init)=>{
             PearItem item = obj.transform.GetComponent<PearItem>();
@@ -155,6 +154,8 @@ public class BackpackWindow : BaseWindow
 
             item.Touch.onClick.RemoveAllListeners();
             item.Touch.onClick.AddListener(()=>{
+                ShowDetail(p, true);
+                
                 if (m_ComposeSeats.ContainsKey(p))  //卸下
                 {
                     EventManager.SendEvent(new GameEvent(EVENT.UI_COMPOSECHANGE, false, p));

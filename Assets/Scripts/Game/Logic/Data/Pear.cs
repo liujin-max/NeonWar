@@ -20,9 +20,9 @@ public class Pear
     //列表排序权重
     public int SortOrder {
         get {
-            int base_order = Level;
+            int base_order = Level * 1000 + UUID;
 
-            if (DataCenter.Instance.User.IsPearEquiped(this)) base_order += 10;
+            if (DataCenter.Instance.User.IsPearEquiped(this)) base_order *= 10000;
 
             return base_order;
         }

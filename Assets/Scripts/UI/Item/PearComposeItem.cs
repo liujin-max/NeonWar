@@ -41,11 +41,8 @@ public class PearComposeItem : MonoBehaviour
             Pear final = DataCenter.Instance.Synthesis(pears);
             if (final != null)
             {
-                List<Pear> rewards = new List<Pear>();
-                rewards.Add(final);
-
                 UICtrl_PearRewardWindow.Instance.Enter((window)=>{
-                    window.Init(rewards);
+                    window.Init(final);
                 });
             } 
 
