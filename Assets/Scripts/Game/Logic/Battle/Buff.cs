@@ -7,12 +7,11 @@ using UnityEngine;
 
 #region 晕眩
 //晕眩0.5秒，无法移动
-public class Buff_Stun : Buff, IDisposable
+public class Buff_Stun : Buff
 {
     public Buff_Stun()
     {
         TYPE    = CONST.BUFF_TYPE.DE;
-        Duration= new CDTimer(0.8f);
     }
 
     public override void Init()
@@ -30,23 +29,27 @@ public class Buff_Stun : Buff, IDisposable
         Belong.StunReference--;
         Belong.Resume();
     }
+
+    public override bool IsControl()
+    {
+        return true;
+    }
 }
 #endregion
 
 
 #region 易伤
-//3秒内受到的伤害提高#%
+//#秒内受到的伤害提高#%
 public class Buff_YiShang : Buff
 {
     public Buff_YiShang()
     {
         TYPE    = CONST.BUFF_TYPE.DE;
-        Duration= new CDTimer(3f);
     }
 
     public override void Init()
     {
-        Belong.ATT.VUN_INC.PutADD(this, Value / 100.0f);
+        Belong.VUN_INC.PutADD(this, Value / 100.0f);
 
         m_Effect = GameFacade.Instance.EffectManager.Load(EFFECT.POJIA, Vector3.zero, Belong.HeadPivot.gameObject);
     }
@@ -55,7 +58,7 @@ public class Buff_YiShang : Buff
     {
         base.Dispose();
 
-        Belong.ATT.VUN_INC.Pop(this);
+        Belong.VUN_INC.Pop(this);
     }
 }
 #endregion
@@ -101,7 +104,7 @@ public class Buff_Shield : Buff
 #endregion
 
 
-#region 混乱
+#region 混乱(玩家)
 //针对玩家，使左右键的方向相反
 public class Buff_Chaos : Buff
 {
@@ -109,7 +112,6 @@ public class Buff_Chaos : Buff
     {
         Name    = "混乱";
         TYPE    = CONST.BUFF_TYPE.DE;
-        Duration= new CDTimer(5);
     }
 
     public override void Init()
@@ -140,7 +142,6 @@ public class Buff_FastSPD : Buff
     public Buff_FastSPD()
     {
         Name    = "疾速";
-        Duration= new CDTimer(9999999);
     }
 
     public override void Init()
@@ -171,7 +172,6 @@ public class Buff_Kill : Buff
     public Buff_Kill()
     {
         Name    = "杀意";
-        Duration= new CDTimer(9999999);
     }
 
     public override void Init()
@@ -221,6 +221,11 @@ public class Buff_Frozen : Buff
 
         Belong.AffectedEffect.Frozen(false);
     }
+
+    public override bool IsControl()
+    {
+        return true;
+    }
 }
 #endregion
 
@@ -257,8 +262,7 @@ public class Buff_Poison : Buff
         hit.Type = CONST.HIT_TYPE.POISON;
         hit.HitColor = Color.green;
         hit.ATK.SetBase(Value);
-        hit.ATK_INC.SetBase(1);
-        hit.ATK_INC.PutMUL(this, Count);
+        hit.ATK_INC.SetBase(Count);
         hit.CP.SetBase(0);
 
         Field.Instance.SettleHit(hit, Belong);
@@ -281,7 +285,6 @@ public class Buff_Crit : Buff
     public Buff_Crit()
     {
         Name    = "会心";
-        Duration= new CDTimer(9999999);
     }
 
     public override void Init()
@@ -312,7 +315,6 @@ public class Buff_CritDemage : Buff
     public Buff_CritDemage()
     {
         Name    = "爆伤";
-        Duration= new CDTimer(9999999);
     }
 
     public override void Init()
@@ -618,7 +620,7 @@ public class Buff_SPDMUL : Buff
 
 
 
-public class Buff
+public class Buff : IDisposable
 {
     public Unit Caster; //Buff释放者
     public Unit Belong; //Buff拥有者
@@ -628,8 +630,8 @@ public class Buff
     public int Count = 1;   //层数
     public CONST.BUFF_TYPE TYPE = CONST.BUFF_TYPE.GAIN;
     public string Name = "未知";
-    public CDTimer Duration = new CDTimer(999999);  //持续时间
-    
+    public CDTimer Duration = new CDTimer(9999999);  //持续时间
+    public AttributeValue LifeValue = new AttributeValue(9999999, false);
 
     protected Effect m_Effect = null;
 
@@ -677,7 +679,11 @@ public class Buff
         buff.Belong = belong;
         buff.Value  = value;
 
-        if (time > 0) buff.Duration = new CDTimer(time);  //持续时间
+        if (time > 0)
+        {
+            buff.Duration = new CDTimer(time);  //持续时间
+            buff.LifeValue.SetBase(time);
+        }
 
         return buff;
     }
@@ -696,6 +702,13 @@ public class Buff
         else Duration.ForceReset();
     }
 
+    public void PutLife(object obj, float rate)
+    {
+        LifeValue.PutAUL(obj, rate);
+
+        Duration.SetDuration(LifeValue.ToNumber());
+    }
+
     public bool IsEnd()
     {
         return Duration.IsFinished() || Count <= 0;
@@ -704,6 +717,12 @@ public class Buff
     public virtual int ShowValue()
     {
         return Count;
+    }
+
+    //是否是控制类Buff
+    public virtual bool IsControl()
+    {
+        return false;
     }
 
     public virtual void Dispose() 

@@ -22,6 +22,23 @@ public class Unit : MonoBehaviour
     public CDTimer ASP = new CDTimer(0f);
     [HideInInspector] public AttributeValue CPS = new AttributeValue(1f, false);  //冷却值的恢复倍率
 
+    //易伤倍率
+    [HideInInspector] public AttributeValue VUN_INC     = new AttributeValue(1f, false);
+    //伤害倍率
+    [HideInInspector] public AttributeValue ATK_INC     = new AttributeValue(1f, false);
+    //对头目伤害加成
+    [HideInInspector] public AttributeValue BOSS_INC    = new AttributeValue(1f, false);
+    //对健康敌人额外伤害倍率
+    [HideInInspector] public AttributeValue HEALTH_INC  = new AttributeValue(1f, false);
+    //对减速敌人额外伤害倍率
+    [HideInInspector] public AttributeValue SLOW_INC    = new AttributeValue(1f, false);
+    //对受控制敌人额外伤害倍率
+    [HideInInspector] public AttributeValue CONTROL_INC = new AttributeValue(1f, false);
+
+
+
+
+
     //Buff
     private Dictionary<int, Buff> m_BuffDic = new Dictionary<int, Buff>();
     public ValueCollection Buffs {get {return m_BuffDic.Values;}}
@@ -49,6 +66,8 @@ public class Unit : MonoBehaviour
         } 
     }
 
+
+    #region 状态判断
     public bool IsHPFull()
     {
         return ATT.HP >= ATT.HPMAX;
@@ -70,6 +89,12 @@ public class Unit : MonoBehaviour
         return false;
     }
 
+    //是否Boss
+    public virtual bool IsBoss()
+    {
+        return false;
+    }
+
     //能否攻击
     public virtual bool CanAttack()
     {
@@ -77,6 +102,21 @@ public class Unit : MonoBehaviour
 
         return true;
     }
+
+    //是否被减速
+    public bool IsSlow()
+    {
+        return ATT.SPEED.GetBase() > ATT.SPEED.ToNumber();
+    }
+
+    //是否被控制
+    public virtual bool IsControlled()
+    {
+        return StunReference > 0 || FrozenReference > 0;
+    }
+
+    #endregion
+
 
     public virtual bool CustomUpdate(float deltaTime)
     {

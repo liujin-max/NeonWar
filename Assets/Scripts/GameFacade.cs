@@ -174,14 +174,14 @@ public class GameFacade : MonoBehaviour
         NavigationController.GotoGame();
 
 
-        // for (int i = 0; i < 5; i++)
-        // {
-        //     DataCenter.Instance.Backpack.PushPear(20050, RandomUtility.Random(1, 6));
-        //     DataCenter.Instance.Backpack.PushPear(20010, RandomUtility.Random(1, 6));
-        //     DataCenter.Instance.Backpack.PushPear(20000, RandomUtility.Random(1, 6));
-        // }
+        for (int i = 0; i < 5; i++)
+        {
+            DataCenter.Instance.Backpack.PushPear(20050, RandomUtility.Random(1, 6));
+            DataCenter.Instance.Backpack.PushPear(20010, RandomUtility.Random(1, 6));
+            DataCenter.Instance.Backpack.PushPear(20000, RandomUtility.Random(1, 6));
+        }
 
-        // DataCenter.Instance.User.UpdateGlass(30000);
+        DataCenter.Instance.User.UpdateGlass(30000);
 
         
         yield return null; 

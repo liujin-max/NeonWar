@@ -106,22 +106,6 @@ public class AttributeValue
         MULDic?.Clear();
     }
 
-    public float ToADDNumber()
-    {
-        var base_value  = m_Base;
-
-        if (ADDDic != null) {
-            foreach (var item in ADDDic) base_value += item.Value;
-        }
-
-
-        if (m_IsInt == true) {
-            base_value = (float)Math.Floor(base_value);
-        }
-
-        return base_value;
-    }
-
     public float ToNumber(bool is_floor = true)
     {
         var base_value  = m_Base;

@@ -9,12 +9,12 @@ public class Property_ATK : Property
 {
     public override void Equip()
     {
-        Pear.Belong.ATT.ATK_INC.PutADD(this, Value / 100f);
+        Pear.Belong.ATK_INC.PutADD(this, Value / 100f);
     }
 
     public override void UnEquip()
     {
-        Pear.Belong.ATT.ATK_INC.Pop(this);
+        Pear.Belong.ATK_INC.Pop(this);
     }
 }
 #endregion
@@ -138,7 +138,7 @@ public class Property_Arrow : Property
 
         if (bullet.Caster.ID == (int)CONST.PLAYER.BOW)
         {
-            bullet.Hit.ATK_INC.PutAUL(this, Value / 100.0f);
+            bullet.Hit.ARROW_INC.PutADD(this, Value / 100.0f);
         }
     }
 }
@@ -166,7 +166,7 @@ public class Property_Buff : Property
 
         if (buff.TYPE == CONST.BUFF_TYPE.GAIN)
         {
-            buff.Duration.SetDuration(buff.Duration.Duration * (1 + Value / 100.0f));
+            buff.PutLife(this, Value / 100.0f);
         }
     }
 }
@@ -179,12 +179,12 @@ public class Property_Boss : Property
 {
     public override void Equip()
     {
-        Pear.Belong.ATT.BOSS_INC.PutAUL(this, Value / 100.0f);
+        Pear.Belong.BOSS_INC.PutADD(this, Value / 100.0f);
     }
 
     public override void UnEquip()
     {
-        Pear.Belong.ATT.BOSS_INC.Pop(this);
+        Pear.Belong.BOSS_INC.Pop(this);
     }
 }
 #endregion
@@ -225,10 +225,80 @@ public class Property_Bless : Property
 #endregion
 
 
+#region 对健康敌人的伤害
+public class Property_HealthInc : Property
+{
+    public override void Equip()
+    {
+        Pear.Belong.HEALTH_INC.PutADD(this, Value / 100f);
+    }
+
+    public override void UnEquip()
+    {
+        Pear.Belong.HEALTH_INC.Pop(this);
+    }
+}
+#endregion
 
 
+#region 对减速敌人的伤害
+public class Property_SlowInc : Property
+{
+    public override void Equip()
+    {
+        Pear.Belong.SLOW_INC.PutADD(this, Value / 100f);
+    }
+
+    public override void UnEquip()
+    {
+        Pear.Belong.SLOW_INC.Pop(this);
+    }
+}
+#endregion
 
 
+#region 对受控制敌人的伤害
+public class Property_ControlInc : Property
+{
+    public override void Equip()
+    {
+        Pear.Belong.CONTROL_INC.PutADD(this, Value / 100f);
+    }
+
+    public override void UnEquip()
+    {
+        Pear.Belong.CONTROL_INC.Pop(this);
+    }
+}
+#endregion
+
+
+#region 控制效果持续时间
+public class Property_ControlBuff : Property
+{
+    public override void Equip()
+    {
+        EventManager.AddHandler(EVENT.ONBUFFADD,    OnBuffAdd);
+    }
+
+    public override void UnEquip()
+    {
+        EventManager.AddHandler(EVENT.ONBUFFADD,    OnBuffAdd);
+    }
+
+    private void OnBuffAdd(GameEvent @event)
+    {
+        Buff buff = @event.GetParam(0) as Buff;
+
+        if (buff.Caster != Pear.Belong) return;
+
+        if (buff.IsControl() == true)
+        {
+            buff.PutLife(this, Value / 100.0f);
+        }
+    }
+}
+#endregion
 
 
 
@@ -628,6 +698,11 @@ public class Property
         {10,    () => new Property_Boss()},
         {11,    () => new Property_Lucky()},
         {12,    () => new Property_Bless()},
+        {13,    () => new Property_HealthInc()},
+        {14,    () => new Property_SlowInc()},
+        {15,    () => new Property_ControlInc()},
+        {16,    () => new Property_ControlBuff()},
+
 
         {100,   () => new Property_AreaRange()},
         {101,   () => new Property_AreaASP()},

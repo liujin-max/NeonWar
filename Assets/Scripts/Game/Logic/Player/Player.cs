@@ -21,10 +21,13 @@ public class Player : Unit
     protected List<Pear> m_Pears = new List<Pear>();
 
 
+
+
     //碎片奖励
     [HideInInspector] public AttributeValue GlassRate = new AttributeValue(1, false);
     //动态祝福值(千分制)
     [HideInInspector] public int BlessRate;
+
 
 
     void Awake()

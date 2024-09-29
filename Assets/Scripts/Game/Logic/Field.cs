@@ -309,7 +309,7 @@ public class Field : MonoBehaviour
         if (hit.IgnoreUnits.Contains(unit)) return false;
         
 
-        float demage = Mathf.Ceil(hit.ATK.ToNumber(false) * hit.ATK_INC.ToNumber() * unit.ATT.VUN_INC.ToNumber());
+        float demage = Mathf.Ceil(hit.ATK.ToNumber(false) * hit.ATK_INC.ToNumber() * unit.VUN_INC.ToNumber());
 
         //护盾
         if (hit.Type == CONST.HIT_TYPE.NORMAL && unit.GetBuff((int)CONST.BUFF.SHIELD) != null)
@@ -328,7 +328,7 @@ public class Field : MonoBehaviour
         }
         else
         {
-            if (RandomUtility.IsHit(hit.KillRate) == true && (unit.Side == CONST.SIDE.ENEMY && unit.GetComponent<Enemy>().TYPE != CONST.ENEMY_TYPE.BOSS))   //一击必杀
+            if (RandomUtility.IsHit(hit.KillRate) == true && unit.IsBoss() == false)   //一击必杀
             {
                 demage = unit.ATT.HPMAX;
 
@@ -338,13 +338,15 @@ public class Field : MonoBehaviour
             }
             else
             {
-                if (unit.Side == CONST.SIDE.ENEMY)
-                {
-                    if (unit.GetComponent<Enemy>().TYPE == CONST.ENEMY_TYPE.BOSS)
-                    {
-                        demage *= hit.BOSS_INC.ToNumber();
-                    }
-                }
+                //对Boss伤害加成
+                if (unit.IsBoss()) demage *= hit.BOSS_INC;
+                //对健康敌人的伤害加成
+                if (unit.IsHPFull()) demage *= hit.HEALTH_INC;
+                //对减速敌人的伤害加成
+                if (hit.SLOW_INC != 1 && unit.IsSlow()) demage *= hit.SLOW_INC;
+                //对受控制敌人的伤害加成
+                if (unit.IsControlled()) demage *= hit.CONTROL_INC;
+                
 
                 //是否暴击
                 if (RandomUtility.IsHit((int)hit.CP.ToNumber(), 1000) == true)

@@ -52,4 +52,6 @@ public static class EVENT
     public static string ONREMOVEAREA       = "ONREMOVEAREA";
     //投掷陷阱
     public static string ONPLAYTRAP         = "ONPLAYTRAP";
+    //创建Hit时
+    public static string ONCREATEHIT        = "ONCREATEHIT";
 }

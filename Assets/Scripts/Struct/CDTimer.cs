@@ -5,20 +5,10 @@ using UnityEngine;
 public class CDTimer
 {
     private float m_duration;
-    public float Duration
-    {
-        get { 
-            return m_duration; 
-        }
-    }
+    public float Duration {get => m_duration;}
 
     private float m_current;
-    public float Current
-    {
-        get { 
-            return m_current; 
-        }
-    }
+    public float Current {get => m_current;}
 
     public float Progress {get{return m_current / m_duration;}}
 

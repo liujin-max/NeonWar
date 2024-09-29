@@ -137,7 +137,7 @@ public class Skill_10110 : Skill
 
 
 #region 弓：晕眩射击
-//被击中的敌人有#%的概率晕眩0.5秒
+//被击中的敌人有#%的概率晕眩1秒
 public class Skill_10120 : Skill
 {
     public Skill_10120()
@@ -160,7 +160,7 @@ public class Skill_10120 : Skill
 
         if (RandomUtility.IsHit(Value))
         {
-            unit.AddBuff(Caster, (int)CONST.BUFF.STUN, 1);
+            unit.AddBuff(Caster, (int)CONST.BUFF.STUN, 1, 1f);
         }
         
     }
@@ -233,7 +233,7 @@ public class Skill_10160 : Skill
 
 
 #region 弓：标记
-//被击中的敌人在5秒内受到的伤害提高#%
+//被击中的敌人在3秒内受到的伤害提高#%
 public class Skill_10170 : Skill
 {
     public Skill_10170()
@@ -254,7 +254,7 @@ public class Skill_10170 : Skill
 
         Unit unit = @event.GetParam(1) as Unit;
 
-        unit.AddBuff(Caster, (int)CONST.BUFF.YISHANG, Value);
+        unit.AddBuff(Caster, (int)CONST.BUFF.YISHANG, Value, 3.0f);
     }
 }
 

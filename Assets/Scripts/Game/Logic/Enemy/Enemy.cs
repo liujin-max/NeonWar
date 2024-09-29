@@ -24,9 +24,6 @@ public class Enemy : Unit
     private bool m_IsRepel = false;   //击退中
     private CDTimer m_RepelTimer = new CDTimer(0.8f);
 
-    private Vector2 m_LastVelocity;
-    private float m_LastAngularVelocity;
-
 
 
 
@@ -63,6 +60,17 @@ public class Enemy : Unit
 
         InitHPBar();
     }
+
+    public override bool IsBoss()
+    {
+        return TYPE == CONST.ENEMY_TYPE.BOSS;
+    }
+
+    public override bool IsControlled()
+    {
+        return base.IsControlled() || m_IsRepel;
+    }
+
 
     public override void Dispose()
     {
@@ -185,15 +193,6 @@ public class Enemy : Unit
     //暂停运动
     public override void Stop()
     {
-        // if (m_Rigidbody.isKinematic == true) return;
-
-        // m_LastVelocity          = m_Rigidbody.velocity;
-        // m_LastAngularVelocity   = m_Rigidbody.angularVelocity;
-
-        // m_Rigidbody.velocity    = Vector3.zero;
-        // m_Rigidbody.angularVelocity = 0;
-        // m_Rigidbody.isKinematic = true;
-
         ATT.SPEED.PutMUL(this, 0);
         SyncSpeed();
     }
@@ -203,13 +202,6 @@ public class Enemy : Unit
     {
         ATT.SPEED.Pop(this);
         m_Rigidbody.velocity = ToolUtility.FindPointOnCircle(Vector2.zero, ATT.SPEED.ToNumber() / 100.0f, m_Angle);
-
-
-        // if (!m_Rigidbody.isKinematic) return;
-
-        // m_Rigidbody.isKinematic = false;
-        // m_Rigidbody.velocity    = m_LastVelocity;
-        // m_Rigidbody.angularVelocity = m_LastAngularVelocity;
     }
 
     #endregion
