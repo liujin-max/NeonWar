@@ -11,7 +11,7 @@ public static class CONST
 
 
 
-    public static int PEAR_UNLOCK_LEVEL= 0;    //通过15关后开放道具系统
+    public static int PEAR_UNLOCK_LEVEL= 8;    //通过8关后开放道具系统
     public static float DEFAULT_RADIUS = 5.4f;  //圆弧半径
     public static float DEFAULT_BLINKCD= 1.5f;  //闪现冷却
 

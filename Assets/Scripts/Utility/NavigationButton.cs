@@ -9,7 +9,7 @@ public class NavigationButton : MonoBehaviour
 {
     public Button m_Button;
     public GameObject m_Light;
-    public Floating m_Floating;
+    public IconAnim m_Anim;
 
 
 
@@ -39,12 +39,12 @@ public class NavigationButton : MonoBehaviour
         }
     }
 
-    void Floating(bool flag)
+    void Play(bool flag)
     {
-        if (m_Floating == null) return;
+        if (m_Anim == null) return;
 
-        if (flag) m_Floating.Play();
-        else m_Floating.Stop();
+        if (flag) m_Anim.Play();
+        else m_Anim.Stop();
     }
 
     //执行
@@ -52,7 +52,7 @@ public class NavigationButton : MonoBehaviour
     {
         if (m_ExecuteCallback())
         {
-            Floating(true);
+            Play(true);
             ShowLight(true);
             return true;
         }
@@ -64,7 +64,7 @@ public class NavigationButton : MonoBehaviour
     {
         m_RevokeCallback();
 
-        Floating(false);
+        Play(false);
         ShowLight(false);
     }
 }

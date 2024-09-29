@@ -128,6 +128,7 @@
     <Compile Include="Assets\AllIn1SpriteShader\Demo\Scripts\DemoCircleExpositor.cs" />
     <Compile Include="Assets\Scripts\Utility\LongPressButton.cs" />
     <Compile Include="Assets\DOTween\Modules\DOTweenModulePhysics.cs" />
+    <Compile Include="Assets\Scripts\Effect\SowrdAttack.cs" />
     <Compile Include="Assets\Scripts\Utility\MouseClickHandler.cs" />
     <Compile Include="Assets\Scripts\Manager\Platform.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\Enemy\Enemy_403.cs" />
@@ -173,6 +174,7 @@
     <Compile Include="Assets\Scripts\Manager\EditorPlatform.cs" />
     <Compile Include="Assets\Scripts\UI.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\Enemy\Enemy_108.cs" />
+    <Compile Include="Assets\Scripts\Effect\IconAnim.cs" />
     <Compile Include="Assets\Scripts\UI\Window\SettingWindow.cs" />
     <Compile Include="Assets\Scripts\UI\Controller\UICtrl_SkillWindow.cs" />
     <Compile Include="Assets\Scripts\UI\Item\SkillItem.cs" />

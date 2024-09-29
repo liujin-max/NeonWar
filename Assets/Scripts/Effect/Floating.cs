@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using DG.Tweening;
 using UnityEngine;
 
-public class Floating : MonoBehaviour
+public class Floating : IconAnim
 {
-    public bool AutoStart = true;
     public float Height = 0.5f;
     public float Time   = 1.5f;
 
@@ -18,13 +17,8 @@ public class Floating : MonoBehaviour
         m_Origin = transform.localPosition;
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        if (AutoStart) Play();
-    }
 
-    public void Play()
+    public override void Play()
     {
         if (m_Tweener == null)
         {
@@ -36,7 +30,7 @@ public class Floating : MonoBehaviour
         m_Tweener.Play();
     }
 
-    public void Stop()
+    public override void Stop()
     {
         if (m_Tweener != null) m_Tweener.Pause();
         transform.localPosition = m_Origin;
