@@ -152,6 +152,13 @@ public class DataCenter
         User.Update(dt);
     }
 
+    //技能模块解锁条件
+    public bool IsSkillUnlock()
+    {
+        return User.Level >= 1;
+    }
+
+    //装备模块解锁条件
     public bool IsPearUnlock()
     {
         return User.Level >= CONST.PEAR_UNLOCK_LEVEL;

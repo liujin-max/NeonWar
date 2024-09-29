@@ -207,29 +207,27 @@ public class Field : MonoBehaviour
     }
 
     //计算道具奖励
-    public void GeneratePearRewards(out Dictionary<int , int> pear_dic)
+    public List<Pear> GeneratePearRewards(CONST.RESULT result)
     {
-        pear_dic  = new Dictionary<int, int>();
-
-        if (m_Level.LevelJSON.PearPool == 0) {
-            return;
+        List<Pear> pears = new List<Pear>();
+        if (string.IsNullOrEmpty(m_Level.LevelJSON.PearLevel)) {
+            return pears;
         }
 
         int[] section   = m_Level.LevelJSON.PearCount.Split("-").Select(int.Parse).ToArray();
-        int count       = RandomUtility.Random(section[0], section[1] + 1);
-        int[] pool      = DataCenter.Instance.Backpack.PearPools[m_Level.LevelJSON.PearPool];
-
+        int count       = result == CONST.RESULT.VICTORY ? RandomUtility.Random(section[0], section[1] + 1) : 1;
+        int[] levels    = m_Level.LevelJSON.PearLevel.Split("-").Select(int.Parse).ToArray();
 
         for (int i = 0; i < count; i++)
         {
-            int rand    = RandomUtility.Random(0, pool.Length);
-            int id      = pool[rand];
+            var data    = DataCenter.Instance.Backpack.PickPearData();
+            int level   = result == CONST.RESULT.VICTORY ? RandomUtility.Random(levels[0], levels[1] + 1) : levels[0];
 
-            if (!pear_dic.ContainsKey(id)) {
-                pear_dic.Add(id, 0);
-            }
-            pear_dic[id] ++;
+            Pear pear   =  DataCenter.Instance.Backpack.PushPear(data.ID, level);
+            pears.Add(pear);
         }
+
+        return pears;
     }
 
     public void InitPlayer()
@@ -349,11 +347,10 @@ public class Field : MonoBehaviour
                 
 
                 //是否暴击
-                if (RandomUtility.IsHit((int)hit.CP.ToNumber(), 1000) == true)
+                hit.IsCrit = RandomUtility.IsHit((int)hit.CP.ToNumber(), 1000);
+                if (hit.IsCrit == true)
                 {
-                    hit.IsCrit = true;
-
-                    demage  = demage * hit.CT.ToNumber() / 1000.0f;
+                    demage  *= hit.CT.ToNumber() / 1000.0f;
 
                     //暴击特效
                     GameFacade.Instance.EffectManager.Load(EFFECT.CRIT, hit.Position, Land.ELEMENT_ROOT.gameObject);

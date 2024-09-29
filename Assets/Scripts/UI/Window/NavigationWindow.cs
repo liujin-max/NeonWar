@@ -62,7 +62,7 @@ public class NavigationWindow : BaseWindow
                     m_NAVBTN = m_BtnLeague; 
                 }
             },
-            ()=>{return true;}
+            ()=>{return DataCenter.Instance.IsSkillUnlock();}
         );
         #endregion
 
@@ -92,6 +92,7 @@ public class NavigationWindow : BaseWindow
         #region 未开放
         m_BtnHalo.Init(
             ()=>{
+                EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "暂未开放"));
                 return false;
             },
             ()=>{

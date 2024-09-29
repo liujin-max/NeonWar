@@ -1,7 +1,7 @@
 {
     "Glass" : 1100,
     "HP" : 550,
-    "PearPool" : 1,
+    "PearLevel" : "1-1",
     "PearCount" : "3-3",
     "Waves": 
     [

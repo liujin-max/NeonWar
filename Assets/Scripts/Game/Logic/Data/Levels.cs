@@ -8,7 +8,7 @@ using UnityEngine;
 public struct LevelJSON
 {
     public int Glass;
-    public int PearPool;
+    public string PearLevel;
     public string PearCount;
     public WaveJSON[] Waves;
 }

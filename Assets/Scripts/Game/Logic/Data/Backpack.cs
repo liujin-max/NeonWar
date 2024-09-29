@@ -18,16 +18,16 @@ public class Backpack
     private Dictionary<PearData, int> m_PearDataWeights = new Dictionary<PearData, int>();
 
 
-    public Dictionary<int, int[]> PearPools = new Dictionary<int, int[]>()
-    {
-        //根据Level(品质)进行分类
-        //关卡最多掉落品质2及以下
-        [1] = new int[] {20000, 20010, 20020, 20030, 20040, 20050, 20060},
-        [2] = new int[] {20001, 20011, 20021, 20031, 20041, 20051, 20061},
+    // public Dictionary<int, int[]> PearPools = new Dictionary<int, int[]>()
+    // {
+    //     //根据Level(品质)进行分类
+    //     //关卡最多掉落品质2及以下
+    //     [1] = new int[] {20000, 20010, 20020, 20030, 20040, 20050, 20060},
+    //     [2] = new int[] {20001, 20011, 20021, 20031, 20041, 20051, 20061},
 
 
-        [99] = new int[] {20030}  //特殊：15关的掉落池
-    };
+    //     [99] = new int[] {20030}  //特殊：15关的掉落池
+    // };
 
 
 
@@ -97,7 +97,8 @@ public class Backpack
     {
         return m_PearDataDic.TryGetValue(id, out PearData value) ? value : default;
     }
-
+    
+    //根据权重返回一个PearData
     public PearData PickPearData()
     {
         return RandomUtility.PickByWeight(m_PearDataWeights);

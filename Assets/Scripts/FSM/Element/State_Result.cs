@@ -44,18 +44,7 @@ public class State_Result<T> : State<Field>
             EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS));
 
             //计算道具奖励
-            Dictionary<int, int> pear_dic = new Dictionary<int, int>();
-            
-            if (m_Result == CONST.RESULT.VICTORY)
-            {
-                Field.Instance.GeneratePearRewards(out pear_dic);
-
-                if (pear_dic.Count > 0) {
-                    foreach (var pear_keypairs in pear_dic) {
-                        // DataCenter.Instance.Backpack.PushPear(pear_keypairs.Key, pear_keypairs.Value);
-                    }
-                }
-            }
+            List<Pear> pears = Field.Instance.GeneratePearRewards(m_Result);
             
             UICtrl_ResultWindow.Instance.Enter((window)=>{
                 window.Init(m_Result, base_glass, worth_glass, (rate)=>{
@@ -63,7 +52,7 @@ public class State_Result<T> : State<Field>
 
                     EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS));
                 });
-                window.InitPears(pear_dic);
+                window.InitPears(pears);
             });
         }
     }

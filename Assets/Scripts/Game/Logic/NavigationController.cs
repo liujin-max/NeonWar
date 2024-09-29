@@ -44,6 +44,12 @@ public static class NavigationController
     //打开技能树
     public static bool GotoSkillTree()
     {
+        if (!DataCenter.Instance.IsSkillUnlock())
+        {
+            EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "通过关卡1后解锁"));
+            return false;
+        }
+
         UICtrl_SkillTreeWindow.Instance.Enter();
 
         return true;

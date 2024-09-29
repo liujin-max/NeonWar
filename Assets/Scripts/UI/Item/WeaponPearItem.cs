@@ -47,6 +47,7 @@ public class WeaponPearItem : MonoBehaviour
             PearSlotMsg slotMsg = DataCenter.Instance.User.CurrentPlayer.PearSlots[i];
 
             var item = new_pear_seat_item(i);
+            item.transform.localScale = new Vector3(1.5f, 1.5f, 1);
             item.Init(slotMsg.Pear);
         }
     }

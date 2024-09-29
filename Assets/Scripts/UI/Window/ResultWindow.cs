@@ -56,18 +56,16 @@ public class ResultWindow : BaseWindow
         m_Tip.SetActive(result == CONST.RESULT.LOSE);
     }
 
-    public void InitPears(Dictionary<int,int> pear_dic)
+    public void InitPears(List<Pear> pears)
     {
-        m_PearPivot.SetActive(pear_dic.Count > 0);
+        m_PearPivot.SetActive(pears.Count > 0);
 
-        // foreach (var pear_keyparis in pear_dic)
-        // {
-        //     var item = GameFacade.Instance.UIManager.LoadItem("PearItem", m_PearContent).GetComponent<PearItem>();
-
-        //     Pear pear= Pear.Create(pear_keyparis.Key, pear_keyparis.Value);
-        //     item.Init(pear);
-        //     item.ShowTagEquip(false);
-        // }
+        foreach (var pear in pears)
+        {
+            var item = GameFacade.Instance.UIManager.LoadItem("PearItem", m_PearContent).GetComponent<PearItem>();
+            item.Init(pear);
+            item.ShowTagEquip(false);
+        }
     }
 
     void Update()
