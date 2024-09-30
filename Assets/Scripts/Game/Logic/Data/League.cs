@@ -76,10 +76,7 @@ public class League
         var player = DataCenter.Instance.User.CurrentPlayer;
 
         //重置技能
-        foreach (var slot in player.SkillSlots)
-        {
-            ResetSkill(slot);
-        }
+        foreach (var slot in player.SkillSlots) ResetSkill(slot);
 
         //重置属性
         int atk_cost = 0;
@@ -98,7 +95,8 @@ public class League
         //返还资源
         DataCenter.Instance.User.UpdateGlass(atk_cost + asp_cost + wor_cost);
 
-        EventManager.SendEvent(new GameEvent(EVENT.UI_SKILLUPGRADE));
         EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS));
+
+        EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "重置成功", true));
     }
 }

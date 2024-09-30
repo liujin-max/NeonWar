@@ -97,6 +97,12 @@ public class PlayerMsg
 
     //N个宝珠槽(每种武器拥有的宝珠槽数量不同)
     public List<PearSlotMsg> PearSlots;
+
+    //养成过
+    public bool IsDevelop()
+    {
+        return ATK > 1 || ASP > 1 || WORTH > 1;
+    }
 }
 
 //宝珠数据
@@ -289,6 +295,7 @@ public class User
 
         return m_Data.GlobalUUID;
     }
+
 
     public void SetLevel(int value)
     {

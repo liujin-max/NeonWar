@@ -38,5 +38,7 @@ public class SkillTreeWindow : BaseWindow
     public void FlushUI()
     {
         if (m_SkillTree != null) m_SkillTree.FlushUI();
+
+        m_BtnReset.gameObject.SetActive(DataCenter.Instance.User.CurrentPlayer.IsDevelop() == true);
     }
 }

@@ -16,7 +16,6 @@ public static class EVENT
     public static string UI_SELECTPEAR      = "UI_SELECTPEAR";
     public static string UI_ENEMYDEAD       = "UI_ENEMYDEAD";
     public static string UI_SHOWFIGHT       = "UI_SHOWFIGHT";
-    public static string UI_RESETWEAPON     = "UI_RESETWEAPON";
 
 
     

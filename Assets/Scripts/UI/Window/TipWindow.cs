@@ -27,9 +27,11 @@ public class TipWindow : BaseWindow
     private void OnTip(GameEvent @event)
     {
         Platform.Instance.VIBRATE(CONST.VIBRATELEVEL.MEDIUM);
-        SoundManager.Instance.Load(SOUND.TIP);
+
+        var flag = @event.GetParam(1);
+        if (flag == null) SoundManager.Instance.Load(SOUND.TIP);
  
-        var text        = (string)@event.GetParam(0);
+        var text = (string)@event.GetParam(0);
 
         m_TipPivot.SetActive(true);
         m_TipPivot.transform.Find("Text").GetComponent<TextMeshProUGUI>().text = text;
