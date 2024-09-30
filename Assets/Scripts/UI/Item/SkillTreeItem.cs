@@ -39,7 +39,7 @@ public class SkillTreeItem : MonoBehaviour
         return item;
     }
 
-    void Start()
+    void Awake()
     {
         //升级攻击力
         m_BtnATK.onClick.AddListener(()=>{

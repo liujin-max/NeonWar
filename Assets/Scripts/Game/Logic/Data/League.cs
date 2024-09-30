@@ -57,7 +57,7 @@ public class League
 
         for (int i = 0; i < slot.Level; i++)
         {
-            cost_total += skillData.GetCost(i); //Skill.GetCost(skillData, i);
+            cost_total += skillData.GetCost(i);
         }
 
         //重置技能
@@ -65,6 +65,38 @@ public class League
 
         //返还资源
         DataCenter.Instance.User.UpdateGlass(cost_total);
+
+        EventManager.SendEvent(new GameEvent(EVENT.UI_SKILLUPGRADE));
+        EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS));
+    }
+
+    //重置养成及所有技能
+    public void ResetWeapon()
+    {
+        var player = DataCenter.Instance.User.CurrentPlayer;
+
+        //重置技能
+        foreach (var slot in player.SkillSlots)
+        {
+            ResetSkill(slot);
+        }
+
+        //重置属性
+        int atk_cost = 0;
+        int asp_cost = 0;
+        int wor_cost = 0;
+
+        for (int i = 1; i < player.ATK; i++) atk_cost += NumericalManager.FML_ATKCost(i);
+        for (int i = 1; i < player.ASP; i++) asp_cost += NumericalManager.FML_ASPCost(i);
+        for (int i = 1; i < player.WORTH; i++) wor_cost += NumericalManager.FML_WORTHCost(i);
+        
+
+        player.ATK = 1;
+        player.ASP = 1;
+        player.WORTH = 1;
+
+        //返还资源
+        DataCenter.Instance.User.UpdateGlass(atk_cost + asp_cost + wor_cost);
 
         EventManager.SendEvent(new GameEvent(EVENT.UI_SKILLUPGRADE));
         EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS));

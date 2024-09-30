@@ -55,7 +55,7 @@ public static class CONST
     //品质对应的属性点
     public static Dictionary<int, int> LEVEL_POINT_PAIRS = new Dictionary<int, int>()
     {
-        [1] = 100,
+        [1] = 150,
         [2] = 250,
         [3] = 500,
         [4] = 1000,

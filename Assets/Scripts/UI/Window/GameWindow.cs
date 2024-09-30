@@ -25,6 +25,7 @@ public class GameWindow : BaseWindow
     void Awake()
     {
         m_BtnFight.onClick.AddListener(()=>{
+            SoundManager.Instance.Load(SOUND.SNAP);
             NavigationController.GotoBattle();
         });
     }

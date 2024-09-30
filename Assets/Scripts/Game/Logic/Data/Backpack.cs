@@ -118,13 +118,17 @@ public class Backpack
         return m_PearsDic.TryGetValue(uuid, out Pear value) ? value : null;
     }
 
+    //
     public Pear PushPear(int id, int level)
     {   
         int uuid = DataCenter.Instance.User.CreateUUID();
 
         string[] properties = DataCenter.Instance.GeneratePearProperties(id, level);
 
-        return AddPear(id, uuid, level, properties);
+        Pear pear = AddPear(id, uuid, level, properties);
+        pear.IsNew= true;
+
+        return pear;
     }
 
     public void RemovePear(int uuid)

@@ -19,5 +19,7 @@ public static class SOUND
     public const string HIT_SHIELD  = "Prefab/Sound/Sound_hitshield";
     public const string BOW         = "Prefab/Sound/Sound_bow";
     public const string BUFF        = "Prefab/Sound/Sound_getBuff";
-    public const string SHINE        = "Prefab/Sound/Sound_shine";
+    public const string SHINE       = "Prefab/Sound/Sound_shine";
+    public const string SNAP        = "Prefab/Sound/Sound_snap";
+    
 }

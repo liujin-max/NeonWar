@@ -34,7 +34,7 @@ Transform:
   - {fileID: 203626855965847081}
   - {fileID: 2263814670492934538}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &9036532575393087834
 MonoBehaviour:
@@ -9609,7 +9609,7 @@ GameObject:
   - component: {fileID: 1821461526666204104}
   m_Layer: 5
   m_HasEditorInfo: 1
-  m_Name: sound
+  m_Name: Sound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

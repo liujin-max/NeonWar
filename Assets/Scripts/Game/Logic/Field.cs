@@ -222,7 +222,6 @@ public class Field : MonoBehaviour
         {
             var data    = DataCenter.Instance.Backpack.PickPearData();
             int level   = result == CONST.RESULT.VICTORY ? RandomUtility.Random(levels[0], levels[1] + 1) : levels[0];
-
             Pear pear   =  DataCenter.Instance.Backpack.PushPear(data.ID, level);
             pears.Add(pear);
         }

@@ -1,5 +1,7 @@
 {
     "Glass" : 30,
+    "PearLevel" : "1-1",
+    "PearCount" : "1-1",
     "Waves": 
     [
         {

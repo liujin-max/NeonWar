@@ -152,6 +152,8 @@ public class NavigationWindow : BaseWindow
         m_Level.text    = (DataCenter.Instance.User.Level + 1).ToString();
 
         m_BtnBackpack.FlushLock();
+        m_BtnLeague.FlushLock();
+        m_BtnHalo.FlushLock();
     }
 
 

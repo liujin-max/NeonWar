@@ -176,7 +176,7 @@ public class GameFacade : MonoBehaviour
 
         // for (int i = 0; i < 5; i++)
         // {
-        //     DataCenter.Instance.Backpack.PushPear(20050, RandomUtility.Random(1, 6));
+            // DataCenter.Instance.Backpack.PushPear(20050, RandomUtility.Random(1, 6));
         //     DataCenter.Instance.Backpack.PushPear(20010, RandomUtility.Random(1, 6));
         //     DataCenter.Instance.Backpack.PushPear(20000, RandomUtility.Random(1, 6));
         // }

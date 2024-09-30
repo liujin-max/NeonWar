@@ -16,6 +16,11 @@ public class Pear
     public string Name {get => Model.Name;}
     public int Level;
 
+    public Player Belong;
+    public List<Property> Properties = new List<Property>();
+    public Property SpecialProperty = null;
+    public bool IsNew = false;
+
 
     //列表排序权重
     public int SortOrder {
@@ -27,10 +32,6 @@ public class Pear
             return base_order;
         }
     }
-
-    public Player Belong;
-    public List<Property> Properties = new List<Property>();
-    public Property SpecialProperty = null;
 
 
     public string[] ExportPropertiesMsg()

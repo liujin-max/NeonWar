@@ -12,6 +12,7 @@ public class ResultWindow : BaseWindow
     [SerializeField] TextMeshProUGUI m_WorthGlass;
     [SerializeField] GameObject m_PearPivot;
     [SerializeField] Transform m_PearContent;
+    [SerializeField] Transform m_DetailPivot;
     [SerializeField] GameObject m_Tip;
 
     [Header("按钮")]
@@ -24,7 +25,7 @@ public class ResultWindow : BaseWindow
     private ValueTransition m_GlassValue = new ValueTransition(1f, 0.3f);
     private ValueTransition m_WorthValue = new ValueTransition(1f, 0.3f);
 
-
+    private PearDetailItem m_DetailItem;
 
     // Start is called before the first frame update
     void Start()
@@ -64,8 +65,21 @@ public class ResultWindow : BaseWindow
         {
             var item = GameFacade.Instance.UIManager.LoadItem("PearItem", m_PearContent).GetComponent<PearItem>();
             item.Init(pear);
-            item.ShowTagEquip(false);
+
+            item.Touch.onClick.RemoveAllListeners();
+            item.Touch.onClick.AddListener(()=>{
+                InitDetail(pear);
+            });
         }
+    }
+
+    void InitDetail(Pear pear)
+    {
+        if (m_DetailItem == null) {
+            m_DetailItem = GameFacade.Instance.UIManager.LoadItem("PearDetailItem", m_DetailPivot).GetComponent<PearDetailItem>();
+        }
+
+        m_DetailItem.Init(pear, true);
     }
 
     void Update()

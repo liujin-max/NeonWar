@@ -8,10 +8,11 @@ public class PearItem : MonoBehaviour
 {
     public Button Touch;
 
-    [SerializeField] private GameObject m_Light;
-    [SerializeField] private Image m_Icon;
-    [SerializeField] private GameObject m_TagEquiped;
+    [SerializeField] GameObject m_Light;
+    [SerializeField] Image m_Icon;
+    [SerializeField] GameObject m_TagEquiped;
     [SerializeField] TextMeshProUGUI m_Text;
+    [SerializeField] GameObject m_NewTag;
 
 
     private Pear m_Pear;
@@ -48,11 +49,17 @@ public class PearItem : MonoBehaviour
     void FlushUI()
     {
         ShowTagEquip(DataCenter.Instance.User.IsPearEquiped(m_Pear));
+        ShowNewTag(m_Pear.IsNew);
     }
 
     public void ShowTagEquip(bool flag)
     {
         m_TagEquiped.SetActive(flag);
+    }
+
+    public void ShowNewTag(bool flag)
+    {
+        m_NewTag.SetActive(flag);
     }
 
     public void ShowName(bool flag)
@@ -63,6 +70,12 @@ public class PearItem : MonoBehaviour
     public void Select(bool flag)
     {
         m_Light.SetActive(flag);
+
+        if (flag == true)
+        {
+            m_Pear.IsNew = false;
+            ShowNewTag(false);
+        }
     }
 
 
