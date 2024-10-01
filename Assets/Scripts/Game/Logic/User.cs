@@ -401,7 +401,7 @@ public class User
     }
 
     //穿脱宝珠
-    public void EquipPear(Pear pear)
+    public PearSlotMsg EquipPear(Pear pear)
     {
         //先判断有没有相同id的宝珠，如果有 则替换
         for (int i = 0; i < CurrentPlayer.PearSlots.Count; i++)
@@ -411,7 +411,7 @@ public class User
                 m_userUpdate = true;
                 slot.UpdateUUID(pear.UUID);
                 UpdateSpecialPropertyValid();
-                return;
+                return slot;
             }
         } 
 
@@ -423,12 +423,14 @@ public class User
                 m_userUpdate = true;
                 slot.UpdateUUID(pear.UUID);
                 UpdateSpecialPropertyValid();
-                break;
+                return slot;
             }
-        } 
+        }
+
+        return null;
     }
 
-    public void UnloadPear(Pear pear)
+    public PearSlotMsg UnloadPear(Pear pear)
     {
         if (pear.SpecialProperty != null) pear.SpecialProperty.IsValid = true;
 
@@ -439,9 +441,12 @@ public class User
                 m_userUpdate = true;
                 slot.UpdateUUID(-1);
                 UpdateSpecialPropertyValid();
-                break;
+                
+                return slot;
             }
         }
+
+        return null;
     }
 
     //穿脱道具时，对道具的词条做[去重]判断

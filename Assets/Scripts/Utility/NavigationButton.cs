@@ -61,10 +61,12 @@ public class NavigationButton : MonoBehaviour
     }
 
     //执行
-    public bool Execute()
+    public bool Execute(bool play_sound = true)
     {
         if (m_ExecuteCallback())
         {
+            if (play_sound) SoundManager.Instance.Load(SOUND.NAVIGATION);
+            
             Play(true);
             ShowLight(true);
             return true;

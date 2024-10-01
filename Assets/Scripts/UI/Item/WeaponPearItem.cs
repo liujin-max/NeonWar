@@ -60,7 +60,22 @@ public class WeaponPearItem : MonoBehaviour
     #region 监听事件
     private void OnPearChange(GameEvent @event)
     {
-        InitPears();
+        // InitPears();
+
+        bool is_equip = (bool)@event.GetParam(0);
+        PearSlotMsg slot = @event.GetParam(2) as PearSlotMsg;
+
+        for (int i = 0; i < DataCenter.Instance.User.CurrentPlayer.PearSlots.Count; i++)
+        {
+            PearSlotMsg slotMsg = DataCenter.Instance.User.CurrentPlayer.PearSlots[i];
+            if (slotMsg == slot)
+            {
+                var item = m_PearSeatItems[i];
+                item.Init(slotMsg.Pear);
+                if (is_equip == true) item.OnEquip();
+                break;
+            }
+        }
     }
     #endregion
 }

@@ -49,17 +49,17 @@ public class PearDetailItem : MonoBehaviour
                 return;
             }
 
-            DataCenter.Instance.User.EquipPear(m_Pear);
+            var slot = DataCenter.Instance.User.EquipPear(m_Pear);
 
-            EventManager.SendEvent(new GameEvent(EVENT.UI_PEARCHANGE));
+            EventManager.SendEvent(new GameEvent(EVENT.UI_PEARCHANGE, true, m_Pear, slot));
         });
 
         m_BtnUnEquip.onClick.AddListener(()=>{
             SoundManager.Instance.Load(SOUND.CLICK);
-            
-            DataCenter.Instance.User.UnloadPear(m_Pear);
 
-            EventManager.SendEvent(new GameEvent(EVENT.UI_PEARCHANGE));
+            var slot = DataCenter.Instance.User.UnloadPear(m_Pear);
+
+            EventManager.SendEvent(new GameEvent(EVENT.UI_PEARCHANGE, false, m_Pear, slot));
         });
 
         //合成
@@ -94,6 +94,8 @@ public class PearDetailItem : MonoBehaviour
         InitProperties(pear);
         InitSpecialProperty(pear);
         FlushUI();
+
+        SoundManager.Instance.Load(SOUND.PEARCLICK);
     }
 
     void InitProperties(Pear pear)

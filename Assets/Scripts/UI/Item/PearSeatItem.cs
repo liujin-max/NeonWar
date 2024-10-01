@@ -63,6 +63,10 @@ public class PearSeatItem : MonoBehaviour
         
     }
 
+    public void OnEquip()
+    {
+        GameFacade.Instance.EffectManager.LoadUIEffect(EFFECT.EQUIP, transform.position);
+    }
 
     void OnClick()
     {

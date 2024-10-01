@@ -142,7 +142,7 @@ public class NavigationWindow : BaseWindow
     void Start()
     {
         m_NAVBTN = m_BtnFight;
-        m_NAVBTN.Execute(); 
+        m_NAVBTN.Execute(false); 
 
         FlushUI();
     }

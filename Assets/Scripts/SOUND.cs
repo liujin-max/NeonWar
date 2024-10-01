@@ -13,6 +13,7 @@ public static class SOUND
     //音效
     public const string COIN        = "Prefab/Sound/Sound_coin";
     public const string CLICK       = "Prefab/Sound/Sound_click";
+    public const string NAVIGATION  = "Prefab/Sound/Sound_nav";
     public const string HIT         = "Prefab/Sound/Sound_hit";
     public const string DEAD        = "Prefab/Sound/Sound_dead";
     public const string TIP         = "Prefab/Sound/Sound_tip";
@@ -21,5 +22,7 @@ public static class SOUND
     public const string BUFF        = "Prefab/Sound/Sound_getBuff";
     public const string SHINE       = "Prefab/Sound/Sound_shine";
     public const string SNAP        = "Prefab/Sound/Sound_snap";
+    public const string PEARCLICK   = "Prefab/Sound/Sound_pearClick";
+    
     
 }
