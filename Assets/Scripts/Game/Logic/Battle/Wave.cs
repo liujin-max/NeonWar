@@ -17,19 +17,18 @@ public class Wave
     private List<Enemy> m_EnemyTemps    = new List<Enemy>();
 
 
-    public int KillCount;
-    public int Total;
+    public Pair Progress;
 
 
     public Wave(WaveJSON waveJSON)
     {
-        Total = waveJSON.Monsters.Length;
+        Progress = new Pair(0, waveJSON.Monsters.Length);
 
         //根据已知的大小做初始化、避免频繁扩容
-        m_EnemyPool = new List<MonsterJSON>(Total);
+        m_EnemyPool = new List<MonsterJSON>(Progress.Total);
         m_EnemyPool.AddRange(waveJSON.Monsters);
 
-        m_Enemys    = new List<Enemy>(Total);
+        m_Enemys    = new List<Enemy>(Progress.Total);
     }
 
     public void Pause()
@@ -122,8 +121,8 @@ public class Wave
             if (e.IsDead() == true) {
                 m_EnemyRemoves.Add(e);
                 if (!e.IsSummon) {
-                    KillCount++;
-                    EventManager.SendEvent(new GameEvent(EVENT.UI_ENEMYDEAD, KillCount));
+                    Progress.UpdateCurrent(1);
+                    EventManager.SendEvent(new GameEvent(EVENT.UI_ENEMYDEAD, Progress.Current));
                 }
             }
         }

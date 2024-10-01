@@ -592,11 +592,6 @@ public class Skill
 
     }
 
-    public virtual void Upgrade(int level)
-    {
-        Level   = level;
-    }
-
     public void FullCD()
     {
         m_Timer.Full();

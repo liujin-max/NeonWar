@@ -40,16 +40,10 @@ public class PearDetailItem : MonoBehaviour
     void Awake()
     {
         EventManager.AddHandler(EVENT.UI_PEARCHANGE,    OnPearChange);
-    }
 
-    void OnDestroy()
-    {
-        EventManager.DelHandler(EVENT.UI_PEARCHANGE,    OnPearChange);
-    }
-
-    void Start()
-    {
         m_BtnEquip.onClick.AddListener(()=>{
+            SoundManager.Instance.Load(SOUND.CLICK);
+
             if (!DataCenter.Instance.User.HasSamePear(m_Pear) && DataCenter.Instance.User.IsPearSeatsFull() == true) {
                 EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "装备槽已满"));
                 return;
@@ -61,6 +55,8 @@ public class PearDetailItem : MonoBehaviour
         });
 
         m_BtnUnEquip.onClick.AddListener(()=>{
+            SoundManager.Instance.Load(SOUND.CLICK);
+            
             DataCenter.Instance.User.UnloadPear(m_Pear);
 
             EventManager.SendEvent(new GameEvent(EVENT.UI_PEARCHANGE));
@@ -68,9 +64,17 @@ public class PearDetailItem : MonoBehaviour
 
         //合成
         BtnSynthesis.onClick.AddListener(()=>{
+            SoundManager.Instance.Load(SOUND.CLICK);
+
             EventManager.SendEvent(new GameEvent(EVENT.UI_PEARCOMPOSE, m_Pear));
         });
     }
+
+    void OnDestroy()
+    {
+        EventManager.DelHandler(EVENT.UI_PEARCHANGE,    OnPearChange);
+    }
+
 
     public void Init(Pear pear, bool is_compose_state = false)
     {

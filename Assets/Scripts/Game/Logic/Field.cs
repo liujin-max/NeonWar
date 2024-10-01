@@ -131,15 +131,6 @@ public class Field : MonoBehaviour
         return m_FSM.CurrentState.ID;
     }
 
-    public void NextWave()
-    {
-        m_Spawn.NextWave();
-
-        EventManager.SendEvent(new GameEvent(EVENT.ONNEXTWAVE));
-
-        m_FSM.Transist(CONST.FSMSTATE.PLAY);
-    }
-
 
     void Update()
     {
@@ -154,25 +145,10 @@ public class Field : MonoBehaviour
         m_Player.CustomUpdate(deltaTime);
         m_Spawn.CustomUpdate(deltaTime);
         
-
         //区域
         Areas.CustomUpdate(deltaTime);
         //Buff
         BuffBubbles.CustomUpdate(deltaTime);
-    }
-
-    //每波结束时 做一些战场清理的操作
-    public void ClearFieldWhenWaveFinished()
-    {
-        //清理Buff等
-        m_Player.ClearBuffs();
-
-        //
-        for (int i = m_Bullets.Count - 1; i >= 0; i--) m_Bullets[i].Dispose();
-        m_Bullets.Clear();
-        //
-        Areas.Clear();
-        BuffBubbles.Clear();
     }
 
     public CONST.RESULT CheckResult()

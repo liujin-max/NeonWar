@@ -17,14 +17,14 @@ public class Spawn
 {
     private List<Wave> m_Waves;
     private int m_WaveOrder;
-    public string Order {get {return (m_WaveOrder + 1).ToString();}}
+    // public string Order {get {return (m_WaveOrder + 1).ToString();}}
 
     public Wave CurrentWave { get {return m_Waves[m_WaveOrder]; }}
     public List<Enemy> Enemys {get {return CurrentWave.Enemys; }}
 
 
     //击杀进度
-    public float KillProgress {get {return (m_WaveOrder + 1) / (float) m_Waves.Count;}}
+    public float KillProgress {get {return CurrentWave.Progress.Progress; }}
     
 
     public void Init(LevelJSON level_json)
@@ -61,11 +61,6 @@ public class Spawn
             }
         }
         return true;
-    }
-
-    public void NextWave()
-    {
-        m_WaveOrder++;
     }
 
     //分裂

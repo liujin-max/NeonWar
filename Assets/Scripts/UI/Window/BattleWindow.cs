@@ -108,7 +108,7 @@ public class BattleWindow : BaseWindow
 
     void InitProgress()
     {
-        m_ProgressBar.Init(Field.Instance.Spawn.CurrentWave.KillCount, Field.Instance.Spawn.CurrentWave.Total);
+        m_ProgressBar.Init(Field.Instance.Spawn.CurrentWave.Progress.Current, Field.Instance.Spawn.CurrentWave.Progress.Total);
     }
 
     void FlushUI()

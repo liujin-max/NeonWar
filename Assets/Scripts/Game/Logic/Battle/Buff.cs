@@ -393,7 +393,7 @@ public class Buff_ATKUP : Buff
     public Buff_ATKUP()
     {
         Name    = "攻击增强";
-        Duration= new CDTimer(5f);
+        SetDuration(5f);
     }
 
     public override void Init()
@@ -416,7 +416,7 @@ public class Buff_ATKDOWN : Buff
     {
         Name    = "攻击削弱";
         TYPE    = CONST.BUFF_TYPE.DE;
-        Duration= new CDTimer(5f);
+        SetDuration(5f);
     }
 
     public override void Init()
@@ -438,7 +438,7 @@ public class Buff_ASPUP : Buff
     public Buff_ASPUP()
     {
         Name    = "攻速提高";
-        Duration= new CDTimer(5f);
+        SetDuration(5f);
     }
 
     public override void Init()
@@ -461,7 +461,7 @@ public class Buff_ASPDOWN : Buff
     {
         Name    = "攻速降低";
         TYPE    = CONST.BUFF_TYPE.DE;
-        Duration= new CDTimer(5f);
+        SetDuration(5f);
     }
 
     public override void Init()
@@ -483,7 +483,7 @@ public class Buff_SPEEDUP : Buff
     public Buff_SPEEDUP()
     {
         Name    = "移速提高";
-        Duration= new CDTimer(5f);
+        SetDuration(5f);
     }
 
     public override void Init()
@@ -506,7 +506,7 @@ public class Buff_SPEEDDOWN : Buff
     {
         Name    = "移速降低";
         TYPE    = CONST.BUFF_TYPE.DE;
-        Duration= new CDTimer(5f);
+        SetDuration(5f);
     }
 
     public override void Init()
@@ -528,7 +528,7 @@ public class Buff_CP : Buff
     public Buff_CP()
     {
         Name    = "暴击提高";
-        Duration= new CDTimer(5f);
+        SetDuration(5f);
     }
 
     public override void Init()
@@ -550,7 +550,7 @@ public class Buff_DODGEUP : Buff
     public Buff_DODGEUP()
     {
         Name    = "闪避增强";
-        Duration= new CDTimer(8f);
+        SetDuration(8f);
     }
 
     public override void Init()
@@ -572,7 +572,7 @@ public class Buff_SPDMUL : Buff
     public Buff_SPDMUL()
     {
         Name    = "子弹时间";
-        Duration= new CDTimer(3.5f);
+        SetDuration(3.5f);
     }
 
     public override void Init()
@@ -679,11 +679,7 @@ public class Buff : IDisposable
         buff.Belong = belong;
         buff.Value  = value;
 
-        if (time > 0)
-        {
-            buff.Duration = new CDTimer(time);  //持续时间
-            buff.LifeValue.SetBase(time);
-        }
+        if (time > 0) buff.SetDuration(time);
 
         return buff;
     }
@@ -700,6 +696,12 @@ public class Buff : IDisposable
     {
         if (time != 0) Duration.Reset(time);
         else Duration.ForceReset();
+    }
+
+    public void SetDuration(float time)
+    {
+        Duration = new CDTimer(time);  //持续时间
+        LifeValue.SetBase(time);
     }
 
     public void PutLife(object obj, float rate)

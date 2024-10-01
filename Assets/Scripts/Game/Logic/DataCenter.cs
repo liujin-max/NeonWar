@@ -43,7 +43,7 @@ public class SkillData
         int o_value = this.GetValue(o_level);
         int t_value = this.GetValue(t_level);
 
-        string str = CONST.COLOR_GREEN + o_value + "</color>->" + CONST.COLOR_GREEN + t_value + "</color>";
+        string str  = o_value + "</color>(" + CONST.COLOR_GREEN + t_value + ")</color>";
 
         return this.Description.Replace("#", str);
     }

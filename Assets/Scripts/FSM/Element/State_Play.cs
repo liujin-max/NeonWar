@@ -39,7 +39,7 @@ public class State_Play<T> : State<Field>
     {
         Platform.Instance.UPDATETARGETFRAME(30);
 
-        Field.Instance.ClearFieldWhenWaveFinished();
+        // Field.Instance.ClearFieldWhenWaveFinished();
 
         EventManager.DelHandler(EVENT.ONJOYSTICK_PRESS,     OnJoyStickPress);
         EventManager.DelHandler(EVENT.ONJOYSTICK_DOUBLE,    OnJoyStickDouble);

@@ -1,6 +1,8 @@
 {
     "Glass" : 340,
     "HP" : 130,
+    "PearLevel" : "1-1",
+    "PearCount" : "1-1",
     "Waves": 
     [
         {
