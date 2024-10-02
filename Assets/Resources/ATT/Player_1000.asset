@@ -17,7 +17,7 @@ MonoBehaviour:
   ATK:
     m_Base: 41
   ASP:
-    m_Base: 450
+    m_Base: 500
   CP:
     m_Base: 0
   CT:
