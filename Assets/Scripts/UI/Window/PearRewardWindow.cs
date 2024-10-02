@@ -18,6 +18,8 @@ public class PearRewardWindow : BaseWindow
     {
         InitPear(pear);
         InitDetail(pear);
+
+        GameFacade.Instance.EffectManager.LoadUIEffect(EFFECT.COMPOSE, m_Icon.transform.position);
     }
 
     void InitPear(Pear pear)

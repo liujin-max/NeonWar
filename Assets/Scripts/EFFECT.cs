@@ -33,4 +33,6 @@ public static class EFFECT
     public const string ASPUP       = "Prefab/Effect/fx_asp_upgrade";
     public const string WORUP       = "Prefab/Effect/fx_worth_upgrade";
     public const string EQUIP       = "Prefab/Effect/fx_pear_equip";
+    public const string COMPOSE     = "Prefab/Effect/fx_pear_compose";
+    
 }
