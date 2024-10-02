@@ -402,7 +402,7 @@ public class Property_AreaReset : Property
 
         if (!RandomUtility.IsHit(Value)) return;
 
-        sk.FullCD();
+        sk.FullCD(0.8f);
     }
 }
 #endregion
@@ -585,6 +585,67 @@ public class Property_AreaBomb : Property
 #endregion
 
 
+#region [弓]瞄准射击不再受敌人数量限制
+public class Property_ArrowFocus : Property
+{
+    public override void Equip()
+    {
+        var player = Pear.Belong;
+        if (player.AttackMode is Attack_Arrow_Focus attackMode)
+        {
+            attackMode.IsUpgrade = true;
+        }
+    }
+}
+#endregion
+
+#region [弓]反弹箭矢在击中敌人时也会触发
+public class Property_Rebound : Property
+{
+    public override void Equip()
+    {
+        EventManager.AddHandler(EVENT.ONBULLETCREATE,   OnBulletCreate);
+    }
+
+    public override void UnEquip()
+    {
+        EventManager.DelHandler(EVENT.ONBULLETCREATE,   OnBulletCreate);
+    }
+
+    private void OnBulletCreate(GameEvent @event)
+    {
+        Bullet bullet = @event.GetParam(0) as Bullet;
+
+        if (bullet.Caster.ID == (int)CONST.PLAYER.BOW && bullet.ReboundTimes > 0)
+        {
+            bullet.ReboundUpgrade = true;
+        }   
+    }
+}
+#endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -711,6 +772,8 @@ public class Property
         {104,   () => new Property_AreaPoison()},
         {105,   () => new Property_AreaIceFrozen()},
         {106,   () => new Property_AreaBomb()},
+        {107,   () => new Property_ArrowFocus()},
+        {108,   () => new Property_Rebound()},
 
         {901,   () => new Property_CritPoint()},
         {902,   () => new Property_DodgeHeal()},

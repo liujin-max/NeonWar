@@ -68,7 +68,6 @@ public class Skill_10060 : Skill
         Bullet b = @event.GetParam(0) as Bullet;
         if (b.Caster != Caster) return;
 
-
         b.HitRemaining = 1 + Value;
     }
 }
@@ -592,9 +591,10 @@ public class Skill
 
     }
 
-    public void FullCD()
+    public void FullCD(float rate = 1.0f)
     {
-        m_Timer.Full();
+        // m_Timer.Full();
+        m_Timer.SetCurrent(m_Timer.Duration * rate);
     }
 
     public bool IsLevelMax()

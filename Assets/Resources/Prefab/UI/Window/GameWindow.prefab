@@ -982,7 +982,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_MovePivot: {fileID: 6180082279136745319}
   m_MoveY: 2
-  PlaySound: 0
+  m_PlaySound: 1
 --- !u!1 &5715897162361597554
 GameObject:
   m_ObjectHideFlags: 0

@@ -181,6 +181,9 @@ public class GameFacade : MonoBehaviour
         //     DataCenter.Instance.Backpack.PushPear(20000, RandomUtility.Random(1, 6));
         // }
 
+        // var pear = DataCenter.Instance.Backpack.PushPear(20100, 5);
+        // pear.SpecialProperty = Property.Create(pear, 108, 1);
+
         // DataCenter.Instance.User.UpdateGlass(30000);
 
         

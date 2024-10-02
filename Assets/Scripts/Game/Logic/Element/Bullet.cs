@@ -18,6 +18,7 @@ public class Bullet : MonoBehaviour
     [HideInInspector] public bool IsSplit = false;      //是否是分裂出的
     [HideInInspector] public int HitRemaining = 1;      //剩余可击中敌人次数(穿透逻辑)
     [HideInInspector] public int ReboundTimes;          //可反弹次数
+    [HideInInspector] public bool ReboundUpgrade;       //击中敌人也可反弹
     
 
     void Awake()
@@ -78,6 +79,7 @@ public class Bullet : MonoBehaviour
         Turn(angle);
     }
 
+    //分裂逻辑
     void Split(Bullet origin, Unit target)
     {
         if (SplitCount == 0) return;
@@ -93,6 +95,8 @@ public class Bullet : MonoBehaviour
             bullet.Shoot(RandomUtility.Random(0, 360));
         }
     }
+
+    //
 
     public void Dispose()
     {
@@ -140,6 +144,14 @@ public class Bullet : MonoBehaviour
 
             //分裂检测
             Split(this, unit);
+
+            //目标反弹
+            if (ReboundUpgrade == true)
+            {
+                if (ReboundTimes > 0) Rebound();
+                else if (ReboundTimes <= 0) Dispose();
+                return;
+            }
 
             HitRemaining--;
 

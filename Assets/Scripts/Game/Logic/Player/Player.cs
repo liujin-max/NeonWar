@@ -14,6 +14,8 @@ public class Player : Unit
     [HideInInspector] public int MoveDirection = 1;
 
     protected AttackMode m_AttackMode;
+    public AttackMode AttackMode {get => m_AttackMode;}
+
     protected List<Skill> m_Skills = new List<Skill>();
     public List<Skill> Skills {get {return m_Skills;}}
     protected Dictionary<int, Skill> m_SkillDic = new Dictionary<int, Skill>();
