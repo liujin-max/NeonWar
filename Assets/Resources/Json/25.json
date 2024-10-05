@@ -1,0 +1,53 @@
+{
+    "Glass" : 1510,
+    "HP" : 930,
+    "PearLevel" : "1-2",
+    "PearCount" : "1-2",
+    "Waves": 
+    [
+        {
+            "Monsters":
+            [
+                {"Time":    0, "ID": 202, "HP": 930, "Radius": 2, "Angle":18},
+                {"Time":    0, "ID": 202, "HP": 930, "Radius": 2, "Angle":90},
+                {"Time":    0, "ID": 202, "HP": 930, "Radius": 2, "Angle":162},
+                {"Time":    0, "ID": 202, "HP": 930, "Radius": 2, "Angle":234},
+                {"Time":    0, "ID": 202, "HP": 930, "Radius": 2, "Angle":306},
+
+                {"Time": 2000, "ID": 201, "HP": 1800, "Radius": 1.5, "Angle":0},
+                {"Time": 2000, "ID": 201, "HP": 1800, "Radius": 1.5, "Angle":120},
+                {"Time": 2000, "ID": 201, "HP": 1800, "Radius": 1.5, "Angle":240},
+
+                {"Time": 4000, "ID": 203, "HP": 3888, "Type": 2, "Glass": 50},
+
+                {"Time": 5500, "ID": 106, "HP": 900},
+                {"Time": 5500, "ID": 106, "HP": 900},
+
+                {"Time": 7000, "ID": 105, "HP": 980},
+                {"Time": 7500, "ID": 105, "HP": 980},
+                {"Time": 8000, "ID": 105, "HP": 980},
+
+                {"Time":10000, "ID": 201, "HP": 1860, "Radius": 1, "Angle":0},
+                {"Time":10000, "ID": 201, "HP": 1860, "Radius": 1, "Angle":180},
+
+                {"Time":13000, "ID": 102, "HP": 560, "Radius": 2, "Angle":45},
+                {"Time":13000, "ID": 102, "HP": 560, "Radius": 2, "Angle":135},
+                {"Time":13000, "ID": 102, "HP": 560, "Radius": 2, "Angle":-135},
+                {"Time":13000, "ID": 102, "HP": 560, "Radius": 2, "Angle":-45},
+
+                {"Time":17000, "ID": 200, "HP": 950, "Radius": 3, "Angle":0},
+                {"Time":17000, "ID": 200, "HP": 950, "Radius": 3, "Angle":60},
+                {"Time":17000, "ID": 200, "HP": 950, "Radius": 3, "Angle":120},
+                {"Time":17000, "ID": 200, "HP": 950, "Radius": 3, "Angle":180},
+                {"Time":17000, "ID": 200, "HP": 950, "Radius": 3, "Angle":240},
+                {"Time":17000, "ID": 200, "HP": 950, "Radius": 3, "Angle":300},
+
+                {"Time":20000, "ID": 202, "HP": 930},
+                {"Time":22000, "ID": 202, "HP": 930},
+                {"Time":22000, "ID": 108, "HP": 1680},
+                {"Time":22000, "ID": 108, "HP": 1680}
+            ]
+        }
+    ]
+}
+  

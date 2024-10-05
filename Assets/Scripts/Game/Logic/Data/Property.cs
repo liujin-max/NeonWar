@@ -402,7 +402,7 @@ public class Property_AreaReset : Property
 
         if (!RandomUtility.IsHit(Value)) return;
 
-        sk.FullCD(0.8f);
+        sk.FullCD(0.9f);
     }
 }
 #endregion

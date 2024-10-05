@@ -12,10 +12,11 @@ public class Wave
     private List<Enemy> m_Enemys;
     public List<Enemy> Enemys {get {return m_Enemys;}}
     public List<SpawnThread> m_Threads = new List<SpawnThread>();
+    
 
     private List<Enemy> m_EnemyRemoves  = new List<Enemy>();
     private List<Enemy> m_EnemyTemps    = new List<Enemy>();
-
+    private int m_AsyncReference = 0;
 
     public Pair Progress;
 
@@ -43,7 +44,7 @@ public class Wave
 
     public bool IsClear()
     {
-        return m_EnemyPool.Count == 0 && m_Enemys.Count == 0 && m_Threads.Count == 0;
+        return m_EnemyPool.Count == 0 && m_Enemys.Count == 0 && m_Threads.Count == 0 && m_AsyncReference == 0;
     }
 
     void PutEnemy(MonsterJSON monsterJSON)
@@ -63,6 +64,7 @@ public class Wave
     //分裂
     public void Summon(MonsterJSON monsterJSON, Vector2 point)
     {
+        m_AsyncReference++;
         GameFacade.Instance.AssetManager.AsyncLoadPrefab("Prefab/Enemy/" + monsterJSON.ID, point, Field.Instance.Land.ENEMY_ROOT, (obj)=>{
             var enemy = obj.GetComponent<Enemy>();
             enemy.Init(monsterJSON);
@@ -70,6 +72,7 @@ public class Wave
             enemy.Push();
             
             m_Enemys.Add(enemy);
+            m_AsyncReference--;
         });
     }
 

@@ -23,7 +23,7 @@ MonoBehaviour:
   CT:
     m_Base: 0
   DODGE:
-    m_Base: 333
+    m_Base: 500
   SPEED:
     m_Base: 520
   BLESS:

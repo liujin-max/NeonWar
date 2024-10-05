@@ -114,12 +114,14 @@
     <Compile Include="Assets\Scripts\Utility\TextSpacing.cs" />
     <Compile Include="Assets\Scripts\UI\Controller\UICtrl_BackpackWindow.cs" />
     <Compile Include="Assets\Scripts\SOUND.cs" />
+    <Compile Include="Assets\Scripts\Game\Logic\Enemy\Enemy_203.cs" />
     <Compile Include="Assets\Scripts\Utility\SlideScrollView.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\Data\Condition.cs" />
     <Compile Include="Assets\Scripts\Utility\SuperScrollView.cs" />
     <Compile Include="Assets\Scripts\UI\Item\PlayerHPItem.cs" />
     <Compile Include="Assets\Scripts\Struct\CycleList.cs" />
     <Compile Include="Assets\Scripts\Manager\SceneManager.cs" />
+    <Compile Include="Assets\Scripts\Game\Logic\Enemy\Enemy_251.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\Enemy\Enemy_106.cs" />
     <Compile Include="Assets\Scripts\Manager\TimeManager.cs" />
     <Compile Include="Assets\Scripts\UI\Item\SkillTreeItem.cs" />
