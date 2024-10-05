@@ -33,7 +33,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3712288799380927817}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3316807968338710274
 SpriteRenderer:
@@ -133,7 +132,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3712288799380927817}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2945328817324299128
 GameObject:
@@ -166,7 +164,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3712288799380927817}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3814604846322337021
 GameObject:
@@ -206,7 +203,6 @@ Transform:
   - {fileID: 3028144208133233005}
   - {fileID: 3411242893585831322}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &4562983818337489457
 Rigidbody2D:
@@ -284,13 +280,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BulletTemplate: {fileID: 5480662803317571861, guid: 90d2582532472784f837df8097cffa69, type: 3}
   ShootPivot: {fileID: 3028144208133233005}
+  HeadPivot: {fileID: 0}
   ID: 0
   Side: 0
   ATT: {fileID: 11400000, guid: 058b4216bfdbdb94898c91e4c880784a, type: 2}
   CPS:
     m_Base: 1
-    m_Origin: 1
-  StunFlag: 0
+  VUN_INC:
+    m_Base: 1
+  ATK_INC:
+    m_Base: 1
+  BOSS_INC:
+    m_Base: 1
+  HEALTH_INC:
+    m_Base: 1
+  SLOW_INC:
+    m_Base: 1
+  CONTROL_INC:
+    m_Base: 1
+  StunReference: 0
+  FrozenReference: 0
   m_Color:
     m_Mode: 2
     m_GradientMin:
@@ -382,10 +391,9 @@ Transform:
   m_GameObject: {fileID: 4427109836883213748}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.44, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3712288799380927817}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

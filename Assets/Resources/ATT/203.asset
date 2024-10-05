@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 20a02e83a7434cb458da91f94aa3bf10, type: 3}
-  m_Name: 205
+  m_Name: 203
   m_EditorClassIdentifier: 
   HPMAX: 3
   HP: 3
@@ -25,7 +25,7 @@ MonoBehaviour:
   DODGE:
     m_Base: 0
   SPEED:
-    m_Base: 390
+    m_Base: 440
   BLESS:
     m_Base: 0
   LUCKY:

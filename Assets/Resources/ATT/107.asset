@@ -16,25 +16,17 @@ MonoBehaviour:
   HP: 3
   ATK:
     m_Base: 1
-    m_Origin: 1
   ASP:
     m_Base: 0
-    m_Origin: 0
   CP:
     m_Base: 0
-    m_Origin: 0
   CT:
     m_Base: 0
-    m_Origin: 0
   DODGE:
     m_Base: 0
-    m_Origin: 0
   SPEED:
-    m_Base: 390
-    m_Origin: 390
-  VUN_INC:
-    m_Base: 1
-    m_Origin: 1
-  BOSS_INC:
-    m_Base: 1
-    m_Origin: 1
+    m_Base: 370
+  BLESS:
+    m_Base: 0
+  LUCKY:
+    m_Base: 0

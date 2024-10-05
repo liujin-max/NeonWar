@@ -375,6 +375,7 @@ public class Field : MonoBehaviour
         //撞击伤害
         player.UpdateHP(-1);
 
+        EventManager.SendEvent(new GameEvent(EVENT.ONCRASH, enemy, player));
         EventManager.SendEvent(new GameEvent(EVENT.ONHPUPDATE));
 
         //受击表现

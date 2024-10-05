@@ -17,6 +17,7 @@ public class Buff_Stun : Buff
     public override void Init()
     {
         Belong.StunReference++;
+        Belong.ATT.DODGE.PutMUL(this, 0);   //无法闪避
         Belong.Stop();
 
         m_Effect = GameFacade.Instance.EffectManager.Load(EFFECT.STUN, Vector3.zero, Belong.HeadPivot.gameObject);
@@ -27,6 +28,7 @@ public class Buff_Stun : Buff
         base.Dispose();
 
         Belong.StunReference--;
+        Belong.ATT.DODGE.Pop(this);
         Belong.Resume();
     }
 
@@ -207,6 +209,7 @@ public class Buff_Frozen : Buff
     public override void Init()
     {
         Belong.StunReference++;
+        Belong.ATT.DODGE.PutMUL(this, 0);   //无法闪避
         Belong.Stop();
 
         Belong.AffectedEffect.Frozen(true);
@@ -217,6 +220,7 @@ public class Buff_Frozen : Buff
         base.Dispose();
 
         Belong.StunReference--;
+        Belong.ATT.DODGE.Pop(this);
         Belong.Resume();
 
         Belong.AffectedEffect.Frozen(false);

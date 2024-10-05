@@ -53,8 +53,10 @@ SpriteAtlas:
     isAtlasV2: 0
     cachedData: {fileID: 0}
     packedSpriteRenderDataKeys:
+    - 695aedc041f120f41971f739e23e1ee4: 21300000
     - 00ec4fd08e2d533438b1a989b4c110d7: 21300000
     - 2630a59175d9d5f45a990d20ac2b7ce7: 21300000
+    - 493e75c2b34d98f4ebefb2394dc808ef: 21300000
     - 57316e138d6e63c42905c2a89d05790f: 21300000
     - 93e79493be3281149849e7995542149a: 21300000
     - cdb54804151a57d4abb0511fbbda1a03: 21300000
@@ -63,16 +65,20 @@ SpriteAtlas:
     - 3c6982c4d98eec740855d01a726072a8: 21300000
     - 0c50ec2534a676e40940890102f1b280: 21300000
     - 43ad19183200db644ba46d1e9463da51: 21300000
+    - a295cc2a481a29c46bc8d734c9889fa5: 21300000
     - d0344c9aee5ff424882baa0192b2977c: 21300000
     - ca5d1e6e857985e45907fc82804580a7: 21300000
     - 9e46957eadca10246b09b1791b73b7dc: 21300000
     - b7e9451f85f01764bbfad9df413aa3da: 21300000
     - bd27d6cf46e9fb8498ad80adea9f8f73: 21300000
+    - 4603e0ff20ea96a4a85dedc2c5595319: 21300000
     - 8831f3ff3f35cf94bbd0ca4535782ef6: 21300000
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: 21300000, guid: 695aedc041f120f41971f739e23e1ee4, type: 3}
   - {fileID: 21300000, guid: 00ec4fd08e2d533438b1a989b4c110d7, type: 3}
   - {fileID: 21300000, guid: 2630a59175d9d5f45a990d20ac2b7ce7, type: 3}
+  - {fileID: 21300000, guid: 493e75c2b34d98f4ebefb2394dc808ef, type: 3}
   - {fileID: 21300000, guid: 57316e138d6e63c42905c2a89d05790f, type: 3}
   - {fileID: 21300000, guid: 93e79493be3281149849e7995542149a, type: 3}
   - {fileID: 21300000, guid: cdb54804151a57d4abb0511fbbda1a03, type: 3}
@@ -81,15 +87,19 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 3c6982c4d98eec740855d01a726072a8, type: 3}
   - {fileID: 21300000, guid: 0c50ec2534a676e40940890102f1b280, type: 3}
   - {fileID: 21300000, guid: 43ad19183200db644ba46d1e9463da51, type: 3}
+  - {fileID: 21300000, guid: a295cc2a481a29c46bc8d734c9889fa5, type: 3}
   - {fileID: 21300000, guid: d0344c9aee5ff424882baa0192b2977c, type: 3}
   - {fileID: 21300000, guid: ca5d1e6e857985e45907fc82804580a7, type: 3}
   - {fileID: 21300000, guid: 9e46957eadca10246b09b1791b73b7dc, type: 3}
   - {fileID: 21300000, guid: b7e9451f85f01764bbfad9df413aa3da, type: 3}
   - {fileID: 21300000, guid: bd27d6cf46e9fb8498ad80adea9f8f73, type: 3}
+  - {fileID: 21300000, guid: 4603e0ff20ea96a4a85dedc2c5595319, type: 3}
   - {fileID: 21300000, guid: 8831f3ff3f35cf94bbd0ca4535782ef6, type: 3}
   m_PackedSpriteNamesToIndex:
+  - 201
   - 108
   - 100
+  - 202
   - 450
   - 403
   - 105
@@ -98,11 +108,13 @@ SpriteAtlas:
   - 102
   - 150
   - 109
+  - 200
   - 401
   - 104
   - 205
   - 404
   - 103
+  - 203
   - 106
   m_RenderDataMap: {}
   m_Tag: Battle

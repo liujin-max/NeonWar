@@ -31,6 +31,8 @@ public static class EVENT
     public static string ONNEXTWAVE         = "ONNEXTWAVE";
     //受击
     public static string ONHIT              = "ONHIT";
+    //撞击
+    public static string ONCRASH            = "ONCRASH";
     //玩家血量变化
     public static string ONHPUPDATE         = "ONHPUPDATE";
     //创建子弹
