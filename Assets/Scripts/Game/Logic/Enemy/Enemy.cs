@@ -76,7 +76,6 @@ public class Enemy : Unit
     {
         base.Dispose();
 
-        // GameFacade.Instance.PoolManager.RecycleHP(m_HPBar);
         if (m_HPBar != null) {
             Destroy(m_HPBar.gameObject);
             m_HPBar = null;

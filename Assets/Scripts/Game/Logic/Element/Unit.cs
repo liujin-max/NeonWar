@@ -56,8 +56,10 @@ public class Unit : MonoBehaviour
     //各种状态
     [HideInInspector] public int StunReference;    //晕眩
     [HideInInspector] public int FrozenReference;    //冰冻
+    [HideInInspector] public bool ImmuneDisplaceFlag = false;
 
     protected float m_Angle;      //角度
+    protected bool m_DeadFlag = false;
     protected bool m_ValidFlag = true;
     public bool IsValid {
         get {
@@ -75,7 +77,7 @@ public class Unit : MonoBehaviour
 
     public virtual bool IsDead()
     {
-        return ATT.HP <= 0;
+        return ATT.HP <= 0 || m_DeadFlag;
     }
 
     public virtual float GetAngle()
@@ -113,6 +115,12 @@ public class Unit : MonoBehaviour
     public virtual bool IsControlled()
     {
         return StunReference > 0 || FrozenReference > 0;
+    }
+
+    //是否免疫位移
+    public virtual bool IsImmuneDisplace()
+    {
+        return ImmuneDisplaceFlag;
     }
 
     #endregion
@@ -192,6 +200,11 @@ public class Unit : MonoBehaviour
         ATT.HP = Mathf.Clamp(ATT.HP + value, 0, ATT.HPMAX);
     }
 
+    public void ForceDead()
+    {
+        m_DeadFlag = true;
+    }
+
     public virtual Projectile CreateProjectile(string projectile ,CONST.TRACE trace_type, Vector2 to_pos, float time, Action callback)
     {
         var project = GameFacade.Instance.AssetManager.LoadPrefab(projectile, Vector3.zero, Field.Instance.Land.ELEMENT_ROOT).GetComponent<Projectile>();
@@ -214,7 +227,7 @@ public class Unit : MonoBehaviour
     }
 
 
-    public Buff AddBuff(Unit caster, int buff_id, int value, float time = 0f, int count = 1)
+    public virtual Buff AddBuff(Unit caster, int buff_id, int value, float time = 0f, int count = 1)
     {
         Buff b;
 

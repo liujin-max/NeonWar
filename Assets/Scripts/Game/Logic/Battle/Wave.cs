@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -62,7 +63,7 @@ public class Wave
     }
 
     //分裂
-    public void Summon(MonsterJSON monsterJSON, Vector2 point)
+    public void Summon(MonsterJSON monsterJSON, Vector2 point, Action<Enemy> callback)
     {
         m_AsyncReference++;
         GameFacade.Instance.AssetManager.AsyncLoadPrefab("Prefab/Enemy/" + monsterJSON.ID, point, Field.Instance.Land.ENEMY_ROOT, (obj)=>{
@@ -73,6 +74,8 @@ public class Wave
             
             m_Enemys.Add(enemy);
             m_AsyncReference--;
+
+            if (callback != null) callback(enemy);
         });
     }
 

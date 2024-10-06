@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\UI\Window\ResultWindow.cs" />
+    <Compile Include="Assets\Scripts\Game\Logic\Enemy\Enemy_204.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\Enemy\Enemy_401.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\Data\Level.cs" />
     <Compile Include="Assets\Scripts\Utility\BalatroFloating.cs" />
@@ -120,6 +121,7 @@
     <Compile Include="Assets\Scripts\Utility\SuperScrollView.cs" />
     <Compile Include="Assets\Scripts\UI\Item\PlayerHPItem.cs" />
     <Compile Include="Assets\Scripts\Struct\CycleList.cs" />
+    <Compile Include="Assets\Scripts\Game\Logic\Enemy\Enemy_255.cs" />
     <Compile Include="Assets\Scripts\Manager\SceneManager.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\Enemy\Enemy_251.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\Enemy\Enemy_106.cs" />
@@ -191,6 +193,7 @@
     <Compile Include="Assets\Scripts\Manager\CsvManager.cs" />
     <Compile Include="Assets\Scripts\Utility\DIYScrollView.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\DataCenter.cs" />
+    <Compile Include="Assets\Scripts\Game\Logic\Enemy\Enemy_256.cs" />
     <Compile Include="Assets\Scripts\UI\Item\PropertyItem.cs" />
     <Compile Include="Assets\Scripts\Utility\ImageGray.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\Battle\CircleHP.cs" />

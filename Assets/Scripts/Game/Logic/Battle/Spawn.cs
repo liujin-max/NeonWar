@@ -64,9 +64,9 @@ public class Spawn
     }
 
     //分裂
-    public void Summon(MonsterJSON monsterJSON, Vector2 point)
+    public void Summon(MonsterJSON monsterJSON, Vector2 point, Action<Enemy> callback = null)
     {
-        CurrentWave.Summon(monsterJSON, point);
+        CurrentWave.Summon(monsterJSON, point, callback);
     }
 
     //挑选周围怪物最多的怪

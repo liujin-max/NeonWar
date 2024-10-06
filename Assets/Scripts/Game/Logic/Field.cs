@@ -379,14 +379,8 @@ public class Field : MonoBehaviour
         EventManager.SendEvent(new GameEvent(EVENT.ONHPUPDATE));
 
         //受击表现
-        if (player.IsDead() == true)
-        {
-            player.Dead();
-        }
-        else
-        {
-            player.Affected();
-        }
+        if (player.IsDead() == true) player.Dead();
+        else player.Affected();
     }
 
     //掉落Buff

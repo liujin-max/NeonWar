@@ -25,7 +25,7 @@ MonoBehaviour:
   DODGE:
     m_Base: 0
   SPEED:
-    m_Base: 300
+    m_Base: 250
   BLESS:
     m_Base: 0
   LUCKY:
