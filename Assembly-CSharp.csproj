@@ -191,9 +191,9 @@
     <Compile Include="Assets\Scripts\Utility\UIMaskUtility.cs" />
     <Compile Include="Assets\Scripts\Display\DisplayEngine.cs" />
     <Compile Include="Assets\Scripts\Manager\CsvManager.cs" />
-    <Compile Include="Assets\Scripts\Utility\DIYScrollView.cs" />
-    <Compile Include="Assets\Scripts\Game\Logic\DataCenter.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\Enemy\Enemy_256.cs" />
+    <Compile Include="Assets\Scripts\Game\Logic\DataCenter.cs" />
+    <Compile Include="Assets\Scripts\Utility\DIYScrollView.cs" />
     <Compile Include="Assets\Scripts\UI\Item\PropertyItem.cs" />
     <Compile Include="Assets\Scripts\Utility\ImageGray.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\Battle\CircleHP.cs" />

@@ -8,7 +8,7 @@ using UnityEngine;
 
 public class Enemy : Unit
 {
-    private Rigidbody2D m_Rigidbody;
+    protected Rigidbody2D m_Rigidbody;
     private Transform m_HPPivot;
     private CircleHP m_HPBar;
 
@@ -164,9 +164,9 @@ public class Enemy : Unit
     }
 
     //strength :力的强度，意味着移动速度
-    public void Push()
+    public void Push(float angle)
     {
-        m_Angle = RandomUtility.Random(0, 360);
+        m_Angle = angle;
 
         m_Rigidbody.velocity = ToolUtility.FindPointOnCircle(Vector2.zero, ATT.SPEED.ToNumber() / 100.0f, m_Angle);
     }
@@ -206,14 +206,6 @@ public class Enemy : Unit
     #endregion
 
     #region 碰撞检测
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        // if (collision.gameObject.tag == CONST.COLLIDER_PLAYER)
-        // {
-        //     Field.Instance.Crash(this, collision.gameObject.GetComponent<Player>());
-        // }
-    }
-
     void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.tag != CONST.COLLIDER_WALL) return;

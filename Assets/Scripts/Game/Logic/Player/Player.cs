@@ -243,15 +243,5 @@ public class Player : Unit
             Field.Instance.Crash(collider.gameObject.GetComponent<Enemy>(), this);
         }
     }
-
-    void OnTriggerStay2D(Collider2D collider)
-    {
-
-    }
-
-    void OnTriggerExit2D(Collider2D collider)
-    {
-
-    }
     #endregion
 }

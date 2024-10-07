@@ -113,7 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97ff4ac8b310d0a44af8c6ba6e864a67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BulletTemplate: {fileID: 0}
+  BulletTemplate: {fileID: 5480662803317571861, guid: b8ad113fa2548c8448ba2525a5f0a106, type: 3}
   ShootPivot: {fileID: 0}
   HeadPivot: {fileID: 0}
   ID: 0
@@ -136,6 +136,7 @@ MonoBehaviour:
   StunReference: 0
   FrozenReference: 0
   ImmuneDisplaceFlag: 0
+  ImmuneControlFlag: 0
   m_Color:
     m_Mode: 2
     m_GradientMin:
@@ -199,10 +200,9 @@ MonoBehaviour:
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     m_ColorMin: {r: 0.5882353, g: 0, b: 0, a: 1}
-    m_ColorMax: {r: 0.4784314, g: 0.4784314, b: 0.32156864, a: 1}
+    m_ColorMax: {r: 0.7926645, g: 0.8396226, b: 0.20990565, a: 1}
   IsSummon: 0
   m_BodyCount: 8
-  m_Posotions: []
 --- !u!1 &2841726863660340128
 GameObject:
   m_ObjectHideFlags: 0
@@ -279,8 +279,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b7e9451f85f01764bbfad9df413aa3da, type: 3}
+  m_SortingOrder: 2
+  m_Sprite: {fileID: 21300000, guid: 05f6e82ce07e1e3499b40d15a96af561, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -330,7 +330,7 @@ Transform:
   m_GameObject: {fileID: 7166884321577943799}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.1, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

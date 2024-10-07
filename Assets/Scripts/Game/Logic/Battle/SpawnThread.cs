@@ -51,7 +51,7 @@ public class SpawnThread
         m_Enemy.gameObject.SetActive(true);
         m_Enemy.SetValid(true);
         m_Enemy.Init(m_JSON);
-        m_Enemy.Push();
+        m_Enemy.Push(RandomUtility.Random(0, 360));
 
         m_FinishFlag = true;
     }

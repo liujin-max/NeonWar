@@ -9,15 +9,35 @@ using UnityEngine;
 //周期性召唤小沙虫
 public class Enemy_256 : Enemy
 {
+    private CDTimer m_Timer = new CDTimer(4f);
+
     public override void Init(MonsterJSON monster_data)
     {
         base.Init(monster_data);
 
-        ImmuneDisplaceFlag = true;
+        ImmuneDisplaceFlag  = true;
+        ImmuneControlFlag   = true;
     }
 
-    public override Buff AddBuff(Unit caster, int buff_id, int value, float time = 0, int count = 1)
+    public override bool CustomUpdate(float deltaTime)
     {
-        return null;
+        if (!base.CustomUpdate(deltaTime)) return false;
+        
+        m_Timer.Update(deltaTime);
+        if (m_Timer.IsFinished() == true) {
+            m_Timer.Reset();
+
+            //召唤
+            for (int i = 0; i < 3; i++)
+            {
+                Field.Instance.Spawn.Summon(new MonsterJSON()
+                {
+                    ID  = 257,
+                    HP  = Mathf.CeilToInt(ATT.HPMAX * 0.1f)
+                }, transform.localPosition);
+            }
+        }
+
+        return true;
     }
 }

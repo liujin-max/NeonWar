@@ -33,7 +33,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2491569824425229344}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -223,7 +222,6 @@ Transform:
   - {fileID: 8883879665031851815}
   - {fileID: 2491569824425229344}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1585666696243292549
 MonoBehaviour:
@@ -274,7 +272,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8883879665031851815}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4548687345193388635
 SpriteRenderer:
@@ -366,7 +363,6 @@ Transform:
   - {fileID: 1956698695479443105}
   - {fileID: 5742127320805540657}
   m_Father: {fileID: 4225492563364461987}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!210 &3057625953097714555
 SortingGroup:
@@ -413,7 +409,6 @@ Transform:
   m_Children:
   - {fileID: 2054070344827338703}
   m_Father: {fileID: 4225492563364461987}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!210 &6170264683510763688
 SortingGroup:
@@ -425,7 +420,7 @@ SortingGroup:
   m_Enabled: 1
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_SortAtRoot: 0
 --- !u!1 &7572760254672002200
 GameObject:
@@ -459,7 +454,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8883879665031851815}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7173966047593763817
 SpriteRenderer:
@@ -547,7 +541,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8883879665031851815}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8503854509926582627
 SpriteRenderer:
@@ -635,7 +628,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8883879665031851815}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7373864695292426234
 SpriteRenderer:

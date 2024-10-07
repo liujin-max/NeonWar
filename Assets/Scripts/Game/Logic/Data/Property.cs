@@ -292,7 +292,7 @@ public class Property_ControlBuff : Property
 
         if (buff.Caster != Pear.Belong) return;
 
-        if (buff.IsControl() == true)
+        if (Buff.IsControl(buff.ID) == true)
         {
             buff.PutLife(this, Value / 100.0f);
         }

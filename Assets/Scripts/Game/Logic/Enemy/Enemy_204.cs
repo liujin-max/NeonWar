@@ -24,8 +24,9 @@ public class Enemy_204 : Enemy
     {
         base.Init(monster_data);
 
-        //免疫位移
-        ImmuneDisplaceFlag = true;
+        //免疫位移、控制
+        ImmuneDisplaceFlag  = true;
+        ImmuneControlFlag   = true;
         
         m_PosCount = (m_BodyCount + 1) * m_Step;
 
@@ -43,6 +44,15 @@ public class Enemy_204 : Enemy
         EventManager.DelHandler(EVENT.ONKILLENEMY,  OnKillEnemy);
     }
 
+    public override void DoAttack()
+    {
+        int random = RandomUtility.Random(0, 360);
+        
+        Field.Instance.CreateBullet(this).Shoot(random);
+        Field.Instance.CreateBullet(this).Shoot(random + 120);
+        Field.Instance.CreateBullet(this).Shoot(random - 120);
+    }
+
     void InitBodys()
     {
         //躯干
@@ -54,7 +64,7 @@ public class Enemy_204 : Enemy
         }
 
         //尾巴
-        Field.Instance.Spawn.Summon(new MonsterJSON(){ID = 256, HP = Mathf.CeilToInt(ATT.HPMAX * 0.5f)}, transform.localPosition, (e)=>{
+        Field.Instance.Spawn.Summon(new MonsterJSON(){ID = 256, HP = Mathf.CeilToInt(ATT.HPMAX * 1f)}, transform.localPosition, (e)=>{
             m_Bodys.Add(e);
         });
     }
@@ -75,7 +85,23 @@ public class Enemy_204 : Enemy
         }
     }
 
+    #region 碰撞检测
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        //撞墙随机反弹
+        if (collision.gameObject.tag == CONST.COLLIDER_WALL)
+        {
+            float angle = ToolUtility.VectorToAngle(m_Rigidbody.velocity);
+            //给一个随机的偏移
+            angle += RandomUtility.Random(-45, 45);
 
+            Push(angle);
+        }
+    }
+    #endregion
+
+
+    #region 事件监听
     private void OnKillEnemy(GameEvent @event)
     {
         Enemy e = (Enemy)@event.GetParam(0);
@@ -101,4 +127,6 @@ public class Enemy_204 : Enemy
             m_Bodys.Remove(b);
         }
     }
+    #endregion
+    
 }

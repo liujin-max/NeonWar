@@ -31,11 +31,6 @@ public class Buff_Stun : Buff
         Belong.ATT.DODGE.Pop(this);
         Belong.Resume();
     }
-
-    public override bool IsControl()
-    {
-        return true;
-    }
 }
 #endregion
 
@@ -224,11 +219,6 @@ public class Buff_Frozen : Buff
         Belong.Resume();
 
         Belong.AffectedEffect.Frozen(false);
-    }
-
-    public override bool IsControl()
-    {
-        return true;
     }
 }
 #endregion
@@ -666,6 +656,11 @@ public class Buff : IDisposable
         {(int)CONST.BUFF.SPD_MUL,  () => new Buff_SPDMUL()},
     };
 
+    public static bool IsControl(int buff_id)
+    {
+        return buff_id == (int)CONST.BUFF.STUN || buff_id == (int)CONST.BUFF.FROZEN;
+    }
+
 
     public static Buff Create(int buff_id, int value, Unit caster, Unit belong, float time = 0)
     {
@@ -723,12 +718,6 @@ public class Buff : IDisposable
     public virtual int ShowValue()
     {
         return Count;
-    }
-
-    //是否是控制类Buff
-    public virtual bool IsControl()
-    {
-        return false;
     }
 
     public virtual void Dispose() 

@@ -12,11 +12,24 @@ public class Enemy_255 : Enemy
     {
         base.Init(monster_data);
 
-        ImmuneDisplaceFlag = true;
+        ImmuneDisplaceFlag  = true;
+        ImmuneControlFlag   = true;
+
+        EventManager.AddHandler(EVENT.ONKILLENEMY,  OnKillEnemy);
     }
 
-    public override Buff AddBuff(Unit caster, int buff_id, int value, float time = 0, int count = 1)
+    public override void Dispose()
     {
-        return null;
+        base.Dispose();
+
+        EventManager.DelHandler(EVENT.ONKILLENEMY,  OnKillEnemy);
+    }
+
+    private void OnKillEnemy(GameEvent @event)
+    {
+        Enemy e = (Enemy) @event.GetParam(0);
+        if (e != this) return;
+
+        Field.Instance.Spawn.Summon(new MonsterJSON(){ID = 257, HP = Mathf.CeilToInt(ATT.HPMAX * 0.1f)}, transform.localPosition);
     }
 }

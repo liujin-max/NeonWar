@@ -56,7 +56,8 @@ public class Unit : MonoBehaviour
     //各种状态
     [HideInInspector] public int StunReference;    //晕眩
     [HideInInspector] public int FrozenReference;    //冰冻
-    [HideInInspector] public bool ImmuneDisplaceFlag = false;
+    [HideInInspector] public bool ImmuneDisplaceFlag;   //免疫位移
+    [HideInInspector] public bool ImmuneControlFlag;    //免疫控制
 
     protected float m_Angle;      //角度
     protected bool m_DeadFlag = false;
@@ -123,7 +124,15 @@ public class Unit : MonoBehaviour
         return ImmuneDisplaceFlag;
     }
 
+    //是否免疫控制
+    public virtual bool IsImmuneControl()
+    {
+        return ImmuneControlFlag;
+    }
+
     #endregion
+
+
 
 
     public virtual bool CustomUpdate(float deltaTime)
@@ -229,25 +238,28 @@ public class Unit : MonoBehaviour
 
     public virtual Buff AddBuff(Unit caster, int buff_id, int value, float time = 0f, int count = 1)
     {
-        Buff b;
+        //免疫控制
+        if (Buff.IsControl(buff_id) && IsImmuneControl())  return null;
+
 
         //已经有对应Buff了
         if (m_BuffDic.ContainsKey(buff_id)) 
         {
-            b = m_BuffDic[buff_id];
-            b.Value = value;
-            b.Flush(time, count);  //刷新CD
-        }
-        else
-        {
-            b = Buff.Create(buff_id, value, caster, this, time);
-            b.Init();
-            b.Count = count;
+            Buff buff = m_BuffDic[buff_id];
+            buff.Value = value;
+            buff.Flush(time, count);  //刷新CD
 
-            m_BuffDic[buff_id] = b;
-
-            EventManager.SendEvent(new GameEvent(EVENT.ONBUFFADD, b));
+            return buff;
         }
+      
+
+        Buff b = Buff.Create(buff_id, value, caster, this, time);
+        b.Init();
+        b.Count = count;
+
+        m_BuffDic[buff_id] = b;
+
+        EventManager.SendEvent(new GameEvent(EVENT.ONBUFFADD, b));
 
         return b;
     }
