@@ -136,6 +136,7 @@ MonoBehaviour:
   StunReference: 0
   FrozenReference: 0
   ImmuneDisplaceFlag: 0
+  ImmuneControlFlag: 0
   m_Color:
     m_Mode: 2
     m_GradientMin:
@@ -201,6 +202,7 @@ MonoBehaviour:
     m_ColorMin: {r: 0.5882353, g: 0, b: 0, a: 1}
     m_ColorMax: {r: 1, g: 0.36320752, b: 0.36320752, a: 1}
   IsSummon: 0
+  m_Sprite: {fileID: 855798464372062768}
 --- !u!1 &2841726863660340128
 GameObject:
   m_ObjectHideFlags: 0

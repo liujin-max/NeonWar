@@ -202,7 +202,7 @@ MonoBehaviour:
     m_ColorMin: {r: 0.5882353, g: 0, b: 0, a: 1}
     m_ColorMax: {r: 0.7926645, g: 0.8396226, b: 0.20990565, a: 1}
   IsSummon: 0
-  m_BodyCount: 8
+  m_BodyCount: 7
 --- !u!1 &2841726863660340128
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,7 +17,7 @@ public class Enemy_204 : Enemy
     int m_Step = 20;
     int m_PosCount;
     List<Vector3> m_Posotions = new List<Vector3>();
-
+    private Vector3 m_LastPosition = Vector3.zero;
 
 
     public override void Init(MonsterJSON monster_data)
@@ -60,11 +60,13 @@ public class Enemy_204 : Enemy
         {
             Field.Instance.Spawn.Summon(new MonsterJSON(){ID = 255, HP = Mathf.CeilToInt(ATT.HPMAX * 5f)}, transform.localPosition, (e)=>{
                 m_Bodys.Add(e);
+
+                e.transform.SetAsFirstSibling();
             });
         }
 
         //尾巴
-        Field.Instance.Spawn.Summon(new MonsterJSON(){ID = 256, HP = Mathf.CeilToInt(ATT.HPMAX * 1f)}, transform.localPosition, (e)=>{
+        Field.Instance.Spawn.Summon(new MonsterJSON(){ID = 256, HP = Mathf.CeilToInt(ATT.HPMAX * 2f)}, transform.localPosition, (e)=>{
             m_Bodys.Add(e);
         });
     }
@@ -83,6 +85,10 @@ public class Enemy_204 : Enemy
 
             if (m_Posotions.Count > order) e.transform.position = m_Posotions[order];
         }
+
+        //转向
+        m_Sprite.transform.localEulerAngles = new Vector3(0 , 0, ToolUtility.VectorToAngle(transform.localPosition - m_LastPosition) + 90);
+        m_LastPosition = transform.localPosition;
     }
 
     #region 碰撞检测
