@@ -11,7 +11,7 @@ public class Enemy : Unit
     protected Rigidbody2D m_Rigidbody;
     private Transform m_HPPivot;
     private CircleHP m_HPBar;
-
+    protected BlackHole m_BlackHole;
     
 
     [SerializeField] private ParticleSystem.MinMaxGradient m_Color;
@@ -104,6 +104,15 @@ public class Enemy : Unit
     }
 
     #region 表现处理
+    public void SetSortingOrder(int value)
+    {
+        m_Sprite.sortingOrder = value;
+    }
+
+    public void InitBlackHole(BlackHole hole)
+    {
+        m_BlackHole = hole;
+    }
 
     void InitHPBar()
     {
@@ -161,6 +170,12 @@ public class Enemy : Unit
         base.UpdateHP(value);
 
         if (m_HPBar != null) m_HPBar.FlushHP();
+    }
+
+    public virtual void Appear()
+    {
+        m_BlackHole?.Dispose();
+        m_BlackHole = null;
     }
 
     //strength :力的强度，意味着移动速度

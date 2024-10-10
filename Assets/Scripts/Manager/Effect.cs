@@ -28,6 +28,11 @@ public class Effect : MonoBehaviour
         m_Time = m_TimeMax;
     }
 
+    public void Dispose()
+    {
+        GameFacade.Instance.EffectManager.RemoveEffect(this);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -41,7 +46,7 @@ public class Effect : MonoBehaviour
                 m_Callback.Invoke();
             }
 
-            GameFacade.Instance.EffectManager.RemoveEffect(this);
+            Dispose();
         }
     }
 }

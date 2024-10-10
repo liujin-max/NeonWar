@@ -29,13 +29,13 @@ public class Enemy_256 : Enemy
             m_Timer.Reset();
 
             //召唤
-            for (int i = 0; i < 3; i++)
+            for (int i = 0; i < 6; i++)
             {
                 Field.Instance.Spawn.Summon(new MonsterJSON()
                 {
                     ID  = 257,
-                    HP  = Mathf.CeilToInt(ATT.HPMAX * 0.1f)
-                }, transform.localPosition);
+                    HP  = 300
+                }, transform.localPosition, e => e.transform.localScale = new Vector3(0.6f, 0.6f, 1));
             }
         }
 

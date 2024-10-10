@@ -39,7 +39,10 @@ public class Enemy_255 : Enemy
         Enemy e = (Enemy) @event.GetParam(0);
         if (e != this) return;
 
-        Field.Instance.Spawn.Summon(new MonsterJSON(){ID = 257, HP = Mathf.CeilToInt(ATT.HPMAX * 0.1f)}, transform.localPosition);
+        for (int i = 0; i < 6; i++)
+        {
+            Field.Instance.Spawn.Summon(new MonsterJSON(){ID = 257, HP = 300}, transform.localPosition, e => e.transform.localScale = new Vector3(0.6f, 0.6f, 1));
+        }
     }
     #endregion
 }

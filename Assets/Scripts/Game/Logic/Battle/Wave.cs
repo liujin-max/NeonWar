@@ -70,6 +70,7 @@ public class Wave
             var enemy = obj.GetComponent<Enemy>();
             enemy.Init(monsterJSON);
             enemy.IsSummon = true;
+            enemy.Appear();
             enemy.Push(RandomUtility.Random(0, 360));
             
             m_Enemys.Add(enemy);

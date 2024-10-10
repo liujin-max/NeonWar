@@ -141,6 +141,7 @@
     <Compile Include="Assets\Scripts\Effect\Affected.cs" />
     <Compile Include="Assets\Scripts\UI\UICtrl.cs" />
     <Compile Include="Assets\Scripts\Utility\TextureImporterSettings.cs" />
+    <Compile Include="Assets\Scripts\Game\Logic\Battle\BlackHole.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\AREA.cs" />
     <Compile Include="Assets\Scripts\FSM\Element\State_Upgrade.cs" />
     <Compile Include="Assets\Scripts\Struct\AttributeValue.cs" />

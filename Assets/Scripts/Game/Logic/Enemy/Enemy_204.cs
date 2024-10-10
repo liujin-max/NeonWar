@@ -13,7 +13,7 @@ public class Enemy_204 : Enemy
 
 
     List<Enemy> m_Bodys = new List<Enemy>();
-    //每截身体的坐标间隔是5帧
+    //每截身体的坐标间隔
     int m_Step = 20;
     int m_PosCount;
     List<Vector3> m_Posotions = new List<Vector3>();
@@ -44,6 +44,11 @@ public class Enemy_204 : Enemy
         EventManager.DelHandler(EVENT.ONKILLENEMY,  OnKillEnemy);
     }
 
+    public override void Appear()
+    {
+        
+    }
+
     public override void DoAttack()
     {
         int random = RandomUtility.Random(0, 360);
@@ -55,18 +60,26 @@ public class Enemy_204 : Enemy
 
     void InitBodys()
     {
+        SetSortingOrder(m_BodyCount + 1);
+
         //躯干
         for (int i = 0; i < m_BodyCount; i++)
         {
-            Field.Instance.Spawn.Summon(new MonsterJSON(){ID = 255, HP = Mathf.CeilToInt(ATT.HPMAX * 5f)}, transform.localPosition, (e)=>{
-                m_Bodys.Add(e);
+            int count = i;
 
-                e.transform.SetAsFirstSibling();
+            Field.Instance.Spawn.Summon(new MonsterJSON(){ID = 255, HP = Mathf.CeilToInt(ATT.HPMAX * 5f)}, transform.localPosition, (e)=>{
+                e.SetSortingOrder(m_BodyCount - count);
+                e.gameObject.SetActive(false);
+
+                m_Bodys.Add(e);
             });
         }
 
         //尾巴
         Field.Instance.Spawn.Summon(new MonsterJSON(){ID = 256, HP = Mathf.CeilToInt(ATT.HPMAX * 2f)}, transform.localPosition, (e)=>{
+            e.SetSortingOrder(0);
+            e.gameObject.SetActive(false);
+
             m_Bodys.Add(e);
         });
     }
@@ -83,7 +96,17 @@ public class Enemy_204 : Enemy
             var e = m_Bodys[i];
             int order = (i + 1) * m_Step;
 
-            if (m_Posotions.Count > order) e.transform.position = m_Posotions[order];
+            if (m_Posotions.Count > order)
+            {
+                e.gameObject.SetActive(true);
+                e.transform.position = m_Posotions[order];
+
+                if (i == m_Bodys.Count - 1 && m_BlackHole != null)
+                {
+                    m_BlackHole.Dispose();
+                    m_BlackHole = null;
+                }
+            }
         }
 
         //转向
