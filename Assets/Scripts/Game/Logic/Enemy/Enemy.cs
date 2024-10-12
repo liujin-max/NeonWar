@@ -24,7 +24,7 @@ public class Enemy : Unit
     private bool m_IsRepel = false;   //击退中
     private CDTimer m_RepelTimer = new CDTimer(0.8f);
 
-
+    private bool m_HPTextVisible = true;
 
 
     void Awake()
@@ -119,9 +119,15 @@ public class Enemy : Unit
         GameFacade.Instance.AssetManager.AsyncLoadPrefab("Prefab/Element/CircleHP", Vector3.zero, m_HPPivot, (obj)=>{
             m_HPBar = obj.GetComponent<CircleHP>();
             m_HPBar.Init(this);
+            m_HPBar.ShowHPText(m_HPTextVisible);
         });
     }
 
+    public void ShowHPText(bool flag)
+    {
+        m_HPTextVisible = flag;
+        m_HPBar?.ShowHPText(flag);
+    }
 
     public override void Affected(Hit hit = default)
     {

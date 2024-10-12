@@ -10,7 +10,7 @@ using UnityEngine;
 public class Enemy_204 : Enemy
 {
     [SerializeField] int m_BodyCount;
-
+    int m_BodyCur;
 
     List<Enemy> m_Bodys = new List<Enemy>();
     //每截身体的坐标间隔
@@ -30,7 +30,8 @@ public class Enemy_204 : Enemy
         
         m_PosCount = (m_BodyCount + 1) * m_Step;
 
-        InitBodys();
+        SetSortingOrder(m_BodyCount + 1);
+        // InitBodys();
 
         EventManager.AddHandler(EVENT.ONKILLENEMY,  OnKillEnemy);
     }
@@ -60,28 +61,28 @@ public class Enemy_204 : Enemy
 
     void InitBodys()
     {
-        SetSortingOrder(m_BodyCount + 1);
+        // SetSortingOrder(m_BodyCount + 1);
 
         //躯干
-        for (int i = 0; i < m_BodyCount; i++)
-        {
-            int count = i;
+        // for (int i = 0; i < m_BodyCount; i++)
+        // {
+        //     int count = i;
 
-            Field.Instance.Spawn.Summon(new MonsterJSON(){ID = 255, HP = Mathf.CeilToInt(ATT.HPMAX * 5f)}, transform.localPosition, (e)=>{
-                e.SetSortingOrder(m_BodyCount - count);
-                e.gameObject.SetActive(false);
+        //     Field.Instance.Spawn.Summon(new MonsterJSON(){ID = 255, HP = Mathf.CeilToInt(ATT.HPMAX * 5f)}, transform.localPosition, (e)=>{
+        //         e.SetSortingOrder(m_BodyCount - count);
+        //         e.gameObject.SetActive(false);
 
-                m_Bodys.Add(e);
-            });
-        }
+        //         m_Bodys.Add(e);
+        //     });
+        // }
 
-        //尾巴
-        Field.Instance.Spawn.Summon(new MonsterJSON(){ID = 256, HP = Mathf.CeilToInt(ATT.HPMAX * 2f)}, transform.localPosition, (e)=>{
-            e.SetSortingOrder(0);
-            e.gameObject.SetActive(false);
+        // //尾巴
+        // Field.Instance.Spawn.Summon(new MonsterJSON(){ID = 256, HP = Mathf.CeilToInt(ATT.HPMAX * 2f)}, transform.localPosition, (e)=>{
+        //     e.SetSortingOrder(0);
+        //     e.gameObject.SetActive(false);
 
-            m_Bodys.Add(e);
-        });
+        //     m_Bodys.Add(e);
+        // });
     }
 
     void FixedUpdate()
@@ -91,20 +92,41 @@ public class Enemy_204 : Enemy
         if (m_Posotions.Count > m_PosCount) m_Posotions.RemoveAt(m_Posotions.Count - 1);
         m_Posotions.Insert(0, transform.position);
 
-        for (int i = 0; i < m_Bodys.Count; i++)
+        for (int i = 0; i < m_BodyCount + 1; i++)
         {
-            var e = m_Bodys[i];
             int order = (i + 1) * m_Step;
 
             if (m_Posotions.Count > order)
             {
-                e.gameObject.SetActive(true);
-                e.transform.position = m_Posotions[order];
-
-                if (i == m_Bodys.Count - 1 && m_BlackHole != null)
+                if (i >= m_Bodys.Count)
                 {
-                    m_BlackHole.Dispose();
-                    m_BlackHole = null;
+                    if (m_BodyCur < m_BodyCount)
+                    {
+                        int count = i;
+                        m_BodyCur++;
+                        Field.Instance.Spawn.Summon(new MonsterJSON(){ID = 255, HP = Mathf.CeilToInt(ATT.HPMAX * 5f)}, transform.localPosition, (e)=>{
+                            e.SetSortingOrder(m_BodyCount - count);
+                            e.transform.position = m_Posotions[order];
+
+                            m_Bodys.Add(e);
+                        });
+                    }
+                    else if (m_BodyCur == m_BodyCount)
+                    {
+                        m_BlackHole.Dispose();
+                        m_BlackHole = null;
+
+                        Field.Instance.Spawn.Summon(new MonsterJSON(){ID = 256, HP = Mathf.CeilToInt(ATT.HPMAX * 2f)}, transform.localPosition, (e)=>{
+                            e.SetSortingOrder(0);
+                            
+                            m_Bodys.Add(e);
+                        });
+                    }
+                }
+                else
+                {
+                    var e = m_Bodys[i];
+                    e.transform.position = m_Posotions[order];
                 }
             }
         }

@@ -5,7 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 
-public class GameEvent
+public struct GameEvent
 {
     internal string eventName;
     private object[] _Params;

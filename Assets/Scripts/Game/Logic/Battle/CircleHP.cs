@@ -10,6 +10,7 @@ public class CircleHP : MonoBehaviour
     [SerializeField] private SpriteRenderer m_Red;
     [SerializeField] private NumberTransition m_HPText;
     [SerializeField] private Transform m_BarPivot;
+    [SerializeField] private GameObject m_TextPivot;
     [SerializeField] private float m_Height;
 
 
@@ -38,6 +39,10 @@ public class CircleHP : MonoBehaviour
         m_Red.color = GREEN;
     }
 
+    public void ShowHPText(bool flag)
+    {
+        m_TextPivot.SetActive(flag);
+    }
 
     public void FlushHP()
     {
