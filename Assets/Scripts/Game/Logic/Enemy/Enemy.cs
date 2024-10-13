@@ -109,6 +109,11 @@ public class Enemy : Unit
         m_Sprite.sortingOrder = value;
     }
 
+    public void SetRotation(float angle)
+    {
+        m_Sprite.transform.localEulerAngles = new Vector3(0 , 0, angle);
+    }
+
     public void InitBlackHole(BlackHole hole)
     {
         m_BlackHole = hole;

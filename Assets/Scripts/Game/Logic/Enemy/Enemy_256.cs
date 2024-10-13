@@ -10,7 +10,6 @@ using UnityEngine;
 public class Enemy_256 : Enemy
 {
     private CDTimer m_Timer = new CDTimer(4f);
-    private Vector3 m_LastPosition = Vector3.zero;
 
     public override void Init(MonsterJSON monster_data)
     {
@@ -43,12 +42,6 @@ public class Enemy_256 : Enemy
         }
 
         return true;
-    }
-
-    void FixedUpdate()
-    {
-        m_Sprite.transform.localEulerAngles = new Vector3(0 , 0, ToolUtility.VectorToAngle(transform.localPosition - m_LastPosition) + 90);
-        m_LastPosition = transform.localPosition;
     }
 
     public override void Dead(Hit hit = null)

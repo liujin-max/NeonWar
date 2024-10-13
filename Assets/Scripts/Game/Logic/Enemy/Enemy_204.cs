@@ -30,7 +30,8 @@ public class Enemy_204 : Enemy
         
         m_PosCount = (m_BodyCount + 1) * m_Step;
 
-        SetSortingOrder(m_BodyCount + 1);
+        InitBodys();
+        
 
         Event_KillEnemy.OnEvent += OnKillEnemy;
     }
@@ -44,9 +45,27 @@ public class Enemy_204 : Enemy
         Event_KillEnemy.OnEvent -= OnKillEnemy;
     }
 
-    public override void Appear()
+    void InitBodys()
     {
-        
+        SetSortingOrder(m_BodyCount + 1);
+
+        //身体
+        for (int i = 0; i < m_BodyCount; i++)
+        {
+            int count = i;
+            Field.Instance.Spawn.Summon(new MonsterJSON(){ ID = 255, HP = Mathf.CeilToInt(ATT.HPMAX * 0.5f)}, transform.localPosition, (e)=>{
+                e.SetSortingOrder(m_BodyCount - count);
+                e.transform.position = transform.position;
+
+                m_Bodys.Add(e);
+            });
+        }
+
+        //尾巴
+        Field.Instance.Spawn.Summon(new MonsterJSON(){ ID = 256, HP = Mathf.CeilToInt(ATT.HPMAX * 0.4f)}, transform.localPosition, (e)=>{
+            e.SetSortingOrder(0);
+            m_Bodys.Add(e);
+        });
     }
 
     public override void DoAttack()
@@ -73,53 +92,19 @@ public class Enemy_204 : Enemy
 
     void FixedUpdate()
     {
-        if (this.IsControlled()) return;
-
-        if (m_Posotions.Count > m_PosCount) m_Posotions.RemoveAt(m_Posotions.Count - 1);
-        m_Posotions.Insert(0, transform.position);
-
-        for (int i = 0; i < m_BodyCount + 1; i++)
+        Enemy focus = this;
+        float speed = ATT.SPEED.ToNumber() / 100.0f;
+        foreach (var body in m_Bodys)
         {
-            int order = (i + 1) * m_Step;
+            //逐渐移动物体 A 到物体 B 的位置
+            body.transform.position = Vector3.Lerp(body.transform.position, focus.transform.position, speed * Time.deltaTime);
+            body.SetRotation(ToolUtility.VectorToAngle(focus.transform.localPosition - body.transform.position) + 90);
 
-            if (m_Posotions.Count > order)
-            {
-                if (i >= m_Bodys.Count)
-                {
-                    if (m_BodyCur < m_BodyCount)
-                    {
-                        int count = i;
-                        Field.Instance.Spawn.Summon(new MonsterJSON(){ID = 255, HP = Mathf.CeilToInt(ATT.HPMAX * 0.5f)}, transform.localPosition, (e)=>{
-                            e.SetSortingOrder(m_BodyCount - count);
-                            e.transform.position = m_Posotions[order];
-
-                            m_Bodys.Add(e);
-                        });
-                    }
-                    else if (m_BodyCur == m_BodyCount)
-                    {
-                        m_BlackHole.Dispose();
-                        m_BlackHole = null;
-
-                        Field.Instance.Spawn.Summon(new MonsterJSON(){ID = 256, HP = Mathf.CeilToInt(ATT.HPMAX * 0.4f)}, transform.localPosition, (e)=>{
-                            e.SetSortingOrder(0);
-                            
-                            m_Bodys.Add(e);
-                        });
-                    }
-
-                    m_BodyCur++;
-                }
-                else
-                {
-                    var e = m_Bodys[i];
-                    e.transform.position = m_Posotions[order];
-                }
-            }
+            focus = body;
         }
 
         //转向
-        m_Sprite.transform.localEulerAngles = new Vector3(0 , 0, ToolUtility.VectorToAngle(transform.localPosition - m_LastPosition) + 90);
+        SetRotation(ToolUtility.VectorToAngle(transform.localPosition - m_LastPosition) + 90);
         m_LastPosition = transform.localPosition;
     }
 

@@ -8,22 +8,12 @@ using UnityEngine;
 //死亡时转化成小沙虫
 public class Enemy_255 : Enemy
 {
-    private Vector3 m_LastPosition = Vector3.zero;
-    
     public override void Init(MonsterJSON monster_data)
     {
         base.Init(monster_data);
 
         ImmuneDisplaceFlag  = true;
         ImmuneControlFlag   = true;
-    }
-
-
-
-    void FixedUpdate()
-    {
-        m_Sprite.transform.localEulerAngles = new Vector3(0 , 0, ToolUtility.VectorToAngle(transform.localPosition - m_LastPosition) + 90);
-        m_LastPosition = transform.localPosition;
     }
 
     public override void Dead(Hit hit = null)
