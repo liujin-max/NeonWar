@@ -10,15 +10,10 @@ using UnityEngine;
 public class Enemy_204 : Enemy
 {
     [SerializeField] int m_BodyCount;
-    int m_BodyCur;
 
     List<Enemy> m_Bodys = new List<Enemy>();
-    //每截身体的坐标间隔
-    int m_Step = 20;
-    int m_PosCount;
-    List<Vector3> m_Posotions = new List<Vector3>();
     private Vector3 m_LastPosition = Vector3.zero;
-
+    private bool HasTail = true;
 
     public override void Init(MonsterJSON monster_data)
     {
@@ -28,10 +23,7 @@ public class Enemy_204 : Enemy
         ImmuneDisplaceFlag  = true;
         ImmuneControlFlag   = true;
         
-        m_PosCount = (m_BodyCount + 1) * m_Step;
-
         InitBodys();
-        
 
         Event_KillEnemy.OnEvent += OnKillEnemy;
     }
@@ -40,8 +32,6 @@ public class Enemy_204 : Enemy
     {
         base.Dispose();
 
-        // foreach (var e in m_Bodys) e.ForceDead();
-        
         Event_KillEnemy.OnEvent -= OnKillEnemy;
     }
 
@@ -54,6 +44,8 @@ public class Enemy_204 : Enemy
         {
             int count = i;
             Field.Instance.Spawn.Summon(new MonsterJSON(){ ID = 255, HP = Mathf.CeilToInt(ATT.HPMAX * 0.5f)}, transform.localPosition, (e)=>{
+                e.GetComponent<Enemy_255>().Head = this;
+
                 e.SetSortingOrder(m_BodyCount - count);
                 e.transform.position = transform.position;
 
@@ -63,6 +55,7 @@ public class Enemy_204 : Enemy
 
         //尾巴
         Field.Instance.Spawn.Summon(new MonsterJSON(){ ID = 256, HP = Mathf.CeilToInt(ATT.HPMAX * 0.4f)}, transform.localPosition, (e)=>{
+            e.GetComponent<Enemy_256>().Head = this;
             e.SetSortingOrder(0);
             m_Bodys.Add(e);
         });
@@ -70,7 +63,7 @@ public class Enemy_204 : Enemy
 
     public override void DoAttack()
     {
-        int random = RandomUtility.Random(0, 360);
+        float random = ToolUtility.VectorToAngle(Field.Instance.Player.transform.localPosition - transform.localPosition);
         
         Field.Instance.CreateBullet(this).Shoot(random);
         Field.Instance.CreateBullet(this).Shoot(random + 120);

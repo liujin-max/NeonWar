@@ -8,6 +8,7 @@ using UnityEngine;
 //死亡时转化成小沙虫
 public class Enemy_255 : Enemy
 {
+    public Enemy Head;
     public override void Init(MonsterJSON monster_data)
     {
         base.Init(monster_data);

@@ -9,6 +9,7 @@ using UnityEngine;
 //周期性召唤小沙虫
 public class Enemy_256 : Enemy
 {
+    public Enemy Head;
     private CDTimer m_Timer = new CDTimer(4f);
 
     public override void Init(MonsterJSON monster_data)
@@ -48,6 +49,10 @@ public class Enemy_256 : Enemy
     {
         base.Dead(hit);
 
+        //头部攻击频率增加
+        Head.CPS.PutAUL(this, 2);
+
+        //产生小沙虫
         for (int i = 0; i < 3; i++)
         {
             Field.Instance.Spawn.Summon(new MonsterJSON(){ID = 257, HP = 300}, transform.localPosition, e => {
