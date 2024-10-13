@@ -17,7 +17,7 @@ public class BuffListItem : MonoBehaviour
     }
 
     private void OnDisable() {
-        Event_BuffADD.OnEvent += OnBuffAdd;
+        Event_BuffADD.OnEvent -= OnBuffAdd;
         Event_BuffRemove.OnEvent -= OnBuffRemove;
     }
 

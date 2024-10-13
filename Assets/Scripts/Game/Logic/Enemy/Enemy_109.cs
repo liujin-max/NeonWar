@@ -45,6 +45,8 @@ public class Enemy_109 : Enemy
 
         if (unit != this) return;
 
+        Roar();
+
         //闪避时发射子弹
         float rand = RandomUtility.Random(0, 360);
         for (int i = 0; i < 6; i++)

@@ -7,18 +7,18 @@ public class UICtrl_NavWindow : UICtrl<UICtrl_NavWindow, NavigationWindow>
 {
     protected override void RegisterHandlers()
     {
-        Event_BattleStart.OnEvent   += OnBattleStart;
-        Event_BattleEnd.OnEvent     += OnBattleEnd;
+        Event_BattleStart.OnEvent += OnBattleStart;
+        Event_BattleEnd.OnEvent += OnBattleEnd;
 
         Event_BackpackOpen.OnEvent += OnBackpackOpen;
     }
 
     protected override void RemoveHandlers()
     {
-        Event_BattleStart.OnEvent   -= OnBattleStart;
-        Event_BattleEnd.OnEvent     -= OnBattleEnd;
+        Event_BattleStart.OnEvent -= OnBattleStart;
+        Event_BattleEnd.OnEvent -= OnBattleEnd;
 
-        Event_BackpackOpen.OnEvent  -= OnBackpackOpen;
+        Event_BackpackOpen.OnEvent -= OnBackpackOpen;
     }
     
     protected override void OpenWindow(Action<NavigationWindow> action)

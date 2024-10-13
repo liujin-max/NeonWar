@@ -29,6 +29,7 @@ public class Enemy_256 : Enemy
             m_Timer.Reset();
 
             //召唤
+            Roar();
             for (int i = 0; i < 6; i++)
             {
                 Field.Instance.Spawn.Summon(new MonsterJSON()

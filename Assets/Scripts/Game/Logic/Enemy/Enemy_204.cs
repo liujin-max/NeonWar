@@ -63,6 +63,8 @@ public class Enemy_204 : Enemy
 
     public override void DoAttack()
     {
+        Roar();
+        
         float random = ToolUtility.VectorToAngle(Field.Instance.Player.transform.localPosition - transform.localPosition);
         
         Field.Instance.CreateBullet(this).Shoot(random);
@@ -149,6 +151,13 @@ public class Enemy_204 : Enemy
         {
             b.ForceDead();
             b.Dead(hit);
+        }
+
+        //如果身体全毁 则自身死亡
+        if (m_Bodys.Count == 0) 
+        {
+            ForceDead();
+            Dead(hit);
         }
     }
     #endregion

@@ -165,6 +165,14 @@ public class Enemy : Unit
     {
         DoAttack();
     }
+
+    //咆哮
+    protected virtual void Roar()
+    {
+        var roar = GameFacade.Instance.EffectManager.Load(EFFECT.ROAR, Vector3.zero, gameObject).GetComponent<Roar>();
+        roar.Play(ID);
+        roar.SetRotation(m_Sprite.transform.localEulerAngles);
+    }
     #endregion
 
 

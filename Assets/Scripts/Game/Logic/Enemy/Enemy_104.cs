@@ -23,6 +23,8 @@ public class Enemy_104 : Enemy
         if (m_Timer.IsFinished() == true) {
             m_Timer.Reset();
 
+            Roar();
+
             //召唤
             for (int i = 0; i < 2; i++)
             {

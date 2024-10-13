@@ -186,9 +186,8 @@ public class Field : MonoBehaviour
     public List<Pear> GeneratePearRewards(RESULT result)
     {
         List<Pear> pears = new List<Pear>();
-        if (string.IsNullOrEmpty(m_Level.LevelJSON.PearLevel)) {
-            return pears;
-        }
+        if (!DataCenter.Instance.IsPearUnlock()) return pears;
+        if (string.IsNullOrEmpty(m_Level.LevelJSON.PearLevel)) return pears;
 
         int[] section   = m_Level.LevelJSON.PearCount.Split("-").Select(int.Parse).ToArray();
         int count       = result == RESULT.VICTORY ? RandomUtility.Random(section[0], section[1] + 1) : 1;

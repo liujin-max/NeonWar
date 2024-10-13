@@ -283,7 +283,7 @@ public class Property_ControlBuff : Property
 
     public override void UnEquip()
     {
-        Event_BuffADD.OnEvent += OnBuffAdd;
+        Event_BuffADD.OnEvent -= OnBuffAdd;
     }
 
     private void OnBuffAdd(Event_BuffADD e)
