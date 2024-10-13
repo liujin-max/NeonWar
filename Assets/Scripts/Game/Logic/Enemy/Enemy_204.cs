@@ -31,7 +31,6 @@ public class Enemy_204 : Enemy
         m_PosCount = (m_BodyCount + 1) * m_Step;
 
         SetSortingOrder(m_BodyCount + 1);
-        // InitBodys();
 
         Event_KillEnemy.OnEvent += OnKillEnemy;
     }
@@ -40,7 +39,7 @@ public class Enemy_204 : Enemy
     {
         base.Dispose();
 
-        foreach (var e in m_Bodys) e.ForceDead();
+        // foreach (var e in m_Bodys) e.ForceDead();
         
         Event_KillEnemy.OnEvent -= OnKillEnemy;
     }
@@ -59,30 +58,17 @@ public class Enemy_204 : Enemy
         Field.Instance.CreateBullet(this).Shoot(random - 120);
     }
 
-    void InitBodys()
+    public override void Dead(Hit hit = null)
     {
-        // SetSortingOrder(m_BodyCount + 1);
+        var temp_bodys = new List<Enemy>(m_Bodys);
+        m_Bodys.Clear();
 
-        //躯干
-        // for (int i = 0; i < m_BodyCount; i++)
-        // {
-        //     int count = i;
+        foreach (var e in temp_bodys) {
+            e.ForceDead();
+            e.Dead(hit);
+        }
 
-        //     Field.Instance.Spawn.Summon(new MonsterJSON(){ID = 255, HP = Mathf.CeilToInt(ATT.HPMAX * 5f)}, transform.localPosition, (e)=>{
-        //         e.SetSortingOrder(m_BodyCount - count);
-        //         e.gameObject.SetActive(false);
-
-        //         m_Bodys.Add(e);
-        //     });
-        // }
-
-        // //尾巴
-        // Field.Instance.Spawn.Summon(new MonsterJSON(){ID = 256, HP = Mathf.CeilToInt(ATT.HPMAX * 2f)}, transform.localPosition, (e)=>{
-        //     e.SetSortingOrder(0);
-        //     e.gameObject.SetActive(false);
-
-        //     m_Bodys.Add(e);
-        // });
+        base.Dead(hit);
     }
 
     void FixedUpdate()
@@ -103,8 +89,7 @@ public class Enemy_204 : Enemy
                     if (m_BodyCur < m_BodyCount)
                     {
                         int count = i;
-                        m_BodyCur++;
-                        Field.Instance.Spawn.Summon(new MonsterJSON(){ID = 255, HP = Mathf.CeilToInt(ATT.HPMAX * 5f)}, transform.localPosition, (e)=>{
+                        Field.Instance.Spawn.Summon(new MonsterJSON(){ID = 255, HP = Mathf.CeilToInt(ATT.HPMAX * 0.5f)}, transform.localPosition, (e)=>{
                             e.SetSortingOrder(m_BodyCount - count);
                             e.transform.position = m_Posotions[order];
 
@@ -116,12 +101,14 @@ public class Enemy_204 : Enemy
                         m_BlackHole.Dispose();
                         m_BlackHole = null;
 
-                        Field.Instance.Spawn.Summon(new MonsterJSON(){ID = 256, HP = Mathf.CeilToInt(ATT.HPMAX * 2f)}, transform.localPosition, (e)=>{
+                        Field.Instance.Spawn.Summon(new MonsterJSON(){ID = 256, HP = Mathf.CeilToInt(ATT.HPMAX * 0.4f)}, transform.localPosition, (e)=>{
                             e.SetSortingOrder(0);
                             
                             m_Bodys.Add(e);
                         });
                     }
+
+                    m_BodyCur++;
                 }
                 else
                 {
@@ -158,6 +145,8 @@ public class Enemy_204 : Enemy
         Enemy e = evt.Enemy;
         if (e == this) return;
 
+        var hit = evt.Hit;
+
         int order = -1;
         for (int i = 0; i < m_Bodys.Count; i++)
         {
@@ -170,12 +159,18 @@ public class Enemy_204 : Enemy
 
         if (order == -1) return;
         
+        var temp = new List<Enemy>();
         for (int i = m_Bodys.Count - 1; i >= order; i--)
         {
             var b = m_Bodys[i];
-            b.ForceDead();
-
+            temp.Add(b);
             m_Bodys.Remove(b);
+        }
+
+        foreach (var b in temp)
+        {
+            b.ForceDead();
+            b.Dead(hit);
         }
     }
     #endregion

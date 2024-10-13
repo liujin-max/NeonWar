@@ -16,16 +16,9 @@ public class Enemy_255 : Enemy
 
         ImmuneDisplaceFlag  = true;
         ImmuneControlFlag   = true;
-
-        Event_KillEnemy.OnEvent += OnKillEnemy;
     }
 
-    public override void Dispose()
-    {
-        base.Dispose();
 
-        Event_KillEnemy.OnEvent -= OnKillEnemy;
-    }
 
     void FixedUpdate()
     {
@@ -33,13 +26,11 @@ public class Enemy_255 : Enemy
         m_LastPosition = transform.localPosition;
     }
 
-    #region 监听事件
-    private void OnKillEnemy(Event_KillEnemy evt)
+    public override void Dead(Hit hit = null)
     {
-        Enemy e = evt.Enemy;
-        if (e != this) return;
+        base.Dead(hit);
 
-        for (int i = 0; i < 6; i++)
+        for (int i = 0; i < 5; i++)
         {
             Field.Instance.Spawn.Summon(new MonsterJSON(){ID = 257, HP = 300}, transform.localPosition, e => {
                 e.transform.localScale = new Vector3(0.6f, 0.6f, 1);
@@ -47,5 +38,4 @@ public class Enemy_255 : Enemy
             });
         }
     }
-    #endregion
 }

@@ -33,7 +33,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &8271507237996616987
 AudioSource:
@@ -143,5 +142,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45d3534610030564eb00e88b69fbcb96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayLimit: 999
+  PlayLimit: 5
   AutoDestroy: 1

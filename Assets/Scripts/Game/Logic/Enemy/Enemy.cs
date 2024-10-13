@@ -197,6 +197,7 @@ public class Enemy : Unit
     {
         //免疫击退
         if (ATT.SPEED.GetBase() == 0) return;
+        if (IsImmuneDisplace()) return;
 
         m_IsRepel = true;
         m_RepelTimer.Reset();

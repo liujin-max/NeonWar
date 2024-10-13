@@ -1,0 +1,16 @@
+{
+    "Glass" : 1900,
+    "HP" : 1300,
+    "PearLevel" : "2-2",
+    "PearCount" : "2-3",
+    "Waves": 
+    [
+        {
+            "Monsters":
+            [
+                {"Time":    0, "ID": 204, "HP": 18888, "Type" : 2, "Glass" : 1266}
+            ]
+        }
+    ]
+}
+  

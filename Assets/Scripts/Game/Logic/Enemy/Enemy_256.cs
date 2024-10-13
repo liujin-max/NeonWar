@@ -50,4 +50,17 @@ public class Enemy_256 : Enemy
         m_Sprite.transform.localEulerAngles = new Vector3(0 , 0, ToolUtility.VectorToAngle(transform.localPosition - m_LastPosition) + 90);
         m_LastPosition = transform.localPosition;
     }
+
+    public override void Dead(Hit hit = null)
+    {
+        base.Dead(hit);
+
+        for (int i = 0; i < 3; i++)
+        {
+            Field.Instance.Spawn.Summon(new MonsterJSON(){ID = 257, HP = 300}, transform.localPosition, e => {
+                e.transform.localScale = new Vector3(0.6f, 0.6f, 1);
+                e.ShowHPText(false);
+            });
+        }
+    }
 }
