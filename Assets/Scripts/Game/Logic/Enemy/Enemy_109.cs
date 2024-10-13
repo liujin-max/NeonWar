@@ -13,14 +13,14 @@ public class Enemy_109 : Enemy
     {
         base.Init(monster_data);
 
-        EventManager.AddHandler(EVENT.ONDODGE,  OnDodge);
+        Event_Dodge.OnEvent += OnDodge;
     }
 
     public override void Dispose()
     {
         base.Dispose();
 
-        EventManager.DelHandler(EVENT.ONDODGE,  OnDodge);
+        Event_Dodge.OnEvent -= OnDodge;
     }
 
     public override bool CustomUpdate(float deltaTime)
@@ -39,9 +39,9 @@ public class Enemy_109 : Enemy
     }
 
     #region 监听事件
-    private void OnDodge(GameEvent @event)
+    private void OnDodge(Event_Dodge e)
     {
-        var unit = @event.GetParam(0) as Unit;
+        var unit = e.Unit;
 
         if (unit != this) return;
 

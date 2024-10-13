@@ -72,7 +72,7 @@ public class Pear
 
             var property = Property.Create(this, id, value);
 
-            if (property.Type == CONST.PROPERTY.SPECIAL) SpecialProperty = property;
+            if (property.Type == PROPERTY.SPECIAL) SpecialProperty = property;
             else
             {
                 Properties.Add(property);

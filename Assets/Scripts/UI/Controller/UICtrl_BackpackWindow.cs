@@ -7,17 +7,17 @@ public class UICtrl_BackpackWindow : UICtrl<UICtrl_BackpackWindow, BackpackWindo
 {
     protected override void RegisterHandlers()
     {
-        EventManager.AddHandler(EVENT.UI_PEARCOMPOSE,   OnPearComposeStart);
-        EventManager.AddHandler(EVENT.UI_COMPOSECHANGE, OnComposeChange);
-        EventManager.AddHandler(EVENT.UI_SELECTPEAR,    OnSelectPear);
-        
+        Event_PearCompose.OnEvent       += OnPearComposeStart;
+        Event_PearComposeChange.OnEvent += OnComposeChange;
+        Event_SelectPear.OnEvent        += OnSelectPear;
     }
 
     protected override void RemoveHandlers()
     {
-        EventManager.DelHandler(EVENT.UI_PEARCOMPOSE,   OnPearComposeStart);
-        EventManager.DelHandler(EVENT.UI_COMPOSECHANGE, OnComposeChange);
-        EventManager.DelHandler(EVENT.UI_SELECTPEAR,    OnSelectPear);
+        Event_PearCompose.OnEvent       -= OnPearComposeStart;
+        Event_PearComposeChange.OnEvent -= OnComposeChange;
+        Event_SelectPear.OnEvent        -= OnSelectPear;
+
     }
 
 
@@ -37,26 +37,19 @@ public class UICtrl_BackpackWindow : UICtrl<UICtrl_BackpackWindow, BackpackWindo
 
 
     #region 监听事件
-    void OnPearComposeStart(GameEvent @event)
+    void OnPearComposeStart(Event_PearCompose e)
     {
-        Pear pear = @event.GetParam(0) as Pear;
-
-        m_Window?.OnPearComposeStart(pear);
+        m_Window?.OnPearComposeStart(e.Pear);
     }
 
-    void OnComposeChange(GameEvent @event)
+    void OnComposeChange(Event_PearComposeChange e)
     {
-        bool flag = (bool)@event.GetParam(0);
-        Pear pear = @event.GetParam(1) as Pear;
-
-        m_Window?.OnComposeChange(flag, pear);
+        m_Window?.OnComposeChange(e.IsPush, e.Pear);
     }
 
-    void OnSelectPear(GameEvent @event)
+    void OnSelectPear(Event_SelectPear e)
     {
-        Pear pear = @event.GetParam(0) as Pear;
-
-        m_Window?.ShowDetail(pear);
+        m_Window?.ShowDetail(e.Pear);
     }
 
     #endregion

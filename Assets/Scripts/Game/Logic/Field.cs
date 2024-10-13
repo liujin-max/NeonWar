@@ -13,7 +13,7 @@ public class Field : MonoBehaviour
     public static Field Instance{ get { return m_Instance;}}
 
     private FSM<Field> m_FSM;
-    public CONST.GAME_STATE STATE = CONST.GAME_STATE.PAUSE;
+    public GAME_STATE STATE = GAME_STATE.PAUSE;
 
     [HideInInspector] public Land Land;
     private Spawn m_Spawn; //怪物工厂
@@ -30,7 +30,7 @@ public class Field : MonoBehaviour
 
 
     public CycleList<BuffBubble> BuffBubbles = new CycleList<BuffBubble>(null);
-    public CycleList<Area> Areas = new CycleList<Area>((a)=>{ EventManager.SendEvent(new GameEvent(EVENT.ONREMOVEAREA, a));});
+    public CycleList<Area> Areas = new CycleList<Area>((a)=>{ new Event_AreaRemove(){Area = a}.Notify();});
     
 
 
@@ -42,22 +42,22 @@ public class Field : MonoBehaviour
     void Start()
     {
         m_FSM = new FSM<Field>(this,  new State<Field>[] {
-            new State_Idle<Field>(CONST.FSMSTATE.IDLE),
-            new State_Play<Field>(CONST.FSMSTATE.PLAY),
-            new State_Upgrade<Field>(CONST.FSMSTATE.UPGRADE),
-            new State_Result<Field>(CONST.FSMSTATE.RESULT),
+            new State_Idle<Field>(FSMSTATE.IDLE),
+            new State_Play<Field>(FSMSTATE.PLAY),
+            new State_Upgrade<Field>(FSMSTATE.UPGRADE),
+            new State_Result<Field>(FSMSTATE.RESULT),
         });
     }
 
     public void Enter()
     {
-        STATE   = CONST.GAME_STATE.PAUSE;
+        STATE   = GAME_STATE.PAUSE;
 
         Land    = new Land();
         m_Spawn = new Spawn();
 
 
-        m_FSM.Transist(CONST.FSMSTATE.IDLE);
+        m_FSM.Transist(FSMSTATE.IDLE);
     }
 
     //开始游玩
@@ -76,18 +76,18 @@ public class Field : MonoBehaviour
         //将最新的加成等级应用到Player身上
         InitPlayer();
 
-        m_FSM.Transist(CONST.FSMSTATE.PLAY);
+        m_FSM.Transist(FSMSTATE.PLAY);
 
 
         UICtrl_BattleWindow.Instance.Enter();
 
-        EventManager.SendEvent(new GameEvent(EVENT.ONBATTLESTART));
+        new Event_BattleStart().Notify();
     }
 
     //结束游玩
     public void End()
     {
-        STATE   = CONST.GAME_STATE.PAUSE;
+        STATE   = GAME_STATE.PAUSE;
 
         Land.Dispose();
         m_Spawn.Dispose();
@@ -101,32 +101,32 @@ public class Field : MonoBehaviour
 
         UICtrl_BattleWindow.Instance.Exit();
 
-        EventManager.SendEvent(new GameEvent(EVENT.ONBATTLEEND));
+        new Event_BattleEnd().Notify();
     }
 
 
     public void Pause()
     {
-        STATE   = CONST.GAME_STATE.PAUSE;
+        STATE   = GAME_STATE.PAUSE;
 
         m_Spawn.Pause();
     }
 
     public void Resume()
     {
-        STATE   = CONST.GAME_STATE.PLAY;
+        STATE   = GAME_STATE.PLAY;
 
         m_Spawn.Resume();
     }
 
-    public void Transist(CONST.FSMSTATE state, params object[] values)
+    public void Transist(FSMSTATE state, params object[] values)
     {
         m_FSM.Transist(state, values);
     }
 
-    public CONST.FSMSTATE GetCurrentFSMState()
+    public FSMSTATE GetCurrentFSMState()
     {
-        if (m_FSM == null || m_FSM.CurrentState == null) return CONST.FSMSTATE.IDLE;
+        if (m_FSM == null || m_FSM.CurrentState == null) return FSMSTATE.IDLE;
 
         return m_FSM.CurrentState.ID;
     }
@@ -134,7 +134,7 @@ public class Field : MonoBehaviour
 
     void Update()
     {
-        if (this.STATE != CONST.GAME_STATE.PLAY) return;
+        if (this.STATE != GAME_STATE.PLAY) return;
 
         if (m_FSM != null) m_FSM.Update();
     }
@@ -151,13 +151,13 @@ public class Field : MonoBehaviour
         BuffBubbles.CustomUpdate(deltaTime);
     }
 
-    public CONST.RESULT CheckResult()
+    public RESULT CheckResult()
     {
-        if (m_Spawn.IsClear() == true) return CONST.RESULT.VICTORY;
-        if (m_Player.IsDead() == true) return CONST.RESULT.LOSE;
-        if (m_Spawn.IsCurrentClear() == true) return CONST.RESULT.UPGRADE;
+        if (m_Spawn.IsClear() == true) return RESULT.VICTORY;
+        if (m_Player.IsDead() == true) return RESULT.LOSE;
+        if (m_Spawn.IsCurrentClear() == true) return RESULT.UPGRADE;
 
-        return CONST.RESULT.NONE;
+        return RESULT.NONE;
     }
 
     #region 逻辑处理
@@ -168,7 +168,7 @@ public class Field : MonoBehaviour
 
         GameFacade.Instance.EffectManager.Load(EFFECT.HEAL, Vector3.zero, unit.gameObject);
 
-        EventManager.SendEvent(new GameEvent(EVENT.ONHPUPDATE));
+        new Event_UpdateHP().Notify();
     }
 
     //根据当前的击杀进度计算出可以获得多少碎片奖励
@@ -183,7 +183,7 @@ public class Field : MonoBehaviour
     }
 
     //计算道具奖励
-    public List<Pear> GeneratePearRewards(CONST.RESULT result)
+    public List<Pear> GeneratePearRewards(RESULT result)
     {
         List<Pear> pears = new List<Pear>();
         if (string.IsNullOrEmpty(m_Level.LevelJSON.PearLevel)) {
@@ -191,13 +191,13 @@ public class Field : MonoBehaviour
         }
 
         int[] section   = m_Level.LevelJSON.PearCount.Split("-").Select(int.Parse).ToArray();
-        int count       = result == CONST.RESULT.VICTORY ? RandomUtility.Random(section[0], section[1] + 1) : 1;
+        int count       = result == RESULT.VICTORY ? RandomUtility.Random(section[0], section[1] + 1) : 1;
         int[] levels    = m_Level.LevelJSON.PearLevel.Split("-").Select(int.Parse).ToArray();
 
         for (int i = 0; i < count; i++)
         {
             var data    = DataCenter.Instance.Backpack.PickPearData();
-            int level   = result == CONST.RESULT.VICTORY ? RandomUtility.Random(levels[0], levels[1] + 1) : levels[0];
+            int level   = result == RESULT.VICTORY ? RandomUtility.Random(levels[0], levels[1] + 1) : levels[0];
             Pear pear   =  DataCenter.Instance.Backpack.PushPear(data.ID, level);
             pears.Add(pear);
         }
@@ -232,7 +232,7 @@ public class Field : MonoBehaviour
 
         m_Bullets.Add(bullet);
 
-        EventManager.SendEvent(new GameEvent(EVENT.ONBULLETCREATE, bullet));
+        new Event_BulletCreate(){Bullet = bullet}.Notify();
 
         return bullet;
     }
@@ -267,7 +267,7 @@ public class Field : MonoBehaviour
 
             Areas.Add(area);
 
-            EventManager.SendEvent(new GameEvent(EVENT.ONPUSHAREA, area));
+            new Event_AreaPush(){Area = area}.Notify();
         });
     }
 
@@ -275,7 +275,7 @@ public class Field : MonoBehaviour
     //击中目标
     public bool SettleHit(Hit hit, Unit unit)
     {
-        if (this.STATE != CONST.GAME_STATE.PLAY) return false;
+        if (this.STATE != GAME_STATE.PLAY) return false;
         //无敌了
         if (unit.IsInvincible() == true) return false;
         if (unit.IsDead()) return false;
@@ -285,11 +285,11 @@ public class Field : MonoBehaviour
         float demage = Mathf.Ceil(hit.ATK.ToNumber(false) * hit.ATK_INC.ToNumber() * unit.VUN_INC.ToNumber());
 
         //护盾
-        if (hit.Type == CONST.HIT_TYPE.NORMAL && unit.GetBuff((int)CONST.BUFF.SHIELD) != null)
+        if (hit.Type == HIT_TYPE.NORMAL && unit.GetBuff((int)BUFF.SHIELD) != null)
         {
             demage = 0;
         }
-        else if (hit.Type == CONST.HIT_TYPE.NORMAL && RandomUtility.IsHit((int)unit.ATT.DODGE.ToNumber(), 1000) == true) //闪避了
+        else if (hit.Type == HIT_TYPE.NORMAL && RandomUtility.IsHit((int)unit.ATT.DODGE.ToNumber(), 1000) == true) //闪避了
         {
             //闪避特效
             if (unit == m_Player) GameFacade.Instance.EffectManager.Load(EFFECT.DODGE, hit.Position, Land.ELEMENT_ROOT.gameObject);
@@ -297,7 +297,7 @@ public class Field : MonoBehaviour
 
             demage = 0;
 
-            EventManager.SendEvent(new GameEvent(EVENT.ONDODGE, unit));
+            new Event_Dodge(){Unit = unit}.Notify();
         }
         else
         {
@@ -338,8 +338,8 @@ public class Field : MonoBehaviour
 
         unit.UpdateHP(-(int)demage); 
 
-        EventManager.SendEvent(new GameEvent(EVENT.ONHIT, hit, unit));
-        EventManager.SendEvent(new GameEvent(EVENT.ONHPUPDATE));
+        new Event_Hit(){Hit = hit, Unit = unit}.Notify();
+        new Event_UpdateHP().Notify();
 
         //受击表现
         if (unit.IsDead() == true)
@@ -365,7 +365,7 @@ public class Field : MonoBehaviour
 
         //闪避了
         if (RandomUtility.IsHit((int)player.ATT.DODGE.ToNumber(), 1000) == true) {
-            EventManager.SendEvent(new GameEvent(EVENT.ONDODGE, player));
+            new Event_Dodge(){Unit = player}.Notify();
             GameFacade.Instance.EffectManager.Load(EFFECT.DODGE, player.transform.localPosition, Land.ELEMENT_ROOT.gameObject);
             return;
         }
@@ -375,8 +375,8 @@ public class Field : MonoBehaviour
         //撞击伤害
         player.UpdateHP(-1);
 
-        EventManager.SendEvent(new GameEvent(EVENT.ONCRASH, enemy, player));
-        EventManager.SendEvent(new GameEvent(EVENT.ONHPUPDATE));
+        new Event_Crash(){Caster = enemy, Target = player}.Notify();
+        new Event_UpdateHP().Notify();
 
         //受击表现
         if (player.IsDead() == true) player.Dead();
@@ -396,19 +396,19 @@ public class Field : MonoBehaviour
         m_Player.BlessRate = 0;
 
         //掉落Buff逻辑
-        List<CONST.BUFF> buffs = new List<CONST.BUFF>()
+        List<BUFF> buffs = new List<BUFF>()
         {
-            CONST.BUFF.ATK_UP, CONST.BUFF.ATK_DOWN,
-            CONST.BUFF.ASP_UP, CONST.BUFF.ASP_DOWN, 
-            CONST.BUFF.SPEED_UP, CONST.BUFF.SPEED_DOWN,
-            CONST.BUFF.CP, CONST.BUFF.DODGE_UP, CONST.BUFF.SPD_MUL
+            BUFF.ATK_UP, BUFF.ATK_DOWN,
+            BUFF.ASP_UP, BUFF.ASP_DOWN, 
+            BUFF.SPEED_UP, BUFF.SPEED_DOWN,
+            BUFF.CP, BUFF.DODGE_UP, BUFF.SPD_MUL
         };
 
         if (RandomUtility.IsHit((int)Field.Instance.Player.ATT.LUCKY.ToNumber(), 1000) == true)
         {
-            buffs.Remove(CONST.BUFF.ATK_DOWN);
-            buffs.Remove(CONST.BUFF.ASP_DOWN);
-            buffs.Remove(CONST.BUFF.SPEED_DOWN);
+            buffs.Remove(BUFF.ATK_DOWN);
+            buffs.Remove(BUFF.ASP_DOWN);
+            buffs.Remove(BUFF.SPEED_DOWN);
         }
         
 

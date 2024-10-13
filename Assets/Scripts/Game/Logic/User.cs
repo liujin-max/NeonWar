@@ -130,7 +130,7 @@ public class GameUserData
         //弓
         new PlayerMsg() 
         {
-            ID          = (int)CONST.PLAYER.BOW, 
+            ID          = (int)PLAYER.BOW, 
             UI          = "Bow",
             UnlockFlag  = true, 
             InUse       = true, 
@@ -327,37 +327,37 @@ public class User
         m_userUpdate = true;
     }
 
-    public void UpdateProperty(CONST.ATT property, int value)
+    public void UpdateProperty(ATT property, int value)
     {
         switch (property)
         {
-            case CONST.ATT.ATK: CurrentPlayer.ATK += value; break;
-            case CONST.ATT.ASP: CurrentPlayer.ASP += value; break;
-            case CONST.ATT.WORTH: CurrentPlayer.WORTH += value; break;
+            case ATT.ATK: CurrentPlayer.ATK += value; break;
+            case ATT.ASP: CurrentPlayer.ASP += value; break;
+            case ATT.WORTH: CurrentPlayer.WORTH += value; break;
         }
 
         m_userUpdate = true;
     }
 
-    public int GetPropertyCost(CONST.ATT property)
+    public int GetPropertyCost(ATT property)
     {
         switch (property)
         {
-            case CONST.ATT.ATK: return NumericalManager.FML_ATKCost(CurrentPlayer.ATK);
-            case CONST.ATT.ASP: return NumericalManager.FML_ASPCost(CurrentPlayer.ASP);
-            case CONST.ATT.WORTH: return NumericalManager.FML_WORTHCost(CurrentPlayer.WORTH);
+            case ATT.ATK: return NumericalManager.FML_ATKCost(CurrentPlayer.ATK);
+            case ATT.ASP: return NumericalManager.FML_ASPCost(CurrentPlayer.ASP);
+            case ATT.WORTH: return NumericalManager.FML_WORTHCost(CurrentPlayer.WORTH);
         }
 
         return 1;
     }
 
-    public int GetPropertyLevel(CONST.ATT property)
+    public int GetPropertyLevel(ATT property)
     {
         switch (property)
         {
-            case CONST.ATT.ATK: return CurrentPlayer.ATK;
-            case CONST.ATT.ASP: return CurrentPlayer.ASP;
-            case CONST.ATT.WORTH: return CurrentPlayer.WORTH;
+            case ATT.ATK: return CurrentPlayer.ATK;
+            case ATT.ASP: return CurrentPlayer.ASP;
+            case ATT.WORTH: return CurrentPlayer.WORTH;
         }
 
         return 1;

@@ -33,7 +33,7 @@ public class Enemy_204 : Enemy
         SetSortingOrder(m_BodyCount + 1);
         // InitBodys();
 
-        EventManager.AddHandler(EVENT.ONKILLENEMY,  OnKillEnemy);
+        Event_KillEnemy.OnEvent += OnKillEnemy;
     }
 
     public override void Dispose()
@@ -42,7 +42,7 @@ public class Enemy_204 : Enemy
 
         foreach (var e in m_Bodys) e.ForceDead();
         
-        EventManager.DelHandler(EVENT.ONKILLENEMY,  OnKillEnemy);
+        Event_KillEnemy.OnEvent -= OnKillEnemy;
     }
 
     public override void Appear()
@@ -153,9 +153,9 @@ public class Enemy_204 : Enemy
 
 
     #region 事件监听
-    private void OnKillEnemy(GameEvent @event)
+    private void OnKillEnemy(Event_KillEnemy evt)
     {
-        Enemy e = (Enemy)@event.GetParam(0);
+        Enemy e = evt.Enemy;
         if (e == this) return;
 
         int order = -1;

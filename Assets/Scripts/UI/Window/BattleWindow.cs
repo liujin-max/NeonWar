@@ -34,25 +34,25 @@ public class BattleWindow : BaseWindow
         m_BtnLeft.SetCallback((eventData)=>{
             m_FingerPivot.gameObject.SetActive(false);
 
-            EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS, -1f));
+            new Event_JoystickPress(){Direction = -1}.Notify();
 
             m_BtnLeft.transform.Find("Wave").gameObject.SetActive(true);
             m_BtnLeft.transform.Find("Wave").transform.position = eventData.position;
         }, 
         ()=>{ m_BtnLeft.transform.Find("Wave").gameObject.SetActive(false);}, 
-        ()=>{ EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS, -1f));});
+        ()=>{ new Event_JoystickPress(){Direction = -1}.Notify();});
 
         //往右
         m_BtnRight.SetCallback((eventData)=>{
             m_FingerPivot.gameObject.SetActive(false);
 
-            EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS,  1f));
+            new Event_JoystickPress(){Direction = 1}.Notify();
 
             m_BtnRight.transform.Find("Wave").gameObject.SetActive(true);
             m_BtnRight.transform.Find("Wave").transform.position = eventData.position;
         }, 
         ()=>{ m_BtnRight.transform.Find("Wave").gameObject.SetActive(false);}, 
-        ()=>{ EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS,  1f));});
+        ()=>{ new Event_JoystickPress(){Direction = 1}.Notify();});
 
 
         //设置
@@ -128,7 +128,7 @@ public class BattleWindow : BaseWindow
 
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS, -1f));
+            new Event_JoystickPress(){Direction = -1}.Notify();
         }
 
         if (Input.GetKeyUp(KeyCode.LeftArrow)) {
@@ -144,7 +144,7 @@ public class BattleWindow : BaseWindow
 
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            EventManager.SendEvent(new GameEvent(EVENT.ONJOYSTICK_PRESS,  1f));
+            new Event_JoystickPress(){Direction = 1}.Notify();
         }
 
         if (Input.GetKeyUp(KeyCode.RightArrow)) {

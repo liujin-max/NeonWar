@@ -7,20 +7,18 @@ public class UICtrl_GameWindow : UICtrl<UICtrl_GameWindow, GameWindow>
 {
     protected override void RegisterHandlers()
     {
-        EventManager.AddHandler(EVENT.ONBATTLESTART,    OnBattleStart);
-        EventManager.AddHandler(EVENT.ONBATTLEEND,      OnBattleEnd);
-        EventManager.AddHandler(EVENT.ONUPDATEGLASS,    OnUpdateGlass);
-
-        EventManager.AddHandler(EVENT.UI_SHOWFIGHT,     OnShowFight);
+        Event_BattleStart.OnEvent   += OnBattleStart;
+        Event_BattleEnd.OnEvent     += OnBattleEnd;
+        Event_UpdateGlass.OnEvent   += OnUpdateGlass;
+        Event_FightShow.OnEvent     += OnShowFight;
     }
 
     protected override void RemoveHandlers()
     {
-        EventManager.DelHandler(EVENT.ONBATTLESTART,    OnBattleStart);
-        EventManager.DelHandler(EVENT.ONBATTLEEND,      OnBattleEnd);
-        EventManager.DelHandler(EVENT.ONUPDATEGLASS,    OnUpdateGlass);
-
-        EventManager.DelHandler(EVENT.UI_SHOWFIGHT,     OnShowFight);
+        Event_BattleStart.OnEvent   -= OnBattleStart;
+        Event_BattleEnd.OnEvent     -= OnBattleEnd;
+        Event_UpdateGlass.OnEvent   -= OnUpdateGlass;
+        Event_FightShow.OnEvent     -= OnShowFight;
     }
 
 
@@ -40,26 +38,26 @@ public class UICtrl_GameWindow : UICtrl<UICtrl_GameWindow, GameWindow>
 
     #region 监听事件
     //战斗开始
-    private void OnBattleStart(GameEvent @event)
+    private void OnBattleStart(Event_BattleStart e)
     {
         m_Window?.OnBattleStart();
     }
 
     //战斗结束
-    private void OnBattleEnd(GameEvent @event)
+    private void OnBattleEnd(Event_BattleEnd e)
     {
         m_Window?.OnBattleEnd();
     }
 
 
-    private void OnUpdateGlass(GameEvent @event)
+    private void OnUpdateGlass(Event_UpdateGlass e)
     {
         m_Window?.OnUpdateGlass();
     }
 
-    private void OnShowFight(GameEvent @event)
+    private void OnShowFight(Event_FightShow e)
     {
-        m_Window?.OnShowFight((bool)@event.GetParam(0));
+        m_Window?.OnShowFight(e.Flag);
     }
 
     #endregion

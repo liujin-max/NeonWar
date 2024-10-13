@@ -27,7 +27,7 @@ public class SkillItem : MonoBehaviour
 
             if (DataCenter.Instance.User.Glass < cost)
             {
-                EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "<sprite=1>不足"));
+                new Event_PopupTip(){Text = "<sprite=1>不足"}.Notify();
                 return;
             }
 
@@ -37,8 +37,8 @@ public class SkillItem : MonoBehaviour
 
             DataCenter.Instance.User.UpgradeSkill(m_SkillSlot, m_SkillData.ID);
 
-            EventManager.SendEvent(new GameEvent(EVENT.UI_SKILLUPGRADE));
-            EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS));
+            new Event_SkillUpgrade().Notify();
+            new Event_UpdateGlass().Notify();
         });
     }
 

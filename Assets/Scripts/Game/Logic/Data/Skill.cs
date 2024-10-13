@@ -54,18 +54,18 @@ public class Skill_10060 : Skill
 {
     public Skill_10060()
     {
-        EventManager.AddHandler(EVENT.ONBULLETCREATE,   OnBulletCreate);
+        Event_BulletCreate.OnEvent += OnBulletCreate;
     }
 
     public override void Dispose()
     {
-        EventManager.DelHandler(EVENT.ONBULLETCREATE,   OnBulletCreate);
+        Event_BulletCreate.OnEvent -= OnBulletCreate;
     }
 
     //创建子弹
-    private void OnBulletCreate(GameEvent @event)
+    private void OnBulletCreate(Event_BulletCreate e)
     {
-        Bullet b = @event.GetParam(0) as Bullet;
+        Bullet b = e.Bullet;
         if (b.Caster != Caster) return;
 
         b.HitRemaining = 1 + Value;
@@ -80,18 +80,18 @@ public class Skill_10070 : Skill
 {
     public Skill_10070()
     {
-        EventManager.AddHandler(EVENT.ONBULLETCREATE,   OnBulletCreate);
+        Event_BulletCreate.OnEvent += OnBulletCreate;
     }
 
     public override void Dispose()
     {
-        EventManager.DelHandler(EVENT.ONBULLETCREATE,   OnBulletCreate);
+        Event_BulletCreate.OnEvent -= OnBulletCreate;
     }
 
     //创建子弹
-    private void OnBulletCreate(GameEvent @event)
+    private void OnBulletCreate(Event_BulletCreate e)
     {
-        Bullet b = @event.GetParam(0) as Bullet;
+        Bullet b = e.Bullet;
         if (b.Caster != Caster) return;
 
 
@@ -110,18 +110,18 @@ public class Skill_10110 : Skill
 {
     public Skill_10110()
     {
-        EventManager.AddHandler(EVENT.ONBULLETSHOOT,    OnBulletShoot);
+        Event_BulletShoot.OnEvent += OnBulletShoot;
     }
 
     public override void Dispose()
     {
-        EventManager.DelHandler(EVENT.ONBULLETSHOOT,    OnBulletShoot);
+        Event_BulletShoot.OnEvent -= OnBulletShoot;
     }
 
     //发射子弹
-    private void OnBulletShoot(GameEvent @event)
+    private void OnBulletShoot(Event_BulletShoot e)
     {
-        Bullet b = @event.GetParam(0) as Bullet;
+        Bullet b = e.Bullet;
         if (b.Caster != Caster) return;
 
         int rate = Value;
@@ -141,25 +141,25 @@ public class Skill_10120 : Skill
 {
     public Skill_10120()
     {
-        EventManager.AddHandler(EVENT.ONBULLETHIT,  OnBulletHit);
+        Event_BulletHit.OnEvent += OnBulletHit;
     }
 
     public override void Dispose()
     {
-        EventManager.DelHandler(EVENT.ONBULLETHIT,  OnBulletHit);
+        Event_BulletHit.OnEvent -= OnBulletHit;
     }
 
     //子弹击中目标
-    private void OnBulletHit(GameEvent @event)
+    private void OnBulletHit(Event_BulletHit e)
     {
-        Bullet b = @event.GetParam(0) as Bullet;
+        Bullet b = e.Bullet;
         if (b.Caster != Caster) return;
 
-        Unit unit = @event.GetParam(1) as Unit;
+        Unit unit = e.Target;
 
         if (RandomUtility.IsHit(Value))
         {
-            unit.AddBuff(Caster, (int)CONST.BUFF.STUN, 1, 1f);
+            unit.AddBuff(Caster, (int)BUFF.STUN, 1, 1f);
         }
         
     }
@@ -174,21 +174,21 @@ public class Skill_10130 : Skill
 {
     public Skill_10130()
     {
-        EventManager.AddHandler(EVENT.ONBULLETHIT,  OnBulletHit);
+        Event_BulletHit.OnEvent += OnBulletHit;
     }
 
     public override void Dispose()
     {
-        EventManager.DelHandler(EVENT.ONBULLETHIT,  OnBulletHit);
+        Event_BulletHit.OnEvent -= OnBulletHit;
     }
 
     //子弹击中目标
-    private void OnBulletHit(GameEvent @event)
+    private void OnBulletHit(Event_BulletHit e)
     {
-        Bullet b = @event.GetParam(0) as Bullet;
+        Bullet b = e.Bullet;
         if (b.Caster != Caster) return;
 
-        Enemy unit = @event.GetParam(1) as Enemy;
+        Enemy unit = e.Target as Enemy;
 
         if (unit == null) return;
 
@@ -210,18 +210,18 @@ public class Skill_10160 : Skill
 {
     public Skill_10160()
     {
-        EventManager.AddHandler(EVENT.ONBULLETCREATE,    OnBulletCreate);
+        Event_BulletCreate.OnEvent += OnBulletCreate;
     }
 
     public override void Dispose()
     {
-        EventManager.DelHandler(EVENT.ONBULLETCREATE,    OnBulletCreate);
+        Event_BulletCreate.OnEvent -= OnBulletCreate;
     }
 
     //创建子弹
-    void OnBulletCreate(GameEvent @event)
+    void OnBulletCreate(Event_BulletCreate e)
     {
-        Bullet b = @event.GetParam(0) as Bullet;
+        Bullet b = e.Bullet;
         if (b.Caster != Caster) return;
 
         b.Hit.KillRate = Value;
@@ -237,23 +237,21 @@ public class Skill_10170 : Skill
 {
     public Skill_10170()
     {
-        EventManager.AddHandler(EVENT.ONHIT,    OnHit);
+        Event_Hit.OnEvent += OnHit;
     }
 
     public override void Dispose()
     {
-        EventManager.DelHandler(EVENT.ONHIT,    OnHit);
+        Event_Hit.OnEvent -= OnHit;
     }
 
     //目标受击
-    private void OnHit(GameEvent @event)
+    private void OnHit(Event_Hit e)
     {
-        Hit h = @event.GetParam(0) as Hit;
+        Hit h = e.Hit;
         if (h.Caster != Caster) return;
 
-        Unit unit = @event.GetParam(1) as Unit;
-
-        unit.AddBuff(Caster, (int)CONST.BUFF.YISHANG, Value, 3.0f);
+        e.Unit.AddBuff(Caster, (int)BUFF.YISHANG, Value, 3.0f);
     }
 }
 
@@ -286,9 +284,9 @@ public class Skill_10210 : Skill
         
         Vector2 point = target.transform.localPosition;
 
-        EventManager.SendEvent(new GameEvent(EVENT.ONPLAYTRAP, this));
+        new Event_PlayTrap(){Skill = this}.Notify();
 
-        Caster.CreateProjectile(PROJECTILE.POISONWATER, CONST.TRACE.PARABOLA, point, 0.4f, ()=>{
+        Caster.CreateProjectile(PROJECTILE.POISONWATER, TRACE.PARABOLA, point, 0.4f, ()=>{
             Field.Instance.PushArea(Caster, AREA.POISON, point, Value);
         });
     }
@@ -322,9 +320,9 @@ public class Skill_10220 : Skill
         //投掷陷阱
         Vector2 point = target.transform.localPosition;
 
-        EventManager.SendEvent(new GameEvent(EVENT.ONPLAYTRAP, this));
+        new Event_PlayTrap(){Skill = this}.Notify();
 
-        Caster.CreateProjectile(PROJECTILE.ICEWATER, CONST.TRACE.PARABOLA, point, 0.4f, ()=>{
+        Caster.CreateProjectile(PROJECTILE.ICEWATER, TRACE.PARABOLA, point, 0.4f, ()=>{
             Field.Instance.PushArea(Caster, AREA.ICE, point, Value);
         });
     }
@@ -356,9 +354,9 @@ public class Skill_10230 : Skill
 
         var point = target.transform.localPosition;
 
-        EventManager.SendEvent(new GameEvent(EVENT.ONPLAYTRAP, this));
+        new Event_PlayTrap(){Skill = this}.Notify();
 
-        Caster.CreateProjectile(PROJECTILE.ROPE, CONST.TRACE.PARABOLA, point, 0.4f, ()=>{
+        Caster.CreateProjectile(PROJECTILE.ROPE, TRACE.PARABOLA, point, 0.4f, ()=>{
             Field.Instance.PushArea(Caster, AREA.ROPE, point, Value);
         });
     }
@@ -374,22 +372,22 @@ public class Skill_10260 : Skill
 {
     public Skill_10260()
     {
-        EventManager.AddHandler(EVENT.ONKILLENEMY,  OnKillEnemy);
+        Event_KillEnemy.OnEvent += OnKillEnemy;
     }
 
     public override void Dispose()
     {
-        EventManager.DelHandler(EVENT.ONKILLENEMY,  OnKillEnemy);
+        Event_KillEnemy.OnEvent -= OnKillEnemy;
     }
 
     //创建子弹
-    void OnKillEnemy(GameEvent @event)
+    void OnKillEnemy(Event_KillEnemy e)
     {
-        Hit hit = (Hit)@event.GetParam(1);
+        Hit hit = e.Hit;
 
         if (hit.Caster != Caster) return;
 
-        hit.Caster.AddBuff(Caster, (int)CONST.BUFF.FASTSPD, Value);
+        hit.Caster.AddBuff(Caster, (int)BUFF.FASTSPD, Value);
     }
 }
 #endregion
@@ -401,22 +399,22 @@ public class Skill_10270 : Skill
 {
     public Skill_10270()
     {
-        EventManager.AddHandler(EVENT.ONKILLENEMY,  OnKillEnemy);
+        Event_KillEnemy.OnEvent += OnKillEnemy;
     }
 
     public override void Dispose()
     {
-        EventManager.DelHandler(EVENT.ONKILLENEMY,  OnKillEnemy);
+        Event_KillEnemy.OnEvent -= OnKillEnemy;
     }
 
     //创建子弹
-    void OnKillEnemy(GameEvent @event)
+    void OnKillEnemy(Event_KillEnemy e)
     {
-        Hit hit = (Hit)@event.GetParam(1);
+        Hit hit = e.Hit;
 
         if (hit.Caster != Caster) return;
         
-        hit.Caster.AddBuff(Caster, (int)CONST.BUFF.KILL, Value);
+        hit.Caster.AddBuff(Caster, (int)BUFF.KILL, Value);
     }
 }
 #endregion
@@ -427,22 +425,22 @@ public class Skill_10280 : Skill
 {
     public Skill_10280()
     {
-        EventManager.AddHandler(EVENT.ONKILLENEMY,  OnKillEnemy);
+        Event_KillEnemy.OnEvent += OnKillEnemy;
     }
 
     public override void Dispose()
     {
-        EventManager.DelHandler(EVENT.ONKILLENEMY,  OnKillEnemy);
+        Event_KillEnemy.OnEvent -= OnKillEnemy;
     }
 
     //创建子弹
-    void OnKillEnemy(GameEvent @event)
+    void OnKillEnemy(Event_KillEnemy e)
     {
-        Hit hit = (Hit)@event.GetParam(1);
+        Hit hit = e.Hit;
 
         if (hit.Caster != Caster) return;
         
-        hit.Caster.AddBuff(Caster, (int)CONST.BUFF.CRIT, Value);
+        hit.Caster.AddBuff(Caster, (int)BUFF.CRIT, Value);
     }
 }
 #endregion
@@ -469,7 +467,7 @@ public class Skill_10280 : Skill
 //         Caster.ATT.HPMAX++;
 //         Caster.UpdateHP(1);
 
-//         EventManager.SendEvent(new GameEvent(EVENT.ONHPUPDATE));
+//         new Event_UpdateHP().Notify();
 //     }
 // }
 // #endregion
@@ -484,7 +482,7 @@ public class Skill_10280 : Skill
 //         int value = Mathf.CeilToInt(Caster.ATT.HPMAX / 2.0f);
 //         Caster.UpdateHP(value);
 
-//         EventManager.SendEvent(new GameEvent(EVENT.ONHPUPDATE));
+//         new Event_UpdateHP().Notify();
 //     }
 // }
 // #endregion

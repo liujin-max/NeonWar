@@ -12,20 +12,22 @@ public class MaskWindow : BaseWindow
     void Awake()
     {
         m_Mask.SetActive(false);
-        
-        EventManager.AddHandler(EVENT.UI_POPUPMASK,     OnPopUpMask);
     }
 
-    void OnDestroy()
+    void OnEnable()
     {
-        EventManager.DelHandler(EVENT.UI_POPUPMASK,     OnPopUpMask);
+        Event_PopupMask.OnEvent += OnPopUpMask;
     }
 
-    private void OnPopUpMask(GameEvent @event)
+    void OnDisable()
     {
-        bool flag = (bool)@event.GetParam(0);
+        Event_PopupMask.OnEvent -= OnPopUpMask;
+    }
 
-        m_MaskCount += flag ? 1 : -1;
+
+    private void OnPopUpMask(Event_PopupMask e)
+    {
+        m_MaskCount += e.IsShow ? 1 : -1;
 
         m_Mask.SetActive(m_MaskCount > 0);
     }

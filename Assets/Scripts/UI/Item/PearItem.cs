@@ -18,15 +18,15 @@ public class PearItem : MonoBehaviour
     private Pear m_Pear;
     public Pear Pear {get { return m_Pear;}}
 
-    void Awake()
-    {
-        EventManager.AddHandler(EVENT.UI_PEARCHANGE,    OnPearChange);
+
+    private void OnEnable() {
+        Event_PearChange.OnEvent += OnPearChange;
     }
 
-    void OnDestroy()
-    {
-        EventManager.DelHandler(EVENT.UI_PEARCHANGE,    OnPearChange);
+    private void OnDisable() {
+        Event_PearChange.OnEvent -= OnPearChange;
     }
+
 
     public void Init(Pear pear)
     {
@@ -80,7 +80,7 @@ public class PearItem : MonoBehaviour
 
 
     #region 监听事件
-    private void OnPearChange(GameEvent @event)
+    private void OnPearChange(Event_PearChange e)
     {
         FlushUI();
     }

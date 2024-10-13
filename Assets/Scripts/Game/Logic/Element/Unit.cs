@@ -17,7 +17,7 @@ public class Unit : MonoBehaviour
     
 
     [HideInInspector] public int ID;
-    [HideInInspector] public CONST.SIDE Side = CONST.SIDE.PLAYER;
+    [HideInInspector] public SIDE Side = SIDE.PLAYER;
     public ATTConfig ATT;
     public CDTimer ASP = new CDTimer(0f);
     [HideInInspector] public AttributeValue CPS = new AttributeValue(1f, false);  //冷却值的恢复倍率
@@ -214,7 +214,7 @@ public class Unit : MonoBehaviour
         m_DeadFlag = true;
     }
 
-    public virtual Projectile CreateProjectile(string projectile ,CONST.TRACE trace_type, Vector2 to_pos, float time, Action callback)
+    public virtual Projectile CreateProjectile(string projectile ,TRACE trace_type, Vector2 to_pos, float time, Action callback)
     {
         var project = GameFacade.Instance.AssetManager.LoadPrefab(projectile, Vector3.zero, Field.Instance.Land.ELEMENT_ROOT).GetComponent<Projectile>();
         project.transform.position = ShootPivot.position;
@@ -259,7 +259,7 @@ public class Unit : MonoBehaviour
 
         m_BuffDic[buff_id] = b;
 
-        EventManager.SendEvent(new GameEvent(EVENT.ONBUFFADD, b));
+        new Event_BuffADD(){Buff = b}.Notify();
 
         return b;
     }
@@ -268,7 +268,7 @@ public class Unit : MonoBehaviour
     {
         buff.Dispose();
 
-        EventManager.SendEvent(new GameEvent(EVENT.ONBUFFREMOVE, buff));
+        new Event_BuffRemove(){Buff = buff}.Notify();
         
         if (m_BuffDic.ContainsKey(buff.ID)) {
             m_BuffDic.Remove(buff.ID);
@@ -285,7 +285,7 @@ public class Unit : MonoBehaviour
     {
         foreach (var buff in m_BuffDic.Values) {
             buff.Dispose();
-            EventManager.SendEvent(new GameEvent(EVENT.ONBUFFREMOVE, buff));
+            new Event_BuffRemove(){Buff = buff}.Notify();
         }
         m_BuffDic.Clear();
     }

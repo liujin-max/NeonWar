@@ -23,7 +23,7 @@ public class DisplayEvent_Wait : DisplayEvent
     {
         m_Timer.Update(dt);
         if (m_Timer.IsFinished()) {
-           m_State = CONST.DISPLAY_STATE.END; 
+           m_State = DISPLAY_STATE.END; 
         }
     }
 
@@ -56,7 +56,7 @@ public class DisplayEvent_Wait : DisplayEvent
 //动画节点
 public class DisplayEvent
 {
-    protected CONST.DISPLAY_STATE m_State = CONST.DISPLAY_STATE.IDLE;
+    protected DISPLAY_STATE m_State = DISPLAY_STATE.IDLE;
 
     protected object[] m_Params;
 
@@ -67,7 +67,7 @@ public class DisplayEvent
 
     public virtual void Start()
     {
-        m_State = CONST.DISPLAY_STATE.PLAYING;
+        m_State = DISPLAY_STATE.PLAYING;
     }
 
     public virtual void Update(float dealta_time)
@@ -82,16 +82,16 @@ public class DisplayEvent
 
     public bool IsIdle()
     {
-        return m_State == CONST.DISPLAY_STATE.IDLE;
+        return m_State == DISPLAY_STATE.IDLE;
     }
 
     public bool IsPlaying()
     {
-        return m_State == CONST.DISPLAY_STATE.PLAYING;
+        return m_State == DISPLAY_STATE.PLAYING;
     }
 
     public bool IsFinished()
     {
-        return m_State == CONST.DISPLAY_STATE.END;
+        return m_State == DISPLAY_STATE.END;
     }
 }

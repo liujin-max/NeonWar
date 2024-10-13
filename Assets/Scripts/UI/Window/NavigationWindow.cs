@@ -71,11 +71,11 @@ public class NavigationWindow : BaseWindow
         #region 关卡
         m_BtnFight.Init(
             ()=>{
-                EventManager.SendEvent(new GameEvent(EVENT.UI_SHOWFIGHT, true));
+                new Event_FightShow(){Flag = true}.Notify();
                 return true;
             },
             ()=>{
-                EventManager.SendEvent(new GameEvent(EVENT.UI_SHOWFIGHT, false));
+                new Event_FightShow(){Flag = false}.Notify();
             },
             ()=>{
                 if (m_NAVBTN == m_BtnFight) return;
@@ -92,7 +92,7 @@ public class NavigationWindow : BaseWindow
         #region 未开放
         m_BtnHalo.Init(
             ()=>{
-                EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "暂未开放"));
+                new Event_PopupTip(){Text = "暂未开放"}.Notify();
                 return false;
             },
             ()=>{

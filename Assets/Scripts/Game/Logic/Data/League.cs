@@ -66,8 +66,8 @@ public class League
         //返还资源
         DataCenter.Instance.User.UpdateGlass(cost_total);
 
-        EventManager.SendEvent(new GameEvent(EVENT.UI_SKILLUPGRADE));
-        EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS));
+        new Event_SkillUpgrade().Notify();
+        new Event_UpdateGlass().Notify();
     }
 
     //重置养成及所有技能
@@ -95,8 +95,7 @@ public class League
         //返还资源
         DataCenter.Instance.User.UpdateGlass(atk_cost + asp_cost + wor_cost);
 
-        EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS));
-
-        EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "重置成功", true));
+        new Event_UpdateGlass().Notify();
+        new Event_PopupTip(){Text = "重置成功", IsSilence = true}.Notify();
     }
 }

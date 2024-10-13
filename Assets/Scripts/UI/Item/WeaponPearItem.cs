@@ -22,15 +22,15 @@ public class WeaponPearItem : MonoBehaviour
         return item;
     }
 
-    void Awake()
-    {
-        EventManager.AddHandler(EVENT.UI_PEARCHANGE,    OnPearChange);
+
+    private void OnEnable() {
+        Event_PearChange.OnEvent += OnPearChange;
     }
 
-    void OnDestroy()
-    {
-        EventManager.DelHandler(EVENT.UI_PEARCHANGE,    OnPearChange);
+    private void OnDisable() {
+        Event_PearChange.OnEvent -= OnPearChange;
     }
+
 
     public void Init()
     {
@@ -58,12 +58,10 @@ public class WeaponPearItem : MonoBehaviour
     }
 
     #region 监听事件
-    private void OnPearChange(GameEvent @event)
+    private void OnPearChange(Event_PearChange e)
     {
-        // InitPears();
-
-        bool is_equip = (bool)@event.GetParam(0);
-        PearSlotMsg slot = @event.GetParam(2) as PearSlotMsg;
+        bool is_equip = e.IsEquip;
+        PearSlotMsg slot = e.Slot;
 
         for (int i = 0; i < DataCenter.Instance.User.CurrentPlayer.PearSlots.Count; i++)
         {

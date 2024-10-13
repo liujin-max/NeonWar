@@ -7,12 +7,12 @@ public class UICtrl_SkillTreeWindow : UICtrl<UICtrl_SkillTreeWindow, SkillTreeWi
 {
     protected override void RegisterHandlers()
     {
-        EventManager.AddHandler(EVENT.ONUPDATEGLASS,    OnUpdateGlass);
+        Event_UpdateGlass.OnEvent   += OnUpdateGlass;
     }
 
     protected override void RemoveHandlers()
     {
-        EventManager.DelHandler(EVENT.ONUPDATEGLASS,    OnUpdateGlass);
+        Event_UpdateGlass.OnEvent   -= OnUpdateGlass;
     }
 
     protected override void OpenWindow(Action<SkillTreeWindow> action)
@@ -25,7 +25,7 @@ public class UICtrl_SkillTreeWindow : UICtrl<UICtrl_SkillTreeWindow, SkillTreeWi
 
 
     #region 监听事件
-    private void OnUpdateGlass(GameEvent @event)
+    private void OnUpdateGlass(Event_UpdateGlass e)
     {
         m_Window?.FlushUI();
     }

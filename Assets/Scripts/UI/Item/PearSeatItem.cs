@@ -72,6 +72,6 @@ public class PearSeatItem : MonoBehaviour
     {
         if (m_Pear == null) return;
 
-        EventManager.SendEvent(new GameEvent(EVENT.UI_SELECTPEAR, m_Pear));
+        new Event_SelectPear(){Pear = m_Pear}.Notify();
     }
 }

@@ -59,7 +59,7 @@ public class Bullet : MonoBehaviour
     {
         Turn(angle);
 
-        EventManager.SendEvent(new GameEvent(EVENT.ONBULLETSHOOT, this));
+        new Event_BulletShoot(){Bullet = this}.Notify();
     }
 
     public void Turn(float angle)
@@ -140,7 +140,7 @@ public class Bullet : MonoBehaviour
         Hit.Velocity = this.Velocity;
 
         if (Field.Instance.SettleHit(Hit, unit) == true) {
-            EventManager.SendEvent(new GameEvent(EVENT.ONBULLETHIT, this, unit));
+            new Event_BulletHit(){Bullet = this, Target = unit}.Notify();
 
             //分裂检测
             Split(this, unit);

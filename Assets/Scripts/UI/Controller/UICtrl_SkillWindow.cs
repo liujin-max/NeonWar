@@ -7,12 +7,12 @@ public class UICtrl_SkillWindow : UICtrl<UICtrl_SkillWindow, SkillWindow>
 {
     protected override void RegisterHandlers()
     {
-        EventManager.AddHandler(EVENT.UI_SKILLUPGRADE,  OnSkillUpgrade);
+        Event_SkillUpgrade.OnEvent += OnSkillUpgrade;
     }
 
     protected override void RemoveHandlers()
     {
-        EventManager.DelHandler(EVENT.UI_SKILLUPGRADE,  OnSkillUpgrade);
+        Event_SkillUpgrade.OnEvent -= OnSkillUpgrade;
     }
 
     protected override void OpenWindow(Action<SkillWindow> action)
@@ -25,7 +25,7 @@ public class UICtrl_SkillWindow : UICtrl<UICtrl_SkillWindow, SkillWindow>
 
 
     #region 监听事件
-    private void OnSkillUpgrade(GameEvent @event)
+    private void OnSkillUpgrade(Event_SkillUpgrade e)
     {
         m_Window?.OnSkillUpgrade();
     }

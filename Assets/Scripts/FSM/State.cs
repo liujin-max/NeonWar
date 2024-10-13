@@ -7,7 +7,7 @@ using UnityEngine;
 /// </summary>
 public class State<T> where T : class
 {
-    public CONST.FSMSTATE ID;
+    public FSMSTATE ID;
     public FSM<T> m_FSM;
 
     // public virtual void Enter() {}   //状态委托：开始
@@ -18,7 +18,7 @@ public class State<T> where T : class
 
 
 
-    public State(CONST.FSMSTATE id)
+    public State(FSMSTATE id)
     {
         ID      = id;
     }

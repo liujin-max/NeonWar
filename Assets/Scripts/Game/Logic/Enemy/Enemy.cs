@@ -18,7 +18,7 @@ public class Enemy : Unit
 
 
     private MonsterJSON m_Data;
-    public CONST.ENEMY_TYPE TYPE {get {return m_Data.Type;}}
+    public ENEMY_TYPE TYPE {get {return m_Data.Type;}}
 
     [HideInInspector] public bool IsSummon = false;
     private bool m_IsRepel = false;   //击退中
@@ -47,7 +47,7 @@ public class Enemy : Unit
     public virtual void Init(MonsterJSON monster_data)
     {
         m_Data  = monster_data;
-        Side    = CONST.SIDE.ENEMY;
+        Side    = SIDE.ENEMY;
         ID      = monster_data.ID;
 
         //不希望ScriptableObject的对象在相同的怪物之间共享,且避免修改到源文件
@@ -63,7 +63,7 @@ public class Enemy : Unit
 
     public override bool IsBoss()
     {
-        return TYPE == CONST.ENEMY_TYPE.BOSS;
+        return TYPE == ENEMY_TYPE.BOSS;
     }
 
     public override bool IsControlled()
@@ -151,7 +151,7 @@ public class Enemy : Unit
 
         Field.Instance.Land.DoSmallShake();
 
-        EventManager.SendEvent(new GameEvent(EVENT.ONKILLENEMY, this, hit));
+        new Event_KillEnemy(){Enemy = this, Hit = hit}.Notify();
     }
 
     //怪物通常没有攻击动画，所以直接执行DoAttack

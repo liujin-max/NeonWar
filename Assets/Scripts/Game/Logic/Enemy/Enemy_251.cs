@@ -11,19 +11,19 @@ public class Enemy_251 : Enemy
     {
         base.Init(monster_data);
 
-        EventManager.AddHandler(EVENT.ONKILLENEMY,  OnKillEnemy);
+        Event_KillEnemy.OnEvent += OnKillEnemy;
     }
 
     public override void Dispose()
     {
         base.Dispose();
 
-        EventManager.DelHandler(EVENT.ONKILLENEMY,  OnKillEnemy);
+        Event_KillEnemy.OnEvent -= OnKillEnemy;
     }
 
-    private void OnKillEnemy(GameEvent @event)
+    private void OnKillEnemy(Event_KillEnemy evt)
     {
-        Enemy e = (Enemy) @event.GetParam(0);
+        Enemy e = evt.Enemy;
         if (e != this) return;
 
         //死亡时发射子弹

@@ -32,7 +32,7 @@ public class ResultWindow : BaseWindow
     {
         m_BtnContinue.onClick.AddListener(()=>{
             Field.Instance.End();
-            Field.Instance.Transist(CONST.FSMSTATE.IDLE);
+            Field.Instance.Transist(FSMSTATE.IDLE);
         });
 
         m_BtnVideo.onClick.AddListener(()=>{
@@ -40,12 +40,12 @@ public class ResultWindow : BaseWindow
                 m_RewardCall?.Invoke(2);
 
                 Field.Instance.End();
-                Field.Instance.Transist(CONST.FSMSTATE.IDLE);
+                Field.Instance.Transist(FSMSTATE.IDLE);
             });
         });
     }
 
-    public void Init(CONST.RESULT result, int glass, int worth_glass, Action<int> action)
+    public void Init(RESULT result, int glass, int worth_glass, Action<int> action)
     {
         m_RewardCall = action;
 
@@ -54,7 +54,7 @@ public class ResultWindow : BaseWindow
         m_GlassValue.SetValue(glass);
         m_WorthValue.SetValue(worth_glass);
 
-        m_Tip.SetActive(result == CONST.RESULT.LOSE);
+        m_Tip.SetActive(result == RESULT.LOSE);
     }
 
     public void InitPears(List<Pear> pears)

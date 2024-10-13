@@ -31,7 +31,7 @@ public static class NavigationController
 
         //判断是不是通关了
         if (DataCenter.Instance.Levels.LoadLevelJSON(level_id) == null) {
-            EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "未完待续..."));
+            new Event_PopupTip(){Text = "未完待续..."}.Notify();
             return false;
         }
 
@@ -46,7 +46,7 @@ public static class NavigationController
     {
         if (!DataCenter.Instance.IsSkillUnlock())
         {
-            EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "通过关卡1后解锁"));
+            new Event_PopupTip(){Text = "通过关卡1后解锁"}.Notify();
             return false;
         }
 
@@ -60,7 +60,7 @@ public static class NavigationController
     {
         if (!DataCenter.Instance.IsPearUnlock())
         {
-            EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "通过关卡" + CONST.PEAR_UNLOCK_LEVEL + "后解锁"));
+            new Event_PopupTip(){Text = "通过关卡" + CONST.PEAR_UNLOCK_LEVEL + "后解锁"}.Notify();
             return false;
         }
 

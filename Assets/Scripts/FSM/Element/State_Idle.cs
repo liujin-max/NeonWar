@@ -7,11 +7,11 @@ using UnityEngine;
 //可以进行局外系统的操作
 public class State_Idle<T> : State<Field>
 {
-    public State_Idle(CONST.FSMSTATE id) : base(id){}
+    public State_Idle(FSMSTATE id) : base(id){}
 
     public override void Enter(params object[] values)
     {
-        EventManager.AddHandler(EVENT.ONJOYSTICK_PRESS,     OnJoyStickPress);
+        Event_JoystickPress.OnEvent += OnJoyStickPress;
     }
 
     public override void Update()
@@ -21,11 +21,11 @@ public class State_Idle<T> : State<Field>
 
     public override void Exit()
     {
-        EventManager.DelHandler(EVENT.ONJOYSTICK_PRESS,     OnJoyStickPress);
+        Event_JoystickPress.OnEvent -= OnJoyStickPress;
     }
 
     //按下按钮
-    private void OnJoyStickPress(GameEvent @event)
+    private void OnJoyStickPress(Event_JoystickPress e)
     {
         int level_id = DataCenter.Instance.User.Level + 1;
 
@@ -36,7 +36,7 @@ public class State_Idle<T> : State<Field>
 
         //判断是不是通关了
         if (DataCenter.Instance.Levels.LoadLevelJSON(level_id) == null) {
-            EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "未完待续..."));
+            new Event_PopupTip(){Text = "未完待续..."}.Notify();
             return;
         }
 

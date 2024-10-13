@@ -129,7 +129,7 @@ public class Wave
                 m_EnemyRemoves.Add(e);
                 if (!e.IsSummon) {
                     Progress.UpdateCurrent(1);
-                    EventManager.SendEvent(new GameEvent(EVENT.UI_ENEMYDEAD, Progress.Current));
+                    new Event_EnemyProgress(){Count = Progress.Current}.Notify();
                 }
             }
         }

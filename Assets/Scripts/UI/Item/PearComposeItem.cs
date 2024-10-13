@@ -33,7 +33,7 @@ public class PearComposeItem : MonoBehaviour
             }
 
             if (pears.Count <= 1) {
-                EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "请放入装备"));
+                new Event_PopupTip(){Text = "请放入装备"}.Notify();
                 return;
             }
 
@@ -49,12 +49,14 @@ public class PearComposeItem : MonoBehaviour
             if (m_Callback != null) m_Callback(final);
         });
 
-        EventManager.AddHandler(EVENT.UI_COMPOSECHANGE, OnComposeChange);
     }
 
-    void OnDestroy()
-    {
-        EventManager.DelHandler(EVENT.UI_COMPOSECHANGE, OnComposeChange);
+    private void OnEnable() {
+        Event_PearComposeChange.OnEvent += OnComposeChange;
+    }
+
+    private void OnDisable() {
+        Event_PearComposeChange.OnEvent -= OnComposeChange;
     }
 
 
@@ -172,7 +174,7 @@ public class PearComposeItem : MonoBehaviour
             if (item.Value.Pear == pear) {
                 item.Value.Init(null);
 
-                if (is_manual) EventManager.SendEvent(new GameEvent(EVENT.UI_COMPOSECHANGE, false, pear));
+                if (is_manual) new Event_PearComposeChange(){IsPush = false, Pear = pear}.Notify();
                 break;
             }
         }
@@ -182,12 +184,11 @@ public class PearComposeItem : MonoBehaviour
 
 
     #region 监听事件
-    void OnComposeChange(GameEvent @event)
+    void OnComposeChange(Event_PearComposeChange e)
     {
-        bool flag = (bool)@event.GetParam(0);
-        Pear pear = @event.GetParam(1) as Pear;
+        Pear pear = e.Pear;
 
-        if (flag == true) 
+        if (e.IsPush == true) 
         {
             PushComposeItems(pear);
         } 

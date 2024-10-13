@@ -10,16 +10,15 @@ public class BuffListItem : MonoBehaviour
 
     private List<BuffItem> m_BuffItems = new List<BuffItem>();
 
-    void Awake()
-    {
-        EventManager.AddHandler(EVENT.ONBUFFADD,    OnBuffAdd);
-        EventManager.AddHandler(EVENT.ONBUFFREMOVE, OnBuffRemove);
+
+    private void OnEnable() {
+        Event_BuffADD.OnEvent += OnBuffAdd;
+        Event_BuffRemove.OnEvent += OnBuffRemove;
     }
 
-    void OnDestroy()
-    {
-        EventManager.DelHandler(EVENT.ONBUFFADD,    OnBuffAdd);
-        EventManager.DelHandler(EVENT.ONBUFFREMOVE, OnBuffRemove);
+    private void OnDisable() {
+        Event_BuffADD.OnEvent += OnBuffAdd;
+        Event_BuffRemove.OnEvent -= OnBuffRemove;
     }
 
 
@@ -51,18 +50,18 @@ public class BuffListItem : MonoBehaviour
 
 
     #region 监听事件
-    private void OnBuffAdd(GameEvent @event)
+    private void OnBuffAdd(Event_BuffADD e)
     {
-        var buff = @event.GetParam(0) as Buff;
+        var buff = e.Buff;
 
         if (buff.Belong != Field.Instance.Player) return;
 
         AddBuff(buff);
     }
 
-    private void OnBuffRemove(GameEvent @event)
+    private void OnBuffRemove(Event_BuffRemove e)
     {
-        var buff = @event.GetParam(0) as Buff;
+        var buff = e.Buff;
 
         if (buff.Belong != Field.Instance.Player) return;
 

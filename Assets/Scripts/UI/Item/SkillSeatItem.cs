@@ -35,7 +35,7 @@ public class SkillSeatItem : MonoBehaviour
 
                 sb.Append("后解锁");
 
-                EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, sb.ToString()));
+                new Event_PopupTip(){Text = sb.ToString()}.Notify();
 
                 return;
             }

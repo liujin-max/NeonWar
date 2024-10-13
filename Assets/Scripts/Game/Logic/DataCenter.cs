@@ -71,7 +71,7 @@ public class PropertyData
 {
     public int ID;
     public string Name;
-    public CONST.PROPERTY Type;
+    public PROPERTY Type;
     public int Point;
     public int Weight;
     public string Description;
@@ -134,7 +134,7 @@ public class DataCenter
             {
                 ID      = Convert.ToInt32(config[0]),
                 Name    = config[1],
-                Type    = (CONST.PROPERTY)Convert.ToInt32(config[2]),
+                Type    = (PROPERTY)Convert.ToInt32(config[2]),
                 Point   = Convert.ToInt32(config[3]),
                 Weight  = Convert.ToInt32(config[4]),
                 Description = config[5]
@@ -142,7 +142,7 @@ public class DataCenter
 
             m_Properties[pear.ID] = pear;
 
-            if (pear.Type == CONST.PROPERTY.NORMAL) m_NormalPropertyWeights.Add(pear, pear.Weight);
+            if (pear.Type == PROPERTY.NORMAL) m_NormalPropertyWeights.Add(pear, pear.Weight);
             else m_SpecialPropertyWeights.Add(pear, pear.Weight);
         }
     }
@@ -272,7 +272,7 @@ public class DataCenter
 
 
         if (!RandomUtility.IsHit(success_rate)) {
-            EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "合成失败"));
+            new Event_PopupTip(){Text = "合成失败"}.Notify();
             return null;
         }
 

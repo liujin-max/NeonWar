@@ -17,14 +17,14 @@ public class Enemy_255 : Enemy
         ImmuneDisplaceFlag  = true;
         ImmuneControlFlag   = true;
 
-        EventManager.AddHandler(EVENT.ONKILLENEMY,  OnKillEnemy);
+        Event_KillEnemy.OnEvent += OnKillEnemy;
     }
 
     public override void Dispose()
     {
         base.Dispose();
 
-        EventManager.DelHandler(EVENT.ONKILLENEMY,  OnKillEnemy);
+        Event_KillEnemy.OnEvent -= OnKillEnemy;
     }
 
     void FixedUpdate()
@@ -34,9 +34,9 @@ public class Enemy_255 : Enemy
     }
 
     #region 监听事件
-    private void OnKillEnemy(GameEvent @event)
+    private void OnKillEnemy(Event_KillEnemy evt)
     {
-        Enemy e = (Enemy) @event.GetParam(0);
+        Enemy e = evt.Enemy;
         if (e != this) return;
 
         for (int i = 0; i < 6; i++)

@@ -43,7 +43,7 @@ public class Player : Unit
     public virtual void Init(int id, float angle)
     {
         ID      = id;
-        Side    = CONST.SIDE.PLAYER;
+        Side    = SIDE.PLAYER;
         m_Angle = angle;
 
         //修改到源文件

@@ -158,19 +158,19 @@ public class BackpackWindow : BaseWindow
                 
                 if (m_ComposeSeats.ContainsKey(p))  //卸下
                 {
-                    EventManager.SendEvent(new GameEvent(EVENT.UI_COMPOSECHANGE, false, p));
+                    new Event_PearComposeChange(){IsPush = false, Pear = p}.Notify();
                 }
                 else    //
                 {
                     if (m_ComposeSeats.Count >= CONST.COMPOSE_COUNTMAX) return;
 
-                    EventManager.SendEvent(new GameEvent(EVENT.UI_COMPOSECHANGE, true, p));
+                    new Event_PearComposeChange(){IsPush = true, Pear = p}.Notify();
                 }
             });
 
             if (m_ComposeSeats.Count == 0 && p.ID == pear.ID)
             {
-                EventManager.SendEvent(new GameEvent(EVENT.UI_COMPOSECHANGE, true, p));
+                new Event_PearComposeChange(){IsPush = true, Pear = p}.Notify();
             }
         });
     }
@@ -180,7 +180,7 @@ public class BackpackWindow : BaseWindow
     #region 协程
     IEnumerator EnterAnim()
     {
-        EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPMASK, true));
+        new Event_PopupMask(){IsShow = true}.Notify();
 
 
         m_PearView.transform.localPosition = new Vector3(0, 1500, 0);
@@ -189,15 +189,15 @@ public class BackpackWindow : BaseWindow
 
         yield return new WaitForSeconds(m_EnterTimer);
 
-        EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPMASK, false));
-        EventManager.SendEvent(new GameEvent(EVENT.UI_BACKPACKOPEN, true));
+        new Event_PopupMask(){IsShow = false}.Notify();
+        new Event_BackpackOpen(){IsOpen = true}.Notify();
 
         yield return null;
     }
 
     IEnumerator ExitAnim()
     {
-        EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPMASK, true));
+        new Event_PopupMask(){IsShow = true}.Notify();
 
   
         m_DetailPivot.gameObject.SetActive(false);
@@ -209,8 +209,8 @@ public class BackpackWindow : BaseWindow
 
         yield return new WaitForSeconds(m_ExitTimer);
 
-        EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPMASK, false));
-        EventManager.SendEvent(new GameEvent(EVENT.UI_BACKPACKOPEN, false));
+        new Event_PopupMask(){IsShow = false}.Notify();
+        new Event_BackpackOpen(){IsOpen = false}.Notify();
 
         GameFacade.Instance.UIManager.UnloadWindow(gameObject);
 

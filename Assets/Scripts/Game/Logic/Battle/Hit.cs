@@ -8,7 +8,7 @@ using UnityEngine;
 public class Hit
 {
     public Unit Caster;
-    public CONST.HIT_TYPE Type = CONST.HIT_TYPE.NORMAL;
+    public HIT_TYPE Type = HIT_TYPE.NORMAL;
 
     public AttributeValue ATK;
     public AttributeValue CP;
@@ -62,7 +62,5 @@ public class Hit
         HEALTH_INC  = caster.HEALTH_INC.ToNumber();
         SLOW_INC    = caster.SLOW_INC.ToNumber();
         CONTROL_INC = caster.CONTROL_INC.ToNumber();
-
-        EventManager.SendEvent(new GameEvent(EVENT.ONCREATEHIT, this));
     }
 }

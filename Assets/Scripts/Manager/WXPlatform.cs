@@ -59,45 +59,6 @@ public class WXPlatform : Platform
 
         DataCenter.Instance.User.SyncRecords();
         DataCenter.Instance.User.SyncFinish();
-
-        // Debug.Log("====开始获取账号数据====");
-        // EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPMASK, true));
-        // //云开发：加载积分数据
-        // WX.cloud.CallFunction(new CallFunctionParam()
-        // {
-        //     name = "GetUserData",
-        //     data = JsonUtility.ToJson(""),
-        //     success = (res) =>
-        //     {
-        //         Debug.Log("====获取账号数据成功==== : " + res.result);
-        //         //云数据保存到本地
-        //         var data = JsonMapper.ToObject(res.result);
-        //         if (data.ContainsKey("data"))
-        //         {
-        //             //将Json转换成临时的GameUserData
-        //             DataCenter.Instance.User.Data    = JsonUtility.FromJson<GameUserData>(JsonMapper.ToJson(data["data"]));
-
-        //             //基础数据
-        //             DataCenter.Instance.User.Base    = JsonUtility.FromJson<BaseData>(JsonMapper.ToJson(data["data"]["userInfo"]));
-        //         }
-        //     },
-        //     fail = (res) =>
-        //     {
-        //         Debug.LogError("====获取账号数据失败====" + res.errMsg);
-        //     },
-        //     complete = (res) =>
-        //     {
-        //         Debug.Log("====获取账号数据结束====");
-        //         DataCenter.Instance.User.SyncRecords();
-
-
-        //         DataCenter.Instance.User.SyncFinish();
-                
-        //         EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPMASK, false));
-        //     }
-        // });
-        
-
     }
 
     public override void UPLOAD(GameUserData userData)
@@ -160,36 +121,7 @@ public class WXPlatform : Platform
     //激励广告
     public override void REWARD_VIDEOAD(string ad_id, Action callback)
     {
-        if (callback != null) callback();
-        
-        // WXCreateRewardedVideoAdParam param = new WXCreateRewardedVideoAdParam();
-        // param.adUnitId = ad_id;
-
-        // WXRewardedVideoAd ad = WX.CreateRewardedVideoAd(param);
-        // ad.OnError((WXADErrorResponse response)=>{
-        //     //上报事件:广告错误
-
-        // });
-
-        // this.LoadAD(ad, ()=>{
-        //     ad.Show((WXTextResponse reponse)=>{
-                
-        //     }, (WXTextResponse error_reponse)=>{
-        //         //上报事件:广告错误
-        //         EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "暂无广告"));
-        //     });
-        // });
-
-        // ad.OnClose((WXRewardedVideoAdOnCloseResponse reponse)=>{
-        //     // Debug.Log("是否完成观看：" + reponse.isEnded);
-        //     if (reponse != null && reponse.isEnded == true) {
-        //         //上报事件:观看广告
-
-        //         if (callback != null) {
-        //             callback();
-        //         }  
-        //     }
-        // });  
+        if (callback != null) callback();  
     }
 
     //Banner广告
@@ -340,7 +272,7 @@ public class WXPlatform : Platform
         NavigateToMiniProgramOption option = new NavigateToMiniProgramOption();
         option.appId    = appid;
         option.fail     = (GeneralCallbackResult callback)=>{
-            EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "跳转失败"));
+            new Event_PopupTip(){Text = "跳转失败"}.Notify();
         };
 
 

@@ -124,19 +124,19 @@ public class Property_Arrow : Property
 {
     public override void Equip()
     {
-        EventManager.AddHandler(EVENT.ONBULLETCREATE,   OnBulletCreate);
+        Event_BulletCreate.OnEvent += OnBulletCreate;
     }
 
     public override void UnEquip()
     {
-        EventManager.DelHandler(EVENT.ONBULLETCREATE,   OnBulletCreate);
+        Event_BulletCreate.OnEvent -= OnBulletCreate;
     }
 
-    private void OnBulletCreate(GameEvent @event)
+    private void OnBulletCreate(Event_BulletCreate e)
     {
-        Bullet bullet = @event.GetParam(0) as Bullet;
+        Bullet bullet = e.Bullet;
 
-        if (bullet.Caster.ID == (int)CONST.PLAYER.BOW)
+        if (bullet.Caster.ID == (int)PLAYER.BOW)
         {
             bullet.Hit.ARROW_INC.PutADD(this, Value / 100.0f);
         }
@@ -150,21 +150,21 @@ public class Property_Buff : Property
 {
     public override void Equip()
     {
-        EventManager.AddHandler(EVENT.ONBUFFADD,    OnBuffAdd);
+        Event_BuffADD.OnEvent += OnBuffAdd;
     }
 
     public override void UnEquip()
     {
-        EventManager.AddHandler(EVENT.ONBUFFADD,    OnBuffAdd);
+        Event_BuffADD.OnEvent -= OnBuffAdd;
     }
 
-    private void OnBuffAdd(GameEvent @event)
+    private void OnBuffAdd(Event_BuffADD e)
     {
-        Buff buff = @event.GetParam(0) as Buff;
+        Buff buff = e.Buff;
 
         if (buff.Belong != Pear.Belong) return;
 
-        if (buff.TYPE == CONST.BUFF_TYPE.GAIN)
+        if (buff.TYPE == BUFF_TYPE.GAIN)
         {
             buff.PutLife(this, Value / 100.0f);
         }
@@ -278,17 +278,17 @@ public class Property_ControlBuff : Property
 {
     public override void Equip()
     {
-        EventManager.AddHandler(EVENT.ONBUFFADD,    OnBuffAdd);
+        Event_BuffADD.OnEvent += OnBuffAdd;
     }
 
     public override void UnEquip()
     {
-        EventManager.AddHandler(EVENT.ONBUFFADD,    OnBuffAdd);
+        Event_BuffADD.OnEvent += OnBuffAdd;
     }
 
-    private void OnBuffAdd(GameEvent @event)
+    private void OnBuffAdd(Event_BuffADD e)
     {
-        Buff buff = @event.GetParam(0) as Buff;
+        Buff buff = e.Buff;
 
         if (buff.Caster != Pear.Belong) return;
 
@@ -339,17 +339,17 @@ public class Property_AreaRange : Property
 {
     public override void Equip()
     {
-        EventManager.AddHandler(EVENT.ONPUSHAREA,   OnPushArea);
+        Event_AreaPush.OnEvent += OnPushArea;
     }
 
     public override void UnEquip()
     {
-        EventManager.DelHandler(EVENT.ONPUSHAREA,   OnPushArea);
+        Event_AreaPush.OnEvent -= OnPushArea;
     }
 
-    private void OnPushArea(GameEvent @event)
+    private void OnPushArea(Event_AreaPush e)
     {
-        Area area = @event.GetParam(0) as Area;
+        Area area = e.Area;
 
         if (area.Belong != Pear.Belong) return;
 
@@ -386,17 +386,17 @@ public class Property_AreaReset : Property
 {
     public override void Equip()
     {
-        EventManager.AddHandler(EVENT.ONPLAYTRAP,   OnPlayTrap);
+        Event_PlayTrap.OnEvent += OnPlayTrap;
     }
 
     public override void UnEquip()
     {
-        EventManager.DelHandler(EVENT.ONPLAYTRAP,   OnPlayTrap);
+        Event_PlayTrap.OnEvent -= OnPlayTrap;
     }
 
-    private void OnPlayTrap(GameEvent @event)
+    private void OnPlayTrap(Event_PlayTrap e)
     {
-        Skill sk = @event.GetParam(0) as Skill;
+        Skill sk = e.Skill;
 
         if (sk.Caster != Pear.Belong) return;
 
@@ -413,18 +413,18 @@ public class Property_SplitFocus : Property
 {
     public override void Equip()
     {
-        EventManager.AddHandler(EVENT.ONBULLETSHOOT,  OnBulletShoot);
+        Event_BulletShoot.OnEvent += OnBulletShoot;
     }
 
     public override void UnEquip()
     {
-        EventManager.DelHandler(EVENT.ONBULLETSHOOT,  OnBulletShoot);
+        Event_BulletShoot.OnEvent -= OnBulletShoot;
     }
 
     //子弹击中目标
-    private void OnBulletShoot(GameEvent @event)
+    private void OnBulletShoot(Event_BulletShoot e)
     {
-        Bullet b = @event.GetParam(0) as Bullet;
+        Bullet b = e.Bullet;
         if (b.Caster != Pear.Belong) return;
         if (b.IsSplit == false) return;   //只影响分裂出的箭矢
 
@@ -438,10 +438,10 @@ public class Property_SplitFocus : Property
     
 
         int rand= RandomUtility.Random(0, Field.Instance.Spawn.Enemys.Count);
-        Enemy e = Field.Instance.Spawn.Enemys[rand];
+        Enemy enemy = Field.Instance.Spawn.Enemys[rand];
 
         //分裂箭射向其他目标
-        b.Turn(ToolUtility.VectorToAngle(e.transform.localPosition - b.transform.localPosition)); 
+        b.Turn(ToolUtility.VectorToAngle(enemy.transform.localPosition - b.transform.localPosition)); 
     }
 }
 
@@ -456,19 +456,19 @@ public class Property_AreaPoison : Property
     
     public override void Equip()
     {
-        EventManager.AddHandler(EVENT.ONPUSHAREA,   OnPushArea);
-        EventManager.AddHandler(EVENT.ONREMOVEAREA, OnRemoveArea);
+        Event_AreaPush.OnEvent += OnPushArea;
+        Event_AreaRemove.OnEvent += OnRemoveArea;
     }
 
     public override void UnEquip()
     {
-        EventManager.DelHandler(EVENT.ONPUSHAREA,   OnPushArea);
-        EventManager.DelHandler(EVENT.ONREMOVEAREA, OnRemoveArea);
+        Event_AreaPush.OnEvent -= OnPushArea;
+        Event_AreaRemove.OnEvent -= OnRemoveArea;
     }
 
-    private void OnPushArea(GameEvent @event)
+    private void OnPushArea(Event_AreaPush e)
     {
-        Area_Poison area = @event.GetParam(0) as Area_Poison;
+        Area_Poison area = e.Area as Area_Poison;
         
         if (area == null) return;
         if (area.Belong != Pear.Belong) return;
@@ -477,9 +477,9 @@ public class Property_AreaPoison : Property
         m_Areas.Add(area);
     }
 
-    private void OnRemoveArea(GameEvent @event)
+    private void OnRemoveArea(Event_AreaRemove e)
     {
-        Area_Poison area = @event.GetParam(0) as Area_Poison;
+        Area_Poison area = e.Area as Area_Poison;
         
         if (area == null) return;
         if (area.Belong != Pear.Belong) return;
@@ -501,7 +501,7 @@ public class Property_AreaPoison : Property
 
                 foreach (var t in area.Units)
                 {
-                    t.Key.AddBuff(caster, (int)CONST.BUFF.POISON, (int)caster.ATT.ATK.GetBase(), 0, Value);
+                    t.Key.AddBuff(caster, (int)BUFF.POISON, (int)caster.ATT.ATK.GetBase(), 0, Value);
                 }
             }
         }
@@ -533,7 +533,7 @@ public class Property_AreaIceFrozen : Property
             {
                 if (t.Value >= time) 
                 {
-                    t.Key.AddBuff(Pear.Belong, (int)CONST.BUFF.FROZEN, 1, 1.5f);
+                    t.Key.AddBuff(Pear.Belong, (int)BUFF.FROZEN, 1, 1.5f);
                 }
             }
         }
@@ -604,19 +604,19 @@ public class Property_Rebound : Property
 {
     public override void Equip()
     {
-        EventManager.AddHandler(EVENT.ONBULLETCREATE,   OnBulletCreate);
+        Event_BulletCreate.OnEvent += OnBulletCreate;
     }
 
     public override void UnEquip()
     {
-        EventManager.DelHandler(EVENT.ONBULLETCREATE,   OnBulletCreate);
+        Event_BulletCreate.OnEvent -= OnBulletCreate;
     }
 
-    private void OnBulletCreate(GameEvent @event)
+    private void OnBulletCreate(Event_BulletCreate e)
     {
-        Bullet bullet = @event.GetParam(0) as Bullet;
+        Bullet bullet = e.Bullet;
 
-        if (bullet.Caster.ID == (int)CONST.PLAYER.BOW && bullet.ReboundTimes > 0)
+        if (bullet.Caster.ID == (int)PLAYER.BOW && bullet.ReboundTimes > 0)
         {
             bullet.ReboundUpgrade = true;
         }   
@@ -659,24 +659,24 @@ public class Property_CritPoint : Property
 {
     public override void Equip()
     {
-        EventManager.AddHandler(EVENT.ONHIT,   OnHit);
+        Event_Hit.OnEvent += OnHit;
     }
 
     public override void UnEquip()
     {
-        EventManager.DelHandler(EVENT.ONHIT,   OnHit);
+        Event_Hit.OnEvent -= OnHit;
     }
 
     //目标受击
-    private void OnHit(GameEvent @event)
+    private void OnHit(Event_Hit e)
     {
-        Hit h = @event.GetParam(0) as Hit;
+        Hit h = e.Hit;
         if (h.Caster != Pear.Belong) return;
 
         if (h.IsCrit == true)
         {
             var caster = Pear.Belong;
-            caster.AddBuff(caster, (int)CONST.BUFF.CRITDEMAGE, Value);
+            caster.AddBuff(caster, (int)BUFF.CRITDEMAGE, Value);
         }
     }
 }
@@ -688,18 +688,18 @@ public class Property_DodgeHeal : Property
 {
     public override void Equip()
     {
-        EventManager.AddHandler(EVENT.ONDODGE,  OnDodge);
+        Event_Dodge.OnEvent += OnDodge;
     }
 
     public override void UnEquip()
     {
-        EventManager.DelHandler(EVENT.ONDODGE,  OnDodge);
+        Event_Dodge.OnEvent -= OnDodge;
     }
 
     //目标受击
-    private void OnDodge(GameEvent @event)
+    private void OnDodge(Event_Dodge e)
     {
-        Unit u = @event.GetParam(0) as Unit;
+        Unit u = e.Unit;
         if (u != Pear.Belong) return;
 
         if (RandomUtility.IsHit(Value) == true)
@@ -716,22 +716,21 @@ public class Property_AttackSlow : Property
 {
     public override void Equip()
     {
-        EventManager.AddHandler(EVENT.ONHIT,   OnHit);
+        Event_Hit.OnEvent += OnHit;
     }
 
     public override void UnEquip()
     {
-        EventManager.DelHandler(EVENT.ONHIT,   OnHit);
+        Event_Hit.OnEvent -= OnHit;
     }
 
     //目标受击
-    private void OnHit(GameEvent @event)
+    private void OnHit(Event_Hit e)
     {
-        Hit h = @event.GetParam(0) as Hit;
+        Hit h = e.Hit;
         if (h.Caster != Pear.Belong) return;
 
-        var u = @event.GetParam(1) as Unit;
-        u.AddBuff(Pear.Belong, (int)CONST.BUFF.SLOW, 60, 2.5f);
+        e.Unit.AddBuff(Pear.Belong, (int)BUFF.SLOW, 60, 2.5f);
     }
 }
 #endregion
@@ -787,7 +786,7 @@ public class Property
     public int ID {get {return Model.ID;}}
     public int Value;
     public string Name {get {return Model.Name;}}
-    public CONST.PROPERTY Type {get {return Model.Type;}}
+    public PROPERTY Type {get {return Model.Type;}}
 
     //是否生效(当携带相同的特殊词条时，只有属性更好的那个会生效)
     public bool IsValid = true;

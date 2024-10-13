@@ -106,7 +106,6 @@
     <Compile Include="Assets\Scripts\Game\Logic\Element\Bullet.cs" />
     <Compile Include="Assets\Scripts\UI\Window\SkillWindow.cs" />
     <Compile Include="Assets\Scripts\Game\AttackMode\AttackMode.cs" />
-    <Compile Include="Assets\Scripts\Manager\EventManager.cs" />
     <Compile Include="Assets\Scripts\UI\Item\PearComposeItem.cs" />
     <Compile Include="Assets\Scripts\Effect\ShakeText.cs" />
     <Compile Include="Assets\Scripts\Utility\BoxColliderUtility.cs" />

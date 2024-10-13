@@ -7,18 +7,14 @@ public class UICtrl_BattleWindow : UICtrl<UICtrl_BattleWindow, BattleWindow>
 {
     protected override void RegisterHandlers()
     {
-        EventManager.AddHandler(EVENT.ONHPUPDATE,       OnUpdateHP);
-        EventManager.AddHandler(EVENT.ONNEXTWAVE,       OnNextWave);
-        
-        EventManager.AddHandler(EVENT.UI_ENEMYDEAD,     OnEnemyDead);
+        Event_UpdateHP.OnEvent      += OnUpdateHP;
+        Event_EnemyProgress.OnEvent += OnEnemyDead;
     }
 
     protected override void RemoveHandlers()
     {
-        EventManager.DelHandler(EVENT.ONHPUPDATE,       OnUpdateHP);
-        EventManager.DelHandler(EVENT.ONNEXTWAVE,       OnNextWave);
-
-        EventManager.DelHandler(EVENT.UI_ENEMYDEAD,     OnEnemyDead);
+        Event_UpdateHP.OnEvent      -= OnUpdateHP;
+        Event_EnemyProgress.OnEvent -= OnEnemyDead;
     }
 
     protected override void OpenWindow(Action<BattleWindow> action = null)
@@ -31,21 +27,19 @@ public class UICtrl_BattleWindow : UICtrl<UICtrl_BattleWindow, BattleWindow>
 
 
     #region 监听事件
-    private void OnUpdateHP(GameEvent @event)
+    private void OnUpdateHP(Event_UpdateHP e)
     {
         m_Window?.OnUpdateHP();
     }
 
-    private void OnNextWave(GameEvent @event)
-    {
-        m_Window?.OnNextWave();
-    }
+    // private void OnNextWave(GameEvent @event)
+    // {
+    //     m_Window?.OnNextWave();
+    // }
 
-    private void OnEnemyDead(GameEvent @event)
+    private void OnEnemyDead(Event_EnemyProgress e)
     {
-        int count = (int)@event.GetParam(0);
-
-        m_Window?.OnEnemyDead(count);
+        m_Window?.OnEnemyDead(e.Count);
     }
 
     #endregion

@@ -15,23 +15,27 @@ public class TipWindow : BaseWindow
     void Awake()
     {
         m_TipPivot.SetActive(false);
-        
-        EventManager.AddHandler(EVENT.UI_POPUPTIP,  OnTip);
     }
 
-    void OnDestroy()
+    void OnEnable()
     {
-        EventManager.AddHandler(EVENT.UI_POPUPTIP,  OnTip);
+        Event_PopupTip.OnEvent += OnTip;
     }
 
-    private void OnTip(GameEvent @event)
+    void OnDisable()
     {
-        Platform.Instance.VIBRATE(CONST.VIBRATELEVEL.MEDIUM);
+        Event_PopupTip.OnEvent -= OnTip;
+    } 
 
-        var flag = @event.GetParam(1);
-        if (flag == null) SoundManager.Instance.Load(SOUND.TIP);
+
+
+    private void OnTip(Event_PopupTip e)
+    {
+        Platform.Instance.VIBRATE(VIBRATELEVEL.MEDIUM);
+
+        if (!e.IsSilence) SoundManager.Instance.Load(SOUND.TIP);
  
-        var text = (string)@event.GetParam(0);
+        var text = e.Text;
 
         m_TipPivot.SetActive(true);
         m_TipPivot.transform.Find("Text").GetComponent<TextMeshProUGUI>().text = text;

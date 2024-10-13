@@ -7,16 +7,16 @@ using UnityEngine;
 //结算
 public class State_Result<T> : State<Field>
 {
-    private CONST.RESULT m_Result;
+    private RESULT m_Result;
     private CDTimer m_DelayTimer = new CDTimer(1);
 
 
 
-    public State_Result(CONST.FSMSTATE id) : base(id){}
+    public State_Result(FSMSTATE id) : base(id){}
 
     public override void Enter(params object[] values)
     {
-        m_Result = (CONST.RESULT) values[0];
+        m_Result = (RESULT) values[0];
         m_DelayTimer.ForceReset();
 
         GameFacade.Instance.TimeManager.BulletTime();
@@ -26,10 +26,10 @@ public class State_Result<T> : State<Field>
     {
         m_DelayTimer.Update(Time.deltaTime);
         if (m_DelayTimer.IsFinished() == true) {
-            Field.Instance.STATE = CONST.GAME_STATE.PAUSE;
+            Field.Instance.STATE = GAME_STATE.PAUSE;
 
             //胜利
-            if (m_Result == CONST.RESULT.VICTORY)
+            if (m_Result == RESULT.VICTORY)
             {   
                 //记录通关
                 DataCenter.Instance.User.SetLevel(Field.Instance.Level.ID);
@@ -41,7 +41,8 @@ public class State_Result<T> : State<Field>
 
             int glass_total = base_glass + worth_glass;
             DataCenter.Instance.User.UpdateGlass(glass_total);
-            EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS));
+
+            new Event_UpdateGlass().Notify();
 
             //计算道具奖励
             List<Pear> pears = Field.Instance.GeneratePearRewards(m_Result);
@@ -50,7 +51,7 @@ public class State_Result<T> : State<Field>
                 window.Init(m_Result, base_glass, worth_glass, (rate)=>{
                     DataCenter.Instance.User.UpdateGlass(glass_total * rate);
 
-                    EventManager.SendEvent(new GameEvent(EVENT.ONUPDATEGLASS));
+                    new Event_UpdateGlass().Notify();
                 });
                 window.InitPears(pears);
             });

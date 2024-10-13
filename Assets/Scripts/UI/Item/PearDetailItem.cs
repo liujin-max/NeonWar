@@ -39,19 +39,17 @@ public class PearDetailItem : MonoBehaviour
 
     void Awake()
     {
-        EventManager.AddHandler(EVENT.UI_PEARCHANGE,    OnPearChange);
-
         m_BtnEquip.onClick.AddListener(()=>{
             SoundManager.Instance.Load(SOUND.CLICK);
 
             if (!DataCenter.Instance.User.HasSamePear(m_Pear) && DataCenter.Instance.User.IsPearSeatsFull() == true) {
-                EventManager.SendEvent(new GameEvent(EVENT.UI_POPUPTIP, "装备槽已满"));
+                new Event_PopupTip(){Text = "装备槽已满"}.Notify();
                 return;
             }
 
             var slot = DataCenter.Instance.User.EquipPear(m_Pear);
 
-            EventManager.SendEvent(new GameEvent(EVENT.UI_PEARCHANGE, true, m_Pear, slot));
+            new Event_PearChange(){IsEquip = true, Pear = m_Pear, Slot = slot}.Notify();
         });
 
         m_BtnUnEquip.onClick.AddListener(()=>{
@@ -59,20 +57,23 @@ public class PearDetailItem : MonoBehaviour
 
             var slot = DataCenter.Instance.User.UnloadPear(m_Pear);
 
-            EventManager.SendEvent(new GameEvent(EVENT.UI_PEARCHANGE, false, m_Pear, slot));
+            new Event_PearChange(){IsEquip = false, Pear = m_Pear, Slot = slot}.Notify();
         });
 
         //合成
         BtnSynthesis.onClick.AddListener(()=>{
             SoundManager.Instance.Load(SOUND.CLICK);
 
-            EventManager.SendEvent(new GameEvent(EVENT.UI_PEARCOMPOSE, m_Pear));
+            new Event_PearCompose(){Pear = m_Pear}.Notify();
         });
     }
 
-    void OnDestroy()
-    {
-        EventManager.DelHandler(EVENT.UI_PEARCHANGE,    OnPearChange);
+    private void OnEnable() {
+        Event_PearChange.OnEvent += OnPearChange;
+    }
+
+    private void OnDisable() {
+        Event_PearChange.OnEvent -= OnPearChange;
     }
 
 
@@ -137,7 +138,7 @@ public class PearDetailItem : MonoBehaviour
 
 
     #region 监听事件
-    private void OnPearChange(GameEvent @event)
+    private void OnPearChange(Event_PearChange e)
     {
         FlushUI();
 

@@ -7,18 +7,18 @@ public class UICtrl_NavWindow : UICtrl<UICtrl_NavWindow, NavigationWindow>
 {
     protected override void RegisterHandlers()
     {
-        EventManager.AddHandler(EVENT.ONBATTLESTART,    OnBattleStart);
-        EventManager.AddHandler(EVENT.ONBATTLEEND,      OnBattleEnd);
+        Event_BattleStart.OnEvent   += OnBattleStart;
+        Event_BattleEnd.OnEvent     += OnBattleEnd;
 
-        EventManager.AddHandler(EVENT.UI_BACKPACKOPEN,  OnBackpackOpen);
+        Event_BackpackOpen.OnEvent += OnBackpackOpen;
     }
 
     protected override void RemoveHandlers()
     {
-        EventManager.DelHandler(EVENT.ONBATTLESTART,    OnBattleStart);
-        EventManager.DelHandler(EVENT.ONBATTLEEND,      OnBattleEnd);
+        Event_BattleStart.OnEvent   -= OnBattleStart;
+        Event_BattleEnd.OnEvent     -= OnBattleEnd;
 
-        EventManager.DelHandler(EVENT.UI_BACKPACKOPEN,  OnBackpackOpen);
+        Event_BackpackOpen.OnEvent  -= OnBackpackOpen;
     }
     
     protected override void OpenWindow(Action<NavigationWindow> action)
@@ -31,23 +31,21 @@ public class UICtrl_NavWindow : UICtrl<UICtrl_NavWindow, NavigationWindow>
 
     #region 监听事件
     //战斗开始
-    private void OnBattleStart(GameEvent @event)
+    private void OnBattleStart(Event_BattleStart e)
     {
         m_Window?.OnBattleStart();
     }
 
     //战斗结束
-    private void OnBattleEnd(GameEvent @event)
+    private void OnBattleEnd(Event_BattleEnd e)
     {
         m_Window?.OnBattleEnd();
     }
 
     //关闭背包
-    private void OnBackpackOpen(GameEvent @event)
+    private void OnBackpackOpen(Event_BackpackOpen e)
     {
-        bool flag = (bool)@event.GetParam(0);
 
-        // m_Window?.OnBackpackOpen(flag);
     }
     #endregion
 }

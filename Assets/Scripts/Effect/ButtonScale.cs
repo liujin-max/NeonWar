@@ -19,7 +19,7 @@ public class ButtonScale : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     public void OnPointerDown(PointerEventData eventData)
     {
         SoundManager.Instance.Load(SOUND.CLICK);
-        Platform.Instance.VIBRATE(CONST.VIBRATELEVEL.LIGHT);
+        Platform.Instance.VIBRATE(VIBRATELEVEL.LIGHT);
 
         if (m_DownTweener != null) {
             m_DownTweener.Restart();

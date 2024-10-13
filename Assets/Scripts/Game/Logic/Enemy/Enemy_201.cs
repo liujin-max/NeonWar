@@ -10,23 +10,23 @@ public class Enemy_201 : Enemy
     {
         base.Init(monster_data);
 
-        EventManager.AddHandler(EVENT.ONCRASH,  OnCrash);
+        Event_Crash.OnEvent += OnCrash;
     }
 
     public override void Dispose()
     {
         base.Dispose();
 
-        EventManager.DelHandler(EVENT.ONCRASH,  OnCrash);
+        Event_Crash.OnEvent -= OnCrash;
     }
 
-    private void OnCrash(GameEvent @event)
+    private void OnCrash(Event_Crash e)
     {
-        Enemy enemy = (Enemy) @event.GetParam(0);
+        Enemy enemy = e.Caster;
 
         if (enemy != this) return;
 
-        Player player = (Player) @event.GetParam(1);
-        player.AddBuff(this, (int)CONST.BUFF.CHAOS, 1, 5f);
+        Player player = e.Target;
+        player.AddBuff(this, (int)BUFF.CHAOS, 1, 5f);
     }
 }

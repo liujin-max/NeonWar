@@ -11,7 +11,7 @@ public class Buff_Stun : Buff
 {
     public Buff_Stun()
     {
-        TYPE    = CONST.BUFF_TYPE.DE;
+        TYPE    = BUFF_TYPE.DE;
     }
 
     public override void Init()
@@ -41,7 +41,7 @@ public class Buff_YiShang : Buff
 {
     public Buff_YiShang()
     {
-        TYPE    = CONST.BUFF_TYPE.DE;
+        TYPE    = BUFF_TYPE.DE;
     }
 
     public override void Init()
@@ -66,7 +66,7 @@ public class Buff_Shield : Buff
 {
     public Buff_Shield()
     {
-        EventManager.AddHandler(EVENT.ONBULLETHIT,  OnBulletHit);
+        Event_BulletHit.OnEvent += OnBulletHit;
     }
 
     public override void Init()
@@ -81,12 +81,12 @@ public class Buff_Shield : Buff
 
         m_Effect.transform.GetComponent<Animation>().Play("Shield_Broken");
         
-        EventManager.DelHandler(EVENT.ONBULLETHIT,  OnBulletHit);
+        Event_BulletHit.OnEvent -= OnBulletHit;
     }
 
-    private void OnBulletHit(GameEvent @event)
+    private void OnBulletHit(Event_BulletHit e)
     {
-        var target = @event.GetParam(1) as Unit;
+        var target = e.Target;
         if (target != Belong) return;
 
         Value--;
@@ -108,7 +108,7 @@ public class Buff_Chaos : Buff
     public Buff_Chaos()
     {
         Name    = "混乱";
-        TYPE    = CONST.BUFF_TYPE.DE;
+        TYPE    = BUFF_TYPE.DE;
     }
 
     public override void Init()
@@ -198,7 +198,7 @@ public class Buff_Frozen : Buff
     public Buff_Frozen()
     {
         Name    = "冰冻";
-        TYPE    = CONST.BUFF_TYPE.DE;
+        TYPE    = BUFF_TYPE.DE;
     }
 
     public override void Init()
@@ -231,7 +231,7 @@ public class Buff_Poison : Buff
     public Buff_Poison()
     {
         Name    = "中毒";
-        TYPE    = CONST.BUFF_TYPE.DE;
+        TYPE    = BUFF_TYPE.DE;
     }
 
     public override void Init()
@@ -253,7 +253,7 @@ public class Buff_Poison : Buff
         m_Timer.Reset();
 
         var hit = new Hit(Caster);
-        hit.Type = CONST.HIT_TYPE.POISON;
+        hit.Type = HIT_TYPE.POISON;
         hit.HitColor = Color.green;
         hit.ATK.SetBase(Value);
         hit.ATK_INC.SetBase(Count);
@@ -344,7 +344,7 @@ public class Buff_Slow : Buff
     public Buff_Slow()
     {
         Name    = "减速";
-        TYPE    = CONST.BUFF_TYPE.DE;
+        TYPE    = BUFF_TYPE.DE;
     }
 
     public override void Init()
@@ -409,7 +409,7 @@ public class Buff_ATKDOWN : Buff
     public Buff_ATKDOWN()
     {
         Name    = "攻击削弱";
-        TYPE    = CONST.BUFF_TYPE.DE;
+        TYPE    = BUFF_TYPE.DE;
         SetDuration(5f);
     }
 
@@ -454,7 +454,7 @@ public class Buff_ASPDOWN : Buff
     public Buff_ASPDOWN()
     {
         Name    = "攻速降低";
-        TYPE    = CONST.BUFF_TYPE.DE;
+        TYPE    = BUFF_TYPE.DE;
         SetDuration(5f);
     }
 
@@ -499,7 +499,7 @@ public class Buff_SPEEDDOWN : Buff
     public Buff_SPEEDDOWN()
     {
         Name    = "移速降低";
-        TYPE    = CONST.BUFF_TYPE.DE;
+        TYPE    = BUFF_TYPE.DE;
         SetDuration(5f);
     }
 
@@ -622,7 +622,7 @@ public class Buff : IDisposable
     public int ID;
     public int Value = 0;   //参数
     public int Count = 1;   //层数
-    public CONST.BUFF_TYPE TYPE = CONST.BUFF_TYPE.GAIN;
+    public BUFF_TYPE TYPE = BUFF_TYPE.GAIN;
     public string Name = "未知";
     public CDTimer Duration = new CDTimer(9999999);  //持续时间
     public AttributeValue LifeValue = new AttributeValue(9999999, false);
@@ -631,34 +631,34 @@ public class Buff : IDisposable
 
 
     private static Dictionary<int, Func<Buff>> m_classDictionary = new Dictionary<int, Func<Buff>> {
-        {(int)CONST.BUFF.STUN,      () => new Buff_Stun()},
-        {(int)CONST.BUFF.YISHANG,   () => new Buff_YiShang()},
-        {(int)CONST.BUFF.SHIELD,    () => new Buff_Shield()},
-        {(int)CONST.BUFF.CHAOS,     () => new Buff_Chaos()},
-        {(int)CONST.BUFF.FASTSPD,   () => new Buff_FastSPD()},
-        {(int)CONST.BUFF.KILL,      () => new Buff_Kill()},
-        {(int)CONST.BUFF.FROZEN,    () => new Buff_Frozen()},
-        {(int)CONST.BUFF.POISON,    () => new Buff_Poison()},
-        {(int)CONST.BUFF.CRIT,      () => new Buff_Crit()},
-        {(int)CONST.BUFF.CRITDEMAGE,() => new Buff_CritDemage()},
-        {(int)CONST.BUFF.SLOW,      () => new Buff_Slow()},
+        {(int)BUFF.STUN,      () => new Buff_Stun()},
+        {(int)BUFF.YISHANG,   () => new Buff_YiShang()},
+        {(int)BUFF.SHIELD,    () => new Buff_Shield()},
+        {(int)BUFF.CHAOS,     () => new Buff_Chaos()},
+        {(int)BUFF.FASTSPD,   () => new Buff_FastSPD()},
+        {(int)BUFF.KILL,      () => new Buff_Kill()},
+        {(int)BUFF.FROZEN,    () => new Buff_Frozen()},
+        {(int)BUFF.POISON,    () => new Buff_Poison()},
+        {(int)BUFF.CRIT,      () => new Buff_Crit()},
+        {(int)BUFF.CRITDEMAGE,() => new Buff_CritDemage()},
+        {(int)BUFF.SLOW,      () => new Buff_Slow()},
 
 
         //场上Buff
-        {(int)CONST.BUFF.ATK_UP,   () => new Buff_ATKUP()},
-        {(int)CONST.BUFF.ATK_DOWN, () => new Buff_ATKDOWN()},
-        {(int)CONST.BUFF.ASP_UP,   () => new Buff_ASPUP()},
-        {(int)CONST.BUFF.ASP_DOWN, () => new Buff_ASPDOWN()},
-        {(int)CONST.BUFF.SPEED_UP, () => new Buff_SPEEDUP()},
-        {(int)CONST.BUFF.SPEED_DOWN,   () => new Buff_SPEEDDOWN()},
-        {(int)CONST.BUFF.CP,       () => new Buff_CP()},
-        {(int)CONST.BUFF.DODGE_UP, () => new Buff_DODGEUP()},
-        {(int)CONST.BUFF.SPD_MUL,  () => new Buff_SPDMUL()},
+        {(int)BUFF.ATK_UP,   () => new Buff_ATKUP()},
+        {(int)BUFF.ATK_DOWN, () => new Buff_ATKDOWN()},
+        {(int)BUFF.ASP_UP,   () => new Buff_ASPUP()},
+        {(int)BUFF.ASP_DOWN, () => new Buff_ASPDOWN()},
+        {(int)BUFF.SPEED_UP, () => new Buff_SPEEDUP()},
+        {(int)BUFF.SPEED_DOWN,   () => new Buff_SPEEDDOWN()},
+        {(int)BUFF.CP,       () => new Buff_CP()},
+        {(int)BUFF.DODGE_UP, () => new Buff_DODGEUP()},
+        {(int)BUFF.SPD_MUL,  () => new Buff_SPDMUL()},
     };
 
     public static bool IsControl(int buff_id)
     {
-        return buff_id == (int)CONST.BUFF.STUN || buff_id == (int)CONST.BUFF.FROZEN;
+        return buff_id == (int)BUFF.STUN || buff_id == (int)BUFF.FROZEN;
     }
 
 
