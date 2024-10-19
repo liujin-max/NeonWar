@@ -124,9 +124,11 @@ public class Bullet : MonoBehaviour
         {
             Hit.IgnoreUnits.Clear();
 
-            if (ReboundTimes > 0) Rebound();
-            else if (ReboundTimes <= 0) Dispose();
-            
+            if (ReboundTimes > 0) 
+                Rebound();
+            else if (ReboundTimes <= 0) 
+                Dispose();
+        
             return;
         }
 
@@ -148,14 +150,18 @@ public class Bullet : MonoBehaviour
             //目标反弹
             if (ReboundUpgrade == true)
             {
-                if (ReboundTimes > 0) Rebound();
-                else if (ReboundTimes <= 0) Dispose();
+                if (ReboundTimes > 0) 
+                    Rebound();
+                else if (ReboundTimes <= 0) 
+                    Dispose();
+
                 return;
             }
 
             HitRemaining--;
 
-            if (HitRemaining <= 0) Dispose();
+            if (HitRemaining <= 0) 
+                Dispose();
         }
     }
     #endregion
