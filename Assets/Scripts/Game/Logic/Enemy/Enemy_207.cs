@@ -20,8 +20,8 @@ public class Enemy_207 : Enemy
         base.Init(monster_data);
 
         //免疫位移、控制
-        ImmuneDisplaceFlag  = true;
-        ImmuneControlFlag   = true;
+        ImmuneDisplaceReference++;
+        ImmuneControlReference++;
         
         InitBodys();
 

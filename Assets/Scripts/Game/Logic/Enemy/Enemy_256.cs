@@ -16,8 +16,8 @@ public class Enemy_256 : Enemy
     {
         base.Init(monster_data);
 
-        ImmuneDisplaceFlag  = true;
-        ImmuneControlFlag   = true;
+        ImmuneDisplaceReference++;
+        ImmuneControlReference++;
     }
 
     public override bool CustomUpdate(float deltaTime)

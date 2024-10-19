@@ -186,6 +186,13 @@ public enum TASK_STATE
 }
 
 
+//冲锋状态
+public enum CHARGE_STATE
+{
+    NONE,
+    PREPARE,
+    CHARGING
+}
 
 
 

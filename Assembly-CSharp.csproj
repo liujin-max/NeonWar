@@ -214,6 +214,7 @@
     <Compile Include="Assets\Scripts\Game\Logic\Area\Area.cs" />
     <Compile Include="Assets\Scripts\Effect\Shine.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\Enemy\Enemy_109.cs" />
+    <Compile Include="Assets\Scripts\Game\Logic\Enemy\Enemy_206.cs" />
     <Compile Include="Assets\Scripts\Utility\UrlImageUtility.cs" />
     <Compile Include="Assets\Scripts\Utility\Sound.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\Data\Skill.cs" />
@@ -226,6 +227,7 @@
     <Compile Include="Assets\Scripts\UI\Item\BowItem.cs" />
     <Compile Include="Assets\Scripts\UI\Window\PearRewardWindow.cs" />
     <Compile Include="Assets\Scripts\Utility\UIFitter.cs" />
+    <Compile Include="Assets\Scripts\Game\Logic\Battle\DetectLineCharge.cs" />
     <Compile Include="Assets\Scripts\UI\Item\PlayerHPPointItem.cs" />
     <Compile Include="Assets\Scripts\UI\Window\TipWindow.cs" />
     <Compile Include="Assets\Scripts\Game\Interface\IFinished.cs" />

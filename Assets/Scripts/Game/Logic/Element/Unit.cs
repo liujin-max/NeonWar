@@ -56,8 +56,8 @@ public class Unit : MonoBehaviour
     //各种状态
     [HideInInspector] public int StunReference;    //晕眩
     [HideInInspector] public int FrozenReference;    //冰冻
-    [HideInInspector] public bool ImmuneDisplaceFlag;   //免疫位移
-    [HideInInspector] public bool ImmuneControlFlag;    //免疫控制
+    [HideInInspector] public int ImmuneDisplaceReference;   //免疫位移
+    [HideInInspector] public int ImmuneControlReference;    //免疫控制
 
     protected float m_Angle;      //角度
     protected bool m_DeadFlag = false;
@@ -121,13 +121,13 @@ public class Unit : MonoBehaviour
     //是否免疫位移
     public virtual bool IsImmuneDisplace()
     {
-        return ImmuneDisplaceFlag;
+        return ImmuneDisplaceReference > 0;
     }
 
     //是否免疫控制
     public virtual bool IsImmuneControl()
     {
-        return ImmuneControlFlag;
+        return ImmuneControlReference > 0;
     }
 
     #endregion

@@ -22,7 +22,9 @@ public static class EFFECT
     public const string POJIA       = "Prefab/Effect/fx_pojia";
     public const string POISON      = "Prefab/Effect/fx_poison";
     public const string ROAR        = "Prefab/Effect/fx_roar";
-    
+
+
+    public const string LINECHARGE  = "Prefab/Effect/DetectLineCharge";
     
 
 

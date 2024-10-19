@@ -372,7 +372,7 @@ public class Field : MonoBehaviour
         var hit = new Hit(enemy);
 
         //撞击伤害
-        player.UpdateHP(-1);
+        player.UpdateHP(-(int)hit.ATK.ToNumber());
 
         new Event_Crash(){Caster = enemy, Target = player}.Notify();
         new Event_UpdateHP().Notify();

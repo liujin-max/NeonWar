@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1613257971997458555}
   - component: {fileID: 1924509244257183491}
   - component: {fileID: 4186952632196083614}
-  - component: {fileID: 476250882898868613}
+  - component: {fileID: 3508232227491294398}
   m_Layer: 7
   m_HasEditorInfo: 1
   m_Name: 206
@@ -101,7 +101,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &476250882898868613
+--- !u!114 &3508232227491294398
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -110,7 +110,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1231718592995520975}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6baad2d78c60f8a46b872272ec8c0666, type: 3}
+  m_Script: {fileID: 11500000, guid: f27e86e67ffe9ff4382cae0600e15c08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   BulletTemplate: {fileID: 0}
@@ -118,7 +118,7 @@ MonoBehaviour:
   HeadPivot: {fileID: 0}
   ID: 0
   Side: 0
-  ATT: {fileID: 11400000, guid: ebd3e1a23a0666d4385964a764bdfd3b, type: 2}
+  ATT: {fileID: 11400000, guid: 4e4ff8918e4c0a84782c075bff224a0e, type: 2}
   CPS:
     m_Base: 1
   VUN_INC:
@@ -230,7 +230,7 @@ Transform:
   m_GameObject: {fileID: 2841726863660340128}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.09, y: 0.1, z: 0}
+  m_LocalPosition: {x: -0.12, y: 0.13, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

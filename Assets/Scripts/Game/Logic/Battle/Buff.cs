@@ -471,7 +471,7 @@ public class Buff_ASPDOWN : Buff
 #endregion
 
 
-#region 移动速度提高
+#region 移动速度提高(玩家)
 public class Buff_SPEEDUP : Buff
 {
     public Buff_SPEEDUP()
@@ -493,7 +493,7 @@ public class Buff_SPEEDUP : Buff
 #endregion
 
 
-#region 移动速度降低
+#region 移动速度降低(玩家)
 public class Buff_SPEEDDOWN : Buff
 {
     public Buff_SPEEDDOWN()
@@ -656,9 +656,16 @@ public class Buff : IDisposable
         {(int)BUFF.SPD_MUL,  () => new Buff_SPDMUL()},
     };
 
+    //控制类Buff
     public static bool IsControl(int buff_id)
     {
         return buff_id == (int)BUFF.STUN || buff_id == (int)BUFF.FROZEN;
+    }
+
+    //减速类Buff
+    public static bool IsSlow(int buff_id)
+    {
+        return buff_id == (int)BUFF.SLOW;
     }
 
 

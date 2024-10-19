@@ -13,8 +13,8 @@ public class Enemy_255 : Enemy
     {
         base.Init(monster_data);
 
-        ImmuneDisplaceFlag  = true;
-        ImmuneControlFlag   = true;
+        ImmuneDisplaceReference++;
+        ImmuneControlReference++;
     }
 
     public override void Dead(Hit hit = null)
