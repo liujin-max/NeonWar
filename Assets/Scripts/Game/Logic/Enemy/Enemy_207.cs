@@ -7,7 +7,7 @@ using UnityEngine;
 //沙虫头部
 //管理所有身体节点
 //周期性释放子弹
-public class Enemy_204 : Enemy
+public class Enemy_207 : Enemy
 {
     [SerializeField] int m_BodyCount;
 

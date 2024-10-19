@@ -65,7 +65,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\UI\Window\ResultWindow.cs" />
-    <Compile Include="Assets\Scripts\Game\Logic\Enemy\Enemy_204.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\Enemy\Enemy_401.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\Data\Level.cs" />
     <Compile Include="Assets\Scripts\Utility\BalatroFloating.cs" />
@@ -237,6 +236,7 @@
     <Compile Include="Assets\Scripts\UI\Item\SkillSeatItem.cs" />
     <Compile Include="Assets\Scripts\Manager\SystemManager.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\Data\Pear.cs" />
+    <Compile Include="Assets\Scripts\Game\Logic\Enemy\Enemy_207.cs" />
     <Compile Include="Assets\Scripts\Utility\NavigationButton.cs" />
     <Compile Include="Assets\DOTween\Modules\DOTweenModuleEPOOutline.cs" />
     <Compile Include="Assets\Scripts\UI\Window\MaskWindow.cs" />
