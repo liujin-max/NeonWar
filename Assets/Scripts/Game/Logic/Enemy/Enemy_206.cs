@@ -39,7 +39,7 @@ public class Enemy_206 : Enemy
 
         //预瞄线
         m_Line = GameFacade.Instance.EffectManager.Load(EFFECT.LINECHARGE, m_StartPos, Field.Instance.Land.ELEMENT_ROOT.gameObject).GetComponent<DetectLineCharge>();
-        m_Line.Play(m_StartPos, m_EndPos);
+        m_Line.Focus(m_StartPos, m_EndPos);
     }
 
     void ChargeStart()

@@ -279,6 +279,7 @@ public class Field : MonoBehaviour
         if (unit.IsInvincible() == true) return false;
         if (unit.IsDead()) return false;
         if (hit.IgnoreUnits.Contains(unit)) return false;
+        if (!unit.IsValid) return false;
         
 
         float demage = Mathf.Ceil(hit.ATK.ToNumber(false) * hit.ATK_INC.ToNumber() * unit.VUN_INC.ToNumber());

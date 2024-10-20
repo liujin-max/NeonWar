@@ -7,9 +7,14 @@ public class Projectile : MonoBehaviour
 {
     //运动轨迹
     private Trace m_Trace;
-    [HideInInspector] Unit Caster;
+    private Unit Caster;
+    private bool m_Arrived = false;
 
     private Action m_Callback;
+    
+
+    [SerializeField]
+    public bool AutoDestroy = true;
     
     
     public void Init(TRACE trace_type, Unit caster, Action callback)
@@ -32,14 +37,18 @@ public class Projectile : MonoBehaviour
 
     void Update()
     {
+        if (m_Arrived == true) return;
+
         m_Trace.CustomUpdate(Time.deltaTime);
 
         if (!m_Trace.IsReach()) return;
+
+        m_Arrived = true;
 
         if (m_Callback != null) {
             m_Callback();
         }
 
-        Dispose();
+        if (AutoDestroy) Dispose();
     }
 }
