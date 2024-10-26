@@ -132,7 +132,8 @@ public enum BUFF
     POISON,     //中毒
     CRIT,       //会心
     CRITDEMAGE, //爆伤
-    SLOW,       //减速
+    SLOW,       //减速,
+    FOV,        //
 
 
 

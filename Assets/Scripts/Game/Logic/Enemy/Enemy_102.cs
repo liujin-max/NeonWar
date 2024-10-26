@@ -8,6 +8,7 @@ public class Enemy_102 : Enemy
 {
     public override void DoAttack()
     {
+        Roar();
         //向玩家发射子弹
         var bullet = Field.Instance.CreateBullet(this);
         bullet.Shoot(ToolUtility.VectorToAngle(Field.Instance.Player.transform.localPosition - transform.localPosition));

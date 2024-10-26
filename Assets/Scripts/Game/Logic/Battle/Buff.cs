@@ -362,6 +362,66 @@ public class Buff_Slow : Buff
 #endregion
 
 
+#region 沙尘|遮挡视线
+public class Buff_FOV : Buff
+{
+    private FOVMask m_FOVMask = null;
+
+    public Buff_FOV()
+    {
+        Name    = "沙尘";
+        TYPE    = BUFF_TYPE.DE;
+    }
+
+    public override void Init()
+    {
+        var player = Belong.GetComponent<Player>();
+        if (player == null) return;
+
+
+        GameFacade.Instance.AssetManager.AsyncLoadPrefab("Prefab/Element/FOVMask", Vector3.zero, Field.Instance.Land.ELEMENT_ROOT, (obj)=>{
+            m_FOVMask = obj.GetComponent<FOVMask>();
+            m_FOVMask.Init(player.transform);
+        });
+    }
+
+    public override void Dispose()
+    {
+        base.Dispose();
+
+        if (m_FOVMask != null)
+        {
+            m_FOVMask.Dispose();
+        }
+    }
+}
+#endregion
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -584,7 +644,7 @@ public class Buff_SPDMUL : Buff
             e.SyncSpeed();
         }
 
-        foreach (var b in Field.Instance.Bullets)
+        foreach (var b in Field.Instance.Bullets.List)
         {
             if (b.Caster == Field.Instance.Player) continue;
             b.Speed.PutMUL(this, 0.4f);
@@ -600,7 +660,7 @@ public class Buff_SPDMUL : Buff
             e.SyncSpeed();
         }
 
-        foreach (var b in Field.Instance.Bullets)
+        foreach (var b in Field.Instance.Bullets.List)
         {
             if (b.Caster == Field.Instance.Player) continue;
             b.Speed.Pop(this);
@@ -642,6 +702,7 @@ public class Buff : IDisposable
         {(int)BUFF.CRIT,      () => new Buff_Crit()},
         {(int)BUFF.CRITDEMAGE,() => new Buff_CritDemage()},
         {(int)BUFF.SLOW,      () => new Buff_Slow()},
+        {(int)BUFF.FOV,       () => new Buff_FOV()},
 
 
         //场上Buff

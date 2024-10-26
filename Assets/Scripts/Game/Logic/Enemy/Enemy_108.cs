@@ -8,6 +8,8 @@ public class Enemy_108 : Enemy
 {
     public override void DoAttack()
     {
+        Roar();
+        
         int random = RandomUtility.Random(0, 360);
         
         Field.Instance.CreateBullet(this).Shoot(random);

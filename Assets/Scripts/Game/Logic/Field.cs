@@ -25,10 +25,10 @@ public class Field : MonoBehaviour
     private Level m_Level;
     public Level Level {get {return m_Level;}}
 
-    private List<Bullet> m_Bullets = new List<Bullet>();
-    public List<Bullet> Bullets {get {return m_Bullets;}}
+    // private List<Bullet> m_Bullets = new List<Bullet>();
+    // public List<Bullet> Bullets {get {return m_Bullets;}}
 
-
+    public CycleList<Bullet> Bullets = new CycleList<Bullet>(null);
     public CycleList<BuffBubble> BuffBubbles = new CycleList<BuffBubble>(null);
     public CycleList<Area> Areas = new CycleList<Area>((a)=>{ new Event_AreaRemove(){Area = a}.Notify();});
     
@@ -95,6 +95,7 @@ public class Field : MonoBehaviour
 
         BuffBubbles.Dispose();
         Areas.Dispose();
+        Bullets.Dispose();
 
 
         RemovePlayer();
@@ -145,10 +146,13 @@ public class Field : MonoBehaviour
         m_Player.CustomUpdate(deltaTime);
         m_Spawn.CustomUpdate(deltaTime);
         
+        //子弹
+        Bullets.CustomUpdate(deltaTime);
         //区域
         Areas.CustomUpdate(deltaTime);
         //Buff
         BuffBubbles.CustomUpdate(deltaTime);
+        
     }
 
     public RESULT CheckResult()
@@ -229,7 +233,7 @@ public class Field : MonoBehaviour
         bullet.transform.position = unit.ShootPivot.position;
         bullet.Init(unit);
 
-        m_Bullets.Add(bullet);
+        Bullets.Add(bullet);
 
         new Event_BulletCreate(){Bullet = bullet}.Notify();
 
@@ -238,8 +242,6 @@ public class Field : MonoBehaviour
 
     public void RecycleBullet(Bullet bullet)
     {
-        m_Bullets.Remove(bullet);
-
         GameFacade.Instance.PoolManager.RecycleBullet(bullet);
     }
 

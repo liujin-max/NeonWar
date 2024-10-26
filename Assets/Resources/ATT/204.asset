@@ -17,7 +17,7 @@ MonoBehaviour:
   ATK:
     m_Base: 1
   ASP:
-    m_Base: 0
+    m_Base: 4000
   CP:
     m_Base: 0
   CT:
@@ -25,7 +25,7 @@ MonoBehaviour:
   DODGE:
     m_Base: 500
   SPEED:
-    m_Base: 520
+    m_Base: 300
   BLESS:
     m_Base: 0
   LUCKY:

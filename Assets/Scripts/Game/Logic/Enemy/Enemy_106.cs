@@ -6,6 +6,8 @@ public class Enemy_106 : Enemy
 {
     public override void DoAttack()
     {
+        Roar();
+        
         float base_angle = ToolUtility.VectorToAngle(Field.Instance.Player.transform.localPosition - transform.localPosition);
 
         Field.Instance.CreateBullet(this).Shoot(base_angle);

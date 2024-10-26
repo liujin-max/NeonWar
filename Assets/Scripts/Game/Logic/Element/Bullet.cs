@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Bullet : MonoBehaviour
+public class Bullet : MonoBehaviour , IDisposable, ICustomUpdate, IFinished
 {
     private Rigidbody2D m_Rigidbody;
 
@@ -12,6 +13,7 @@ public class Bullet : MonoBehaviour
     public Vector2 Velocity {get { return m_Rigidbody.velocity;}}
     public AttributeValue Speed = new AttributeValue(500);
     public Hit Hit;
+    private bool m_FinishFlag;
 
 
     [HideInInspector] public int SplitCount;            //分裂数量
@@ -19,6 +21,7 @@ public class Bullet : MonoBehaviour
     [HideInInspector] public int HitRemaining = 1;      //剩余可击中敌人次数(穿透逻辑)
     [HideInInspector] public int ReboundTimes;          //可反弹次数
     [HideInInspector] public bool ReboundUpgrade;       //击中敌人也可反弹
+    [HideInInspector] public CDTimer LifeTimer = null;  //存活时间
     
 
     void Awake()
@@ -36,10 +39,14 @@ public class Bullet : MonoBehaviour
     {
         Speed.Clear();
 
+        m_FinishFlag    = false;
+
         SplitCount      = 0;
         IsSplit         = false;
         HitRemaining    = 1;
         ReboundTimes    = 0;
+        ReboundUpgrade  = false;
+        LifeTimer       = null;
     }
 
     public void Init(Unit caster)
@@ -65,6 +72,11 @@ public class Bullet : MonoBehaviour
     public void Turn(float angle)
     {
         m_Rigidbody.velocity = ToolUtility.FindPointOnCircle(Vector2.zero, Speed.ToNumber() / 100.0f, angle);
+    }
+
+    public void InitLiftTime(float time)
+    {
+        LifeTimer = new CDTimer(time);
     }
 
     void Rebound()
@@ -97,10 +109,17 @@ public class Bullet : MonoBehaviour
     }
 
     //
-
-    public void Dispose()
+    public void CustomUpdate(float deltaTime)
     {
-        Field.Instance.RecycleBullet(this);
+        if (LifeTimer != null)
+        {
+            LifeTimer.Update(Time.deltaTime);
+            if (LifeTimer.IsFinished())
+            {
+                LifeTimer = null;
+                Finish();
+            }
+        }
     }
 
     void LateUpdate()
@@ -109,13 +128,28 @@ public class Bullet : MonoBehaviour
         transform.right = m_Rigidbody.velocity;
     }
 
+    public bool IsFinished()
+    {
+        return m_FinishFlag;
+    }
+
+    private void Finish()
+    {
+        m_FinishFlag = true;
+    }
+
+    public void Dispose()
+    {
+        Field.Instance.RecycleBullet(this);
+    }
+
     #region 碰撞检测
     void OnTriggerEnter2D(Collider2D collider)
     {
         //子弹撞到边界 则销毁
         if (collider.gameObject.tag == CONST.COLLIDER_BOARD)
         {
-            Dispose();
+            Finish();
             return;
         }
 
@@ -127,7 +161,7 @@ public class Bullet : MonoBehaviour
             if (ReboundTimes > 0) 
                 Rebound();
             else if (ReboundTimes <= 0) 
-                Dispose();
+                Finish();
         
             return;
         }
@@ -153,7 +187,7 @@ public class Bullet : MonoBehaviour
                 if (ReboundTimes > 0) 
                     Rebound();
                 else if (ReboundTimes <= 0) 
-                    Dispose();
+                    Finish();
 
                 return;
             }
@@ -161,8 +195,9 @@ public class Bullet : MonoBehaviour
             HitRemaining--;
 
             if (HitRemaining <= 0) 
-                Dispose();
+                Finish();
         }
     }
+
     #endregion
 }
