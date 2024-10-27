@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 3712288799380927817}
   - component: {fileID: 4562983818337489457}
   - component: {fileID: 1827891889010042124}
-  - component: {fileID: -2893981507327112794}
+  - component: {fileID: 3979687351939454920}
   m_Layer: 7
   m_HasEditorInfo: 1
   m_Name: 257
@@ -163,7 +163,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2237775171984065861}
@@ -234,7 +234,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &-2893981507327112794
+--- !u!114 &3979687351939454920
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -243,7 +243,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3814604846322337021}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6baad2d78c60f8a46b872272ec8c0666, type: 3}
+  m_Script: {fileID: 11500000, guid: 99e98d1f5562db0458456556efbd9dca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   BulletTemplate: {fileID: 0}
@@ -268,8 +268,8 @@ MonoBehaviour:
     m_Base: 1
   StunReference: 0
   FrozenReference: 0
-  ImmuneDisplaceFlag: 0
-  ImmuneControlFlag: 0
+  ImmuneDisplaceReference: 0
+  ImmuneControlReference: 0
   m_Color:
     m_Mode: 2
     m_GradientMin:
@@ -333,7 +333,7 @@ MonoBehaviour:
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     m_ColorMin: {r: 0.5882353, g: 0, b: 0, a: 1}
-    m_ColorMax: {r: 0.4666667, g: 0.19215688, b: 0.20000002, a: 1}
+    m_ColorMax: {r: 0.9176471, g: 0.49803925, b: 0.49803925, a: 1}
   IsSummon: 0
 --- !u!1 &4138743660350436647
 GameObject:

@@ -24,8 +24,8 @@ public class Enemy_255 : Enemy
         for (int i = 0; i < 5; i++)
         {
             Field.Instance.Spawn.Summon(new MonsterJSON(){ID = 257, HP = 300}, transform.localPosition, e => {
-                e.transform.localScale = new Vector3(0.6f, 0.6f, 1);
-                e.ShowHPText(false);
+                // e.transform.localScale = new Vector3(0.6f, 0.6f, 1);
+                // e.ShowHPText(false);
             });
         }
     }

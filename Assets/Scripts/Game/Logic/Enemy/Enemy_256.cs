@@ -37,8 +37,8 @@ public class Enemy_256 : Enemy
                     ID  = 257,
                     HP  = 300
                 }, transform.localPosition, e => {
-                    e.transform.localScale = new Vector3(0.6f, 0.6f, 1);
-                    e.ShowHPText(false);
+                    // e.transform.localScale = new Vector3(0.6f, 0.6f, 1);
+                    // e.ShowHPText(false);
                 });
             }
         }

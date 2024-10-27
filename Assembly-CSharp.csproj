@@ -145,6 +145,7 @@
     <Compile Include="Assets\Scripts\Game\Logic\Battle\BlackHole.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\AREA.cs" />
     <Compile Include="Assets\Scripts\FSM\Element\State_Upgrade.cs" />
+    <Compile Include="Assets\Scripts\Game\Logic\Enemy\Enemy_257.cs" />
     <Compile Include="Assets\Scripts\Struct\AttributeValue.cs" />
     <Compile Include="Assets\AllIn1SpriteShader\Demo\Scripts\DemoItem.cs" />
     <Compile Include="Assets\Scripts\Game\Logic\Enemy\Enemy_404.cs" />
