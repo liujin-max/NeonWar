@@ -1119,7 +1119,7 @@ MonoBehaviour:
   Version: 1.0.0
   OpenAdvert: 1
   TestMode: 1
-  TestStage: 0
+  TestStage: 30
 --- !u!1001 &1531585247
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -20,6 +20,13 @@ public class Enemy_206 : Enemy
     private CDTimer m_ChargePrepareTimer = new CDTimer(1.5f);
 
 
+    public override void Dispose()
+    {
+        base.Dispose();
+
+        if (m_Line != null) m_Line.GetComponent<Effect>().Dispose();
+    }
+
     public override void DoAttack()
     {
         ChargePrepare();
