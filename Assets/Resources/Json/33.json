@@ -1,0 +1,29 @@
+{
+    "Glass" : 2650,
+    "HP" : 2000,
+    "PearLevel" : "2-2",
+    "PearCount" : "1-1",
+    "Waves": 
+    [
+        {
+            "Monsters":
+            [
+                {"Time":    0, "ID": 206, "HP": 5123, "Radius": 3, "Angle":45},
+                {"Time":    0, "ID": 206, "HP": 5123, "Radius": 3, "Angle":135},
+                {"Time":    0, "ID": 206, "HP": 5123, "Radius": 3, "Angle":225},
+                {"Time":    0, "ID": 206, "HP": 5123, "Radius": 3, "Angle":315},
+                
+                {"Time": 7000, "ID": 205, "HP": 2000, "Radius": 0, "Angle":0},
+
+                {"Time":15000, "ID": 206, "HP": 5123, "Radius": 2, "Angle":0},
+                {"Time":15000, "ID": 206, "HP": 5123, "Radius": 2, "Angle":90},
+                {"Time":15000, "ID": 206, "HP": 5123, "Radius": 2, "Angle":180},
+                {"Time":15000, "ID": 206, "HP": 5123, "Radius": 2, "Angle":270},
+
+                {"Time":20000, "ID": 205, "HP": 2000, "Radius": 0, "Angle":0},
+                {"Time":21000, "ID": 204, "HP": 2222}
+            ]
+        }
+    ]
+}
+  
